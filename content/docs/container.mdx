@@ -1,0 +1,794 @@
+---
+title: Service Container
+description: Service Container
+---
+
+# Service Container
+
+- [簡介](#introduction)
+    - [零設定解析](#zero-configuration-resolution)
+    - [何時使用 Container](#when-to-use-the-container)
+- [綁定 (Binding)](#binding)
+    - [綁定基礎](#binding-basics)
+    - [綁定介面至實作](#binding-interfaces-to-implementations)
+    - [上下文綁定 (Contextual Binding)](#contextual-binding)
+    - [上下文屬性 (Contextual Attributes)](#contextual-attributes)
+    - [綁定基本型別](#binding-primitives)
+    - [綁定型別化可變參數](#binding-typed-variadics)
+    - [標記 (Tagging)](#tagging)
+    - [擴充綁定](#extending-bindings)
+- [解析 (Resolving)](#resolving)
+    - [Make 方法](#the-make-method)
+    - [自動注入](#automatic-injection)
+- [方法呼叫與注入](#method-invocation-and-injection)
+- [Container Events](#container-events)
+    - [重新綁定 (Rebinding)](#rebinding)
+- [PSR-11](#psr-11)
+
+<a name="introduction"></a>
+## 簡介
+
+Laravel Service Container 是一個用於管理類別依賴和執行 Dependency Injection (依賴注入) 的強大工具。Dependency Injection 是一個花俏的詞彙，基本上意味著：類別依賴透過建構子或在某些情況下透過「setter」方法「注入」到類別中。
+
+讓我們看一個簡單的例子：
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\AppleMusic;
+use Illuminate\View\View;
+
+class PodcastController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct(
+        protected AppleMusic $apple,
+    ) {}
+
+    /**
+     * Show information about the given podcast.
+     */
+    public function show(string $id): View
+    {
+        return view('podcasts.show', [
+            'podcast' => $this->apple->findPodcast($id)
+        ]);
+    }
+}
+```
+
+在這個例子中，`PodcastController` 需要從資料來源（如 Apple Music）檢索 Podcast。因此，我們將 **注入** 一個能夠檢索 Podcast 的服務。由於服務是注入的，我們可以在測試應用程式時輕鬆地「模擬 (mock)」，或建立 `AppleMusic` 服務的虛擬實作。
+
+深入了解 Laravel Service Container 對於建立強大的大型應用程式以及為 Laravel 核心本身做出貢獻至關重要。
+
+<a name="zero-configuration-resolution"></a>
+### 零設定解析
+
+如果一個類別沒有依賴，或者只依賴於其他具體類別（不是介面），則不需要指示 Container 如何解析該類別。例如，您可以在 `routes/web.php` 檔案中放置以下程式碼：
+
+```php
+<?php
+
+class Service
+{
+    // ...
+}
+
+Route::get('/', function (Service $service) {
+    dd($service::class);
+});
+```
+
+在這個例子中，存取應用程式的 `/` 路由將自動解析 `Service` 類別並將其注入到您的路由處理常式中。這是一個改變遊戲規則的功能。這意味著您可以開發應用程式並利用 Dependency Injection，而無需擔心臃腫的設定檔。
+
+值得慶幸的是，在建立 Laravel 應用程式時，您將編寫的許多類別都會自動透過 Container 接收其依賴，包括 [Controllers](/docs/{{version}}/controllers)、[Event Listeners](/docs/{{version}}/events)、[Middleware](/docs/{{version}}/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/{{version}}/queues) 的 `handle` 方法中對依賴進行型別提示。一旦您體驗了自動和零設定 Dependency Injection 的強大功能，就會覺得沒有它就無法開發。
+
+<a name="when-to-use-the-container"></a>
+### 何時使用 Container
+
+由於零設定解析，您經常會在路由、Controllers、Event Listeners 和其他地方對依賴進行型別提示，而無需手動與 Container 互動。例如，您可以在路由定義中對 `Illuminate\Http\Request` 物件進行型別提示，以便您可以輕鬆存取目前的請求。即使我們從不需要與 Container 互動來編寫此程式碼，它也在幕後管理這些依賴的注入：
+
+```php
+use Illuminate\Http\Request;
+
+Route::get('/', function (Request $request) {
+    // ...
+});
+```
+
+在許多情況下，由於自動 Dependency Injection 和 [Facades](/docs/{{version}}/facades)，您可以在 **完全不** 手動從 Container 綁定或解析任何內容的情況下建立 Laravel 應用程式。**那麼，您什麼時候會手動與 Container 互動呢？** 讓我們檢視兩種情況。
+
+首先，如果您編寫一個實作介面的類別，並且您希望在路由或類別建構子中對該介面進行型別提示，您必須 [告訴 Container 如何解析該介面](#binding-interfaces-to-implementations)。其次，如果您正在 [編寫一個 Laravel 套件](/docs/{{version}}/packages) 並計劃與其他 Laravel 開發者分享，您可能需要將您的套件服務綁定到 Container 中。
+
+<a name="binding"></a>
+## 綁定 (Binding)
+
+<a name="binding-basics"></a>
+### 綁定基礎
+
+<a name="simple-bindings"></a>
+#### 簡單綁定
+
+幾乎所有的 Service Container 綁定都將在 [Service Providers](/docs/{{version}}/providers) 中註冊，因此這些範例中的大多數將示範在該上下文中使用 Container。
+
+在 Service Provider 中，您始終可以透過 `$this->app` 屬性存取 Container。我們可以使用 `bind` 方法註冊綁定，傳遞我們希望註冊的類別或介面名稱以及返回類別實例的 Closure：
+
+```php
+use App\Services\Transistor;
+use App\Services\PodcastParser;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->bind(Transistor::class, function (Application $app) {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+請注意，我們接收 Container 本身作為解析器的參數。然後我們可以使用 Container 來解析我們正在建立的物件的子依賴。
+
+如前所述，您通常會在 Service Providers 中與 Container 互動；但是，如果您想在 Service Provider 之外與 Container 互動，可以透過 `App` [Facade](/docs/{{version}}/facades) 進行：
+
+```php
+use App\Services\Transistor;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\App;
+
+App::bind(Transistor::class, function (Application $app) {
+    // ...
+});
+```
+
+您可以使用 `bindIf` 方法僅在尚未為給定類型註冊綁定時註冊 Container 綁定：
+
+```php
+$this->app->bindIf(Transistor::class, function (Application $app) {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+為了方便起見，您可以省略提供您希望註冊的類別或介面名稱作為單獨的參數，而是讓 Laravel 從您提供給 `bind` 方法的 Closure 的返回型別推斷型別：
+
+```php
+App::bind(function (Application $app): Transistor {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+> [!NOTE]
+> 如果類別不依賴於任何介面，則無需將其綁定到 Container 中。Container 不需要被指示如何建立這些物件，因為它可以使用反射自動解析這些物件。
+
+<a name="binding-a-singleton"></a>
+#### 綁定 Singleton
+
+`singleton` 方法將一個類別或介面綁定到 Container 中，該類別或介面只應解析一次。一旦解析了 Singleton 綁定，隨後的 Container 呼叫將返回相同的物件實例：
+
+```php
+use App\Services\Transistor;
+use App\Services\PodcastParser;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->singleton(Transistor::class, function (Application $app) {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+您可以使用 `singletonIf` 方法僅在尚未為給定類型註冊綁定時註冊 Singleton Container 綁定：
+
+```php
+$this->app->singletonIf(Transistor::class, function (Application $app) {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+<a name="singleton-attribute"></a>
+#### Singleton 屬性
+
+或者，您可以使用 `#[Singleton]` 屬性標記介面或類別，以指示 Container 應將其解析一次：
+
+```php
+<?php
+
+namespace App\Services;
+
+use Illuminate\Container\Attributes\Singleton;
+
+#[Singleton]
+class Transistor
+{
+    // ...
+}
+```
+
+<a name="binding-scoped"></a>
+#### 綁定 Scoped Singletons
+
+`scoped` 方法將一個類別或介面綁定到 Container 中，該類別或介面在給定的 Laravel 請求 / Job 生命週期內只應解析一次。雖然此方法與 `singleton` 方法類似，但使用 `scoped` 方法註冊的實例將在 Laravel 應用程式開始新的「生命週期」時被清除，例如當 [Laravel Octane](/docs/{{version}}/octane) worker 處理新請求或 Laravel [Queue worker](/docs/{{version}}/queues) 處理新 Job 時：
+
+```php
+use App\Services\Transistor;
+use App\Services\PodcastParser;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->scoped(Transistor::class, function (Application $app) {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+您可以使用 `scopedIf` 方法僅在尚未為給定類型註冊綁定時註冊 Scoped Container 綁定：
+
+```php
+$this->app->scopedIf(Transistor::class, function (Application $app) {
+    return new Transistor($app->make(PodcastParser::class));
+});
+```
+
+<a name="scoped-attribute"></a>
+#### Scoped 屬性
+
+或者，您可以使用 `#[Scoped]` 屬性標記介面或類別，以指示 Container 應在給定的 Laravel 請求 / Job 生命週期內將其解析一次：
+
+```php
+<?php
+
+namespace App\Services;
+
+use Illuminate\Container\Attributes\Scoped;
+
+#[Scoped]
+class Transistor
+{
+    // ...
+}
+```
+
+<a name="binding-instances"></a>
+#### 綁定實例
+
+您也可以使用 `instance` 方法將現有的物件實例綁定到 Container 中。隨後的 Container 呼叫將始終返回給定的實例：
+
+```php
+use App\Services\Transistor;
+use App\Services\PodcastParser;
+
+$service = new Transistor(new PodcastParser);
+
+$this->app->instance(Transistor::class, $service);
+```
+
+<a name="binding-interfaces-to-implementations"></a>
+### 綁定介面至實作
+
+Service Container 的一個非常強大的功能是能夠將介面綁定到給定的實作。例如，假設我們有一個 `EventPusher` 介面和一個 `RedisEventPusher` 實作。一旦我們編寫了這個介面的 `RedisEventPusher` 實作，我們就可以像這樣向 Service Container 註冊它：
+
+```php
+use App\Contracts\EventPusher;
+use App\Services\RedisEventPusher;
+
+$this->app->bind(EventPusher::class, RedisEventPusher::class);
+```
+
+這個語句告訴 Container，當類別需要 `EventPusher` 的實作時，它應該注入 `RedisEventPusher`。現在我們可以在由 Container 解析的類別的建構子中對 `EventPusher` 介面進行型別提示。請記住，Laravel 應用程式中的 Controllers、Event Listeners、Middleware 和各種其他類型的類別始終使用 Container 進行解析：
+
+```php
+use App\Contracts\EventPusher;
+
+/**
+ * Create a new class instance.
+ */
+public function __construct(
+    protected EventPusher $pusher,
+) {}
+```
+
+<a name="bind-attribute"></a>
+#### Bind 屬性
+
+Laravel 還提供了一個 `Bind` 屬性以增加便利性。您可以將此屬性應用於任何介面，以告訴 Laravel 每當請求該介面時應自動注入哪個實作。使用 `Bind` 屬性時，無需在應用程式的 Service Providers 中執行任何額外的服務註冊。
+
+此外，可以在介面上放置多個 `Bind` 屬性，以便設定應針對給定環境集注入的不同實作：
+
+```php
+<?php
+
+namespace App\Contracts;
+
+use App\Services\FakeEventPusher;
+use App\Services\RedisEventPusher;
+use Illuminate\Container\Attributes\Bind;
+
+#[Bind(RedisEventPusher::class)]
+#[Bind(FakeEventPusher::class, environments: ['local', 'testing'])]
+interface EventPusher
+{
+    // ...
+}
+```
+
+此外，可以應用 [Singleton](#singleton-attribute) 和 [Scoped](#scoped-attribute) 屬性來指示 Container 綁定應解析一次還是每個請求 / Job 生命週期解析一次：
+
+```php
+use App\Services\RedisEventPusher;
+use Illuminate\Container\Attributes\Bind;
+use Illuminate\Container\Attributes\Singleton;
+
+#[Bind(RedisEventPusher::class)]
+#[Singleton]
+interface EventPusher
+{
+    // ...
+}
+```
+
+<a name="contextual-binding"></a>
+### 上下文綁定 (Contextual Binding)
+
+有時您可能由兩個類別使用相同的介面，但您希望將不同的實作注入到每個類別中。例如，兩個 Controllers 可能依賴於 `Illuminate\Contracts\Filesystem\Filesystem` [Contract](/docs/{{version}}/contracts) 的不同實作。Laravel 提供了一個簡單、流暢的介面來定義此行為：
+
+```php
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\UploadController;
+use App\Http\Controllers\VideoController;
+use Illuminate\Contracts\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
+
+$this->app->when(PhotoController::class)
+    ->needs(Filesystem::class)
+    ->give(function () {
+        return Storage::disk('local');
+    });
+
+$this->app->when([VideoController::class, UploadController::class])
+    ->needs(Filesystem::class)
+    ->give(function () {
+        return Storage::disk('s3');
+    });
+```
+
+<a name="contextual-attributes"></a>
+### 上下文屬性 (Contextual Attributes)
+
+由於上下文綁定通常用於注入驅動程式的實作或設定值，Laravel 提供了各種上下文綁定屬性，允許注入這些類型的值，而無需在 Service Providers 中手動定義上下文綁定。
+
+例如，`Storage` 屬性可用於注入特定的 [Storage Disk](/docs/{{version}}/filesystem)：
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Container\Attributes\Storage;
+use Illuminate\Contracts\Filesystem\Filesystem;
+
+class PhotoController extends Controller
+{
+    public function __construct(
+        #[Storage('local')] protected Filesystem $filesystem
+    ) {
+        // ...
+    }
+}
+```
+
+除了 `Storage` 屬性之外，Laravel 還提供 `Auth`、`Cache`、`Config`、`Context`、`DB`、`Give`、`Log`、`RouteParameter` 和 [Tag](#tagging) 屬性：
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Contracts\UserRepository;
+use App\Models\Photo;
+use App\Repositories\DatabaseRepository;
+use Illuminate\Container\Attributes\Auth;
+use Illuminate\Container\Attributes\Cache;
+use Illuminate\Container\Attributes\Config;
+use Illuminate\Container\Attributes\Context;
+use Illuminate\Container\Attributes\DB;
+use Illuminate\Container\Attributes\Give;
+use Illuminate\Container\Attributes\Log;
+use Illuminate\Container\Attributes\RouteParameter;
+use Illuminate\Container\Attributes\Tag;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Cache\Repository;
+use Illuminate\Database\Connection;
+use Psr\Log\LoggerInterface;
+
+class PhotoController extends Controller
+{
+    public function __construct(
+        #[Auth('web')] protected Guard $auth,
+        #[Cache('redis')] protected Repository $cache,
+        #[Config('app.timezone')] protected string $timezone,
+        #[Context('uuid')] protected string $uuid,
+        #[Context('ulid', hidden: true)] protected string $ulid,
+        #[DB('mysql')] protected Connection $connection,
+        #[Give(DatabaseRepository::class)] protected UserRepository $users,
+        #[Log('daily')] protected LoggerInterface $log,
+        #[RouteParameter('photo')] protected Photo $photo,
+        #[Tag('reports')] protected iterable $reports,
+    ) {
+        // ...
+    }
+}
+```
+
+此外，Laravel 提供了一個 `CurrentUser` 屬性，用於將目前通過驗證的使用者注入到給定的路由或類別中：
+
+```php
+use App\Models\User;
+use Illuminate\Container\Attributes\CurrentUser;
+
+Route::get('/user', function (#[CurrentUser] User $user) {
+    return $user;
+})->middleware('auth');
+```
+
+<a name="defining-custom-attributes"></a>
+#### 定義自訂屬性
+
+您可以透過實作 `Illuminate\Contracts\Container\ContextualAttribute` Contract 來建立自己的上下文屬性。Container 將呼叫您的屬性的 `resolve` 方法，該方法應解析應注入到使用該屬性的類別中的值。在下面的範例中，我們將重新實作 Laravel 內建的 `Config` 屬性：
+
+```php
+<?php
+
+namespace App\Attributes;
+
+use Attribute;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Container\ContextualAttribute;
+
+#[Attribute(Attribute::TARGET_PARAMETER)]
+class Config implements ContextualAttribute
+{
+    /**
+     * Create a new attribute instance.
+     */
+    public function __construct(public string $key, public mixed $default = null)
+    {
+    }
+
+    /**
+     * Resolve the configuration value.
+     *
+     * @param  self  $attribute
+     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @return mixed
+     */
+    public static function resolve(self $attribute, Container $container)
+    {
+        return $container->make('config')->get($attribute->key, $attribute->default);
+    }
+}
+```
+
+<a name="binding-primitives"></a>
+### 綁定基本型別
+
+有時您可能有一個類別接收一些注入的類別，但也需要一個注入的基本值，例如整數。您可以輕鬆地使用上下文綁定來注入您的類別可能需要的任何值：
+
+```php
+use App\Http\Controllers\UserController;
+
+$this->app->when(UserController::class)
+    ->needs('$variableName')
+    ->give($value);
+```
+
+有時一個類別可能依賴於一個 [標記 (tagged)](#tagging) 實例的陣列。使用 `giveTagged` 方法，您可以輕鬆地注入帶有該標記的所有 Container 綁定：
+
+```php
+$this->app->when(ReportAggregator::class)
+    ->needs('$reports')
+    ->giveTagged('reports');
+```
+
+如果您需要從應用程式的設定檔中注入一個值，可以使用 `giveConfig` 方法：
+
+```php
+$this->app->when(ReportAggregator::class)
+    ->needs('$timezone')
+    ->giveConfig('app.timezone');
+```
+
+<a name="binding-typed-variadics"></a>
+### 綁定型別化可變參數
+
+偶爾，您可能有一個類別使用可變參數建構子參數接收一個型別化物件的陣列：
+
+```php
+<?php
+
+use App\Models\Filter;
+use App\Services\Logger;
+
+class Firewall
+{
+    /**
+     * The filter instances.
+     *
+     * @var array
+     */
+    protected $filters;
+
+    /**
+     * Create a new class instance.
+     */
+    public function __construct(
+        protected Logger $logger,
+        Filter ...$filters,
+    ) {
+        $this->filters = $filters;
+    }
+}
+```
+
+使用上下文綁定，您可以透過為 `give` 方法提供一個返回已解析 `Filter` 實例陣列的 Closure 來解析此依賴：
+
+```php
+$this->app->when(Firewall::class)
+    ->needs(Filter::class)
+    ->give(function (Application $app) {
+          return [
+              $app->make(NullFilter::class),
+              $app->make(ProfanityFilter::class),
+              $app->make(TooLongFilter::class),
+          ];
+    });
+```
+
+為了方便起見，您也可以只提供一個類別名稱陣列，以便每當 `Firewall` 需要 `Filter` 實例時由 Container 解析：
+
+```php
+$this->app->when(Firewall::class)
+    ->needs(Filter::class)
+    ->give([
+        NullFilter::class,
+        ProfanityFilter::class,
+        TooLongFilter::class,
+    ]);
+```
+
+<a name="variadic-tag-dependencies"></a>
+#### 可變參數標記依賴
+
+有時一個類別可能有一個型別提示為給定類別的可變參數依賴 (`Report ...$reports`)。使用 `needs` 和 `giveTagged` 方法，您可以輕鬆地為給定依賴注入帶有該 [標記](#tagging) 的所有 Container 綁定：
+
+```php
+$this->app->when(ReportAggregator::class)
+    ->needs(Report::class)
+    ->giveTagged('reports');
+```
+
+<a name="tagging"></a>
+### 標記 (Tagging)
+
+偶爾，您可能需要解析某個「類別」的所有綁定。例如，也許您正在建立一個報告分析器，它接收許多不同 `Report` 介面實作的陣列。註冊 `Report` 實作後，您可以使用 `tag` 方法為它們分配一個標記：
+
+```php
+$this->app->bind(CpuReport::class, function () {
+    // ...
+});
+
+$this->app->bind(MemoryReport::class, function () {
+    // ...
+});
+
+$this->app->tag([CpuReport::class, MemoryReport::class], 'reports');
+```
+
+一旦服務被標記，您可以透過 Container 的 `tagged` 方法輕鬆地解析它們：
+
+```php
+$this->app->bind(ReportAnalyzer::class, function (Application $app) {
+    return new ReportAnalyzer($app->tagged('reports'));
+});
+```
+
+<a name="extending-bindings"></a>
+### 擴充綁定
+
+`extend` 方法允許修改已解析的服務。例如，當一個服務被解析時，您可以執行額外的程式碼來裝飾或設定該服務。`extend` 方法接受兩個參數，您要擴充的服務類別和一個應返回修改後服務的 Closure。Closure 接收正在解析的服務和 Container 實例：
+
+```php
+$this->app->extend(Service::class, function (Service $service, Application $app) {
+    return new DecoratedService($service);
+});
+```
+
+<a name="resolving"></a>
+## 解析 (Resolving)
+
+<a name="the-make-method"></a>
+### `make` 方法
+
+您可以使用 `make` 方法從 Container 中解析類別實例。`make` 方法接受您希望解析的類別或介面的名稱：
+
+```php
+use App\Services\Transistor;
+
+$transistor = $this->app->make(Transistor::class);
+```
+
+如果您的類別的某些依賴無法透過 Container 解析，您可以透過將它們作為關聯陣列傳遞給 `makeWith` 方法來注入它們。例如，我們可以手動傳遞 `Transistor` 服務所需的 `$id` 建構子參數：
+
+```php
+use App\Services\Transistor;
+
+$transistor = $this->app->makeWith(Transistor::class, ['id' => 1]);
+```
+
+`bound` 方法可用於判斷類別或介面是否已在 Container 中明確綁定：
+
+```php
+if ($this->app->bound(Transistor::class)) {
+    // ...
+}
+```
+
+如果您在 Service Provider 之外，位於無法存取 `$app` 變數的程式碼位置，您可以使用 `App` [Facade](/docs/{{version}}/facades) 或 `app` [Helper](/docs/{{version}}/helpers#method-app) 從 Container 中解析類別實例：
+
+```php
+use App\Services\Transistor;
+use Illuminate\Support\Facades\App;
+
+$transistor = App::make(Transistor::class);
+
+$transistor = app(Transistor::class);
+```
+
+如果您希望將 Laravel Container 實例本身注入到由 Container 解析的類別中，您可以在類別的建構子中對 `Illuminate\Container\Container` 類別進行型別提示：
+
+```php
+use Illuminate\Container\Container;
+
+/**
+ * Create a new class instance.
+ */
+public function __construct(
+    protected Container $container,
+) {}
+```
+
+<a name="automatic-injection"></a>
+### 自動注入
+
+或者，重要的是，您可以在由 Container 解析的類別的建構子中對依賴進行型別提示，包括 [Controllers](/docs/{{version}}/controllers)、[Event Listeners](/docs/{{version}}/events)、[Middleware](/docs/{{version}}/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/{{version}}/queues) 的 `handle` 方法中對依賴進行型別提示。實際上，這是您的大多數物件應該由 Container 解析的方式。
+
+例如，您可以在 Controller 的建構子中對應用程式定義的服務進行型別提示。該服務將自動解析並注入到類別中：
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Services\AppleMusic;
+
+class PodcastController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct(
+        protected AppleMusic $apple,
+    ) {}
+
+    /**
+     * Show information about the given podcast.
+     */
+    public function show(string $id): Podcast
+    {
+        return $this->apple->findPodcast($id);
+    }
+}
+```
+
+<a name="method-invocation-and-injection"></a>
+## 方法呼叫與注入
+
+有時您可能希望在物件實例上呼叫方法，同時允許 Container 自動注入該方法的依賴。例如，給定以下類別：
+
+```php
+<?php
+
+namespace App;
+
+use App\Services\AppleMusic;
+
+class PodcastStats
+{
+    /**
+     * Generate a new podcast stats report.
+     */
+    public function generate(AppleMusic $apple): array
+    {
+        return [
+            // ...
+        ];
+    }
+}
+```
+
+您可以像這樣透過 Container 呼叫 `generate` 方法：
+
+```php
+use App\PodcastStats;
+use Illuminate\Support\Facades\App;
+
+$stats = App::call([new PodcastStats, 'generate']);
+```
+
+`call` 方法接受任何 PHP callable。Container 的 `call` 方法甚至可用於呼叫 Closure，同時自動注入其依賴：
+
+```php
+use App\Services\AppleMusic;
+use Illuminate\Support\Facades\App;
+
+$result = App::call(function (AppleMusic $apple) {
+    // ...
+});
+```
+
+<a name="container-events"></a>
+## Container Events
+
+Service Container 每次解析物件時都會觸發一個事件。您可以使用 `resolving` 方法監聽此事件：
+
+```php
+use App\Services\Transistor;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->resolving(Transistor::class, function (Transistor $transistor, Application $app) {
+    // Called when container resolves objects of type "Transistor"...
+});
+
+$this->app->resolving(function (mixed $object, Application $app) {
+    // Called when container resolves object of any type...
+});
+```
+
+如您所見，正在解析的物件將傳遞給回呼，允許您在將物件提供給其取用者之前設定該物件的任何其他屬性。
+
+<a name="rebinding"></a>
+### 重新綁定 (Rebinding)
+
+`rebinding` 方法允許您監聽服務何時重新綁定到 Container，這意味著它在初始綁定後再次註冊或被覆蓋。當您需要在每次更新特定綁定時更新依賴或修改行為時，這很有用：
+
+```php
+use App\Contracts\PodcastPublisher;
+use App\Services\SpotifyPublisher;
+use App\Services\TransistorPublisher;
+use Illuminate\Contracts\Foundation\Application;
+
+$this->app->bind(PodcastPublisher::class, SpotifyPublisher::class);
+
+$this->app->rebinding(
+    PodcastPublisher::class,
+    function (Application $app, PodcastPublisher $newInstance) {
+        //
+    },
+);
+
+// New binding will trigger rebinding closure...
+$this->app->bind(PodcastPublisher::class, TransistorPublisher::class);
+```
+
+<a name="psr-11"></a>
+## PSR-11
+
+Laravel 的 Service Container 實作了 [PSR-11](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-11-container.md) 介面。因此，您可以對 PSR-11 Container 介面進行型別提示以獲取 Laravel Container 的實例：
+
+```php
+use App\Services\Transistor;
+use Psr\Container\ContainerInterface;
+
+Route::get('/', function (ContainerInterface $container) {
+    $service = $container->get(Transistor::class);
+
+    // ...
+});
+```
+
+如果無法解析給定的識別碼，則會拋出例外。如果識別碼從未綁定，則例外將是 `Psr\Container\NotFoundExceptionInterface` 的實例。如果識別碼已綁定但無法解析，則將拋出 `Psr\Container\ContainerExceptionInterface` 的實例。
