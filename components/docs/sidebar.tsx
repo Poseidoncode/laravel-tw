@@ -44,21 +44,11 @@ const sidebarItems = [
         ]
     },
     {
-        title: '資料庫',
+        title: '深入探討',
         items: [
-            { title: '資料庫基礎', href: '/docs/database' },
-            { title: 'Query Builder', href: '/docs/queries' },
-            { title: '分頁', href: '/docs/pagination' },
-            { title: '遷移', href: '/docs/migrations' },
-            { title: 'Seeding', href: '/docs/seeding' },
-            { title: 'Redis', href: '/docs/redis' },
-            { title: 'Eloquent ORM', href: '/docs/eloquent' },
-            { title: 'Eloquent 關聯', href: '/docs/eloquent-relationships' },
-            { title: 'Eloquent 集合', href: '/docs/eloquent-collections' },
-            { title: 'Eloquent Factories', href: '/docs/eloquent-factories' },
-            { title: 'Eloquent Mutators', href: '/docs/eloquent-mutators' },
-            { title: 'Eloquent Resources', href: '/docs/eloquent-resources' },
-            { title: 'Eloquent Serialization', href: '/docs/eloquent-serialization' },
+            { title: 'Contracts', href: '/docs/contracts' },
+            { title: 'Context', href: '/docs/context' },
+            { title: 'Concurrency', href: '/docs/concurrency' },
         ]
     },
     {
@@ -68,6 +58,29 @@ const sidebarItems = [
             { title: '授權', href: '/docs/authorization' },
             { title: '加密', href: '/docs/encryption' },
             { title: '雜湊', href: '/docs/hashing' },
+        ]
+    },
+    {
+        title: '資料庫',
+        items: [
+            { title: '資料庫基礎', href: '/docs/database' },
+            { title: 'Query Builder', href: '/docs/queries' },
+            { title: '分頁', href: '/docs/pagination' },
+            { title: '遷移', href: '/docs/migrations' },
+            { title: 'Seeding', href: '/docs/seeding' },
+            { title: 'Redis', href: '/docs/redis' },
+        ]
+    },
+    {
+        title: 'Eloquent ORM',
+        items: [
+            { title: 'Eloquent ORM', href: '/docs/eloquent' },
+            { title: 'Eloquent 關聯', href: '/docs/eloquent-relationships' },
+            { title: 'Eloquent 集合', href: '/docs/eloquent-collections' },
+            { title: 'Eloquent Factories', href: '/docs/eloquent-factories' },
+            { title: 'Eloquent Mutators', href: '/docs/eloquent-mutators' },
+            { title: 'Eloquent Resources', href: '/docs/eloquent-resources' },
+            { title: 'Eloquent Serialization', href: '/docs/eloquent-serialization' },
         ]
     },
     {
@@ -202,6 +215,18 @@ export function DocsSidebar() {
                             )}
                         </div>
                     ))}
+                    <div className="border-t pt-4 space-y-2">
+                        <Link href="/docs/api" className="block">
+                            <Button variant="ghost" size="sm" className="w-full justify-start font-normal text-sm">
+                                API 文件
+                            </Button>
+                        </Link>
+                        <Link href="/docs/releases" className="block">
+                            <Button variant="ghost" size="sm" className="w-full justify-start font-normal text-sm">
+                                更新日誌
+                            </Button>
+                        </Link>
+                    </div>
                 </div>
             </ScrollArea>
         </div>
