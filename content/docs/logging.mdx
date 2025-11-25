@@ -44,7 +44,7 @@ By default, Laravel will use the `stack` channel when logging messages. The `sta
 
 Each log channel is powered by a "driver". The driver determines how and where the log message is actually recorded. The following log channel drivers are available in every Laravel application. An entry for most of these drivers is already present in your application's `config/logging.php` configuration file, so be sure to review this file to become familiar with its contents:
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Name         | Description                                                          |
 | ------------ | -------------------------------------------------------------------- |
@@ -84,7 +84,7 @@ By default, Monolog is instantiated with a "channel name" that matches the curre
 
 The `single` and `daily` channels have three optional configuration options: `bubble`, `permission`, and `locking`.
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Name         | Description                                                                   | Default |
 | ------------ | ----------------------------------------------------------------------------- | ------- |
@@ -96,7 +96,7 @@ The `single` and `daily` channels have three optional configuration options: `bu
 
 Additionally, the retention policy for the `daily` channel can be configured via the `LOG_DAILY_DAYS` environment variable or by setting the `days` configuration option.
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Name   | Description                                                 | Default |
 | ------ | ----------------------------------------------------------- | ------- |

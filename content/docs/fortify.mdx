@@ -283,7 +283,7 @@ After choosing to enable two-factor authentication, the user must still "confirm
 
 ```html
 @if (session('status') == 'two-factor-authentication-enabled')
-    <div class="mb-4 font-medium text-sm">
+    <div className="mb-4 font-medium text-sm">
         Please finish configuring two-factor authentication below.
     </div>
 @endif
@@ -306,7 +306,7 @@ If the request is successful, the user will be redirected back to the previous U
 
 ```html
 @if (session('status') == 'two-factor-authentication-confirmed')
-    <div class="mb-4 font-medium text-sm">
+    <div className="mb-4 font-medium text-sm">
         Two-factor authentication confirmed and enabled successfully.
     </div>
 @endif
@@ -438,7 +438,7 @@ The value of the `$status` session variable will match one of the translation st
 
 ```html
 @if (session('status'))
-    <div class="mb-4 font-medium text-sm text-green-600">
+    <div className="mb-4 font-medium text-sm text-green-600">
         {{ session('status') }}
     </div>
 @endif
@@ -481,7 +481,7 @@ If the password reset request was successful, Fortify will redirect back to the 
 
 ```blade
 @if (session('status'))
-    <div class="mb-4 font-medium text-sm text-green-600">
+    <div className="mb-4 font-medium text-sm text-green-600">
         {{ session('status') }}
     </div>
 @endif
@@ -534,7 +534,7 @@ If the request to resend the verification link email was successful, Fortify wil
 
 ```blade
 @if (session('status') == 'verification-link-sent')
-    <div class="mb-4 font-medium text-sm text-green-600">
+    <div className="mb-4 font-medium text-sm text-green-600">
         A new email verification link has been emailed to you!
     </div>
 @endif

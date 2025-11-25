@@ -192,7 +192,7 @@ If you are displaying JavaScript variables in a large portion of your template, 
 
 ```blade
 @verbatim
-    <div class="container">
+    <div className="container">
         Hello, {{ name }}.
     </div>
 @endverbatim
@@ -295,11 +295,11 @@ You may determine if a template inheritance section has content using the `@hasS
 
 ```blade
 @hasSection('navigation')
-    <div class="pull-right">
+    <div className="pull-right">
         @yield('navigation')
     </div>
 
-    <div class="clearfix"></div>
+    <div className="clearfix"></div>
 @endif
 ```
 
@@ -307,7 +307,7 @@ You may use the `sectionMissing` directive to determine if a section does not ha
 
 ```blade
 @sectionMissing('navigation')
-    <div class="pull-right">
+    <div className="pull-right">
         @include('default-navigation')
     </div>
 @endif
@@ -320,7 +320,7 @@ The `@session` directive may be used to determine if a [session](/docs/{'12.x'}/
 
 ```blade
 @session('status')
-    <div class="p-4 bg-green-100">
+    <div className="p-4 bg-green-100">
         {{ $value }}
     </div>
 @endsession
@@ -446,7 +446,7 @@ If you are in a nested loop, you may access the parent loop's `$loop` variable v
 
 The `$loop` variable also contains a variety of other useful properties:
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Property           | Description                                            |
 | ------------------ | ------------------------------------------------------ |
@@ -481,7 +481,7 @@ The `@class` directive conditionally compiles a CSS class string. The directive 
     'bg-red' => $hasError,
 ])></span>
 
-<span class="p-4 text-gray-500 bg-red"></span>
+<span className="p-4 text-gray-500 bg-red"></span>
 ```
 
 Likewise, the `@style` directive may be used to conditionally add inline CSS styles to an HTML element:
@@ -880,7 +880,7 @@ class Alert extends Component
 When your component is rendered, you may display the contents of your component's public variables by echoing the variables by name:
 
 ```blade
-<div class="alert alert-{{ $type }}">
+<div className="alert alert-{{ $type }}">
     {{ $message }}
 </div>
 ```
@@ -924,7 +924,7 @@ When passing attributes to components, you may also use a "short attribute" synt
 Since some JavaScript frameworks such as Alpine.js also use colon-prefixed attributes, you may use a double colon (`::`) prefix to inform Blade that the attribute is not a PHP expression. For example, given the following component:
 
 ```blade
-<x-button ::class="{ danger: isDeleting }">
+<x-button ::className="{ danger: isDeleting }">
     Submit
 </x-button>
 ```
@@ -932,7 +932,7 @@ Since some JavaScript frameworks such as Alpine.js also use colon-prefixed attri
 The following HTML will be rendered by Blade:
 
 ```blade
-<button :class="{ danger: isDeleting }">
+<button :className="{ danger: isDeleting }">
     Submit
 </button>
 ```
@@ -1052,7 +1052,7 @@ class Alert extends Component
 We've already examined how to pass data attributes to a component; however, sometimes you may need to specify additional HTML attributes, such as `class`, that are not part of the data required for a component to function. Typically, you want to pass these additional attributes down to the root element of the component template. For example, imagine we want to render an `alert` component like so:
 
 ```blade
-<x-alert type="error" :message="$message" class="mt-4"/>
+<x-alert type="error" :message="$message" className="mt-4"/>
 ```
 
 All of the attributes that are not part of the component's constructor will automatically be added to the component's "attribute bag". This attribute bag is automatically made available to the component via the `$attributes` variable. All of the attributes may be rendered within the component by echoing this variable:
@@ -1080,13 +1080,13 @@ Sometimes you may need to specify default values for attributes or merge additio
 If we assume this component is utilized like so:
 
 ```blade
-<x-alert type="error" :message="$message" class="mb-4"/>
+<x-alert type="error" :message="$message" className="mb-4"/>
 ```
 
 The final, rendered HTML of the component will appear like the following:
 
 ```blade
-<div class="alert alert-error mb-4">
+<div className="alert alert-error mb-4">
     <!-- Contents of the $message variable -->
 </div>
 ```
@@ -1222,7 +1222,7 @@ The `except` method may be used to retrieve all attributes except those with the
 
 By default, some keywords are reserved for Blade's internal use in order to render components. The following keywords cannot be defined as public properties or method names within your components:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - `data`
 - `render`
@@ -1243,7 +1243,7 @@ You will often need to pass additional content to your component via "slots". Co
 ```blade
 <!-- /resources/views/components/alert.blade.php -->
 
-<div class="alert alert-danger">
+<div className="alert alert-danger">
     {{ $slot }}
 </div>
 ```
@@ -1261,9 +1261,9 @@ Sometimes a component may need to render multiple different slots in different l
 ```blade
 <!-- /resources/views/components/alert.blade.php -->
 
-<span class="alert-title">{{ $title }}</span>
+<span className="alert-title">{{ $title }}</span>
 
-<div class="alert alert-danger">
+<div className="alert alert-danger">
     {{ $slot }}
 </div>
 ```
@@ -1283,9 +1283,9 @@ You may define the content of the named slot using the `x-slot` tag. Any content
 You may invoke a slot's `isEmpty` method to determine if the slot contains content:
 
 ```blade
-<span class="alert-title">{{ $title }}</span>
+<span className="alert-title">{{ $title }}</span>
 
-<div class="alert alert-danger">
+<div className="alert alert-danger">
     @if ($slot->isEmpty())
         This is default content if the slot is empty.
     @else
@@ -1323,14 +1323,14 @@ If you have used a JavaScript framework such as Vue, you may be familiar with "s
 Like Blade components, you may assign additional [attributes](#component-attributes) to slots such as CSS class names:
 
 ```xml
-<x-card class="shadow-sm">
-    <x-slot:heading class="font-bold">
+<x-card className="shadow-sm">
+    <x-slot:heading className="font-bold">
         Heading
     </x-slot>
 
     Content
 
-    <x-slot:footer class="text-sm">
+    <x-slot:footer className="text-sm">
         Footer
     </x-slot>
 </x-card>
@@ -1369,7 +1369,7 @@ For very small components, it may feel cumbersome to manage both the component c
 public function render(): string
 {
     return <<<'blade'
-        <div class="alert alert-danger">
+        <div className="alert alert-danger">
             {{ $slot }}
         </div>
     blade;
@@ -1393,7 +1393,7 @@ Sometimes you may need to render a component but not know which component should
 ```blade
 // $componentName = "secondary-button";
 
-<x-dynamic-component :component="$componentName" class="mt-4" />
+<x-dynamic-component :component="$componentName" className="mt-4" />
 ```
 
 <a name="manually-registering-components"></a>
@@ -1522,7 +1522,7 @@ You may specify which attributes should be considered data variables using the `
 Given the component definition above, we may render the component like so:
 
 ```blade
-<x-alert type="error" :message="$message" class="mb-4"/>
+<x-alert type="error" :message="$message" className="mb-4"/>
 ```
 
 <a name="accessing-parent-data"></a>
@@ -1690,7 +1690,7 @@ To get started, let's take a look at a simple example. First, we will examine a 
             This is the master sidebar.
         @show
 
-        <div class="container">
+        <div className="container">
             @yield('content')
         </div>
     </body>
@@ -1777,11 +1777,11 @@ The `@error` directive may be used to quickly check if [validation error message
 <input
     id="title"
     type="text"
-    class="@error('title') is-invalid @enderror"
+    className="@error('title') is-invalid @enderror"
 />
 
 @error('title')
-    <div class="alert alert-danger">{{ $message }}</div>
+    <div className="alert alert-danger">{{ $message }}</div>
 @enderror
 ```
 
@@ -1795,7 +1795,7 @@ Since the `@error` directive compiles to an "if" statement, you may use the `@el
 <input
     id="email"
     type="email"
-    class="@error('email') is-invalid @else is-valid @enderror"
+    className="@error('email') is-invalid @else is-valid @enderror"
 />
 ```
 
@@ -1809,11 +1809,11 @@ You may pass [the name of a specific error bag](/docs/{'12.x'}/validation#named-
 <input
     id="email"
     type="email"
-    class="@error('email', 'login') is-invalid @enderror"
+    className="@error('email', 'login') is-invalid @enderror"
 />
 
 @error('email', 'login')
-    <div class="alert alert-danger">{{ $message }}</div>
+    <div className="alert alert-danger">{{ $message }}</div>
 @enderror
 ```
 

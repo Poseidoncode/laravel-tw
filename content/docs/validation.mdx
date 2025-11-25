@@ -202,7 +202,7 @@ So, in our example, the user will be redirected to our controller's `create` met
 <h1>Create Post</h1>
 
 @if ($errors->any())
-    <div class="alert alert-danger">
+    <div className="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -245,18 +245,18 @@ You may use the `@error` [Blade](/docs/12.x/blade) directive to quickly determin
     id="title"
     type="text"
     name="title"
-    class="@error('title') is-invalid @enderror"
+    className="@error('title') is-invalid @enderror"
 />
 
 @error('title')
-    <div class="alert alert-danger">{{ $message }}</div>
+    <div className="alert alert-danger">{{ $message }}</div>
 @enderror
 ```
 
 If you are using [named error bags](#named-error-bags), you may pass the name of the error bag as the second argument to the `@error` directive:
 
 ```blade
-<input ... class="@error('title', 'post') is-invalid @enderror">
+<input ... className="@error('title', 'post') is-invalid @enderror">
 ```
 
 <a name="repopulating-forms"></a>
@@ -955,7 +955,7 @@ Below is a list of all available validation rules and their function:
 
 #### Booleans
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Accepted](#rule-accepted)
 [Accepted If](#rule-accepted-if)
@@ -967,7 +967,7 @@ Below is a list of all available validation rules and their function:
 
 #### Strings
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Active URL](#rule-active-url)
 [Alpha](#rule-alpha)
@@ -1006,7 +1006,7 @@ Below is a list of all available validation rules and their function:
 
 #### Numbers
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Between](#rule-between)
 [Decimal](#rule-decimal)
@@ -1031,7 +1031,7 @@ Below is a list of all available validation rules and their function:
 
 #### Arrays
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Array](#rule-array)
 [Between](#rule-between)
@@ -1049,7 +1049,7 @@ Below is a list of all available validation rules and their function:
 
 #### Dates
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [After](#rule-after)
 [After Or Equal](#rule-after-or-equal)
@@ -1065,7 +1065,7 @@ Below is a list of all available validation rules and their function:
 
 #### Files
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Between](#rule-between)
 [Dimensions](#rule-dimensions)
@@ -1082,7 +1082,7 @@ Below is a list of all available validation rules and their function:
 
 #### Database
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Exists](#rule-exists)
 [Unique](#rule-unique)
@@ -1091,7 +1091,7 @@ Below is a list of all available validation rules and their function:
 
 #### Utilities
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [Any Of](#rule-anyof)
 [Bail](#rule-bail)
@@ -1540,7 +1540,7 @@ The field under validation must be formatted as an email address. This validatio
 
 The example above will apply the `RFCValidation` and `DNSCheckValidation` validations. Here's a full list of validation styles you can apply:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - `rfc`: `RFCValidation` - Validate the email address according to [supported RFCs](https://github.com/egulias/EmailValidator?tab=readme-ov-file#supported-rfcs).
 - `strict`: `NoRFCWarningsValidation` - Validate the email according to [supported RFCs](https://github.com/egulias/EmailValidator?tab=readme-ov-file#supported-rfcs), failing when warnings are found (e.g. trailing periods and multiple consecutive periods).
@@ -2042,7 +2042,7 @@ The field under validation must be present _only if_ all of the other specified 
 
 The field under validation must be missing or empty. A field is "empty" if it meets one of the following criteria:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The value is `null`.
 - The value is an empty string.
@@ -2056,7 +2056,7 @@ The field under validation must be missing or empty. A field is "empty" if it me
 
 The field under validation must be missing or empty if the _anotherfield_ field is equal to any _value_. A field is "empty" if it meets one of the following criteria:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The value is `null`.
 - The value is an empty string.
@@ -2094,7 +2094,7 @@ The field under validation must be missing or empty if the _anotherfield_ field 
 
 The field under validation must be missing or empty unless the _anotherfield_ field is equal to any _value_. A field is "empty" if it meets one of the following criteria:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The value is `null`.
 - The value is an empty string.
@@ -2108,7 +2108,7 @@ The field under validation must be missing or empty unless the _anotherfield_ fi
 
 If the field under validation is not missing or empty, all fields in _anotherfield_ must be missing or empty. A field is "empty" if it meets one of the following criteria:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The value is `null`.
 - The value is an empty string.
@@ -2132,7 +2132,7 @@ Internally, this rule uses the PHP `preg_match` function. The pattern specified 
 
 The field under validation must be present in the input data and not empty. A field is "empty" if it meets one of the following criteria:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The value is `null`.
 - The value is an empty string.

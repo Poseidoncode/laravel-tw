@@ -239,7 +239,7 @@ If necessary, the `checkout` method will automatically create a customer in Padd
 In the `buy` view, we will include a button to display the Checkout Overlay. The `paddle-button` Blade component is included with Cashier Paddle; however, you may also [manually render an overlay checkout](#manually-rendering-an-overlay-checkout):
 
 ```html
-<x-paddle-button :checkout="$checkout" class="px-8 py-4">
+<x-paddle-button :checkout="$checkout" className="px-8 py-4">
     Buy Product
 </x-paddle-button>
 ```
@@ -343,7 +343,7 @@ Route::get('/subscribe', function (Request $request) {
 In the `subscribe` view, we will include a button to display the Checkout Overlay. The `paddle-button` Blade component is included with Cashier Paddle; however, you may also [manually render an overlay checkout](#manually-rendering-an-overlay-checkout):
 
 ```html
-<x-paddle-button :checkout="$checkout" class="px-8 py-4">
+<x-paddle-button :checkout="$checkout" className="px-8 py-4">
     Subscribe
 </x-paddle-button>
 ```
@@ -469,7 +469,7 @@ Route::get('/buy', function (Request $request) {
 Cashier includes a `paddle-button` [Blade component](/docs/12.x/blade#components). You may pass the checkout session to this component as a "prop". Then, when this button is clicked, Paddle's checkout widget will be displayed:
 
 ```html
-<x-paddle-button :checkout="$checkout" class="px-8 py-4">
+<x-paddle-button :checkout="$checkout" className="px-8 py-4">
     Subscribe
 </x-paddle-button>
 ```
@@ -477,7 +477,7 @@ Cashier includes a `paddle-button` [Blade component](/docs/12.x/blade#components
 By default, this will display the widget using Paddle's default styling. You can customize the widget by adding [Paddle supported attributes](https://developer.paddle.com/paddlejs/html-data-attributes) like the  `data-theme='light'` attribute to the component:
 
 ```html
-<x-paddle-button :checkout="$checkout" class="px-8 py-4" data-theme="light">
+<x-paddle-button :checkout="$checkout" className="px-8 py-4" data-theme="light">
     Subscribe
 </x-paddle-button>
 ```
@@ -514,7 +514,7 @@ $custom = $checkout->getCustomData();
 
 <a
     href='#!'
-    class='paddle_button'
+    className='paddle_button'
     data-items='{!! json_encode($items) !!}'
     @if ($customer) data-customer-id='{{ $customer->paddle_id }}' @endif
     @if ($custom) data-custom-data='{{ json_encode($custom) }}' @endif
@@ -545,13 +545,13 @@ Route::get('/buy', function (Request $request) {
 Then, you may pass the checkout session to the component's `checkout` attribute:
 
 ```blade
-<x-paddle-checkout :checkout="$checkout" class="w-full" />
+<x-paddle-checkout :checkout="$checkout" className="w-full" />
 ```
 
 To adjust the height of the inline checkout component, you may pass the `height` attribute to the Blade component:
 
 ```blade
-<x-paddle-checkout :checkout="$checkout" class="w-full" height="500" />
+<x-paddle-checkout :checkout="$checkout" className="w-full" height="500" />
 ```
 
 Please consult Paddle's [guide on Inline Checkout](https://developer.paddle.com/build/checkout/build-branded-inline-checkout) and [available checkout settings](https://developer.paddle.com/build/checkout/set-up-checkout-default-settings) for further details on the inline checkout's customization options.
@@ -582,7 +582,7 @@ $options['settings']['frameTarget'] = 'paddle-checkout';
 $options['settings']['frameInitialHeight'] = 366;
 ?>
 
-<div class="paddle-checkout" x-data="{}" x-init="
+<div className="paddle-checkout" x-data="{}" x-init="
     Paddle.Checkout.open(@json($options));
 ">
 </div>
@@ -773,7 +773,7 @@ $checkout = $request->user()->subscribe($premium = 'pri_123', 'default')
 Once a subscription checkout session has been created, the checkout session may be provided to the `paddle-button` [Blade component](#overlay-checkout) that is included with Cashier Paddle:
 
 ```blade
-<x-paddle-button :checkout="$checkout" class="px-8 py-4">
+<x-paddle-button :checkout="$checkout" className="px-8 py-4">
     Subscribe
 </x-paddle-button>
 ```
@@ -1409,7 +1409,7 @@ class PaddleEventListener
 
 Cashier also emit events dedicated to the type of the received webhook. In addition to the full payload from Paddle, they also contain the relevant models that were used to process the webhook such as the billable model, the subscription, or the receipt:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - `Laravel\Paddle\Events\CustomerUpdated`
 - `Laravel\Paddle\Events\TransactionCompleted`
@@ -1455,7 +1455,7 @@ Route::get('/buy', function (Request $request) {
 After generating the checkout session, you may use Cashier's provided `paddle-button` [Blade component](#overlay-checkout) to allow the user to view the Paddle checkout widget and complete the purchase:
 
 ```blade
-<x-paddle-button :checkout="$checkout" class="px-8 py-4">
+<x-paddle-button :checkout="$checkout" className="px-8 py-4">
     Buy
 </x-paddle-button>
 ```

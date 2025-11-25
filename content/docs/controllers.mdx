@@ -213,7 +213,7 @@ Route::softDeletableResources([
 <a name="actions-handled-by-resource-controllers"></a>
 #### Resource Controllers 處理的動作
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | 動詞      | URI                    | 動作    | 路由名稱       |
 | --------- | ---------------------- | ------- | -------------- |
@@ -359,7 +359,7 @@ Route::resource('photos.comments', CommentController::class)->shallow();
 
 此路由定義將定義以下路由：
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | 動詞      | URI                               | 動作    | 路由名稱               |
 | --------- | --------------------------------- | ------- | ---------------------- |
@@ -481,7 +481,7 @@ Route::singleton('profile', ProfileController::class);
 
 上面的 singleton resource 定義將註冊以下路由。如你所見，singleton resources 不會註冊「建立」路由，並且註冊的路由不接受識別碼，因為該 resource 只能存在一個實例：
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | 動詞      | URI             | 動作   | 路由名稱       |
 | --------- | --------------- | ------ | -------------- |
@@ -499,7 +499,7 @@ Route::singleton('photos.thumbnail', ThumbnailController::class);
 
 在此範例中，`photos` resource 將接收所有[標準 resource 路由](#actions-handled-by-resource-controllers)；但是，`thumbnail` resource 將是一個 singleton resource，具有以下路由：
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | 動詞      | URI                              | 動作   | 路由名稱                |
 | --------- | -------------------------------- | ------ | ----------------------- |
@@ -520,7 +520,7 @@ Route::singleton('photos.thumbnail', ThumbnailController::class)->creatable();
 
 在此範例中，將註冊以下路由。如你所見，可建立的 singleton resources 也將註冊一個 `DELETE` 路由：
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | 動詞      | URI                                | 動作    | 路由名稱                 |
 | --------- | ---------------------------------- | ------- | ------------------------ |

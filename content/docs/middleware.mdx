@@ -248,7 +248,7 @@ Route::middleware(['group-name'])->group(function () {
 
 Laravel 包含預定義的 `web` 和 `api` Middleware 群組，其中包含您可能想要應用於 Web 和 API 路由的常見 Middleware。請記住，Laravel 會自動將這些 Middleware 群組應用於相應的 `routes/web.php` 和 `routes/api.php` 檔案：
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | `web` Middleware 群組                                     |
 | --------------------------------------------------------- |
@@ -261,7 +261,7 @@ Laravel 包含預定義的 `web` 和 `api` Middleware 群組，其中包含您�
 
 </div>
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | `api` Middleware 群組                              |
 | -------------------------------------------------- |
@@ -358,7 +358,7 @@ Route::get('/profile', function () {
 
 為了方便起見，Laravel 的一些內建 Middleware 預設已設定別名。例如，`auth` Middleware 是 `Illuminate\Auth\Middleware\Authenticate` Middleware 的別名。以下是預設 Middleware 別名的清單：
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | 別名               | Middleware                                                                                                    |
 | ------------------ | ------------------------------------------------------------------------------------------------------------- |

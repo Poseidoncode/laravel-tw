@@ -154,6 +154,425 @@ const sidebarItems = [
             {
                 title: '配置',
                 href: '/docs/configuration'
+            },
+            {
+                title: '目錄結構',
+                href: '/docs/structure'
+            },
+            {
+                title: '生命週期',
+                href: '/docs/lifecycle'
+            }
+        ]
+    },
+    {
+        title: '架構',
+        items: [
+            {
+                title: 'Service Container',
+                href: '/docs/container'
+            },
+            {
+                title: 'Service Providers',
+                href: '/docs/providers'
+            },
+            {
+                title: 'Facades',
+                href: '/docs/facades'
+            }
+        ]
+    },
+    {
+        title: '基礎功能',
+        items: [
+            {
+                title: '路由',
+                href: '/docs/routing'
+            },
+            {
+                title: '中介軟體',
+                href: '/docs/middleware'
+            },
+            {
+                title: 'CSRF 保護',
+                href: '/docs/csrf'
+            },
+            {
+                title: '控制器',
+                href: '/docs/controllers'
+            },
+            {
+                title: '請求',
+                href: '/docs/requests'
+            },
+            {
+                title: '回應',
+                href: '/docs/responses'
+            },
+            {
+                title: '視圖',
+                href: '/docs/views'
+            },
+            {
+                title: 'Blade 樣板',
+                href: '/docs/blade'
+            }
+        ]
+    },
+    {
+        title: '資料庫',
+        items: [
+            {
+                title: '資料庫基礎',
+                href: '/docs/database'
+            },
+            {
+                title: 'Query Builder',
+                href: '/docs/queries'
+            },
+            {
+                title: '分頁',
+                href: '/docs/pagination'
+            },
+            {
+                title: '遷移',
+                href: '/docs/migrations'
+            },
+            {
+                title: 'Seeding',
+                href: '/docs/seeding'
+            },
+            {
+                title: 'Redis',
+                href: '/docs/redis'
+            },
+            {
+                title: 'Eloquent ORM',
+                href: '/docs/eloquent'
+            },
+            {
+                title: 'Eloquent 關聯',
+                href: '/docs/eloquent-relationships'
+            },
+            {
+                title: 'Eloquent 集合',
+                href: '/docs/eloquent-collections'
+            },
+            {
+                title: 'Eloquent Factories',
+                href: '/docs/eloquent-factories'
+            },
+            {
+                title: 'Eloquent Mutators',
+                href: '/docs/eloquent-mutators'
+            },
+            {
+                title: 'Eloquent Resources',
+                href: '/docs/eloquent-resources'
+            },
+            {
+                title: 'Eloquent Serialization',
+                href: '/docs/eloquent-serialization'
+            }
+        ]
+    },
+    {
+        title: '安全性',
+        items: [
+            {
+                title: '驗證',
+                href: '/docs/authentication'
+            },
+            {
+                title: '授權',
+                href: '/docs/authorization'
+            },
+            {
+                title: '加密',
+                href: '/docs/encryption'
+            },
+            {
+                title: '雜湊',
+                href: '/docs/hashing'
+            }
+        ]
+    },
+    {
+        title: '測試',
+        items: [
+            {
+                title: '測試概論',
+                href: '/docs/testing'
+            },
+            {
+                title: 'HTTP 測試',
+                href: '/docs/http-tests'
+            },
+            {
+                title: 'Console 測試',
+                href: '/docs/console-tests'
+            },
+            {
+                title: '資料庫測試',
+                href: '/docs/database-testing'
+            },
+            {
+                title: 'Dusk',
+                href: '/docs/dusk'
+            }
+        ]
+    },
+    {
+        title: '其他',
+        items: [
+            {
+                title: 'Artisan Console',
+                href: '/docs/artisan'
+            },
+            {
+                title: '廣播',
+                href: '/docs/broadcasting'
+            },
+            {
+                title: '快取',
+                href: '/docs/cache'
+            },
+            {
+                title: '集合',
+                href: '/docs/collections'
+            },
+            {
+                title: '事件',
+                href: '/docs/events'
+            },
+            {
+                title: '檔案儲存',
+                href: '/docs/filesystem'
+            },
+            {
+                title: '輔助函式',
+                href: '/docs/helpers'
+            },
+            {
+                title: '郵件',
+                href: '/docs/mail'
+            },
+            {
+                title: '通知',
+                href: '/docs/notifications'
+            },
+            {
+                title: '佇列',
+                href: '/docs/queues'
+            },
+            {
+                title: '排程',
+                href: '/docs/scheduling'
+            }
+        ]
+    },
+    {
+        title: '官方套件',
+        items: [
+            {
+                title: 'Billing',
+                href: '/docs/billing'
+            },
+            {
+                title: 'Cashier (Paddle)',
+                href: '/docs/cashier-paddle'
+            },
+            {
+                title: 'Envoy',
+                href: '/docs/envoy'
+            },
+            {
+                title: 'Errors',
+                href: '/docs/errors'
+            },
+            {
+                title: 'Folio',
+                href: '/docs/folio'
+            },
+            {
+                title: 'Fortify',
+                href: '/docs/fortify'
+            },
+            {
+                title: 'Frontend',
+                href: '/docs/frontend'
+            },
+            {
+                title: 'Homestead',
+                href: '/docs/homestead'
+            },
+            {
+                title: 'Horizon',
+                href: '/docs/horizon'
+            },
+            {
+                title: 'HTTP Client',
+                href: '/docs/http-client'
+            },
+            {
+                title: 'License',
+                href: '/docs/license'
+            },
+            {
+                title: 'Localization',
+                href: '/docs/localization'
+            },
+            {
+                title: 'Logging',
+                href: '/docs/logging'
+            },
+            {
+                title: 'MCP',
+                href: '/docs/mcp'
+            },
+            {
+                title: 'Mix',
+                href: '/docs/mix'
+            },
+            {
+                title: 'Mocking',
+                href: '/docs/mocking'
+            },
+            {
+                title: 'MongoDB',
+                href: '/docs/mongodb'
+            },
+            {
+                title: 'Octane',
+                href: '/docs/octane'
+            },
+            {
+                title: 'Packages',
+                href: '/docs/packages'
+            },
+            {
+                title: 'Passport',
+                href: '/docs/passport'
+            },
+            {
+                title: 'Passwords',
+                href: '/docs/passwords'
+            },
+            {
+                title: 'Pennant',
+                href: '/docs/pennant'
+            },
+            {
+                title: 'Pint',
+                href: '/docs/pint'
+            },
+            {
+                title: 'Precognition',
+                href: '/docs/precognition'
+            },
+            {
+                title: 'Processes',
+                href: '/docs/processes'
+            },
+            {
+                title: 'Prompts',
+                href: '/docs/prompts'
+            },
+            {
+                title: 'Pulse',
+                href: '/docs/pulse'
+            },
+            {
+                title: 'Rate Limiting',
+                href: '/docs/rate-limiting'
+            },
+            {
+                title: 'Readme',
+                href: '/docs/readme'
+            },
+            {
+                title: 'Redirects',
+                href: '/docs/redirects'
+            },
+            {
+                title: 'Reverb',
+                href: '/docs/reverb'
+            },
+            {
+                title: 'Sail',
+                href: '/docs/sail'
+            },
+            {
+                title: 'Sanctum',
+                href: '/docs/sanctum'
+            },
+            {
+                title: 'Scout',
+                href: '/docs/scout'
+            },
+            {
+                title: 'Socialite',
+                href: '/docs/socialite'
+            },
+            {
+                title: 'Starter Kits',
+                href: '/docs/starter-kits'
+            },
+            {
+                title: 'Strings',
+                href: '/docs/strings'
+            },
+            {
+                title: 'Telescope',
+                href: '/docs/telescope'
+            },
+            {
+                title: 'Upgrade',
+                href: '/docs/upgrade'
+            },
+            {
+                title: 'URLs',
+                href: '/docs/urls'
+            },
+            {
+                title: 'Valet',
+                href: '/docs/valet'
+            },
+            {
+                title: 'Validation',
+                href: '/docs/validation'
+            },
+            {
+                title: 'Verification',
+                href: '/docs/verification'
+            },
+            {
+                title: 'Vite',
+                href: '/docs/vite'
+            },
+            {
+                title: 'Context',
+                href: '/docs/context'
+            },
+            {
+                title: 'Contracts',
+                href: '/docs/contracts'
+            },
+            {
+                title: 'Contributions',
+                href: '/docs/contributions'
+            },
+            {
+                title: 'Deployment',
+                href: '/docs/deployment'
+            },
+            {
+                title: 'Documentation',
+                href: '/docs/documentation'
+            },
+            {
+                title: 'Concurrency',
+                href: '/docs/concurrency'
             }
         ]
     }
@@ -170,14 +589,14 @@ function DocsSidebar() {
                         children: "Laravel"
                     }, void 0, false, {
                         fileName: "[project]/components/docs/sidebar.tsx",
-                        lineNumber: 25,
+                        lineNumber: 156,
                         columnNumber: 17
                     }, this),
                     " Docs CN"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/docs/sidebar.tsx",
-                lineNumber: 24,
+                lineNumber: 155,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$scroll$2d$area$2e$tsx__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["ScrollArea"], {
@@ -191,7 +610,7 @@ function DocsSidebar() {
                                     children: section.title
                                 }, void 0, false, {
                                     fileName: "[project]/components/docs/sidebar.tsx",
-                                    lineNumber: 31,
+                                    lineNumber: 162,
                                     columnNumber: 29
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -206,39 +625,39 @@ function DocsSidebar() {
                                                 children: item.title
                                             }, void 0, false, {
                                                 fileName: "[project]/components/docs/sidebar.tsx",
-                                                lineNumber: 35,
+                                                lineNumber: 166,
                                                 columnNumber: 41
                                             }, this)
                                         }, item.href, false, {
                                             fileName: "[project]/components/docs/sidebar.tsx",
-                                            lineNumber: 34,
+                                            lineNumber: 165,
                                             columnNumber: 37
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/components/docs/sidebar.tsx",
-                                    lineNumber: 32,
+                                    lineNumber: 163,
                                     columnNumber: 29
                                 }, this)
                             ]
                         }, section.title, true, {
                             fileName: "[project]/components/docs/sidebar.tsx",
-                            lineNumber: 30,
+                            lineNumber: 161,
                             columnNumber: 25
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/components/docs/sidebar.tsx",
-                    lineNumber: 28,
+                    lineNumber: 159,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/docs/sidebar.tsx",
-                lineNumber: 27,
+                lineNumber: 158,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/docs/sidebar.tsx",
-        lineNumber: 23,
+        lineNumber: 154,
         columnNumber: 9
     }, this);
 }

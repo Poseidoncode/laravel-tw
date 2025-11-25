@@ -96,7 +96,7 @@ For the majority of the remaining collection documentation, we'll discuss each m
 
 
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [after](#method-after)
 [all](#method-all)
@@ -377,9 +377,9 @@ This method is especially useful in [views](/docs/12.x/views) when working with 
 
 ```blade
 @foreach ($products->chunk(3) as $chunk)
-    <div class="row">
+    <div className="row">
         @foreach ($chunk as $product)
-            <div class="col-xs-4">{{ $product->name }}</div>
+            <div className="col-xs-4">{{ $product->name }}</div>
         @endforeach
     </div>
 @endforeach
@@ -4098,7 +4098,7 @@ Almost all methods available on the `Collection` class are also available on the
 
 
 
-<div class="collection-method-list" markdown="1">
+<div className="collection-method-list" markdown="1">
 
 [all](#method-all)
 [average](#method-average)

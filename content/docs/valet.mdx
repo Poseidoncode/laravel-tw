@@ -145,7 +145,7 @@ You may update your Valet installation by executing the `composer global require
 
 If you're upgrading from Valet 3 to Valet 4, take the following steps to properly upgrade your Valet installation:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - If you've added `.valetphprc` files to customize your site's PHP version, rename each `.valetphprc` file to `.valetrc`. Then, prepend `php=` to the existing content of the `.valetrc` file.
 - Update any custom drivers to match the namespace, extension, type-hints, and return type-hints of the new driver system. You may consult Valet's [SampleValetDriver](https://github.com/laravel/valet/blob/d7787c025e60abc24a5195dc7d4c5c6f2d984339/cli/stubs/SampleValetDriver.php) as an example.
@@ -473,7 +473,7 @@ class LocalValetDriver extends LaravelValetDriver
 <a name="other-valet-commands"></a>
 ## Other Valet Commands
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Command | Description |
 | --- | --- |

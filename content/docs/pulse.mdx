@@ -576,7 +576,7 @@ When using Livewire's [lazy loading](https://livewire.laravel.com/docs/lazy) fea
 When writing your Pulse card's corresponding view, you may leverage Pulse's Blade components for a consistent look and feel:
 
 ```blade
-<x-pulse::card :cols="$cols" :rows="$rows" :class="$class" wire:poll.5s="">
+<x-pulse::card :cols="$cols" :rows="$rows" :className="$class" wire:poll.5s="">
     <x-pulse::card-header name="Top Sellers">
         <x-slot:icon>
             ...
@@ -682,7 +682,7 @@ You may then specify the configuration file in your CSS entrypoint:
 You will also need to include an `id` or `class` attribute in your card's view that matches the selector passed to Tailwind's [important selector strategy](https://tailwindcss.com/docs/configuration#selector-strategy):
 
 ```blade
-<x-pulse::card id="top-sellers" :cols="$cols" :rows="$rows" class="$class">
+<x-pulse::card id="top-sellers" :cols="$cols" :rows="$rows" className="$class">
     ...
 </x-pulse::card>
 ```

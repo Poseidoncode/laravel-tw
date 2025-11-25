@@ -239,7 +239,7 @@ When calling the `paginate` method, you will receive an instance of `Illuminate\
 These objects provide several methods that describe the result set. In addition to these helper methods, the paginator instances are iterators and may be looped as an array. So, once you have retrieved the results, you may display the results and render the page links using [Blade](/docs/{'12.x'}/blade):
 
 ```blade
-<div class="container">
+<div className="container">
     @foreach ($users as $user)
         {{ $user->name }}
     @endforeach
@@ -366,7 +366,7 @@ public function boot(): void
 
 Each paginator instance provides additional pagination information via the following methods:
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Method                                  | Description                                                                                                  |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -398,7 +398,7 @@ Each paginator instance provides additional pagination information via the follo
 
 Each cursor paginator instance provides additional pagination information via the following methods:
 
-<div class="overflow-auto">
+<div className="overflow-auto">
 
 | Method                          | Description                                                       |
 | ------------------------------- | ----------------------------------------------------------------- |

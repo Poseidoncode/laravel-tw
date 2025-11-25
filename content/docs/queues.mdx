@@ -161,7 +161,7 @@ Adjusting this value based on your queue load can be more efficient than continu
 
 The following dependencies are needed for the listed queue drivers. These dependencies may be installed via the Composer package manager:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - Amazon SQS: `aws/aws-sdk-php ~3.0`
 - Beanstalkd: `pda/pheanstalk ~5.0`
@@ -1254,7 +1254,7 @@ When a job is dispatched, it is pushed onto the queue. A worker then picks it up
 
 However, an attempt does not necessarily mean the job's `handle` method was executed. Attempts can also be "consumed" in several ways:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The job encounters an unhandled exception during execution.
 - The job is manually released back to the queue using `$this->release()`.
@@ -2467,7 +2467,7 @@ class ProcessPodcast implements ShouldQueue
 
 A failed job is not necessarily one that encountered an unhandled exception. A job may also be considered failed when it has exhausted all of its allowed attempts. These attempts can be consumed in several ways:
 
-<div class="content-list" markdown="1">
+<div className="content-list" markdown="1">
 
 - The job timed out.
 - The job encounters an unhandled exception during execution.
