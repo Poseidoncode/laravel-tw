@@ -66,7 +66,7 @@ class EnsureTokenIsValid
 最好將 Middleware 想像為一系列「層」，HTTP 請求必須通過這些層才能到達您的應用程式。每一層都可以檢查請求，甚至完全拒絕它。
 
 > [!NOTE]
-> 所有 Middleware 都透過 [Service Container](/docs/{{version}}/container) 解析，因此您可以在 Middleware 的建構子中對所需的任何依賴項進行型別提示。
+> 所有 Middleware 都透過 [Service Container](/docs/{'12.x'}/container) 解析，因此您可以在 Middleware 的建構子中對所需的任何依賴項進行型別提示。
 
 <a name="middleware-and-responses"></a>
 #### Middleware 與回應
@@ -195,7 +195,7 @@ Route::middleware([EnsureTokenIsValid::class])->group(function () {
 });
 ```
 
-您還可以從整個路由定義 [群組](/docs/{{version}}/routing#route-groups) 中排除給定的 Middleware 集：
+您還可以從整個路由定義 [群組](/docs/{'12.x'}/routing#route-groups) 中排除給定的 Middleware 集：
 
 ```php
 use App\Http\Middleware\EnsureTokenIsValid;
@@ -440,7 +440,7 @@ class EnsureUserHasRole
 ```php
 use App\Http\Middleware\EnsureUserHasRole;
 
-Route::put('/post/{id}', function (string $id) {
+Route::put('/post/{'{id}'}', function (string $id) {
     // ...
 })->middleware(EnsureUserHasRole::class.':editor');
 ```
@@ -448,7 +448,7 @@ Route::put('/post/{id}', function (string $id) {
 多個參數可以用逗號分隔：
 
 ```php
-Route::put('/post/{id}', function (string $id) {
+Route::put('/post/{'{id}'}', function (string $id) {
     // ...
 })->middleware(EnsureUserHasRole::class.':editor,publisher');
 ```
@@ -491,7 +491,7 @@ class TerminatingMiddleware
 
 `terminate` 方法應同時接收請求和回應。一旦您定義了可終止的 Middleware，您應該將其新增到應用程式 `bootstrap/app.php` 檔案中的路由或全域 Middleware 清單中。
 
-在 Middleware 上呼叫 `terminate` 方法時，Laravel 將從 [Service Container](/docs/{{version}}/container) 解析 Middleware 的新實例。如果您希望在呼叫 `handle` 和 `terminate` 方法時使用相同的 Middleware 實例，請使用 Container 的 `singleton` 方法向 Container 註冊 Middleware。通常這應該在您的 `AppServiceProvider` 的 `register` 方法中完成：
+在 Middleware 上呼叫 `terminate` 方法時，Laravel 將從 [Service Container](/docs/{'12.x'}/container) 解析 Middleware 的新實例。如果您希望在呼叫 `handle` 和 `terminate` 方法時使用相同的 Middleware 實例，請使用 Container 的 `singleton` 方法向 Container 註冊 Middleware。通常這應該在您的 `AppServiceProvider` 的 `register` 方法中完成：
 
 ```php
 use App\Http\Middleware\TerminatingMiddleware;

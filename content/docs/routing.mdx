@@ -51,7 +51,7 @@ Route::get('/greeting', function () {
 <a name="the-default-route-files"></a>
 ### 預設路由檔案
 
-所有 Laravel 路由都在您的路由檔案中定義，這些檔案位於 `routes` 目錄中。這些檔案由 Laravel 使用應用程式 `bootstrap/app.php` 檔案中指定的設定自動載入。`routes/web.php` 檔案定義了用於 Web 介面的路由。這些路由被分配了 `web` [Middleware 群組](/docs/{{version}}/middleware#laravels-default-middleware-groups)，該群組提供了 Session 狀態和 CSRF 保護等功能。
+所有 Laravel 路由都在您的路由檔案中定義，這些檔案位於 `routes` 目錄中。這些檔案由 Laravel 使用應用程式 `bootstrap/app.php` 檔案中指定的設定自動載入。`routes/web.php` 檔案定義了用於 Web 介面的路由。這些路由被分配了 `web` [Middleware 群組](/docs/{'12.x'}/middleware#laravels-default-middleware-groups)，該群組提供了 Session 狀態和 CSRF 保護等功能。
 
 對於大多數應用程式，您將從在 `routes/web.php` 檔案中定義路由開始。可以透過在瀏覽器中輸入定義的路由 URL 來存取 `routes/web.php` 中定義的路由。例如，您可以透過在瀏覽器中導航到 `http://example.com/user` 來存取以下路由：
 
@@ -70,7 +70,7 @@ Route::get('/user', [UserController::class, 'index']);
 php artisan install:api
 ```
 
-`install:api` 指令會安裝 [Laravel Sanctum](/docs/{{version}}/sanctum)，它提供了一個強大且簡單的 API Token 驗證 Guard，可用於驗證第三方 API 消費者、SPA 或行動應用程式。此外，`install:api` 指令會建立 `routes/api.php` 檔案：
+`install:api` 指令會安裝 [Laravel Sanctum](/docs/{'12.x'}/sanctum)，它提供了一個強大且簡單的 API Token 驗證 Guard，可用於驗證第三方 API 消費者、SPA 或行動應用程式。此外，`install:api` 指令會建立 `routes/api.php` 檔案：
 
 ```php
 Route::get('/user', function (Request $request) {
@@ -78,7 +78,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 ```
 
-`routes/api.php` 中的路由是無狀態的，並分配給 `api` [Middleware 群組](/docs/{{version}}/middleware#laravels-default-middleware-groups)。此外，`/api` URI 前綴會自動應用於這些路由，因此您無需手動將其應用於檔案中的每個路由。您可以透過修改應用程式的 `bootstrap/app.php` 檔案來更改前綴：
+`routes/api.php` 中的路由是無狀態的，並分配給 `api` [Middleware 群組](/docs/{'12.x'}/middleware#laravels-default-middleware-groups)。此外，`/api` URI 前綴會自動應用於這些路由，因此您無需手動將其應用於檔案中的每個路由。您可以透過修改應用程式的 `bootstrap/app.php` 檔案來更改前綴：
 
 ```php
 ->withRouting(
@@ -120,7 +120,7 @@ Route::any('/', function () {
 <a name="dependency-injection"></a>
 #### Dependency Injection
 
-您可以在路由的 Callback 簽名中對路由所需的任何依賴項進行型別提示 (Type-hint)。聲明的依賴項將由 Laravel [Service Container](/docs/{{version}}/container) 自動解析並注入到 Callback 中。例如，您可以對 `Illuminate\Http\Request` 類別進行型別提示，以便將當前 HTTP 請求自動注入到您的路由 Callback 中：
+您可以在路由的 Callback 簽名中對路由所需的任何依賴項進行型別提示 (Type-hint)。聲明的依賴項將由 Laravel [Service Container](/docs/{'12.x'}/container) 自動解析並注入到 Callback 中。例如，您可以對 `Illuminate\Http\Request` 類別進行型別提示，以便將當前 HTTP 請求自動注入到您的路由 Callback 中：
 
 ```php
 use Illuminate\Http\Request;
@@ -133,7 +133,7 @@ Route::get('/users', function (Request $request) {
 <a name="csrf-protection"></a>
 #### CSRF 保護
 
-請記住，任何指向 `web` 路由檔案中定義的 `POST`、`PUT`、`PATCH` 或 `DELETE` 路由的 HTML 表單都應包含 CSRF Token 欄位。否則，請求將被拒絕。您可以在 [CSRF 文件](/docs/{{version}}/csrf) 中閱讀有關 CSRF 保護的更多資訊：
+請記住，任何指向 `web` 路由檔案中定義的 `POST`、`PUT`、`PATCH` 或 `DELETE` 路由的 HTML 表單都應包含 CSRF Token 欄位。否則，請求將被拒絕。您可以在 [CSRF 文件](/docs/{'12.x'}/csrf) 中閱讀有關 CSRF 保護的更多資訊：
 
 ```blade
 <form method="POST" action="/profile">
@@ -169,7 +169,7 @@ Route::permanentRedirect('/here', '/there');
 <a name="view-routes"></a>
 ### View 路由
 
-如果您的路由只需要返回一個 [View](/docs/{{version}}/views)，您可以使用 `Route::view` 方法。就像 `redirect` 方法一樣，此方法提供了一個簡單的捷徑，因此您不必定義完整的路由或 Controller。`view` 方法接受 URI 作為其第一個參數，View 名稱作為其第二個參數。此外，您可以提供一個資料陣列作為可選的第三個參數傳遞給 View：
+如果您的路由只需要返回一個 [View](/docs/{'12.x'}/views)，您可以使用 `Route::view` 方法。就像 `redirect` 方法一樣，此方法提供了一個簡單的捷徑，因此您不必定義完整的路由或 Controller。`view` 方法接受 URI 作為其第一個參數，View 名稱作為其第二個參數。此外，您可以提供一個資料陣列作為可選的第三個參數傳遞給 View：
 
 ```php
 Route::view('/welcome', 'welcome');
@@ -279,7 +279,7 @@ use Illuminate\Support\Facades\Route;
 有時您需要在路由中擷取 URI 的片段。例如，您可能需要從 URL 中擷取使用者的 ID。您可以透過定義路由參數來實現：
 
 ```php
-Route::get('/user/{id}', function (string $id) {
+Route::get('/user/{'{id}'}', function (string $id) {
     return 'User '.$id;
 });
 ```
@@ -287,7 +287,7 @@ Route::get('/user/{id}', function (string $id) {
 您可以根據路由需要定義任意數量的路由參數：
 
 ```php
-Route::get('/posts/{post}/comments/{comment}', function (string $postId, string $commentId) {
+Route::get('/posts/{'{post}'}/comments/{'{comment}'}', function (string $postId, string $commentId) {
     // ...
 });
 ```
@@ -302,7 +302,7 @@ Route::get('/posts/{post}/comments/{comment}', function (string $postId, string 
 ```php
 use Illuminate\Http\Request;
 
-Route::get('/user/{id}', function (Request $request, string $id) {
+Route::get('/user/{'{id}'}', function (Request $request, string $id) {
     return 'User '.$id;
 });
 ```
@@ -328,15 +328,15 @@ Route::get('/user/{name?}', function (?string $name = 'John') {
 您可以使用路由實例上的 `where` 方法約束路由參數的格式。`where` 方法接受參數名稱和定義參數應如何約束的正規表示式：
 
 ```php
-Route::get('/user/{name}', function (string $name) {
+Route::get('/user/{'{name}'}', function (string $name) {
     // ...
 })->where('name', '[A-Za-z]+');
 
-Route::get('/user/{id}', function (string $id) {
+Route::get('/user/{'{id}'}', function (string $id) {
     // ...
 })->where('id', '[0-9]+');
 
-Route::get('/user/{id}/{name}', function (string $id, string $name) {
+Route::get('/user/{'{id}'}/{'{name}'}', function (string $id, string $name) {
     // ...
 })->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
 ```
@@ -344,27 +344,27 @@ Route::get('/user/{id}/{name}', function (string $id, string $name) {
 為了方便起見，一些常用的正規表示式模式具有 Helper 方法，允許您快速將模式約束新增到您的路由中：
 
 ```php
-Route::get('/user/{id}/{name}', function (string $id, string $name) {
+Route::get('/user/{'{id}'}/{'{name}'}', function (string $id, string $name) {
     // ...
 })->whereNumber('id')->whereAlpha('name');
 
-Route::get('/user/{name}', function (string $name) {
+Route::get('/user/{'{name}'}', function (string $name) {
     // ...
 })->whereAlphaNumeric('name');
 
-Route::get('/user/{id}', function (string $id) {
+Route::get('/user/{'{id}'}', function (string $id) {
     // ...
 })->whereUuid('id');
 
-Route::get('/user/{id}', function (string $id) {
+Route::get('/user/{'{id}'}', function (string $id) {
     // ...
 })->whereUlid('id');
 
-Route::get('/category/{category}', function (string $category) {
+Route::get('/category/{'{category}'}', function (string $category) {
     // ...
 })->whereIn('category', ['movie', 'song', 'painting']);
 
-Route::get('/category/{category}', function (string $category) {
+Route::get('/category/{'{category}'}', function (string $category) {
     // ...
 })->whereIn('category', CategoryEnum::cases());
 ```
@@ -391,8 +391,8 @@ public function boot(): void
 一旦定義了模式，它將自動應用於所有使用該參數名稱的路由：
 
 ```php
-Route::get('/user/{id}', function (string $id) {
-    // Only executed if {id} is numeric...
+Route::get('/user/{'{id}'}', function (string $id) {
+    // Only executed if {'{id}'} is numeric...
 });
 ```
 
@@ -402,7 +402,7 @@ Route::get('/user/{id}', function (string $id) {
 Laravel 路由元件允許除 `/` 之外的所有字元出現在路由參數值中。您必須使用 `where` 條件正規表示式明確允許 `/` 成為預留位置的一部分：
 
 ```php
-Route::get('/search/{search}', function (string $search) {
+Route::get('/search/{'{search}'}', function (string $search) {
     return $search;
 })->where('search', '.*');
 ```
@@ -451,7 +451,7 @@ return to_route('profile');
 如果命名路由定義了參數，您可以將參數作為第二個參數傳遞給 `route` 函式。給定的參數將自動插入到生成的 URL 中的正確位置：
 
 ```php
-Route::get('/user/{id}/profile', function (string $id) {
+Route::get('/user/{'{id}'}/profile', function (string $id) {
     // ...
 })->name('profile');
 
@@ -461,7 +461,7 @@ $url = route('profile', ['id' => 1]);
 如果您在陣列中傳遞其他參數，這些鍵/值對將自動新增到生成的 URL 的查詢字串中：
 
 ```php
-Route::get('/user/{id}/profile', function (string $id) {
+Route::get('/user/{'{id}'}/profile', function (string $id) {
     // ...
 })->name('profile');
 
@@ -471,7 +471,7 @@ $url = route('profile', ['id' => 1, 'photos' => 'yes']);
 ```
 
 > [!NOTE]
-> 有時，您可能希望為 URL 參數指定請求範圍的預設值，例如當前語言環境。為此，您可以使用 [URL::defaults 方法](/docs/{{version}}/urls#default-values)。
+> 有時，您可能希望為 URL 參數指定請求範圍的預設值，例如當前語言環境。為此，您可以使用 [URL::defaults 方法](/docs/{'12.x'}/urls#default-values)。
 
 <a name="inspecting-the-current-route"></a>
 #### 檢查當前路由
@@ -508,7 +508,7 @@ public function handle(Request $request, Closure $next): Response
 <a name="route-group-middleware"></a>
 ### Middleware
 
-要將 [Middleware](/docs/{{version}}/middleware) 分配給群組內的所有路由，您可以在定義群組之前使用 `middleware` 方法。Middleware 按照它們在陣列中列出的順序執行：
+要將 [Middleware](/docs/{'12.x'}/middleware) 分配給群組內的所有路由，您可以在定義群組之前使用 `middleware` 方法。Middleware 按照它們在陣列中列出的順序執行：
 
 ```php
 Route::middleware(['first', 'second'])->group(function () {
@@ -525,13 +525,13 @@ Route::middleware(['first', 'second'])->group(function () {
 <a name="route-group-controllers"></a>
 ### Controllers
 
-如果一組路由都使用相同的 [Controller](/docs/{{version}}/controllers)，您可以使用 `controller` 方法為群組內的所有路由定義通用的 Controller。然後，在定義路由時，您只需要提供它們呼叫的 Controller 方法：
+如果一組路由都使用相同的 [Controller](/docs/{'12.x'}/controllers)，您可以使用 `controller` 方法為群組內的所有路由定義通用的 Controller。然後，在定義路由時，您只需要提供它們呼叫的 Controller 方法：
 
 ```php
 use App\Http\Controllers\OrderController;
 
 Route::controller(OrderController::class)->group(function () {
-    Route::get('/orders/{id}', 'show');
+    Route::get('/orders/{'{id}'}', 'show');
     Route::post('/orders', 'store');
 });
 ```
@@ -542,8 +542,8 @@ Route::controller(OrderController::class)->group(function () {
 路由群組也可用於處理子網域路由。子網域可以像路由 URI 一樣分配路由參數，允許您擷取子網域的一部分以在您的路由或 Controller 中使用。可以在定義群組之前呼叫 `domain` 方法來指定子網域：
 
 ```php
-Route::domain('{account}.example.com')->group(function () {
-    Route::get('/user/{id}', function (string $account, string $id) {
+Route::domain('{'{account}'}.example.com')->group(function () {
+    Route::get('/user/{'{id}'}', function (string $account, string $id) {
         // ...
     });
 });
@@ -591,7 +591,7 @@ Laravel 自動解析在路由或 Controller Action 中定義的 Eloquent Model�
 ```php
 use App\Models\User;
 
-Route::get('/users/{user}', function (User $user) {
+Route::get('/users/{'{user}'}', function (User $user) {
     return $user->email;
 });
 ```
@@ -605,7 +605,7 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 
 // Route definition...
-Route::get('/users/{user}', [UserController::class, 'show']);
+Route::get('/users/{'{user}'}', [UserController::class, 'show']);
 
 // Controller method definition...
 public function show(User $user)
@@ -617,12 +617,12 @@ public function show(User $user)
 <a name="implicit-soft-deleted-models"></a>
 #### 軟刪除的 Models
 
-通常，隱式 Model 綁定不會檢索已 [軟刪除](/docs/{{version}}/eloquent#soft-deleting) 的 Model。但是，您可以透過將 `withTrashed` 方法鏈接到您的路由定義來指示隱式綁定檢索這些 Model：
+通常，隱式 Model 綁定不會檢索已 [軟刪除](/docs/{'12.x'}/eloquent#soft-deleting) 的 Model。但是，您可以透過將 `withTrashed` 方法鏈接到您的路由定義來指示隱式綁定檢索這些 Model：
 
 ```php
 use App\Models\User;
 
-Route::get('/users/{user}', function (User $user) {
+Route::get('/users/{'{user}'}', function (User $user) {
     return $user->email;
 })->withTrashed();
 ```
@@ -661,7 +661,7 @@ public function getRouteKeyName(): string
 use App\Models\Post;
 use App\Models\User;
 
-Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) {
+Route::get('/users/{'{user}'}/posts/{post:slug}', function (User $user, Post $post) {
     return $post;
 });
 ```
@@ -674,7 +674,7 @@ Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) 
 use App\Models\Post;
 use App\Models\User;
 
-Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
+Route::get('/users/{'{user}'}/posts/{'{post}'}', function (User $user, Post $post) {
     return $post;
 })->scopeBindings();
 ```
@@ -683,7 +683,7 @@ Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
 
 ```php
 Route::scopeBindings()->group(function () {
-    Route::get('/users/{user}/posts/{post}', function (User $user, Post $post) {
+    Route::get('/users/{'{user}'}/posts/{'{post}'}', function (User $user, Post $post) {
         return $post;
     });
 });
@@ -692,7 +692,7 @@ Route::scopeBindings()->group(function () {
 同樣，您可以透過呼叫 `withoutScopedBindings` 方法明確指示 Laravel 不限定綁定範圍：
 
 ```php
-Route::get('/users/{user}/posts/{post:slug}', function (User $user, Post $post) {
+Route::get('/users/{'{user}'}/posts/{post:slug}', function (User $user, Post $post) {
     return $post;
 })->withoutScopedBindings();
 ```
@@ -737,7 +737,7 @@ enum Category: string
 use App\Enums\Category;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/categories/{category}', function (Category $category) {
+Route::get('/categories/{'{category}'}', function (Category $category) {
     return $category->value;
 });
 ```
@@ -765,7 +765,7 @@ public function boot(): void
 ```php
 use App\Models\User;
 
-Route::get('/users/{user}', function (User $user) {
+Route::get('/users/{'{user}'}', function (User $user) {
     // ...
 });
 ```
@@ -976,7 +976,7 @@ RateLimiter::for('resource-not-found', function (Request $request) {
 <a name="attaching-rate-limiters-to-routes"></a>
 ### 將 Rate Limiters 附加到路由
 
-可以使用 `throttle` [Middleware](/docs/{{version}}/middleware) 將 Rate Limiters 附加到路由或路由群組。throttle Middleware 接受您希望分配給路由的 Rate Limiter 名稱：
+可以使用 `throttle` [Middleware](/docs/{'12.x'}/middleware) 將 Rate Limiters 附加到路由或路由群組。throttle Middleware 接受您希望分配給路由的 Rate Limiter 名稱：
 
 ```php
 Route::middleware(['throttle:uploads'])->group(function () {
@@ -1014,7 +1014,7 @@ HTML 表單不支援 `PUT`、`PATCH` 或 `DELETE` 動作。因此，當定義從
 </form>
 ```
 
-為了方便起見，您可以使用 `@method` [Blade 指令](/docs/{{version}}/blade) 生成 `_method` 輸入欄位：
+為了方便起見，您可以使用 `@method` [Blade 指令](/docs/{'12.x'}/blade) 生成 `_method` 輸入欄位：
 
 ```blade
 <form action="/example" method="POST">
@@ -1036,12 +1036,12 @@ $name = Route::currentRouteName(); // string
 $action = Route::currentRouteAction(); // string
 ```
 
-您可以參考 [Route Facade 的底層類別](https://api.laravel.com/docs/{{version}}/Illuminate/Routing/Router.html) 和 [Route 實例](https://api.laravel.com/docs/{{version}}/Illuminate/Routing/Route.html) 的 API 文件，以查看 Router 和 Route 類別上可用的所有方法。
+您可以參考 [Route Facade 的底層類別](https://api.laravel.com/docs/{'12.x'}/Illuminate/Routing/Router.html) 和 [Route 實例](https://api.laravel.com/docs/{'12.x'}/Illuminate/Routing/Route.html) 的 API 文件，以查看 Router 和 Route 類別上可用的所有方法。
 
 <a name="cors"></a>
 ## 跨來源資源共用 (CORS)
 
-Laravel 可以使用您設定的值自動響應 CORS `OPTIONS` HTTP 請求。`OPTIONS` 請求將由 `HandleCors` [Middleware](/docs/{{version}}/middleware) 自動處理，該 Middleware 自動包含在應用程式的全域 Middleware 堆疊中。
+Laravel 可以使用您設定的值自動響應 CORS `OPTIONS` HTTP 請求。`OPTIONS` 請求將由 `HandleCors` [Middleware](/docs/{'12.x'}/middleware) 自動處理，該 Middleware 自動包含在應用程式的全域 Middleware 堆疊中。
 
 有時，您可能需要自訂應用程式的 CORS 設定值。您可以透過使用 `config:publish` Artisan 指令發布 `cors` 設定檔來實現：
 

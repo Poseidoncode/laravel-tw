@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/docs/configuration":{},"/docs/container":{},"/docs/facades":{},"/docs/installation":{},"/docs/lifecycle":{},"/docs/providers":{},"/docs/releases":{},"/docs/structure":{},"/docs/routing":{},"/docs/middleware":{}},"dynamicRoutes":{"/docs/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/docs/[slug]","routeRegex":"^\\/docs\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"0aed5a034bcf67b8058ecada6cc74bf6","previewModeSigningKey":"e92c1aa00e33c282d54cafde32ad315dd16e984c72dd90ba68a06d3071dd117e","previewModeEncryptionKey":"b8eeb44f4d3c35c5f583e8c42afbd362924f24dfd64a3623d871e26e9bafa1d3"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "e70d23774fb7a131cb5fa5af3e7fe6bb",
+    "previewModeSigningKey": "c26d9a5df9b2e649b4efe3e142cf7d1b8138b740dc536d9173bf5fd7c6b38365",
+    "previewModeEncryptionKey": "d05d6cd10b91250d0373eb13b7224862a62f132232cc2cba624b3988ecf27f31"
+  }
+}

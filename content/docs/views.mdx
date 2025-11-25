@@ -1,0 +1,303 @@
+---
+title: Views
+---
+
+# Views
+
+- [介紹](#introduction)
+  - [使用 React / Vue 撰寫 Views](#writing-views-in-react-or-vue)
+- [建立與渲染 Views](#creating-and-rendering-views)
+  - [巢狀 View 目錄](#nested-view-directories)
+  - [建立第一個可用的 View](#creating-the-first-available-view)
+  - [判斷 View 是否存在](#determining-if-a-view-exists)
+- [傳遞資料到 Views](#passing-data-to-views)
+  - [與所有 Views 共享資料](#sharing-data-with-all-views)
+- [View Composers](#view-composers)
+  - [View Creators](#view-creators)
+- [最佳化 Views](#optimizing-views)
+
+<a name="introduction"></a>
+## 介紹
+
+當然，直接從路由和 controller 回傳完整的 HTML 文件字串並不實用。值得慶幸的是，views 提供了一種便利的方式來將所有 HTML 放在獨立的檔案中。
+
+Views 將你的 controller / 應用程式邏輯與你的呈現邏輯分離，並儲存在 `resources/views` 目錄中。在使用 Laravel 時，view 樣板通常使用 [Blade 樣板語言](/docs/{'12.x'}/blade) 撰寫。一個簡單的 view 可能看起來像這樣：
+
+```blade
+<!-- View stored in resources/views/greeting.blade.php -->
+
+<html>
+    <body>
+        <h1>Hello, {{ $name }}</h1>
+    </body>
+</html>
+```
+
+由於這個 view 儲存在 `resources/views/greeting.blade.php`，我們可以使用全域 `view` 輔助函式來回傳它，如下所示：
+
+```php
+Route::get('/', function () {
+    return view('greeting', ['name' => 'James']);
+});
+```
+
+> [!NOTE]
+> 尋找更多關於如何撰寫 Blade 樣板的資訊？查看完整的 [Blade 文件](/docs/{'12.x'}/blade) 開始使用。
+
+<a name="writing-views-in-react-or-vue"></a>
+### 使用 React / Vue 撰寫 Views
+
+許多開發者已經開始偏好使用 React 或 Vue 來撰寫他們的樣板，而不是透過 Blade 在 PHP 中撰寫前端樣板。Laravel 透過 [Inertia](https://inertiajs.com/) 讓這變得輕而易舉，這是一個函式庫，可以輕鬆地將你的 React / Vue 前端連接到你的 Laravel 後端，而不需要建構 SPA 的典型複雜性。
+
+我們的 [React 和 Vue 應用程式入門套件](/docs/{'12.x'}/starter-kits) 為你的下一個由 Inertia 驅動的 Laravel 應用程式提供了一個很好的起點。
+
+<a name="creating-and-rendering-views"></a>
+## 建立與渲染 Views
+
+你可以透過在應用程式的 `resources/views` 目錄中放置一個副檔名為 `.blade.php` 的檔案來建立 view，或者使用 `make:view` Artisan 指令：
+
+```shell
+php artisan make:view greeting
+```
+
+`.blade.php` 副檔名告訴框架該檔案包含一個 [Blade 樣板](/docs/{'12.x'}/blade)。Blade 樣板包含 HTML 以及 Blade 指令，讓你可以輕鬆地輸出值、建立 "if" 陳述式、迭代資料等等。
+
+一旦你建立了一個 view，你可以使用全域 `view` 輔助函式從應用程式的路由或 controller 中回傳它：
+
+```php
+Route::get('/', function () {
+    return view('greeting', ['name' => 'James']);
+});
+```
+
+Views 也可以使用 `View` facade 回傳：
+
+```php
+use Illuminate\Support\Facades\View;
+
+return View::make('greeting', ['name' => 'James']);
+```
+
+如你所見，傳遞給 `view` 輔助函式的第一個參數對應於 `resources/views` 目錄中 view 檔案的名稱。第二個參數是一個應該提供給 view 的資料陣列。在這個例子中，我們傳遞了 `name` 變數，它在 view 中使用 [Blade 語法](/docs/{'12.x'}/blade) 顯示。
+
+<a name="nested-view-directories"></a>
+### 巢狀 View 目錄
+
+Views 也可以巢狀在 `resources/views` 目錄的子目錄中。「點」符號可以用來參照巢狀的 views。例如，如果你的 view 儲存在 `resources/views/admin/profile.blade.php`，你可以從應用程式的路由 / controller 中這樣回傳它：
+
+```php
+return view('admin.profile', $data);
+```
+
+> [!WARNING]
+> View 目錄名稱不應包含 `.` 字元。
+
+<a name="creating-the-first-available-view"></a>
+### 建立第一個可用的 View
+
+使用 `View` facade 的 `first` 方法，你可以建立在給定的 views 陣列中存在的第一個 view。如果你的應用程式或套件允許 views 被自訂或覆寫，這可能很有用：
+
+```php
+use Illuminate\Support\Facades\View;
+
+return View::first(['custom.admin', 'admin'], $data);
+```
+
+<a name="determining-if-a-view-exists"></a>
+### 判斷 View 是否存在
+
+如果你需要判斷 view 是否存在，你可以使用 `View` facade。`exists` 方法會在 view 存在時回傳 `true`：
+
+```php
+use Illuminate\Support\Facades\View;
+
+if (View::exists('admin.profile')) {
+    // ...
+}
+```
+
+<a name="passing-data-to-views"></a>
+## 傳遞資料到 Views
+
+如你在先前的範例中所見，你可以傳遞一個資料陣列給 views 來讓 view 可以使用這些資料：
+
+```php
+return view('greetings', ['name' => 'Victoria']);
+```
+
+以這種方式傳遞資訊時，資料應該是一個具有鍵 / 值配對的陣列。在將資料提供給 view 後，你可以在 view 中使用資料的鍵來存取每個值，例如 `<?php echo $name; ?>`。
+
+作為傳遞完整資料陣列給 `view` 輔助函式的替代方案，你可以使用 `with` 方法將個別資料片段加入到 view 中。`with` 方法會回傳 view 物件的實例，因此你可以在回傳 view 之前繼續串接方法：
+
+```php
+return view('greeting')
+    ->with('name', 'Victoria')
+    ->with('occupation', 'Astronaut');
+```
+
+<a name="sharing-data-with-all-views"></a>
+### 與所有 Views 共享資料
+
+有時候，你可能需要與應用程式渲染的所有 views 共享資料。你可以使用 `View` facade 的 `share` 方法來做到這一點。通常，你應該在 service provider 的 `boot` 方法中呼叫 `share` 方法。你可以將它們加入到 `App\Providers\AppServiceProvider` 類別中，或產生一個獨立的 service provider 來容納它們：
+
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\View;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        // ...
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        View::share('key', 'value');
+    }
+}
+```
+
+<a name="view-composers"></a>
+## View Composers
+
+View composers 是在渲染 view 時呼叫的回呼或類別方法。如果你有想要在每次渲染該 view 時綁定到 view 的資料，view composer 可以幫助你將該邏輯組織到一個單一位置。如果同一個 view 由應用程式中的多個路由或 controller 回傳，並且總是需要特定的資料片段，view composers 可能特別有用。
+
+通常，view composers 會在應用程式的其中一個 [service providers](/docs/{'12.x'}/providers) 中註冊。在這個範例中，我們假設 `App\Providers\AppServiceProvider` 將容納這個邏輯。
+
+我們將使用 `View` facade 的 `composer` 方法來註冊 view composer。Laravel 不包含基於類別的 view composers 的預設目錄，所以你可以自由地以你想要的方式組織它們。例如，你可以建立一個 `app/View/Composers` 目錄來容納所有應用程式的 view composers：
+
+```php
+<?php
+
+namespace App\Providers;
+
+use App\View\Composers\ProfileComposer;
+use Illuminate\Support\Facades;
+use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     */
+    public function register(): void
+    {
+        // ...
+    }
+
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        // Using class-based composers...
+        Facades\View::composer('profile', ProfileComposer::class);
+
+        // Using closure-based composers...
+        Facades\View::composer('welcome', function (View $view) {
+            // ...
+        });
+
+        Facades\View::composer('dashboard', function (View $view) {
+            // ...
+        });
+    }
+}
+```
+
+現在我們已經註冊了 composer，每次渲染 `profile` view 時都會執行 `App\View\Composers\ProfileComposer` 類別的 `compose` 方法。讓我們來看一個 composer 類別的範例：
+
+```php
+<?php
+
+namespace App\View\Composers;
+
+use App\Repositories\UserRepository;
+use Illuminate\View\View;
+
+class ProfileComposer
+{
+    /**
+     * Create a new profile composer.
+     */
+    public function __construct(
+        protected UserRepository $users,
+    ) {}
+
+    /**
+     * Bind data to the view.
+     */
+    public function compose(View $view): void
+    {
+        $view->with('count', $this->users->count());
+    }
+}
+```
+
+如你所見，所有 view composers 都透過 [service container](/docs/{'12.x'}/container) 解析，因此你可以在 composer 的建構式中型別提示任何你需要的依賴項。
+
+<a name="attaching-a-composer-to-multiple-views"></a>
+#### 將 Composer 附加到多個 Views
+
+你可以透過傳遞一個 views 陣列作為 `composer` 方法的第一個參數，一次將 view composer 附加到多個 views：
+
+```php
+use App\Views\Composers\MultiComposer;
+use Illuminate\Support\Facades\View;
+
+View::composer(
+    ['profile', 'dashboard'],
+    MultiComposer::class
+);
+```
+
+`composer` 方法也接受 `*` 字元作為萬用字元，允許你將 composer 附加到所有 views：
+
+```php
+use Illuminate\Support\Facades;
+use Illuminate\View\View;
+
+Facades\View::composer('*', function (View $view) {
+    // ...
+});
+```
+
+<a name="view-creators"></a>
+### View Creators
+
+View "creators" 與 view composers 非常相似；然而，它們在 view 實例化之後立即執行，而不是等到 view 即將渲染。要註冊 view creator，使用 `creator` 方法：
+
+```php
+use App\View\Creators\ProfileCreator;
+use Illuminate\Support\Facades\View;
+
+View::creator('profile', ProfileCreator::class);
+```
+
+<a name="optimizing-views"></a>
+## 最佳化 Views
+
+預設情況下，Blade 樣板 views 會在需要時編譯。當執行渲染 view 的請求時，Laravel 會判斷 view 的已編譯版本是否存在。如果檔案存在，Laravel 會判斷未編譯的 view 是否比已編譯的 view 更近期被修改。如果已編譯的 view 不存在，或者未編譯的 view 已被修改，Laravel 會重新編譯該 view。
+
+在請求期間編譯 views 可能會對效能產生些微的負面影響，因此 Laravel 提供了 `view:cache` Artisan 指令來預先編譯應用程式使用的所有 views。為了提升效能，你可能希望在部署過程中執行此指令：
+
+```shell
+php artisan view:cache
+```
+
+你可以使用 `view:clear` 指令來清除 view 快取：
+
+```shell
+php artisan view:clear
+```

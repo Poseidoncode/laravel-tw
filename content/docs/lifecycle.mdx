@@ -29,23 +29,23 @@ description: Request Lifecycle
 
 所有進入 Laravel 應用程式的請求的入口點都是 `public/index.php` 檔案。您的 Web 伺服器 (Apache / Nginx) 設定將所有請求導向此檔案。`index.php` 檔案不包含太多程式碼。相反，它是載入框架其餘部分的起點。
 
-`index.php` 檔案載入 Composer 生成的自動載入定義，然後從 `bootstrap/app.php` 檢索 Laravel 應用程式的實例。Laravel 本身採取的第一個動作是建立應用程式 / [Service Container](/docs/{{version}}/container) 的實例。
+`index.php` 檔案載入 Composer 生成的自動載入定義，然後從 `bootstrap/app.php` 檢索 Laravel 應用程式的實例。Laravel 本身採取的第一個動作是建立應用程式 / [Service Container](/docs/{'12.x'}/container) 的實例。
 
 <a name="http-console-kernels"></a>
 ### HTTP / Console Kernels
 
 接下來，傳入的請求會使用應用程式實例的 `handleRequest` 或 `handleCommand` 方法發送到 HTTP Kernel 或 Console Kernel，具體取決於進入應用程式的請求類型。這兩個 Kernels 作為所有請求流經的中心位置。現在，讓我們只關注 HTTP Kernel，它是 `Illuminate\Foundation\Http\Kernel` 的實例。
 
-HTTP Kernel 定義了一個 `bootstrappers` 陣列，這些 bootstrappers 將在請求執行之前執行。這些 bootstrappers 設定錯誤處理、設定日誌記錄、[偵測應用程式環境](/docs/{{version}}/configuration#environment-configuration)，並執行在實際處理請求之前需要完成的其他任務。通常，這些類別處理您不需要擔心的內部 Laravel 設定。
+HTTP Kernel 定義了一個 `bootstrappers` 陣列，這些 bootstrappers 將在請求執行之前執行。這些 bootstrappers 設定錯誤處理、設定日誌記錄、[偵測應用程式環境](/docs/{'12.x'}/configuration#environment-configuration)，並執行在實際處理請求之前需要完成的其他任務。通常，這些類別處理您不需要擔心的內部 Laravel 設定。
 
-HTTP Kernel 還負責將請求傳遞給應用程式的 Middleware 堆疊。這些 Middleware 處理讀取和寫入 [HTTP Session](/docs/{{version}}/session)、判斷應用程式是否處於維護模式、[驗證 CSRF Token](/docs/{{version}}/csrf) 等等。我們很快就會詳細討論這些。
+HTTP Kernel 還負責將請求傳遞給應用程式的 Middleware 堆疊。這些 Middleware 處理讀取和寫入 [HTTP Session](/docs/{'12.x'}/session)、判斷應用程式是否處於維護模式、[驗證 CSRF Token](/docs/{'12.x'}/csrf) 等等。我們很快就會詳細討論這些。
 
 HTTP Kernel 的 `handle` 方法的方法簽章非常簡單：它接收一個 `Request` 並返回一個 `Response`。將 Kernel 想像成一個代表整個應用程式的大黑盒子。給它 HTTP 請求，它就會返回 HTTP 回應。
 
 <a name="service-providers"></a>
 ### Service Providers
 
-最重要的 Kernel 啟動動作之一是載入應用程式的 [Service Providers](/docs/{{version}}/providers)。Service Providers 負責啟動框架的所有各種組件，例如資料庫、Queue、驗證和路由組件。
+最重要的 Kernel 啟動動作之一是載入應用程式的 [Service Providers](/docs/{'12.x'}/providers)。Service Providers 負責啟動框架的所有各種組件，例如資料庫、Queue、驗證和路由組件。
 
 Laravel 將遍歷此 Providers 清單並實例化每個 Provider。實例化 Providers 後，將在所有 Providers 上呼叫 `register` 方法。然後，一旦所有 Providers 都已註冊，將在每個 Provider 上呼叫 `boot` 方法。這樣 Service Providers 就可以依賴於在執行其 `boot` 方法時已註冊並可用的每個 Container 綁定。
 
@@ -58,7 +58,7 @@ Laravel 將遍歷此 Providers 清單並實例化每個 Provider。實例化 Pro
 
 一旦應用程式啟動並且所有 Service Providers 都已註冊，`Request` 將被移交給 Router 進行調度。Router 將把請求調度到路由或 Controller，以及執行任何特定於路由的 Middleware。
 
-Middleware 提供了一種方便的機制來過濾或檢查進入應用程式的 HTTP 請求。例如，Laravel 包含一個驗證應用程式使用者是否已通過驗證的 Middleware。如果使用者未通過驗證，Middleware 會將使用者重新導向到登入畫面。但是，如果使用者已通過驗證，Middleware 將允許請求進一步進入應用程式。有些 Middleware 分配給應用程式內的所有路由，如 `PreventRequestsDuringMaintenance`，而有些則僅分配給特定路由或路由群組。您可以透過閱讀完整的 [Middleware 文件](/docs/{{version}}/middleware) 來了解有關 Middleware 的更多資訊。
+Middleware 提供了一種方便的機制來過濾或檢查進入應用程式的 HTTP 請求。例如，Laravel 包含一個驗證應用程式使用者是否已通過驗證的 Middleware。如果使用者未通過驗證，Middleware 會將使用者重新導向到登入畫面。但是，如果使用者已通過驗證，Middleware 將允許請求進一步進入應用程式。有些 Middleware 分配給應用程式內的所有路由，如 `PreventRequestsDuringMaintenance`，而有些則僅分配給特定路由或路由群組。您可以透過閱讀完整的 [Middleware 文件](/docs/{'12.x'}/middleware) 來了解有關 Middleware 的更多資訊。
 
 如果請求通過了所有符合的路由分配的 Middleware，則將執行路由或 Controller 方法，並且路由或 Controller 方法返回的回應將透過路由的 Middleware 鏈送回。
 
