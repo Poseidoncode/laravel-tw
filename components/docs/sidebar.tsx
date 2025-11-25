@@ -159,8 +159,11 @@ export function DocsSidebar() {
     const toggleSection = (sectionTitle: string) => {
         const newExpanded = new Set(expandedSections)
         if (newExpanded.has(sectionTitle)) {
+            // 如果當前section已經展開，則收起它
             newExpanded.delete(sectionTitle)
         } else {
+            // 否則，收起所有section，然後展開點擊的section
+            newExpanded.clear()
             newExpanded.add(sectionTitle)
         }
         setExpandedSections(newExpanded)
