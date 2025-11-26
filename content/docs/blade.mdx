@@ -1121,3 +1121,450 @@ public function boot(): void
 }
 ```
 
+<a name="anonymous-components"></a>
+## 匿名元件 (Anonymous Components)
+
+與行內元件類似，匿名元件也只需單一檔案即可管理，但匿名元件沒有對應的 class。只要在 `resources/views/components` 目錄中放一個 Blade 檔案即可定義匿名元件：
+
+```blade
+<x-alert/>
+```
+
+若元件位於 `resources/views/components/inputs/button.blade.php`，可用 `.` 表示子目錄：
+
+```blade
+<x-inputs.button/>
+```
+
+也可以透過 Artisan 建立匿名元件檢視：
+
+```shell
+php artisan make:component forms.input --view
+```
+
+<a name="anonymous-index-components"></a>
+### 匿名 Index 元件
+
+當某元件是由多個 Blade 檔組成時，您可能想把這些檔案整理在同一個資料夾下。例如一個 accordion 元件：
+
+```text
+/resources/views/components/accordion.blade.php
+/resources/views/components/accordion/item.blade.php
+```
+
+這樣可以這樣使用：
+
+```blade
+<x-accordion>
+    <x-accordion.item>
+        ...
+    </x-accordion.item>
+</x-accordion>
+```
+
+Blade 允許您將名稱與目錄相同的檔案放在目錄裡，並將它視為該元件的「root」檢視：
+
+```text
+/resources/views/components/accordion/accordion.blade.php
+/resources/views/components/accordion/item.blade.php
+```
+
+<a name="data-properties-attributes"></a>
+### 匿名元件的資料屬性與 Attributes
+
+由於匿名元件沒有對應的 class，您可以透過 `@props` 指令指定哪些屬性應視為「資料變數」，其他屬性則會放入 attribute bag：
+
+```blade
+<!-- /resources/views/components/alert.blade.php -->
+
+@props(['type' => 'info', 'message'])
+
+<div {{ $attributes->merge(['class' => 'alert alert-'.$type]) }}>
+    {{ $message }}
+</div>
+```
+
+<a name="accessing-parent-data"></a>
+### 存取父元件資料：@aware
+
+有時候您會希望在子元件中存取父元件的屬性。可使用 `@aware` 指令：
+
+```blade
+<!-- /resources/views/components/menu/index.blade.php -->
+
+@props(['color' => 'gray'])
+
+<ul {{ $attributes->merge(['class' => 'bg-'.$color.'-200']) }}>
+    {{ $slot }}
+</ul>
+```
+
+```blade
+<!-- /resources/views/components/menu/item.blade.php -->
+
+@aware(['color' => 'gray'])
+
+<li {{ $attributes->merge(['class' => 'text-'.$color.'-800']) }}>
+    {{ $slot }}
+</li>
+```
+
+> [!WARNING]
+> `@aware` 只能存取以 HTML 屬性明確傳入父元件的資料，無法取得只在 `@props` 內設定、但未顯式傳入的預設值。
+
+<a name="anonymous-component-paths"></a>
+### 匿名元件路徑
+
+除了預設的 `resources/views/components` 目錄外，您也可以在 service provider 中註冊額外的匿名元件路徑：
+
+```php
+public function boot(): void
+{
+    Blade::anonymousComponentPath(__DIR__.'/../components');
+}
+```
+
+可選擇性地提供命名空間前綴：
+
+```php
+Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
+```
+
+渲染時即可使用：
+
+```blade
+<x-dashboard::panel />
+```
+
+<a name="building-layouts"></a>
+## 建立版型 (Layouts)
+
+<a name="layouts-using-components"></a>
+### 使用元件的版型
+
+多數 Web 應用程式在各頁面之間都共享相同的版面結構。若每個檢視都重複整個 HTML 外框，維護將非常麻煩。幸好，我們可以使用單一 [Blade 元件](#components) 來定義版型，並在整個應用中重複使用。
+
+#### 定義版型元件
+
+```blade
+<!-- resources/views/components/layout.blade.php -->
+
+<html>
+    <head>
+        <title>{{ $title ?? 'Todo Manager' }}</title>
+    </head>
+    <body>
+        <h1>Todos</h1>
+        <hr/>
+        {{ $slot }}
+    </body>
+</html>
+```
+
+#### 套用版型元件
+
+```blade
+<!-- resources/views/tasks.blade.php -->
+
+<x-layout>
+    @foreach ($tasks as $task)
+        <div>{{ $task }}</div>
+    @endforeach
+</x-layout>
+```
+
+如需自訂標題，可使用具名 slot：
+
+```blade
+<x-layout>
+    <x-slot:title>
+        Custom Title
+    </x-slot>
+
+    @foreach ($tasks as $task)
+        <div>{{ $task }}</div>
+    @endforeach
+</x-layout>
+```
+
+<a name="layouts-using-template-inheritance"></a>
+### 使用樣板繼承的版型
+
+<a name="defining-a-layout"></a>
+#### 定義版型
+
+在 Components 出現之前，Blade 主要透過「樣板繼承」來建立版型：
+
+```blade
+<!-- resources/views/layouts/app.blade.php -->
+
+<html>
+    <head>
+        <title>App Name - @yield('title')</title>
+    </head>
+    <body>
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
+</html>
+```
+
+<a name="extending-a-layout"></a>
+#### 繼承版型
+
+子檢視可透過 `@extends` 指令指定要繼承的版型，並在其中定義 `@section` 內容：
+
+```blade
+<!-- resources/views/child.blade.php -->
+
+@extends('layouts.app')
+
+@section('title', 'Page Title')
+
+@section('sidebar')
+    @@parent
+
+    <p>This is appended to the master sidebar.</p>
+@endsection
+
+@section('content')
+    <p>This is my body content.</p>
+@endsection
+```
+
+`@yield` 也可接受第二個參數作為預設內容：
+
+```blade
+@yield('content', 'Default content')
+```
+
+<a name="forms"></a>
+## 表單 (Forms)
+
+<a name="csrf-field"></a>
+### CSRF 欄位
+
+所有 HTML 表單都應包含隱藏的 CSRF token 欄位，讓 [CSRF 保護](/docs/{'12.x'}/csrf) middleware 能驗證請求。可使用 `@csrf` 指令產生此欄位：
+
+```blade
+<form method="POST" action="/profile">
+    @csrf
+
+    ...
+</form>
+```
+
+<a name="method-field"></a>
+### HTTP Method 欄位
+
+由於 HTML 表單無法直接送出 `PUT`、`PATCH` 或 `DELETE` 請求，您可以透過隱藏欄位 `_method` 來「欺騙」HTTP 方法。`@method` 指令可以自動產生該欄位：
+
+```blade
+<form action="/foo/bar" method="POST">
+    @method('PUT')
+
+    ...
+</form>
+```
+
+<a name="validation-errors"></a>
+### 驗證錯誤
+
+`@error` 指令可快速檢查特定欄位是否有[驗證錯誤訊息](/docs/{'12.x'}/validation#quick-displaying-the-validation-errors)。在 `@error` 區塊中，可使用 `$message` 來顯示訊息：
+
+```blade
+<label for="title">Post Title</label>
+
+<input
+    id="title"
+    type="text"
+    class="@error('title') is-invalid @enderror"
+/>
+
+@error('title')
+    <div class="alert alert-danger">{{ $message }}</div>
+@enderror
+```
+
+<a name="stacks"></a>
+## Stacks
+
+Blade 允許您將內容推送到具名的「stack」，並在其他檢視或版型中一次渲染出來。這在指定子檢視所需的 JavaScript 或 CSS 資源時特別好用：
+
+```blade
+@push('scripts')
+    <script src="/example.js"></script>
+@endpush
+```
+
+若只想在條件為真時推入內容，可使用 `@pushIf`：
+
+```blade
+@pushIf($shouldPush, 'scripts')
+    <script src="/example.js"></script>
+@endPushIf
+```
+
+您可以多次對同一個 stack 使用 `@push`。要在版型中渲染完整內容，可使用 `@stack`：
+
+```blade
+<head>
+    <!-- Head Contents -->
+
+    @stack('scripts')
+</head>
+```
+
+若想將內容加在 stack 開頭，可使用 `@prepend`：
+
+```blade
+@push('scripts')
+    This will be second...
+@endpush
+
+@prepend('scripts')
+    This will be first...
+@endprepend
+```
+
+可使用 `@hasstack` 判斷 stack 是否有內容：
+
+```blade
+@hasstack('list')
+    <ul>
+        @stack('list')
+    </ul>
+@endif
+```
+
+<a name="service-injection"></a>
+## Service Injection
+
+`@inject` 指令可用來從 Laravel [Service Container](/docs/{'12.x'}/container) 解析服務，並將其注入為樣板中的變數：
+
+```blade
+@inject('metrics', 'App\\Services\\MetricsService')
+
+<div>
+    Monthly Revenue: {{ $metrics->monthlyRevenue() }}.
+</div>
+```
+
+<a name="rendering-inline-blade-templates"></a>
+## 渲染行內 Blade 樣板
+
+有時您可能只想將一小段 Blade 字串轉成 HTML，可使用 `Blade::render`：
+
+```php
+use Illuminate\\Support\\Facades\\Blade;
+
+return Blade::render('Hello, {{ $name }}', ['name' => 'Julian Bashir']);
+```
+
+Laravel 會將這類臨時樣板寫入 `storage/framework/views`。若想在渲染後自動刪除快取檔，可傳入 `deleteCachedView: true`：
+
+```php
+return Blade::render(
+    'Hello, {{ $name }}',
+    ['name' => 'Julian Bashir'],
+    deleteCachedView: true
+);
+```
+
+<a name="rendering-blade-fragments"></a>
+## 渲染 Blade Fragments
+
+在搭配 [Turbo](https://turbo.hotwired.dev/) 或 [htmx](https://htmx.org/) 等前端工具時，您可能只需要回傳 Blade 模板的一小部分。可使用 `@fragment` / `@endfragment`：
+
+```blade
+@fragment('user-list')
+    <ul>
+        @foreach ($users as $user)
+            <li>{{ $user->name }}</li>
+        @endforeach
+    </ul>
+@endfragment
+```
+
+在渲染檢視時，可透過 `fragment` 只回傳特定區塊：
+
+```php
+return view('dashboard', ['users' => $users])->fragment('user-list');
+```
+
+`fragmentIf` 可根據條件決定是否只回傳 fragment，否則回傳整個檢視：
+
+```php
+return view('dashboard', ['users' => $users])
+    ->fragmentIf($request->hasHeader('HX-Request'), 'user-list');
+```
+
+`fragments` / `fragmentsIf` 則支援一次回傳多個 fragment，並將它們串接在一起：
+
+```php
+view('dashboard', ['users' => $users])
+    ->fragments(['user-list', 'comment-list']);
+```
+
+<a name="extending-blade"></a>
+## 擴充 Blade
+
+Blade 允許您使用 `directive` 方法定義自訂指令。當 Blade 編譯器遇到該指令時，會呼叫您提供的 callback，並將指令的表達式傳入：
+
+```php
+use Illuminate\\Support\\Facades\\Blade;
+
+Blade::directive('datetime', function (string $expression) {
+    return "<?php echo ($expression)->format('m/d/Y H:i'); ?>";
+});
+```
+
+> [!WARNING]
+> 更新自訂指令邏輯後，必須清除快取檢視。可使用 `php artisan view:clear`。
+
+<a name="custom-echo-handlers"></a>
+### 自訂 Echo Handler
+
+當您在 Blade 中 echo 某個物件時，會呼叫該物件的 `__toString` 方法。不過，若您無法控制該方法（例如來自第三方套件的 class），可以使用 `Blade::stringable` 註冊自訂處理：
+
+```php
+use Illuminate\\Support\\Facades\\Blade;
+use Money\\Money;
+
+Blade::stringable(function (Money $money) {
+    return $money->formatTo('en_GB');
+});
+```
+
+<a name="custom-if-statements"></a>
+### 自訂 If 指令
+
+若只需要簡單的自訂條件判斷，比起撰寫完整指令更方便的方式是使用 `Blade::if`：
+
+```php
+Blade::if('disk', function (string $value) {
+    return config('filesystems.default') === $value;
+});
+``;
+
+在樣板中即可使用：
+
+```blade
+@disk('local')
+    <!-- The application is using the local disk... -->
+@elsedisk('s3')
+    <!-- The application is using the s3 disk... -->
+@else
+    <!-- The application is using some other disk... -->
+@enddisk
+
+@unlessdisk('local')
+    <!-- The application is not using the local disk... -->
+@enddisk
+```
+
