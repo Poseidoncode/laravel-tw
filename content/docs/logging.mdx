@@ -2,21 +2,21 @@
 
 - [介紹](#introduction)
 - [設定](#configuration)
-    - [可用的通道驅動](#available-channel-drivers)
-    - [通道先決條件](#channel-prerequisites)
-    - [記錄棄用警告](#logging-deprecation-warnings)
+  - [可用的通道驅動](#available-channel-drivers)
+  - [通道先決條件](#channel-prerequisites)
+  - [記錄棄用警告](#logging-deprecation-warnings)
 - [建立日誌堆疊](#building-log-stacks)
 - [撰寫日誌訊息](#writing-log-messages)
-    - [上下文資訊](#contextual-information)
-    - [寫入特定通道](#writing-to-specific-channels)
+  - [上下文資訊](#contextual-information)
+  - [寫入特定通道](#writing-to-specific-channels)
 - [Monolog 通道自訂](#monolog-channel-customization)
-    - [為通道自訂 Monolog](#customizing-monolog-for-channels)
-    - [建立 Monolog Handler 通道](#creating-monolog-handler-channels)
-    - [透過工廠建立自訂通道](#creating-custom-channels-via-factories)
+  - [為通道自訂 Monolog](#customizing-monolog-for-channels)
+  - [建立 Monolog Handler 通道](#creating-monolog-handler-channels)
+  - [透過工廠建立自訂通道](#creating-custom-channels-via-factories)
 - [使用 Pail 尾隨日誌訊息](#tailing-log-messages-using-pail)
-    - [安裝](#pail-installation)
-    - [使用](#pail-usage)
-    - [過濾日誌](#pail-filtering-logs)
+  - [安裝](#pail-installation)
+  - [使用](#pail-usage)
+  - [過濾日誌](#pail-filtering-logs)
 
 <a name="introduction"></a>
 ## 介紹
@@ -41,17 +41,17 @@ Laravel 日誌基於「通道」。每個通道代表一種特定的寫入日誌
 
 <div className="overflow-auto" markdown="1">
 
-| 名稱         | 描述                                                          |
-| ------------ | -------------------------------------------------------------------- |
-| `custom`     | 呼叫指定工廠來建立通道的驅動。         |
-| `daily`      | 基於 `RotatingFileHandler` 的 Monolog 驅動，每日輪換。    |
-| `errorlog`   | 基於 `ErrorLogHandler` 的 Monolog 驅動。                           |
-| `monolog`    | 可使用任何支援的 Monolog 處理器的 Monolog 工廠驅動。 |
-| `papertrail` | 基於 `SyslogUdpHandler` 的 Monolog 驅動。                           |
-| `single`     | 基於單一檔案或路徑的日誌通道（`StreamHandler`）。        |
-| `slack`      | 基於 `SlackWebhookHandler` 的 Monolog 驅動。                        |
-| `stack`      | 用於建立「多通道」通道的包裝器。           |
-| `syslog`     | 基於 `SyslogHandler` 的 Monolog 驅動。                              |
+| 名稱         | 描述                                                   |
+| ------------ | ------------------------------------------------------ |
+| `custom`     | 呼叫指定工廠來建立通道的驅動。                         |
+| `daily`      | 基於 `RotatingFileHandler` 的 Monolog 驅動，每日輪換。 |
+| `errorlog`   | 基於 `ErrorLogHandler` 的 Monolog 驅動。               |
+| `monolog`    | 可使用任何支援的 Monolog 處理器的 Monolog 工廠驅動。   |
+| `papertrail` | 基於 `SyslogUdpHandler` 的 Monolog 驅動。              |
+| `single`     | 基於單一檔案或路徑的日誌通道（`StreamHandler`）。      |
+| `slack`      | 基於 `SlackWebhookHandler` 的 Monolog 驅動。           |
+| `stack`      | 用於建立「多通道」通道的包裝器。                       |
+| `syslog`     | 基於 `SyslogHandler` 的 Monolog 驅動。                 |
 
 </div>
 
@@ -81,11 +81,11 @@ Laravel 日誌基於「通道」。每個通道代表一種特定的寫入日誌
 
 <div className="overflow-auto" markdown="1">
 
-| 名稱         | 描述                                                                   | 預設值 |
-| ------------ | ----------------------------------------------------------------------------- | ------- |
+| 名稱         | 描述                                           | 預設值  |
+| ------------ | ---------------------------------------------- | ------- |
 | `bubble`     | 指示訊息在被處理後是否應該向上冒泡到其他通道。 | `true`  |
-| `locking`    | 在寫入之前嘗試鎖定日誌檔案。                            | `false` |
-| `permission` | 日誌檔案的權限。                                                   | `0644`  |
+| `locking`    | 在寫入之前嘗試鎖定日誌檔案。                   | `false` |
+| `permission` | 日誌檔案的權限。                               | `0644`  |
 
 </div>
 
@@ -93,9 +93,9 @@ Laravel 日誌基於「通道」。每個通道代表一種特定的寫入日誌
 
 <div className="overflow-auto" markdown="1">
 
-| 名稱   | 描述                                                 | 預設值 |
-| ------ | ----------------------------------------------------------- | ------- |
-| `days` | 每日日誌檔案應該保留的天數。 | `14`    |
+| 名稱   | 描述                         | 預設值 |
+| ------ | ---------------------------- | ------ |
+| `days` | 每日日誌檔案應該保留的天數。 | `14`   |
 
 </div>
 
@@ -281,7 +281,7 @@ class AssignRequestId
 }
 ```
 
-如果你想要在_所有_日誌通道之間共享上下文資訊，你可以調用 `Log::shareContext()` 方法。此方法會將上下文資訊提供給所有已建立的通道以及後續建立的任何通道：
+如果你想要在*所有*日誌通道之間共享上下文資訊，你可以調用 `Log::shareContext()` 方法。此方法會將上下文資訊提供給所有已建立的通道以及後續建立的任何通道：
 
 ```php
 <?php

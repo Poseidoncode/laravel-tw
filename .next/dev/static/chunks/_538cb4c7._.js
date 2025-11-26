@@ -683,7 +683,7 @@ function DocsSidebar() {
                         lineNumber: 189,
                         columnNumber: 17
                     }, this),
-                    " Docs CN"
+                    " Docs（中文）"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/docs/sidebar.tsx",

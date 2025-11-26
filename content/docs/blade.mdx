@@ -6,21 +6,21 @@ description: Blade 是 Laravel 內建的簡單但強大的樣板引擎
 # Blade 樣板
 
 - [介紹](#introduction)
-    - [使用 Livewire 強化 Blade](#supercharging-blade-with-livewire)
+  - [使用 Livewire 強化 Blade](#supercharging-blade-with-livewire)
 - [顯示資料](#displaying-data)
-    - [HTML 實體編碼](#html-entity-encoding)
-    - [Blade 與 JavaScript 框架](#blade-and-javascript-frameworks)
+  - [HTML 實體編碼](#html-entity-encoding)
+  - [Blade 與 JavaScript 框架](#blade-and-javascript-frameworks)
 - [Blade 指令](#blade-directives)
-    - [If 條件](#if-statements)
-    - [Switch 條件](#switch-statements)
-    - [迴圈](#loops)
-    - [Loop 變數](#the-loop-variable)
-    - [條件式 class](#conditional-classes)
-    - [其他屬性](#additional-attributes)
-    - [包含子檢視](#including-subviews)
-    - [`@once` 指令](#the-once-directive)
-    - [原始 PHP](#raw-php)
-    - [註解](#comments)
+  - [If 條件](#if-statements)
+  - [Switch 條件](#switch-statements)
+  - [迴圈](#loops)
+  - [Loop 變數](#the-loop-variable)
+  - [條件式 class](#conditional-classes)
+  - [其他屬性](#additional-attributes)
+  - [包含子檢視](#including-subviews)
+  - [`@once` 指令](#the-once-directive)
+  - [原始 PHP](#raw-php)
+  - [註解](#comments)
 
 <a name="introduction"></a>
 ## 介紹
@@ -415,18 +415,18 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 
 <div className="overflow-auto" markdown="1">
 
-| 屬性               | 說明                                                 |
-| ------------------ | ---------------------------------------------------- |
-| `$loop->index`     | 當前迭代的索引（從 0 開始）                          |
-| `$loop->iteration` | 當前迭代次數（從 1 開始）                            |
-| `$loop->remaining` | 迴圈中剩餘的迭代數量                                 |
-| `$loop->count`     | 陣列或集合中總項目數                                 |
-| `$loop->first`     | 是否為第一筆迭代                                       |
-| `$loop->last`      | 是否為最後一筆迭代                                     |
-| `$loop->even`      | 當前迭代是否為偶數                                     |
-| `$loop->odd`       | 當前迭代是否為奇數                                     |
-| `$loop->depth`     | 目前迴圈的巢狀層級                                     |
-| `$loop->parent`    | 在巢狀迴圈中，父層的 loop 變數                         |
+| 屬性               | 說明                           |
+| ------------------ | ------------------------------ |
+| `$loop->index`     | 當前迭代的索引（從 0 開始）    |
+| `$loop->iteration` | 當前迭代次數（從 1 開始）      |
+| `$loop->remaining` | 迴圈中剩餘的迭代數量           |
+| `$loop->count`     | 陣列或集合中總項目數           |
+| `$loop->first`     | 是否為第一筆迭代               |
+| `$loop->last`      | 是否為最後一筆迭代             |
+| `$loop->even`      | 當前迭代是否為偶數             |
+| `$loop->odd`       | 當前迭代是否為奇數             |
+| `$loop->depth`     | 目前迴圈的巢狀層級             |
+| `$loop->parent`    | 在巢狀迴圈中，父層的 loop 變數 |
 
 </div>
 
@@ -1209,8 +1209,7 @@ Blade 允許您將名稱與目錄相同的檔案放在目錄裡，並將它視�
 </li>
 ```
 
-> [!WARNING]
-> `@aware` 只能存取以 HTML 屬性明確傳入父元件的資料，無法取得只在 `@props` 內設定、但未顯式傳入的預設值。
+> [!WARNING] > `@aware` 只能存取以 HTML 屬性明確傳入父元件的資料，無法取得只在 `@props` 內設定、但未顯式傳入的預設值。
 
 <a name="anonymous-component-paths"></a>
 ### 匿名元件路徑
@@ -1546,7 +1545,7 @@ Blade::stringable(function (Money $money) {
 
 若只需要簡單的自訂條件判斷，比起撰寫完整指令更方便的方式是使用 `Blade::if`：
 
-```php
+````php
 Blade::if('disk', function (string $value) {
     return config('filesystems.default') === $value;
 });
@@ -1566,5 +1565,4 @@ Blade::if('disk', function (string $value) {
 @unlessdisk('local')
     <!-- The application is not using the local disk... -->
 @enddisk
-```
-
+````

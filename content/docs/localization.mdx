@@ -1,15 +1,13 @@
 # 本地化
 
 - [介紹](#introduction)
-你可以指示 Laravel 的「複數化器」使用英語以外的語言，Eloquent 和框架的其他部分會使用它將單數字串轉換為複數字串。這可以透過在應用程式的某個 service provider 的 `boot` 方法中調用 `useLanguage` 方法來完成。複數化器目前支援的語言有：`french`、`norwegian-bokmal`、`portuguese`、`spanish` 和 `turkish`：
-    - [設定地區](#configuring-the-locale)
-    - [複數化語言](#pluralization-language)
+  你可以指示 Laravel 的「複數化器」使用英語以外的語言，Eloquent 和框架的其他部分會使用它將單數字串轉換為複數字串。這可以透過在應用程式的某個 service provider 的 `boot` 方法中調用 `useLanguage` 方法來完成。複數化器目前支援的語言有：`french`、`norwegian-bokmal`、`portuguese`、`spanish` 和 `turkish`： - [設定地區](#configuring-the-locale) - [複數化語言](#pluralization-language)
 - [定義翻譯字串](#defining-translation-strings)
-    - [使用短鍵](#using-short-keys)
-    - [使用翻譯字串作為鍵](#using-translation-strings-as-keys)
+  - [使用短鍵](#using-short-keys)
+  - [使用翻譯字串作為鍵](#using-translation-strings-as-keys)
 - [擷取翻譯字串](#retrieving-translation-strings)
-    - [替換翻譯字串中的參數](#replacing-parameters-in-translation-strings)
-    - [複數化](#pluralization)
+  - [替換翻譯字串中的參數](#replacing-parameters-in-translation-strings)
+  - [複數化](#pluralization)
 - [覆寫套件語言檔案](#overriding-package-language-files)
 
 <a name="introduction"></a>
@@ -152,7 +150,7 @@ return [
 
 ```json
 {
-    "I love programming.": "Me encanta programar."
+  "I love programming.": "Me encanta programar."
 }
 ```
 
@@ -210,7 +208,7 @@ echo __('messages.welcome', ['name' => 'dayle']);
 <a name="object-replacement-formatting"></a>
 #### 物件替換格式化
 
-如果你嘗試提供物件作為翻譯佔位符，物件的 `__toString` 方法會被調用。[__toString](https://www.php.net/manual/en/language.oop5.magic.php#object.tostring) 方法是 PHP 內建的「魔術方法」之一。然而，有時你可能無法控制給定類別的 `__toString` 方法，例如當你互動的類別屬於第三方函式庫時。
+如果你嘗試提供物件作為翻譯佔位符，物件的 `__toString` 方法會被調用。[\_\_toString](https://www.php.net/manual/en/language.oop5.magic.php#object.tostring) 方法是 PHP 內建的「魔術方法」之一。然而，有時你可能無法控制給定類別的 `__toString` 方法，例如當你互動的類別屬於第三方函式庫時。
 
 在這些情況下，Laravel 允許你為該特定類型的物件註冊自訂格式化處理器。為達成此目的，你應該調用翻譯器的 `stringable` 方法。`stringable` 方法接受一個閉包，該閉包應該類型提示它負責格式化的物件類型。通常，`stringable` 方法應該在應用程式的 `AppServiceProvider` 類別的 `boot` 方法中調用：
 
@@ -242,7 +240,7 @@ public function boot(): void
 
 ```json
 {
-    "There is one apple|There are many apples": "Hay una manzana|Hay muchas manzanas"
+  "There is one apple|There are many apples": "Hay una manzana|Hay muchas manzanas"
 }
 ```
 
