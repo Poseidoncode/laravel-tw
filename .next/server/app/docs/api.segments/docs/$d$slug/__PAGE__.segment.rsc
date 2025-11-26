@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"OutletBoundary"]
+3:"$Sreact.suspense"
+0:{"buildId":"mFHGnIr2wV_N13OtGl4eL","rsc":["$","$1","c",{"children":[["$","div",null,{"className":"container mx-auto py-10","children":["$","div",null,{"className":"mx-auto max-w-3xl","children":[["$","div",null,{"className":"mb-8","children":[["$","h1",null,{"className":"scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl"}],"$undefined"]}],["$","article",null,{"className":"prose prose-slate dark:prose-invert max-w-none","children":[["$","h1",null,{"id":"api-文件","children":["$","a",null,{"href":"#api-文件","children":"API 文件"}]}],"\n",["$","p",null,{"children":"Laravel 提供了完整的 API 文檔，您可以在以下連結查看："}],"\n",["$","p",null,{"children":["$","a",null,{"href":"https://laravel.com/api/11.x/","children":"Laravel API Documentation"}]}],"\n",["$","p",null,{"children":"此頁面包含所有 Laravel 類別、方法和功能的詳細 API 參考。"}]]}]]}]}],null,["$","$L2",null,{"children":["$","$3",null,{"name":"Next.MetadataOutlet","children":"$@4"}]}]]}],"loading":null,"isPartial":false}
+4:null
