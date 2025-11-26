@@ -1,33 +1,21 @@
 ---
-title: Eloquent Serialization
-description: 將 models 和關聯轉換為陣列或 JSON
+title: Eloquent：序列化
 ---
 
-# Eloquent: Serialization
+# Eloquent：序列化
 
-- [Introduction](#introduction)
-- [Serializing Models and Collections](#serializing-models-and-collections)
-    - [Serializing to Arrays](#serializing-to-arrays)
-    - [Serializing to JSON](#serializing-to-json)
-- [Hiding Attributes From JSON](#hiding-attributes-from-json)
-- [Appending Values to JSON](#appending-values-to-json)
-- [Date Serialization](#date-serialization)
-
-<a name="introduction"></a>
 ## 簡介
 
-When building APIs using Laravel, you will often need to convert your models and relationships to arrays or JSON. Eloquent includes convenient methods for making these conversions, as well as controlling which attributes are included in the serialized representation of your models.
+使用 Laravel 建構 API 時，你經常需要將 Model 和關聯轉換為陣列或 JSON。Eloquent 包含了便利的方法來進行這些轉換，以及控制哪些屬性會包含在 Model 的序列化表示中。
 
 > [!NOTE]
-> For an even more robust way of handling Eloquent model and collection JSON serialization, check out the documentation on [Eloquent API resources](/docs/{'12.x'}/eloquent-resources).
+> 若要獲得更強大的 Eloquent Model 和 Collection JSON 序列化處理方式，請查看 [Eloquent API Resources](/docs/{{version}}/eloquent-resources) 的文件。
 
-<a name="serializing-models-and-collections"></a>
-## Serializing Models and Collections
+## 序列化 Model 與 Collection
 
-<a name="serializing-to-arrays"></a>
-### Serializing to Arrays
+### 序列化為陣列
 
-To convert a model and its loaded [relationships](/docs/{'12.x'}/eloquent-relationships) to an array, you should use the `toArray` method. This method is recursive, so all attributes and all relations (including the relations of relations) will be converted to arrays:
+要將 Model 及其已載入的[關聯](/docs/{{version}}/eloquent-relationships)轉換為陣列，你應該使用 `toArray` 方法。此方法是遞迴的，因此所有屬性和所有關聯（包括關聯的關聯）都會被轉換為陣列：
 
 ```php
 use App\Models\User;
@@ -37,7 +25,7 @@ $user = User::with('roles')->first();
 return $user->toArray();
 ```
 
-The `attributesToArray` method may be used to convert a model's attributes to an array but not its relationships:
+`attributesToArray` 方法可用於將 Model 的屬性轉換為陣列，但不包含其關聯：
 
 ```php
 $user = User::first();
@@ -45,7 +33,7 @@ $user = User::first();
 return $user->attributesToArray();
 ```
 
-You may also convert entire [collections](/docs/{'12.x'}/eloquent-collections) of models to arrays by calling the `toArray` method on the collection instance:
+你也可以透過在 Collection 實例上呼叫 `toArray` 方法，將整個 Model [Collection](/docs/{{version}}/eloquent-collections) 轉換為陣列：
 
 ```php
 $users = User::all();
@@ -53,10 +41,9 @@ $users = User::all();
 return $users->toArray();
 ```
 
-<a name="serializing-to-json"></a>
-### Serializing to JSON
+### 序列化為 JSON
 
-To convert a model to JSON, you should use the `toJson` method. Like `toArray`, the `toJson` method is recursive, so all attributes and relations will be converted to JSON. You may also specify any JSON encoding options that are [supported by PHP](https://secure.php.net/manual/en/function.json-encode.php):
+要將 Model 轉換為 JSON，你應該使用 `toJson` 方法。與 `toArray` 一樣，`toJson` 方法是遞迴的，因此所有屬性和關聯都會被轉換為 JSON。你也可以指定任何 [PHP 支援的](https://secure.php.net/manual/en/function.json-encode.php) JSON 編碼選項：
 
 ```php
 use App\Models\User;
@@ -68,13 +55,13 @@ return $user->toJson();
 return $user->toJson(JSON_PRETTY_PRINT);
 ```
 
-Alternatively, you may cast a model or collection to a string, which will automatically call the `toJson` method on the model or collection:
+或者，你可以將 Model 或 Collection 轉型為字串，這會自動呼叫 Model 或 Collection 上的 `toJson` 方法：
 
 ```php
 return (string) User::find(1);
 ```
 
-Since models and collections are converted to JSON when cast to a string, you can return Eloquent objects directly from your application's routes or controllers. Laravel will automatically serialize your Eloquent models and collections to JSON when they are returned from routes or controllers:
+由於 Model 和 Collection 在轉型為字串時會被轉換為 JSON，你可以直接從應用程式的路由或控制器回傳 Eloquent 物件。Laravel 會在它們從路由或控制器回傳時自動將 Eloquent Model 和 Collection 序列化為 JSON：
 
 ```php
 Route::get('/users', function () {
@@ -82,15 +69,13 @@ Route::get('/users', function () {
 });
 ```
 
-<a name="relationships"></a>
-#### Relationships
+#### 關聯
 
-When an Eloquent model is converted to JSON, its loaded relationships will automatically be included as attributes on the JSON object. Also, though Eloquent relationship methods are defined using "camel case" method names, a relationship's JSON attribute will be "snake case".
+當 Eloquent Model 被轉換為 JSON 時，其已載入的關聯會自動作為屬性包含在 JSON 物件中。另外，雖然 Eloquent 關聯方法是使用「駝峰式大小寫」方法名稱定義的，但關聯的 JSON 屬性會是「蛇底式」。
 
-<a name="hiding-attributes-from-json"></a>
-## Hiding Attributes From JSON
+## 從 JSON 隱藏屬性
 
-Sometimes you may wish to limit the attributes, such as passwords, that are included in your model's array or JSON representation. To do so, add a `$hidden` property to your model. Attributes that are listed in the `$hidden` property's array will not be included in the serialized representation of your model:
+有時你可能希望限制包含在 Model 陣列或 JSON 表示中的屬性，例如密碼。為此，請在 Model 中新增一個 `$hidden` 屬性。列在 `$hidden` 屬性陣列中的屬性不會包含在 Model 的序列化表示中：
 
 ```php
 <?php
@@ -102,7 +87,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     /**
-     * The attributes that should be hidden for serialization.
+     * 應該為序列化隱藏的屬性。
      *
      * @var array<string>
      */
@@ -111,9 +96,9 @@ class User extends Model
 ```
 
 > [!NOTE]
-> To hide relationships, add the relationship's method name to your Eloquent model's `$hidden` property.
+> 要隱藏關聯，請將關聯的方法名稱加入到 Eloquent Model 的 `$hidden` 屬性。
 
-Alternatively, you may use the `visible` property to define an "allow list" of attributes that should be included in your model's array and JSON representation. All attributes that are not present in the `$visible` array will be hidden when the model is converted to an array or JSON:
+或者，你可以使用 `visible` 屬性來定義一個「允許清單」，指定應該包含在 Model 陣列和 JSON 表示中的屬性。當 Model 被轉換為陣列或 JSON 時，所有不在 `$visible` 陣列中的屬性都會被隱藏：
 
 ```php
 <?php
@@ -125,7 +110,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     /**
-     * The attributes that should be visible in arrays.
+     * 應該在陣列中可見的屬性。
      *
      * @var array
      */
@@ -133,10 +118,9 @@ class User extends Model
 }
 ```
 
-<a name="temporarily-modifying-attribute-visibility"></a>
-#### Temporarily Modifying Attribute Visibility
+#### 臨時修改屬性可見性
 
-If you would like to make some typically hidden attributes visible on a given model instance, you may use the `makeVisible` or `mergeVisible` methods. The `makeVisible` method returns the model instance:
+如果你想讓某些通常隱藏的屬性在給定的 Model 實例上可見，你可以使用 `makeVisible` 或 `mergeVisible` 方法。`makeVisible` 方法會回傳 Model 實例：
 
 ```php
 return $user->makeVisible('attribute')->toArray();
@@ -144,7 +128,7 @@ return $user->makeVisible('attribute')->toArray();
 return $user->mergeVisible(['name', 'email'])->toArray();
 ```
 
-Likewise, if you would like to hide some attributes that are typically visible, you may use the `makeHidden` or `mergeHidden` methods:
+同樣地，如果你想隱藏某些通常可見的屬性，你可以使用 `makeHidden` 或 `mergeHidden` 方法：
 
 ```php
 return $user->makeHidden('attribute')->toArray();
@@ -152,7 +136,7 @@ return $user->makeHidden('attribute')->toArray();
 return $user->mergeHidden(['name', 'email'])->toArray();
 ```
 
-If you wish to temporarily override all of the visible or hidden attributes, you may use the `setVisible` and `setHidden` methods respectively:
+如果你希望臨時覆寫所有可見或隱藏的屬性，你可以分別使用 `setVisible` 和 `setHidden` 方法：
 
 ```php
 return $user->setVisible(['id', 'name'])->toArray();
@@ -160,10 +144,9 @@ return $user->setVisible(['id', 'name'])->toArray();
 return $user->setHidden(['email', 'password', 'remember_token'])->toArray();
 ```
 
-<a name="appending-values-to-json"></a>
-## Appending Values to JSON
+## 附加值到 JSON
 
-Occasionally, when converting models to arrays or JSON, you may wish to add attributes that do not have a corresponding column in your database. To do so, first define an [accessor](/docs/{'12.x'}/eloquent-mutators) for the value:
+有時，在將 Model 轉換為陣列或 JSON 時，你可能希望新增在資料庫中沒有對應欄位的屬性。為此，首先為該值定義一個[存取器](/docs/{{version}}/eloquent-mutators)：
 
 ```php
 <?php
@@ -176,7 +159,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     /**
-     * Determine if the user is an administrator.
+     * 判斷使用者是否為管理員。
      */
     protected function isAdmin(): Attribute
     {
@@ -187,7 +170,7 @@ class User extends Model
 }
 ```
 
-If you would like the accessor to always be appended to your model's array and JSON representations, you may add the attribute name to the `appends` property of your model. Note that attribute names are typically referenced using their "snake case" serialized representation, even though the accessor's PHP method is defined using "camel case":
+如果你希望存取器始終附加到 Model 的陣列和 JSON 表示中，你可以將屬性名稱加入到 Model 的 `appends` 屬性中。請注意，屬性名稱通常使用其「蛇底式」序列化表示來參照，即使存取器的 PHP 方法是使用「駝峰式」定義的：
 
 ```php
 <?php
@@ -199,7 +182,7 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     /**
-     * The accessors to append to the model's array form.
+     * 要附加到 Model 陣列形式的存取器。
      *
      * @var array
      */
@@ -207,12 +190,11 @@ class User extends Model
 }
 ```
 
-Once the attribute has been added to the `appends` list, it will be included in both the model's array and JSON representations. Attributes in the `appends` array will also respect the `visible` and `hidden` settings configured on the model.
+一旦屬性被加入到 `appends` 清單，它就會包含在 Model 的陣列和 JSON 表示中。`appends` 陣列中的屬性也會遵循在 Model 上設定的 `visible` 和 `hidden` 設定。
 
-<a name="appending-at-run-time"></a>
-#### Appending at Run Time
+#### 在執行時期附加
 
-At runtime, you may instruct a model instance to append additional attributes using the `append` or `mergeAppends` methods. Or, you may use the `setAppends` method to override the entire array of appended properties for a given model instance:
+在執行時期，你可以使用 `append` 或 `mergeAppends` 方法指示 Model 實例附加額外的屬性。或者，你可以使用 `setAppends` 方法來覆寫給定 Model 實例的整個附加屬性陣列：
 
 ```php
 return $user->append('is_admin')->toArray();
@@ -222,17 +204,15 @@ return $user->mergeAppends(['is_admin', 'status'])->toArray();
 return $user->setAppends(['is_admin'])->toArray();
 ```
 
-<a name="date-serialization"></a>
-## Date Serialization
+## 日期序列化
 
-<a name="customizing-the-default-date-format"></a>
-#### Customizing the Default Date Format
+#### 自訂預設日期格式
 
-You may customize the default serialization format by overriding the `serializeDate` method. This method does not affect how your dates are formatted for storage in the database:
+你可以透過覆寫 `serializeDate` 方法來自訂預設的序列化格式。此方法不會影響日期在資料庫中儲存的格式：
 
 ```php
 /**
- * Prepare a date for array / JSON serialization.
+ * 為陣列 / JSON 序列化準備日期。
  */
 protected function serializeDate(DateTimeInterface $date): string
 {
@@ -240,10 +220,9 @@ protected function serializeDate(DateTimeInterface $date): string
 }
 ```
 
-<a name="customizing-the-date-format-per-attribute"></a>
-#### Customizing the Date Format per Attribute
+#### 為每個屬性自訂日期格式
 
-You may customize the serialization format of individual Eloquent date attributes by specifying the date format in the model's [cast declarations](/docs/{'12.x'}/eloquent-mutators#attribute-casting):
+你可以透過在 Model 的[轉換宣告](/docs/{{version}}/eloquent-mutators#attribute-casting)中指定日期格式，來自訂個別 Eloquent 日期屬性的序列化格式：
 
 ```php
 protected function casts(): array

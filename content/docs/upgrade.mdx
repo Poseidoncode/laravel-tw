@@ -1,86 +1,86 @@
 ---
-title: Upgrade
-description: Laravel 升級指南
+title: Upgrade Guide
+description: Laravel 版本升級指南
 ---
 
-# Upgrade Guide
+# 升級指南
 
-- [Upgrading To 12.0 From 11.x](#upgrade-12.0)
+- [從 11.x 升級到 12.0](#upgrade-12.0)
 
 <a name="high-impact-changes"></a>
-## High Impact Changes
+## 高影響變更
 
-<div className="content-list" markdown="1">
+<div class="content-list" markdown="1">
 
-- [Updating Dependencies](#updating-dependencies)
-- [Updating the Laravel Installer](#updating-the-laravel-installer)
+- [更新依賴套件](#updating-dependencies)
+- [更新 Laravel 安裝器](#updating-the-laravel-installer)
 
 </div>
 
 <a name="medium-impact-changes"></a>
-## Medium Impact Changes
+## 中等影響變更
 
-<div className="content-list" markdown="1">
+<div class="content-list" markdown="1">
 
-- [Models and UUIDv7](#models-and-uuidv7)
+- [Models 與 UUIDv7](#models-and-uuidv7)
 
 </div>
 
 <a name="low-impact-changes"></a>
-## Low Impact Changes
+## 低影響變更
 
-<div className="content-list" markdown="1">
+<div class="content-list" markdown="1">
 
 - [Carbon 3](#carbon-3)
-- [Concurrency Result Index Mapping](#concurrency-result-index-mapping)
-- [Container Class Dependency Resolution](#container-class-dependency-resolution)
-- [Image Validation Now Excludes SVGs](#image-validation)
-- [Local Filesystem Disk Default Root Path](#local-filesystem-disk-default-root-path)
-- [Multi-Schema Database Inspecting](#multi-schema-database-inspecting)
-- [Nested Array Request Merging](#nested-array-request-merging)
+- [Concurrency 結果索引映射](#concurrency-result-index-mapping)
+- [Container 類別依賴解析](#container-class-dependency-resolution)
+- [Image 驗證現在排除 SVGs](#image-validation)
+- [本地檔案系統磁碟預設根路徑](#local-filesystem-disk-default-root-path)
+- [多 Schema 資料庫檢視](#multi-schema-database-inspecting)
+- [巢狀陣列請求合併](#nested-array-request-merging)
 
 </div>
 
 <a name="upgrade-12.0"></a>
-## Upgrading To 12.0 From 11.x
+## 從 11.x 升級到 12.0
 
-#### Estimated Upgrade Time: 5 Minutes
+#### 預估升級時間：5 分鐘
 
 > [!NOTE]
-> We attempt to document every possible breaking change. Since some of these breaking changes are in obscure parts of the framework only a portion of these changes may actually affect your application. Want to save time? You can use [Laravel Shift](https://laravelshift.com/) to help automate your application upgrades.
+> 我們嘗試記錄每個可能的破壞性變更。由於這些破壞性變更有些在 framework 的隱蔽部分，只有一部分這些變更可能實際影響你的應用程式。想要節省時間嗎？你可以使用 [Laravel Shift](https://laravelshift.com/) 來協助自動化你的應用程式升級。
 
 <a name="updating-dependencies"></a>
-### Updating Dependencies
+### 更新依賴套件
 
-**Likelihood Of Impact: High**
+**影響可能性：高**
 
-You should update the following dependencies in your application's `composer.json` file:
+你應該在應用程式的 `composer.json` 檔案中更新以下依賴套件：
 
-<div className="content-list" markdown="1">
+<div class="content-list" markdown="1">
 
-- `laravel/framework` to `^12.0`
-- `phpunit/phpunit` to `^11.0`
-- `pestphp/pest` to `^3.0`
+- `laravel/framework` 更新到 `^12.0`
+- `phpunit/phpunit` 更新到 `^11.0`
+- `pestphp/pest` 更新到 `^3.0`
 
 </div>
 
 <a name="carbon-3"></a>
 #### Carbon 3
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-Support for [Carbon 2.x](https://carbon.nesbot.com/docs/) has been removed. All Laravel 12 applications now require [Carbon 3.x](https://carbon.nesbot.com/docs/#api-carbon-3).
+已移除對 [Carbon 2.x](https://carbon.nesbot.com/docs/) 的支援。所有 Laravel 12 應用程式現在需要 [Carbon 3.x](https://carbon.nesbot.com/docs/#api-carbon-3)。
 
 <a name="updating-the-laravel-installer"></a>
-### Updating the Laravel Installer
+### 更新 Laravel 安裝器
 
-If you are using the Laravel installer CLI tool to create new Laravel applications, you should update your installer installation to be compatible with Laravel 12.x and the [new Laravel starter kits](https://laravel.com/starter-kits). If you installed the Laravel installer via `composer global require`, you may update the installer using `composer global update`:
+如果你使用 Laravel 安裝器 CLI 工具來建立新的 Laravel 應用程式，你應該更新你的安裝器以與 Laravel 12.x 和[新的 Laravel 入門套件](https://laravel.com/starter-kits)相容。如果你透過 `composer global require` 安裝了 Laravel 安裝器，你可以使用 `composer global update` 來更新安裝器：
 
 ```shell
 composer global update laravel/installer
 ```
 
-If you originally installed PHP and Laravel via `php.new`, you may simply re-run the `php.new` installation commands for your operating system to install the latest version of PHP and the Laravel installer:
+如果你最初是透過 `php.new` 安裝 PHP 和 Laravel，你可以簡單地重新執行適用於你作業系統的 `php.new` 安裝命令，以安裝最新版本的 PHP 和 Laravel 安裝器：
 
 ```shell tab=macOS
 /bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.4)"
@@ -95,27 +95,27 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 /bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.4)"
 ```
 
-Or, if you are using [Laravel Herd's](https://herd.laravel.com) bundled copy of the Laravel installer, you should update your Herd installation to the latest release.
+或者，如果你使用 [Laravel Herd](https://herd.laravel.com) 內建的 Laravel 安裝器，你應該將 Herd 安裝更新到最新版本。
 
 <a name="authentication"></a>
-### Authentication
+### 驗證
 
 <a name="updated-databasetokenrepository-constructor-signature"></a>
-#### Updated `DatabaseTokenRepository` Constructor Signature
+#### 更新 `DatabaseTokenRepository` 建構函式簽章
 
-**Likelihood Of Impact: Very Low**
+**影響可能性：非常低**
 
-The constructor of the `Illuminate\Auth\Passwords\DatabaseTokenRepository` class now expects the `$expires` parameter to be given in seconds, rather than minutes.
+`Illuminate\Auth\Passwords\DatabaseTokenRepository` 類別的建構函式現在期望 `$expires` 參數以秒為單位，而不是分鐘。
 
 <a name="concurrency"></a>
 ### Concurrency
 
 <a name="concurrency-result-index-mapping"></a>
-#### Concurrency Result Index Mapping
+#### Concurrency 結果索引映射
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-When invoking the `Concurrency::run` method with an associative array, the results of the concurrent operations are now returned with their associated keys:
+當使用關聯陣列呼叫 `Concurrency::run` 方法時，並行操作的結果現在會回傳關聯的鍵：
 
 ```php
 $result = Concurrency::run([
@@ -130,11 +130,11 @@ $result = Concurrency::run([
 ### Container
 
 <a name="container-class-dependency-resolution"></a>
-#### Container Class Dependency Resolution
+#### Container 類別依賴解析
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-The dependency injection container now respects the default value of class properties when resolving a class instance. If you were previously relying on the container to resolve a class instance without the default value, you may need to adjust your application to account for this new behavior:
+依賴注入容器現在在解析類別實例時會尊重類別屬性的預設值。如果你之前依賴容器在沒有預設值的情況下解析類別實例，你可能需要調整你的應用程式以適應這個新行為：
 
 ```php
 class Example
@@ -152,14 +152,14 @@ $example->date === null;
 ```
 
 <a name="database"></a>
-### Database
+### 資料庫
 
 <a name="multi-schema-database-inspecting"></a>
-#### Multi-Schema Database Inspecting
+#### 多 Schema 資料庫檢視
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-The `Schema::getTables()`, `Schema::getViews()`, and `Schema::getTypes()` methods now include the results from all schemas by default. You may pass the `schema` argument to retrieve the result for the given schema only:
+`Schema::getTables()`、`Schema::getViews()` 和 `Schema::getTypes()` 方法現在預設會包含所有 schemas 的結果。你可以傳遞 `schema` 參數來僅擷取指定 schema 的結果：
 
 ```php
 // All tables on all schemas...
@@ -172,7 +172,7 @@ $tables = Schema::getTables(schema: 'main');
 $tables = Schema::getTables(schema: ['main', 'blog']);
 ```
 
-The `Schema::getTableListing()` method now returns schema-qualified table names by default. You may pass the `schemaQualified` argument to change the behavior as desired:
+`Schema::getTableListing()` 方法現在預設回傳帶有 schema 前綴的資料表名稱。你可以傳遞 `schemaQualified` 參數來依需要變更行為：
 
 ```php
 $tables = Schema::getTableListing();
@@ -185,41 +185,41 @@ $tables = Schema::getTableListing(schema: 'main', schemaQualified: false);
 // ['migrations', 'users']
 ```
 
-The `db:table` and `db:show` commands now output the results of all schemas on MySQL, MariaDB, and SQLite, just like PostgreSQL and SQL Server.
+`db:table` 和 `db:show` 命令現在會在 MySQL、MariaDB 和 SQLite 上輸出所有 schemas 的結果，就像 PostgreSQL 和 SQL Server 一樣。
 
 <a name="updated-blueprint-constructor-signature"></a>
-#### Updated `Blueprint` Constructor Signature
+#### 更新 `Blueprint` 建構函式簽章
 
-**Likelihood Of Impact: Very Low**
+**影響可能性：非常低**
 
-The constructor of the `Illuminate\Database\Schema\Blueprint` class now expects an instance of `Illuminate\Database\Connection` as its first argument.
+`Illuminate\Database\Schema\Blueprint` 類別的建構函式現在期望 `Illuminate\Database\Connection` 的實例作為第一個參數。
 
 <a name="eloquent"></a>
 ### Eloquent
 
 <a name="models-and-uuidv7"></a>
-#### Models and UUIDv7
+#### Models 與 UUIDv7
 
-**Likelihood Of Impact: Medium**
+**影響可能性：中等**
 
-The `HasUuids` trait now returns UUIDs that are compatible with version 7 of the UUID spec (ordered UUIDs). If you would like to continue using ordered UUIDv4 strings for your model's IDs, you should now use the `HasVersion4Uuids` trait:
+`HasUuids` trait 現在會回傳與 UUID 規範版本 7（有序 UUIDs）相容的 UUIDs。如果你想繼續為 model 的 IDs 使用有序 UUIDv4 字串，你現在應該使用 `HasVersion4Uuids` trait：
 
 ```php
 use Illuminate\Database\Eloquent\Concerns\HasUuids; // [tl! remove]
 use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids; // [tl! add]
 ```
 
-The `HasVersion7Uuids` trait has been removed. If you were previously using this trait, you should use the `HasUuids` trait instead, which now provides the same behavior.
+`HasVersion7Uuids` trait 已被移除。如果你之前使用這個 trait，你應該改用 `HasUuids` trait，它現在提供相同的行為。
 
 <a name="requests"></a>
-### Requests
+### 請求
 
 <a name="nested-array-request-merging"></a>
-#### Nested Array Request Merging
+#### 巢狀陣列請求合併
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-The `$request->mergeIfMissing()` method now allows merging nested array data using "dot" notation. If you were previously relying on this method to create a top-level array key containing the "dot" notation version of the key, you may need to adjust your application to account for this new behavior:
+`$request->mergeIfMissing()` 方法現在允許使用「點」標記法來合併巢狀陣列資料。如果你之前依賴此方法來建立包含「點」標記法版本的頂層陣列鍵，你可能需要調整你的應用程式以適應這個新行為：
 
 ```php
 $request->mergeIfMissing([
@@ -228,24 +228,24 @@ $request->mergeIfMissing([
 ```
 
 <a name="storage"></a>
-### Storage
+### 儲存
 
 <a name="local-filesystem-disk-default-root-path"></a>
-#### Local Filesystem Disk Default Root Path
+#### 本地檔案系統磁碟預設根路徑
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-If your application does not explicitly define a `local` disk in your filesystems configuration, Laravel will now default the local disk's root to `storage/app/private`. In previous releases, this defaulted to `storage/app`. As a result, calls to `Storage::disk('local')` will read from and write to `storage/app/private` unless otherwise configured. To restore the previous behavior, you may define the `local` disk manually and set the desired root path.
+如果你的應用程式沒有在檔案系統設定中明確定義 `local` 磁碟，Laravel 現在會將本地磁碟的根目錄預設為 `storage/app/private`。在之前的版本中，這預設為 `storage/app`。因此，除非另有設定，否則呼叫 `Storage::disk('local')` 將從 `storage/app/private` 讀取和寫入。若要恢復之前的行為，你可以手動定義 `local` 磁碟並設定所需的根路徑。
 
 <a name="validation"></a>
-### Validation
+### 驗證
 
 <a name="image-validation"></a>
-#### Image Validation Now Excludes SVGs
+#### Image 驗證現在排除 SVGs
 
-**Likelihood Of Impact: Low**
+**影響可能性：低**
 
-The `image` validation rule no longer allows SVG images by default. If you would like to allow SVGs when using the `image` rule, you must explicitly allow them:
+`image` 驗證規則現在預設不再允許 SVG 圖片。如果你想在使用 `image` 規則時允許 SVGs，你必須明確允許它們：
 
 ```php
 use Illuminate\Validation\Rules\File;
@@ -257,6 +257,6 @@ use Illuminate\Validation\Rules\File;
 ```
 
 <a name="miscellaneous"></a>
-### Miscellaneous
+### 其他
 
-We also encourage you to view the changes in the `laravel/laravel` [GitHub repository](https://github.com/laravel/laravel). While many of these changes are not required, you may wish to keep these files in sync with your application. Some of these changes will be covered in this upgrade guide, but others, such as changes to configuration files or comments, will not be. You can easily view the changes with the [GitHub comparison tool](https://github.com/laravel/laravel/compare/11.x...12.x) and choose which updates are important to you.
+我們也鼓勵你檢視 `laravel/laravel` [GitHub 儲存庫](https://github.com/laravel/laravel)中的變更。雖然這些變更中有許多不是必需的，但你可能希望將這些檔案與你的應用程式保持同步。這些變更中的一些會在此升級指南中介紹，但其他的，例如設定檔或註解的變更，則不會。你可以使用 [GitHub 比較工具](https://github.com/laravel/laravel/compare/11.x...12.x)輕鬆查看變更，並選擇哪些更新對你來說是重要的。
