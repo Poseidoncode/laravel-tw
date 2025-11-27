@@ -28,6 +28,7 @@ const sidebarItems = [
     {
         title: '架構',
         items: [
+            { title: '請求生命週期', href: '/docs/lifecycle' },
             { title: 'Service Container', href: '/docs/container' },
             { title: 'Service Providers', href: '/docs/providers' },
             { title: 'Facades', href: '/docs/facades' },
