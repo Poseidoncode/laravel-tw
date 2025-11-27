@@ -6,40 +6,40 @@ description: Laravel 提供多種不同的方式來驗證應用程式的輸入�
 # Validation
 
 - [Introduction](#introduction)
-- [Validation Quickstart](#validation-quickstart)
-    - [Defining the Routes](#quick-defining-the-routes)
-    - [Creating the Controller](#quick-creating-the-controller)
-    - [Writing the Validation Logic](#quick-writing-the-validation-logic)
-    - [Displaying the Validation Errors](#quick-displaying-the-validation-errors)
-    - [Repopulating Forms](#repopulating-forms)
-    - [A Note on Optional Fields](#a-note-on-optional-fields)
-    - [Validation Error Response Format](#validation-error-response-format)
-- [Form Request Validation](#form-request-validation)
-    - [Creating Form Requests](#creating-form-requests)
-    - [Authorizing Form Requests](#authorizing-form-requests)
-    - [Customizing the Error Messages](#customizing-the-error-messages)
-    - [Preparing Input for Validation](#preparing-input-for-validation)
-- [Manually Creating Validators](#manually-creating-validators)
-    - [Automatic Redirection](#automatic-redirection)
-    - [Named Error Bags](#named-error-bags)
-    - [Customizing the Error Messages](#manual-customizing-the-error-messages)
-    - [Performing Additional Validation](#performing-additional-validation)
-- [Working With Validated Input](#working-with-validated-input)
-- [Working With Error Messages](#working-with-error-messages)
-    - [Specifying Custom Messages in Language Files](#specifying-custom-messages-in-language-files)
-    - [Specifying Attributes in Language Files](#specifying-attribute-in-language-files)
-    - [Specifying Values in Language Files](#specifying-values-in-language-files)
-- [Available Validation Rules](#available-validation-rules)
-- [Conditionally Adding Rules](#conditionally-adding-rules)
-- [Validating Arrays](#validating-arrays)
-    - [Validating Nested Array Input](#validating-nested-array-input)
-    - [Error Message Indexes and Positions](#error-message-indexes-and-positions)
-- [Validating Files](#validating-files)
-- [Validating Passwords](#validating-passwords)
-- [Custom Validation Rules](#custom-validation-rules)
-    - [Using Rule Objects](#using-rule-objects)
-    - [Using Closures](#using-closures)
-    - [Implicit Rules](#implicit-rules)
+- [驗證快速入門](#validation-quickstart)
+    - [定義路由](#quick-defining-the-routes)
+    - [建立控制器](#quick-creating-the-controller)
+    - [編寫驗證邏輯](#quick-writing-the-validation-logic)
+    - [顯示驗證錯誤](#quick-displaying-the-validation-errors)
+    - [重新填入表單](#repopulating-forms)
+    - [關於可選欄位的說明](#a-note-on-optional-fields)
+    - [驗證錯誤回應格式](#validation-error-response-format)
+- [表單請求驗證](#form-request-validation)
+    - [建立表單請求](#creating-form-requests)
+    - [授權表單請求](#authorizing-form-requests)
+    - [自訂錯誤訊息](#customizing-the-error-messages)
+    - [準備驗證輸入](#preparing-input-for-validation)
+- [手動建立驗證器](#manually-creating-validators)
+    - [自動重新導向](#automatic-redirection)
+    - [命名錯誤包](#named-error-bags)
+    - [自訂錯誤訊息](#manual-customizing-the-error-messages)
+    - [執行額外驗證](#performing-additional-validation)
+- [處理已驗證的輸入](#working-with-validated-input)
+- [處理錯誤訊息](#working-with-error-messages)
+    - [在語言檔案中指定自訂訊息](#specifying-custom-messages-in-language-files)
+    - [在語言檔案中指定屬性](#specifying-attribute-in-language-files)
+    - [在語言檔案中指定值](#specifying-values-in-language-files)
+- [可用的驗證規則](#available-validation-rules)
+- [有條件地新增規則](#conditionally-adding-rules)
+- [驗證陣列](#validating-arrays)
+    - [驗證巢狀陣列輸入](#validating-nested-array-input)
+    - [錯誤訊息索引和位置](#error-message-indexes-and-positions)
+- [驗證檔案](#validating-files)
+- [驗證密碼](#validating-passwords)
+- [自訂驗證規則](#custom-validation-rules)
+    - [使用規則物件](#using-rule-objects)
+    - [使用閉包](#using-closures)
+    - [隱式規則](#implicit-rules)
 
 <a name="introduction"></a>
 ## 簡介
@@ -313,7 +313,7 @@ $request->validate([
             "The users.0.email field is required."
         ],
         "users.2.email": [
-            "The users.2.email must be a valid email address."
+            "The users.2.email 必須是有效的電子郵件地址。"
         ]
     }
 }
@@ -337,7 +337,7 @@ php artisan make:request StorePostRequest
 
 ```php
 /**
- * Get the validation rules that apply to the request.
+ * 取得適用於請求的驗證規則。
  *
  * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
  */
@@ -361,16 +361,16 @@ public function rules(): array
  */
 public function store(StorePostRequest $request): RedirectResponse
 {
-    // The incoming request is valid...
+    // 傳入的請求是有效的...
 
-    // Retrieve the validated input data...
+    // 檢索已驗證的輸入資料...
     $validated = $request->validated();
 
-    // Retrieve a portion of the validated input data...
+    // 檢索已驗證輸入資料的一部分...
     $validated = $request->safe()->only(['name', 'email']);
     $validated = $request->safe()->except(['name', 'email']);
 
-    // Store the blog post...
+    // 儲存部落格文章...
 
     return redirect('/posts');
 }
@@ -880,12 +880,12 @@ Laravel 的內建驗證規則都有一個錯誤訊息，位於應用程式的 `l
 此外，你可以將此檔案複製到另一個語言目錄，以翻譯應用程式語言的訊息。要了解有關 Laravel 在地化的更多資訊，請查看完整的 [在地化文件](/docs/12.x/localization)。
 
 > [!WARNING]
-> By default, the Laravel application skeleton does not include the `lang` directory. If you would like to customize Laravel's language files, you may publish them via the `lang:publish` Artisan command.
+> 預設情況下，Laravel 應用程式骨架不包含 `lang` 目錄。如果你想自訂 Laravel 的語言檔案，你可以透過 `lang:publish` Artisan 指令發佈它們。
 
 <a name="custom-messages-for-specific-attributes"></a>
-#### Custom Messages for Specific Attributes
+#### 特定屬性的自訂訊息
 
-You may customize the error messages used for specified attribute and rule combinations within your application's validation language files. To do so, add your message customizations to the `custom` array of your application's `lang/xx/validation.php` language file:
+你可以在應用程式的 `lang/xx/validation.php` 語言檔案的 `custom` 陣列中新增訊息自訂，以自訂用於指定屬性或規則組合的錯誤訊息：
 
 ```php
 'custom' => [
@@ -1126,7 +1126,7 @@ The credit card number field is required when payment type is credit card.
 [Required Without](#rule-required-without)
 [Required Without All](#rule-required-without-all)
 [Required Array Keys](#rule-required-array-keys)
-[Sometimes](#validating-when-present)
+[存在時驗證](#validating-when-present)
 
 </div>
 
@@ -1727,7 +1727,7 @@ Validator::make($data, [
 'state' => Rule::exists('states', 'abbreviation'),
 ```
 
-Sometimes, you may wish to validate whether an array of values exists in the database. You can do so by adding both the `exists` and [array](#rule-array) rules to the field being validated:
+有時，你可能希望驗證資料庫中是否存在值陣列。你可以透過將 `exists` 和 [array](#rule-array) 規則都新增到正在驗證的欄位來實現此目的：
 
 ```php
 'states' => ['array', Rule::exists('states', 'abbreviation')],
@@ -1776,7 +1776,7 @@ Sometimes, you may wish to validate whether an array of values exists in the dat
 驗證的檔案必須是圖片（jpg、jpeg、png、bmp、gif、svg 或 webp）。
 
 > [!WARNING]
-> By default, the image rule does not allow SVG files due to the possibility of XSS vulnerabilities. If you need to allow SVG files, you may provide the `allow_svg` directive to the `image` rule (`image:allow_svg`).
+> 預設情況下，`image` 規則不允許 SVG 檔案，因為存在 XSS 漏洞的可能性。如果你需要允許 SVG 檔案，你可以將 `allow_svg` 指令提供給 `image` 規則 (`image:allow_svg`)。
 
 <a name="rule-in"></a>
 #### in:_foo_,_bar_,...
@@ -1972,6 +1972,7 @@ Validator::make($input, [
 驗證的欄位不得包含在給定的值列表中。可以使用 `Rule::notIn` 方法來流暢地建構規則：
 
 ```php
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
 Validator::make($data, [
@@ -2616,7 +2617,7 @@ Validator::validate($input, [
 
 <a name="validating-files-file-sizes"></a>
 
-For convenience, minimum and maximum file sizes may be specified as a string with a suffix indicating the file size units. The `kb`, `mb`, `gb`, and `tb` suffixes are supported:
+為了方便起見，最小和最大檔案大小可以指定為帶有指示檔案大小單位的後綴的字串。支援 `kb`、`mb`、`gb` 和 `tb` 後綴：
 
 ```php
 File::types(['mp3', 'wav'])
@@ -2648,15 +2649,15 @@ Validator::validate($input, [
 ```
 
 > [!NOTE]
-> More information regarding validating image dimensions may be found in the [dimension rule documentation](#rule-dimensions).
+> 有關驗證圖片尺寸的更多資訊，請參閱 [dimensions 規則文件](#rule-dimensions)。
 
 > [!WARNING]
 > 預設情況下，`image` 規則不允許 SVG 檔案，因為存在 XSS 漏洞的可能性。如果你需要允許 SVG 檔案，你可以將 `allowSvg: true` 傳遞給 `image` 規則：`File::image(allowSvg: true)`。
 
 <a name="validating-files-image-dimensions"></a>
-#### Validating Image Dimensions
+#### 驗證圖片尺寸
 
-You may also validate the dimensions of an image. For example, to validate that an uploaded image is at least 1000 pixels wide and 500 pixels tall, you may use the `dimensions` rule:
+你也可以驗證圖片的尺寸。例如，要驗證上傳的圖片寬度至少為 1000 像素，高度至少為 500 像素，你可以使用 `dimensions` 規則：
 
 ```php
 use Illuminate\Validation\Rule;
@@ -2670,12 +2671,12 @@ File::image()->dimensions(
 ```
 
 > [!NOTE]
-> More information regarding validating image dimensions may be found in the [dimension rule documentation](#rule-dimensions).
+> 有關驗證圖片尺寸的更多資訊，請參閱 [dimensions 規則文件](#rule-dimensions)。
 
 <a name="validating-passwords"></a>
-## Validating Passwords
+## 驗證密碼
 
-To ensure that passwords have an adequate level of complexity, you may use Laravel's `Password` rule object:
+為了確保密碼具有足夠的複雜度，你可以使用 Laravel 的 `Password` 規則物件：
 
 ```php
 use Illuminate\Support\Facades\Validator;
@@ -2686,7 +2687,7 @@ $validator = Validator::make($request->all(), [
 ]);
 ```
 
-The `Password` rule object allows you to easily customize the password complexity requirements for your application, such as specifying that passwords require at least one letter, number, symbol, or characters with mixed casing:
+`Password` 規則物件允許你輕鬆自訂應用程式的密碼複雜度要求，例如指定密碼需要至少一個字母、數字、符號或大小寫混合的字元：
 
 ```php
 // Require at least 8 characters...
@@ -2705,22 +2706,22 @@ Password::min(8)->numbers()
 Password::min(8)->symbols()
 ```
 
-In addition, you may ensure that a password has not been compromised in a public password data breach leak using the `uncompromised` method:
+此外，你可以使用 `uncompromised` 方法確保密碼未在公開密碼資料洩露中洩露：
 
 ```php
 Password::min(8)->uncompromised()
 ```
 
-Internally, the `Password` rule object uses the [k-Anonymity](https://en.wikipedia.org/wiki/K-anonymity) model to determine if a password has been leaked via the [haveibeenpwned.com](https://haveibeenpwned.com) service without sacrificing the user's privacy or security.
+在內部，`Password` 規則物件使用 [k-Anonymity](https://en.wikipedia.org/wiki/K-anonymity) 模型來判斷密碼是否透過 [haveibeenpwned.com](https://haveibeenpwned.com) 服務洩露，而不會犧牲使用者的隱私或安全性。
 
-By default, if a password appears at least once in a data leak, it will be considered compromised. You can customize this threshold using the first argument of the `uncompromised` method:
+預設情況下，如果密碼在資料洩露中至少出現一次，則將被視為已洩露。你可以使用 `uncompromised` 方法的第一個參數自訂此閾值：
 
 ```php
 // Ensure the password appears less than 3 times in the same data leak...
 Password::min(8)->uncompromised(3);
 ```
 
-Of course, you may chain all the methods in the examples above:
+當然，你可以鏈接上面範例中的所有方法：
 
 ```php
 Password::min(8)
@@ -2732,9 +2733,9 @@ Password::min(8)
 ```
 
 <a name="defining-default-password-rules"></a>
-#### Defining Default Password Rules
+#### 定義預設密碼規則
 
-You may find it convenient to specify the default validation rules for passwords in a single location of your application. You can easily accomplish this using the `Password::defaults` method, which accepts a closure. The closure given to the `defaults` method should return the default configuration of the Password rule. Typically, the `defaults` rule should be called within the `boot` method of one of your application's service providers:
+你可能會發現在應用程式的單一位置指定密碼的預設驗證規則很方便。你可以使用 `Password::defaults` 方法輕鬆實現此目的，該方法接受一個閉包。提供給 `defaults` 方法的閉包應回傳密碼規則的預設配置。通常，`defaults` 規則應在應用程式的服務提供者之一的 `boot` 方法中呼叫：
 
 ```php
 use Illuminate\Validation\Rules\Password;
@@ -2754,13 +2755,13 @@ public function boot(): void
 }
 ```
 
-Then, when you would like to apply the default rules to a particular password undergoing validation, you may invoke the `defaults` method with no arguments:
+然後，當你希望將預設規則應用於正在驗證的特定密碼時，你可以不帶參數呼叫 `defaults` 方法：
 
 ```php
 'password' => ['required', Password::defaults()],
 ```
 
-Occasionally, you may want to attach additional validation rules to your default password validation rules. You may use the `rules` method to accomplish this:
+偶爾，你可能希望將額外的驗證規則附加到你的預設密碼驗證規則。你可以使用 `rules` 方法來實現此目的：
 
 ```php
 use App\Rules\ZxcvbnRule;
@@ -2802,7 +2803,7 @@ class Uppercase implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (strtoupper($value) !== $value) {
-            $fail('The :attribute must be uppercase.');
+            $fail('驗證的欄位必須是大寫。');
         }
     }
 }
@@ -2818,9 +2819,9 @@ $request->validate([
 ]);
 ```
 
-#### Translating Validation Messages
+#### 翻譯驗證訊息
 
-Instead of providing a literal error message to the `$fail` closure, you may also provide a [translation string key](/docs/12.x/localization) and instruct Laravel to translate the error message:
+你可以提供 [翻譯字串鍵](/docs/12.x/localization) 而不是向 `$fail` 閉包提供文字錯誤訊息，並指示 Laravel 翻譯錯誤訊息：
 
 ```php
 if (strtoupper($value) !== $value) {
@@ -2828,7 +2829,7 @@ if (strtoupper($value) !== $value) {
 }
 ```
 
-If necessary, you may provide placeholder replacements and the preferred language as the first and second arguments to the `translate` method:
+如有必要，你可以將佔位符替換和首選語言作為 `translate` 方法的第一個和第二個參數提供：
 
 ```php
 $fail('validation.location')->translate([
@@ -2836,7 +2837,7 @@ $fail('validation.location')->translate([
 ], 'fr');
 ```
 
-#### Accessing Additional Data
+#### 存取額外資料
 
 如果你的自訂驗證規則類別需要存取所有正在驗證的其他資料，你的規則類別可以實作 `Illuminate\Contracts\Validation\DataAwareRule` 介面。此介面要求你的類別定義一個 `setData` 方法。此方法將由 Laravel 自動呼叫（在驗證進行之前），並帶有所有正在驗證的資料：
 
@@ -2860,7 +2861,7 @@ class Uppercase implements DataAwareRule, ValidationRule
     // ...
 
     /**
-     * Set the data under validation.
+     * 設定正在驗證的資料。
      *
      * @param  array<string, mixed>  $data
      */
@@ -2873,7 +2874,7 @@ class Uppercase implements DataAwareRule, ValidationRule
 }
 ```
 
-Or, if your validation rule requires access to the validator instance performing the validation, you may implement the `ValidatorAwareRule` interface:
+或者，如果你的驗證規則需要存取執行驗證的驗證器實例，你可以實作 `ValidatorAwareRule` 介面：
 
 ```php
 <?php
@@ -2908,9 +2909,9 @@ class Uppercase implements ValidationRule, ValidatorAwareRule
 ```
 
 <a name="using-closures"></a>
-### Using Closures
+### 使用閉包
 
-If you only need the functionality of a custom rule once throughout your application, you may use a closure instead of a rule object. The closure receives the attribute's name, the attribute's value, and a `$fail` callback that should be called if validation fails:
+如果你只需要在應用程式中一次使用自訂規則的功能，你可以使用閉包而不是規則物件。閉包接收屬性名稱、屬性值和一個 `$fail` 回呼，如果驗證失敗，則應呼叫該回呼：
 
 ```php
 use Illuminate\Support\Facades\Validator;
@@ -2944,11 +2945,11 @@ $input = ['name' => ''];
 Validator::make($input, $rules)->passes(); // true
 ```
 
-For a custom rule to run even when an attribute is empty, the rule must imply that the attribute is required. To quickly generate a new implicit rule object, you may use the `make:rule` Artisan command with the `--implicit` option:
+為了使自訂規則即使在屬性為空時也能執行，該規則必須暗示該屬性是必需的。要快速產生一個新的隱式規則物件，你可以使用帶有 `--implicit` 選項的 `make:rule` Artisan 命令：
 
 ```shell
 php artisan make:rule Uppercase --implicit
 ```
 
 > [!WARNING]
-> An "implicit" rule only _implies_ that the attribute is required. Whether it actually invalidates a missing or empty attribute is up to you.
+> 「隱式」規則僅 _暗示_ 該屬性是必需的。它是否實際使缺失或空的屬性無效取決於你。

@@ -57,6 +57,7 @@ _請依照 Laravel 官方文件的邏輯順序進行翻譯。_
 #### Batch A: 入門與架構 (Prolog & Architecture)
 
 - [x] **Step 2.1**: 翻譯 `installation.md` (安裝)
+- [x] **Step 2.1b**: 翻譯 `content/docs/validation.mdx` (驗證)
 - [x] **Step 2.2**: 翻譯 `configuration.md` (設定)
 - [x] **Step 2.3**: 翻譯 `structure.md` (目錄結構)
 - [x] **Step 2.4**: 翻譯 `lifecycle.md` (生命週期)
