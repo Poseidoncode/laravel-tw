@@ -7,8 +7,8 @@ description: Facades
 
 - [簡介](#introduction)
 - [何時使用 Facades](#when-to-use-facades)
-    - [Facades 與 Dependency Injection](#facades-vs-dependency-injection)
-    - [Facades 與 Helper 函式](#facades-vs-helper-functions)
+  - [Facades 與 Dependency Injection](#facades-vs-dependency-injection)
+  - [Facades 與 Helper 函式](#facades-vs-helper-functions)
 - [Facades 如何運作](#how-facades-work)
 - [即時 Facades](#real-time-facades)
 - [Facade 類別參考](#facade-class-reference)
@@ -304,62 +304,585 @@ class PodcastTest extends TestCase
 <a name="facade-class-reference"></a>
 ## Facade 類別參考
 
-在下面，您將找到每個 Facade 及其底層類別。這是一個用於快速深入了解給定 Facade root 的 API 文件的有用工具。[Service Container 綁定](/docs/{'12.x'}/container) 鍵也包含在適用的地方。
+在下面，您將找到每個 Facade 及其底層類別。這是一個用於快速深入了解給定 Facade root 的 API 文件的有用工具。[Service Container 綁定](/docs/12.x/container) 鍵也包含在適用的地方。
 
-| Facade | Class | Service Container Binding |
-| --- | --- | --- |
-| App | [Illuminate\Foundation\Application](https://api.laravel.com/docs/{'12.x'}/Illuminate/Foundation/Application.html) | `app` |
-| Artisan | [Illuminate\Contracts\Console\Kernel](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Console/Kernel.html) | `artisan` |
-| Auth (Instance) | [Illuminate\Contracts\Auth\Guard](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Auth/Guard.html) | `auth.driver` |
-| Auth | [Illuminate\Auth\AuthManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Auth/AuthManager.html) | `auth` |
-| Blade | [Illuminate\View\Compilers\BladeCompiler](https://api.laravel.com/docs/{'12.x'}/Illuminate/View/Compilers/BladeCompiler.html) | `blade.compiler` |
-| Broadcast (Instance) | [Illuminate\Contracts\Broadcasting\Broadcaster](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Broadcasting/Broadcaster.html) | &nbsp; |
-| Broadcast | [Illuminate\Contracts\Broadcasting\Factory](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Broadcasting/Factory.html) | &nbsp; |
-| Bus | [Illuminate\Contracts\Bus\Dispatcher](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Bus/Dispatcher.html) | &nbsp; |
-| Cache (Instance) | [Illuminate\Cache\Repository](https://api.laravel.com/docs/{'12.x'}/Illuminate/Cache/Repository.html) | `cache.store` |
-| Cache | [Illuminate\Cache\CacheManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Cache/CacheManager.html) | `cache` |
-| Config | [Illuminate\Config\Repository](https://api.laravel.com/docs/{'12.x'}/Illuminate/Config/Repository.html) | `config` |
-| Context | [Illuminate\Log\Context\Repository](https://api.laravel.com/docs/{'12.x'}/Illuminate/Log/Context/Repository.html) | &nbsp; |
-| Cookie | [Illuminate\Cookie\CookieJar](https://api.laravel.com/docs/{'12.x'}/Illuminate/Cookie/CookieJar.html) | `cookie` |
-| Crypt | [Illuminate\Encryption\Encrypter](https://api.laravel.com/docs/{'12.x'}/Illuminate/Encryption/Encrypter.html) | `encrypter` |
-| Date | [Illuminate\Support\DateFactory](https://api.laravel.com/docs/{'12.x'}/Illuminate/Support/DateFactory.html) | `date` |
-| DB (Instance) | [Illuminate\Database\Connection](https://api.laravel.com/docs/{'12.x'}/Illuminate/Database/Connection.html) | `db.connection` |
-| DB | [Illuminate\Database\DatabaseManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Database/DatabaseManager.html) | `db` |
-| Event | [Illuminate\Events\Dispatcher](https://api.laravel.com/docs/{'12.x'}/Illuminate/Events/Dispatcher.html) | `events` |
-| Exceptions (Instance) | [Illuminate\Contracts\Debug\ExceptionHandler](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Debug/ExceptionHandler.html) | &nbsp; |
-| Exceptions | [Illuminate\Foundation\Exceptions\Handler](https://api.laravel.com/docs/{'12.x'}/Illuminate/Foundation/Exceptions/Handler.html) | &nbsp; |
-| File | [Illuminate\Filesystem\Filesystem](https://api.laravel.com/docs/{'12.x'}/Illuminate/Filesystem/Filesystem.html) | `files` |
-| Gate | [Illuminate\Contracts\Auth\Access\Gate](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Auth/Access/Gate.html) | &nbsp; |
-| Hash | [Illuminate\Contracts\Hashing\Hasher](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Hashing/Hasher.html) | `hash` |
-| Http | [Illuminate\Http\Client\Factory](https://api.laravel.com/docs/{'12.x'}/Illuminate/Http/Client/Factory.html) | &nbsp; |
-| Lang | [Illuminate\Translation\Translator](https://api.laravel.com/docs/{'12.x'}/Illuminate/Translation/Translator.html) | `translator` |
-| Log | [Illuminate\Log\LogManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Log/LogManager.html) | `log` |
-| Mail | [Illuminate\Mail\Mailer](https://api.laravel.com/docs/{'12.x'}/Illuminate/Mail/Mailer.html) | `mailer` |
-| Notification | [Illuminate\Notifications\ChannelManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Notifications/ChannelManager.html) | &nbsp; |
-| Password (Instance) | [Illuminate\Auth\Passwords\PasswordBroker](https://api.laravel.com/docs/{'12.x'}/Illuminate/Auth/Passwords/PasswordBroker.html) | `auth.password.broker` |
-| Password | [Illuminate\Auth\Passwords\PasswordBrokerManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Auth/Passwords/PasswordBrokerManager.html) | `auth.password` |
-| Pipeline (Instance) | [Illuminate\Pipeline\Pipeline](https://api.laravel.com/docs/{'12.x'}/Illuminate/Pipeline/Pipeline.html) | &nbsp; |
-| Process | [Illuminate\Process\Factory](https://api.laravel.com/docs/{'12.x'}/Illuminate/Process/Factory.html) | &nbsp; |
-| Queue (Base Class) | [Illuminate\Queue\Queue](https://api.laravel.com/docs/{'12.x'}/Illuminate/Queue/Queue.html) | &nbsp; |
-| Queue (Instance) | [Illuminate\Contracts\Queue\Queue](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Queue/Queue.html) | `queue.connection` |
-| Queue | [Illuminate\Queue\QueueManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Queue/QueueManager.html) | `queue` |
-| RateLimiter | [Illuminate\Cache\RateLimiter](https://api.laravel.com/docs/{'12.x'}/Illuminate/Cache/RateLimiter.html) | &nbsp; |
-| Redirect | [Illuminate\Routing\Redirector](https://api.laravel.com/docs/{'12.x'}/Illuminate/Routing/Redirector.html) | `redirect` |
-| Redis (Instance) | [Illuminate\Redis\Connections\Connection](https://api.laravel.com/docs/{'12.x'}/Illuminate/Redis/Connections/Connection.html) | `redis.connection` |
-| Redis | [Illuminate\Redis\RedisManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Redis/RedisManager.html) | `redis` |
-| Request | [Illuminate\Http\Request](https://api.laravel.com/docs/{'12.x'}/Illuminate/Http/Request.html) | `request` |
-| Response (Instance) | [Illuminate\Http\Response](https://api.laravel.com/docs/{'12.x'}/Illuminate/Http/Response.html) | &nbsp; |
-| Response | [Illuminate\Contracts\Routing\ResponseFactory](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Routing/ResponseFactory.html) | &nbsp; |
-| Route | [Illuminate\Routing\Router](https://api.laravel.com/docs/{'12.x'}/Illuminate/Routing/Router.html) | `router` |
-| Schedule | [Illuminate\Console\Scheduling\Schedule](https://api.laravel.com/docs/{'12.x'}/Illuminate/Console/Scheduling/Schedule.html) | &nbsp; |
-| Schema | [Illuminate\Database\Schema\Builder](https://api.laravel.com/docs/{'12.x'}/Illuminate/Database/Schema/Builder.html) | &nbsp; |
-| Session (Instance) | [Illuminate\Session\Store](https://api.laravel.com/docs/{'12.x'}/Illuminate/Session/Store.html) | `session.store` |
-| Session | [Illuminate\Session\SessionManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Session/SessionManager.html) | `session` |
-| Storage (Instance) | [Illuminate\Contracts\Filesystem\Filesystem](https://api.laravel.com/docs/{'12.x'}/Illuminate/Contracts/Filesystem/Filesystem.html) | `filesystem.disk` |
-| Storage | [Illuminate\Filesystem\FilesystemManager](https://api.laravel.com/docs/{'12.x'}/Illuminate/Filesystem/FilesystemManager.html) | `filesystem` |
-| URL | [Illuminate\Routing\UrlGenerator](https://api.laravel.com/docs/{'12.x'}/Illuminate/Routing/UrlGenerator.html) | `url` |
-| Validator (Instance) | [Illuminate\Validation\Validator](https://api.laravel.com/docs/{'12.x'}/Illuminate/Validation/Validator.html) | &nbsp; |
-| Validator | [Illuminate\Validation\Factory](https://api.laravel.com/docs/{'12.x'}/Illuminate/Validation/Factory.html) | `validator` |
-| View (Instance) | [Illuminate\View\View](https://api.laravel.com/docs/{'12.x'}/Illuminate/View/View.html) | &nbsp; |
-| View | [Illuminate\View\Factory](https://api.laravel.com/docs/{'12.x'}/Illuminate/View/Factory.html) | `view` |
-| Vite | [Illuminate\Foundation\Vite](https://api.laravel.com/docs/{'12.x'}/Illuminate/Foundation/Vite.html) | &nbsp; |
+<div className="overflow-x-auto">
+  <table className="min-w-full text-sm">
+    <thead>
+      <tr>
+        <th className="text-left px-3 py-2 whitespace-nowrap">Facade</th>
+        <th className="text-left px-3 py-2">類別</th>
+        <th className="text-left px-3 py-2 whitespace-nowrap">
+          Service Container 綁定
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">App</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Foundation/Application.html">
+            Illuminate\Foundation\Application
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>app</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Artisan</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Console/Kernel.html">
+            Illuminate\Contracts\Console\Kernel
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>artisan</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Auth (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Auth/Guard.html">
+            Illuminate\Contracts\Auth\Guard
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>auth.driver</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Auth</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Auth/AuthManager.html">
+            Illuminate\Auth\AuthManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>auth</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Blade</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/View/Compilers/BladeCompiler.html">
+            Illuminate\View\Compilers\BladeCompiler
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>blade.compiler</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Broadcast (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Broadcasting/Broadcaster.html">
+            Illuminate\Contracts\Broadcasting\Broadcaster
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Broadcast</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Broadcasting/Factory.html">
+            Illuminate\Contracts\Broadcasting\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Bus</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Bus/Dispatcher.html">
+            Illuminate\Contracts\Bus\Dispatcher
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Cache (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Cache/Repository.html">
+            Illuminate\Cache\Repository
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>cache.store</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Cache</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Cache/CacheManager.html">
+            Illuminate\Cache\CacheManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>cache</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Config</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Config/Repository.html">
+            Illuminate\Config\Repository
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>config</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Context</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Log/Context/Repository.html">
+            Illuminate\Log\Context\Repository
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Cookie</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Cookie/CookieJar.html">
+            Illuminate\Cookie\CookieJar
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>cookie</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Crypt</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Encryption/Encrypter.html">
+            Illuminate\Encryption\Encrypter
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>encrypter</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Date</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Support/DateFactory.html">
+            Illuminate\Support\DateFactory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>date</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">DB (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Database/Connection.html">
+            Illuminate\Database\Connection
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>db.connection</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">DB</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Database/DatabaseManager.html">
+            Illuminate\Database\DatabaseManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>db</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Event</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Events/Dispatcher.html">
+            Illuminate\Events\Dispatcher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>events</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Exceptions (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Debug/ExceptionHandler.html">
+            Illuminate\Contracts\Debug\ExceptionHandler
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Exceptions</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Foundation/Exceptions/Handler.html">
+            Illuminate\Foundation\Exceptions\Handler
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">File</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Filesystem/Filesystem.html">
+            Illuminate\Filesystem\Filesystem
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>files</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Gate</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Auth/Access/Gate.html">
+            Illuminate\Contracts\Auth\Access\Gate
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Hash</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Hashing/Hasher.html">
+            Illuminate\Contracts\Hashing\Hasher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>hash</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Http</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Http/Client/Factory.html">
+            Illuminate\Http\Client\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Lang</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Translation/Translator.html">
+            Illuminate\Translation\Translator
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>translator</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Log</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Log/LogManager.html">
+            Illuminate\Log\LogManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>log</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Mail</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Mail/Mailer.html">
+            Illuminate\Mail\Mailer
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>mailer</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Notification</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Notifications/ChannelManager.html">
+            Illuminate\Notifications\ChannelManager
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Password (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Auth/Passwords/PasswordBroker.html">
+            Illuminate\Auth\Passwords\PasswordBroker
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>auth.password.broker</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Password</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Auth/Passwords/PasswordBrokerManager.html">
+            Illuminate\Auth\Passwords\PasswordBrokerManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>auth.password</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Pipeline (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Pipeline/Pipeline.html">
+            Illuminate\Pipeline\Pipeline
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Process</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Process/Factory.html">
+            Illuminate\Process\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Queue (Base Class)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Queue/Queue.html">
+            Illuminate\Queue\Queue
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Queue (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Queue/Queue.html">
+            Illuminate\Contracts\Queue\Queue
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>queue.connection</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Queue</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Queue/QueueManager.html">
+            Illuminate\Queue\QueueManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>queue</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">RateLimiter</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Cache/RateLimiter.html">
+            Illuminate\Cache\RateLimiter
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Redirect</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Routing/Redirector.html">
+            Illuminate\Routing\Redirector
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>redirect</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Redis (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Redis/Connections/Connection.html">
+            Illuminate\Redis\Connections\Connection
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>redis.connection</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Redis</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Redis/RedisManager.html">
+            Illuminate\Redis\RedisManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>redis</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Request</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Http/Request.html">
+            Illuminate\Http\Request
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>request</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Response (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Http/Response.html">
+            Illuminate\Http\Response
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Response</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Routing/ResponseFactory.html">
+            Illuminate\Contracts\Routing\ResponseFactory
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Route</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Routing/Router.html">
+            Illuminate\Routing\Router
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>router</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Schedule</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Console/Scheduling/Schedule.html">
+            Illuminate\Console\Scheduling\Schedule
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Schema</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Database/Schema/Builder.html">
+            Illuminate\Database\Schema\Builder
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Session (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Session/Store.html">
+            Illuminate\Session\Store
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>session.store</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Session</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Session/SessionManager.html">
+            Illuminate\Session\SessionManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>session</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Storage (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Contracts/Filesystem/Filesystem.html">
+            Illuminate\Contracts\Filesystem\Filesystem
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>filesystem.disk</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Storage</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Filesystem/FilesystemManager.html">
+            Illuminate\Filesystem\FilesystemManager
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>filesystem</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">URL</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Routing/UrlGenerator.html">
+            Illuminate\Routing\UrlGenerator
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>url</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Validator (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Validation/Validator.html">
+            Illuminate\Validation\Validator
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Validator</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Validation/Factory.html">
+            Illuminate\Validation\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>validator</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">View (Instance)</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/View/View.html">
+            Illuminate\View\View
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">View</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/View/Factory.html">
+            Illuminate\View\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>view</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2 whitespace-nowrap">Vite</td>
+        <td className="px-3 py-2 break-all">
+          <a href="https://api.laravel.com/docs/12.x/Illuminate/Foundation/Vite.html">
+            Illuminate\Foundation\Vite
+          </a>
+        </td>
+        <td className="px-3 py-2"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
