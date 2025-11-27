@@ -20,6 +20,9 @@ const sidebarItems = [
             { title: '配置', href: '/docs/configuration' },
             { title: '目錄結構', href: '/docs/structure' },
             { title: '生命週期', href: '/docs/lifecycle' },
+            { title: '前端', href: '/docs/frontend' },
+            { title: '啟動套件', href: '/docs/starter-kits' },
+            { title: '部署', href: '/docs/deployment' },
         ]
     },
     {
@@ -119,7 +122,6 @@ const sidebarItems = [
             { title: 'Errors', href: '/docs/errors' },
             { title: 'Folio', href: '/docs/folio' },
             { title: 'Fortify', href: '/docs/fortify' },
-            { title: 'Frontend', href: '/docs/frontend' },
             { title: 'Homestead', href: '/docs/homestead' },
             { title: 'Horizon', href: '/docs/horizon' },
             { title: 'HTTP Client', href: '/docs/http-client' },
@@ -148,7 +150,6 @@ const sidebarItems = [
             { title: 'Sanctum', href: '/docs/sanctum' },
             { title: 'Scout', href: '/docs/scout' },
             { title: 'Socialite', href: '/docs/socialite' },
-            { title: 'Starter Kits', href: '/docs/starter-kits' },
             { title: 'Strings', href: '/docs/strings' },
             { title: 'Telescope', href: '/docs/telescope' },
             { title: 'Upgrade', href: '/docs/upgrade' },
@@ -160,7 +161,7 @@ const sidebarItems = [
             { title: 'Context', href: '/docs/context' },
             { title: 'Contracts', href: '/docs/contracts' },
             { title: 'Contributions', href: '/docs/contributions' },
-            { title: 'Deployment', href: '/docs/deployment' },
+            
             { title: 'Documentation', href: '/docs/documentation' },
             { title: 'Concurrency', href: '/docs/concurrency' },
         ]
