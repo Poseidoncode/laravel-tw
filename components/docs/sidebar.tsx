@@ -42,10 +42,15 @@ const sidebarItems = [
             { title: 'CSRF 保護', href: '/docs/csrf' },
             { title: '控制器', href: '/docs/controllers' },
             { title: '請求', href: '/docs/requests' },
-            { title: 'Session', href: '/docs/session' },
             { title: '回應', href: '/docs/responses' },
             { title: '視圖', href: '/docs/views' },
             { title: 'Blade 樣板', href: '/docs/blade' },
+            { title: '資產打包', href: '/docs/vite' },
+            { title: 'URL 產生', href: '/docs/urls' },
+            { title: 'Session', href: '/docs/session' },
+            { title: '驗證', href: '/docs/validation' },
+            { title: '錯誤處理', href: '/docs/errors' },
+            { title: '日誌', href: '/docs/logging' },
         ]
     },
     {

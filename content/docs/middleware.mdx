@@ -250,22 +250,50 @@ Laravel 包含預定義的 `web` 和 `api` Middleware 群組，其中包含您�
 
 <div className="overflow-auto">
 
-| `web` Middleware 群組                                     |
-| --------------------------------------------------------- |
-| `Illuminate\Cookie\Middleware\EncryptCookies`             |
-| `Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse` |
-| `Illuminate\Session\Middleware\StartSession`              |
-| `Illuminate\View\Middleware\ShareErrorsFromSession`       |
-| `Illuminate\Foundation\Http\Middleware\ValidateCsrfToken` |
-| `Illuminate\Routing\Middleware\SubstituteBindings`        |
+<table>
+<thead>
+<tr>
+<th>`web` Middleware 群組</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`Illuminate\Cookie\Middleware\EncryptCookies`</td>
+</tr>
+<tr>
+<td>`Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse`</td>
+</tr>
+<tr>
+<td>`Illuminate\Session\Middleware\StartSession`</td>
+</tr>
+<tr>
+<td>`Illuminate\View\Middleware\ShareErrorsFromSession`</td>
+</tr>
+<tr>
+<td>`Illuminate\Foundation\Http\Middleware\ValidateCsrfToken`</td>
+</tr>
+<tr>
+<td>`Illuminate\Routing\Middleware\SubstituteBindings`</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
 <div className="overflow-auto">
 
-| `api` Middleware 群組                              |
-| -------------------------------------------------- |
-| `Illuminate\Routing\Middleware\SubstituteBindings` |
+<table>
+<thead>
+<tr>
+<th>`api` Middleware 群組</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`Illuminate\Routing\Middleware\SubstituteBindings`</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
@@ -360,20 +388,64 @@ Route::get('/profile', function () {
 
 <div className="overflow-auto">
 
-| 別名               | Middleware                                                                                                    |
-| ------------------ | ------------------------------------------------------------------------------------------------------------- |
-| `auth`             | `Illuminate\Auth\Middleware\Authenticate`                                                                     |
-| `auth.basic`       | `Illuminate\Auth\Middleware\AuthenticateWithBasicAuth`                                                        |
-| `auth.session`     | `Illuminate\Session\Middleware\AuthenticateSession`                                                           |
-| `cache.headers`    | `Illuminate\Http\Middleware\SetCacheHeaders`                                                                  |
-| `can`              | `Illuminate\Auth\Middleware\Authorize`                                                                        |
-| `guest`            | `Illuminate\Auth\Middleware\RedirectIfAuthenticated`                                                          |
-| `password.confirm` | `Illuminate\Auth\Middleware\RequirePassword`                                                                  |
-| `precognitive`     | `Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests`                                            |
-| `signed`           | `Illuminate\Routing\Middleware\ValidateSignature`                                                             |
-| `subscribed`       | `\Spark\Http\Middleware\VerifyBillableIsSubscribed`                                                           |
-| `throttle`         | `Illuminate\Routing\Middleware\ThrottleRequests` or `Illuminate\Routing\Middleware\ThrottleRequestsWithRedis` |
-| `verified`         | `Illuminate\Auth\Middleware\EnsureEmailIsVerified`                                                            |
+<table>
+<thead>
+<tr>
+<th>別名</th>
+<th>Middleware</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>`auth`</td>
+<td>`Illuminate\Auth\Middleware\Authenticate`</td>
+</tr>
+<tr>
+<td>`auth.basic`</td>
+<td>`Illuminate\Auth\Middleware\AuthenticateWithBasicAuth`</td>
+</tr>
+<tr>
+<td>`auth.session`</td>
+<td>`Illuminate\Session\Middleware\AuthenticateSession`</td>
+</tr>
+<tr>
+<td>`cache.headers`</td>
+<td>`Illuminate\Http\Middleware\SetCacheHeaders`</td>
+</tr>
+<tr>
+<td>`can`</td>
+<td>`Illuminate\Auth\Middleware\Authorize`</td>
+</tr>
+<tr>
+<td>`guest`</td>
+<td>`Illuminate\Auth\Middleware\RedirectIfAuthenticated`</td>
+</tr>
+<tr>
+<td>`password.confirm`</td>
+<td>`Illuminate\Auth\Middleware\RequirePassword`</td>
+</tr>
+<tr>
+<td>`precognitive`</td>
+<td>`Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests`</td>
+</tr>
+<tr>
+<td>`signed`</td>
+<td>`Illuminate\Routing\Middleware\ValidateSignature`</td>
+</tr>
+<tr>
+<td>`subscribed`</td>
+<td>`\Spark\Http\Middleware\VerifyBillableIsSubscribed`</td>
+</tr>
+<tr>
+<td>`throttle`</td>
+<td>`Illuminate\Routing\Middleware\ThrottleRequests` or `Illuminate\Routing\Middleware\ThrottleRequestsWithRedis`</td>
+</tr>
+<tr>
+<td>`verified`</td>
+<td>`Illuminate\Auth\Middleware\EnsureEmailIsVerified`</td>
+</tr>
+</tbody>
+</table>
 
 </div>
 
