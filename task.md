@@ -62,6 +62,7 @@ _請依照 Laravel 官方文件的邏輯順序進行翻譯。_
 - [x] **Step 2.4**: 翻譯 `lifecycle.md` (生命週期)
 - [x] **Step 2.5**: 翻譯 `container.md` (Service Container) & `providers.md` (Service Providers)
 - [x] **Step 2.6**: 翻譯 `facades.md` (Facades)
+- [x] **Step 2.6b**: 翻譯 `starter-kits.md` (啟動套件)
 
 #### Batch B: 基礎功能 (The Basics)
 
