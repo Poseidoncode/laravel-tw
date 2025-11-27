@@ -1,25 +1,25 @@
 ---
-title: Starter Kits
+title: 啟動套件
 description: Laravel 入門套件提供了應用程式開發的起點
 ---
 
-# Starter Kits
+# 啟動套件
 
-- [Introduction](#introduction)
-- [Creating an Application Using a Starter Kit](#creating-an-application)
-- [Available Starter Kits](#available-starter-kits)
-    - [React](#react)
-    - [Vue](#vue)
-    - [Livewire](#livewire)
-- [Starter Kit Customization](#starter-kit-customization)
-    - [React](#react-customization)
-    - [Vue](#vue-customization)
-    - [Livewire](#livewire-customization)
-- [Two-Factor Authentication](#two-factor-authentication)
-- [WorkOS AuthKit Authentication](#workos)
+- [簡介](#introduction)
+- [使用啟動套件建立應用程式](#creating-an-application)
+- [可用的啟動套件](#available-starter-kits)
+  - [React](#react)
+  - [Vue](#vue)
+  - [Livewire](#livewire)
+- [啟動套件自訂](#starter-kit-customization)
+  - [React](#react-customization)
+  - [Vue](#vue-customization)
+  - [Livewire](#livewire-customization)
+- [兩因素驗證](#two-factor-authentication)
+- [WorkOS AuthKit 認證](#workos)
 - [Inertia SSR](#inertia-ssr)
-- [Community Maintained Starter Kits](#community-maintained-starter-kits)
-- [Frequently Asked Questions](#faqs)
+- [社群維護的啟動套件](#community-maintained-starter-kits)
+- [常見問題](#faqs)
 
 <a name="introduction"></a>
 ## 簡介
@@ -29,7 +29,7 @@ To give you a head start building your new Laravel application, we are happy to 
 While you are welcome to use these starter kits, they are not required. You are free to build your own application from the ground up by simply installing a fresh copy of Laravel. Either way, we know you will build something great!
 
 <a name="creating-an-application"></a>
-## Creating an Application Using a Starter Kit
+## 使用啟動套件建立應用程式
 
 To create a new Laravel application using one of our starter kits, you should first [install PHP and the Laravel CLI tool](/docs/12.x/installation#installing-php). If you already have PHP and Composer installed, you may install the Laravel installer CLI tool via Composer:
 
@@ -54,7 +54,7 @@ composer run dev
 Once you have started the Laravel development server, your application will be accessible in your web browser at [http://localhost:8000](http://localhost:8000).
 
 <a name="available-starter-kits"></a>
-## Available Starter Kits
+## 可用的啟動套件
 
 <a name="react"></a>
 ### React
@@ -84,7 +84,7 @@ Livewire is a powerful way of building dynamic, reactive, frontend UIs using jus
 The Livewire starter kit utilizes Livewire, Tailwind, and the [Flux UI](https://fluxui.dev) component library.
 
 <a name="starter-kit-customization"></a>
-## Starter Kit Customization
+## 啟動套件自訂
 
 <a name="react-customization"></a>
 ### React
@@ -112,7 +112,7 @@ npx shadcn@latest add switch
 In this example, the command will publish the Switch component to `resources/js/components/ui/switch.tsx`. Once the component has been published, you can use it in any of your pages:
 
 ```jsx
-import { Switch } from "@/components/ui/switch"
+import { Switch } from "@/components/ui/switch";
 
 const MyPage = () => {
   return (
@@ -131,8 +131,8 @@ export default MyPage;
 The React starter kit includes two different primary layouts for you to choose from: a "sidebar" layout and a "header" layout. The sidebar layout is the default, but you can switch to the header layout by modifying the layout that is imported at the top of your application's `resources/js/layouts/app-layout.tsx` file:
 
 ```js
-import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout'; // [tl! remove]
-import AppLayoutTemplate from '@/layouts/app/app-header-layout'; // [tl! add]
+import AppLayoutTemplate from "@/layouts/app/app-sidebar-layout"; // [tl! remove]
+import AppLayoutTemplate from "@/layouts/app/app-header-layout"; // [tl! add]
 ```
 
 <a name="react-sidebar-variants"></a>
@@ -153,8 +153,8 @@ The authentication pages included with the React starter kit, such as the login 
 To change your authentication layout, modify the layout that is imported at the top of your application's `resources/js/layouts/auth-layout.tsx` file:
 
 ```js
-import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout'; // [tl! remove]
-import AuthLayoutTemplate from '@/layouts/auth/auth-split-layout'; // [tl! add]
+import AuthLayoutTemplate from "@/layouts/auth/auth-simple-layout"; // [tl! remove]
+import AuthLayoutTemplate from "@/layouts/auth/auth-split-layout"; // [tl! add]
 ```
 
 <a name="vue-customization"></a>
@@ -184,13 +184,13 @@ In this example, the command will publish the Switch component to `resources/js/
 
 ```vue
 <script setup lang="ts">
-import { Switch } from '@/Components/ui/switch'
+import { Switch } from "@/Components/ui/switch";
 </script>
 
 <template>
-    <div>
-        <Switch />
-    </div>
+  <div>
+    <Switch />
+  </div>
 </template>
 ```
 
@@ -200,8 +200,8 @@ import { Switch } from '@/Components/ui/switch'
 The Vue starter kit includes two different primary layouts for you to choose from: a "sidebar" layout and a "header" layout. The sidebar layout is the default, but you can switch to the header layout by modifying the layout that is imported at the top of your application's `resources/js/layouts/AppLayout.vue` file:
 
 ```js
-import AppLayout from '@/layouts/app/AppSidebarLayout.vue'; // [tl! remove]
-import AppLayout from '@/layouts/app/AppHeaderLayout.vue'; // [tl! add]
+import AppLayout from "@/layouts/app/AppSidebarLayout.vue"; // [tl! remove]
+import AppLayout from "@/layouts/app/AppHeaderLayout.vue"; // [tl! add]
 ```
 
 <a name="vue-sidebar-variants"></a>
@@ -222,8 +222,8 @@ The authentication pages included with the Vue starter kit, such as the login pa
 To change your authentication layout, modify the layout that is imported at the top of your application's `resources/js/layouts/AuthLayout.vue` file:
 
 ```js
-import AuthLayout from '@/layouts/auth/AuthSimpleLayout.vue'; // [tl! remove]
-import AuthLayout from '@/layouts/auth/AuthSplitLayout.vue'; // [tl! add]
+import AuthLayout from "@/layouts/auth/AuthSimpleLayout.vue"; // [tl! remove]
+import AuthLayout from "@/layouts/auth/AuthSplitLayout.vue"; // [tl! add]
 ```
 
 <a name="livewire-customization"></a>
@@ -276,7 +276,7 @@ To change your authentication layout, modify the layout that is used by your app
 ```
 
 <a name="two-factor-authentication"></a>
-## Two-Factor Authentication
+## 兩因素驗證
 
 All starter kits include built-in two-factor authentication (2FA) powered by [Laravel Fortify](/docs/12.x/fortify#two-factor-authentication), adding an extra layer of security to user accounts. Users can protect their accounts using any Time-based One-Time Password (TOTP) supporting authenticator application.
 
@@ -290,7 +290,7 @@ Features::twoFactorAuthentication([
 ```
 
 <a name="workos"></a>
-## WorkOS AuthKit Authentication
+## WorkOS AuthKit 認證
 
 By default, the React, Vue, and Livewire starter kits all utilize Laravel's built-in authentication system to offer login, registration, password reset, email verification, and more. In addition, we also offer a [WorkOS AuthKit](https://authkit.com) powered variant of each starter kit that offers:
 
@@ -345,7 +345,7 @@ composer dev:ssr
 ```
 
 <a name="community-maintained-starter-kits"></a>
-### Community Maintained Starter Kits
+### 社群維護的啟動套件
 
 When creating a new Laravel application using the Laravel installer, you may provide any community maintained starter kit available on Packagist to the `--using` flag:
 
@@ -359,15 +359,15 @@ laravel new my-app --using=example/starter-kit
 To ensure your starter kit is available to others, you will need to publish it to [Packagist](https://packagist.org). Your starter kit should define its required environment variables in its `.env.example` file, and any necessary post-installation commands should be listed in the `post-create-project-cmd` array of the starter kit's `composer.json` file.
 
 <a name="faqs"></a>
-### Frequently Asked Questions
+### 常見問題
 
 <a name="faq-upgrade"></a>
-#### How do I upgrade?
+#### 如何升級？
 
 Every starter kit gives you a solid starting point for your next application. With full ownership of the code, you can tweak, customize, and build your application exactly as you envision. However, there is no need to update the starter kit itself.
 
 <a name="faq-enable-email-verification"></a>
-#### How do I enable email verification?
+#### 如何啟用電子郵件驗證？
 
 Email verification can be added by uncommenting the `MustVerifyEmail` import in your `App/Models/User.php` model and ensuring the model implements the `MustVerifyEmail` interface:
 
