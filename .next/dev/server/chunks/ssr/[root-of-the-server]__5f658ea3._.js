@@ -299,16 +299,84 @@ const sidebarItems = [
         title: '深入探討',
         items: [
             {
-                title: 'Contracts',
-                href: '/docs/contracts'
+                title: 'Artisan Console',
+                href: '/docs/artisan'
+            },
+            {
+                title: 'Broadcasting',
+                href: '/docs/broadcasting'
+            },
+            {
+                title: 'Cache',
+                href: '/docs/cache'
+            },
+            {
+                title: 'Collections',
+                href: '/docs/collections'
+            },
+            {
+                title: 'Concurrency',
+                href: '/docs/concurrency'
             },
             {
                 title: 'Context',
                 href: '/docs/context'
             },
             {
-                title: 'Concurrency',
-                href: '/docs/concurrency'
+                title: 'Contracts',
+                href: '/docs/contracts'
+            },
+            {
+                title: 'Events',
+                href: '/docs/events'
+            },
+            {
+                title: 'File Storage',
+                href: '/docs/filesystem'
+            },
+            {
+                title: 'Helpers',
+                href: '/docs/helpers'
+            },
+            {
+                title: 'HTTP Client',
+                href: '/docs/http-client'
+            },
+            {
+                title: 'Localization',
+                href: '/docs/localization'
+            },
+            {
+                title: 'Mail',
+                href: '/docs/mail'
+            },
+            {
+                title: 'Notifications',
+                href: '/docs/notifications'
+            },
+            {
+                title: 'Package Development',
+                href: '/docs/packages'
+            },
+            {
+                title: 'Processes',
+                href: '/docs/processes'
+            },
+            {
+                title: 'Queues',
+                href: '/docs/queues'
+            },
+            {
+                title: 'Rate Limiting',
+                href: '/docs/rate-limiting'
+            },
+            {
+                title: 'Strings',
+                href: '/docs/strings'
+            },
+            {
+                title: 'Task Scheduling',
+                href: '/docs/scheduling'
             }
         ]
     },
@@ -417,55 +485,6 @@ const sidebarItems = [
             {
                 title: 'Dusk',
                 href: '/docs/dusk'
-            }
-        ]
-    },
-    {
-        title: '其他',
-        items: [
-            {
-                title: 'Artisan Console',
-                href: '/docs/artisan'
-            },
-            {
-                title: '廣播',
-                href: '/docs/broadcasting'
-            },
-            {
-                title: '快取',
-                href: '/docs/cache'
-            },
-            {
-                title: '集合',
-                href: '/docs/collections'
-            },
-            {
-                title: '事件',
-                href: '/docs/events'
-            },
-            {
-                title: '檔案儲存',
-                href: '/docs/filesystem'
-            },
-            {
-                title: '輔助函式',
-                href: '/docs/helpers'
-            },
-            {
-                title: '郵件',
-                href: '/docs/mail'
-            },
-            {
-                title: '通知',
-                href: '/docs/notifications'
-            },
-            {
-                title: '佇列',
-                href: '/docs/queues'
-            },
-            {
-                title: '排程',
-                href: '/docs/scheduling'
             }
         ]
     },
@@ -691,14 +710,14 @@ function DocsSidebar() {
                         children: "Laravel"
                     }, void 0, false, {
                         fileName: "[project]/components/docs/sidebar.tsx",
-                        lineNumber: 196,
+                        lineNumber: 197,
                         columnNumber: 17
                     }, this),
                     " Docs（中文）"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/docs/sidebar.tsx",
-                lineNumber: 195,
+                lineNumber: 196,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$scroll$2d$area$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["ScrollArea"], {
@@ -716,26 +735,26 @@ function DocsSidebar() {
                                                 children: section.title
                                             }, void 0, false, {
                                                 fileName: "[project]/components/docs/sidebar.tsx",
-                                                lineNumber: 206,
+                                                lineNumber: 207,
                                                 columnNumber: 33
                                             }, this),
                                             expandedSections.has(section.title) ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$down$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronDown$3e$__["ChevronDown"], {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/docs/sidebar.tsx",
-                                                lineNumber: 208,
+                                                lineNumber: 209,
                                                 columnNumber: 37
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$chevron$2d$right$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__ChevronRight$3e$__["ChevronRight"], {
                                                 className: "h-4 w-4"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/docs/sidebar.tsx",
-                                                lineNumber: 210,
+                                                lineNumber: 211,
                                                 columnNumber: 37
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/docs/sidebar.tsx",
-                                        lineNumber: 202,
+                                        lineNumber: 203,
                                         columnNumber: 29
                                     }, this),
                                     expandedSections.has(section.title) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -750,23 +769,23 @@ function DocsSidebar() {
                                                     children: item.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/docs/sidebar.tsx",
-                                                    lineNumber: 217,
+                                                    lineNumber: 218,
                                                     columnNumber: 45
                                                 }, this)
                                             }, item.href, false, {
                                                 fileName: "[project]/components/docs/sidebar.tsx",
-                                                lineNumber: 216,
+                                                lineNumber: 217,
                                                 columnNumber: 41
                                             }, this))
                                     }, void 0, false, {
                                         fileName: "[project]/components/docs/sidebar.tsx",
-                                        lineNumber: 214,
+                                        lineNumber: 215,
                                         columnNumber: 33
                                     }, this)
                                 ]
                             }, section.title, true, {
                                 fileName: "[project]/components/docs/sidebar.tsx",
-                                lineNumber: 201,
+                                lineNumber: 202,
                                 columnNumber: 25
                             }, this)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -782,12 +801,12 @@ function DocsSidebar() {
                                         children: "API 文件"
                                     }, void 0, false, {
                                         fileName: "[project]/components/docs/sidebar.tsx",
-                                        lineNumber: 228,
+                                        lineNumber: 229,
                                         columnNumber: 29
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/docs/sidebar.tsx",
-                                    lineNumber: 227,
+                                    lineNumber: 228,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -800,35 +819,35 @@ function DocsSidebar() {
                                         children: "更新日誌"
                                     }, void 0, false, {
                                         fileName: "[project]/components/docs/sidebar.tsx",
-                                        lineNumber: 233,
+                                        lineNumber: 234,
                                         columnNumber: 29
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/docs/sidebar.tsx",
-                                    lineNumber: 232,
+                                    lineNumber: 233,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/docs/sidebar.tsx",
-                            lineNumber: 226,
+                            lineNumber: 227,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/docs/sidebar.tsx",
-                    lineNumber: 199,
+                    lineNumber: 200,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/docs/sidebar.tsx",
-                lineNumber: 198,
+                lineNumber: 199,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/docs/sidebar.tsx",
-        lineNumber: 194,
+        lineNumber: 195,
         columnNumber: 9
     }, this);
 }
