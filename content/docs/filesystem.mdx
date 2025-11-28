@@ -115,15 +115,15 @@ AWS_USE_PATH_STYLE_ENDPOINT=false
 為了方便起見,這些環境變數與 AWS CLI 使用的命名慣例相匹配。
 
 <a name="ftp-driver-configuration"></a>
-#### FTP Driver Configuration
+#### FTP 驅動程式設定
 
-Before using the FTP driver, you will need to install the Flysystem FTP package via the Composer package manager:
+在使用 FTP 驅動程式之前,你需要透過 Composer 套件管理器安裝 Flysystem FTP 套件:
 
 ```shell
 composer require league/flysystem-ftp "^3.0"
 ```
 
-Laravel's Flysystem integrations work great with FTP; however, a sample configuration is not included with the framework's default `config/filesystems.php` configuration file. If you need to configure an FTP filesystem, you may use the configuration example below:
+Laravel 的 Flysystem 整合與 FTP 配合得很好;但是,框架的預設 `config/filesystems.php` 設定檔中不包含範例設定。如果你需要設定 FTP 檔案系統,你可以使用以下設定範例:
 
 ```php
 'ftp' => [
@@ -142,15 +142,15 @@ Laravel's Flysystem integrations work great with FTP; however, a sample configur
 ```
 
 <a name="sftp-driver-configuration"></a>
-#### SFTP Driver Configuration
+#### SFTP 驅動程式設定
 
-Before using the SFTP driver, you will need to install the Flysystem SFTP package via the Composer package manager:
+在使用 SFTP 驅動程式之前,你需要透過 Composer 套件管理器安裝 Flysystem SFTP 套件:
 
 ```shell
 composer require league/flysystem-sftp-v3 "^3.0"
 ```
 
-Laravel's Flysystem integrations work great with SFTP; however, a sample configuration is not included with the framework's default `config/filesystems.php` configuration file. If you need to configure an SFTP filesystem, you may use the configuration example below:
+Laravel 的 Flysystem 整合與 SFTP 配合得很好;但是,框架的預設 `config/filesystems.php` 設定檔中不包含範例設定。如果你需要設定 SFTP 檔案系統,你可以使用以下設定範例:
 
 ```php
 'sftp' => [
@@ -181,15 +181,15 @@ Laravel's Flysystem integrations work great with SFTP; however, a sample configu
 ```
 
 <a name="scoped-and-read-only-filesystems"></a>
-### Scoped and Read-Only Filesystems
+### 作用域和唯讀檔案系統
 
-Scoped disks allow you to define a filesystem where all paths are automatically prefixed with a given path prefix. Before creating a scoped filesystem disk, you will need to install an additional Flysystem package via the Composer package manager:
+作用域磁碟允許你定義一個檔案系統,其中所有路徑都會自動以給定的路徑前綴為前綴。在建立作用域檔案系統磁碟之前,你需要透過 Composer 套件管理器安裝額外的 Flysystem 套件:
 
 ```shell
 composer require league/flysystem-path-prefixing "^3.0"
 ```
 
-You may create a path scoped instance of any existing filesystem disk by defining a disk that utilizes the `scoped` driver. For example, you may create a disk which scopes your existing `s3` disk to a specific path prefix, and then every file operation using your scoped disk will utilize the specified prefix:
+你可以透過定義使用 `scoped` 驅動程式的磁碟來建立任何現有檔案系統磁碟的路徑作用域實例。例如,你可以建立一個磁碟,將你現有的 `s3` 磁碟的作用域限定到特定的路徑前綴,然後使用作用域磁碟的每個檔案操作都將使用指定的前綴:
 
 ```php
 's3-videos' => [
@@ -199,13 +199,13 @@ You may create a path scoped instance of any existing filesystem disk by definin
 ],
 ```
 
-"Read-only" disks allow you to create filesystem disks that do not allow write operations. Before using the `read-only` configuration option, you will need to install an additional Flysystem package via the Composer package manager:
+「唯讀」磁碟允許你建立不允許寫入操作的檔案系統磁碟。在使用 `read-only` 設定選項之前,你需要透過 Composer 套件管理器安裝額外的 Flysystem 套件:
 
 ```shell
 composer require league/flysystem-read-only "^3.0"
 ```
 
-Next, you may include the `read-only` configuration option in one or more of your disk's configuration arrays:
+接下來,你可以在一個或多個磁碟的設定陣列中包含 `read-only` 設定選項:
 
 ```php
 's3-videos' => [
@@ -216,11 +216,11 @@ Next, you may include the `read-only` configuration option in one or more of you
 ```
 
 <a name="amazon-s3-compatible-filesystems"></a>
-### Amazon S3 Compatible Filesystems
+### Amazon S3 相容檔案系統
 
-By default, your application's `filesystems` configuration file contains a disk configuration for the `s3` disk. In addition to using this disk to interact with [Amazon S3](https://aws.amazon.com/s3/), you may use it to interact with any S3-compatible file storage service such as [MinIO](https://github.com/minio/minio), [DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/), [Vultr Object Storage](https://www.vultr.com/products/object-storage/), [Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/), or [Hetzner Cloud Storage](https://www.hetzner.com/storage/object-storage/).
+預設情況下,你的應用程式的 `filesystems` 設定檔包含 `s3` 磁碟的磁碟設定。除了使用此磁碟與 [Amazon S3](https://aws.amazon.com/s3/) 互動外,你還可以使用它與任何 S3 相容檔案儲存服務互動,例如 [MinIO](https://github.com/minio/minio)、[DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/)、[Vultr Object Storage](https://www.vultr.com/products/object-storage/)、[Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) 或 [Hetzner Cloud Storage](https://www.hetzner.com/storage/object-storage/)。
 
-Typically, after updating the disk's credentials to match the credentials of the service you are planning to use, you only need to update the value of the `endpoint` configuration option. This option's value is typically defined via the `AWS_ENDPOINT` environment variable:
+通常,在更新磁碟的憑證以匹配你計劃使用的服務的憑證後,你只需要更新 `endpoint` 設定選項的值。此選項的值通常透過 `AWS_ENDPOINT` 環境變數定義:
 
 ```php
 'endpoint' => env('AWS_ENDPOINT', 'https://minio:9000'),
@@ -229,19 +229,19 @@ Typically, after updating the disk's credentials to match the credentials of the
 <a name="minio"></a>
 #### MinIO
 
-In order for Laravel's Flysystem integration to generate proper URLs when using MinIO, you should define the `AWS_URL` environment variable so that it matches your application's local URL and includes the bucket name in the URL path:
+為了讓 Laravel 的 Flysystem 整合在使用 MinIO 時產生正確的 URL,你應該定義 `AWS_URL` 環境變數,使其與你的應用程式的本地 URL 相匹配,並在 URL 路徑中包含儲存桶名稱:
 
 ```ini
 AWS_URL=http://localhost:9000/local
 ```
 
 > [!WARNING]
-> Generating temporary storage URLs via the `temporaryUrl` method may not work when using MinIO if the `endpoint` is not accessible by the client.
+> 當使用 MinIO 時,如果 `endpoint` 無法被客戶端存取,透過 `temporaryUrl` 方法產生臨時儲存 URL 可能無法工作。
 
 <a name="obtaining-disk-instances"></a>
-## Obtaining Disk Instances
+## 取得磁碟實例
 
-The `Storage` facade may be used to interact with any of your configured disks. For example, you may use the `put` method on the facade to store an avatar on the default disk. If you call methods on the `Storage` facade without first calling the `disk` method, the method will automatically be passed to the default disk:
+`Storage` facade 可用於與你的任何設定磁碟互動。例如,你可以在 facade 上使用 `put` 方法將頭像儲存到預設磁碟。如果你在 `Storage` facade 上呼叫方法而不先呼叫 `disk` 方法,該方法將自動傳遞給預設磁碟:
 
 ```php
 use Illuminate\Support\Facades\Storage;
@@ -249,16 +249,16 @@ use Illuminate\Support\Facades\Storage;
 Storage::put('avatars/1', $content);
 ```
 
-If your application interacts with multiple disks, you may use the `disk` method on the `Storage` facade to work with files on a particular disk:
+如果你的應用程式與多個磁碟互動,你可以在 `Storage` facade 上使用 `disk` 方法來處理特定磁碟上的檔案:
 
 ```php
 Storage::disk('s3')->put('avatars/1', $content);
 ```
 
 <a name="on-demand-disks"></a>
-### On-Demand Disks
+### 隨選磁碟
 
-Sometimes you may wish to create a disk at runtime using a given configuration without that configuration actually being present in your application's `filesystems` configuration file. To accomplish this, you may pass a configuration array to the `Storage` facade's `build` method:
+有時你可能希望在執行時期使用給定的設定建立磁碟,而不需要該設定實際存在於你的應用程式的 `filesystems` 設定檔中。要完成此操作,你可以將設定陣列傳遞給 `Storage` facade 的 `build` 方法:
 
 ```php
 use Illuminate\Support\Facades\Storage;
