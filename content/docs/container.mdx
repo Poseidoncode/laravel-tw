@@ -85,7 +85,7 @@ Route::get('/', function (Service $service) {
 
 在這個例子中，存取應用程式的 `/` 路由將自動解析 `Service` 類別並將其注入到您的路由處理常式中。這是一個改變遊戲規則的功能。這意味著您可以開發應用程式並利用 Dependency Injection，而無需擔心臃腫的設定檔。
 
-值得慶幸的是，在建立 Laravel 應用程式時，您將編寫的許多類別都會自動透過 Container 接收其依賴，包括 [Controllers](/docs/{'12.x'}/controllers)、[Event Listeners](/docs/{'12.x'}/events)、[Middleware](/docs/{'12.x'}/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/{'12.x'}/queues) 的 `handle` 方法中對依賴進行型別提示。一旦您體驗了自動和零設定 Dependency Injection 的強大功能，就會覺得沒有它就無法開發。
+值得慶幸的是，在建立 Laravel 應用程式時，您將編寫的許多類別都會自動透過 Container 接收其依賴，包括 [Controllers](/docs/controllers)、[Event Listeners](/docs/events)、[Middleware](/docs/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/queues) 的 `handle` 方法中對依賴進行型別提示。一旦您體驗了自動和零設定 Dependency Injection 的強大功能，就會覺得沒有它就無法開發。
 
 <a name="when-to-use-the-container"></a>
 ### 何時使用 Container
@@ -100,9 +100,9 @@ Route::get('/', function (Request $request) {
 });
 ```
 
-在許多情況下，由於自動 Dependency Injection 和 [Facades](/docs/{'12.x'}/facades)，您可以在 **完全不** 手動從 Container 綁定或解析任何內容的情況下建立 Laravel 應用程式。**那麼，您什麼時候會手動與 Container 互動呢？** 讓我們檢視兩種情況。
+在許多情況下，由於自動 Dependency Injection 和 [Facades](/docs/facades)，您可以在 **完全不** 手動從 Container 綁定或解析任何內容的情況下建立 Laravel 應用程式。**那麼，您什麼時候會手動與 Container 互動呢？** 讓我們檢視兩種情況。
 
-首先，如果您編寫一個實作介面的類別，並且您希望在路由或類別建構子中對該介面進行型別提示，您必須 [告訴 Container 如何解析該介面](#binding-interfaces-to-implementations)。其次，如果您正在 [編寫一個 Laravel 套件](/docs/{'12.x'}/packages) 並計劃與其他 Laravel 開發者分享，您可能需要將您的套件服務綁定到 Container 中。
+首先，如果您編寫一個實作介面的類別，並且您希望在路由或類別建構子中對該介面進行型別提示，您必須 [告訴 Container 如何解析該介面](#binding-interfaces-to-implementations)。其次，如果您正在 [編寫一個 Laravel 套件](/docs/packages) 並計劃與其他 Laravel 開發者分享，您可能需要將您的套件服務綁定到 Container 中。
 
 <a name="binding"></a>
 ## 綁定 (Binding)
@@ -113,7 +113,7 @@ Route::get('/', function (Request $request) {
 <a name="simple-bindings"></a>
 #### 簡單綁定
 
-幾乎所有的 Service Container 綁定都將在 [Service Providers](/docs/{'12.x'}/providers) 中註冊，因此這些範例中的大多數將示範在該上下文中使用 Container。
+幾乎所有的 Service Container 綁定都將在 [Service Providers](/docs/providers) 中註冊，因此這些範例中的大多數將示範在該上下文中使用 Container。
 
 在 Service Provider 中，您始終可以透過 `$this->app` 屬性存取 Container。我們可以使用 `bind` 方法註冊綁定，傳遞我們希望註冊的類別或介面名稱以及返回類別實例的 Closure：
 
@@ -129,7 +129,7 @@ $this->app->bind(Transistor::class, function (Application $app) {
 
 請注意，我們接收 Container 本身作為解析器的參數。然後我們可以使用 Container 來解析我們正在建立的物件的子依賴。
 
-如前所述，您通常會在 Service Providers 中與 Container 互動；但是，如果您想在 Service Provider 之外與 Container 互動，可以透過 `App` [Facade](/docs/{'12.x'}/facades) 進行：
+如前所述，您通常會在 Service Providers 中與 Container 互動；但是，如果您想在 Service Provider 之外與 Container 互動，可以透過 `App` [Facade](/docs/facades) 進行：
 
 ```php
 use App\Services\Transistor;
@@ -205,7 +205,7 @@ class Transistor
 <a name="binding-scoped"></a>
 #### 綁定 Scoped Singletons
 
-`scoped` 方法將一個類別或介面綁定到 Container 中，該類別或介面在給定的 Laravel 請求 / Job 生命週期內只應解析一次。雖然此方法與 `singleton` 方法類似，但使用 `scoped` 方法註冊的實例將在 Laravel 應用程式開始新的「生命週期」時被清除，例如當 [Laravel Octane](/docs/{'12.x'}/octane) worker 處理新請求或 Laravel [Queue worker](/docs/{'12.x'}/queues) 處理新 Job 時：
+`scoped` 方法將一個類別或介面綁定到 Container 中，該類別或介面在給定的 Laravel 請求 / Job 生命週期內只應解析一次。雖然此方法與 `singleton` 方法類似，但使用 `scoped` 方法註冊的實例將在 Laravel 應用程式開始新的「生命週期」時被清除，例如當 [Laravel Octane](/docs/octane) worker 處理新請求或 Laravel [Queue worker](/docs/queues) 處理新 Job 時：
 
 ```php
 use App\Services\Transistor;
@@ -325,7 +325,7 @@ interface EventPusher
 <a name="contextual-binding"></a>
 ### 上下文綁定 (Contextual Binding)
 
-有時您可能由兩個類別使用相同的介面，但您希望將不同的實作注入到每個類別中。例如，兩個 Controllers 可能依賴於 `Illuminate\Contracts\Filesystem\Filesystem` [Contract](/docs/{'12.x'}/contracts) 的不同實作。Laravel 提供了一個簡單、流暢的介面來定義此行為：
+有時您可能由兩個類別使用相同的介面，但您希望將不同的實作注入到每個類別中。例如，兩個 Controllers 可能依賴於 `Illuminate\Contracts\Filesystem\Filesystem` [Contract](/docs/contracts) 的不同實作。Laravel 提供了一個簡單、流暢的介面來定義此行為：
 
 ```php
 use App\Http\Controllers\PhotoController;
@@ -352,7 +352,7 @@ $this->app->when([VideoController::class, UploadController::class])
 
 由於上下文綁定通常用於注入驅動程式的實作或設定值，Laravel 提供了各種上下文綁定屬性，允許注入這些類型的值，而無需在 Service Providers 中手動定義上下文綁定。
 
-例如，`Storage` 屬性可用於注入特定的 [Storage Disk](/docs/{'12.x'}/filesystem)：
+例如，`Storage` 屬性可用於注入特定的 [Storage Disk](/docs/filesystem)：
 
 ```php
 <?php
@@ -628,7 +628,7 @@ if ($this->app->bound(Transistor::class)) {
 }
 ```
 
-如果您在 Service Provider 之外，位於無法存取 `$app` 變數的程式碼位置，您可以使用 `App` [Facade](/docs/{'12.x'}/facades) 或 `app` [Helper](/docs/{'12.x'}/helpers#method-app) 從 Container 中解析類別實例：
+如果您在 Service Provider 之外，位於無法存取 `$app` 變數的程式碼位置，您可以使用 `App` [Facade](/docs/facades) 或 `app` [Helper](/docs/helpers#method-app) 從 Container 中解析類別實例：
 
 ```php
 use App\Services\Transistor;
@@ -655,7 +655,7 @@ public function __construct(
 <a name="automatic-injection"></a>
 ### 自動注入
 
-或者，重要的是，您可以在由 Container 解析的類別的建構子中對依賴進行型別提示，包括 [Controllers](/docs/{'12.x'}/controllers)、[Event Listeners](/docs/{'12.x'}/events)、[Middleware](/docs/{'12.x'}/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/{'12.x'}/queues) 的 `handle` 方法中對依賴進行型別提示。實際上，這是您的大多數物件應該由 Container 解析的方式。
+或者，重要的是，您可以在由 Container 解析的類別的建構子中對依賴進行型別提示，包括 [Controllers](/docs/controllers)、[Event Listeners](/docs/events)、[Middleware](/docs/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/queues) 的 `handle` 方法中對依賴進行型別提示。實際上，這是您的大多數物件應該由 Container 解析的方式。
 
 例如，您可以在 Controller 的建構子中對應用程式定義的服務進行型別提示。該服務將自動解析並注入到類別中：
 

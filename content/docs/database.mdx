@@ -19,7 +19,7 @@ title: 資料庫：入門
 <a name="introduction"></a>
 ## 簡介
 
-幾乎每個現代 Web 應用程式都會與資料庫互動。Laravel 讓使用原始 SQL、[流暢查詢建構器](/docs/{'12.x'}/queries) 和 [Eloquent ORM](/docs/{'12.x'}/eloquent) 與各種支援的資料庫互動變得非常簡單。目前，Laravel 提供對五種資料庫的第一方支援：
+幾乎每個現代 Web 應用程式都會與資料庫互動。Laravel 讓使用原始 SQL、[流暢查詢建構器](/docs/queries) 和 [Eloquent ORM](/docs/eloquent) 與各種支援的資料庫互動變得非常簡單。目前，Laravel 提供對五種資料庫的第一方支援：
 
 <div className="content-list" markdown="1">
 
@@ -38,7 +38,7 @@ title: 資料庫：入門
 
 Laravel 資料庫服務的設定位於你應用程式的 `config/database.php` 設定檔中。在此檔案中，你可以定義所有資料庫連線，以及指定預設應使用哪個連線。此檔案中的大多數設定選項由你應用程式的環境變數值驅動。此檔案中提供了 Laravel 支援的大多數資料庫系統的範例。
 
-預設情況下，Laravel 的範例[環境設定](/docs/{'12.x'}/configuration#environment-configuration)已準備好與 [Laravel Sail](/docs/{'12.x'}/sail) 一起使用，這是一個用於在本機開發 Laravel 應用程式的 Docker 設定。不過，你可以根據本機資料庫的需要自由修改資料庫設定。
+預設情況下，Laravel 的範例[環境設定](/docs/configuration#environment-configuration)已準備好與 [Laravel Sail](/docs/sail) 一起使用，這是一個用於在本機開發 Laravel 應用程式的 Docker 設定。不過，你可以根據本機資料庫的需要自由修改資料庫設定。
 
 <a name="sqlite-configuration"></a>
 #### SQLite 設定
@@ -57,7 +57,7 @@ DB_FOREIGN_KEYS=false
 ```
 
 > [!NOTE]
-> 如果你使用 [Laravel 安裝器](/docs/{'12.x'}/installation#creating-a-laravel-project)建立 Laravel 應用程式並選擇 SQLite 作為你的資料庫，Laravel 將自動建立 `database/database.sqlite` 檔案並為你執行預設的[資料庫遷移](/docs/{'12.x'}/migrations)。
+> 如果你使用 [Laravel 安裝器](/docs/installation#creating-a-laravel-project)建立 Laravel 應用程式並選擇 SQLite 作為你的資料庫，Laravel 將自動建立 `database/database.sqlite` 檔案並為你執行預設的[資料庫遷移](/docs/migrations)。
 
 <a name="mssql-configuration"></a>
 #### Microsoft SQL Server 設定
@@ -295,7 +295,7 @@ $pdo = DB::connection()->getPdo();
 <a name="listening-for-query-events"></a>
 ### 監聽查詢事件
 
-如果你想指定一個閉包，在應用程式執行的每個 SQL 查詢時被呼叫，你可以使用 `DB` facade 的 `listen` 方法。此方法對於記錄查詢或除錯很有用。你可以在 [service provider](/docs/{'12.x'}/providers) 的 `boot` 方法中註冊查詢監聽器閉包：
+如果你想指定一個閉包，在應用程式執行的每個 SQL 查詢時被呼叫，你可以使用 `DB` facade 的 `listen` 方法。此方法對於記錄查詢或除錯很有用。你可以在 [service provider](/docs/providers) 的 `boot` 方法中註冊查詢監聽器閉包：
 
 ```php
 <?php
@@ -334,7 +334,7 @@ class AppServiceProvider extends ServiceProvider
 <a name="monitoring-cumulative-query-time"></a>
 ### 監控累積查詢時間
 
-現代 Web 應用程式的一個常見效能瓶頸是它們花費在查詢資料庫上的時間。幸運的是，當 Laravel 在單一請求期間花費太多時間查詢資料庫時，它可以呼叫你選擇的閉包或回呼。要開始使用，請向 `whenQueryingForLongerThan` 方法提供查詢時間閾值（以毫秒為單位）和閉包。你可以在 [service provider](/docs/{'12.x'}/providers) 的 `boot` 方法中呼叫此方法：
+現代 Web 應用程式的一個常見效能瓶頸是它們花費在查詢資料庫上的時間。幸運的是，當 Laravel 在單一請求期間花費太多時間查詢資料庫時，它可以呼叫你選擇的閉包或回呼。要開始使用，請向 `whenQueryingForLongerThan` 方法提供查詢時間閾值（以毫秒為單位）和閉包。你可以在 [service provider](/docs/providers) 的 `boot` 方法中呼叫此方法：
 
 ```php
 <?php
@@ -421,7 +421,7 @@ DB::rollBack();
 DB::commit();
 ```
 
-> [!NOTE] > `DB` facade 的交易方法控制[查詢建構器](/docs/{'12.x'}/queries)和 [Eloquent ORM](/docs/{'12.x'}/eloquent) 的交易。
+> [!NOTE] > `DB` facade 的交易方法控制[查詢建構器](/docs/queries)和 [Eloquent ORM](/docs/eloquent) 的交易。
 
 <a name="connecting-to-the-database-cli"></a>
 ## 連線到資料庫 CLI
@@ -491,7 +491,7 @@ php artisan db:table users
 
 使用 `db:monitor` Artisan 指令，如果你的資料庫管理的開啟連線數超過指定數量，你可以指示 Laravel 分派 `Illuminate\Database\Events\DatabaseBusy` 事件。
 
-要開始使用，你應該排程 `db:monitor` 指令[每分鐘執行一次](/docs/{'12.x'}/scheduling)。該指令接受你希望監控的資料庫連線設定名稱，以及在分派事件之前應容忍的最大開啟連線數：
+要開始使用，你應該排程 `db:monitor` 指令[每分鐘執行一次](/docs/scheduling)。該指令接受你希望監控的資料庫連線設定名稱，以及在分派事件之前應容忍的最大開啟連線數：
 
 ```shell
 php artisan db:monitor --databases=mysql,pgsql --max=100

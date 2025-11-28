@@ -111,7 +111,7 @@ APP_NAME="My Application"
 <a name="determining-the-current-environment"></a>
 ### 判斷目前環境
 
-目前的應用程式環境是透過 `.env` 檔案中的 `APP_ENV` 變數決定的。您可以透過 `App` [Facade](/docs/{'12.x'}/facades) 上的 `environment` 方法存取此值：
+目前的應用程式環境是透過 `.env` 檔案中的 `APP_ENV` 變數決定的。您可以透過 `App` [Facade](/docs/facades) 上的 `environment` 方法存取此值：
 
 ```php
 use Illuminate\Support\Facades\App;
@@ -155,7 +155,7 @@ php artisan env:encrypt --key=3UVsEgGVK36XN82KKeyLFMhvosbZN1aF
 ```
 
 > [!NOTE]
-> 提供的金鑰長度應符合所使用的加密 cipher 所需的金鑰長度。預設情況下，Laravel 將使用 `AES-256-CBC` cipher，這需要 32 個字元的金鑰。您可以自由使用 Laravel [加密器](/docs/{'12.x'}/encryption) 支援的任何 cipher，只需在呼叫指令時傳遞 `--cipher` 選項即可。
+> 提供的金鑰長度應符合所使用的加密 cipher 所需的金鑰長度。預設情況下，Laravel 將使用 `AES-256-CBC` cipher，這需要 32 個字元的金鑰。您可以自由使用 Laravel [加密器](/docs/encryption) 支援的任何 cipher，只需在呼叫指令時傳遞 `--cipher` 選項即可。
 
 如果您的應用程式有多個環境檔案，例如 `.env` 和 `.env.staging`，您可以透過 `--env` 選項提供環境名稱來指定應加密的環境檔案：
 
@@ -370,7 +370,7 @@ php artisan up
 <a name="maintenance-mode-queues"></a>
 #### 維護模式與 Queues
 
-當您的應用程式處於維護模式時，將不會處理任何 [Queued jobs](/docs/{'12.x'}/queues)。一旦應用程式退出維護模式，Jobs 將繼續正常處理。
+當您的應用程式處於維護模式時，將不會處理任何 [Queued jobs](/docs/queues)。一旦應用程式退出維護模式，Jobs 將繼續正常處理。
 
 <a name="alternatives-to-maintenance-mode"></a>
 #### 維護模式的替代方案

@@ -40,7 +40,7 @@ description: CSRF Protection
 <a name="preventing-csrf-requests"></a>
 ## 防止 CSRF 請求
 
-Laravel 會為每個由應用程式管理的作用中 [使用者 Session](/docs/{'12.x'}/session) 自動產生一組 CSRF「Token」。這組 Token 用來確認實際發出請求的人就是該已驗證使用者。由於 Token 儲存在使用者的 Session 中，且每次重新產生 Session 時都會更新，惡意應用程式無法取得它。
+Laravel 會為每個由應用程式管理的作用中 [使用者 Session](/docs/session) 自動產生一組 CSRF「Token」。這組 Token 用來確認實際發出請求的人就是該已驗證使用者。由於 Token 儲存在使用者的 Session 中，且每次重新產生 Session 時都會更新，惡意應用程式無法取得它。
 
 當前 Session 的 CSRF Token 可以透過 Request 的 Session 或 `csrf_token` 輔助函式存取：
 
@@ -67,12 +67,12 @@ Route::get('/token', function (Request $request) {
 </form>
 ```
 
-預設包含在 `web` Middleware 群組內的 `Illuminate\Foundation\Http\Middleware\ValidateCsrfToken` [Middleware](/docs/{'12.x'}/middleware) 會自動驗證請求輸入中的 Token 是否與 Session 儲存的 Token 相符。當兩者一致時，我們便能確認是已驗證使用者正在發起請求。
+預設包含在 `web` Middleware 群組內的 `Illuminate\Foundation\Http\Middleware\ValidateCsrfToken` [Middleware](/docs/middleware) 會自動驗證請求輸入中的 Token 是否與 Session 儲存的 Token 相符。當兩者一致時，我們便能確認是已驗證使用者正在發起請求。
 
 <a name="csrf-tokens-and-spas"></a>
 ### CSRF Token 與 SPA
 
-若你正在建立以 Laravel 作為 API 後端的 SPA，請參考 [Laravel Sanctum 文件](/docs/{'12.x'}/sanctum)，瞭解如何與 API 進行驗證並防止 CSRF 漏洞。
+若你正在建立以 Laravel 作為 API 後端的 SPA，請參考 [Laravel Sanctum 文件](/docs/sanctum)，瞭解如何與 API 進行驗證並防止 CSRF 漏洞。
 
 <a name="csrf-excluding-uris"></a>
 ### 從 CSRF 保護中排除 URI
@@ -92,7 +92,7 @@ Route::get('/token', function (Request $request) {
 ```
 
 > [!NOTE]
-> 為了方便，[執行測試](/docs/{'12.x'}/testing)時會自動停用所有路由的 CSRF Middleware。
+> 為了方便，[執行測試](/docs/testing)時會自動停用所有路由的 CSRF Middleware。
 
 <a name="csrf-x-csrf-token"></a>
 ## X-CSRF-TOKEN

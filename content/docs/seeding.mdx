@@ -18,18 +18,18 @@ description: Laravel 提供使用 seed 類別來填充資料庫資料的功能
 Laravel 提供了使用 seed 類別來填充資料庫資料的功能。所有的 seed 類別都儲存在 `database/seeders` 目錄中。預設情況下，會為您定義一個 `DatabaseSeeder` 類別。透過這個類別，您可以使用 `call` 方法來執行其他 seed 類別，讓您可以控制 seeding 的順序。
 
 > [!NOTE]
-> 在資料庫 seeding 期間，[Mass assignment 保護](/docs/{'12.x'}/eloquent#mass-assignment) 會自動停用。
+> 在資料庫 seeding 期間，[Mass assignment 保護](/docs/eloquent#mass-assignment) 會自動停用。
 
 <a name="writing-seeders"></a>
 ## 撰寫 Seeders
 
-要產生一個 seeder，請執行 `make:seeder` [Artisan 命令](/docs/{'12.x'}/artisan)。框架產生的所有 seeders 都將放置在 `database/seeders` 目錄中：
+要產生一個 seeder，請執行 `make:seeder` [Artisan 命令](/docs/artisan)。框架產生的所有 seeders 都將放置在 `database/seeders` 目錄中：
 
 ```shell
 php artisan make:seeder UserSeeder
 ```
 
-Seeder 類別預設只包含一個方法：`run`。當執行 `db:seed` [Artisan 命令](/docs/{'12.x'}/artisan) 時，會呼叫這個方法。在 `run` 方法中，您可以用任何方式將資料插入資料庫。您可以使用 [query builder](/docs/{'12.x'}/queries) 手動插入資料，或者您可以使用 [Eloquent model factories](/docs/{'12.x'}/eloquent-factories)。
+Seeder 類別預設只包含一個方法：`run`。當執行 `db:seed` [Artisan 命令](/docs/artisan) 時，會呼叫這個方法。在 `run` 方法中，您可以用任何方式將資料插入資料庫。您可以使用 [query builder](/docs/queries) 手動插入資料，或者您可以使用 [Eloquent model factories](/docs/eloquent-factories)。
 
 作為範例，讓我們修改預設的 `DatabaseSeeder` 類別，並在 `run` 方法中加入一個資料庫插入語句：
 
@@ -60,12 +60,12 @@ class DatabaseSeeder extends Seeder
 ```
 
 > [!NOTE]
-> 您可以在 `run` 方法的簽章中型別提示任何您需要的依賴項。它們將透過 Laravel [service container](/docs/{'12.x'}/container) 自動解析。
+> 您可以在 `run` 方法的簽章中型別提示任何您需要的依賴項。它們將透過 Laravel [service container](/docs/container) 自動解析。
 
 <a name="using-model-factories"></a>
 ### 使用 Model Factories
 
-當然，手動指定每個 model seed 的屬性是很麻煩的。相反，您可以使用 [model factories](/docs/{'12.x'}/eloquent-factories) 來方便地產生大量的資料庫記錄。首先，請查看 [model factory 文件](/docs/{'12.x'}/eloquent-factories) 來了解如何定義您的 factories。
+當然，手動指定每個 model seed 的屬性是很麻煩的。相反，您可以使用 [model factories](/docs/eloquent-factories) 來方便地產生大量的資料庫記錄。首先，請查看 [model factory 文件](/docs/eloquent-factories) 來了解如何定義您的 factories。
 
 例如，讓我們建立 50 個使用者，每個使用者都有一個相關的文章：
 

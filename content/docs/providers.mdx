@@ -24,12 +24,12 @@ Laravel 內部使用數十個 Service Providers 來啟動其核心服務，例�
 所有使用者定義的 Service Providers 都在 `bootstrap/providers.php` 檔案中註冊。在以下文件中，您將學習如何編寫自己的 Service Providers 並將它們註冊到您的 Laravel 應用程式中。
 
 > [!NOTE]
-> 如果您想了解更多關於 Laravel 如何處理請求和內部運作的資訊，請查看我們關於 Laravel [請求生命週期](/docs/{'12.x'}/lifecycle) 的文件。
+> 如果您想了解更多關於 Laravel 如何處理請求和內部運作的資訊，請查看我們關於 Laravel [請求生命週期](/docs/lifecycle) 的文件。
 
 <a name="writing-service-providers"></a>
 ## 編寫 Service Providers
 
-所有 Service Providers 都繼承 `Illuminate\Support\ServiceProvider` 類別。大多數 Service Providers 包含 `register` 和 `boot` 方法。在 `register` 方法中，您應該 **只將事物綁定到 [Service Container](/docs/{'12.x'}/container) 中**。您永遠不應嘗試在 `register` 方法中註冊任何 Event Listeners、路由或任何其他功能。
+所有 Service Providers 都繼承 `Illuminate\Support\ServiceProvider` 類別。大多數 Service Providers 包含 `register` 和 `boot` 方法。在 `register` 方法中，您應該 **只將事物綁定到 [Service Container](/docs/container) 中**。您永遠不應嘗試在 `register` 方法中註冊任何 Event Listeners、路由或任何其他功能。
 
 Artisan CLI 可以透過 `make:provider` 指令生成新的 Provider。Laravel 將自動在您的應用程式的 `bootstrap/providers.php` 檔案中註冊您的新 Provider：
 
@@ -40,7 +40,7 @@ php artisan make:provider RiakServiceProvider
 <a name="the-register-method"></a>
 ### Register 方法
 
-如前所述，在 `register` 方法中，您應該只將事物綁定到 [Service Container](/docs/{'12.x'}/container) 中。您永遠不應嘗試在 `register` 方法中註冊任何 Event Listeners、路由或任何其他功能。否則，您可能會意外使用尚未載入的 Service Provider 提供的服務。
+如前所述，在 `register` 方法中，您應該只將事物綁定到 [Service Container](/docs/container) 中。您永遠不應嘗試在 `register` 方法中註冊任何 Event Listeners、路由或任何其他功能。否則，您可能會意外使用尚未載入的 Service Provider 提供的服務。
 
 讓我們來看一個基本的 Service Provider。在您的任何 Service Provider 方法中，您始終可以存取 `$app` 屬性，該屬性提供對 Service Container 的存取：
 
@@ -67,7 +67,7 @@ class RiakServiceProvider extends ServiceProvider
 }
 ```
 
-此 Service Provider 僅定義了一個 `register` 方法，並使用該方法在 Service Container 中定義 `App\Services\Riak\Connection` 的實作。如果您還不熟悉 Laravel 的 Service Container，請查看 [其文件](/docs/{'12.x'}/container)。
+此 Service Provider 僅定義了一個 `register` 方法，並使用該方法在 Service Container 中定義 `App\Services\Riak\Connection` 的實作。如果您還不熟悉 Laravel 的 Service Container，請查看 [其文件](/docs/container)。
 
 <a name="the-bindings-and-singletons-properties"></a>
 #### `bindings` 和 `singletons` 屬性
@@ -112,7 +112,7 @@ class AppServiceProvider extends ServiceProvider
 <a name="the-boot-method"></a>
 ### Boot 方法
 
-那麼，如果我們需要在 Service Provider 中註冊 [View Composer](/docs/{'12.x'}/views#view-composers) 怎麼辦？這應該在 `boot` 方法中完成。**此方法在所有其他 Service Providers 註冊後呼叫**，這意味著您可以存取框架已註冊的所有其他服務：
+那麼，如果我們需要在 Service Provider 中註冊 [View Composer](/docs/views#view-composers) 怎麼辦？這應該在 `boot` 方法中完成。**此方法在所有其他 Service Providers 註冊後呼叫**，這意味著您可以存取框架已註冊的所有其他服務：
 
 ```php
 <?php
@@ -139,7 +139,7 @@ class ComposerServiceProvider extends ServiceProvider
 <a name="boot-method-dependency-injection"></a>
 #### Boot 方法 Dependency Injection
 
-您可以對 Service Provider 的 `boot` 方法的依賴進行型別提示。[Service Container](/docs/{'12.x'}/container) 將自動注入您需要的任何依賴：
+您可以對 Service Provider 的 `boot` 方法的依賴進行型別提示。[Service Container](/docs/container) 將自動注入您需要的任何依賴：
 
 ```php
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -182,7 +182,7 @@ return [
 <a name="deferred-providers"></a>
 ## 延遲 Providers
 
-如果您的 Provider **僅** 在 [Service Container](/docs/{'12.x'}/container) 中註冊綁定，您可以選擇延遲其註冊，直到實際需要註冊的綁定之一。延遲載入此類 Provider 將提高應用程式的效能，因為它不會在每次請求時從檔案系統載入。
+如果您的 Provider **僅** 在 [Service Container](/docs/container) 中註冊綁定，您可以選擇延遲其註冊，直到實際需要註冊的綁定之一。延遲載入此類 Provider 將提高應用程式的效能，因為它不會在每次請求時從檔案系統載入。
 
 Laravel 編譯並儲存延遲 Service Providers 提供的所有服務的清單，以及其 Service Provider 類別的名稱。然後，只有當您嘗試解析這些服務之一時，Laravel 才會載入 Service Provider。
 

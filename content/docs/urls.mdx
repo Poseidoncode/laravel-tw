@@ -81,7 +81,7 @@ echo url()->current();
 echo url()->full();
 ```
 
-這些方法也可以透過 `URL` [Facade](/docs/{'12.x'}/facades) 來存取：
+這些方法也可以透過 `URL` [Facade](/docs/facades) 來存取：
 
 ```php
 use Illuminate\Support\Facades\URL;
@@ -102,7 +102,7 @@ echo url()->previous();
 echo url()->previousPath();
 ```
 
-或者，透過 [session](/docs/{'12.x'}/session)，您可以取得前一個 URL 作為一個 [fluent URI](#fluent-uri-objects) 實例：
+或者，透過 [session](/docs/session)，您可以取得前一個 URL 作為一個 [fluent URI](#fluent-uri-objects) 實例：
 
 ```php
 use Illuminate\Http\Request;
@@ -123,7 +123,7 @@ $previousRoute = $request->session()->previousRoute();
 <a name="urls-for-named-routes"></a>
 ## 命名路由的 URLs
 
-`route` 輔助函式可用來產生指向[命名路由](/docs/{'12.x'}/routing#named-routes)的 URLs。命名路由讓您可以產生 URLs 而不必與路由上定義的實際 URL 耦合。因此，如果路由的 URL 變更，您不需要對 `route` 函式的呼叫進行任何修改。例如，假設您的應用程式包含如下定義的路由：
+`route` 輔助函式可用來產生指向[命名路由](/docs/routing#named-routes)的 URLs。命名路由讓您可以產生 URLs 而不必與路由上定義的實際 URL 耦合。因此，如果路由的 URL 變更，您不需要對 `route` 函式的呼叫進行任何修改。例如，假設您的應用程式包含如下定義的路由：
 
 ```php
 Route::get('/post/{post}', function (Post $post) {
@@ -162,7 +162,7 @@ echo route('post.show', ['post' => 1, 'search' => 'rocket']);
 <a name="eloquent-models"></a>
 #### Eloquent Models
 
-您經常會使用 [Eloquent models](/docs/{'12.x'}/eloquent) 的路由鍵（通常是主鍵）來產生 URLs。因此，您可以將 Eloquent models 作為參數值傳遞。`route` 輔助函式將自動擷取模型的路由鍵：
+您經常會使用 [Eloquent models](/docs/eloquent) 的路由鍵（通常是主鍵）來產生 URLs。因此，您可以將 Eloquent models 作為參數值傳遞。`route` 輔助函式將自動擷取模型的路由鍵：
 
 ```php
 echo route('post.show', ['post' => $post]);
@@ -222,7 +222,7 @@ if (! $request->hasValidSignatureWhileIgnoring(['page', 'order'])) {
 }
 ```
 
-您可以將 `signed`（`Illuminate\Routing\Middleware\ValidateSignature`）[middleware](/docs/{'12.x'}/middleware) 指派給路由，而不是使用傳入請求實例來驗證簽名 URLs。如果傳入請求沒有有效簽名，middleware 將自動回傳 `403` HTTP 回應：
+您可以將 `signed`（`Illuminate\Routing\Middleware\ValidateSignature`）[middleware](/docs/middleware) 指派給路由，而不是使用傳入請求實例來驗證簽名 URLs。如果傳入請求沒有有效簽名，middleware 將自動回傳 `403` HTTP 回應：
 
 ```php
 Route::post('/unsubscribe/{user}', function (Request $request) {
@@ -312,7 +312,7 @@ $uri = Uri::of('https://example.com')
     ->withFragment('section-1');
 ```
 
-有關使用 fluent URI 物件的更多資訊，請參閱 [URI 文件](/docs/{'12.x'}/helpers#uri)。
+有關使用 fluent URI 物件的更多資訊，請參閱 [URI 文件](/docs/helpers#uri)。
 
 <a name="default-values"></a>
 ## 預設值
@@ -325,7 +325,7 @@ Route::get('/{locale}/posts', function () {
 })->name('post.index');
 ```
 
-每次呼叫 `route` 輔助函式時都要傳遞 `locale` 是很繁瑣的。因此，您可以使用 `URL::defaults` 方法來定義此參數的預設值，該預設值將在目前請求期間始終套用。您可能希望從[路由 middleware](/docs/{'12.x'}/middleware#assigning-middleware-to-routes) 中呼叫此方法，以便您可以存取目前的請求：
+每次呼叫 `route` 輔助函式時都要傳遞 `locale` 是很繁瑣的。因此，您可以使用 `URL::defaults` 方法來定義此參數的預設值，該預設值將在目前請求期間始終套用。您可能希望從[路由 middleware](/docs/middleware#assigning-middleware-to-routes) 中呼叫此方法，以便您可以存取目前的請求：
 
 ```php
 <?php
@@ -358,7 +358,7 @@ class SetDefaultLocaleForUrls
 <a name="url-defaults-middleware-priority"></a>
 #### URL 預設值和 Middleware 優先順序
 
-設定 URL 預設值可能會干擾 Laravel 對隱式模型繫結的處理。因此，您應該[排序您的 middleware](/docs/{'12.x'}/middleware#sorting-middleware)，使設定 URL 預設值的 middleware 在 Laravel 自己的 `SubstituteBindings` middleware 之前執行。您可以在應用程式的 `bootstrap/app.php` 檔案中使用 `priority` middleware 方法來完成此操作：
+設定 URL 預設值可能會干擾 Laravel 對隱式模型繫結的處理。因此，您應該[排序您的 middleware](/docs/middleware#sorting-middleware)，使設定 URL 預設值的 middleware 在 Laravel 自己的 `SubstituteBindings` middleware 之前執行。您可以在應用程式的 `bootstrap/app.php` 檔案中使用 `priority` middleware 方法來完成此操作：
 
 ```php
 ->withMiddleware(function (Middleware $middleware): void {

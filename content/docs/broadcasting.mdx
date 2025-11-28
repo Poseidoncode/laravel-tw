@@ -51,9 +51,9 @@ description: Laravel 讓你能輕鬆地透過 WebSockets 廣播伺服器端事�
 
 在許多現代 Web 應用程式中，WebSockets 用於實現即時、即時更新的使用者介面。當伺服器上的某些資料更新時，通常會透過 WebSocket 連線傳送訊息以供客戶端處理。WebSockets 提供了一種更有效的替代方案，可以持續輪詢應用程式伺服器以獲取應反映在 UI 中的資料變更。
 
-例如，想像你的應用程式能夠將使用者的資料匯出為 CSV 檔案並透過電子郵件傳送給他們。但是，建立此 CSV 檔案需要幾分鐘時間，因此你選擇在 [佇列任務](/docs/{'12.x'}/queues) 中建立並郵寄 CSV。當 CSV 建立並郵寄給使用者後，我們可以使用事件廣播分派 `App\Events\UserDataExported` 事件，該事件由我們的應用程式的 JavaScript 接收。收到事件後，我們可以向使用者顯示一條訊息，指出他們的 CSV 已透過電子郵件傳送給他們，而無需重新整理頁面。
+例如，想像你的應用程式能夠將使用者的資料匯出為 CSV 檔案並透過電子郵件傳送給他們。但是，建立此 CSV 檔案需要幾分鐘時間，因此你選擇在 [佇列任務](/docs/queues) 中建立並郵寄 CSV。當 CSV 建立並郵寄給使用者後，我們可以使用事件廣播分派 `App\Events\UserDataExported` 事件，該事件由我們的應用程式的 JavaScript 接收。收到事件後，我們可以向使用者顯示一條訊息，指出他們的 CSV 已透過電子郵件傳送給他們，而無需重新整理頁面。
 
-為了協助你建立這些類型的功能，Laravel 讓你可以輕鬆地透過 WebSocket 連線「廣播」你的伺服器端 Laravel [事件](/docs/{'12.x'}/events)。廣播你的 Laravel 事件允許你在伺服器端 Laravel 應用程式和客戶端 JavaScript 應用程式之間共用相同的事件名稱和資料。
+為了協助你建立這些類型的功能，Laravel 讓你可以輕鬆地透過 WebSocket 連線「廣播」你的伺服器端 Laravel [事件](/docs/events)。廣播你的 Laravel 事件允許你在伺服器端 Laravel 應用程式和客戶端 JavaScript 應用程式之間共用相同的事件名稱和資料。
 
 廣播背後的核心概念很簡單：客戶端連線到前端的命名頻道，而你的 Laravel 應用程式在後端向這些頻道廣播事件。這些事件可以包含你希望提供給前端的任何其他資料。
 
@@ -63,7 +63,7 @@ description: Laravel 讓你能輕鬆地透過 WebSockets 廣播伺服器端事�
 預設情況下，Laravel 包含三個伺服器端廣播驅動程式供你選擇：[Laravel Reverb](https://reverb.laravel.com)、[Pusher Channels](https://pusher.com/channels) 和 [Ably](https://ably.com)。
 
 > [!NOTE]
-> 在深入研究事件廣播之前，請確保你已閱讀 Laravel 關於 [事件和監聽器](/docs/{'12.x'}/events) 的文件。
+> 在深入研究事件廣播之前，請確保你已閱讀 Laravel 關於 [事件和監聽器](/docs/events) 的文件。
 
 <a name="quickstart"></a>
 ## 快速入門
@@ -76,17 +76,17 @@ php artisan install:broadcasting
 
 `install:broadcasting` 指令將提示你選擇要使用的事件廣播服務。此外，它將建立 `config/broadcasting.php` 設定檔和 `routes/channels.php` 檔案，你可以在其中註冊應用程式的廣播授權路由和回呼。
 
-Laravel 開箱即支援多種廣播驅動程式：[Laravel Reverb](/docs/{'12.x'}/reverb)、[Pusher Channels](https://pusher.com/channels)、[Ably](https://ably.com) 以及用於本機開發和除錯的 `log` 驅動程式。此外，還包含一個 `null` 驅動程式，允許你在測試期間停用廣播。`config/broadcasting.php` 設定檔中包含每個驅動程式的設定範例。
+Laravel 開箱即支援多種廣播驅動程式：[Laravel Reverb](/docs/reverb)、[Pusher Channels](https://pusher.com/channels)、[Ably](https://ably.com) 以及用於本機開發和除錯的 `log` 驅動程式。此外，還包含一個 `null` 驅動程式，允許你在測試期間停用廣播。`config/broadcasting.php` 設定檔中包含每個驅動程式的設定範例。
 
 應用程式的所有事件廣播設定都儲存在 `config/broadcasting.php` 設定檔中。如果你的應用程式中不存在此檔案，請不要擔心；當你執行 `install:broadcasting` Artisan 指令時，它將被建立。
 
 <a name="quickstart-next-steps"></a>
 #### 下一步
 
-啟用事件廣播後，你就可以準備好了解有關 [定義廣播事件](#defining-broadcast-events) 和 [監聽事件](#listening-for-events) 的更多資訊。如果你使用的是 Laravel 的 React 或 Vue [入門套件](/docs/{'12.x'}/starter-kits)，則可以使用 Echo 的 [useEcho hook](#using-react-or-vue) 監聽事件。
+啟用事件廣播後，你就可以準備好了解有關 [定義廣播事件](#defining-broadcast-events) 和 [監聽事件](#listening-for-events) 的更多資訊。如果你使用的是 Laravel 的 React 或 Vue [入門套件](/docs/starter-kits)，則可以使用 Echo 的 [useEcho hook](#using-react-or-vue) 監聽事件。
 
 > [!NOTE]
-> 在廣播任何事件之前，你應該先設定並執行 [佇列工作者](/docs/{'12.x'}/queues)。所有事件廣播都是透過佇列任務完成的，以便應用程式的回應時間不會受到廣播事件的嚴重影響。
+> 在廣播任何事件之前，你應該先設定並執行 [佇列工作者](/docs/queues)。所有事件廣播都是透過佇列任務完成的，以便應用程式的回應時間不會受到廣播事件的嚴重影響。
 
 <a name="server-side-installation"></a>
 ## 伺服器端安裝
@@ -107,7 +107,7 @@ php artisan install:broadcasting --reverb
 <a name="reverb-manual-installation"></a>
 #### 手動安裝
 
-執行 `install:broadcasting` 指令時，系統會提示你安裝 [Laravel Reverb](/docs/{'12.x'}/reverb)。當然，你也可以使用 Composer 套件管理器手動安裝 Reverb：
+執行 `install:broadcasting` 指令時，系統會提示你安裝 [Laravel Reverb](/docs/reverb)。當然，你也可以使用 Composer 套件管理器手動安裝 Reverb：
 
 ```shell
 composer require laravel/reverb
@@ -119,7 +119,7 @@ composer require laravel/reverb
 php artisan reverb:install
 ```
 
-你可以在 [Reverb 文件](/docs/{'12.x'}/reverb) 中找到詳細的 Reverb 安裝和使用說明。
+你可以在 [Reverb 文件](/docs/reverb) 中找到詳細的 Reverb 安裝和使用說明。
 
 <a name="pusher-channels"></a>
 ### Pusher Channels
@@ -184,7 +184,7 @@ php artisan install:broadcasting --ably
 composer require ably/ably-php
 ```
 
-接下來，你應該在 `config/broadcasting.php` 設定檔中設定 Ably 憑證。此檔案中已包含 Ably 設定範例，允許你快速指定金鑰。通常，此值應透過 `ABLY_KEY` [環境變數](/docs/{'12.x'}/configuration#environment-configuration) 設定：
+接下來，你應該在 `config/broadcasting.php` 設定檔中設定 Ably 憑證。此檔案中已包含 Ably 設定範例，允許你快速指定金鑰。通常，此值應透過 `ABLY_KEY` [環境變數](/docs/configuration#environment-configuration) 設定：
 
 ```ini
 ABLY_KEY=your-ably-key
@@ -361,7 +361,7 @@ npm run build
 ```
 
 > [!NOTE]
-> 要了解有關編譯應用程式 JavaScript 資源的更多資訊，請查閱 [Vite](/docs/{'12.x'}/vite) 文件。
+> 要了解有關編譯應用程式 JavaScript 資源的更多資訊，請查閱 [Vite](/docs/vite) 文件。
 
 <a name="using-an-existing-client-instance"></a>
 #### 使用現有的客戶端實例
@@ -457,7 +457,7 @@ npm run dev
 ```
 
 > [!NOTE]
-> 要了解有關編譯應用程式 JavaScript 資源的更多資訊，請查閱 [Vite](/docs/{'12.x'}/vite) 文件。
+> 要了解有關編譯應用程式 JavaScript 資源的更多資訊，請查閱 [Vite](/docs/vite) 文件。
 
 <a name="concept-overview"></a>
 ## 概念總覽
@@ -635,7 +635,7 @@ class ServerCreated implements ShouldBroadcast
 }
 ```
 
-實作 `ShouldBroadcast` 介面後，你只需要像往常一樣 [觸發事件](/docs/{'12.x'}/events)。觸發事件後，[佇列任務](/docs/{'12.x'}/queues) 將使用你指定的廣播驅動程式自動廣播該事件。
+實作 `ShouldBroadcast` 介面後，你只需要像往常一樣 [觸發事件](/docs/events)。觸發事件後，[佇列任務](/docs/queues) 將使用你指定的廣播驅動程式自動廣播該事件。
 
 <a name="broadcast-name"></a>
 ### 廣播名稱
@@ -775,7 +775,7 @@ class ServerCreated implements ShouldBroadcast, ShouldDispatchAfterCommit
 ```
 
 > [!NOTE]
-> 要了解有關解決這些問題的更多資訊，請查看有關 [佇列任務和資料庫交易](/docs/{'12.x'}/queues#jobs-and-database-transactions) 的文件。
+> 要了解有關解決這些問題的更多資訊，請查看有關 [佇列任務和資料庫交易](/docs/queues#jobs-and-database-transactions) 的文件。
 
 <a name="authorizing-channels"></a>
 ## 授權頻道
@@ -818,7 +818,7 @@ php artisan channel:list
 <a name="authorization-callback-model-binding"></a>
 #### 授權回呼模型繫結
 
-就像 HTTP 路由一樣，頻道路由也可以利用隱式和顯式 [路由模型繫結](/docs/{'12.x'}/routing#route-model-binding)。例如，你可以請求一個實際的 `Order` 模型實例，而不是接收字串或數字訂單 ID：
+就像 HTTP 路由一樣，頻道路由也可以利用隱式和顯式 [路由模型繫結](/docs/routing#route-model-binding)。例如，你可以請求一個實際的 `Order` 模型實例，而不是接收字串或數字訂單 ID：
 
 ```php
 use App\Models\Order;
@@ -830,7 +830,7 @@ Broadcast::channel('orders.{order}', function (User $user, Order $order) {
 ```
 
 > [!WARNING]
-> 與 HTTP 路由模型繫結不同，頻道模型繫結不支援自動 [隱式模型繫結範圍](/docs/{'12.x'}/routing#implicit-model-binding-scoping)。但是，這很少成為問題，因為大多數頻道都可以基於單個模型的唯一主鍵進行範圍設定。
+> 與 HTTP 路由模型繫結不同，頻道模型繫結不支援自動 [隱式模型繫結範圍](/docs/routing#implicit-model-binding-scoping)。但是，這很少成為問題，因為大多數頻道都可以基於單個模型的唯一主鍵進行範圍設定。
 
 <a name="authorization-callback-authentication"></a>
 #### 授權回呼身份驗證
@@ -888,7 +888,7 @@ class OrderChannel
 ```
 
 > [!NOTE]
-> 像 Laravel 中的許多其他類別一樣，頻道類別將由 [服務容器](/docs/{'12.x'}/container) 自動解析。因此，你可以在其建構函式中對頻道所需的任何依賴項進行型別提示。
+> 像 Laravel 中的許多其他類別一樣，頻道類別將由 [服務容器](/docs/container) 自動解析。因此，你可以在其建構函式中對頻道所需的任何依賴項進行型別提示。
 
 <a name="broadcasting-events"></a>
 ## 廣播事件
@@ -1022,7 +1022,7 @@ Broadcast::private('orders.'.$order->id)->send();
 Broadcast::presence('channels.'.$channel->id)->send();
 ```
 
-使用 `send` 方法廣播匿名事件會將事件分派到應用程式的 [佇列](/docs/{'12.x'}/queues) 進行處理。但是，如果你想立即廣播事件，可以使用 `sendNow` 方法：
+使用 `send` 方法廣播匿名事件會將事件分派到應用程式的 [佇列](/docs/queues) 進行處理。但是，如果你想立即廣播事件，可以使用 `sendNow` 方法：
 
 ```php
 Broadcast::on('orders.'.$order->id)->sendNow();
@@ -1041,7 +1041,7 @@ Broadcast::on('orders.'.$order->id)
 
 當你的應用程式的佇列伺服器不可用或 Laravel 在廣播事件時遇到錯誤時，會拋出例外，通常會導致最終使用者看到應用程式錯誤。由於事件廣播通常是應用程式核心功能的補充，因此你可以透過在事件上實作 `ShouldRescue` 介面來防止這些例外中斷使用者體驗。
 
-實作 `ShouldRescue` 介面的事件在廣播嘗試期間會自動利用 Laravel 的 [rescue 輔助函式](/docs/{'12.x'}/helpers#method-rescue)。此輔助函式會擷取任何例外，將其報告給應用程式的例外處理常式進行記錄，並允許應用程式繼續正常執行而不會中斷使用者的工作流程：
+實作 `ShouldRescue` 介面的事件在廣播嘗試期間會自動利用 Laravel 的 [rescue 輔助函式](/docs/helpers#method-rescue)。此輔助函式會擷取任何例外，將其報告給應用程式的例外處理常式進行記錄，並允許應用程式繼續正常執行而不會中斷使用者的工作流程：
 
 ```php
 <?php
@@ -1378,7 +1378,7 @@ Echo.join(`chat.${roomId}`)
 > [!WARNING]
 > 在閱讀以下有關模型廣播的文件之前，我們建議你熟悉 Laravel 模型廣播服務的一般概念，以及如何手動建立和監聽廣播事件。
 
-當應用程式的 [Eloquent 模型](/docs/{'12.x'}/eloquent) 被建立、更新或刪除時，廣播事件是很常見的。當然，這可以透過手動 [為 Eloquent 模型狀態變更定義自訂事件](/docs/{'12.x'}/eloquent#events) 並使用 `ShouldBroadcast` 介面標記這些事件來輕鬆完成。
+當應用程式的 [Eloquent 模型](/docs/eloquent) 被建立、更新或刪除時，廣播事件是很常見的。當然，這可以透過手動 [為 Eloquent 模型狀態變更定義自訂事件](/docs/eloquent#events) 並使用 `ShouldBroadcast` 介面標記這些事件來輕鬆完成。
 
 但是，如果你沒有在應用程式中將這些事件用於任何其他目的，那麼僅為了廣播而建立事件類別可能會很麻煩。為了解決這個問題，Laravel 允許你指示 Eloquent 模型應自動廣播其狀態變更。
 
@@ -1676,7 +1676,7 @@ channel().listenForWhisper('typing', (e) => {
 <a name="notifications"></a>
 ## 通知
 
-透過將事件廣播與 [通知](/docs/{'12.x'}/notifications) 配對，你的 JavaScript 應用程式可以在新通知發生時接收它們，而無需重新整理頁面。在開始之前，請務必閱讀有關使用 [廣播通知頻道](/docs/{'12.x'}/notifications#broadcast-notifications) 的文件。
+透過將事件廣播與 [通知](/docs/notifications) 配對，你的 JavaScript 應用程式可以在新通知發生時接收它們，而無需重新整理頁面。在開始之前，請務必閱讀有關使用 [廣播通知頻道](/docs/notifications#broadcast-notifications) 的文件。
 
 一旦你將通知設定為使用廣播頻道，你就可以使用 Echo 的 `notification` 方法來監聽廣播事件。請記住，頻道名稱應與接收通知的實體的類別名稱相符：
 

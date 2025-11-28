@@ -46,7 +46,7 @@ Session `driver` 設定選項定義了每個請求的 Session 資料將儲存在
 </div>
 
 > [!NOTE]
-> array 驅動程式主要在 [測試](/docs/{'12.x'}/testing) 期間使用，可防止儲存在 Session 中的資料被持久化。
+> array 驅動程式主要在 [測試](/docs/testing) 期間使用，可防止儲存在 Session 中的資料被持久化。
 
 <a name="driver-prerequisites"></a>
 ### 驅動程式先決條件
@@ -54,7 +54,7 @@ Session `driver` 設定選項定義了每個請求的 Session 資料將儲存在
 <a name="database"></a>
 #### 資料庫
 
-使用 `database` Session 驅動程式時，您需要確保有一個資料庫資料表來包含 Session 資料。通常，這包含在 Laravel 的預設 `0001_01_01_000000_create_users_table.php` [資料庫 Migration](/docs/{'12.x'}/migrations) 中；但是，如果您因為任何原因沒有 `sessions` 資料表，您可以使用 `make:session-table` Artisan 指令來產生此 Migration：
+使用 `database` Session 驅動程式時，您需要確保有一個資料庫資料表來包含 Session 資料。通常，這包含在 Laravel 的預設 `0001_01_01_000000_create_users_table.php` [資料庫 Migration](/docs/migrations) 中；但是，如果您因為任何原因沒有 `sessions` 資料表，您可以使用 `make:session-table` Artisan 指令來產生此 Migration：
 
 ```shell
 php artisan make:session-table
@@ -65,7 +65,7 @@ php artisan migrate
 <a name="redis"></a>
 #### Redis
 
-在 Laravel 中使用 Redis Session 之前，您需要透過 PECL 安裝 PhpRedis PHP 擴充功能，或透過 Composer 安裝 `predis/predis` 套件 (~1.0)。有關設定 Redis 的更多資訊，請參閱 Laravel 的 [Redis 文件](/docs/{'12.x'}/redis#configuration)。
+在 Laravel 中使用 Redis Session 之前，您需要透過 PECL 安裝 PhpRedis PHP 擴充功能，或透過 Composer 安裝 `predis/predis` 套件 (~1.0)。有關設定 Redis 的更多資訊，請參閱 Laravel 的 [Redis 文件](/docs/redis#configuration)。
 
 > [!NOTE]
 > `SESSION_CONNECTION` 環境變數或 `session.php` 設定檔中的 `connection` 選項可用於指定哪個 Redis 連線用於 Session 儲存。
@@ -76,7 +76,7 @@ php artisan migrate
 <a name="retrieving-data"></a>
 ### 取得資料
 
-在 Laravel 中有兩種主要的方式來處理 Session 資料：全域 `session` 輔助函式和透過 `Request` 實例。首先，讓我們看看透過 `Request` 實例存取 Session，它可以在路由 Closure 或 Controller 方法上進行型別提示。請記住，Controller 方法的依賴項會透過 Laravel [Service Container](/docs/{'12.x'}/container) 自動注入：
+在 Laravel 中有兩種主要的方式來處理 Session 資料：全域 `session` 輔助函式和透過 `Request` 實例。首先，讓我們看看透過 `Request` 實例存取 Session，它可以在路由 Closure 或 Controller 方法上進行型別提示。請記住，Controller 方法的依賴項會透過 Laravel [Service Container](/docs/container) 自動注入：
 
 ```php
 <?php
@@ -133,7 +133,7 @@ Route::get('/home', function () {
 ```
 
 > [!NOTE]
-> 透過 HTTP 請求實例使用 Session 與使用全域 `session` 輔助函式之間幾乎沒有實際差異。這兩種方法都可以透過所有測試案例中都可用的 `assertSessionHas` 方法進行 [測試](/docs/{'12.x'}/testing)。
+> 透過 HTTP 請求實例使用 Session 與使用全域 `session` 輔助函式之間幾乎沒有實際差異。這兩種方法都可以透過所有測試案例中都可用的 `assertSessionHas` 方法進行 [測試](/docs/testing)。
 
 <a name="retrieving-all-session-data"></a>
 #### 取得所有 Session 資料
@@ -271,7 +271,7 @@ $request->session()->flush();
 
 重新產生 Session ID 通常是為了防止惡意使用者利用 [Session 固定](https://owasp.org/www-community/attacks/Session_fixation) 攻擊您的應用程式。
 
-如果您使用 Laravel [應用程式 Starter Kits](/docs/{'12.x'}/starter-kits) 或 [Laravel Fortify](/docs/{'12.x'}/fortify)，Laravel 會在驗證期間自動重新產生 Session ID；但是，如果您需要手動重新產生 Session ID，您可以使用 `regenerate` 方法：
+如果您使用 Laravel [應用程式 Starter Kits](/docs/starter-kits) 或 [Laravel Fortify](/docs/fortify)，Laravel 會在驗證期間自動重新產生 Session ID；但是，如果您需要手動重新產生 Session ID，您可以使用 `regenerate` 方法：
 
 ```php
 $request->session()->regenerate();
@@ -286,7 +286,7 @@ $request->session()->invalidate();
 <a name="session-cache"></a>
 ## Session 快取
 
-Laravel 的 Session 快取提供了一種方便的方式來快取限定於個別使用者 Session 的資料。與全域應用程式快取不同，Session 快取資料會自動按 Session 隔離，並在 Session 過期或銷毀時清理。Session 快取支援所有熟悉的 [Laravel 快取方法](/docs/{'12.x'}/cache)，如 `get`、`put`、`remember`、`forget` 等，但範圍限定於當前 Session。
+Laravel 的 Session 快取提供了一種方便的方式來快取限定於個別使用者 Session 的資料。與全域應用程式快取不同，Session 快取資料會自動按 Session 隔離，並在 Session 過期或銷毀時清理。Session 快取支援所有熟悉的 [Laravel 快取方法](/docs/cache)，如 `get`、`put`、`remember`、`forget` 等，但範圍限定於當前 Session。
 
 Session 快取非常適合儲存您希望在同一 Session 內的多個請求之間持久保存，但不需要永久儲存的臨時、使用者特定資料。這包括表單資料、臨時計算、API 回應或任何其他應該與特定使用者 Session 綁定的短暫資料。
 
@@ -300,13 +300,13 @@ $request->session()->cache()->put(
 );
 ```
 
-有關 Laravel 快取方法的更多資訊，請參閱 [快取文件](/docs/{'12.x'}/cache)。
+有關 Laravel 快取方法的更多資訊，請參閱 [快取文件](/docs/cache)。
 
 <a name="session-blocking"></a>
 ## Session 阻塞
 
 > [!WARNING]
-> 要使用 Session 阻塞，您的應用程式必須使用支援 [原子鎖](/docs/{'12.x'}/cache#atomic-locks) 的快取驅動程式。目前，這些快取驅動程式包括 `memcached`、`dynamodb`、`redis`、`mongodb`（包含在官方 `mongodb/laravel-mongodb` 套件中）、`database`、`file` 和 `array` 驅動程式。此外，您不能使用 `cookie` Session 驅動程式。
+> 要使用 Session 阻塞，您的應用程式必須使用支援 [原子鎖](/docs/cache#atomic-locks) 的快取驅動程式。目前，這些快取驅動程式包括 `memcached`、`dynamodb`、`redis`、`mongodb`（包含在官方 `mongodb/laravel-mongodb` 套件中）、`database`、`file` 和 `array` 驅動程式。此外，您不能使用 `cookie` Session 驅動程式。
 
 預設情況下，Laravel 允許使用相同 Session 的請求同時執行。因此，例如，如果您使用 JavaScript HTTP 函式庫向應用程式發出兩個 HTTP 請求，它們將同時執行。對於許多應用程式來說，這不是問題；但是，在少數向兩個不同的應用程式端點發出並發請求且都寫入 Session 資料的應用程式中，可能會發生 Session 資料遺失。
 
@@ -376,7 +376,7 @@ class MongoSessionHandler implements \SessionHandlerInterface
 <a name="registering-the-driver"></a>
 ### 註冊驅動程式
 
-一旦您的驅動程式實作完成，您就可以將其註冊到 Laravel。要向 Laravel 的 Session 後端新增額外的驅動程式，您可以使用 `Session` [Facade](/docs/{'12.x'}/facades) 提供的 `extend` 方法。您應該從 [Service Provider](/docs/{'12.x'}/providers) 的 `boot` 方法呼叫 `extend` 方法。您可以從現有的 `App\Providers\AppServiceProvider` 執行此操作，或建立一個全新的 Provider：
+一旦您的驅動程式實作完成，您就可以將其註冊到 Laravel。要向 Laravel 的 Session 後端新增額外的驅動程式，您可以使用 `Session` [Facade](/docs/facades) 提供的 `extend` 方法。您應該從 [Service Provider](/docs/providers) 的 `boot` 方法呼叫 `extend` 方法。您可以從現有的 `App\Providers\AppServiceProvider` 執行此操作，或建立一個全新的 Provider：
 
 ```php
 <?php

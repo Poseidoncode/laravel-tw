@@ -27,7 +27,7 @@ description: Blade 是 Laravel 內建的簡單但強大的樣板引擎
 
 Blade 是 Laravel 內建的簡單但強大的樣板引擎。與某些 PHP 樣板引擎不同，Blade 並不會限制您在樣板中使用原生 PHP。事實上，所有 Blade 樣板都會被編譯成純 PHP 並快取直到被修改，這表示 Blade 幾乎不會為您的應用程式增加額外負擔。Blade 樣板檔案使用 `.blade.php` 副檔名，通常儲存在 `resources/views` 目錄中。
 
-您可以透過全域的 `view` 輔助函式從路由或 controller 回傳 Blade 檢視。如同在 [views](/docs/{'12.x'}/views) 文件所提到，您可以使用 `view` 輔助函式的第二個參數將資料傳遞給 Blade 檢視：
+您可以透過全域的 `view` 輔助函式從路由或 controller 回傳 Blade 檢視。如同在 [views](/docs/views) 文件所提到，您可以使用 `view` 輔助函式的第二個參數將資料傳遞給 Blade 檢視：
 
 ```php
 Route::get('/', function () {
@@ -1348,7 +1348,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 <a name="csrf-field"></a>
 ### CSRF 欄位
 
-所有 HTML 表單都應包含隱藏的 CSRF token 欄位，讓 [CSRF 保護](/docs/{'12.x'}/csrf) middleware 能驗證請求。可使用 `@csrf` 指令產生此欄位：
+所有 HTML 表單都應包含隱藏的 CSRF token 欄位，讓 [CSRF 保護](/docs/csrf) middleware 能驗證請求。可使用 `@csrf` 指令產生此欄位：
 
 ```blade
 <form method="POST" action="/profile">
@@ -1374,7 +1374,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 <a name="validation-errors"></a>
 ### 驗證錯誤
 
-`@error` 指令可快速檢查特定欄位是否有[驗證錯誤訊息](/docs/{'12.x'}/validation#quick-displaying-the-validation-errors)。在 `@error` 區塊中，可使用 `$message` 來顯示訊息：
+`@error` 指令可快速檢查特定欄位是否有[驗證錯誤訊息](/docs/validation#quick-displaying-the-validation-errors)。在 `@error` 區塊中，可使用 `$message` 來顯示訊息：
 
 ```blade
 <label for="title">Post Title</label>
@@ -1444,7 +1444,7 @@ Blade 允許您將內容推送到具名的「stack」，並在其他檢視或版
 <a name="service-injection"></a>
 ## Service Injection
 
-`@inject` 指令可用來從 Laravel [Service Container](/docs/{'12.x'}/container) 解析服務，並將其注入為樣板中的變數：
+`@inject` 指令可用來從 Laravel [Service Container](/docs/container) 解析服務，並將其注入為樣板中的變數：
 
 ```blade
 @inject('metrics', 'App\\Services\\MetricsService')

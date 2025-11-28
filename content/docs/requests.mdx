@@ -37,7 +37,7 @@ Laravel 的 `Illuminate\Http\Request` 類別提供了物件導向的方式來與
 <a name="accessing-the-request"></a>
 ### 存取 Request
 
-要透過依賴注入取得當前 HTTP 請求的實例，你應該在路由閉包或 Controller 方法上型別提示 `Illuminate\Http\Request` 類別。傳入的請求實例將由 Laravel [Service Container](/docs/{'12.x'}/container) 自動注入:
+要透過依賴注入取得當前 HTTP 請求的實例，你應該在路由閉包或 Controller 方法上型別提示 `Illuminate\Http\Request` 類別。傳入的請求實例將由 Laravel [Service Container](/docs/container) 自動注入:
 
 ```php
 <?php
@@ -133,7 +133,7 @@ if ($request->is('admin/*')) {
 }
 ```
 
-使用 `routeIs` 方法，你可以判斷傳入的請求是否符合[命名路由](/docs/{'12.x'}/routing#named-routes):
+使用 `routeIs` 方法，你可以判斷傳入的請求是否符合[命名路由](/docs/routing#named-routes):
 
 ```php
 if ($request->routeIs('admin.*')) {
@@ -299,7 +299,7 @@ Route::get('/', function (ServerRequestInterface $request) {
 $input = $request->all();
 ```
 
-使用 `collect` 方法，你可以將所有傳入請求的輸入資料以[集合](/docs/{'12.x'}/collections)的形式取得:
+使用 `collect` 方法，你可以將所有傳入請求的輸入資料以[集合](/docs/collections)的形式取得:
 
 ```php
 $input = $request->collect();
@@ -375,7 +375,7 @@ $name = $request->input('user.name');
 <a name="retrieving-stringable-input-values"></a>
 #### 取得可字串化的輸入值
 
-你可以使用 `string` 方法將請求資料作為 [Illuminate\Support\Stringable](/docs/{'12.x'}/strings) 的實例取得，而不是將請求的輸入資料作為基本 `string` 取得:
+你可以使用 `string` 方法將請求資料作為 [Illuminate\Support\Stringable](/docs/strings) 的實例取得，而不是將請求的輸入資料作為基本 `string` 取得:
 
 ```php
 $name = $request->string('name')->trim();
@@ -605,12 +605,12 @@ $request->mergeIfMissing(['votes' => 0]);
 <a name="old-input"></a>
 ### 舊輸入
 
-Laravel 允許你在下一次請求期間保留來自一次請求的輸入。此功能對於在檢測到驗證錯誤後重新填充表單特別有用。但是，如果你使用 Laravel 包含的[驗證功能](/docs/{'12.x'}/validation)，你可能不需要手動直接使用這些 Session 輸入快閃方法，因為 Laravel 的一些內建驗證功能會自動呼叫它們。
+Laravel 允許你在下一次請求期間保留來自一次請求的輸入。此功能對於在檢測到驗證錯誤後重新填充表單特別有用。但是，如果你使用 Laravel 包含的[驗證功能](/docs/validation)，你可能不需要手動直接使用這些 Session 輸入快閃方法，因為 Laravel 的一些內建驗證功能會自動呼叫它們。
 
 <a name="flashing-input-to-the-session"></a>
 #### 將輸入快閃到 Session
 
-`Illuminate\Http\Request` 類別上的 `flash` 方法會將當前輸入快閃到 [Session](/docs/{'12.x'}/session)，以便在使用者的下一次請求期間可用:
+`Illuminate\Http\Request` 類別上的 `flash` 方法會將當前輸入快閃到 [Session](/docs/session)，以便在使用者的下一次請求期間可用:
 
 ```php
 $request->flash();
@@ -642,13 +642,13 @@ return redirect('/form')->withInput(
 <a name="retrieving-old-input"></a>
 #### 取得舊輸入
 
-要從上一次請求中取得快閃的輸入，請在 `Illuminate\Http\Request` 的實例上呼叫 `old` 方法。`old` 方法將從 [Session](/docs/{'12.x'}/session) 中拉取先前快閃的輸入資料:
+要從上一次請求中取得快閃的輸入，請在 `Illuminate\Http\Request` 的實例上呼叫 `old` 方法。`old` 方法將從 [Session](/docs/session) 中拉取先前快閃的輸入資料:
 
 ```php
 $username = $request->old('username');
 ```
 
-Laravel 還提供了一個全域 `old` 輔助函式。如果你在 [Blade 模板](/docs/{'12.x'}/blade)中顯示舊輸入，使用 `old` 輔助函式重新填充表單會更方便。如果給定欄位不存在舊輸入，將回傳 `null`:
+Laravel 還提供了一個全域 `old` 輔助函式。如果你在 [Blade 模板](/docs/blade)中顯示舊輸入，使用 `old` 輔助函式重新填充表單會更方便。如果給定欄位不存在舊輸入，將回傳 `null`:
 
 ```blade
 <input type="text" name="username" value="{{ old('username') }}">
@@ -753,7 +753,7 @@ $extension = $request->photo->extension();
 <a name="storing-uploaded-files"></a>
 ### 儲存上傳的檔案
 
-要儲存上傳的檔案，你通常會使用你配置的[檔案系統](/docs/{'12.x'}/filesystem)之一。`UploadedFile` 類別有一個 `store` 方法，它會將上傳的檔案移動到你的磁碟之一，這可能是你本地檔案系統上的位置或像 Amazon S3 這樣的雲端儲存位置。
+要儲存上傳的檔案，你通常會使用你配置的[檔案系統](/docs/filesystem)之一。`UploadedFile` 類別有一個 `store` 方法，它會將上傳的檔案移動到你的磁碟之一，這可能是你本地檔案系統上的位置或像 Amazon S3 這樣的雲端儲存位置。
 
 `store` 方法接受檔案應儲存的路徑，該路徑相對於檔案系統的配置根目錄。此路徑不應包含檔案名稱，因為將自動產生唯一 ID 作為檔案名稱。
 
@@ -774,7 +774,7 @@ $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 ```
 
 > [!NOTE]
-> 有關 Laravel 中檔案儲存的更多資訊，請查看完整的[檔案儲存文件](/docs/{'12.x'}/filesystem)。
+> 有關 Laravel 中檔案儲存的更多資訊，請查看完整的[檔案儲存文件](/docs/filesystem)。
 
 <a name="configuring-trusted-proxies"></a>
 ## 設定受信任的代理

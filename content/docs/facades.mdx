@@ -16,7 +16,7 @@ description: Facades
 <a name="introduction"></a>
 ## 簡介
 
-在整個 Laravel 文件中，您將看到透過「Facades」與 Laravel 功能互動的程式碼範例。Facades 為應用程式的 [Service Container](/docs/{'12.x'}/container) 中可用的類別提供「靜態」介面。Laravel 附帶了許多 Facades，可以存取幾乎所有的 Laravel 功能。
+在整個 Laravel 文件中，您將看到透過「Facades」與 Laravel 功能互動的程式碼範例。Facades 為應用程式的 [Service Container](/docs/container) 中可用的類別提供「靜態」介面。Laravel 附帶了許多 Facades，可以存取幾乎所有的 Laravel 功能。
 
 Laravel Facades 作為 Service Container 中底層類別的「靜態代理」，提供了簡潔、富有表現力的語法的好處，同時保持了比傳統靜態方法更高的可測試性和靈活性。如果您不完全了解 Facades 的運作方式也沒關係 - 順其自然，繼續學習 Laravel。
 
@@ -36,7 +36,7 @@ Route::get('/cache', function () {
 <a name="helper-functions"></a>
 #### Helper 函式
 
-為了補充 Facades，Laravel 提供了各種全域「Helper 函式」，使與常見 Laravel 功能的互動變得更加容易。您可能互動的一些常見 Helper 函式包括 `view`、`response`、`url`、`config` 等等。Laravel 提供的每個 Helper 函式都有相應功能的說明文件；但是，完整的清單可在專用的 [Helper 文件](/docs/{'12.x'}/helpers) 中找到。
+為了補充 Facades，Laravel 提供了各種全域「Helper 函式」，使與常見 Laravel 功能的互動變得更加容易。您可能互動的一些常見 Helper 函式包括 `view`、`response`、`url`、`config` 等等。Laravel 提供的每個 Helper 函式都有相應功能的說明文件；但是，完整的清單可在專用的 [Helper 文件](/docs/helpers) 中找到。
 
 例如，我們可以直接使用 `response` 函式，而不是使用 `Illuminate\Support\Facades\Response` Facade 來生成 JSON 回應。因為 Helper 函式是全域可用的，所以您不需要匯入任何類別即可使用它們：
 
@@ -197,7 +197,7 @@ class Cache extends Facade
 }
 ```
 
-相反，`Cache` Facade 繼承了基礎 `Facade` 類別並定義了方法 `getFacadeAccessor()`。此方法的工作是返回 Service Container 綁定的名稱。當使用者參考 `Cache` Facade 上的任何靜態方法時，Laravel 會從 [Service Container](/docs/{'12.x'}/container) 解析 `cache` 綁定，並針對該物件執行請求的方法（在本例中為 `get`）。
+相反，`Cache` Facade 繼承了基礎 `Facade` 類別並定義了方法 `getFacadeAccessor()`。此方法的工作是返回 Service Container 綁定的名稱。當使用者參考 `Cache` Facade 上的任何靜態方法時，Laravel 會從 [Service Container](/docs/container) 解析 `cache` 綁定，並針對該物件執行請求的方法（在本例中為 `get`）。
 
 <a name="real-time-facades"></a>
 ## 即時 Facades

@@ -49,12 +49,12 @@ Route::get('/', function () {
 ```
 
 > [!NOTE]
-> 你知道你也可以從路由或 Controller 回傳 [Eloquent 集合](/docs/{'12.x'}/eloquent-collections)嗎?它們會自動轉換為 JSON。試試看!
+> 你知道你也可以從路由或 Controller 回傳 [Eloquent 集合](/docs/eloquent-collections)嗎?它們會自動轉換為 JSON。試試看!
 
 <a name="response-objects"></a>
 #### Response 物件
 
-通常,你不會只是從路由動作回傳簡單的字串或陣列。相反,你將回傳完整的 `Illuminate\Http\Response` 實例或 [view](/docs/{'12.x'}/views)。
+通常,你不會只是從路由動作回傳簡單的字串或陣列。相反,你將回傳完整的 `Illuminate\Http\Response` 實例或 [view](/docs/views)。
 
 回傳完整的 `Response` 實例允許你自訂 Response 的 HTTP 狀態碼和標頭。`Response` 實例繼承自 `Symfony\Component\HttpFoundation\Response` 類別,它提供了各種建立 HTTP Response 的方法:
 
@@ -68,7 +68,7 @@ Route::get('/home', function () {
 <a name="eloquent-models-and-collections"></a>
 #### Eloquent 模型與集合
 
-你也可以直接從路由和 Controller 回傳 [Eloquent ORM](/docs/{'12.x'}/eloquent) 模型和集合。當你這樣做時,Laravel 會自動將模型和集合轉換為 JSON Response,同時遵守模型的[隱藏屬性](/docs/{'12.x'}/eloquent-serialization#hiding-attributes-from-json):
+你也可以直接從路由和 Controller 回傳 [Eloquent ORM](/docs/eloquent) 模型和集合。當你這樣做時,Laravel 會自動將模型和集合轉換為 JSON Response,同時遵守模型的[隱藏屬性](/docs/eloquent-serialization#hiding-attributes-from-json):
 
 ```php
 use App\Models\User;
@@ -195,7 +195,7 @@ Route::get('/dashboard', function () {
 });
 ```
 
-有時你可能希望將使用者重新導向到其先前的位置,例如當提交的表單無效時。你可以使用全域 `back` 輔助函式來實現。由於此功能使用 [Session](/docs/{'12.x'}/session),請確保呼叫 `back` 函式的路由使用 `web` Middleware 群組:
+有時你可能希望將使用者重新導向到其先前的位置,例如當提交的表單無效時。你可以使用全域 `back` 輔助函式來實現。由於此功能使用 [Session](/docs/session),請確保呼叫 `back` 函式的路由使用 `web` Middleware 群組:
 
 ```php
 Route::post('/user/profile', function () {
@@ -248,7 +248,7 @@ public function getRouteKey(): mixed
 <a name="redirecting-controller-actions"></a>
 ### 重新導向到 Controller 動作
 
-你也可以產生到 [Controller 動作](/docs/{'12.x'}/controllers)的重新導向。為此,將 Controller 和動作名稱傳遞給 `action` 方法:
+你也可以產生到 [Controller 動作](/docs/controllers)的重新導向。為此,將 Controller 和動作名稱傳遞給 `action` 方法:
 
 ```php
 use App\Http\Controllers\UserController;
@@ -276,7 +276,7 @@ return redirect()->away('https://www.google.com');
 <a name="redirecting-with-flashed-session-data"></a>
 ### 使用快閃的 Session 資料重新導向
 
-重新導向到新 URL 並[將資料快閃到 Session](/docs/{'12.x'}/session#flash-data) 通常同時完成。通常,這是在成功執行動作後完成的,當你向 Session 快閃成功訊息時。為了方便起見,你可以建立一個 `RedirectResponse` 實例並在單一流暢的方法鏈中將資料快閃到 Session:
+重新導向到新 URL 並[將資料快閃到 Session](/docs/session#flash-data) 通常同時完成。通常,這是在成功執行動作後完成的,當你向 Session 快閃成功訊息時。為了方便起見,你可以建立一個 `RedirectResponse` 實例並在單一流暢的方法鏈中將資料快閃到 Session:
 
 ```php
 Route::post('/user/profile', function () {
@@ -286,7 +286,7 @@ Route::post('/user/profile', function () {
 });
 ```
 
-使用者重新導向後,你可以從 [Session](/docs/{'12.x'}/session) 顯示快閃的訊息。例如,使用 [Blade 語法](/docs/{'12.x'}/blade):
+使用者重新導向後,你可以從 [Session](/docs/session) 顯示快閃的訊息。例如,使用 [Blade 語法](/docs/blade):
 
 ```blade
 @if (session('status'))
@@ -299,7 +299,7 @@ Route::post('/user/profile', function () {
 <a name="redirecting-with-input"></a>
 #### 使用輸入重新導向
 
-你可以使用 `RedirectResponse` 實例提供的 `withInput` 方法在將使用者重新導向到新位置之前將當前請求的輸入資料快閃到 Session。如果使用者遇到驗證錯誤,通常會這樣做。一旦輸入被快閃到 Session,你可以在下一次請求期間輕鬆[取得它](/docs/{'12.x'}/requests#retrieving-old-input)以重新填充表單:
+你可以使用 `RedirectResponse` 實例提供的 `withInput` 方法在將使用者重新導向到新位置之前將當前請求的輸入資料快閃到 Session。如果使用者遇到驗證錯誤,通常會這樣做。一旦輸入被快閃到 Session,你可以在下一次請求期間輕鬆[取得它](/docs/requests#retrieving-old-input)以重新填充表單:
 
 ```php
 return back()->withInput();
@@ -308,12 +308,12 @@ return back()->withInput();
 <a name="other-response-types"></a>
 ## 其他 Response 類型
 
-`response` 輔助函式可用於產生其他類型的 Response 實例。當在沒有參數的情況下呼叫 `response` 輔助函式時,會回傳 `Illuminate\Contracts\Routing\ResponseFactory` [Contract](/docs/{'12.x'}/contracts) 的實作。此 Contract 提供了幾種有用的方法來產生 Response。
+`response` 輔助函式可用於產生其他類型的 Response 實例。當在沒有參數的情況下呼叫 `response` 輔助函式時,會回傳 `Illuminate\Contracts\Routing\ResponseFactory` [Contract](/docs/contracts) 的實作。此 Contract 提供了幾種有用的方法來產生 Response。
 
 <a name="view-responses"></a>
 ### View Response
 
-如果你需要控制 Response 的狀態和標頭,但還需要回傳 [view](/docs/{'12.x'}/views) 作為 Response 的內容,你應該使用 `view` 方法:
+如果你需要控制 Response 的狀態和標頭,但還需要回傳 [view](/docs/views) 作為 Response 的內容,你應該使用 `view` 方法:
 
 ```php
 return response()
@@ -464,7 +464,7 @@ const sendMessage = () => {
 透過 `send` 將資料發送回串流時,在發送新資料之前會取消與串流的活動連線。所有請求都作為 JSON `POST` 請求發送。
 
 > [!WARNING]
-> 由於 `useStream` hook 向你的應用程式發出 `POST` 請求,因此需要有效的 CSRF token。提供 CSRF token 的最簡單方法是[透過應用程式佈局的 head 中的 meta 標籤包含它](/docs/{'12.x'}/csrf#csrf-x-csrf-token)。
+> 由於 `useStream` hook 向你的應用程式發出 `POST` 請求,因此需要有效的 CSRF token。提供 CSRF token 的最簡單方法是[透過應用程式佈局的 head 中的 meta 標籤包含它](/docs/csrf#csrf-x-csrf-token)。
 
 給予 `useStream` 的第二個參數是一個選項物件,你可以使用它來自訂串流使用行為。此物件的預設值如下所示:
 
@@ -877,7 +877,7 @@ return response()->streamDownload(function () {
 <a name="response-macros"></a>
 ## Response 巨集
 
-如果你想定義可以在各種路由和 Controller 中重複使用的自訂 Response,你可以使用 `Response` Facade 上的 `macro` 方法。通常,你應該從應用程式的[Service Provider](/docs/{'12.x'}/providers) 之一的 `boot` 方法呼叫此方法,例如 `App\Providers\AppServiceProvider` Service Provider:
+如果你想定義可以在各種路由和 Controller 中重複使用的自訂 Response,你可以使用 `Response` Facade 上的 `macro` 方法。通常,你應該從應用程式的[Service Provider](/docs/providers) 之一的 `boot` 方法呼叫此方法,例如 `App\Providers\AppServiceProvider` Service Provider:
 
 ```php
 <?php

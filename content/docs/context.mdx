@@ -25,7 +25,7 @@ Laravel 的「context」功能可讓您在應用程式中執行的 requests、jo
 <a name="how-it-works"></a>
 ### 運作方式
 
-了解 Laravel context 功能的最佳方式是使用內建的 logging 功能來實際操作。首先，您可以使用 `Context` facade 來[將資訊加入到 context](#capturing-context)。在此範例中，我們將使用 [middleware](/docs/{'12.x'}/middleware) 在每個傳入 request 上將 request URL 和唯一的 trace ID 加入到 context：
+了解 Laravel context 功能的最佳方式是使用內建的 logging 功能來實際操作。首先，您可以使用 `Context` facade 來[將資訊加入到 context](#capturing-context)。在此範例中，我們將使用 [middleware](/docs/middleware) 在每個傳入 request 上將 request URL 和唯一的 trace ID 加入到 context：
 
 ```php
 <?php
@@ -53,7 +53,7 @@ class AddContext
 }
 ```
 
-加入到 context 的資訊會自動作為 metadata 附加到整個 request 過程中寫入的任何 [log 條目](/docs/{'12.x'}/logging)。將 context 作為 metadata 附加可以區分傳遞給個別 log 條目的資訊與透過 `Context` 共享的資訊。例如，假設我們寫入以下 log 條目：
+加入到 context 的資訊會自動作為 metadata 附加到整個 request 過程中寫入的任何 [log 條目](/docs/logging)。將 context 作為 metadata 附加可以區分傳遞給個別 log 條目的資訊與透過 `Context` 共享的資訊。例如，假設我們寫入以下 log 條目：
 
 ```php
 Log::info('User authenticated.', ['auth_id' => Auth::id()]);

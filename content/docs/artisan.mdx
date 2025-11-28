@@ -47,7 +47,7 @@ php artisan help migrate
 <a name="laravel-sail"></a>
 #### Laravel Sail
 
-如果你使用 [Laravel Sail](/docs/{'12.x'}/sail) 作為本機開發環境，請記得使用 `sail` 命令列來呼叫 Artisan 指令。Sail 將在應用程式的 Docker 容器中執行你的 Artisan 指令：
+如果你使用 [Laravel Sail](/docs/sail) 作為本機開發環境，請記得使用 `sail` 命令列來呼叫 Artisan 指令。Sail 將在應用程式的 Docker 容器中執行你的 Artisan 指令：
 
 ```shell
 ./vendor/bin/sail artisan list
@@ -129,7 +129,7 @@ php artisan make:command SendEmails
 
 生成指令後，你應該為類別的 `signature` 和 `description` 屬性定義適當的值。這些屬性將用於在 `list` 畫面上顯示你的指令。`signature` 屬性還允許你定義 [指令的輸入期望](#defining-input-expectations)。`handle` 方法將在執行指令時被呼叫。你可以將指令邏輯放置在此方法中。
 
-讓我們看一個範例指令。請注意，我們可以透過指令的 `handle` 方法請求我們需要的任何依賴項目。Laravel [服務容器](/docs/{'12.x'}/container) 將自動注入此方法簽章中型別提示的所有依賴項目：
+讓我們看一個範例指令。請注意，我們可以透過指令的 `handle` 方法請求我們需要的任何依賴項目。Laravel [服務容器](/docs/container) 將自動注入此方法簽章中型別提示的所有依賴項目：
 
 ```php
 <?php
@@ -204,7 +204,7 @@ Closure 綁定到底層指令實例，因此你可以完全存取通常可以在
 <a name="type-hinting-dependencies"></a>
 #### 型別提示依賴
 
-除了接收指令的參數和選項外，指令 Closure 還可以型別提示你希望從 [服務容器](/docs/{'12.x'}/container) 解析的其他依賴項目：
+除了接收指令的參數和選項外，指令 Closure 還可以型別提示你希望從 [服務容器](/docs/container) 解析的其他依賴項目：
 
 ```php
 use App\Models\User;
@@ -506,7 +506,7 @@ return [
 ```
 
 > [!NOTE]
-> 完整的 [Laravel Prompts](/docs/{'12.x'}/prompts) 文件包含有關可用提示及其用法的更多資訊。
+> 完整的 [Laravel Prompts](/docs/prompts) 文件包含有關可用提示及其用法的更多資訊。
 
 如果你希望提示使用者選擇或輸入 [選項](#options)，可以在指令的 `handle` 方法中包含提示。但是，如果你只希望在使用者也被自動提示缺少參數時才提示使用者，則可以實作 `afterPromptingForMissingArguments` 方法：
 
@@ -567,7 +567,7 @@ $options = $this->options();
 ### 提示輸入
 
 > [!NOTE]
-> [Laravel Prompts](/docs/{'12.x'}/prompts) 是一個 PHP 套件，用於為你的命令列應用程式新增美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
+> [Laravel Prompts](/docs/prompts) 是一個 PHP 套件，用於為你的命令列應用程式新增美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
 
 除了顯示輸出外，你還可以在指令執行期間要求使用者提供輸入。`ask` 方法將提示使用者給定的問題，接受他們的輸入，然後將使用者的輸入回傳給你的指令：
 
@@ -769,7 +769,7 @@ use App\Domain\Orders\Commands\SendEmails;
 ])
 ```
 
-當 Artisan 啟動時，應用程式中的所有指令都將由 [服務容器](/docs/{'12.x'}/container) 解析並向 Artisan 註冊。
+當 Artisan 啟動時，應用程式中的所有指令都將由 [服務容器](/docs/container) 解析並向 Artisan 註冊。
 
 <a name="programmatically-executing-commands"></a>
 ## 程式化執行指令
@@ -825,7 +825,7 @@ $exitCode = Artisan::call('migrate:refresh', [
 <a name="queueing-artisan-commands"></a>
 #### 佇列 Artisan 指令
 
-使用 `Artisan` facade 上的 `queue` 方法，你甚至可以將 Artisan 指令排入佇列，以便由你的 [佇列工作者](/docs/{'12.x'}/queues) 在背景處理。在使用此方法之前，請確保你已設定佇列並正在執行佇列監聽器：
+使用 `Artisan` facade 上的 `queue` 方法，你甚至可以將 Artisan 指令排入佇列，以便由你的 [佇列工作者](/docs/queues) 在背景處理。在使用此方法之前，請確保你已設定佇列並正在執行佇列監聽器：
 
 ```php
 use Illuminate\Support\Facades\Artisan;
