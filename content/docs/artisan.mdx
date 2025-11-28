@@ -5,40 +5,40 @@ description: Artisan 是 Laravel 內建的命令列介面
 
 # Artisan Console
 
-- [Introduction](#introduction)
+- [簡介](#introduction)
     - [Tinker (REPL)](#tinker)
-- [Writing Commands](#writing-commands)
-    - [Generating Commands](#generating-commands)
-    - [Command Structure](#command-structure)
-    - [Closure Commands](#closure-commands)
-    - [Isolatable Commands](#isolatable-commands)
-- [Defining Input Expectations](#defining-input-expectations)
-    - [Arguments](#arguments)
-    - [Options](#options)
-    - [Input Arrays](#input-arrays)
-    - [Input Descriptions](#input-descriptions)
-    - [Prompting for Missing Input](#prompting-for-missing-input)
-- [Command I/O](#command-io)
-    - [Retrieving Input](#retrieving-input)
-    - [Prompting for Input](#prompting-for-input)
-    - [Writing Output](#writing-output)
-- [Registering Commands](#registering-commands)
-- [Programmatically Executing Commands](#programmatically-executing-commands)
-    - [Calling Commands From Other Commands](#calling-commands-from-other-commands)
-- [Signal Handling](#signal-handling)
-- [Stub Customization](#stub-customization)
-- [Events](#events)
+- [撰寫指令](#writing-commands)
+    - [生成指令](#generating-commands)
+    - [指令結構](#command-structure)
+    - [Closure 指令](#closure-commands)
+    - [可隔離指令](#isolatable-commands)
+- [定義輸入期望](#defining-input-expectations)
+    - [參數](#arguments)
+    - [選項](#options)
+    - [輸入陣列](#input-arrays)
+    - [輸入描述](#input-descriptions)
+    - [提示缺少輸入](#prompting-for-missing-input)
+- [指令 I/O](#command-io)
+    - [檢索輸入](#retrieving-input)
+    - [提示輸入](#prompting-for-input)
+    - [寫入輸出](#writing-output)
+- [註冊指令](#registering-commands)
+- [程式化執行指令](#programmatically-executing-commands)
+    - [從其他指令呼叫指令](#calling-commands-from-other-commands)
+- [訊號處理](#signal-handling)
+- [Stub 自訂](#stub-customization)
+- [事件](#events)
 
 <a name="introduction"></a>
 ## 簡介
 
-Artisan is the command line interface included with Laravel. Artisan exists at the root of your application as the `artisan` script and provides a number of helpful commands that can assist you while you build your application. To view a list of all available Artisan commands, you may use the `list` command:
+Artisan 是 Laravel 隨附的命令列介面。Artisan 作為 `artisan` 腳本存在於應用程式的根目錄中，並提供了許多有用的指令，可協助你建立應用程式。要查看所有可用的 Artisan 指令列表，可以使用 `list` 指令：
 
 ```shell
 php artisan list
 ```
 
-Every command also includes a "help" screen which displays and describes the command's available arguments and options. To view a help screen, precede the name of the command with `help`:
+每個指令還包含一個「help」畫面，顯示並描述指令可用的參數和選項。要查看說明畫面，請在指令名稱前加上 `help`：
 
 ```shell
 php artisan help migrate
@@ -47,7 +47,7 @@ php artisan help migrate
 <a name="laravel-sail"></a>
 #### Laravel Sail
 
-If you are using [Laravel Sail](/docs/{'12.x'}/sail) as your local development environment, remember to use the `sail` command line to invoke Artisan commands. Sail will execute your Artisan commands within your application's Docker containers:
+如果你使用 [Laravel Sail](/docs/{'12.x'}/sail) 作為本機開發環境，請記得使用 `sail` 命令列來呼叫 Artisan 指令。Sail 將在應用程式的 Docker 容器中執行你的 Artisan 指令：
 
 ```shell
 ./vendor/bin/sail artisan list
@@ -56,42 +56,42 @@ If you are using [Laravel Sail](/docs/{'12.x'}/sail) as your local development e
 <a name="tinker"></a>
 ### Tinker (REPL)
 
-[Laravel Tinker](https://github.com/laravel/tinker) is a powerful REPL for the Laravel framework, powered by the [PsySH](https://github.com/bobthecow/psysh) package.
+[Laravel Tinker](https://github.com/laravel/tinker) 是一個強大的 Laravel 框架 REPL，由 [PsySH](https://github.com/bobthecow/psysh) 套件提供支援。
 
 <a name="installation"></a>
 #### 安裝
 
-All Laravel applications include Tinker by default. However, you may install Tinker using Composer if you have previously removed it from your application:
+所有 Laravel 應用程式預設都包含 Tinker。但是，如果你之前已將其從應用程式中移除，則可以使用 Composer 安裝 Tinker：
 
 ```shell
 composer require laravel/tinker
 ```
 
 > [!NOTE]
-> Looking for hot reloading, multiline code editing, and autocompletion when interacting with your Laravel application? Check out [Tinkerwell](https://tinkerwell.app)!
+> 正在尋找與 Laravel 應用程式互動時的熱重載、多行程式碼編輯和自動完成功能嗎？請查看 [Tinkerwell](https://tinkerwell.app)！
 
 <a name="usage"></a>
-#### Usage
+#### 用法
 
-Tinker allows you to interact with your entire Laravel application on the command line, including your Eloquent models, jobs, events, and more. To enter the Tinker environment, run the `tinker` Artisan command:
+Tinker 允許你在命令列上與整個 Laravel 應用程式互動，包括你的 Eloquent Model、Job、Event 等。要進入 Tinker 環境，請執行 `tinker` Artisan 指令：
 
 ```shell
 php artisan tinker
 ```
 
-You can publish Tinker's configuration file using the `vendor:publish` command:
+你可以使用 `vendor:publish` 指令發布 Tinker 的設定檔：
 
 ```shell
 php artisan vendor:publish --provider="Laravel\Tinker\TinkerServiceProvider"
 ```
 
 > [!WARNING]
-> The `dispatch` helper function and `dispatch` method on the `Dispatchable` class depends on garbage collection to place the job on the queue. Therefore, when using tinker, you should use `Bus::dispatch` or `Queue::push` to dispatch jobs.
+> `dispatch` 輔助函式和 `Dispatchable` 類別上的 `dispatch` 方法依賴垃圾回收將 Job 放入 Queue 中。因此，使用 tinker 時，你應該使用 `Bus::dispatch` 或 `Queue::push` 來調度 Job。
 
 <a name="command-allow-list"></a>
-#### Command Allow List
+#### 指令允許列表
 
-Tinker utilizes an "allow" list to determine which Artisan commands are allowed to be run within its shell. By default, you may run the `clear-compiled`, `down`, `env`, `inspire`, `migrate`, `migrate:install`, `up`, and `optimize` commands. If you would like to allow more commands you may add them to the `commands` array in your `tinker.php` configuration file:
+Tinker 利用「允許」列表來決定哪些 Artisan 指令可以在其 Shell 中執行。預設情況下，你可以執行 `clear-compiled`、`down`、`env`、`inspire`、`migrate`、`migrate:install`、`up` 和 `optimize` 指令。如果你想允許更多指令，可以將它們新增到 `tinker.php` 設定檔中的 `commands` 陣列：
 
 ```php
 'commands' => [
@@ -100,9 +100,9 @@ Tinker utilizes an "allow" list to determine which Artisan commands are allowed 
 ```
 
 <a name="classes-that-should-not-be-aliased"></a>
-#### Classes That Should Not Be Aliased
+#### 不應被別名的類別
 
-Typically, Tinker automatically aliases classes as you interact with them in Tinker. However, you may wish to never alias some classes. You may accomplish this by listing the classes in the `dont_alias` array of your `tinker.php` configuration file:
+通常，當你在 Tinker 中與類別互動時，Tinker 會自動為類別建立別名。但是，你可能希望永遠不要為某些類別建立別名。你可以透過在 `tinker.php` 設定檔的 `dont_alias` 陣列中列出這些類別來達成此目的：
 
 ```php
 'dont_alias' => [
@@ -111,25 +111,25 @@ Typically, Tinker automatically aliases classes as you interact with them in Tin
 ```
 
 <a name="writing-commands"></a>
-## Writing Commands
+## 撰寫指令
 
-In addition to the commands provided with Artisan, you may build your own custom commands. Commands are typically stored in the `app/Console/Commands` directory; however, you are free to choose your own storage location as long as you instruct Laravel to [scan other directories for Artisan commands](#registering-commands).
+除了 Artisan 提供的指令外，你還可以建立自己的自訂指令。指令通常儲存在 `app/Console/Commands` 目錄中；但是，只要你指示 Laravel [掃描其他目錄以尋找 Artisan 指令](#registering-commands)，你就可以自由選擇自己的儲存位置。
 
 <a name="generating-commands"></a>
-### Generating Commands
+### 生成指令
 
-To create a new command, you may use the `make:command` Artisan command. This command will create a new command class in the `app/Console/Commands` directory. Don't worry if this directory does not exist in your application - it will be created the first time you run the `make:command` Artisan command:
+要建立新指令，可以使用 `make:command` Artisan 指令。此指令將在 `app/Console/Commands` 目錄中建立一個新的指令類別。如果你的應用程式中不存在此目錄，請不要擔心 - 它將在你第一次執行 `make:command` Artisan 指令時建立：
 
 ```shell
 php artisan make:command SendEmails
 ```
 
 <a name="command-structure"></a>
-### Command Structure
+### 指令結構
 
-After generating your command, you should define appropriate values for the `signature` and `description` properties of the class. These properties will be used when displaying your command on the `list` screen. The `signature` property also allows you to define [your command's input expectations](#defining-input-expectations). The `handle` method will be called when your command is executed. You may place your command logic in this method.
+生成指令後，你應該為類別的 `signature` 和 `description` 屬性定義適當的值。這些屬性將用於在 `list` 畫面上顯示你的指令。`signature` 屬性還允許你定義 [指令的輸入期望](#defining-input-expectations)。`handle` 方法將在執行指令時被呼叫。你可以將指令邏輯放置在此方法中。
 
-Let's take a look at an example command. Note that we are able to request any dependencies we need via the command's `handle` method. The Laravel [service container](/docs/{'12.x'}/container) will automatically inject all dependencies that are type-hinted in this method's signature:
+讓我們看一個範例指令。請注意，我們可以透過指令的 `handle` 方法請求我們需要的任何依賴項目。Laravel [服務容器](/docs/{'12.x'}/container) 將自動注入此方法簽章中型別提示的所有依賴項目：
 
 ```php
 <?php
@@ -147,7 +147,7 @@ class SendEmails extends Command
      *
      * @var string
      */
-    protected $signature = 'mail:send {'{user}'}';
+    protected $signature = 'mail:send {user}';
 
     /**
      * The console command description.
@@ -167,12 +167,12 @@ class SendEmails extends Command
 ```
 
 > [!NOTE]
-> For greater code reuse, it is good practice to keep your console commands light and let them defer to application services to accomplish their tasks. In the example above, note that we inject a service class to do the "heavy lifting" of sending the e-mails.
+> 為了提高程式碼的重複使用性，最好保持 Console 指令輕量，並讓它們延遲到應用程式服務來完成任務。在上面的範例中，請注意我們注入了一個服務類別來執行發送電子郵件的「繁重工作」。
 
 <a name="exit-codes"></a>
-#### Exit Codes
+#### 退出代碼
 
-If nothing is returned from the `handle` method and the command executes successfully, the command will exit with a `0` exit code, indicating success. However, the `handle` method may optionally return an integer to manually specify command's exit code:
+如果 `handle` 方法沒有回傳任何內容且指令執行成功，則指令將以 `0` 退出代碼退出，表示成功。但是，`handle` 方法可以選擇回傳一個整數來手動指定指令的退出代碼：
 
 ```php
 $this->error('Something went wrong.');
@@ -180,60 +180,60 @@ $this->error('Something went wrong.');
 return 1;
 ```
 
-If you would like to "fail" the command from any method within the command, you may utilize the `fail` method. The `fail` method will immediately terminate execution of the command and return an exit code of `1`:
+如果你想從指令中的任何方法「失敗」指令，可以使用 `fail` 方法。`fail` 方法將立即終止指令的執行並回傳退出代碼 `1`：
 
 ```php
 $this->fail('Something went wrong.');
 ```
 
 <a name="closure-commands"></a>
-### Closure Commands
+### Closure 指令
 
-Closure-based commands provide an alternative to defining console commands as classes. In the same way that route closures are an alternative to controllers, think of command closures as an alternative to command classes.
+基於 Closure 的指令提供了一種將 Console 指令定義為類別的替代方案。就像路由 Closure 是控制器的替代方案一樣，可以將指令 Closure 視為指令類別的替代方案。
 
-Even though the `routes/console.php` file does not define HTTP routes, it defines console based entry points (routes) into your application. Within this file, you may define all of your closure-based console commands using the `Artisan::command` method. The `command` method accepts two arguments: the [command signature](#defining-input-expectations) and a closure which receives the command's arguments and options:
+即使 `routes/console.php` 檔案沒有定義 HTTP 路由，它也定義了進入應用程式的基於 Console 的入口點（路由）。在此檔案中，你可以使用 `Artisan::command` 方法定義所有基於 Closure 的 Console 指令。`command` 方法接受兩個參數：[指令簽章](#defining-input-expectations) 和一個接收指令參數和選項的 Closure：
 
 ```php
-Artisan::command('mail:send {'{user}'}', function (string $user) {
+Artisan::command('mail:send {user}', function (string $user) {
     $this->info("Sending email to: {$user}!");
 });
 ```
 
-The closure is bound to the underlying command instance, so you have full access to all of the helper methods you would typically be able to access on a full command class.
+Closure 綁定到底層指令實例，因此你可以完全存取通常可以在完整指令類別上存取的所有輔助方法。
 
 <a name="type-hinting-dependencies"></a>
-#### Type-Hinting Dependencies
+#### 型別提示依賴
 
-In addition to receiving your command's arguments and options, command closures may also type-hint additional dependencies that you would like resolved out of the [service container](/docs/{'12.x'}/container):
+除了接收指令的參數和選項外，指令 Closure 還可以型別提示你希望從 [服務容器](/docs/{'12.x'}/container) 解析的其他依賴項目：
 
 ```php
 use App\Models\User;
 use App\Support\DripEmailer;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('mail:send {'{user}'}', function (DripEmailer $drip, string $user) {
+Artisan::command('mail:send {user}', function (DripEmailer $drip, string $user) {
     $drip->send(User::find($user));
 });
 ```
 
 <a name="closure-command-descriptions"></a>
-#### Closure Command Descriptions
+#### Closure 指令描述
 
-When defining a closure-based command, you may use the `purpose` method to add a description to the command. This description will be displayed when you run the `php artisan list` or `php artisan help` commands:
+定義基於 Closure 的指令時，可以使用 `purpose` 方法為指令新增描述。當你執行 `php artisan list` 或 `php artisan help` 指令時，將顯示此描述：
 
 ```php
-Artisan::command('mail:send {'{user}'}', function (string $user) {
+Artisan::command('mail:send {user}', function (string $user) {
     // ...
 })->purpose('Send a marketing email to a user');
 ```
 
 <a name="isolatable-commands"></a>
-### Isolatable Commands
+### 可隔離指令
 
 > [!WARNING]
-> To utilize this feature, your application must be using the `memcached`, `redis`, `dynamodb`, `database`, `file`, or `array` cache driver as your application's default cache driver. In addition, all servers must be communicating with the same central cache server.
+> 要使用此功能，你的應用程式必須使用 `memcached`、`redis`、`dynamodb`、`database`、`file` 或 `array` 快取驅動程式作為應用程式的預設快取驅動程式。此外，所有伺服器必須與同一個中央快取伺服器通訊。
 
-Sometimes you may wish to ensure that only one instance of a command can run at a time. To accomplish this, you may implement the `Illuminate\Contracts\Console\Isolatable` interface on your command class:
+有時你可能希望確保一次只能執行一個指令實例。為達成此目的，你可以在指令類別上實作 `Illuminate\Contracts\Console\Isolatable` 介面：
 
 ```php
 <?php
@@ -249,22 +249,22 @@ class SendEmails extends Command implements Isolatable
 }
 ```
 
-When you mark a command as `Isolatable`, Laravel automatically makes the `--isolated` option available for the command without needing to explicitly define it in the command's options. When the command is invoked with that option, Laravel will ensure that no other instances of that command are already running. Laravel accomplishes this by attempting to acquire an atomic lock using your application's default cache driver. If other instances of the command are running, the command will not execute; however, the command will still exit with a successful exit status code:
+當你將指令標記為 `Isolatable` 時，Laravel 會自動為指令提供 `--isolated` 選項，而無需在指令選項中明確定義它。當使用該選項呼叫指令時，Laravel 將確保沒有其他該指令的實例正在執行。Laravel 透過使用應用程式的預設快取驅動程式嘗試獲取原子鎖來達成此目的。如果其他指令實例正在執行，則該指令將不會執行；但是，指令仍將以成功的退出狀態代碼退出：
 
 ```shell
 php artisan mail:send 1 --isolated
 ```
 
-If you would like to specify the exit status code that the command should return if it is not able to execute, you may provide the desired status code via the `isolated` option:
+如果你想指定指令在無法執行時應回傳的退出狀態代碼，可以透過 `isolated` 選項提供所需的狀態代碼：
 
 ```shell
 php artisan mail:send 1 --isolated=12
 ```
 
 <a name="lock-id"></a>
-#### Lock ID
+#### 鎖定 ID
 
-By default, Laravel will use the command's name to generate the string key that is used to acquire the atomic lock in your application's cache. However, you may customize this key by defining an `isolatableId` method on your Artisan command class, allowing you to integrate the command's arguments or options into the key:
+預設情況下，Laravel 將使用指令名稱生成用於在應用程式快取中獲取原子鎖的字串鍵。但是，你可以透過在 Artisan 指令類別上定義 `isolatableId` 方法來自訂此鍵，允許你將指令的參數或選項整合到鍵中：
 
 ```php
 /**
@@ -277,9 +277,9 @@ public function isolatableId(): string
 ```
 
 <a name="lock-expiration-time"></a>
-#### Lock Expiration Time
+#### 鎖定過期時間
 
-By default, isolation locks expire after the command is finished. Or, if the command is interrupted and unable to finish, the lock will expire after one hour. However, you may adjust the lock expiration time by defining a `isolationLockExpiresAt` method on your command:
+預設情況下，隔離鎖在指令完成後過期。或者，如果指令中斷且無法完成，鎖將在一小時後過期。但是，你可以透過在指令上定義 `isolationLockExpiresAt` 方法來調整鎖定過期時間：
 
 ```php
 use DateTimeInterface;
@@ -295,14 +295,14 @@ public function isolationLockExpiresAt(): DateTimeInterface|DateInterval
 ```
 
 <a name="defining-input-expectations"></a>
-## Defining Input Expectations
+## 定義輸入期望
 
-When writing console commands, it is common to gather input from the user through arguments or options. Laravel makes it very convenient to define the input you expect from the user using the `signature` property on your commands. The `signature` property allows you to define the name, arguments, and options for the command in a single, expressive, route-like syntax.
+撰寫 Console 指令時，通常會透過參數或選項從使用者收集輸入。Laravel 讓你可以使用指令上的 `signature` 屬性非常方便地定義你期望從使用者獲得的輸入。`signature` 屬性允許你以單一、表達性強、類似路由的語法定義指令的名稱、參數和選項。
 
 <a name="arguments"></a>
-### Arguments
+### 參數
 
-All user supplied arguments and options are wrapped in curly braces. In the following example, the command defines one required argument: `user`:
+所有使用者提供的參數和選項都包在花括號中。在以下範例中，指令定義了一個必要的參數：`user`：
 
 ```php
 /**
@@ -310,10 +310,10 @@ All user supplied arguments and options are wrapped in curly braces. In the foll
  *
  * @var string
  */
-protected $signature = 'mail:send {'{user}'}';
+protected $signature = 'mail:send {user}';
 ```
 
-You may also make arguments optional or define default values for arguments:
+你也可以將參數設為可選或為參數定義預設值：
 
 ```php
 // Optional argument...
@@ -324,9 +324,9 @@ You may also make arguments optional or define default values for arguments:
 ```
 
 <a name="options"></a>
-### Options
+### 選項
 
-Options, like arguments, are another form of user input. Options are prefixed by two hyphens (`--`) when they are provided via the command line. There are two types of options: those that receive a value and those that don't. Options that don't receive a value serve as a boolean "switch". Let's take a look at an example of this type of option:
+選項，就像參數一樣，是使用者輸入的另一種形式。當透過命令列提供選項時，選項以兩個連字號 (`--`) 為前綴。有兩種類型的選項：接收值的選項和不接收值的選項。不接收值的選項作為布林「開關」。讓我們看一個這種類型選項的範例：
 
 ```php
 /**
@@ -334,19 +334,19 @@ Options, like arguments, are another form of user input. Options are prefixed by
  *
  * @var string
  */
-protected $signature = 'mail:send {'{user}'} {--queue}';
+protected $signature = 'mail:send {user} {--queue}';
 ```
 
-In this example, the `--queue` switch may be specified when calling the Artisan command. If the `--queue` switch is passed, the value of the option will be `true`. Otherwise, the value will be `false`:
+在此範例中，可以在呼叫 Artisan 指令時指定 `--queue` 開關。如果傳遞了 `--queue` 開關，則選項的值將為 `true`。否則，值將為 `false`：
 
 ```shell
 php artisan mail:send 1 --queue
 ```
 
 <a name="options-with-values"></a>
-#### Options With Values
+#### 帶有值的選項
 
-Next, let's take a look at an option that expects a value. If the user must specify a value for an option, you should suffix the option name with a `=` sign:
+接下來，讓我們看一個期望值的選項。如果使用者必須為選項指定值，你應該在選項名稱後加上 `=` 符號：
 
 ```php
 /**
@@ -354,76 +354,76 @@ Next, let's take a look at an option that expects a value. If the user must spec
  *
  * @var string
  */
-protected $signature = 'mail:send {'{user}'} {--queue=}';
+protected $signature = 'mail:send {user} {--queue=}';
 ```
 
-In this example, the user may pass a value for the option like so. If the option is not specified when invoking the command, its value will be `null`:
+在此範例中，使用者可以像這樣為選項傳遞值。如果在呼叫指令時未指定選項，其值將為 `null`：
 
 ```shell
 php artisan mail:send 1 --queue=default
 ```
 
-You may assign default values to options by specifying the default value after the option name. If no option value is passed by the user, the default value will be used:
+你可以透過在選項名稱後指定預設值來為選項分配預設值。如果使用者未傳遞選項值，將使用預設值：
 
 ```php
-'mail:send {'{user}'} {--queue=default}'
+'mail:send {user} {--queue=default}'
 ```
 
 <a name="option-shortcuts"></a>
-#### Option Shortcuts
+#### 選項捷徑
 
-To assign a shortcut when defining an option, you may specify it before the option name and use the `|` character as a delimiter to separate the shortcut from the full option name:
+要在定義選項時分配捷徑，你可以在選項名稱前指定它，並使用 `|` 字元作為分隔符號將捷徑與完整選項名稱分開：
 
 ```php
-'mail:send {'{user}'} {--Q|queue=}'
+'mail:send {user} {--Q|queue=}'
 ```
 
-When invoking the command on your terminal, option shortcuts should be prefixed with a single hyphen and no `=` character should be included when specifying a value for the option:
+在終端機上呼叫指令時，選項捷徑應以單個連字號為前綴，並且在為選項指定值時不應包含 `=` 字元：
 
 ```shell
 php artisan mail:send 1 -Qdefault
 ```
 
 <a name="input-arrays"></a>
-### Input Arrays
+### 輸入陣列
 
-If you would like to define arguments or options to expect multiple input values, you may use the `*` character. First, let's take a look at an example that specifies such an argument:
+如果你想定義參數或選項以期望多個輸入值，可以使用 `*` 字元。首先，讓我們看一個指定此類參數的範例：
 
 ```php
 'mail:send {user*}'
 ```
 
-When running this command, the `user` arguments may be passed in order to the command line. For example, the following command will set the value of `user` to an array with `1` and `2` as its values:
+執行此指令時，可以按順序將 `user` 參數傳遞給命令列。例如，以下指令將 `user` 的值設定為包含 `1` 和 `2` 作為其值的陣列：
 
 ```shell
 php artisan mail:send 1 2
 ```
 
-This `*` character can be combined with an optional argument definition to allow zero or more instances of an argument:
+此 `*` 字元可以與可選參數定義結合使用，以允許零個或多個參數實例：
 
 ```php
 'mail:send {user?*}'
 ```
 
 <a name="option-arrays"></a>
-#### Option Arrays
+#### 選項陣列
 
-When defining an option that expects multiple input values, each option value passed to the command should be prefixed with the option name:
+定義期望多個輸入值的選項時，傳遞給指令的每個選項值都應以選項名稱為前綴：
 
 ```php
 'mail:send {--id=*}'
 ```
 
-Such a command may be invoked by passing multiple `--id` arguments:
+可以透過傳遞多個 `--id` 參數來呼叫此類指令：
 
 ```shell
 php artisan mail:send --id=1 --id=2
 ```
 
 <a name="input-descriptions"></a>
-### Input Descriptions
+### 輸入描述
 
-You may assign descriptions to input arguments and options by separating the argument name from the description using a colon. If you need a little extra room to define your command, feel free to spread the definition across multiple lines:
+你可以透過使用冒號將參數名稱與描述分開來為輸入參數和選項分配描述。如果你需要一點額外的空間來定義指令，請隨意將定義分佈在多行中：
 
 ```php
 /**
@@ -437,9 +437,9 @@ protected $signature = 'mail:send
 ```
 
 <a name="prompting-for-missing-input"></a>
-### Prompting for Missing Input
+### 提示缺少輸入
 
-If your command contains required arguments, the user will receive an error message when they are not provided. Alternatively, you may configure your command to automatically prompt the user when required arguments are missing by implementing the `PromptsForMissingInput` interface:
+如果你的指令包含必要的參數，當使用者未提供這些參數時，他們將收到錯誤訊息。或者，你可以透過實作 `PromptsForMissingInput` 介面來設定指令，以便在缺少必要參數時自動提示使用者：
 
 ```php
 <?php
@@ -456,13 +456,13 @@ class SendEmails extends Command implements PromptsForMissingInput
      *
      * @var string
      */
-    protected $signature = 'mail:send {'{user}'}';
+    protected $signature = 'mail:send {user}';
 
     // ...
 }
 ```
 
-If Laravel needs to gather a required argument from the user, it will automatically ask the user for the argument by intelligently phrasing the question using either the argument name or description. If you wish to customize the question used to gather the required argument, you may implement the `promptForMissingArgumentsUsing` method, returning an array of questions keyed by the argument names:
+如果 Laravel 需要從使用者收集必要的參數，它將自動詢問使用者該參數，並使用參數名稱或描述智慧地表達問題。如果你希望自訂用於收集必要參數的問題，可以實作 `promptForMissingArgumentsUsing` 方法，回傳以參數名稱為鍵的問題陣列：
 
 ```php
 /**
@@ -478,7 +478,7 @@ protected function promptForMissingArgumentsUsing(): array
 }
 ```
 
-You may also provide placeholder text by using a tuple containing the question and placeholder:
+你也可以透過使用包含問題和預留位置的 Tuple 來提供預留位置文字：
 
 ```php
 return [
@@ -486,7 +486,7 @@ return [
 ];
 ```
 
-If you would like complete control over the prompt, you may provide a closure that should prompt the user and return their answer:
+如果你想要完全控制提示，可以提供一個 Closure，該 Closure 應提示使用者並回傳他們的答案：
 
 ```php
 use App\Models\User;
@@ -506,9 +506,9 @@ return [
 ```
 
 > [!NOTE]
-The comprehensive [Laravel Prompts](/docs/{'12.x'}/prompts) documentation includes additional information on the available prompts and their usage.
+> 完整的 [Laravel Prompts](/docs/{'12.x'}/prompts) 文件包含有關可用提示及其用法的更多資訊。
 
-If you wish to prompt the user to select or enter [options](#options), you may include prompts in your command's `handle` method. However, if you only wish to prompt the user when they have also been automatically prompted for missing arguments, then you may implement the `afterPromptingForMissingArguments` method:
+如果你希望提示使用者選擇或輸入 [選項](#options)，可以在指令的 `handle` 方法中包含提示。但是，如果你只希望在使用者也被自動提示缺少參數時才提示使用者，則可以實作 `afterPromptingForMissingArguments` 方法：
 
 ```php
 use Symfony\Component\Console\Input\InputInterface;
@@ -530,12 +530,12 @@ protected function afterPromptingForMissingArguments(InputInterface $input, Outp
 ```
 
 <a name="command-io"></a>
-## Command I/O
+## 指令 I/O
 
 <a name="retrieving-input"></a>
-### Retrieving Input
+### 檢索輸入
 
-While your command is executing, you will likely need to access the values for the arguments and options accepted by your command. To do so, you may use the `argument` and `option` methods. If an argument or option does not exist, `null` will be returned:
+當你的指令正在執行時，你可能需要存取指令接受的參數和選項的值。為此，你可以使用 `argument` 和 `option` 方法。如果參數或選項不存在，將回傳 `null`：
 
 ```php
 /**
@@ -547,13 +547,13 @@ public function handle(): void
 }
 ```
 
-If you need to retrieve all of the arguments as an `array`, call the `arguments` method:
+如果你需要以 `array` 形式檢索所有參數，請呼叫 `arguments` 方法：
 
 ```php
 $arguments = $this->arguments();
 ```
 
-Options may be retrieved just as easily as arguments using the `option` method. To retrieve all of the options as an array, call the `options` method:
+選項可以像參數一樣輕鬆地使用 `option` 方法檢索。要以陣列形式檢索所有選項，請呼叫 `options` 方法：
 
 ```php
 // Retrieve a specific option...
@@ -564,12 +564,12 @@ $options = $this->options();
 ```
 
 <a name="prompting-for-input"></a>
-### Prompting for Input
+### 提示輸入
 
 > [!NOTE]
-> [Laravel Prompts](/docs/{'12.x'}/prompts) is a PHP package for adding beautiful and user-friendly forms to your command-line applications, with browser-like features including placeholder text and validation.
+> [Laravel Prompts](/docs/{'12.x'}/prompts) 是一個 PHP 套件，用於為你的命令列應用程式新增美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
 
-In addition to displaying output, you may also ask the user to provide input during the execution of your command. The `ask` method will prompt the user with the given question, accept their input, and then return the user's input back to your command:
+除了顯示輸出外，你還可以在指令執行期間要求使用者提供輸入。`ask` 方法將提示使用者給定的問題，接受他們的輸入，然後將使用者的輸入回傳給你的指令：
 
 ```php
 /**
@@ -583,22 +583,22 @@ public function handle(): void
 }
 ```
 
-The `ask` method also accepts an optional second argument which specifies the default value that should be returned if no user input is provided:
+`ask` 方法還接受一個可選的第二個參數，該參數指定如果未提供使用者輸入應回傳的預設值：
 
 ```php
 $name = $this->ask('What is your name?', 'Taylor');
 ```
 
-The `secret` method is similar to `ask`, but the user's input will not be visible to them as they type in the console. This method is useful when asking for sensitive information such as passwords:
+`secret` 方法類似於 `ask`，但使用者在控制台中輸入時，其輸入將不可見。此方法在詢問密碼等敏感資訊時很有用：
 
 ```php
 $password = $this->secret('What is the password?');
 ```
 
 <a name="asking-for-confirmation"></a>
-#### Asking for Confirmation
+#### 詢問確認
 
-If you need to ask the user for a simple "yes or no" confirmation, you may use the `confirm` method. By default, this method will return `false`. However, if the user enters `y` or `yes` in response to the prompt, the method will return `true`.
+如果你需要詢問使用者一個簡單的「是或否」確認，可以使用 `confirm` 方法。預設情況下，此方法將回傳 `false`。但是，如果使用者在提示時輸入 `y` 或 `yes`，該方法將回傳 `true`。
 
 ```php
 if ($this->confirm('Do you wish to continue?')) {
@@ -606,7 +606,7 @@ if ($this->confirm('Do you wish to continue?')) {
 }
 ```
 
-If necessary, you may specify that the confirmation prompt should return `true` by default by passing `true` as the second argument to the `confirm` method:
+如有必要，你可以透過將 `true` 作為第二個參數傳遞給 `confirm` 方法，來指定確認提示預設應回傳 `true`：
 
 ```php
 if ($this->confirm('Do you wish to continue?', true)) {
@@ -615,15 +615,15 @@ if ($this->confirm('Do you wish to continue?', true)) {
 ```
 
 <a name="auto-completion"></a>
-#### Auto-Completion
+#### 自動完成
 
-The `anticipate` method can be used to provide auto-completion for possible choices. The user can still provide any answer, regardless of the auto-completion hints:
+`anticipate` 方法可用於為可能的選擇提供自動完成功能。無論自動完成提示如何，使用者仍然可以提供任何答案：
 
 ```php
 $name = $this->anticipate('What is your name?', ['Taylor', 'Dayle']);
 ```
 
-Alternatively, you may pass a closure as the second argument to the `anticipate` method. The closure will be called each time the user types an input character. The closure should accept a string parameter containing the user's input so far, and return an array of options for auto-completion:
+或者，你可以將 Closure 作為第二個參數傳遞給 `anticipate` 方法。每當使用者輸入字元時，都會呼叫 Closure。Closure 應接受包含使用者目前輸入的字串參數，並回傳自動完成選項的陣列：
 
 ```php
 use App\Models\Address;
@@ -637,9 +637,9 @@ $name = $this->anticipate('What is your address?', function (string $input) {
 ```
 
 <a name="multiple-choice-questions"></a>
-#### Multiple Choice Questions
+#### 多選題
 
-If you need to give the user a predefined set of choices when asking a question, you may use the `choice` method. You may set the array index of the default value to be returned if no option is chosen by passing the index as the third argument to the method:
+如果你需要在提問時給使用者一組預定義的選擇，可以使用 `choice` 方法。你可以透過將索引作為第三個參數傳遞給方法，來設定如果未選擇任何選項時要回傳的預設值的陣列索引：
 
 ```php
 $name = $this->choice(
@@ -649,7 +649,7 @@ $name = $this->choice(
 );
 ```
 
-In addition, the `choice` method accepts optional fourth and fifth arguments for determining the maximum number of attempts to select a valid response and whether multiple selections are permitted:
+此外，`choice` 方法接受可選的第四個和第五個參數，用於確定選擇有效回應的最大嘗試次數以及是否允許多選：
 
 ```php
 $name = $this->choice(
@@ -662,9 +662,9 @@ $name = $this->choice(
 ```
 
 <a name="writing-output"></a>
-### Writing Output
+### 寫入輸出
 
-To send output to the console, you may use the `line`, `newLine`, `info`, `comment`, `question`, `warn`, `alert`, and `error` methods. Each of these methods will use appropriate ANSI colors for their purpose. For example, let's display some general information to the user. Typically, the `info` method will display in the console as green colored text:
+要將輸出傳送到控制台，可以使用 `line`、`newLine`、`info`、`comment`、`question`、`warn`、`alert` 和 `error` 方法。這些方法中的每一個都將使用適當的 ANSI 顏色來達到其目的。例如，讓我們向使用者顯示一些一般資訊。通常，`info` 方法將在控制台中顯示為綠色文字：
 
 ```php
 /**
@@ -678,19 +678,19 @@ public function handle(): void
 }
 ```
 
-To display an error message, use the `error` method. Error message text is typically displayed in red:
+要顯示錯誤訊息，請使用 `error` 方法。錯誤訊息文字通常顯示為紅色：
 
 ```php
 $this->error('Something went wrong!');
 ```
 
-You may use the `line` method to display plain, uncolored text:
+你可以使用 `line` 方法顯示純文字、無顏色文字：
 
 ```php
 $this->line('Display this on the screen');
 ```
 
-You may use the `newLine` method to display a blank line:
+你可以使用 `newLine` 方法顯示空白行：
 
 ```php
 // Write a single blank line...
@@ -701,9 +701,9 @@ $this->newLine(3);
 ```
 
 <a name="tables"></a>
-#### Tables
+#### 表格
 
-The `table` method makes it easy to correctly format multiple rows / columns of data. All you need to do is provide the column names and the data for the table and Laravel will automatically calculate the appropriate width and height of the table for you:
+`table` 方法使得正確格式化多行/列資料變得容易。你只需要提供列名稱和表格資料，Laravel 就會自動為你計算表格的適當寬度和高度：
 
 ```php
 use App\Models\User;
@@ -715,9 +715,9 @@ $this->table(
 ```
 
 <a name="progress-bars"></a>
-#### Progress Bars
+#### 進度條
 
-For long running tasks, it can be helpful to show a progress bar that informs users how complete the task is. Using the `withProgressBar` method, Laravel will display a progress bar and advance its progress for each iteration over a given iterable value:
+對於長時間執行的任務，顯示進度條來通知使用者任務完成度會很有幫助。使用 `withProgressBar` 方法，Laravel 將顯示一個進度條，並在給定可迭代值的每次迭代中推進其進度：
 
 ```php
 use App\Models\User;
@@ -727,7 +727,7 @@ $users = $this->withProgressBar(User::all(), function (User $user) {
 });
 ```
 
-Sometimes, you may need more manual control over how a progress bar is advanced. First, define the total number of steps the process will iterate through. Then, advance the progress bar after processing each item:
+有時，你可能需要對進度條的推進方式進行更多手動控制。首先，定義流程將迭代的總步驟數。然後，在處理每個項目後推進進度條：
 
 ```php
 $users = App\Models\User::all();
@@ -746,12 +746,12 @@ $bar->finish();
 ```
 
 > [!NOTE]
-> For more advanced options, check out the [Symfony Progress Bar component documentation](https://symfony.com/doc/current/components/console/helpers/progressbar.html).
+> 有關更多進階選項，請查看 [Symfony Progress Bar 元件文件](https://symfony.com/doc/current/components/console/helpers/progressbar.html)。
 
 <a name="registering-commands"></a>
-## Registering Commands
+## 註冊指令
 
-By default, Laravel automatically registers all commands within the `app/Console/Commands` directory. However, you can instruct Laravel to scan other directories for Artisan commands using the `withCommands` method in your application's `bootstrap/app.php` file:
+預設情況下，Laravel 會自動註冊 `app/Console/Commands` 目錄中的所有指令。但是，你可以使用應用程式 `bootstrap/app.php` 檔案中的 `withCommands` 方法指示 Laravel 掃描其他目錄以尋找 Artisan 指令：
 
 ```php
 ->withCommands([
@@ -759,7 +759,7 @@ By default, Laravel automatically registers all commands within the `app/Console
 ])
 ```
 
-If necessary, you may also manually register commands by providing the command's class name to the `withCommands` method:
+如有必要，你也可以透過將指令的類別名稱提供給 `withCommands` 方法來手動註冊指令：
 
 ```php
 use App\Domain\Orders\Commands\SendEmails;
@@ -769,18 +769,18 @@ use App\Domain\Orders\Commands\SendEmails;
 ])
 ```
 
-When Artisan boots, all the commands in your application will be resolved by the [service container](/docs/{'12.x'}/container) and registered with Artisan.
+當 Artisan 啟動時，應用程式中的所有指令都將由 [服務容器](/docs/{'12.x'}/container) 解析並向 Artisan 註冊。
 
 <a name="programmatically-executing-commands"></a>
-## Programmatically Executing Commands
+## 程式化執行指令
 
-Sometimes you may wish to execute an Artisan command outside of the CLI. For example, you may wish to execute an Artisan command from a route or controller. You may use the `call` method on the `Artisan` facade to accomplish this. The `call` method accepts either the command's signature name or class name as its first argument, and an array of command parameters as the second argument. The exit code will be returned:
+有時你可能希望在 CLI 之外執行 Artisan 指令。例如，你可能希望從路由或控制器執行 Artisan 指令。你可以使用 `Artisan` facade 上的 `call` 方法來實現此目的。`call` 方法接受指令的簽章名稱或類別名稱作為其第一個參數，並接受指令參數陣列作為第二個參數。將回傳退出代碼：
 
 ```php
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/user/{'{user}'}/mail', function (string $user) {
+Route::post('/user/{user}/mail', function (string $user) {
     $exitCode = Artisan::call('mail:send', [
         'user' => $user, '--queue' => 'default'
     ]);
@@ -789,16 +789,16 @@ Route::post('/user/{'{user}'}/mail', function (string $user) {
 });
 ```
 
-Alternatively, you may pass the entire Artisan command to the `call` method as a string:
+或者，你可以將整個 Artisan 指令作為字串傳遞給 `call` 方法：
 
 ```php
 Artisan::call('mail:send 1 --queue=default');
 ```
 
 <a name="passing-array-values"></a>
-#### Passing Array Values
+#### 傳遞陣列值
 
-If your command defines an option that accepts an array, you may pass an array of values to that option:
+如果你的指令定義了一個接受陣列的選項，你可以將值陣列傳遞給該選項：
 
 ```php
 use Illuminate\Support\Facades\Artisan;
@@ -812,9 +812,9 @@ Route::post('/mail', function () {
 ```
 
 <a name="passing-boolean-values"></a>
-#### Passing Boolean Values
+#### 傳遞布林值
 
-If you need to specify the value of an option that does not accept string values, such as the `--force` flag on the `migrate:refresh` command, you should pass `true` or `false` as the value of the option:
+如果你需要指定不接受字串值的選項的值，例如 `migrate:refresh` 指令上的 `--force` 旗標，你應該傳遞 `true` 或 `false` 作為選項的值：
 
 ```php
 $exitCode = Artisan::call('migrate:refresh', [
@@ -823,15 +823,15 @@ $exitCode = Artisan::call('migrate:refresh', [
 ```
 
 <a name="queueing-artisan-commands"></a>
-#### Queueing Artisan Commands
+#### 佇列 Artisan 指令
 
-Using the `queue` method on the `Artisan` facade, you may even queue Artisan commands so they are processed in the background by your [queue workers](/docs/{'12.x'}/queues). Before using this method, make sure you have configured your queue and are running a queue listener:
+使用 `Artisan` facade 上的 `queue` 方法，你甚至可以將 Artisan 指令排入佇列，以便由你的 [佇列工作者](/docs/{'12.x'}/queues) 在背景處理。在使用此方法之前，請確保你已設定佇列並正在執行佇列監聽器：
 
 ```php
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/user/{'{user}'}/mail', function (string $user) {
+Route::post('/user/{user}/mail', function (string $user) {
     Artisan::queue('mail:send', [
         'user' => $user, '--queue' => 'default'
     ]);
@@ -840,7 +840,7 @@ Route::post('/user/{'{user}'}/mail', function (string $user) {
 });
 ```
 
-Using the `onConnection` and `onQueue` methods, you may specify the connection or queue the Artisan command should be dispatched to:
+使用 `onConnection` 和 `onQueue` 方法，你可以指定 Artisan 指令應分派到的連線或佇列：
 
 ```php
 Artisan::queue('mail:send', [
@@ -849,9 +849,9 @@ Artisan::queue('mail:send', [
 ```
 
 <a name="calling-commands-from-other-commands"></a>
-### Calling Commands From Other Commands
+### 從其他指令呼叫指令
 
-Sometimes you may wish to call other commands from an existing Artisan command. You may do so using the `call` method. This `call` method accepts the command name and an array of command arguments / options:
+有時你可能希望從現有的 Artisan 指令呼叫其他指令。你可以使用 `call` 方法來執行此操作。此 `call` 方法接受指令名稱和指令參數/選項陣列：
 
 ```php
 /**
@@ -867,7 +867,7 @@ public function handle(): void
 }
 ```
 
-If you would like to call another console command and suppress all of its output, you may use the `callSilently` method. The `callSilently` method has the same signature as the `call` method:
+如果你想呼叫另一個控制台指令並抑制其所有輸出，可以使用 `callSilently` 方法。`callSilently` 方法與 `call` 方法具有相同的簽章：
 
 ```php
 $this->callSilently('mail:send', [
@@ -876,9 +876,9 @@ $this->callSilently('mail:send', [
 ```
 
 <a name="signal-handling"></a>
-## Signal Handling
+## 訊號處理
 
-As you may know, operating systems allow signals to be sent to running processes. For example, the `SIGTERM` signal is how operating systems ask a program to terminate. If you wish to listen for signals in your Artisan console commands and execute code when they occur, you may use the `trap` method:
+正如你所知，作業系統允許將訊號傳送到正在執行的程序。例如，`SIGTERM` 訊號是作業系統要求程式終止的方式。如果你希望在 Artisan 控制台指令中監聽訊號並在發生訊號時執行程式碼，可以使用 `trap` 方法：
 
 ```php
 /**
@@ -894,7 +894,7 @@ public function handle(): void
 }
 ```
 
-To listen for multiple signals at once, you may provide an array of signals to the `trap` method:
+要一次監聽多個訊號，可以將訊號陣列提供給 `trap` 方法：
 
 ```php
 $this->trap([SIGTERM, SIGQUIT], function (int $signal) {
@@ -905,17 +905,17 @@ $this->trap([SIGTERM, SIGQUIT], function (int $signal) {
 ```
 
 <a name="stub-customization"></a>
-## Stub Customization
+## Stub 自訂
 
-The Artisan console's `make` commands are used to create a variety of classes, such as controllers, jobs, migrations, and tests. These classes are generated using "stub" files that are populated with values based on your input. However, you may want to make small changes to files generated by Artisan. To accomplish this, you may use the `stub:publish` command to publish the most common stubs to your application so that you can customize them:
+Artisan 控制台的 `make` 指令用於建立各種各樣的類別，例如控制器、任務、遷移和測試。這些類別是使用「Stub」檔案產生的，這些檔案會根據你的輸入填入值。但是，你可能想要對 Artisan 產生的檔案進行小幅更改。為此，你可以使用 `stub:publish` 指令將最常見的 Stub 發佈到你的應用程式，以便你可以自訂它們：
 
 ```shell
 php artisan stub:publish
 ```
 
-The published stubs will be located within a `stubs` directory in the root of your application. Any changes you make to these stubs will be reflected when you generate their corresponding classes using Artisan's `make` commands.
+發佈的 Stub 將位於應用程式根目錄下的 `stubs` 目錄中。當你使用 Artisan 的 `make` 指令產生相應的類別時，你對這些 Stub 所做的任何更改都將反映出來。
 
 <a name="events"></a>
-## Events
+## 事件
 
-Artisan dispatches three events when running commands: `Illuminate\Console\Events\ArtisanStarting`, `Illuminate\Console\Events\CommandStarting`, and `Illuminate\Console\Events\CommandFinished`. The `ArtisanStarting` event is dispatched immediately when Artisan starts running. Next, the `CommandStarting` event is dispatched immediately before a command runs. Finally, the `CommandFinished` event is dispatched once a command finishes executing.
+Artisan 在執行指令時會分派三個事件：`Illuminate\Console\Events\ArtisanStarting`、`Illuminate\Console\Events\CommandStarting` 和 `Illuminate\Console\Events\CommandFinished`。`ArtisanStarting` 事件在 Artisan 開始執行時立即分派。接下來，`CommandStarting` 事件在指令執行之前立即分派。最後，`CommandFinished` 事件在指令完成執行後分派。

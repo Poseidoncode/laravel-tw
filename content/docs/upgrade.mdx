@@ -87,7 +87,7 @@ composer global update laravel/installer
 ```
 
 ```shell tab=Windows PowerShell
-# Run as administrator...
+# 以管理員身分執行...
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
 ```
 
@@ -162,13 +162,13 @@ $example->date === null;
 `Schema::getTables()`、`Schema::getViews()` 和 `Schema::getTypes()` 方法現在預設會包含所有 schemas 的結果。你可以傳遞 `schema` 參數來僅擷取指定 schema 的結果：
 
 ```php
-// All tables on all schemas...
+// 所有 schemas 上的所有資料表...
 $tables = Schema::getTables();
 
-// All tables on the 'main' schema...
+// 'main' schema 上的所有資料表...
 $tables = Schema::getTables(schema: 'main');
 
-// All tables on the 'main' and 'blog' schemas...
+// 'main' 和 'blog' schemas 上的所有資料表...
 $tables = Schema::getTables(schema: ['main', 'blog']);
 ```
 
@@ -252,7 +252,7 @@ use Illuminate\Validation\Rules\File;
 
 'photo' => 'required|image:allow_svg'
 
-// Or...
+// 或者...
 'photo' => ['required', File::image(allowSvg: true)],
 ```
 

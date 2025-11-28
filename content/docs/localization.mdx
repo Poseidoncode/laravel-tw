@@ -134,7 +134,7 @@ public function boot(): void
 // lang/en/messages.php
 
 return [
-    'welcome' => 'Welcome to our application!',
+    'welcome' => '歡迎來到我們的應用程式！',
 ];
 ```
 
@@ -189,7 +189,7 @@ echo __('I love programming.');
 如果你願意，你可以在翻譯字串中定義佔位符。所有佔位符都以 `:` 為前綴。例如，你可以定義一個帶有佔位符名稱的歡迎訊息：
 
 ```php
-'welcome' => 'Welcome, :name',
+    'welcome' => '歡迎，:name',
 ```
 
 要在擷取翻譯字串時替換佔位符，你可以將替換陣列作為第二個引數傳遞給 `__` 函式：
@@ -201,8 +201,8 @@ echo __('messages.welcome', ['name' => 'dayle']);
 如果你的佔位符包含全部大寫字母，或只有第一個字母大寫，翻譯值會相應地大寫：
 
 ```php
-'welcome' => 'Welcome, :NAME', // Welcome, DAYLE
-'goodbye' => 'Goodbye, :Name', // Goodbye, Dayle
+    'welcome' => '歡迎，:NAME', // 歡迎，DAYLE
+    'goodbye' => '再見，:Name', // 再見，Dayle
 ```
 
 <a name="object-replacement-formatting"></a>
@@ -233,7 +233,7 @@ public function boot(): void
 複數化是一個複雜的問題，因為不同的語言有各種複雜的複數化規則；然而，Laravel 可以根據你定義的複數化規則以不同方式翻譯字串。使用 `|` 字元，你可以區分字串的單數和複數形式：
 
 ```php
-'apples' => 'There is one apple|There are many apples',
+    'apples' => '有一顆蘋果|有很多蘋果',
 ```
 
 當然，使用[翻譯字串作為鍵](#using-translation-strings-as-keys)時也支援複數化：
@@ -247,7 +247,7 @@ public function boot(): void
 你甚至可以建立更複雜的複數化規則，為多個值範圍指定翻譯字串：
 
 ```php
-'apples' => '{0} There are none|[1,19] There are some|[20,*] There are many',
+    'apples' => '{0} 沒有|[1,19] 有一些|[20,*] 有很多',
 ```
 
 在定義了具有複數化選項的翻譯字串後，你可以使用 `trans_choice` 函式來擷取給定「計數」的行。在這個範例中，由於計數大於一，會回傳翻譯字串的複數形式：
@@ -259,7 +259,7 @@ echo trans_choice('messages.apples', 10);
 你也可以在複數化字串中定義佔位符屬性。這些佔位符可以透過將陣列作為第三個引數傳遞給 `trans_choice` 函式來替換：
 
 ```php
-'minutes_ago' => '{1} :value minute ago|[2,*] :value minutes ago',
+    'minutes_ago' => '{1} :value 分鐘前|[2,*] :value 分鐘前',
 
 echo trans_choice('time.minutes_ago', 5, ['value' => 5]);
 ```
@@ -267,7 +267,7 @@ echo trans_choice('time.minutes_ago', 5, ['value' => 5]);
 如果你想顯示傳遞給 `trans_choice` 函式的整數值，你可以使用內建的 `:count` 佔位符：
 
 ```php
-'apples' => '{0} There are none|{1} There is one|[2,*] There are :count',
+    'apples' => '{0} 沒有|{1} 有一顆|[2,*] 有 :count 顆',
 ```
 
 <a name="overriding-package-language-files"></a>

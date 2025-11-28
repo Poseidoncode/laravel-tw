@@ -49,97 +49,97 @@ description: Laravel 讓你能輕鬆地透過 WebSockets 廣播伺服器端事�
 <a name="introduction"></a>
 ## 簡介
 
-In many modern web applications, WebSockets are used to implement realtime, live-updating user interfaces. When some data is updated on the server, a message is typically sent over a WebSocket connection to be handled by the client. WebSockets provide a more efficient alternative to continually polling your application's server for data changes that should be reflected in your UI.
+在許多現代 Web 應用程式中，WebSockets 用於實現即時、即時更新的使用者介面。當伺服器上的某些資料更新時，通常會透過 WebSocket 連線傳送訊息以供客戶端處理。WebSockets 提供了一種更有效的替代方案，可以持續輪詢應用程式伺服器以獲取應反映在 UI 中的資料變更。
 
-For example, imagine your application is able to export a user's data to a CSV file and email it to them. However, creating this CSV file takes several minutes so you choose to create and mail the CSV within a [queued job](/docs/{'12.x'}/queues). When the CSV has been created and mailed to the user, we can use event broadcasting to dispatch an `App\Events\UserDataExported` event that is received by our application's JavaScript. Once the event is received, we can display a message to the user that their CSV has been emailed to them without them ever needing to refresh the page.
+例如，想像你的應用程式能夠將使用者的資料匯出為 CSV 檔案並透過電子郵件傳送給他們。但是，建立此 CSV 檔案需要幾分鐘時間，因此你選擇在 [佇列任務](/docs/{'12.x'}/queues) 中建立並郵寄 CSV。當 CSV 建立並郵寄給使用者後，我們可以使用事件廣播分派 `App\Events\UserDataExported` 事件，該事件由我們的應用程式的 JavaScript 接收。收到事件後，我們可以向使用者顯示一條訊息，指出他們的 CSV 已透過電子郵件傳送給他們，而無需重新整理頁面。
 
-To assist you in building these types of features, Laravel makes it easy to "broadcast" your server-side Laravel [events](/docs/{'12.x'}/events) over a WebSocket connection. Broadcasting your Laravel events allows you to share the same event names and data between your server-side Laravel application and your client-side JavaScript application.
+為了協助你建立這些類型的功能，Laravel 讓你可以輕鬆地透過 WebSocket 連線「廣播」你的伺服器端 Laravel [事件](/docs/{'12.x'}/events)。廣播你的 Laravel 事件允許你在伺服器端 Laravel 應用程式和客戶端 JavaScript 應用程式之間共用相同的事件名稱和資料。
 
-The core concepts behind broadcasting are simple: clients connect to named channels on the frontend, while your Laravel application broadcasts events to these channels on the backend. These events can contain any additional data you wish to make available to the frontend.
+廣播背後的核心概念很簡單：客戶端連線到前端的命名頻道，而你的 Laravel 應用程式在後端向這些頻道廣播事件。這些事件可以包含你希望提供給前端的任何其他資料。
 
 <a name="supported-drivers"></a>
-#### Supported Drivers
+#### 支援的驅動程式
 
-By default, Laravel includes three server-side broadcasting drivers for you to choose from: [Laravel Reverb](https://reverb.laravel.com), [Pusher Channels](https://pusher.com/channels), and [Ably](https://ably.com).
+預設情況下，Laravel 包含三個伺服器端廣播驅動程式供你選擇：[Laravel Reverb](https://reverb.laravel.com)、[Pusher Channels](https://pusher.com/channels) 和 [Ably](https://ably.com)。
 
 > [!NOTE]
-> Before diving into event broadcasting, make sure you have read Laravel's documentation on [events and listeners](/docs/{'12.x'}/events).
+> 在深入研究事件廣播之前，請確保你已閱讀 Laravel 關於 [事件和監聽器](/docs/{'12.x'}/events) 的文件。
 
 <a name="quickstart"></a>
-## Quickstart
+## 快速入門
 
-By default, broadcasting is not enabled in new Laravel applications. You may enable broadcasting using the `install:broadcasting` Artisan command:
+預設情況下，新的 Laravel 應用程式未啟用廣播。你可以使用 `install:broadcasting` Artisan 指令啟用廣播：
 
 ```shell
 php artisan install:broadcasting
 ```
 
-The `install:broadcasting` command will prompt you for which event broadcasting service you would like to use. In addition, it will create the `config/broadcasting.php` configuration file and the `routes/channels.php` file where you may register your application's broadcast authorization routes and callbacks.
+`install:broadcasting` 指令將提示你選擇要使用的事件廣播服務。此外，它將建立 `config/broadcasting.php` 設定檔和 `routes/channels.php` 檔案，你可以在其中註冊應用程式的廣播授權路由和回呼。
 
-Laravel supports several broadcast drivers out of the box: [Laravel Reverb](/docs/{'12.x'}/reverb), [Pusher Channels](https://pusher.com/channels), [Ably](https://ably.com), and a `log` driver for local development and debugging. Additionally, a `null` driver is included which allows you to disable broadcasting during testing. A configuration example is included for each of these drivers in the `config/broadcasting.php` configuration file.
+Laravel 開箱即支援多種廣播驅動程式：[Laravel Reverb](/docs/{'12.x'}/reverb)、[Pusher Channels](https://pusher.com/channels)、[Ably](https://ably.com) 以及用於本機開發和除錯的 `log` 驅動程式。此外，還包含一個 `null` 驅動程式，允許你在測試期間停用廣播。`config/broadcasting.php` 設定檔中包含每個驅動程式的設定範例。
 
-All of your application's event broadcasting configuration is stored in the `config/broadcasting.php` configuration file. Don't worry if this file does not exist in your application; it will be created when you run the `install:broadcasting` Artisan command.
+應用程式的所有事件廣播設定都儲存在 `config/broadcasting.php` 設定檔中。如果你的應用程式中不存在此檔案，請不要擔心；當你執行 `install:broadcasting` Artisan 指令時，它將被建立。
 
 <a name="quickstart-next-steps"></a>
-#### Next Steps
+#### 下一步
 
-Once you have enabled event broadcasting, you're ready to learn more about [defining broadcast events](#defining-broadcast-events) and [listening for events](#listening-for-events). If you're using Laravel's React or Vue [starter kits](/docs/{'12.x'}/starter-kits), you may listen for events using Echo's [useEcho hook](#using-react-or-vue).
+啟用事件廣播後，你就可以準備好了解有關 [定義廣播事件](#defining-broadcast-events) 和 [監聽事件](#listening-for-events) 的更多資訊。如果你使用的是 Laravel 的 React 或 Vue [入門套件](/docs/{'12.x'}/starter-kits)，則可以使用 Echo 的 [useEcho hook](#using-react-or-vue) 監聽事件。
 
 > [!NOTE]
-> Before broadcasting any events, you should first configure and run a [queue worker](/docs/{'12.x'}/queues). All event broadcasting is done via queued jobs so that the response time of your application is not seriously affected by events being broadcast.
+> 在廣播任何事件之前，你應該先設定並執行 [佇列工作者](/docs/{'12.x'}/queues)。所有事件廣播都是透過佇列任務完成的，以便應用程式的回應時間不會受到廣播事件的嚴重影響。
 
 <a name="server-side-installation"></a>
-## Server Side Installation
+## 伺服器端安裝
 
-To get started using Laravel's event broadcasting, we need to do some configuration within the Laravel application as well as install a few packages.
+要開始使用 Laravel 的事件廣播，我們需要在 Laravel 應用程式中進行一些設定以及安裝一些套件。
 
-Event broadcasting is accomplished by a server-side broadcasting driver that broadcasts your Laravel events so that Laravel Echo (a JavaScript library) can receive them within the browser client. Don't worry - we'll walk through each part of the installation process step-by-step.
+事件廣播是透過伺服器端廣播驅動程式完成的，該驅動程式廣播你的 Laravel 事件，以便 Laravel Echo（一個 JavaScript 函式庫）可以在瀏覽器客戶端接收它們。別擔心 - 我們將逐步引導你完成安裝過程的每個部分。
 
 <a name="reverb"></a>
 ### Reverb
 
-To quickly enable support for Laravel's broadcasting features while using Reverb as your event broadcaster, invoke the `install:broadcasting` Artisan command with the `--reverb` option. This Artisan command will install Reverb's required Composer and NPM packages and update your application's `.env` file with the appropriate variables:
+要在使用 Reverb 作為事件廣播器時快速啟用對 Laravel 廣播功能的支援，請使用 `--reverb` 選項呼叫 `install:broadcasting` Artisan 指令。此 Artisan 指令將安裝 Reverb 所需的 Composer 和 NPM 套件，並使用適當的變數更新應用程式的 `.env` 檔案：
 
 ```shell
 php artisan install:broadcasting --reverb
 ```
 
 <a name="reverb-manual-installation"></a>
-#### Manual Installation
+#### 手動安裝
 
-When running the `install:broadcasting` command, you will be prompted to install [Laravel Reverb](/docs/{'12.x'}/reverb). Of course, you may also install Reverb manually using the Composer package manager:
+執行 `install:broadcasting` 指令時，系統會提示你安裝 [Laravel Reverb](/docs/{'12.x'}/reverb)。當然，你也可以使用 Composer 套件管理器手動安裝 Reverb：
 
 ```shell
 composer require laravel/reverb
 ```
 
-Once the package is installed, you may run Reverb's installation command to publish the configuration, add Reverb's required environment variables, and enable event broadcasting in your application:
+安裝套件後，你可以執行 Reverb 的安裝指令來發佈設定、新增 Reverb 所需的環境變數，並在應用程式中啟用事件廣播：
 
 ```shell
 php artisan reverb:install
 ```
 
-You can find detailed Reverb installation and usage instructions in the [Reverb documentation](/docs/{'12.x'}/reverb).
+你可以在 [Reverb 文件](/docs/{'12.x'}/reverb) 中找到詳細的 Reverb 安裝和使用說明。
 
 <a name="pusher-channels"></a>
 ### Pusher Channels
 
-To quickly enable support for Laravel's broadcasting features while using Pusher as your event broadcaster, invoke the `install:broadcasting` Artisan command with the `--pusher` option. This Artisan command will prompt you for your Pusher credentials, install the Pusher PHP and JavaScript SDKs, and update your application's `.env` file with the appropriate variables:
+要在使用 Pusher 作為事件廣播器時快速啟用對 Laravel 廣播功能的支援，請使用 `--pusher` 選項呼叫 `install:broadcasting` Artisan 指令。此 Artisan 指令將提示你輸入 Pusher 憑證，安裝 Pusher PHP 和 JavaScript SDK，並使用適當的變數更新應用程式的 `.env` 檔案：
 
 ```shell
 php artisan install:broadcasting --pusher
 ```
 
 <a name="pusher-manual-installation"></a>
-#### Manual Installation
+#### 手動安裝
 
-To install Pusher support manually, you should install the Pusher Channels PHP SDK using the Composer package manager:
+要手動安裝 Pusher 支援，你應該使用 Composer 套件管理器安裝 Pusher Channels PHP SDK：
 
 ```shell
 composer require pusher/pusher-php-server
 ```
 
-Next, you should configure your Pusher Channels credentials in the `config/broadcasting.php` configuration file. An example Pusher Channels configuration is already included in this file, allowing you to quickly specify your key, secret, and application ID. Typically, you should configure your Pusher Channels credentials in your application's `.env` file:
+接下來，你應該在 `config/broadcasting.php` 設定檔中設定 Pusher Channels 憑證。此檔案中已包含 Pusher Channels 設定範例，允許你快速指定金鑰、金鑰密碼和應用程式 ID。通常，你應該在應用程式的 `.env` 檔案中設定 Pusher Channels 憑證：
 
 ```ini
 PUSHER_APP_ID="your-pusher-app-id"
@@ -151,73 +151,73 @@ PUSHER_SCHEME="https"
 PUSHER_APP_CLUSTER="mt1"
 ```
 
-The `config/broadcasting.php` file's `pusher` configuration also allows you to specify additional `options` that are supported by Channels, such as the cluster.
+`config/broadcasting.php` 檔案的 `pusher` 設定還允許你指定 Channels 支援的其他 `options`，例如叢集。
 
-Then, set the `BROADCAST_CONNECTION` environment variable to `pusher` in your application's `.env` file:
+然後，在應用程式的 `.env` 檔案中將 `BROADCAST_CONNECTION` 環境變數設定為 `pusher`：
 
 ```ini
 BROADCAST_CONNECTION=pusher
 ```
 
-Finally, you are ready to install and configure [Laravel Echo](#client-side-installation), which will receive the broadcast events on the client-side.
+最後，你就可以準備安裝和設定 [Laravel Echo](#client-side-installation)，它將在客戶端接收廣播事件。
 
 <a name="ably"></a>
 ### Ably
 
 > [!NOTE]
-> The documentation below discusses how to use Ably in "Pusher compatibility" mode. However, the Ably team recommends and maintains a broadcaster and Echo client that is able to take advantage of the unique capabilities offered by Ably. For more information on using the Ably maintained drivers, please [consult Ably's Laravel broadcaster documentation](https://github.com/ably/laravel-broadcaster).
+> 下面的文件討論如何在「Pusher 相容性」模式下使用 Ably。但是，Ably 團隊推薦並維護一個廣播器和 Echo 客戶端，能夠利用 Ably 提供的獨特功能。有關使用 Ably 維護的驅動程式的更多資訊，請 [查閱 Ably 的 Laravel 廣播器文件](https://github.com/ably/laravel-broadcaster)。
 
-To quickly enable support for Laravel's broadcasting features while using [Ably](https://ably.com) as your event broadcaster, invoke the `install:broadcasting` Artisan command with the `--ably` option. This Artisan command will prompt you for your Ably credentials, install the Ably PHP and JavaScript SDKs, and update your application's `.env` file with the appropriate variables:
+要在使用 [Ably](https://ably.com) 作為事件廣播器時快速啟用對 Laravel 廣播功能的支援，請使用 `--ably` 選項呼叫 `install:broadcasting` Artisan 指令。此 Artisan 指令將提示你輸入 Ably 憑證，安裝 Ably PHP 和 JavaScript SDK，並使用適當的變數更新應用程式的 `.env` 檔案：
 
 ```shell
 php artisan install:broadcasting --ably
 ```
 
-**Before continuing, you should enable Pusher protocol support in your Ably application settings. You may enable this feature within the "Protocol Adapter Settings" portion of your Ably application's settings dashboard.**
+**在繼續之前，你應該在 Ably 應用程式設定中啟用 Pusher 協定支援。你可以在 Ably 應用程式設定儀表板的「Protocol Adapter Settings」部分啟用此功能。**
 
 <a name="ably-manual-installation"></a>
-#### Manual Installation
+#### 手動安裝
 
-To install Ably support manually, you should install the Ably PHP SDK using the Composer package manager:
+要手動安裝 Ably 支援，你應該使用 Composer 套件管理器安裝 Ably PHP SDK：
 
 ```shell
 composer require ably/ably-php
 ```
 
-Next, you should configure your Ably credentials in the `config/broadcasting.php` configuration file. An example Ably configuration is already included in this file, allowing you to quickly specify your key. Typically, this value should be set via the `ABLY_KEY` [environment variable](/docs/{'12.x'}/configuration#environment-configuration):
+接下來，你應該在 `config/broadcasting.php` 設定檔中設定 Ably 憑證。此檔案中已包含 Ably 設定範例，允許你快速指定金鑰。通常，此值應透過 `ABLY_KEY` [環境變數](/docs/{'12.x'}/configuration#environment-configuration) 設定：
 
 ```ini
 ABLY_KEY=your-ably-key
 ```
 
-Then, set the `BROADCAST_CONNECTION` environment variable to `ably` in your application's `.env` file:
+然後，在應用程式的 `.env` 檔案中將 `BROADCAST_CONNECTION` 環境變數設定為 `ably`：
 
 ```ini
 BROADCAST_CONNECTION=ably
 ```
 
-Finally, you are ready to install and configure [Laravel Echo](#client-side-installation), which will receive the broadcast events on the client-side.
+最後，你就可以準備安裝和設定 [Laravel Echo](#client-side-installation)，它將在客戶端接收廣播事件。
 
 <a name="client-side-installation"></a>
-## Client Side Installation
+## 客戶端安裝
 
 <a name="client-reverb"></a>
 ### Reverb
 
-[Laravel Echo](https://github.com/laravel/echo) is a JavaScript library that makes it painless to subscribe to channels and listen for events broadcast by your server-side broadcasting driver.
+[Laravel Echo](https://github.com/laravel/echo) 是一個 JavaScript 函式庫，讓你可以輕鬆訂閱頻道並監聽伺服器端廣播驅動程式廣播的事件。
 
-When installing Laravel Reverb via the `install:broadcasting` Artisan command, Reverb and Echo's scaffolding and configuration will be injected into your application automatically. However, if you wish to manually configure Laravel Echo, you may do so by following the instructions below.
+當透過 `install:broadcasting` Artisan 指令安裝 Laravel Reverb 時，Reverb 和 Echo 的鷹架和設定將自動注入到你的應用程式中。但是，如果你希望手動設定 Laravel Echo，可以按照以下說明進行操作。
 
 <a name="reverb-client-manual-installation"></a>
-#### Manual Installation
+#### 手動安裝
 
-To manually configure Laravel Echo for your application's frontend, first install the `pusher-js` package since Reverb utilizes the Pusher protocol for WebSocket subscriptions, channels, and messages:
+要為應用程式的前端手動設定 Laravel Echo，請先安裝 `pusher-js` 套件，因為 Reverb 使用 Pusher 協定進行 WebSocket 訂閱、頻道和訊息：
 
 ```shell
 npm install --save-dev laravel-echo pusher-js
 ```
 
-Once Echo is installed, you are ready to create a fresh Echo instance in your application's JavaScript. A great place to do this is at the bottom of the `resources/js/bootstrap.js` file that is included with the Laravel framework:
+安裝 Echo 後，你就可以準備在應用程式的 JavaScript 中建立一個新的 Echo 實例。執行此操作的一個好地方是 Laravel 框架包含的 `resources/js/bootstrap.js` 檔案底部：
 
 ```js tab=JavaScript
 import Echo from 'laravel-echo';
@@ -264,32 +264,32 @@ configureEcho({
 });
 ```
 
-Next, you should compile your application's assets:
+接下來，你應該編譯應用程式的資源：
 
 ```shell
 npm run build
 ```
 
 > [!WARNING]
-> The Laravel Echo `reverb` broadcaster requires laravel-echo v1.16.0+.
+> Laravel Echo `reverb` 廣播器需要 laravel-echo v1.16.0+。
 
 <a name="client-pusher-channels"></a>
 ### Pusher Channels
 
-[Laravel Echo](https://github.com/laravel/echo) is a JavaScript library that makes it painless to subscribe to channels and listen for events broadcast by your server-side broadcasting driver.
+[Laravel Echo](https://github.com/laravel/echo) 是一個 JavaScript 函式庫，讓你可以輕鬆訂閱頻道並監聽伺服器端廣播驅動程式廣播的事件。
 
-When installing broadcasting support via the `install:broadcasting --pusher` Artisan command, Pusher and Echo's scaffolding and configuration will be injected into your application automatically. However, if you wish to manually configure Laravel Echo, you may do so by following the instructions below.
+當透過 `install:broadcasting --pusher` Artisan 指令安裝廣播支援時，Pusher 和 Echo 的鷹架和設定將自動注入到你的應用程式中。但是，如果你希望手動設定 Laravel Echo，可以按照以下說明進行操作。
 
 <a name="pusher-client-manual-installation"></a>
-#### Manual Installation
+#### 手動安裝
 
-To manually configure Laravel Echo for your application's frontend, first install the `laravel-echo` and `pusher-js` packages which utilize the Pusher protocol for WebSocket subscriptions, channels, and messages:
+要為應用程式的前端手動設定 Laravel Echo，請先安裝 `laravel-echo` 和 `pusher-js` 套件，它們使用 Pusher 協定進行 WebSocket 訂閱、頻道和訊息：
 
 ```shell
 npm install --save-dev laravel-echo pusher-js
 ```
 
-Once Echo is installed, you are ready to create a fresh Echo instance in your application's `resources/js/bootstrap.js` file:
+安裝 Echo 後，你就可以準備在應用程式的 `resources/js/bootstrap.js` 檔案中建立一個新的 Echo 實例：
 
 ```js tab=JavaScript
 import Echo from 'laravel-echo';
@@ -335,7 +335,7 @@ configureEcho({
 });
 ```
 
-Next, you should define the appropriate values for the Pusher environment variables in your application's `.env` file. If these variables do not already exist in your `.env` file, you should add them:
+接下來，你應該在應用程式的 `.env` 檔案中定義 Pusher 環境變數的適當值。如果這些變數在你的 `.env` 檔案中不存在，你應該新增它們：
 
 ```ini
 PUSHER_APP_ID="your-pusher-app-id"
@@ -354,19 +354,19 @@ VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
 VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 ```
 
-Once you have adjusted the Echo configuration according to your application's needs, you may compile your application's assets:
+根據應用程式的需求調整 Echo 設定後，你可以編譯應用程式的資源：
 
 ```shell
 npm run build
 ```
 
 > [!NOTE]
-> To learn more about compiling your application's JavaScript assets, please consult the documentation on [Vite](/docs/{'12.x'}/vite).
+> 要了解有關編譯應用程式 JavaScript 資源的更多資訊，請查閱 [Vite](/docs/{'12.x'}/vite) 文件。
 
 <a name="using-an-existing-client-instance"></a>
-#### Using an Existing Client Instance
+#### 使用現有的客戶端實例
 
-If you already have a pre-configured Pusher Channels client instance that you would like Echo to utilize, you may pass it to Echo via the `client` configuration option:
+如果你已經有一個預先設定好的 Pusher Channels 客戶端實例，並且希望 Echo 使用它，你可以透過 `client` 設定選項將其傳遞給 Echo：
 
 ```js
 import Echo from 'laravel-echo';
@@ -387,24 +387,24 @@ window.Echo = new Echo({
 ### Ably
 
 > [!NOTE]
-> The documentation below discusses how to use Ably in "Pusher compatibility" mode. However, the Ably team recommends and maintains a broadcaster and Echo client that is able to take advantage of the unique capabilities offered by Ably. For more information on using the Ably maintained drivers, please [consult Ably's Laravel broadcaster documentation](https://github.com/ably/laravel-broadcaster).
+> 下面的文件討論如何在「Pusher 相容性」模式下使用 Ably。但是，Ably 團隊推薦並維護一個廣播器和 Echo 客戶端，能夠利用 Ably 提供的獨特功能。有關使用 Ably 維護的驅動程式的更多資訊，請 [查閱 Ably 的 Laravel 廣播器文件](https://github.com/ably/laravel-broadcaster)。
 
-[Laravel Echo](https://github.com/laravel/echo) is a JavaScript library that makes it painless to subscribe to channels and listen for events broadcast by your server-side broadcasting driver.
+[Laravel Echo](https://github.com/laravel/echo) 是一個 JavaScript 函式庫，讓你可以輕鬆訂閱頻道並監聽伺服器端廣播驅動程式廣播的事件。
 
-When installing broadcasting support via the `install:broadcasting --ably` Artisan command, Ably and Echo's scaffolding and configuration will be injected into your application automatically. However, if you wish to manually configure Laravel Echo, you may do so by following the instructions below.
+當透過 `install:broadcasting --ably` Artisan 指令安裝廣播支援時，Ably 和 Echo 的鷹架和設定將自動注入到你的應用程式中。但是，如果你希望手動設定 Laravel Echo，可以按照以下說明進行操作。
 
 <a name="ably-client-manual-installation"></a>
-#### Manual Installation
+#### 手動安裝
 
-To manually configure Laravel Echo for your application's frontend, first install the `laravel-echo` and `pusher-js` packages which utilize the Pusher protocol for WebSocket subscriptions, channels, and messages:
+要為應用程式的前端手動設定 Laravel Echo，請先安裝 `laravel-echo` 和 `pusher-js` 套件，它們使用 Pusher 協定進行 WebSocket 訂閱、頻道和訊息：
 
 ```shell
 npm install --save-dev laravel-echo pusher-js
 ```
 
-**Before continuing, you should enable Pusher protocol support in your Ably application settings. You may enable this feature within the "Protocol Adapter Settings" portion of your Ably application's settings dashboard.**
+**在繼續之前，你應該在 Ably 應用程式設定中啟用 Pusher 協定支援。你可以在 Ably 應用程式設定儀表板的「Protocol Adapter Settings」部分啟用此功能。**
 
-Once Echo is installed, you are ready to create a fresh Echo instance in your application's `resources/js/bootstrap.js` file:
+安裝 Echo 後，你就可以準備在應用程式的 `resources/js/bootstrap.js` 檔案中建立一個新的 Echo 實例：
 
 ```js tab=JavaScript
 import Echo from 'laravel-echo';
@@ -448,30 +448,30 @@ configureEcho({
 });
 ```
 
-You may have noticed our Ably Echo configuration references a `VITE_ABLY_PUBLIC_KEY` environment variable. This variable's value should be your Ably public key. Your public key is the portion of your Ably key that occurs before the `:` character.
+你可能已經注意到我們的 Ably Echo 設定引用了 `VITE_ABLY_PUBLIC_KEY` 環境變數。此變數的值應該是你的 Ably 公開金鑰。你的公開金鑰是 Ably 金鑰中 `:` 字元之前的部分。
 
-Once you have adjusted the Echo configuration according to your needs, you may compile your application's assets:
+根據你的需求調整 Echo 設定後，你可以編譯應用程式的資源：
 
 ```shell
 npm run dev
 ```
 
 > [!NOTE]
-> To learn more about compiling your application's JavaScript assets, please consult the documentation on [Vite](/docs/{'12.x'}/vite).
+> 要了解有關編譯應用程式 JavaScript 資源的更多資訊，請查閱 [Vite](/docs/{'12.x'}/vite) 文件。
 
 <a name="concept-overview"></a>
-## Concept Overview
+## 概念總覽
 
-Laravel's event broadcasting allows you to broadcast your server-side Laravel events to your client-side JavaScript application using a driver-based approach to WebSockets. Currently, Laravel ships with [Laravel Reverb](https://reverb.laravel.com), [Pusher Channels](https://pusher.com/channels), and [Ably](https://ably.com) drivers. The events may be easily consumed on the client-side using the [Laravel Echo](#client-side-installation) JavaScript package.
+Laravel 的事件廣播允許你使用基於驅動程式的 WebSockets 方法將伺服器端 Laravel 事件廣播到客戶端 JavaScript 應用程式。目前，Laravel 隨附 [Laravel Reverb](https://reverb.laravel.com)、[Pusher Channels](https://pusher.com/channels) 和 [Ably](https://ably.com) 驅動程式。可以使用 [Laravel Echo](#client-side-installation) JavaScript 套件在客戶端輕鬆使用這些事件。
 
-Events are broadcast over "channels", which may be specified as public or private. Any visitor to your application may subscribe to a public channel without any authentication or authorization; however, in order to subscribe to a private channel, a user must be authenticated and authorized to listen on that channel.
+事件透過「頻道」廣播，頻道可以指定為公開或私有。應用程式的任何訪客都可以在沒有任何身份驗證或授權的情況下訂閱公開頻道；但是，為了訂閱私有頻道，使用者必須經過身份驗證並獲得授權才能在該頻道上監聽。
 
 <a name="using-example-application"></a>
-### Using an Example Application
+### 使用範例應用程式
 
-Before diving into each component of event broadcasting, let's take a high level overview using an e-commerce store as an example.
+在深入研究事件廣播的每個元件之前，讓我們以電子商務商店為例進行高層次的概述。
 
-In our application, let's assume we have a page that allows users to view the shipping status for their orders. Let's also assume that an `OrderShipmentStatusUpdated` event is fired when a shipping status update is processed by the application:
+在我們的應用程式中，假設我們有一個頁面允許使用者查看其訂單的運送狀態。我們還假設當應用程式處理運送狀態更新時會觸發 `OrderShipmentStatusUpdated` 事件：
 
 ```php
 use App\Events\OrderShipmentStatusUpdated;
@@ -480,9 +480,9 @@ OrderShipmentStatusUpdated::dispatch($order);
 ```
 
 <a name="the-shouldbroadcast-interface"></a>
-#### The `ShouldBroadcast` Interface
+#### `ShouldBroadcast` 介面
 
-When a user is viewing one of their orders, we don't want them to have to refresh the page to view status updates. Instead, we want to broadcast the updates to the application as they are created. So, we need to mark the `OrderShipmentStatusUpdated` event with the `ShouldBroadcast` interface. This will instruct Laravel to broadcast the event when it is fired:
+當使用者正在查看他們的訂單之一時，我們不希望他們必須重新整理頁面才能查看狀態更新。相反，我們希望在建立更新時將其廣播到應用程式。因此，我們需要使用 `ShouldBroadcast` 介面標記 `OrderShipmentStatusUpdated` 事件。這將指示 Laravel 在觸發事件時廣播該事件：
 
 ```php
 <?php
@@ -507,7 +507,7 @@ class OrderShipmentStatusUpdated implements ShouldBroadcast
 }
 ```
 
-The `ShouldBroadcast` interface requires our event to define a `broadcastOn` method. This method is responsible for returning the channels that the event should broadcast on. An empty stub of this method is already defined on generated event classes, so we only need to fill in its details. We only want the creator of the order to be able to view status updates, so we will broadcast the event on a private channel that is tied to the order:
+`ShouldBroadcast` 介面要求我們的事件定義一個 `broadcastOn` 方法。此方法負責回傳事件應廣播到的頻道。生成的事件類別上已經定義了此方法的空 Stub，因此我們只需要填寫其詳細資訊。我們只希望訂單的建立者能夠查看狀態更新，因此我們將在與訂單繫結的私有頻道上廣播該事件：
 
 ```php
 use Illuminate\Broadcasting\Channel;
@@ -522,7 +522,7 @@ public function broadcastOn(): Channel
 }
 ```
 
-If you wish the event to broadcast on multiple channels, you may return an `array` instead:
+如果你希望事件在多個頻道上廣播，你可以回傳一個 `array`：
 
 ```php
 use Illuminate\Broadcasting\PrivateChannel;
@@ -542,9 +542,9 @@ public function broadcastOn(): array
 ```
 
 <a name="example-application-authorizing-channels"></a>
-#### Authorizing Channels
+#### 授權頻道
 
-Remember, users must be authorized to listen on private channels. We may define our channel authorization rules in our application's `routes/channels.php` file. In this example, we need to verify that any user attempting to listen on the private `orders.1` channel is actually the creator of the order:
+請記住，使用者必須獲得授權才能在私有頻道上監聽。我們可以在應用程式的 `routes/channels.php` 檔案中定義頻道授權規則。在此範例中，我們需要驗證任何嘗試在私有 `orders.1` 頻道上監聽的使用者實際上是訂單的建立者：
 
 ```php
 use App\Models\Order;
@@ -555,14 +555,14 @@ Broadcast::channel('orders.{orderId}', function (User $user, int $orderId) {
 });
 ```
 
-The `channel` method accepts two arguments: the name of the channel and a callback which returns `true` or `false` indicating whether the user is authorized to listen on the channel.
+`channel` 方法接受兩個參數：頻道名稱和一個回呼，該回呼回傳 `true` 或 `false` 以指示使用者是否被授權在頻道上監聽。
 
-All authorization callbacks receive the currently authenticated user as their first argument and any additional wildcard parameters as their subsequent arguments. In this example, we are using the `{orderId}` placeholder to indicate that the "ID" portion of the channel name is a wildcard.
+所有授權回呼都接收目前經過身份驗證的使用者作為其第一個參數，並接收任何其他萬用字元參數作為其後續參數。在此範例中，我們使用 `{orderId}` 預留位置來指示頻道名稱的「ID」部分是萬用字元。
 
 <a name="listening-for-event-broadcasts"></a>
-#### Listening for Event Broadcasts
+#### 監聽事件廣播
 
-Next, all that remains is to listen for the event in our JavaScript application. We can do this using [Laravel Echo](#client-side-installation). Laravel Echo's built-in React and Vue hooks make it simple to get started, and, by default, all of the event's public properties will be included on the broadcast event:
+接下來，剩下的就是在我們的 JavaScript 應用程式中監聽事件。我們可以使用 [Laravel Echo](#client-side-installation) 來完成此操作。Laravel Echo 內建的 React 和 Vue hooks 使得入門變得簡單，並且預設情況下，事件的所有公開屬性都將包含在廣播事件中：
 
 ```js tab=React
 import { useEcho } from "@laravel/echo-react";
@@ -591,11 +591,11 @@ useEcho(
 ```
 
 <a name="defining-broadcast-events"></a>
-## Defining Broadcast Events
+## 定義廣播事件
 
-To inform Laravel that a given event should be broadcast, you must implement the `Illuminate\Contracts\Broadcasting\ShouldBroadcast` interface on the event class. This interface is already imported into all event classes generated by the framework so you may easily add it to any of your events.
+要通知 Laravel 應該廣播給定的事件，你必須在事件類別上實作 `Illuminate\Contracts\Broadcasting\ShouldBroadcast` 介面。此介面已匯入到框架產生的所有事件類別中，因此你可以輕鬆地將其新增至任何事件中。
 
-The `ShouldBroadcast` interface requires you to implement a single method: `broadcastOn`. The `broadcastOn` method should return a channel or array of channels that the event should broadcast on. The channels should be instances of `Channel`, `PrivateChannel`, or `PresenceChannel`. Instances of `Channel` represent public channels that any user may subscribe to, while `PrivateChannels` and `PresenceChannels` represent private channels that require [channel authorization](#authorizing-channels):
+`ShouldBroadcast` 介面要求你實作一個方法：`broadcastOn`。`broadcastOn` 方法應回傳事件應廣播到的一個頻道或頻道陣列。頻道應為 `Channel`、`PrivateChannel` 或 `PresenceChannel` 的實例。`Channel` 的實例代表任何使用者都可以訂閱的公開頻道，而 `PrivateChannels` 和 `PresenceChannels` 代表需要 [頻道授權](#authorizing-channels) 的私有頻道：
 
 ```php
 <?php
@@ -635,12 +635,12 @@ class ServerCreated implements ShouldBroadcast
 }
 ```
 
-After implementing the `ShouldBroadcast` interface, you only need to [fire the event](/docs/{'12.x'}/events) as you normally would. Once the event has been fired, a [queued job](/docs/{'12.x'}/queues) will automatically broadcast the event using your specified broadcast driver.
+實作 `ShouldBroadcast` 介面後，你只需要像往常一樣 [觸發事件](/docs/{'12.x'}/events)。觸發事件後，[佇列任務](/docs/{'12.x'}/queues) 將使用你指定的廣播驅動程式自動廣播該事件。
 
 <a name="broadcast-name"></a>
-### Broadcast Name
+### 廣播名稱
 
-By default, Laravel will broadcast the event using the event's class name. However, you may customize the broadcast name by defining a `broadcastAs` method on the event:
+預設情況下，Laravel 將使用事件的類別名稱廣播事件。但是，你可以透過在事件上定義 `broadcastAs` 方法來自訂廣播名稱：
 
 ```php
 /**
@@ -652,7 +652,7 @@ public function broadcastAs(): string
 }
 ```
 
-If you customize the broadcast name using the `broadcastAs` method, you should make sure to register your listener with a leading `.` character. This will instruct Echo to not prepend the application's namespace to the event:
+如果你使用 `broadcastAs` 方法自訂廣播名稱，你應該確保使用前導 `.` 字元註冊你的監聽器。這將指示 Echo 不要將應用程式的命名空間附加到事件：
 
 ```javascript
 .listen('.server.created', function (e) {
@@ -661,9 +661,9 @@ If you customize the broadcast name using the `broadcastAs` method, you should m
 ```
 
 <a name="broadcast-data"></a>
-### Broadcast Data
+### 廣播資料
 
-When an event is broadcast, all of its `public` properties are automatically serialized and broadcast as the event's payload, allowing you to access any of its public data from your JavaScript application. So, for example, if your event has a single public `$user` property that contains an Eloquent model, the event's broadcast payload would be:
+當事件被廣播時，其所有 `public` 屬性都會自動序列化並作為事件的負載進行廣播，允許你從 JavaScript 應用程式存取其任何公開資料。因此，例如，如果你的事件有一個包含 Eloquent 模型的單一公開 `$user` 屬性，則事件的廣播負載將是：
 
 ```json
 {
@@ -675,7 +675,7 @@ When an event is broadcast, all of its `public` properties are automatically ser
 }
 ```
 
-However, if you wish to have more fine-grained control over your broadcast payload, you may add a `broadcastWith` method to your event. This method should return the array of data that you wish to broadcast as the event payload:
+但是，如果你希望對廣播負載進行更精細的控制，可以在事件中新增 `broadcastWith` 方法。此方法應回傳你希望作為事件負載廣播的資料陣列：
 
 ```php
 /**
@@ -690,9 +690,9 @@ public function broadcastWith(): array
 ```
 
 <a name="broadcast-queue"></a>
-### Broadcast Queue
+### 廣播佇列
 
-By default, each broadcast event is placed on the default queue for the default queue connection specified in your `queue.php` configuration file. You may customize the queue connection and name used by the broadcaster by defining `connection` and `queue` properties on your event class:
+預設情況下，每個廣播事件都放置在 `queue.php` 設定檔中指定的預設佇列連線的預設佇列中。你可以透過在事件類別上定義 `connection` 和 `queue` 屬性來自訂廣播器使用的佇列連線和名稱：
 
 ```php
 /**
@@ -710,7 +710,7 @@ public $connection = 'redis';
 public $queue = 'default';
 ```
 
-Alternatively, you may customize the queue name by defining a `broadcastQueue` method on your event:
+或者，你可以透過在事件上定義 `broadcastQueue` 方法來自訂佇列名稱：
 
 ```php
 /**
@@ -722,7 +722,7 @@ public function broadcastQueue(): string
 }
 ```
 
-If you would like to broadcast your event using the `sync` queue instead of the default queue driver, you can implement the `ShouldBroadcastNow` interface instead of `ShouldBroadcast`:
+如果你想使用 `sync` 佇列而不是預設佇列驅動程式來廣播事件，你可以實作 `ShouldBroadcastNow` 介面而不是 `ShouldBroadcast`：
 
 ```php
 <?php
@@ -738,9 +738,9 @@ class OrderShipmentStatusUpdated implements ShouldBroadcastNow
 ```
 
 <a name="broadcast-conditions"></a>
-### Broadcast Conditions
+### 廣播條件
 
-Sometimes you want to broadcast your event only if a given condition is true. You may define these conditions by adding a `broadcastWhen` method to your event class:
+有時你只想在給定條件為真時廣播事件。你可以透過在事件類別中新增 `broadcastWhen` 方法來定義這些條件：
 
 ```php
 /**
@@ -753,11 +753,11 @@ public function broadcastWhen(): bool
 ```
 
 <a name="broadcasting-and-database-transactions"></a>
-#### Broadcasting and Database Transactions
+#### 廣播和資料庫交易
 
-When broadcast events are dispatched within database transactions, they may be processed by the queue before the database transaction has committed. When this happens, any updates you have made to models or database records during the database transaction may not yet be reflected in the database. In addition, any models or database records created within the transaction may not exist in the database. If your event depends on these models, unexpected errors can occur when the job that broadcasts the event is processed.
+當廣播事件在資料庫交易中分派時，它們可能會在資料庫交易提交之前由佇列處理。發生這種情況時，你在資料庫交易期間對模型或資料庫記錄所做的任何更新可能尚未反映在資料庫中。此外，在交易中建立的任何模型或資料庫記錄可能不存在於資料庫中。如果你的事件依賴這些模型，則在處理廣播事件的任務時可能會發生意外錯誤。
 
-If your queue connection's `after_commit` configuration option is set to `false`, you may still indicate that a particular broadcast event should be dispatched after all open database transactions have been committed by implementing the `ShouldDispatchAfterCommit` interface on the event class:
+如果你的佇列連線的 `after_commit` 設定選項設定為 `false`，你仍然可以透過在事件類別上實作 `ShouldDispatchAfterCommit` 介面，來指示特定的廣播事件應在所有開啟的資料庫交易提交後分派：
 
 ```php
 <?php
@@ -775,14 +775,14 @@ class ServerCreated implements ShouldBroadcast, ShouldDispatchAfterCommit
 ```
 
 > [!NOTE]
-> To learn more about working around these issues, please review the documentation regarding [queued jobs and database transactions](/docs/{'12.x'}/queues#jobs-and-database-transactions).
+> 要了解有關解決這些問題的更多資訊，請查看有關 [佇列任務和資料庫交易](/docs/{'12.x'}/queues#jobs-and-database-transactions) 的文件。
 
 <a name="authorizing-channels"></a>
-## Authorizing Channels
+## 授權頻道
 
-Private channels require you to authorize that the currently authenticated user can actually listen on the channel. This is accomplished by making an HTTP request to your Laravel application with the channel name and allowing your application to determine if the user can listen on that channel. When using [Laravel Echo](#client-side-installation), the HTTP request to authorize subscriptions to private channels will be made automatically.
+私有頻道要求你授權目前經過身份驗證的使用者實際上可以在頻道上監聽。這是透過向你的 Laravel 應用程式發出帶有頻道名稱的 HTTP 請求並允許你的應用程式確定使用者是否可以在該頻道上監聽來完成的。使用 [Laravel Echo](#client-side-installation) 時，將自動發出授權訂閱私有頻道的 HTTP 請求。
 
-When broadcasting is installed Laravel attempts to automatically register the `/broadcasting/auth` route to handle authorization requests. If Laravel fails to automatically register these routes, you may register them manually in your application's `/bootstrap/app.php` file:
+安裝廣播時，Laravel 會嘗試自動註冊 `/broadcasting/auth` 路由來處理授權請求。如果 Laravel 無法自動註冊這些路由，你可以在應用程式的 `/bootstrap/app.php` 檔案中手動註冊它們：
 
 ```php
 ->withRouting(
@@ -793,9 +793,9 @@ When broadcasting is installed Laravel attempts to automatically register the `/
 ```
 
 <a name="defining-authorization-callbacks"></a>
-### Defining Authorization Callbacks
+### 定義授權回呼
 
-Next, we need to define the logic that will actually determine if the currently authenticated user can listen to a given channel. This is done in the `routes/channels.php` file that was created by the `install:broadcasting` Artisan command. In this file, you may use the `Broadcast::channel` method to register channel authorization callbacks:
+接下來，我們需要定義實際確定目前經過身份驗證的使用者是否可以監聽給定頻道的邏輯。這是在 `install:broadcasting` Artisan 指令建立的 `routes/channels.php` 檔案中完成的。在此檔案中，你可以使用 `Broadcast::channel` 方法註冊頻道授權回呼：
 
 ```php
 use App\Models\User;
@@ -805,37 +805,37 @@ Broadcast::channel('orders.{orderId}', function (User $user, int $orderId) {
 });
 ```
 
-The `channel` method accepts two arguments: the name of the channel and a callback which returns `true` or `false` indicating whether the user is authorized to listen on the channel.
+`channel` 方法接受兩個參數：頻道名稱和一個回呼，該回呼回傳 `true` 或 `false` 以指示使用者是否被授權在頻道上監聽。
 
-All authorization callbacks receive the currently authenticated user as their first argument and any additional wildcard parameters as their subsequent arguments. In this example, we are using the `{orderId}` placeholder to indicate that the "ID" portion of the channel name is a wildcard.
+所有授權回呼都接收目前經過身份驗證的使用者作為其第一個參數，並接收任何其他萬用字元參數作為其後續參數。在此範例中，我們使用 `{orderId}` 預留位置來指示頻道名稱的「ID」部分是萬用字元。
 
-You may view a list of your application's broadcast authorization callbacks using the `channel:list` Artisan command:
+你可以使用 `channel:list` Artisan 指令查看應用程式的廣播授權回呼清單：
 
 ```shell
 php artisan channel:list
 ```
 
 <a name="authorization-callback-model-binding"></a>
-#### Authorization Callback Model Binding
+#### 授權回呼模型繫結
 
-Just like HTTP routes, channel routes may also take advantage of implicit and explicit [route model binding](/docs/{'12.x'}/routing#route-model-binding). For example, instead of receiving a string or numeric order ID, you may request an actual `Order` model instance:
+就像 HTTP 路由一樣，頻道路由也可以利用隱式和顯式 [路由模型繫結](/docs/{'12.x'}/routing#route-model-binding)。例如，你可以請求一個實際的 `Order` 模型實例，而不是接收字串或數字訂單 ID：
 
 ```php
 use App\Models\Order;
 use App\Models\User;
 
-Broadcast::channel('orders.{'{order}'}', function (User $user, Order $order) {
+Broadcast::channel('orders.{order}', function (User $user, Order $order) {
     return $user->id === $order->user_id;
 });
 ```
 
 > [!WARNING]
-> Unlike HTTP route model binding, channel model binding does not support automatic [implicit model binding scoping](/docs/{'12.x'}/routing#implicit-model-binding-scoping). However, this is rarely a problem because most channels can be scoped based on a single model's unique, primary key.
+> 與 HTTP 路由模型繫結不同，頻道模型繫結不支援自動 [隱式模型繫結範圍](/docs/{'12.x'}/routing#implicit-model-binding-scoping)。但是，這很少成為問題，因為大多數頻道都可以基於單個模型的唯一主鍵進行範圍設定。
 
 <a name="authorization-callback-authentication"></a>
-#### Authorization Callback Authentication
+#### 授權回呼身份驗證
 
-Private and presence broadcast channels authenticate the current user via your application's default authentication guard. If the user is not authenticated, channel authorization is automatically denied and the authorization callback is never executed. However, you may assign multiple, custom guards that should authenticate the incoming request if necessary:
+私有和存在廣播頻道透過應用程式的預設身份驗證守衛對目前使用者進行身份驗證。如果使用者未經過身份驗證，頻道授權將自動被拒絕，並且永遠不會執行授權回呼。但是，你可以分配多個自訂守衛，以便在必要時對傳入請求進行身份驗證：
 
 ```php
 Broadcast::channel('channel', function () {
@@ -844,23 +844,23 @@ Broadcast::channel('channel', function () {
 ```
 
 <a name="defining-channel-classes"></a>
-### Defining Channel Classes
+### 定義頻道類別
 
-If your application is consuming many different channels, your `routes/channels.php` file could become bulky. So, instead of using closures to authorize channels, you may use channel classes. To generate a channel class, use the `make:channel` Artisan command. This command will place a new channel class in the `App/Broadcasting` directory.
+如果你的應用程式正在使用許多不同的頻道，你的 `routes/channels.php` 檔案可能會變得很龐大。因此，你可以使用頻道類別，而不是使用 Closure 來授權頻道。要產生頻道類別，請使用 `make:channel` Artisan 指令。此指令將在 `App/Broadcasting` 目錄中放置一個新的頻道類別。
 
 ```shell
 php artisan make:channel OrderChannel
 ```
 
-Next, register your channel in your `routes/channels.php` file:
+接下來，在你的 `routes/channels.php` 檔案中註冊你的頻道：
 
 ```php
 use App\Broadcasting\OrderChannel;
 
-Broadcast::channel('orders.{'{order}'}', OrderChannel::class);
+Broadcast::channel('orders.{order}', OrderChannel::class);
 ```
 
-Finally, you may place the authorization logic for your channel in the channel class' `join` method. This `join` method will house the same logic you would have typically placed in your channel authorization closure. You may also take advantage of channel model binding:
+最後，你可以將頻道的授權邏輯放置在頻道類別的 `join` 方法中。此 `join` 方法將包含你通常放置在頻道授權 Closure 中的相同邏輯。你也可以利用頻道模型繫結：
 
 ```php
 <?php
@@ -888,12 +888,12 @@ class OrderChannel
 ```
 
 > [!NOTE]
-> Like many other classes in Laravel, channel classes will automatically be resolved by the [service container](/docs/{'12.x'}/container). So, you may type-hint any dependencies required by your channel in its constructor.
+> 像 Laravel 中的許多其他類別一樣，頻道類別將由 [服務容器](/docs/{'12.x'}/container) 自動解析。因此，你可以在其建構函式中對頻道所需的任何依賴項進行型別提示。
 
 <a name="broadcasting-events"></a>
-## Broadcasting Events
+## 廣播事件
 
-Once you have defined an event and marked it with the `ShouldBroadcast` interface, you only need to fire the event using the event's dispatch method. The event dispatcher will notice that the event is marked with the `ShouldBroadcast` interface and will queue the event for broadcasting:
+一旦你定義了一個事件並用 `ShouldBroadcast` 介面標記了它，你只需要使用事件的分派方法觸發該事件。事件分派器會注意到該事件標記有 `ShouldBroadcast` 介面，並將該事件排入佇列以進行廣播：
 
 ```php
 use App\Events\OrderShipmentStatusUpdated;
@@ -902,9 +902,9 @@ OrderShipmentStatusUpdated::dispatch($order);
 ```
 
 <a name="only-to-others"></a>
-### Only to Others
+### 僅傳送給其他人
 
-When building an application that utilizes event broadcasting, you may occasionally need to broadcast an event to all subscribers to a given channel except for the current user. You may accomplish this using the `broadcast` helper and the `toOthers` method:
+在建置利用事件廣播的應用程式時，你偶爾可能需要將事件廣播給給定頻道的所有訂閱者，除了目前使用者之外。你可以使用 `broadcast` 輔助函式和 `toOthers` 方法來實現此目的：
 
 ```php
 use App\Events\OrderShipmentStatusUpdated;
@@ -912,7 +912,7 @@ use App\Events\OrderShipmentStatusUpdated;
 broadcast(new OrderShipmentStatusUpdated($update))->toOthers();
 ```
 
-To better understand when you may want to use the `toOthers` method, let's imagine a task list application where a user may create a new task by entering a task name. To create a task, your application might make a request to a `/task` URL which broadcasts the task's creation and returns a JSON representation of the new task. When your JavaScript application receives the response from the end-point, it might directly insert the new task into its task list like so:
+為了更了解何時可能需要使用 `toOthers` 方法，讓我們想像一個任務清單應用程式，使用者可以透過輸入任務名稱來建立新任務。要建立任務，你的應用程式可能會向 `/task` URL 發出請求，該 URL 廣播任務的建立並回傳新任務的 JSON 表示形式。當你的 JavaScript 應用程式收到來自端點的回應時，它可能會像這樣直接將新任務插入其任務清單中：
 
 ```js
 axios.post('/task', task)
@@ -921,26 +921,26 @@ axios.post('/task', task)
     });
 ```
 
-However, remember that we also broadcast the task's creation. If your JavaScript application is also listening for this event in order to add tasks to the task list, you will have duplicate tasks in your list: one from the end-point and one from the broadcast. You may solve this by using the `toOthers` method to instruct the broadcaster to not broadcast the event to the current user.
+但是，請記住我們也廣播了任務的建立。如果你的 JavaScript 應用程式也在監聽此事件以將任務新增至任務清單，則你的清單中將有重複的任務：一個來自端點，一個來自廣播。你可以透過使用 `toOthers` 方法指示廣播器不要將事件廣播給目前使用者來解決此問題。
 
 > [!WARNING]
-> Your event must use the `Illuminate\Broadcasting\InteractsWithSockets` trait in order to call the `toOthers` method.
+> 你的事件必須使用 `Illuminate\Broadcasting\InteractsWithSockets` trait 才能呼叫 `toOthers` 方法。
 
 <a name="only-to-others-configuration"></a>
 #### 設定
 
-When you initialize a Laravel Echo instance, a socket ID is assigned to the connection. If you are using a global [Axios](https://github.com/axios/axios) instance to make HTTP requests from your JavaScript application, the socket ID will automatically be attached to every outgoing request as an `X-Socket-ID` header. Then, when you call the `toOthers` method, Laravel will extract the socket ID from the header and instruct the broadcaster to not broadcast to any connections with that socket ID.
+當你初始化 Laravel Echo 實例時，會為連線分配一個 socket ID。如果你使用全域 [Axios](https://github.com/axios/axios) 實例從 JavaScript 應用程式發出 HTTP 請求，則 socket ID 將自動作為 `X-Socket-ID` 標頭附加到每個傳出請求。然後，當你呼叫 `toOthers` 方法時，Laravel 將從標頭中提取 socket ID，並指示廣播器不要廣播到具有該 socket ID 的任何連線。
 
-If you are not using a global Axios instance, you will need to manually configure your JavaScript application to send the `X-Socket-ID` header with all outgoing requests. You may retrieve the socket ID using the `Echo.socketId` method:
+如果你不使用全域 Axios 實例，則需要手動設定 JavaScript 應用程式以隨所有傳出請求傳送 `X-Socket-ID` 標頭。你可以使用 `Echo.socketId` 方法檢索 socket ID：
 
 ```js
 var socketId = Echo.socketId();
 ```
 
 <a name="customizing-the-connection"></a>
-### Customizing the Connection
+### 自訂連線
 
-If your application interacts with multiple broadcast connections and you want to broadcast an event using a broadcaster other than your default, you may specify which connection to push an event to using the `via` method:
+如果你的應用程式與多個廣播連線互動，並且你想使用預設廣播器以外的廣播器廣播事件，你可以使用 `via` 方法指定將事件推送到哪個連線：
 
 ```php
 use App\Events\OrderShipmentStatusUpdated;
@@ -948,7 +948,7 @@ use App\Events\OrderShipmentStatusUpdated;
 broadcast(new OrderShipmentStatusUpdated($update))->via('pusher');
 ```
 
-Alternatively, you may specify the event's broadcast connection by calling the `broadcastVia` method within the event's constructor. However, before doing so, you should ensure that the event class uses the `InteractsWithBroadcasting` trait:
+或者，你可以透過在事件的建構函式中呼叫 `broadcastVia` 方法來指定事件的廣播連線。但是，在這樣做之前，你應該確保事件類別使用 `InteractsWithBroadcasting` trait：
 
 ```php
 <?php
@@ -978,9 +978,9 @@ class OrderShipmentStatusUpdated implements ShouldBroadcast
 ```
 
 <a name="anonymous-events"></a>
-### Anonymous Events
+### 匿名事件
 
-Sometimes, you may want to broadcast a simple event to your application's frontend without creating a dedicated event class. To accommodate this, the `Broadcast` facade allows you to broadcast "anonymous events":
+有時，你可能希望將簡單事件廣播到應用程式的前端，而無需建立專用的事件類別。為了適應這種情況，`Broadcast` facade 允許你廣播「匿名事件」：
 
 ```php
 Broadcast::on('orders.'.$order->id)->send();
@@ -1005,7 +1005,7 @@ Broadcast::on('orders.'.$order->id)
     ->send();
 ```
 
-The example above will broadcast an event like the following:
+上面的範例將廣播如下事件：
 
 ```json
 {
@@ -1015,20 +1015,20 @@ The example above will broadcast an event like the following:
 }
 ```
 
-If you would like to broadcast the anonymous event on a private or presence channel, you may utilize the `private` and `presence` methods:
+如果你想在私有或存在頻道上廣播匿名事件，可以使用 `private` 和 `presence` 方法：
 
 ```php
 Broadcast::private('orders.'.$order->id)->send();
 Broadcast::presence('channels.'.$channel->id)->send();
 ```
 
-Broadcasting an anonymous event using the `send` method dispatches the event to your application's [queue](/docs/{'12.x'}/queues) for processing. However, if you would like to broadcast the event immediately, you may use the `sendNow` method:
+使用 `send` 方法廣播匿名事件會將事件分派到應用程式的 [佇列](/docs/{'12.x'}/queues) 進行處理。但是，如果你想立即廣播事件，可以使用 `sendNow` 方法：
 
 ```php
 Broadcast::on('orders.'.$order->id)->sendNow();
 ```
 
-To broadcast the event to all channel subscribers except the currently authenticated user, you can invoke the `toOthers` method:
+要將事件廣播給除目前經過身份驗證的使用者之外的所有頻道訂閱者，你可以呼叫 `toOthers` 方法：
 
 ```php
 Broadcast::on('orders.'.$order->id)
@@ -1037,11 +1037,11 @@ Broadcast::on('orders.'.$order->id)
 ```
 
 <a name="rescuing-broadcasts"></a>
-### Rescuing Broadcasts
+### 挽救廣播
 
-When your application's queue server is unavailable or Laravel encounters an error while broadcasting an event, an exception is thrown that typically causes the end user to see an application error. Since event broadcasting is often supplementary to your application's core functionality, you can prevent these exceptions from disrupting the user experience by implementing the `ShouldRescue` interface on your events.
+當你的應用程式的佇列伺服器不可用或 Laravel 在廣播事件時遇到錯誤時，會拋出例外，通常會導致最終使用者看到應用程式錯誤。由於事件廣播通常是應用程式核心功能的補充，因此你可以透過在事件上實作 `ShouldRescue` 介面來防止這些例外中斷使用者體驗。
 
-Events that implement the `ShouldRescue` interface automatically utilize Laravel's [rescue helper function](/docs/{'12.x'}/helpers#method-rescue) during broadcast attempts. This helper catches any exceptions, reports them to your application's exception handler for logging, and allows the application to continue executing normally without interrupting the user's workflow:
+實作 `ShouldRescue` 介面的事件在廣播嘗試期間會自動利用 Laravel 的 [rescue 輔助函式](/docs/{'12.x'}/helpers#method-rescue)。此輔助函式會擷取任何例外，將其報告給應用程式的例外處理常式進行記錄，並允許應用程式繼續正常執行而不會中斷使用者的工作流程：
 
 ```php
 <?php
@@ -1058,12 +1058,12 @@ class ServerCreated implements ShouldBroadcast, ShouldRescue
 ```
 
 <a name="receiving-broadcasts"></a>
-## Receiving Broadcasts
+## 接收廣播
 
 <a name="listening-for-events"></a>
-### Listening for Events
+### 監聽事件
 
-Once you have [installed and instantiated Laravel Echo](#client-side-installation), you are ready to start listening for events that are broadcast from your Laravel application. First, use the `channel` method to retrieve an instance of a channel, then call the `listen` method to listen for a specified event:
+一旦你 [安裝並實例化了 Laravel Echo](#client-side-installation)，你就可以準備開始監聽從 Laravel 應用程式廣播的事件。首先，使用 `channel` 方法檢索頻道的實例，然後呼叫 `listen` 方法來監聽指定的事件：
 
 ```js
 Echo.channel(`orders.${this.order.id}`)
@@ -1072,7 +1072,7 @@ Echo.channel(`orders.${this.order.id}`)
     });
 ```
 
-If you would like to listen for events on a private channel, use the `private` method instead. You may continue to chain calls to the `listen` method to listen for multiple events on a single channel:
+如果你想在私有頻道上監聽事件，請改用 `private` 方法。你可以繼續鍊式呼叫 `listen` 方法，以在單個頻道上監聽多個事件：
 
 ```js
 Echo.private(`orders.${this.order.id}`)
@@ -1082,9 +1082,9 @@ Echo.private(`orders.${this.order.id}`)
 ```
 
 <a name="stop-listening-for-events"></a>
-#### Stop Listening for Events
+#### 停止監聽事件
 
-If you would like to stop listening to a given event without [leaving the channel](#leaving-a-channel), you may use the `stopListening` method:
+如果你想停止監聽給定的事件而不 [離開頻道](#leaving-a-channel)，可以使用 `stopListening` 方法：
 
 ```js
 Echo.private(`orders.${this.order.id}`)
@@ -1092,23 +1092,23 @@ Echo.private(`orders.${this.order.id}`)
 ```
 
 <a name="leaving-a-channel"></a>
-### Leaving a Channel
+### 離開頻道
 
-To leave a channel, you may call the `leaveChannel` method on your Echo instance:
+要離開頻道，你可以在 Echo 實例上呼叫 `leaveChannel` 方法：
 
 ```js
 Echo.leaveChannel(`orders.${this.order.id}`);
 ```
 
-If you would like to leave a channel and also its associated private and presence channels, you may call the `leave` method:
+如果你想離開頻道及其關聯的私有和存在頻道，可以呼叫 `leave` 方法：
 
 ```js
 Echo.leave(`orders.${this.order.id}`);
 ```
 <a name="namespaces"></a>
-### Namespaces
+### 命名空間
 
-You may have noticed in the examples above that we did not specify the full `App\Events` namespace for the event classes. This is because Echo will automatically assume the events are located in the `App\Events` namespace. However, you may configure the root namespace when you instantiate Echo by passing a `namespace` configuration option:
+你可能已經注意到在上面的範例中，我們沒有為事件類別指定完整的 `App\Events` 命名空間。這是因為 Echo 會自動假設事件位於 `App\Events` 命名空間中。但是，你可以在實例化 Echo 時透過傳遞 `namespace` 設定選項來設定根命名空間：
 
 ```js
 window.Echo = new Echo({
@@ -1118,7 +1118,7 @@ window.Echo = new Echo({
 });
 ```
 
-Alternatively, you may prefix event classes with a `.` when subscribing to them using Echo. This will allow you to always specify the fully-qualified class name:
+或者，你可以在使用 Echo 訂閱事件類別時為其加上 `.` 前綴。這將允許你始終指定完全限定的類別名稱：
 
 ```js
 Echo.channel('orders')
@@ -1128,9 +1128,9 @@ Echo.channel('orders')
 ```
 
 <a name="using-react-or-vue"></a>
-### Using React or Vue
+### 使用 React 或 Vue
 
-Laravel Echo includes React and Vue hooks that make it painless to listen for events. To get started, invoke the `useEcho` hook, which is used to listen for private events. The `useEcho` hook will automatically leave channels when the consuming component is unmounted:
+Laravel Echo 包含 React 和 Vue hooks，讓監聽事件變得輕鬆。要開始使用，請呼叫 `useEcho` hook，它用於監聽私有事件。當使用元件卸載時，`useEcho` hook 將自動離開頻道：
 
 ```js tab=React
 import { useEcho } from "@laravel/echo-react";
@@ -1158,7 +1158,7 @@ useEcho(
 </script>
 ```
 
-You may listen to multiple events by providing an array of events to `useEcho`:
+你可以透過向 `useEcho` 提供事件陣列來監聽多個事件：
 
 ```js
 useEcho(
@@ -1170,7 +1170,7 @@ useEcho(
 );
 ```
 
-You may also specify the shape of the broadcast event payload data, providing greater type safety and editing convenience:
+你也可以指定廣播事件負載資料的形狀，提供更好的型別安全性和編輯便利性：
 
 ```ts
 type OrderData = {
@@ -1190,7 +1190,7 @@ useEcho<OrderData>(`orders.${orderId}`, "OrderShipmentStatusUpdated", (e) => {
 });
 ```
 
-The `useEcho` hook will automatically leave channels when the consuming component is unmounted; however, you may utilize the returned functions to manually stop / start listening to channels programmatically when necessary:
+`useEcho` hook 將在消費元件卸載時自動離開頻道；但是，你可以在必要時利用回傳的函式以程式設計方式手動停止/開始監聽頻道：
 
 ```js tab=React
 import { useEcho } from "@laravel/echo-react";
@@ -1243,9 +1243,9 @@ leave();
 ```
 
 <a name="react-vue-connecting-to-public-channels"></a>
-#### Connecting to Public Channels
+#### 連接到公開頻道
 
-To connect to a public channel, you may use the `useEchoPublic` hook:
+要連接到公開頻道，你可以使用 `useEchoPublic` hook：
 
 ```js tab=React
 import { useEchoPublic } from "@laravel/echo-react";
@@ -1266,9 +1266,9 @@ useEchoPublic("posts", "PostPublished", (e) => {
 ```
 
 <a name="react-vue-connecting-to-presence-channels"></a>
-#### Connecting to Presence Channels
+#### 連接到存在頻道
 
-To connect to a presence channel, you may use the `useEchoPresence` hook:
+要連接到存在頻道，你可以使用 `useEchoPresence` hook：
 
 ```js tab=React
 import { useEchoPresence } from "@laravel/echo-react";
@@ -1289,16 +1289,16 @@ useEchoPresence("posts", "PostPublished", (e) => {
 ```
 
 <a name="presence-channels"></a>
-## Presence Channels
+## 存在頻道
 
-Presence channels build on the security of private channels while exposing the additional feature of awareness of who is subscribed to the channel. This makes it easy to build powerful, collaborative application features such as notifying users when another user is viewing the same page or listing the inhabitants of a chat room.
+存在頻道建立在私有頻道的安全性之上，同時公開了誰訂閱了頻道的額外功能。這使得建置強大的協作應用程式功能變得容易，例如當另一個使用者正在查看同一頁面時通知使用者，或列出聊天室的成員。
 
 <a name="authorizing-presence-channels"></a>
-### Authorizing Presence Channels
+### 授權存在頻道
 
-All presence channels are also private channels; therefore, users must be [authorized to access them](#authorizing-channels). However, when defining authorization callbacks for presence channels, you will not return `true` if the user is authorized to join the channel. Instead, you should return an array of data about the user.
+所有存在頻道也是私有頻道；因此，使用者必須 [被授權存取它們](#authorizing-channels)。但是，在為存在頻道定義授權回呼時，如果使用者被授權加入頻道，你將不會回傳 `true`。相反，你應該回傳有關使用者的資料陣列。
 
-The data returned by the authorization callback will be made available to the presence channel event listeners in your JavaScript application. If the user is not authorized to join the presence channel, you should return `false` or `null`:
+授權回呼回傳的資料將可供 JavaScript 應用程式中的存在頻道事件監聽器使用。如果使用者未被授權加入存在頻道，你應該回傳 `false` 或 `null`：
 
 ```php
 use App\Models\User;
@@ -1311,9 +1311,9 @@ Broadcast::channel('chat.{roomId}', function (User $user, int $roomId) {
 ```
 
 <a name="joining-presence-channels"></a>
-### Joining Presence Channels
+### 加入存在頻道
 
-To join a presence channel, you may use Echo's `join` method. The `join` method will return a `PresenceChannel` implementation which, along with exposing the `listen` method, allows you to subscribe to the `here`, `joining`, and `leaving` events.
+要加入存在頻道，你可以使用 Echo 的 `join` 方法。`join` 方法將回傳一個 `PresenceChannel` 實作，該實作除了公開 `listen` 方法外，還允許你訂閱 `here`、`joining` 和 `leaving` 事件。
 
 ```js
 Echo.join(`chat.${roomId}`)
@@ -1331,12 +1331,12 @@ Echo.join(`chat.${roomId}`)
     });
 ```
 
-The `here` callback will be executed immediately once the channel is joined successfully, and will receive an array containing the user information for all of the other users currently subscribed to the channel. The `joining` method will be executed when a new user joins a channel, while the `leaving` method will be executed when a user leaves the channel. The `error` method will be executed when the authentication endpoint returns an HTTP status code other than 200 or if there is a problem parsing the returned JSON.
+`here` 回呼將在成功加入頻道後立即執行，並將接收一個包含目前訂閱該頻道的所有其他使用者資訊的陣列。`joining` 方法將在使用者加入頻道時執行，而 `leaving` 方法將在使用者離開頻道時執行。`error` 方法將在身份驗證端點回傳非 200 HTTP 狀態碼或解析回傳的 JSON 出現問題時執行。
 
 <a name="broadcasting-to-presence-channels"></a>
-### Broadcasting to Presence Channels
+### 廣播到存在頻道
 
-Presence channels may receive events just like public or private channels. Using the example of a chatroom, we may want to broadcast `NewMessage` events to the room's presence channel. To do so, we'll return an instance of `PresenceChannel` from the event's `broadcastOn` method:
+存在頻道可以像公開或私有頻道一樣接收事件。以聊天室為例，我們可能希望將 `NewMessage` 事件廣播到聊天室的存在頻道。為此，我們將從事件的 `broadcastOn` 方法回傳 `PresenceChannel` 的實例：
 
 ```php
 /**
@@ -1352,7 +1352,7 @@ public function broadcastOn(): array
 }
 ```
 
-As with other events, you may use the `broadcast` helper and the `toOthers` method to exclude the current user from receiving the broadcast:
+與其他事件一樣，你可以使用 `broadcast` 輔助函式和 `toOthers` 方法來排除目前使用者接收廣播：
 
 ```php
 broadcast(new NewMessage($message));
@@ -1360,7 +1360,7 @@ broadcast(new NewMessage($message));
 broadcast(new NewMessage($message))->toOthers();
 ```
 
-As typical of other types of events, you may listen for events sent to presence channels using Echo's `listen` method:
+與其他類型的事件一樣，你可以使用 Echo 的 `listen` 方法監聽傳送到存在頻道的事件：
 
 ```js
 Echo.join(`chat.${roomId}`)
@@ -1373,16 +1373,16 @@ Echo.join(`chat.${roomId}`)
 ```
 
 <a name="model-broadcasting"></a>
-## Model Broadcasting
+## 模型廣播
 
 > [!WARNING]
-> Before reading the following documentation about model broadcasting, we recommend you become familiar with the general concepts of Laravel's model broadcasting services as well as how to manually create and listen to broadcast events.
+> 在閱讀以下有關模型廣播的文件之前，我們建議你熟悉 Laravel 模型廣播服務的一般概念，以及如何手動建立和監聽廣播事件。
 
-It is common to broadcast events when your application's [Eloquent models](/docs/{'12.x'}/eloquent) are created, updated, or deleted. Of course, this can easily be accomplished by manually [defining custom events for Eloquent model state changes](/docs/{'12.x'}/eloquent#events) and marking those events with the `ShouldBroadcast` interface.
+當應用程式的 [Eloquent 模型](/docs/{'12.x'}/eloquent) 被建立、更新或刪除時，廣播事件是很常見的。當然，這可以透過手動 [為 Eloquent 模型狀態變更定義自訂事件](/docs/{'12.x'}/eloquent#events) 並使用 `ShouldBroadcast` 介面標記這些事件來輕鬆完成。
 
-However, if you are not using these events for any other purposes in your application, it can be cumbersome to create event classes for the sole purpose of broadcasting them. To remedy this, Laravel allows you to indicate that an Eloquent model should automatically broadcast its state changes.
+但是，如果你沒有在應用程式中將這些事件用於任何其他目的，那麼僅為了廣播而建立事件類別可能會很麻煩。為了解決這個問題，Laravel 允許你指示 Eloquent 模型應自動廣播其狀態變更。
 
-To get started, your Eloquent model should use the `Illuminate\Database\Eloquent\BroadcastsEvents` trait. In addition, the model should define a `broadcastOn` method, which will return an array of channels that the model's events should broadcast on:
+要開始使用，你的 Eloquent 模型應使用 `Illuminate\Database\Eloquent\BroadcastsEvents` trait。此外，模型應定義一個 `broadcastOn` 方法，該方法將回傳模型事件應廣播到的頻道陣列：
 
 ```php
 <?php
@@ -1420,9 +1420,9 @@ class Post extends Model
 }
 ```
 
-Once your model includes this trait and defines its broadcast channels, it will begin automatically broadcasting events when a model instance is created, updated, deleted, trashed, or restored.
+一旦你的模型包含了這個 trait 並定義了它的廣播頻道，當模型實例被建立、更新、刪除、移至垃圾桶或還原時，它將開始自動廣播事件。
 
-In addition, you may have noticed that the `broadcastOn` method receives a string `$event` argument. This argument contains the type of event that has occurred on the model and will have a value of `created`, `updated`, `deleted`, `trashed`, or `restored`. By inspecting the value of this variable, you may determine which channels (if any) the model should broadcast to for a particular event:
+此外，你可能已經注意到 `broadcastOn` 方法接收一個字串 `$event` 參數。此參數包含模型上發生的事件類型，其值為 `created`、`updated`、`deleted`、`trashed` 或 `restored`。透過檢查此變數的值，你可以確定模型應針對特定事件廣播到哪些頻道（如果有的話）：
 
 ```php
 /**
@@ -1440,9 +1440,9 @@ public function broadcastOn(string $event): array
 ```
 
 <a name="customizing-model-broadcasting-event-creation"></a>
-#### Customizing Model Broadcasting Event Creation
+#### 自訂模型廣播事件建立
 
-Occasionally, you may wish to customize how Laravel creates the underlying model broadcasting event. You may accomplish this by defining a `newBroadcastableEvent` method on your Eloquent model. This method should return an `Illuminate\Database\Eloquent\BroadcastableModelEventOccurred` instance:
+偶爾，你可能希望自訂 Laravel 如何建立底層模型廣播事件。你可以透過在 Eloquent 模型上定義 `newBroadcastableEvent` 方法來實現此目的。此方法應回傳一個 `Illuminate\Database\Eloquent\BroadcastableModelEventOccurred` 實例：
 
 ```php
 use Illuminate\Database\Eloquent\BroadcastableModelEventOccurred;
@@ -1459,14 +1459,14 @@ protected function newBroadcastableEvent(string $event): BroadcastableModelEvent
 ```
 
 <a name="model-broadcasting-conventions"></a>
-### Model Broadcasting Conventions
+### 模型廣播慣例
 
 <a name="model-broadcasting-channel-conventions"></a>
-#### Channel Conventions
+#### 頻道慣例
 
-As you may have noticed, the `broadcastOn` method in the model example above did not return `Channel` instances. Instead, Eloquent models were returned directly. If an Eloquent model instance is returned by your model's `broadcastOn` method (or is contained in an array returned by the method), Laravel will automatically instantiate a private channel instance for the model using the model's class name and primary key identifier as the channel name.
+你可能已經注意到，上述模型範例中的 `broadcastOn` 方法沒有回傳 `Channel` 實例。相反，直接回傳了 Eloquent 模型。如果你的模型的 `broadcastOn` 方法回傳了 Eloquent 模型實例（或包含在該方法回傳的陣列中），Laravel 將使用模型的類別名稱和主鍵識別碼作為頻道名稱，自動為該模型實例化一個私有頻道實例。
 
-So, an `App\Models\User` model with an `id` of `1` would be converted into an `Illuminate\Broadcasting\PrivateChannel` instance with a name of `App.Models.User.1`. Of course, in addition to returning Eloquent model instances from your model's `broadcastOn` method, you may return complete `Channel` instances in order to have full control over the model's channel names:
+因此，一個 `id` 為 `1` 的 `App\Models\User` 模型將被轉換為一個名為 `App.Models.User.1` 的 `Illuminate\Broadcasting\PrivateChannel` 實例。當然，除了從模型的 `broadcastOn` 方法回傳 Eloquent 模型實例外，你還可以回傳完整的 `Channel` 實例，以便完全控制模型的頻道名稱：
 
 ```php
 use Illuminate\Broadcasting\PrivateChannel;
@@ -1484,24 +1484,24 @@ public function broadcastOn(string $event): array
 }
 ```
 
-If you plan to explicitly return a channel instance from your model's `broadcastOn` method, you may pass an Eloquent model instance to the channel's constructor. When doing so, Laravel will use the model channel conventions discussed above to convert the Eloquent model into a channel name string:
+如果你打算從模型的 `broadcastOn` 方法明確回傳頻道實例，你可以將 Eloquent 模型實例傳遞給頻道的建構函式。這樣做時，Laravel 將使用上面討論的模型頻道慣例將 Eloquent 模型轉換為頻道名稱字串：
 
 ```php
 return [new Channel($this->user)];
 ```
 
-If you need to determine the channel name of a model, you may call the `broadcastChannel` method on any model instance. For example, this method returns the string `App.Models.User.1` for an `App\Models\User` model with an `id` of `1`:
+如果你需要確定模型的頻道名稱，可以在任何模型實例上呼叫 `broadcastChannel` 方法。例如，此方法對於 `id` 為 `1` 的 `App\Models\User` 模型回傳字串 `App.Models.User.1`：
 
 ```php
 $user->broadcastChannel();
 ```
 
 <a name="model-broadcasting-event-conventions"></a>
-#### Event Conventions
+#### 事件慣例
 
-Since model broadcast events are not associated with an "actual" event within your application's `App\Events` directory, they are assigned a name and a payload based on conventions. Laravel's convention is to broadcast the event using the class name of the model (not including the namespace) and the name of the model event that triggered the broadcast.
+由於模型廣播事件與應用程式 `App\Events` 目錄中的「實際」事件無關，因此它們是根據慣例分配名稱和負載的。Laravel 的慣例是使用模型的類別名稱（不包括命名空間）和觸發廣播的模型事件名稱來廣播事件。
 
-So, for example, an update to the `App\Models\Post` model would broadcast an event to your client-side application as `PostUpdated` with the following payload:
+因此，例如，對 `App\Models\Post` 模型的更新將作為 `PostUpdated` 廣播到你的客戶端應用程式，並帶有以下負載：
 
 ```json
 {
@@ -1515,9 +1515,9 @@ So, for example, an update to the `App\Models\Post` model would broadcast an eve
 }
 ```
 
-The deletion of the `App\Models\User` model would broadcast an event named `UserDeleted`.
+`App\Models\User` 模型的刪除將廣播名為 `UserDeleted` 的事件。
 
-If you would like, you may define a custom broadcast name and payload by adding a `broadcastAs` and `broadcastWith` method to your model. These methods receive the name of the model event / operation that is occurring, allowing you to customize the event's name and payload for each model operation. If `null` is returned from the `broadcastAs` method, Laravel will use the model broadcasting event name conventions discussed above when broadcasting the event:
+如果你願意，你可以透過在模型中新增 `broadcastAs` 和 `broadcastWith` 方法來自訂廣播名稱和負載。這些方法接收正在發生的模型事件/操作的名稱，允許你為每個模型操作自訂事件的名稱和負載。如果從 `broadcastAs` 方法回傳 `null`，Laravel 將在廣播事件時使用上面討論的模型廣播事件名稱慣例：
 
 ```php
 /**
@@ -1546,13 +1546,13 @@ public function broadcastWith(string $event): array
 ```
 
 <a name="listening-for-model-broadcasts"></a>
-### Listening for Model Broadcasts
+### 監聽模型廣播
 
-Once you have added the `BroadcastsEvents` trait to your model and defined your model's `broadcastOn` method, you are ready to start listening for broadcasted model events within your client-side application. Before getting started, you may wish to consult the complete documentation on [listening for events](#listening-for-events).
+一旦你將 `BroadcastsEvents` trait 新增到你的模型並定義了模型的 `broadcastOn` 方法，你就可以準備開始在客戶端應用程式中監聽廣播的模型事件。在開始之前，你可能希望查閱有關 [監聽事件](#listening-for-events) 的完整文件。
 
-First, use the `private` method to retrieve an instance of a channel, then call the `listen` method to listen for a specified event. Typically, the channel name given to the `private` method should correspond to Laravel's [model broadcasting conventions](#model-broadcasting-conventions).
+首先，使用 `private` 方法檢索頻道的實例，然後呼叫 `listen` 方法來監聽指定的事件。通常，提供給 `private` 方法的頻道名稱應對應於 Laravel 的 [模型廣播慣例](#model-broadcasting-conventions)。
 
-Once you have obtained a channel instance, you may use the `listen` method to listen for a particular event. Since model broadcast events are not associated with an "actual" event within your application's `App\Events` directory, the [event name](#model-broadcasting-event-conventions) must be prefixed with a `.` to indicate it does not belong to a particular namespace. Each model broadcast event has a `model` property which contains all of the broadcastable properties of the model:
+一旦你獲得了頻道實例，就可以使用 `listen` 方法來監聽特定事件。由於模型廣播事件與應用程式 `App\Events` 目錄中的「實際」事件無關，因此 [事件名稱](#model-broadcasting-event-conventions) 必須加上 `.` 前綴，以指示它不屬於特定命名空間。每個模型廣播事件都有一個 `model` 屬性，其中包含模型的所有可廣播屬性：
 
 ```js
 Echo.private(`App.Models.User.${this.user.id}`)
@@ -1562,9 +1562,9 @@ Echo.private(`App.Models.User.${this.user.id}`)
 ```
 
 <a name="model-broadcasts-with-react-or-vue"></a>
-#### Using React or Vue
+#### 使用 React 或 Vue
 
-If you are using React or Vue, you may use Laravel Echo's included `useEchoModel` hook to easily listen for model broadcasts:
+如果你使用 React 或 Vue，你可以使用 Laravel Echo 包含的 `useEchoModel` hook 輕鬆監聽模型廣播：
 
 ```js tab=React
 import { useEchoModel } from "@laravel/echo-react";
@@ -1584,7 +1584,7 @@ useEchoModel("App.Models.User", userId, ["UserUpdated"], (e) => {
 </script>
 ```
 
-You may also specify the shape of the model event payload data, providing greater type safety and editing convenience:
+你也可以指定模型事件負載資料的形狀，提供更好的型別安全性和編輯便利性：
 
 ```ts
 type User = {
@@ -1600,14 +1600,14 @@ useEchoModel<User, "App.Models.User">("App.Models.User", userId, ["UserUpdated"]
 ```
 
 <a name="client-events"></a>
-## Client Events
+## 客戶端事件
 
 > [!NOTE]
-> When using [Pusher Channels](https://pusher.com/channels), you must enable the "Client Events" option in the "App Settings" section of your [application dashboard](https://dashboard.pusher.com/) in order to send client events.
+> 使用 [Pusher Channels](https://pusher.com/channels) 時，你必須在 [應用程式儀表板](https://dashboard.pusher.com/) 的「App Settings」部分啟用「Client Events」選項，才能傳送客戶端事件。
 
-Sometimes you may wish to broadcast an event to other connected clients without hitting your Laravel application at all. This can be particularly useful for things like "typing" notifications, where you want to alert users of your application that another user is typing a message on a given screen.
+有時你可能希望將事件廣播給其他連接的客戶端，而根本不經過你的 Laravel 應用程式。這對於「正在輸入」通知之類的功能特別有用，你想在這些功能中提醒應用程式的使用者另一個使用者正在給定螢幕上輸入訊息。
 
-To broadcast client events, you may use Echo's `whisper` method:
+要廣播客戶端事件，你可以使用 Echo 的 `whisper` 方法：
 
 ```js tab=JavaScript
 Echo.private(`chat.${roomId}`)
@@ -1638,7 +1638,7 @@ channel().whisper('typing', { name: user.name });
 </script>
 ```
 
-To listen for client events, you may use the `listenForWhisper` method:
+要監聽客戶端事件，你可以使用 `listenForWhisper` 方法：
 
 ```js tab=JavaScript
 Echo.private(`chat.${roomId}`)
@@ -1674,11 +1674,11 @@ channel().listenForWhisper('typing', (e) => {
 ```
 
 <a name="notifications"></a>
-## Notifications
+## 通知
 
-By pairing event broadcasting with [notifications](/docs/{'12.x'}/notifications), your JavaScript application may receive new notifications as they occur without needing to refresh the page. Before getting started, be sure to read over the documentation on using [the broadcast notification channel](/docs/{'12.x'}/notifications#broadcast-notifications).
+透過將事件廣播與 [通知](/docs/{'12.x'}/notifications) 配對，你的 JavaScript 應用程式可以在新通知發生時接收它們，而無需重新整理頁面。在開始之前，請務必閱讀有關使用 [廣播通知頻道](/docs/{'12.x'}/notifications#broadcast-notifications) 的文件。
 
-Once you have configured a notification to use the broadcast channel, you may listen for the broadcast events using Echo's `notification` method. Remember, the channel name should match the class name of the entity receiving the notifications:
+一旦你將通知設定為使用廣播頻道，你就可以使用 Echo 的 `notification` 方法來監聽廣播事件。請記住，頻道名稱應與接收通知的實體的類別名稱相符：
 
 ```js tab=JavaScript
 Echo.private(`App.Models.User.${userId}`)
@@ -1709,12 +1709,12 @@ channel().notification((notification) => {
 </script>
 ```
 
-In this example, all notifications sent to `App\Models\User` instances via the `broadcast` channel would be received by the callback. A channel authorization callback for the `App.Models.User.{id}` channel is included in your application's `routes/channels.php` file.
+在此範例中，透過 `broadcast` 頻道傳送到 `App\Models\User` 實例的所有通知都將由回呼接收。`App.Models.User.{id}` 頻道的頻道授權回呼包含在應用程式的 `routes/channels.php` 檔案中。
 
 <a name="stop-listening-for-notifications"></a>
-#### Stop Listening for Notifications
+#### 停止監聽通知
 
-If you would like to stop listening to notifications without [leaving the channel](#leaving-a-channel), you may use the `stopListeningForNotification` method:
+如果你想停止監聽通知而不 [離開頻道](#leaving-a-channel)，可以使用 `stopListeningForNotification` 方法：
 
 ```js
 const callback = (notification) => {
