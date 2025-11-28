@@ -76,8 +76,6 @@ const sidebarItems = [
             { title: 'Rate Limiting', href: '/docs/rate-limiting' },
             { title: 'Strings', href: '/docs/strings' },
             { title: 'Task Scheduling', href: '/docs/scheduling' },
-            { title: 'Context', href: '/docs/context' },
-            { title: 'Concurrency', href: '/docs/concurrency' },
         ]
     },
     {
