@@ -56,26 +56,9 @@ const sidebarItems = [
     {
         title: '深入探討',
         items: [
-            { title: 'Artisan Console', href: '/docs/artisan' },
-            { title: 'Broadcasting', href: '/docs/broadcasting' },
-            { title: 'Cache', href: '/docs/cache' },
-            { title: 'Collections', href: '/docs/collections' },
-            { title: 'Concurrency', href: '/docs/concurrency' },
-            { title: 'Context', href: '/docs/context' },
             { title: 'Contracts', href: '/docs/contracts' },
-            { title: 'Events', href: '/docs/events' },
-            { title: 'File Storage', href: '/docs/filesystem' },
-            { title: 'Helpers', href: '/docs/helpers' },
-            { title: 'HTTP Client', href: '/docs/http-client' },
-            { title: 'Localization', href: '/docs/localization' },
-            { title: 'Mail', href: '/docs/mail' },
-            { title: 'Notifications', href: '/docs/notifications' },
-            { title: 'Package Development', href: '/docs/packages' },
-            { title: 'Processes', href: '/docs/processes' },
-            { title: 'Queues', href: '/docs/queues' },
-            { title: 'Rate Limiting', href: '/docs/rate-limiting' },
-            { title: 'Strings', href: '/docs/strings' },
-            { title: 'Task Scheduling', href: '/docs/scheduling' },
+            { title: 'Context', href: '/docs/context' },
+            { title: 'Concurrency', href: '/docs/concurrency' },
         ]
     },
     {
@@ -118,6 +101,22 @@ const sidebarItems = [
             { title: 'Console 測試', href: '/docs/console-tests' },
             { title: '資料庫測試', href: '/docs/database-testing' },
             { title: 'Dusk', href: '/docs/dusk' },
+        ]
+    },
+    {
+        title: '其他',
+        items: [
+            { title: 'Artisan Console', href: '/docs/artisan' },
+            { title: '廣播', href: '/docs/broadcasting' },
+            { title: '快取', href: '/docs/cache' },
+            { title: '集合', href: '/docs/collections' },
+            { title: '事件', href: '/docs/events' },
+            { title: '檔案儲存', href: '/docs/filesystem' },
+            { title: '輔助函式', href: '/docs/helpers' },
+            { title: '郵件', href: '/docs/mail' },
+            { title: '通知', href: '/docs/notifications' },
+            { title: '佇列', href: '/docs/queues' },
+            { title: '排程', href: '/docs/scheduling' },
         ]
     },
     {
