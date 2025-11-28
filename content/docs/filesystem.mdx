@@ -33,22 +33,22 @@ description: Laravel 提供強大的檔案系統抽象
 <a name="introduction"></a>
 ## 簡介
 
-Laravel provides a powerful filesystem abstraction thanks to the wonderful [Flysystem](https://github.com/thephpleague/flysystem) PHP package by Frank de Jonge. The Laravel Flysystem integration provides simple drivers for working with local filesystems, SFTP, and Amazon S3. Even better, it's amazingly simple to switch between these storage options between your local development machine and production server as the API remains the same for each system.
+Laravel 提供了強大的檔案系統抽象,感謝 Frank de Jonge 的出色 [Flysystem](https://github.com/thephpleague/flysystem) PHP 套件。Laravel Flysystem 整合提供了簡單的驅動程式來處理本地檔案系統、SFTP 和 Amazon S3。更好的是,在本地開發機器和生產伺服器之間切換這些儲存選項非常簡單,因為每個系統的 API 保持一致。
 
 <a name="configuration"></a>
 ## 設定
 
-Laravel's filesystem configuration file is located at `config/filesystems.php`. Within this file, you may configure all of your filesystem "disks". Each disk represents a particular storage driver and storage location. Example configurations for each supported driver are included in the configuration file so you can modify the configuration to reflect your storage preferences and credentials.
+Laravel 的檔案系統設定檔位於 `config/filesystems.php`。在此檔案中,你可以設定所有檔案系統「磁碟」。每個磁碟代表一個特定的儲存驅動程式和儲存位置。設定檔中包含了每個支援的驅動程式的範例設定,因此你可以修改設定以反映你的儲存喜好和憑證。
 
-The `local` driver interacts with files stored locally on the server running the Laravel application, while the `sftp` storage driver is used for SSH key-based FTP. The `s3` driver is used to write to Amazon's S3 cloud storage service.
+`local` 驅動程式與儲存在執行 Laravel 應用程式的伺服器上的檔案互動,而 `sftp` 儲存驅動程式用於基於 SSH 鍵的 FTP。`s3` 驅動程式用於寫入 Amazon 的 S3 雲端儲存服務。
 
 > [!NOTE]
-> You may configure as many disks as you like and may even have multiple disks that use the same driver.
+> 你可以設定任意數量的磁碟,甚至可以有多個使用相同驅動程式的磁碟。
 
 <a name="the-local-driver"></a>
-### The Local Driver
+### Local 驅動程式
 
-When using the `local` driver, all file operations are relative to the `root` directory defined in your `filesystems` configuration file. By default, this value is set to the `storage/app/private` directory. Therefore, the following method would write to `storage/app/private/example.txt`:
+當使用 `local` 驅動程式時,所有檔案操作都是相對於你的 `filesystems` 設定檔中定義的 `root` 目錄。預設情況下,此值設定為 `storage/app/private` 目錄。因此,以下方法將寫入 `storage/app/private/example.txt`:
 
 ```php
 use Illuminate\Support\Facades\Storage;
@@ -57,25 +57,25 @@ Storage::disk('local')->put('example.txt', 'Contents');
 ```
 
 <a name="the-public-disk"></a>
-### The Public Disk
+### Public 磁碟
 
-The `public` disk included in your application's `filesystems` configuration file is intended for files that are going to be publicly accessible. By default, the `public` disk uses the `local` driver and stores its files in `storage/app/public`.
+應用程式的 `filesystems` 設定檔中包含的 `public` 磁碟用於將公開可存取的檔案。預設情況下,`public` 磁碟使用 `local` 驅動程式並將其檔案儲存在 `storage/app/public` 中。
 
-If your `public` disk uses the `local` driver and you want to make these files accessible from the web, you should create a symbolic link from source directory `storage/app/public` to target directory `public/storage`:
+如果你的 `public` 磁碟使用 `local` 驅動程式並且你想讓這些檔案從 Web 可存取,你應該從來源目錄 `storage/app/public` 到目標目錄 `public/storage` 建立一個符號連結:
 
-To create the symbolic link, you may use the `storage:link` Artisan command:
+要建立符號連結,你可以使用 `storage:link` Artisan 指令:
 
 ```shell
 php artisan storage:link
 ```
 
-Once a file has been stored and the symbolic link has been created, you can create a URL to the files using the `asset` helper:
+一旦檔案被儲存並建立了符號連結,你可以使用 `asset` 輔助函式建立檔案的 URL:
 
 ```php
 echo asset('storage/file.txt');
 ```
 
-You may configure additional symbolic links in your `filesystems` configuration file. Each of the configured links will be created when you run the `storage:link` command:
+你可以在 `filesystems` 設定檔中設定額外的符號連結。當你執行 `storage:link` 指令時,每個設定的連結都將被建立:
 
 ```php
 'links' => [
@@ -84,25 +84,25 @@ You may configure additional symbolic links in your `filesystems` configuration 
 ],
 ```
 
-The `storage:unlink` command may be used to destroy your configured symbolic links:
+`storage:unlink` 指令可用於銀毀你設定的符號連結:
 
 ```shell
 php artisan storage:unlink
 ```
 
 <a name="driver-prerequisites"></a>
-### Driver Prerequisites
+### 驅動程式先決條件
 
 <a name="s3-driver-configuration"></a>
-#### S3 Driver Configuration
+#### S3 驅動程式設定
 
-Before using the S3 driver, you will need to install the Flysystem S3 package via the Composer package manager:
+在使用 S3 驅動程式之前,你需要透過 Composer 套件管理器安裝 Flysystem S3 套件:
 
 ```shell
 composer require league/flysystem-aws-s3-v3 "^3.0" --with-all-dependencies
 ```
 
-An S3 disk configuration array is located in your `config/filesystems.php` configuration file. Typically, you should configure your S3 information and credentials using the following environment variables which are referenced by the `config/filesystems.php` configuration file:
+S3 磁碟設定陣列位於你的 `config/filesystems.php` 設定檔中。通常,你應該使用以下環境變數來設定你的 S3 資訊和憑證,這些環境變數由 `config/filesystems.php` 設定檔引用:
 
 ```ini
 AWS_ACCESS_KEY_ID=<your-key-id>
@@ -112,7 +112,7 @@ AWS_BUCKET=<your-bucket-name>
 AWS_USE_PATH_STYLE_ENDPOINT=false
 ```
 
-For convenience, these environment variables match the naming convention used by the AWS CLI.
+為了方便起見,這些環境變數與 AWS CLI 使用的命名慣例相匹配。
 
 <a name="ftp-driver-configuration"></a>
 #### FTP Driver Configuration

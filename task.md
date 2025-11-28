@@ -1,20 +1,32 @@
 # 深入探討 章節翻譯任務
 
-以下是「深入探討」部分中尚未翻譯的章節：
+## 翻譯狀態
 
-- [ ] Broadcasting (`/docs/broadcasting`)
-- [ ] Cache (`/docs/cache`)
-- [ ] Collections (`/docs/collections`)
-- [ ] Events (`/docs/events`)
-- [ ] File Storage (`/docs/filesystem`)
-- [ ] Helpers (`/docs/helpers`)
-- [ ] HTTP Client (`/docs/http- [ ] client`)
-- [ ] Mail (`/docs/mail`)
-- [ ] Notifications (`/docs/notifications`)
-- [ ] Package Development (`/docs/packages`)
-- [ ] Processes (`/docs/processes`)
-- [ ] Queues (`/docs/queues`)
-- [ ] Rate Limiting (`/docs/rate- [ ] limiting`)
-- [ ] Strings (`/docs/strings`)
+- [x] Broadcasting (`/docs/broadcasting`) - 已完全翻譯
+- [x] Cache (`/docs/cache`) - 已完全翻譯
+- [ ] Collections (`/docs/collections`) - 僅標題翻譯
+- [x] Events (`/docs/events`) - 已完全翻譯
+- [/] File Storage (`/docs/filesystem`) - 進行中
+- [ ] Helpers (`/docs/helpers`) - 僅標題翻譯
+- [ ] HTTP Client (`/docs/http-client`) - 待檢查
+- [ ] Mail (`/docs/mail`) - 待檢查
+- [ ] Notifications (`/docs/notifications`) - 待檢查
+- [ ] Package Development (`/docs/packages`) - 待檢查
+- [ ] Processes (`/docs/processes`) - 待檢查
+- [ ] Queues (`/docs/queues`) - 待檢查
+- [ ] Rate Limiting (`/docs/rate-limiting`) - 待檢查
+- [ ] Strings (`/docs/strings`) - 待檢查
 
-請逐一檢查並翻譯這些文件中的英文部分為中文。
+## 翻譯階段
+
+### 第一批:中等大小文件
+- [x] Cache (~681 行) - 已完成
+- [x] Events (~1158 行) - 已完成
+- [/] File Storage (~913 行) - 進行中
+
+### 第二批:大型文件
+- [ ] Collections (~4338 行)
+- [ ] Helpers (~3699 行)
+
+### 第三批:待檢查文件
+- [ ] 檢查並翻譯其餘 8 個文件
