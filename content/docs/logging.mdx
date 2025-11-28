@@ -39,19 +39,53 @@ Laravel 日誌基於「通道」。每個通道代表一種特定的寫入日誌
 
 每個日誌通道都由「驅動」驅動。驅動決定了日誌訊息實際如何記錄以及記錄在哪裡。以下日誌通道驅動在每個 Laravel 應用程式中都可用。這些驅動的大多數條目已經存在於你的應用程式的 `config/logging.php` 設定檔中，因此請務必檢視此檔案以熟悉其內容：
 
-<div className="overflow-auto" markdown="1">
-
-| 名稱         | 描述                                                   |
-| ------------ | ------------------------------------------------------ |
-| `custom`     | 呼叫指定工廠來建立通道的驅動。                         |
-| `daily`      | 基於 `RotatingFileHandler` 的 Monolog 驅動，每日輪換。 |
-| `errorlog`   | 基於 `ErrorLogHandler` 的 Monolog 驅動。               |
-| `monolog`    | 可使用任何支援的 Monolog 處理器的 Monolog 工廠驅動。   |
-| `papertrail` | 基於 `SyslogUdpHandler` 的 Monolog 驅動。              |
-| `single`     | 基於單一檔案或路徑的日誌通道（`StreamHandler`）。      |
-| `slack`      | 基於 `SlackWebhookHandler` 的 Monolog 驅動。           |
-| `stack`      | 用於建立「多通道」通道的包裝器。                       |
-| `syslog`     | 基於 `SyslogHandler` 的 Monolog 驅動。                 |
+<div className="overflow-auto">
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">名稱</th>
+            <th className="px-3 py-2">描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`custom`</td>
+            <td className="px-3 py-2">呼叫指定工廠來建立通道的驅動。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`daily`</td>
+            <td className="px-3 py-2">基於 `RotatingFileHandler` 的 Monolog 驅動，每日輪換。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`errorlog`</td>
+            <td className="px-3 py-2">基於 `ErrorLogHandler` 的 Monolog 驅動。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`monolog`</td>
+            <td className="px-3 py-2">可使用任何支援的 Monolog 處理器的 Monolog 工廠驅動。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`papertrail`</td>
+            <td className="px-3 py-2">基於 `SyslogUdpHandler` 的 Monolog 驅動。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`single`</td>
+            <td className="px-3 py-2">基於單一檔案或路徑的日誌通道(`StreamHandler`)。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`slack`</td>
+            <td className="px-3 py-2">基於 `SlackWebhookHandler` 的 Monolog 驅動。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`stack`</td>
+            <td className="px-3 py-2">用於建立「多通道」通道的包裝器。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`syslog`</td>
+            <td className="px-3 py-2">基於 `SyslogHandler` 的 Monolog 驅動。</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
@@ -79,23 +113,55 @@ Laravel 日誌基於「通道」。每個通道代表一種特定的寫入日誌
 
 `single` 和 `daily` 通道有三個可選的設定選項：`bubble`、`permission` 和 `locking`。
 
-<div className="overflow-auto" markdown="1">
-
-| 名稱         | 描述                                           | 預設值  |
-| ------------ | ---------------------------------------------- | ------- |
-| `bubble`     | 指示訊息在被處理後是否應該向上冒泡到其他通道。 | `true`  |
-| `locking`    | 在寫入之前嘗試鎖定日誌檔案。                   | `false` |
-| `permission` | 日誌檔案的權限。                               | `0644`  |
+<div className="overflow-auto">
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">名稱</th>
+            <th className="px-3 py-2">描述</th>
+            <th className="px-3 py-2">預設值</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`bubble`</td>
+            <td className="px-3 py-2">指示訊息在被處理後是否應該向上冒泡到其他通道。</td>
+            <td className="px-3 py-2">`true`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`locking`</td>
+            <td className="px-3 py-2">在寫入之前嘗試鎖定日誌檔案。</td>
+            <td className="px-3 py-2">`false`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`permission`</td>
+            <td className="px-3 py-2">日誌檔案的權限。</td>
+            <td className="px-3 py-2">`0644`</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
 此外，`daily` 通道的保留策略可以透過 `LOG_DAILY_DAYS` 環境變數或設定 `days` 設定選項來設定。
 
-<div className="overflow-auto" markdown="1">
-
-| 名稱   | 描述                         | 預設值 |
-| ------ | ---------------------------- | ------ |
-| `days` | 每日日誌檔案應該保留的天數。 | `14`   |
+<div className="overflow-auto">
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">名稱</th>
+            <th className="px-3 py-2">描述</th>
+            <th className="px-3 py-2">預設值</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`days`</td>
+            <td className="px-3 py-2">每日日誌檔案應該保留的天數。</td>
+            <td className="px-3 py-2">`14`</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
