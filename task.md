@@ -2,11 +2,14 @@
 
 根據檢查，以下頁面包含未翻譯的英文內容，需要完成翻譯：
 
-- [ ] localization.mdx - 包含複數化示例中的英文句子
-- [ ] upgrade.mdx - 包含升級指南中的英文註釋和代碼示例
-- [ ] urls.mdx - 包含基礎 URL 相關的英文內容
-- [ ] mcp.mdx - 包含 Laravel MCP 介紹和工具描述的英文句子
-- [ ] packages.mdx - 包含套件開發指南中的大量英文說明
-- [ ] routing.mdx - 包含路由示例中的英文註釋
+- [ ] homestead.mdx - 包含 Vagrant 和虛擬機設置的英文說明
+- [ ] notifications.mdx - 包含通知系統的英文描述和示例
+- [ ] cache.mdx - 包含快取功能的英文說明和示例
+- [ ] passwords.mdx - 包含密碼重置配置的英文內容
+- [ ] mail.mdx - 包含郵件功能的英文描述
+- [ ] migrations.mdx - 包含資料庫遷移的英文說明
+- [ ] http-client.mdx - 包含 HTTP 客戶端的英文內容
+- [ ] queues.mdx - 包含隊列系統的英文說明和示例
+- [ ] pulse.mdx - 包含 Pulse 監控工具的英文描述
 
 請逐一檢查並翻譯這些文件中的英文部分為中文。
