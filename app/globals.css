@@ -117,7 +117,40 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+.collection-method-list ul {
+  column-count: 3;
+  column-gap: 2rem;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.collection-method-list li {
+  break-inside: avoid;
+  margin-bottom: 0.5rem;
+}
+
+.collection-method-list a {
+  display: block;
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .collection-method-list ul {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .collection-method-list ul {
+    column-count: 1;
   }
 }
