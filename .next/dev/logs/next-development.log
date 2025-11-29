@@ -80,3 +80,4 @@ It can also happen if the client has a browser extension installed which messes 
 [01:00:15.332] Browser ERROR   Encountered two children with the same key, `%s`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version. /docs/concurrency
 [01:00:49.496] Server  LOG      ✓ Compiled in 32ms
 [01:20:16.483] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[10:21:03.068] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -4,7 +4,7 @@
 
 - [x] Broadcasting (`/docs/broadcasting`) - 已完全翻譯
 - [x] Cache (`/docs/cache`) - 已完全翻譯
-- [ ] Collections (`/docs/collections`) - 僅標題翻譯
+- [/] Collections (`/docs/collections`) - 進行中
 - [x] Events (`/docs/events`) - 已完全翻譯
 - [x] File Storage (`/docs/filesystem`) - 已完全翻譯
 - [ ] Helpers (`/docs/helpers`) - 僅標題翻譯
@@ -25,7 +25,7 @@
 - [x] File Storage (~913 行) - 已完成
 
 ### 第二批:大型文件
-- [ ] Collections (~4338 行)
+- [x] Collections (collections.mdx) <!-- id: 4 -->
 - [ ] Helpers (~3699 行)
 
 ### 第三批:待檢查文件
