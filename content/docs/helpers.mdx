@@ -5,28 +5,28 @@ description: Laravel 包含多種全域 PHP 輔助函式
 
 # Helpers
 
-- [Introduction](#introduction)
-- [Available Methods](#available-methods)
-- [Other Utilities](#other-utilities)
-  - [Benchmarking](#benchmarking)
-  - [Dates](#dates)
-  - [Deferred Functions](#deferred-functions)
-  - [Lottery](#lottery)
-  - [Pipeline](#pipeline)
-  - [Sleep](#sleep)
-  - [Timebox](#timebox)
+- [簡介 (Introduction)](#introduction)
+- [可用方法 (Available Methods)](#available-methods)
+- [其他工具 (Other Utilities)](#other-utilities)
+  - [基準測試 (Benchmarking)](#benchmarking)
+  - [日期 (Dates)](#dates)
+  - [延遲函式 (Deferred Functions)](#deferred-functions)
+  - [抽獎 (Lottery)](#lottery)
+  - [管道 (Pipeline)](#pipeline)
+  - [睡眠 (Sleep)](#sleep)
+  - [時間框 (Timebox)](#timebox)
   - [URI](#uri)
 
 <a name="introduction"></a>
 ## 簡介
 
-Laravel includes a variety of global "helper" PHP functions. Many of these functions are used by the framework itself; however, you are free to use them in your own applications if you find them convenient.
+Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架本身使用;但是,如果你發現它們很方便,你可以在自己的應用程式中自由使用它們。
 
 <a name="available-methods"></a>
 ## 可用方法
 
 <a name="arrays-and-objects-method-list"></a>
-### Arrays & Objects
+### 陣列和物件 (Arrays & Objects)
 
 <div className="collection-method-list" markdown="1">
 
@@ -95,7 +95,7 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 </div>
 
 <a name="numbers-method-list"></a>
-### Numbers
+### 數字 (Numbers)
 
 <div className="collection-method-list" markdown="1">
 
@@ -123,7 +123,7 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 </div>
 
 <a name="paths-method-list"></a>
-### Paths
+### 路徑 (Paths)
 
 <div className="collection-method-list" markdown="1">
 
@@ -139,7 +139,7 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 </div>
 
 <a name="urls-method-list"></a>
-### URLs
+### URL (URLs)
 
 <div className="collection-method-list" markdown="1">
 
@@ -156,7 +156,7 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 </div>
 
 <a name="miscellaneous-method-list"></a>
-### Miscellaneous
+### 其他 (Miscellaneous)
 
 <div className="collection-method-list" markdown="1">
 
@@ -223,12 +223,12 @@ Laravel includes a variety of global "helper" PHP functions. Many of these funct
 </div>
 
 <a name="arrays"></a>
-## Arrays & Objects
+## 陣列和物件 (Arrays & Objects)
 
 <a name="method-array-accessible"></a>
 #### `Arr::accessible()`
 
-The `Arr::accessible` method determines if the given value is array accessible:
+`Arr::accessible` 方法判斷給定的值是否為陣列可存取的:
 
 ```php
 use Illuminate\Support\Arr;
@@ -254,7 +254,7 @@ $isAccessible = Arr::accessible(new stdClass);
 <a name="method-array-add"></a>
 #### `Arr::add()`
 
-The `Arr::add` method adds a given key / value pair to an array if the given key doesn't already exist in the array or is set to `null`:
+`Arr::add` 方法將給定的鍵/值對新增到陣列中(如果給定的鍵在陣列中不存在或設定為 `null`):
 
 ```php
 use Illuminate\Support\Arr;
@@ -271,7 +271,7 @@ $array = Arr::add(['name' => 'Desk', 'price' => null], 'price', 100);
 <a name="method-array-array"></a>
 #### `Arr::array()`
 
-The `Arr::array` method retrieves a value from a deeply nested array using "dot" notation (just as [Arr::get()](#method-array-get) does), but throws an `InvalidArgumentException` if the requested value is not an `array`:
+`Arr::array` 方法使用「點」符號從深度巢狀的陣列中檢索值(就像 [Arr::get()](#method-array-get) 一樣),但如果請求的值不是 `array`,則拋出 `InvalidArgumentException`:
 
 ```
 use Illuminate\Support\Arr;
@@ -290,7 +290,7 @@ $value = Arr::array($array, 'name');
 <a name="method-array-boolean"></a>
 #### `Arr::boolean()`
 
-The `Arr::boolean` method retrieves a value from a deeply nested array using "dot" notation (just as [Arr::get()](#method-array-get) does), but throws an `InvalidArgumentException` if the requested value is not a `boolean`:
+`Arr::boolean` 方法使用「點」符號從深度巢狀的陣列中檢索值(就像 [Arr::get()](#method-array-get) 一樣),但如果請求的值不是 `boolean`,則拋出 `InvalidArgumentException`:
 
 ```
 use Illuminate\Support\Arr;
@@ -309,7 +309,7 @@ $value = Arr::boolean($array, 'name');
 <a name="method-array-collapse"></a>
 #### `Arr::collapse()`
 
-The `Arr::collapse` method collapses an array of arrays or collections into a single array:
+`Arr::collapse` 方法將陣列的陣列或集合摺疊成單個陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -322,7 +322,7 @@ $array = Arr::collapse([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
 <a name="method-array-crossjoin"></a>
 #### `Arr::crossJoin()`
 
-The `Arr::crossJoin` method cross joins the given arrays, returning a Cartesian product with all possible permutations:
+`Arr::crossJoin` 方法交叉連線給定的陣列,返回具有所有可能排列的笛卡兒積:
 
 ```php
 use Illuminate\Support\Arr;
@@ -357,7 +357,7 @@ $matrix = Arr::crossJoin([1, 2], ['a', 'b'], ['I', 'II']);
 <a name="method-array-divide"></a>
 #### `Arr::divide()`
 
-The `Arr::divide` method returns two arrays: one containing the keys and the other containing the values of the given array:
+`Arr::divide` 方法返回兩個陣列:一個包含鍵,另一個包含給定陣列的值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -372,7 +372,7 @@ use Illuminate\Support\Arr;
 <a name="method-array-dot"></a>
 #### `Arr::dot()`
 
-The `Arr::dot` method flattens a multi-dimensional array into a single level array that uses "dot" notation to indicate depth:
+`Arr::dot` 方法將多維陣列展平為使用「點」符號指示深度的單層陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -387,7 +387,7 @@ $flattened = Arr::dot($array);
 <a name="method-array-every"></a>
 #### `Arr::every()`
 
-The `Arr::every` method ensures that all values in the array pass a given truth test:
+`Arr::every` 方法確保陣列中的所有值都通過給定的真值測試:
 
 ```php
 use Illuminate\Support\Arr;
@@ -406,7 +406,7 @@ Arr::every($array, fn ($i) => $i > 2);
 <a name="method-array-except"></a>
 #### `Arr::except()`
 
-The `Arr::except` method removes the given key / value pairs from an array:
+`Arr::except` 方法從陣列中移除給定的鍵/值對:
 
 ```php
 use Illuminate\Support\Arr;
@@ -421,7 +421,7 @@ $filtered = Arr::except($array, ['price']);
 <a name="method-array-exists"></a>
 #### `Arr::exists()`
 
-The `Arr::exists` method checks that the given key exists in the provided array:
+`Arr::exists` 方法檢查給定的鍵是否存在於提供的陣列中:
 
 ```php
 use Illuminate\Support\Arr;
@@ -440,7 +440,7 @@ $exists = Arr::exists($array, 'salary');
 <a name="method-array-first"></a>
 #### `Arr::first()`
 
-The `Arr::first` method returns the first element of an array passing a given truth test:
+`Arr::first` 方法返回通過給定真值測試的陣列的第一個元素:
 
 ```php
 use Illuminate\Support\Arr;
@@ -454,7 +454,7 @@ $first = Arr::first($array, function (int $value, int $key) {
 // 200
 ```
 
-A default value may also be passed as the third parameter to the method. This value will be returned if no value passes the truth test:
+也可以將預設值作為第三個參數傳遞給該方法。如果沒有值通過真值測試,則將返回此值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -465,7 +465,7 @@ $first = Arr::first($array, $callback, $default);
 <a name="method-array-flatten"></a>
 #### `Arr::flatten()`
 
-The `Arr::flatten` method flattens a multi-dimensional array into a single level array:
+`Arr::flatten` 方法將多維陣列展平為單層陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -480,7 +480,7 @@ $flattened = Arr::flatten($array);
 <a name="method-array-float"></a>
 #### `Arr::float()`
 
-The `Arr::float` method retrieves a value from a deeply nested array using "dot" notation (just as [Arr::get()](#method-array-get) does), but throws an `InvalidArgumentException` if the requested value is not a `float`:
+`Arr::float` 方法使用「點」符號從深度巢狀的陣列中檢索值(就像 [Arr::get()](#method-array-get) 一樣),但如果請求的值不是 `float`,則拋出 `InvalidArgumentException`:
 
 ```
 use Illuminate\Support\Arr;
@@ -499,7 +499,7 @@ $value = Arr::float($array, 'name');
 <a name="method-array-forget"></a>
 #### `Arr::forget()`
 
-The `Arr::forget` method removes a given key / value pairs from a deeply nested array using "dot" notation:
+`Arr::forget` 方法使用「點」符號從深度巢狀的陣列中移除給定的鍵/值對:
 
 ```php
 use Illuminate\Support\Arr;
@@ -514,7 +514,7 @@ Arr::forget($array, 'products.desk');
 <a name="method-array-from"></a>
 #### `Arr::from()`
 
-The `Arr::from` method converts various input types into a plain PHP array. It supports a range of input types, including arrays, objects, and several common Laravel interfaces, such as `Arrayable`, `Enumerable`, `Jsonable`, and `JsonSerializable`. Additionally, it handles `Traversable` and `WeakMap` instances:
+`Arr::from` 方法將各種輸入類型轉換為純 PHP 陣列。它支援一系列輸入類型,包括陣列、物件和幾個常見的 Laravel 介面,如 `Arrayable`、`Enumerable`、`Jsonable` 和 `JsonSerializable`。此外,它還處理 `Traversable` 和 `WeakMap` 實例:
 
 ```php
 use Illuminate\Support\Arr;
@@ -535,7 +535,7 @@ Arr::from(new TestJsonableObject); // ['foo' => 'bar']
 <a name="method-array-get"></a>
 #### `Arr::get()`
 
-The `Arr::get` method retrieves a value from a deeply nested array using "dot" notation:
+`Arr::get` 方法使用「點」符號從深度巢狀的陣列中檢索值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -547,7 +547,7 @@ $price = Arr::get($array, 'products.desk.price');
 // 100
 ```
 
-The `Arr::get` method also accepts a default value, which will be returned if the specified key is not present in the array:
+`Arr::get` 方法也接受一個預設值,如果指定的鍵在陣列中不存在,則返回該預設值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -560,7 +560,7 @@ $discount = Arr::get($array, 'products.desk.discount', 0);
 <a name="method-array-has"></a>
 #### `Arr::has()`
 
-The `Arr::has` method checks whether a given item or items exists in an array using "dot" notation:
+`Arr::has` 方法使用「點」符號檢查陣列中是否存在給定的項目或項目:
 
 ```php
 use Illuminate\Support\Arr;
@@ -579,7 +579,7 @@ $contains = Arr::has($array, ['product.price', 'product.discount']);
 <a name="method-array-hasall"></a>
 #### `Arr::hasAll()`
 
-The `Arr::hasAll` method determines if all of the specified keys exist in the given array using "dot" notation:
+`Arr::hasAll` 方法使用「點」符號判斷給定陣列中是否存在所有指定的鍵:
 
 ```php
 use Illuminate\Support\Arr;
@@ -594,7 +594,7 @@ Arr::hasAll($array, ['name', 'IDE']); // false
 <a name="method-array-hasany"></a>
 #### `Arr::hasAny()`
 
-The `Arr::hasAny` method checks whether any item in a given set exists in an array using "dot" notation:
+`Arr::hasAny` 方法使用「點」符號檢查給定集合中的任何項目是否存在於陣列中:
 
 ```php
 use Illuminate\Support\Arr;
@@ -617,7 +617,7 @@ $contains = Arr::hasAny($array, ['category', 'product.discount']);
 <a name="method-array-integer"></a>
 #### `Arr::integer()`
 
-The `Arr::integer` method retrieves a value from a deeply nested array using "dot" notation (just as [Arr::get()](#method-array-get) does), but throws an `InvalidArgumentException` if the requested value is not an `int`:
+`Arr::integer` 方法使用「點」符號從深度巢狀的陣列中檢索值(就像 [Arr::get()](#method-array-get) 一樣),但如果請求的值不是 `int`,則拋出 `InvalidArgumentException`:
 
 ```
 use Illuminate\Support\Arr;
@@ -636,7 +636,7 @@ $value = Arr::integer($array, 'name');
 <a name="method-array-isassoc"></a>
 #### `Arr::isAssoc()`
 
-The `Arr::isAssoc` method returns `true` if the given array is an associative array. An array is considered "associative" if it doesn't have sequential numerical keys beginning with zero:
+如果給定的陣列是關聯陣列,則 `Arr::isAssoc` 方法返回 `true`。如果陣列沒有以零開頭的連續數字鍵,則該陣列被視為「關聯」陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -653,7 +653,7 @@ $isAssoc = Arr::isAssoc([1, 2, 3]);
 <a name="method-array-islist"></a>
 #### `Arr::isList()`
 
-The `Arr::isList` method returns `true` if the given array's keys are sequential integers beginning from zero:
+如果給定陣列的鍵是從零開頭的連續整數,則 `Arr::isList` 方法返回 `true`:
 
 ```php
 use Illuminate\Support\Arr;
@@ -670,7 +670,7 @@ $isList = Arr::isList(['product' => ['name' => 'Desk', 'price' => 100]]);
 <a name="method-array-join"></a>
 #### `Arr::join()`
 
-The `Arr::join` method joins array elements with a string. Using this method's third argument, you may also specify the joining string for the final element of the array:
+`Arr::join` 方法使用字串連線陣列元素。使用此方法的第三個參數,你還可以指定陣列最後一個元素的連線字串:
 
 ```php
 use Illuminate\Support\Arr;
@@ -689,7 +689,7 @@ $joined = Arr::join($array, ', ', ', and ');
 <a name="method-array-keyby"></a>
 #### `Arr::keyBy()`
 
-The `Arr::keyBy` method keys the array by the given key. If multiple items have the same key, only the last one will appear in the new array:
+`Arr::keyBy` 方法按給定鍵對陣列進行鍵控。如果多個項目具有相同的鍵,則只有最後一個項目會出現在新陣列中:
 
 ```php
 use Illuminate\Support\Arr;
@@ -712,7 +712,7 @@ $keyed = Arr::keyBy($array, 'product_id');
 <a name="method-array-last"></a>
 #### `Arr::last()`
 
-The `Arr::last` method returns the last element of an array passing a given truth test:
+`Arr::last` 方法返回通過給定真值測試的陣列的最後一個元素:
 
 ```php
 use Illuminate\Support\Arr;
@@ -726,7 +726,7 @@ $last = Arr::last($array, function (int $value, int $key) {
 // 300
 ```
 
-A default value may be passed as the third argument to the method. This value will be returned if no value passes the truth test:
+可以將預設值作為第三個參數傳遞給該方法。如果沒有值通過真值測試,則將返回此值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -737,7 +737,7 @@ $last = Arr::last($array, $callback, $default);
 <a name="method-array-map"></a>
 #### `Arr::map()`
 
-The `Arr::map` method iterates through the array and passes each value and key to the given callback. The array value is replaced by the value returned by the callback:
+`Arr::map` 方法遍歷陣列並將每個值和鍵傳遞給給定的回呼。陣列值將被回呼返回的值替換:
 
 ```php
 use Illuminate\Support\Arr;
@@ -754,7 +754,7 @@ $mapped = Arr::map($array, function (string $value, string $key) {
 <a name="method-array-map-spread"></a>
 #### `Arr::mapSpread()`
 
-The `Arr::mapSpread` method iterates over the array, passing each nested item value into the given closure. The closure is free to modify the item and return it, thus forming a new array of modified items:
+`Arr::mapSpread` 方法遍歷陣列,將每個巢狀項目值傳遞給給定的閉包。閉包可以自由修改項目並返回它,從而形成一個修改後項目的新陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -779,7 +779,7 @@ $mapped = Arr::mapSpread($array, function (int $even, int $odd) {
 <a name="method-array-map-with-keys"></a>
 #### `Arr::mapWithKeys()`
 
-The `Arr::mapWithKeys` method iterates through the array and passes each value to the given callback. The callback should return an associative array containing a single key / value pair:
+`Arr::mapWithKeys` 方法遍歷陣列並將每個值傳遞給給定的回呼。回呼應返回包含單個鍵/值對的關聯陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -812,7 +812,7 @@ $mapped = Arr::mapWithKeys($array, function (array $item, int $key) {
 <a name="method-array-only"></a>
 #### `Arr::only()`
 
-The `Arr::only` method returns only the specified key / value pairs from the given array:
+`Arr::only` 方法僅返回給定陣列中指定的鍵/值對:
 
 ```php
 use Illuminate\Support\Arr;
@@ -827,7 +827,7 @@ $slice = Arr::only($array, ['name', 'price']);
 <a name="method-array-partition"></a>
 #### `Arr::partition()`
 
-The `Arr::partition` method may be combined with PHP array destructuring to separate elements that pass a given truth test from those that do not:
+`Arr::partition` 方法可以與 PHP 陣列解構結合使用,將通過給定真值測試的元素與未通過的元素分開:
 
 ```php
 <?php
@@ -852,7 +852,7 @@ dump($equalOrAboveThree);
 <a name="method-array-pluck"></a>
 #### `Arr::pluck()`
 
-The `Arr::pluck` method retrieves all of the values for a given key from an array:
+`Arr::pluck` 方法從陣列中檢索給定鍵的所有值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -867,7 +867,7 @@ $names = Arr::pluck($array, 'developer.name');
 // ['Taylor', 'Abigail']
 ```
 
-You may also specify how you wish the resulting list to be keyed:
+你也可以指定希望如何為結果清單設定鍵:
 
 ```php
 use Illuminate\Support\Arr;
@@ -880,7 +880,7 @@ $names = Arr::pluck($array, 'developer.name', 'developer.id');
 <a name="method-array-prepend"></a>
 #### `Arr::prepend()`
 
-The `Arr::prepend` method will push an item onto the beginning of an array:
+`Arr::prepend` 方法將一個項目推送到陣列的開頭:
 
 ```php
 use Illuminate\Support\Arr;
@@ -892,7 +892,7 @@ $array = Arr::prepend($array, 'zero');
 // ['zero', 'one', 'two', 'three', 'four']
 ```
 
-If needed, you may specify the key that should be used for the value:
+如果需要,你可以指定應用於值的鍵:
 
 ```php
 use Illuminate\Support\Arr;
@@ -907,7 +907,7 @@ $array = Arr::prepend($array, 'Desk', 'name');
 <a name="method-array-prependkeyswith"></a>
 #### `Arr::prependKeysWith()`
 
-The `Arr::prependKeysWith` prepends all key names of an associative array with the given prefix:
+`Arr::prependKeysWith` 將關聯陣列的所有鍵名加上給定的前綴:
 
 ```php
 use Illuminate\Support\Arr;
@@ -930,7 +930,7 @@ $keyed = Arr::prependKeysWith($array, 'product.');
 <a name="method-array-pull"></a>
 #### `Arr::pull()`
 
-The `Arr::pull` method returns and removes a key / value pair from an array:
+`Arr::pull` 方法從陣列中返回並移除鍵/值對:
 
 ```php
 use Illuminate\Support\Arr;
@@ -944,7 +944,7 @@ $name = Arr::pull($array, 'name');
 // $array: ['price' => 100]
 ```
 
-A default value may be passed as the third argument to the method. This value will be returned if the key doesn't exist:
+可以將預設值作為第三個參數傳遞給該方法。如果鍵不存在,則將返回此值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -955,7 +955,7 @@ $value = Arr::pull($array, $key, $default);
 <a name="method-array-push"></a>
 #### `Arr::push()`
 
-The `Arr::push` method pushes an item into an array using "dot" notation. If an array does not exist at the given key, it will be created:
+`Arr::push` 方法使用「點」符號將項目推送到陣列中。如果給定鍵處不存在陣列,則會建立它:
 
 ```php
 use Illuminate\Support\Arr;
@@ -970,7 +970,7 @@ Arr::push($array, 'office.furniture', 'Desk');
 <a name="method-array-query"></a>
 #### `Arr::query()`
 
-The `Arr::query` method converts the array into a query string:
+`Arr::query` 方法將陣列轉換為查詢字串:
 
 ```php
 use Illuminate\Support\Arr;
@@ -991,7 +991,7 @@ Arr::query($array);
 <a name="method-array-random"></a>
 #### `Arr::random()`
 
-The `Arr::random` method returns a random value from an array:
+`Arr::random` 方法從陣列中返回一個隨機值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1003,7 +1003,7 @@ $random = Arr::random($array);
 // 4 - (retrieved randomly)
 ```
 
-You may also specify the number of items to return as an optional second argument. Note that providing this argument will return an array even if only one item is desired:
+你也可以指定要返回的項目數作為可選的第二個參數。請注意,提供此參數將返回一個陣列,即使只需要一個項目:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1016,7 +1016,7 @@ $items = Arr::random($array, 2);
 <a name="method-array-reject"></a>
 #### `Arr::reject()`
 
-The `Arr::reject` method removes items from an array using the given closure:
+`Arr::reject` 方法使用給定的閉包從陣列中移除項目:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1033,7 +1033,7 @@ $filtered = Arr::reject($array, function (string|int $value, int $key) {
 <a name="method-array-select"></a>
 #### `Arr::select()`
 
-The `Arr::select` method selects an array of values from an array:
+`Arr::select` 方法從陣列中選擇一個值陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1052,7 +1052,7 @@ Arr::select($array, ['name', 'price']);
 <a name="method-array-set"></a>
 #### `Arr::set()`
 
-The `Arr::set` method sets a value within a deeply nested array using "dot" notation:
+`Arr::set` 方法使用「點」符號在深度巢狀的陣列中設定值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1067,7 +1067,7 @@ Arr::set($array, 'products.desk.price', 200);
 <a name="method-array-shuffle"></a>
 #### `Arr::shuffle()`
 
-The `Arr::shuffle` method randomly shuffles the items in the array:
+`Arr::shuffle` 方法隨機打亂陣列中的項目:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1080,7 +1080,7 @@ $array = Arr::shuffle([1, 2, 3, 4, 5]);
 <a name="method-array-sole"></a>
 #### `Arr::sole()`
 
-The `Arr::sole` method retrieves a single value from an array using the given closure. If more than one value within the array matches the given truth test, an `Illuminate\Support\MultipleItemsFoundException` exception will be thrown. If no values match the truth test, an `Illuminate\Support\ItemNotFoundException` exception will be thrown:
+`Arr::sole` 方法使用給定的閉包從陣列中檢索單個值。如果陣列中有多個值符合給定的真值測試,將拋出 `Illuminate\Support\MultipleItemsFoundException` 異常。如果沒有值符合真值測試,將拋出 `Illuminate\Support\ItemNotFoundException` 異常:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1095,7 +1095,7 @@ $value = Arr::sole($array, fn (string $value) => $value === 'Desk');
 <a name="method-array-some"></a>
 #### `Arr::some()`
 
-The `Arr::some` method ensures that at least one of the values in the array passes a given truth test:
+`Arr::some` 方法確保陣列中至少有一個值通過給定的真值測試:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1110,7 +1110,7 @@ Arr::some($array, fn ($i) => $i > 2);
 <a name="method-array-sort"></a>
 #### `Arr::sort()`
 
-The `Arr::sort` method sorts an array by its values:
+`Arr::sort` 方法按值對陣列進行排序:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1122,7 +1122,7 @@ $sorted = Arr::sort($array);
 // ['Chair', 'Desk', 'Table']
 ```
 
-You may also sort the array by the results of a given closure:
+你也可以按給定閉包的結果對陣列進行排序:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1149,7 +1149,7 @@ $sorted = array_values(Arr::sort($array, function (array $value) {
 <a name="method-array-sort-desc"></a>
 #### `Arr::sortDesc()`
 
-The `Arr::sortDesc` method sorts an array in descending order by its values:
+`Arr::sortDesc` 方法按值對陣列進行降序排序:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1161,7 +1161,7 @@ $sorted = Arr::sortDesc($array);
 // ['Table', 'Desk', 'Chair']
 ```
 
-You may also sort the array by the results of a given closure:
+你也可以按給定閉包的結果對陣列進行排序:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1188,7 +1188,7 @@ $sorted = array_values(Arr::sortDesc($array, function (array $value) {
 <a name="method-array-sort-recursive"></a>
 #### `Arr::sortRecursive()`
 
-The `Arr::sortRecursive` method recursively sorts an array using the `sort` function for numerically indexed sub-arrays and the `ksort` function for associative sub-arrays:
+`Arr::sortRecursive` 方法使用 `sort` 函式遞迴排序數字索引的子陣列,並使用 `ksort` 函式排序關聯子陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1210,7 +1210,7 @@ $sorted = Arr::sortRecursive($array);
 */
 ```
 
-If you would like the results sorted in descending order, you may use the `Arr::sortRecursiveDesc` method.
+如果你希望結果按降序排序,可以使用 `Arr::sortRecursiveDesc` 方法。
 
 ```php
 $sorted = Arr::sortRecursiveDesc($array);
@@ -1219,7 +1219,7 @@ $sorted = Arr::sortRecursiveDesc($array);
 <a name="method-array-string"></a>
 #### `Arr::string()`
 
-The `Arr::string` method retrieves a value from a deeply nested array using "dot" notation (just as [Arr::get()](#method-array-get) does), but throws an `InvalidArgumentException` if the requested value is not a `string`:
+`Arr::string` 方法使用「點」符號從深度巢狀的陣列中檢索值(就像 [Arr::get()](#method-array-get) 一樣),但如果請求的值不是 `string`,則拋出 `InvalidArgumentException`:
 
 ```
 use Illuminate\Support\Arr;
@@ -1238,7 +1238,7 @@ $value = Arr::string($array, 'languages');
 <a name="method-array-take"></a>
 #### `Arr::take()`
 
-The `Arr::take` method returns a new array with the specified number of items:
+`Arr::take` 方法返回具有指定數量項目的新陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1250,7 +1250,7 @@ $chunk = Arr::take($array, 3);
 // [0, 1, 2]
 ```
 
-You may also pass a negative integer to take the specified number of items from the end of the array:
+你也可以傳遞一個負整數來從陣列末尾獲取指定數量的項目:
 
 ```php
 $array = [0, 1, 2, 3, 4, 5];
@@ -1263,7 +1263,7 @@ $chunk = Arr::take($array, -2);
 <a name="method-array-to-css-classes"></a>
 #### `Arr::toCssClasses()`
 
-The `Arr::toCssClasses` method conditionally compiles a CSS class string. The method accepts an array of classes where the array key contains the class or classes you wish to add, while the value is a boolean expression. If the array element has a numeric key, it will always be included in the rendered class list:
+`Arr::toCssClasses` 方法條件式編譯 CSS 類別字串。該方法接受一個類別陣列,其中陣列鍵包含你希望新增的類別,而值是一個布林表達式。如果陣列元素具有數字鍵,它將始終包含在渲染的類別清單中:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1283,7 +1283,7 @@ $classes = Arr::toCssClasses($array);
 <a name="method-array-to-css-styles"></a>
 #### `Arr::toCssStyles()`
 
-The `Arr::toCssStyles` conditionally compiles a CSS style string. The method accepts an array of classes where the array key contains the class or classes you wish to add, while the value is a boolean expression. If the array element has a numeric key, it will always be included in the rendered class list:
+`Arr::toCssStyles` 條件式編譯 CSS 樣式字串。該方法接受一個類別陣列,其中陣列鍵包含你希望新增的類別,而值是一個布林表達式。如果陣列元素具有數字鍵,它將始終包含在渲染的類別清單中:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1299,12 +1299,12 @@ $classes = Arr::toCssStyles($array);
 */
 ```
 
-This method powers Laravel's functionality allowing [merging classes with a Blade component's attribute bag](/docs/12.x/blade#conditionally-merge-classes) as well as the `@class` [Blade directive](/docs/12.x/blade#conditional-classes).
+此方法支援 Laravel 的功能,允許[將類別與 Blade 元件的屬性包合併](/docs/12.x/blade#conditionally-merge-classes)以及 `@class` [Blade 指令](/docs/12.x/blade#conditional-classes)。
 
 <a name="method-array-undot"></a>
 #### `Arr::undot()`
 
-The `Arr::undot` method expands a single-dimensional array that uses "dot" notation into a multi-dimensional array:
+`Arr::undot` 方法將使用「點」符號的一維陣列擴展為多維陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1322,7 +1322,7 @@ $array = Arr::undot($array);
 <a name="method-array-where"></a>
 #### `Arr::where()`
 
-The `Arr::where` method filters an array using the given closure:
+`Arr::where` 方法使用給定的閉包過濾陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1339,7 +1339,7 @@ $filtered = Arr::where($array, function (string|int $value, int $key) {
 <a name="method-array-where-not-null"></a>
 #### `Arr::whereNotNull()`
 
-The `Arr::whereNotNull` method removes all `null` values from the given array:
+`Arr::whereNotNull` 方法從給定陣列中移除所有 `null` 值:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1354,7 +1354,7 @@ $filtered = Arr::whereNotNull($array);
 <a name="method-array-wrap"></a>
 #### `Arr::wrap()`
 
-The `Arr::wrap` method wraps the given value in an array. If the given value is already an array it will be returned without modification:
+`Arr::wrap` 方法將給定值包裝在陣列中。如果給定值已經是陣列,則將其原樣返回:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1366,7 +1366,7 @@ $array = Arr::wrap($string);
 // ['Laravel']
 ```
 
-If the given value is `null`, an empty array will be returned:
+如果給定值為 `null`,將返回一個空陣列:
 
 ```php
 use Illuminate\Support\Arr;
@@ -1379,7 +1379,7 @@ $array = Arr::wrap(null);
 <a name="method-data-fill"></a>
 #### `data_fill()`
 
-The `data_fill` function sets a missing value within a nested array or object using "dot" notation:
+`data_fill` 函式使用「點」符號在巢狀陣列或物件中設定缺失值:
 
 ```php
 $data = ['products' => ['desk' => ['price' => 100]]];
@@ -1393,7 +1393,7 @@ data_fill($data, 'products.desk.discount', 10);
 // ['products' => ['desk' => ['price' => 100, 'discount' => 10]]]
 ```
 
-This function also accepts asterisks as wildcards and will fill the target accordingly:
+此函式也接受星號作為萬用字元,並將相應地填充目標:
 
 ```php
 $data = [
@@ -1418,7 +1418,7 @@ data_fill($data, 'products.*.price', 200);
 <a name="method-data-get"></a>
 #### `data_get()`
 
-The `data_get` function retrieves a value from a nested array or object using "dot" notation:
+`data_get` 函式使用「點」符號從巢狀陣列或物件中檢索值:
 
 ```php
 $data = ['products' => ['desk' => ['price' => 100]]];
@@ -1428,7 +1428,7 @@ $price = data_get($data, 'products.desk.price');
 // 100
 ```
 
-The `data_get` function also accepts a default value, which will be returned if the specified key is not found:
+`data_get` 函式也接受一個預設值,如果找不到指定的鍵,將返回該預設值:
 
 ```php
 $discount = data_get($data, 'products.desk.discount', 0);
@@ -1436,7 +1436,7 @@ $discount = data_get($data, 'products.desk.discount', 0);
 // 0
 ```
 
-The function also accepts wildcards using asterisks, which may target any key of the array or object:
+該函式也接受使用星號的萬用字元,這可以針對陣列或物件的任何鍵:
 
 ```php
 $data = [
@@ -1449,7 +1449,7 @@ data_get($data, '*.name');
 // ['Desk 1', 'Desk 2'];
 ```
 
-The `{first}` and `{last}` placeholders may be used to retrieve the first or last items in an array:
+`{first}` 和 `{last}` 佔位符可用於檢索陣列中的第一個或最後一個項目:
 
 ```php
 $flight = [
@@ -1467,7 +1467,7 @@ data_get($flight, 'segments.{first}.arrival');
 <a name="method-data-set"></a>
 #### `data_set()`
 
-The `data_set` function sets a value within a nested array or object using "dot" notation:
+`data_set` 函式使用「點」符號在巢狀陣列或物件中設定值:
 
 ```php
 $data = ['products' => ['desk' => ['price' => 100]]];
@@ -1477,7 +1477,7 @@ data_set($data, 'products.desk.price', 200);
 // ['products' => ['desk' => ['price' => 200]]]
 ```
 
-This function also accepts wildcards using asterisks and will set values on the target accordingly:
+此函式也接受使用星號的萬用字元,並將相應地設定目標上的值:
 
 ```php
 $data = [
@@ -1499,7 +1499,7 @@ data_set($data, 'products.*.price', 200);
 */
 ```
 
-By default, any existing values are overwritten. If you wish to only set a value if it doesn't exist, you may pass `false` as the fourth argument to the function:
+預設情況下,任何現有值都會被覆蓋。如果你希望僅在值不存在時設定值,可以將 `false` 作為第四個參數傳遞給函式:
 
 ```php
 $data = ['products' => ['desk' => ['price' => 100]]];
@@ -1512,7 +1512,7 @@ data_set($data, 'products.desk.price', 200, overwrite: false);
 <a name="method-data-forget"></a>
 #### `data_forget()`
 
-The `data_forget` function removes a value within a nested array or object using "dot" notation:
+`data_forget` 函式使用「點」符號從巢狀陣列或物件中移除值:
 
 ```php
 $data = ['products' => ['desk' => ['price' => 100]]];
@@ -1522,7 +1522,7 @@ data_forget($data, 'products.desk.price');
 // ['products' => ['desk' => []]]
 ```
 
-This function also accepts wildcards using asterisks and will remove values on the target accordingly:
+此函式也接受使用星號的萬用字元,並將相應地移除目標上的值:
 
 ```php
 $data = [
@@ -1547,7 +1547,7 @@ data_forget($data, 'products.*.price');
 <a name="method-head"></a>
 #### `head()`
 
-The `head` function returns the first element in the given array. If the array is empty, `false` will be returned:
+`head` 函式返回給定陣列中的第一個元素。如果陣列為空,將返回 `false`:
 
 ```php
 $array = [100, 200, 300];
@@ -1560,7 +1560,7 @@ $first = head($array);
 <a name="method-last"></a>
 #### `last()`
 
-The `last` function returns the last element in the given array. If the array is empty, `false` will be returned:
+`last` 函式返回給定陣列中的最後一個元素。如果陣列為空,將返回 `false`:
 
 ```php
 $array = [100, 200, 300];
@@ -1576,7 +1576,7 @@ $last = last($array);
 <a name="method-number-abbreviate"></a>
 #### `Number::abbreviate()`
 
-The `Number::abbreviate` method returns the human-readable format of the provided numerical value, with an abbreviation for the units:
+`Number::abbreviate` 方法返回提供的數值的可讀格式,並帶有單位的縮寫:
 
 ```php
 use Illuminate\Support\Number;
@@ -1597,7 +1597,7 @@ $number = Number::abbreviate(1230000, precision: 2);
 <a name="method-number-clamp"></a>
 #### `Number::clamp()`
 
-The `Number::clamp` method ensures a given number stays within a specified range. If the number is lower than the minimum, the minimum value is returned. If the number is higher than the maximum, the maximum value is returned:
+`Number::clamp` 方法確保給定的數字保持在指定範圍內。如果數字低於最小值,則返回最小值。如果數字高於最大值,則返回最大值:
 
 ```php
 use Illuminate\Support\Number;
@@ -1622,7 +1622,7 @@ $number = Number::clamp(20, min: 10, max: 100);
 <a name="method-number-currency"></a>
 #### `Number::currency()`
 
-The `Number::currency` method returns the currency representation of the given value as a string:
+`Number::currency` 方法以字串形式返回給定值的貨幣表示形式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1647,7 +1647,7 @@ $currency = Number::currency(1000, in: 'EUR', locale: 'de', precision: 0);
 <a name="method-default-currency"></a>
 #### `Number::defaultCurrency()`
 
-The `Number::defaultCurrency` method returns the default currency being used by the `Number` class:
+`Number::defaultCurrency` 方法返回 `Number` 類別正在使用的預設貨幣:
 
 ```php
 use Illuminate\Support\Number;
@@ -1660,7 +1660,7 @@ $currency = Number::defaultCurrency();
 <a name="method-default-locale"></a>
 #### `Number::defaultLocale()`
 
-The `Number::defaultLocale` method returns the default locale being used by the `Number` class:
+`Number::defaultLocale` 方法返回 `Number` 類別正在使用的預設區域設定:
 
 ```php
 use Illuminate\Support\Number;
@@ -1673,7 +1673,7 @@ $locale = Number::defaultLocale();
 <a name="method-number-file-size"></a>
 #### `Number::fileSize()`
 
-The `Number::fileSize` method returns the file size representation of the given byte value as a string:
+`Number::fileSize` 方法以字串形式返回給定位元組值的檔案大小表示形式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1694,7 +1694,7 @@ $size = Number::fileSize(1024, precision: 2);
 <a name="method-number-for-humans"></a>
 #### `Number::forHumans()`
 
-The `Number::forHumans` method returns the human-readable format of the provided numerical value:
+`Number::forHumans` 方法返回提供的數值的可讀格式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1715,7 +1715,7 @@ $number = Number::forHumans(1230000, precision: 2);
 <a name="method-number-format"></a>
 #### `Number::format()`
 
-The `Number::format` method formats the given number into a locale specific string:
+`Number::format` 方法將給定的數字格式化為特定於區域設定的字串:
 
 ```php
 use Illuminate\Support\Number;
@@ -1740,7 +1740,7 @@ $number = Number::format(100000, locale: 'de');
 <a name="method-number-ordinal"></a>
 #### `Number::ordinal()`
 
-The `Number::ordinal` method returns a number's ordinal representation:
+`Number::ordinal` 方法返回數字的序數表示形式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1761,7 +1761,7 @@ $number = Number::ordinal(21);
 <a name="method-number-pairs"></a>
 #### `Number::pairs()`
 
-The `Number::pairs` method generates an array of number pairs (sub-ranges) based on a specified range and step value. This method can be useful for dividing a larger range of numbers into smaller, manageable sub-ranges for things like pagination or batching tasks. The `pairs` method returns an array of arrays, where each inner array represents a pair (sub-range) of numbers:
+`Number::pairs` 方法根據指定的範圍和步長值產生數字對(子範圍)的陣列。此方法對於將較大範圍的數字劃分為較小的、可管理的子範圍(例如分頁或批次處理任務)非常有用。`pairs` 方法返回一個陣列的陣列,其中每個內部陣列代表一對(子範圍)數字:
 
 ```php
 use Illuminate\Support\Number;
@@ -1778,7 +1778,7 @@ $result = Number::pairs(25, 10, offset: 0);
 <a name="method-number-parse-int"></a>
 #### `Number::parseInt()`
 
-The `Number::parseInt` method parse a string into an integer according to the specified locale:
+`Number::parseInt` 方法根據指定的區域設定將字串解析為整數:
 
 ```php
 use Illuminate\Support\Number;
@@ -1795,7 +1795,7 @@ $result = Number::parseInt('10,123', locale: 'fr');
 <a name="method-number-parse-float"></a>
 #### `Number::parseFloat()`
 
-The `Number::parseFloat` method parse a string into a float according to the specified locale:
+`Number::parseFloat` 方法根據指定的區域設定將字串解析為浮點數:
 
 ```php
 use Illuminate\Support\Number;
@@ -1812,7 +1812,7 @@ $result = Number::parseFloat('10', locale: 'fr');
 <a name="method-number-percentage"></a>
 #### `Number::percentage()`
 
-The `Number::percentage` method returns the percentage representation of the given value as a string:
+`Number::percentage` 方法以字串形式返回給定值的百分比表示形式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1837,7 +1837,7 @@ $percentage = Number::percentage(10, precision: 2, locale: 'de');
 <a name="method-number-spell"></a>
 #### `Number::spell()`
 
-The `Number::spell` method transforms the given number into a string of words:
+`Number::spell` 方法將給定的數字轉換為單字字串:
 
 ```php
 use Illuminate\Support\Number;
@@ -1851,7 +1851,7 @@ $number = Number::spell(88, locale: 'fr');
 // quatre-vingt-huit
 ```
 
-The `after` argument allows you to specify a value after which all numbers should be spelled out:
+`after` 參數允許你指定一個值,在此值之後所有數字都應拼寫出來:
 
 ```php
 $number = Number::spell(10, after: 10);
@@ -1863,7 +1863,7 @@ $number = Number::spell(11, after: 10);
 // eleven
 ```
 
-The `until` argument allows you to specify a value before which all numbers should be spelled out:
+`until` 參數允許你指定一個值,在此值之前所有數字都應拼寫出來:
 
 ```php
 $number = Number::spell(5, until: 10);
@@ -1878,7 +1878,7 @@ $number = Number::spell(10, until: 10);
 <a name="method-number-spell-ordinal"></a>
 #### `Number::spellOrdinal()`
 
-The `Number::spellOrdinal` method returns the number's ordinal representation as a string of words:
+`Number::spellOrdinal` 方法以單字字串形式返回數字的序數表示形式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1899,7 +1899,7 @@ $number = Number::spellOrdinal(21);
 <a name="method-number-trim"></a>
 #### `Number::trim()`
 
-The `Number::trim` method removes any trailing zero digits after the decimal point of the given number:
+`Number::trim` 方法移除給定數字小數點後的任何尾隨零數字:
 
 ```php
 use Illuminate\Support\Number;
@@ -1916,7 +1916,7 @@ $number = Number::trim(12.30);
 <a name="method-number-use-locale"></a>
 #### `Number::useLocale()`
 
-The `Number::useLocale` method sets the default number locale globally, which affects how numbers and currency are formatted by subsequent invocations to the `Number` class's methods:
+`Number::useLocale` 方法全域設定預設數字區域設定,這會影響後續呼叫 `Number` 類別方法時數字和貨幣的格式化方式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1933,7 +1933,7 @@ public function boot(): void
 <a name="method-number-with-locale"></a>
 #### `Number::withLocale()`
 
-The `Number::withLocale` method executes the given closure using the specified locale and then restores the original locale after the callback has executed:
+`Number::withLocale` 方法使用指定的區域設定執行給定的閉包,然後在回呼執行後恢復原始區域設定:
 
 ```php
 use Illuminate\Support\Number;
@@ -1946,7 +1946,7 @@ $number = Number::withLocale('de', function () {
 <a name="method-number-use-currency"></a>
 #### `Number::useCurrency()`
 
-The `Number::useCurrency` method sets the default number currency globally, which affects how the currency is formatted by subsequent invocations to the `Number` class's methods:
+`Number::useCurrency` 方法全域設定預設數字貨幣,這會影響後續呼叫 `Number` 類別方法時貨幣的格式化方式:
 
 ```php
 use Illuminate\Support\Number;
@@ -1963,7 +1963,7 @@ public function boot(): void
 <a name="method-number-with-currency"></a>
 #### `Number::withCurrency()`
 
-The `Number::withCurrency` method executes the given closure using the specified currency and then restores the original currency after the callback has executed:
+`Number::withCurrency` 方法使用指定的貨幣執行給定的閉包,然後在回呼執行後恢復原始貨幣:
 
 ```php
 use Illuminate\Support\Number;
@@ -1979,7 +1979,7 @@ $number = Number::withCurrency('GBP', function () {
 <a name="method-app-path"></a>
 #### `app_path()`
 
-The `app_path` function returns the fully qualified path to your application's `app` directory. You may also use the `app_path` function to generate a fully qualified path to a file relative to the application directory:
+`app_path` 函式返回應用程式 `app` 目錄的完全限定路徑。你也可以使用 `app_path` 函式產生相對於應用程式目錄的檔案的完全限定路徑:
 
 ```php
 $path = app_path();
@@ -1990,7 +1990,7 @@ $path = app_path('Http/Controllers/Controller.php');
 <a name="method-base-path"></a>
 #### `base_path()`
 
-The `base_path` function returns the fully qualified path to your application's root directory. You may also use the `base_path` function to generate a fully qualified path to a given file relative to the project root directory:
+`base_path` 函式返回應用程式根目錄的完全限定路徑。你也可以使用 `base_path` 函式產生相對於專案根目錄的給定檔案的完全限定路徑:
 
 ```php
 $path = base_path();
@@ -2001,7 +2001,7 @@ $path = base_path('vendor/bin');
 <a name="method-config-path"></a>
 #### `config_path()`
 
-The `config_path` function returns the fully qualified path to your application's `config` directory. You may also use the `config_path` function to generate a fully qualified path to a given file within the application's configuration directory:
+`config_path` 函式返回應用程式 `config` 目錄的完全限定路徑。你也可以使用 `config_path` 函式產生應用程式設定目錄中給定檔案的完全限定路徑:
 
 ```php
 $path = config_path();
@@ -2012,7 +2012,7 @@ $path = config_path('app.php');
 <a name="method-database-path"></a>
 #### `database_path()`
 
-The `database_path` function returns the fully qualified path to your application's `database` directory. You may also use the `database_path` function to generate a fully qualified path to a given file within the database directory:
+`database_path` 函式返回應用程式 `database` 目錄的完全限定路徑。你也可以使用 `database_path` 函式產生資料庫目錄中給定檔案的完全限定路徑:
 
 ```php
 $path = database_path();
@@ -2023,7 +2023,7 @@ $path = database_path('factories/UserFactory.php');
 <a name="method-lang-path"></a>
 #### `lang_path()`
 
-The `lang_path` function returns the fully qualified path to your application's `lang` directory. You may also use the `lang_path` function to generate a fully qualified path to a given file within the directory:
+`lang_path` 函式返回應用程式 `lang` 目錄的完全限定路徑。你也可以使用 `lang_path` 函式產生目錄中給定檔案的完全限定路徑:
 
 ```php
 $path = lang_path();
@@ -2032,12 +2032,12 @@ $path = lang_path('en/messages.php');
 ```
 
 > [!NOTE]
-> By default, the Laravel application skeleton does not include the `lang` directory. If you would like to customize Laravel's language files, you may publish them via the `lang:publish` Artisan command.
+> 預設情況下,Laravel 應用程式骨架不包含 `lang` 目錄。如果你想自訂 Laravel 的語言檔案,你可以透過 `lang:publish` Artisan 指令發佈它們。
 
 <a name="method-public-path"></a>
 #### `public_path()`
 
-The `public_path` function returns the fully qualified path to your application's `public` directory. You may also use the `public_path` function to generate a fully qualified path to a given file within the public directory:
+`public_path` 函式返回應用程式 `public` 目錄的完全限定路徑。你也可以使用 `public_path` 函式產生 public 目錄中給定檔案的完全限定路徑:
 
 ```php
 $path = public_path();
@@ -2048,7 +2048,7 @@ $path = public_path('css/app.css');
 <a name="method-resource-path"></a>
 #### `resource_path()`
 
-The `resource_path` function returns the fully qualified path to your application's `resources` directory. You may also use the `resource_path` function to generate a fully qualified path to a given file within the resources directory:
+`resource_path` 函式返回應用程式 `resources` 目錄的完全限定路徑。你也可以使用 `resource_path` 函式產生 resources 目錄中給定檔案的完全限定路徑:
 
 ```php
 $path = resource_path();
@@ -2059,7 +2059,7 @@ $path = resource_path('sass/app.scss');
 <a name="method-storage-path"></a>
 #### `storage_path()`
 
-The `storage_path` function returns the fully qualified path to your application's `storage` directory. You may also use the `storage_path` function to generate a fully qualified path to a given file within the storage directory:
+`storage_path` 函式返回應用程式 `storage` 目錄的完全限定路徑。你也可以使用 `storage_path` 函式產生 storage 目錄中給定檔案的完全限定路徑:
 
 ```php
 $path = storage_path();
@@ -2073,7 +2073,7 @@ $path = storage_path('app/file.txt');
 <a name="method-action"></a>
 #### `action()`
 
-The `action` function generates a URL for the given controller action:
+`action` 函式為給定的控制器動作產生 URL:
 
 ```php
 use App\Http\Controllers\HomeController;
@@ -2081,7 +2081,7 @@ use App\Http\Controllers\HomeController;
 $url = action([HomeController::class, 'index']);
 ```
 
-If the method accepts route parameters, you may pass them as the second argument to the method:
+如果方法接受路由參數,你可以將它們作為第二個參數傳遞給該方法:
 
 ```php
 $url = action([UserController::class, 'profile'], ['id' => 1]);
@@ -2090,13 +2090,13 @@ $url = action([UserController::class, 'profile'], ['id' => 1]);
 <a name="method-asset"></a>
 #### `asset()`
 
-The `asset` function generates a URL for an asset using the current scheme of the request (HTTP or HTTPS):
+`asset` 函式使用請求的當前方案(HTTP 或 HTTPS)為資產產生 URL:
 
 ```php
 $url = asset('img/photo.jpg');
 ```
 
-You can configure the asset URL host by setting the `ASSET_URL` variable in your `.env` file. This can be useful if you host your assets on an external service like Amazon S3 or another CDN:
+你可以透過在 `.env` 檔案中設定 `ASSET_URL` 變數來設定資產 URL 主機。如果你將資產託管在外部服務(如 Amazon S3 或其他 CDN)上,這可能很有用:
 
 ```php
 // ASSET_URL=http://example.com/assets
@@ -2107,19 +2107,19 @@ $url = asset('img/photo.jpg'); // http://example.com/assets/img/photo.jpg
 <a name="method-route"></a>
 #### `route()`
 
-The `route` function generates a URL for a given [named route](/docs/12.x/routing#named-routes):
+`route` 函式為給定的[命名路由](/docs/12.x/routing#named-routes)產生 URL:
 
 ```php
 $url = route('route.name');
 ```
 
-If the route accepts parameters, you may pass them as the second argument to the function:
+如果路由接受參數,你可以將它們作為第二個參數傳遞給該函式:
 
 ```php
 $url = route('route.name', ['id' => 1]);
 ```
 
-By default, the `route` function generates an absolute URL. If you wish to generate a relative URL, you may pass `false` as the third argument to the function:
+預設情況下,`route` 函式產生絕對 URL。如果你希望產生相對 URL,可以將 `false` 作為第三個參數傳遞給該函式:
 
 ```php
 $url = route('route.name', ['id' => 1], false);
@@ -2128,7 +2128,7 @@ $url = route('route.name', ['id' => 1], false);
 <a name="method-secure-asset"></a>
 #### `secure_asset()`
 
-The `secure_asset` function generates a URL for an asset using HTTPS:
+`secure_asset` 函式使用 HTTPS 為資產產生 URL:
 
 ```php
 $url = secure_asset('img/photo.jpg');
@@ -2137,7 +2137,7 @@ $url = secure_asset('img/photo.jpg');
 <a name="method-secure-url"></a>
 #### `secure_url()`
 
-The `secure_url` function generates a fully qualified HTTPS URL to the given path. Additional URL segments may be passed in the function's second argument:
+`secure_url` 函式產生給定路徑的完全限定 HTTPS URL。額外的 URL 片段可以在函式的第二個參數中傳遞:
 
 ```php
 $url = secure_url('user/profile');
@@ -2148,7 +2148,7 @@ $url = secure_url('user/profile', [1]);
 <a name="method-to-action"></a>
 #### `to_action()`
 
-The `to_action` function generates a [redirect HTTP response](/docs/12.x/responses#redirects) for a given controller action:
+`to_action` 函式為給定的控制器動作產生[重新導向 HTTP 回應](/docs/12.x/responses#redirects):
 
 ```php
 use App\Http\Controllers\UserController;
@@ -2156,7 +2156,7 @@ use App\Http\Controllers\UserController;
 return to_action([UserController::class, 'show'], ['user' => 1]);
 ```
 
-If necessary, you may pass the HTTP status code that should be assigned to the redirect and any additional response headers as the third and fourth arguments to the `to_action` method:
+如果需要,你可以將應分配給重新導向的 HTTP 狀態碼和任何額外的回應標頭作為第三個和第四個參數傳遞給 `to_action` 方法:
 
 ```php
 return to_action(
@@ -2170,13 +2170,13 @@ return to_action(
 <a name="method-to-route"></a>
 #### `to_route()`
 
-The `to_route` function generates a [redirect HTTP response](/docs/12.x/responses#redirects) for a given [named route](/docs/12.x/routing#named-routes):
+`to_route` 函式為給定的[命名路由](/docs/12.x/routing#named-routes)產生[重新導向 HTTP 回應](/docs/12.x/responses#redirects):
 
 ```php
 return to_route('users.show', ['user' => 1]);
 ```
 
-If necessary, you may pass the HTTP status code that should be assigned to the redirect and any additional response headers as the third and fourth arguments to the `to_route` method:
+如果需要,你可以將應分配給重新導向的 HTTP 狀態碼和任何額外的回應標頭作為第三個和第四個參數傳遞給 `to_route` 方法:
 
 ```php
 return to_route('users.show', ['user' => 1], 302, ['X-Framework' => 'Laravel']);
@@ -2185,7 +2185,7 @@ return to_route('users.show', ['user' => 1], 302, ['X-Framework' => 'Laravel']);
 <a name="method-uri"></a>
 #### `uri()`
 
-The `uri` function generates a [fluent URI instance](#uri) for the given URI:
+`uri` 函式為給定的 URI 產生[流暢的 URI 實例](#uri):
 
 ```php
 $uri = uri('https://example.com')
@@ -2193,7 +2193,7 @@ $uri = uri('https://example.com')
     ->withQuery(['page' => 1]);
 ```
 
-If the `uri` function is given an array containing a callable controller and method pair, the function will create a `Uri` instance for the controller method's route path:
+如果 `uri` 函式被賦予一個包含可呼叫控制器和方法對的陣列,該函式將為控制器方法的路由路徑建立一個 `Uri` 實例:
 
 ```php
 use App\Http\Controllers\UserController;
@@ -2201,7 +2201,7 @@ use App\Http\Controllers\UserController;
 $uri = uri([UserController::class, 'show'], ['user' => $user]);
 ```
 
-If the controller is invokable, you may simply provide the controller class name:
+如果控制器是可呼叫的,你可以簡單地提供控制器類別名稱:
 
 ```php
 use App\Http\Controllers\UserIndexController;
@@ -2209,7 +2209,7 @@ use App\Http\Controllers\UserIndexController;
 $uri = uri(UserIndexController::class);
 ```
 
-If the value given to the `uri` function matches the name of a [named route](/docs/12.x/routing#named-routes), a `Uri` instance will be generated for that route's path:
+如果賦予 `uri` 函式的值與[命名路由](/docs/12.x/routing#named-routes)的名稱匹配,將為該路由的路徑產生一個 `Uri` 實例:
 
 ```php
 $uri = uri('users.show', ['user' => $user]);
@@ -2218,7 +2218,7 @@ $uri = uri('users.show', ['user' => $user]);
 <a name="method-url"></a>
 #### `url()`
 
-The `url` function generates a fully qualified URL to the given path:
+`url` 函式產生給定路徑的完全限定 URL:
 
 ```php
 $url = url('user/profile');
@@ -2226,7 +2226,7 @@ $url = url('user/profile');
 $url = url('user/profile', [1]);
 ```
 
-If no path is provided, an `Illuminate\Routing\UrlGenerator` instance is returned:
+如果未提供路徑,則返回 `Illuminate\Routing\UrlGenerator` 實例:
 
 ```php
 $current = url()->current();
@@ -2236,7 +2236,7 @@ $full = url()->full();
 $previous = url()->previous();
 ```
 
-For more information on working with the `url` function, consult the [URL generation documentation](/docs/12.x/urls#generating-urls).
+有關使用 `url` 函式的更多資訊,請參閱[URL 產生文件](/docs/12.x/urls#generating-urls)。
 
 <a name="miscellaneous"></a>
 ## Miscellaneous
@@ -2244,13 +2244,13 @@ For more information on working with the `url` function, consult the [URL genera
 <a name="method-abort"></a>
 #### `abort()`
 
-The `abort` function throws [an HTTP exception](/docs/12.x/errors#http-exceptions) which will be rendered by the [exception handler](/docs/12.x/errors#handling-exceptions):
+`abort` 函式拋出[一個 HTTP 異常](/docs/12.x/errors#http-exceptions),該異常將由[異常處理常式](/docs/12.x/errors#handling-exceptions)呈現:
 
 ```php
 abort(403);
 ```
 
-You may also provide the exception's message and custom HTTP response headers that should be sent to the browser:
+你也可以提供異常的訊息和應傳送給瀏覽器的自訂 HTTP 回應標頭:
 
 ```php
 abort(403, 'Unauthorized.', $headers);
@@ -2259,35 +2259,35 @@ abort(403, 'Unauthorized.', $headers);
 <a name="method-abort-if"></a>
 #### `abort_if()`
 
-The `abort_if` function throws an HTTP exception if a given boolean expression evaluates to `true`:
+`abort_if` 函式如果給定的布林表達式評估為 `true`,則拋出 HTTP 異常:
 
 ```php
 abort_if(! Auth::user()->isAdmin(), 403);
 ```
 
-Like the `abort` method, you may also provide the exception's response text as the third argument and an array of custom response headers as the fourth argument to the function.
+像 `abort` 方法一樣,你也可以提供異常的回應文字作為第三個參數,並將自訂回應標頭陣列作為第四個參數傳遞給該函式。
 
 <a name="method-abort-unless"></a>
 #### `abort_unless()`
 
-The `abort_unless` function throws an HTTP exception if a given boolean expression evaluates to `false`:
+`abort_unless` 函式如果給定的布林表達式評估為 `false`,則拋出 HTTP 異常:
 
 ```php
 abort_unless(Auth::user()->isAdmin(), 403);
 ```
 
-Like the `abort` method, you may also provide the exception's response text as the third argument and an array of custom response headers as the fourth argument to the function.
+像 `abort` 方法一樣,你也可以提供異常的回應文字作為第三個參數,並將自訂回應標頭陣列作為第四個參數傳遞給該函式。
 
 <a name="method-app"></a>
 #### `app()`
 
-The `app` function returns the [service container](/docs/12.x/container) instance:
+`app` 函式返回[服務容器](/docs/12.x/container)實例:
 
 ```php
 $container = app();
 ```
 
-You may pass a class or interface name to resolve it from the container:
+你可以傳遞類別或介面名稱以從容器中解析它:
 
 ```php
 $api = app('HelpSpot\API');
@@ -2296,13 +2296,13 @@ $api = app('HelpSpot\API');
 <a name="method-auth"></a>
 #### `auth()`
 
-The `auth` function returns an [authenticator](/docs/12.x/authentication) instance. You may use it as an alternative to the `Auth` facade:
+`auth` 函式返回一個[認證器](/docs/12.x/authentication)實例。你可以使用它作為 `Auth` facade 的替代方案:
 
 ```php
 $user = auth()->user();
 ```
 
-If needed, you may specify which guard instance you would like to access:
+如果需要,你可以指定要存取的守衛實例:
 
 ```php
 $user = auth('admin')->user();
@@ -2311,7 +2311,7 @@ $user = auth('admin')->user();
 <a name="method-back"></a>
 #### `back()`
 
-The `back` function generates a [redirect HTTP response](/docs/12.x/responses#redirects) to the user's previous location:
+`back` 函式產生[重新導向 HTTP 回應](/docs/12.x/responses#redirects)到使用者的前一個位置:
 
 ```php
 return back($status = 302, $headers = [], $fallback = '/');
@@ -2322,7 +2322,7 @@ return back();
 <a name="method-bcrypt"></a>
 #### `bcrypt()`
 
-The `bcrypt` function [hashes](/docs/12.x/hashing) the given value using Bcrypt. You may use this function as an alternative to the `Hash` facade:
+`bcrypt` 函式使用 Bcrypt [雜湊](/docs/12.x/hashing)給定值。你可以使用此函式作為 `Hash` facade 的替代方案:
 
 ```php
 $password = bcrypt('my-secret-password');
@@ -2331,7 +2331,7 @@ $password = bcrypt('my-secret-password');
 <a name="method-blank"></a>
 #### `blank()`
 
-The `blank` function determines whether the given value is "blank":
+`blank` 函式判斷給定值是否為「空白」:
 
 ```php
 blank('');
@@ -2348,12 +2348,12 @@ blank(false);
 // false
 ```
 
-For the inverse of `blank`, see the [filled](#method-filled) function.
+有關 `blank` 的反向操作,請參閱 [filled](#method-filled) 函式。
 
 <a name="method-broadcast"></a>
 #### `broadcast()`
 
-The `broadcast` function [broadcasts](/docs/12.x/broadcasting) the given [event](/docs/12.x/events) to its listeners:
+`broadcast` 函式將給定[事件](/docs/12.x/events)[廣播](/docs/12.x/broadcasting)給其監聽器:
 
 ```php
 broadcast(new UserRegistered($user));
@@ -2364,7 +2364,7 @@ broadcast(new UserRegistered($user))->toOthers();
 <a name="method-broadcast-if"></a>
 #### `broadcast_if()`
 
-The `broadcast_if` function [broadcasts](/docs/12.x/broadcasting) the given [event](/docs/12.x/events) to its listeners if a given boolean expression evaluates to `true`:
+`broadcast_if` 函式如果給定的布林表達式評估為 `true`,則將給定[事件](/docs/12.x/events)[廣播](/docs/12.x/broadcasting)給其監聽器:
 
 ```php
 broadcast_if($user->isActive(), new UserRegistered($user));
@@ -2375,7 +2375,7 @@ broadcast_if($user->isActive(), new UserRegistered($user))->toOthers();
 <a name="method-broadcast-unless"></a>
 #### `broadcast_unless()`
 
-The `broadcast_unless` function [broadcasts](/docs/12.x/broadcasting) the given [event](/docs/12.x/events) to its listeners if a given boolean expression evaluates to `false`:
+`broadcast_unless` 函式如果給定的布林表達式評估為 `false`,則將給定[事件](/docs/12.x/events)[廣播](/docs/12.x/broadcasting)給其監聽器:
 
 ```php
 broadcast_unless($user->isBanned(), new UserRegistered($user));
@@ -2386,7 +2386,7 @@ broadcast_unless($user->isBanned(), new UserRegistered($user))->toOthers();
 <a name="method-cache"></a>
 #### `cache()`
 
-The `cache` function may be used to get values from the [cache](/docs/12.x/cache). If the given key does not exist in the cache, an optional default value will be returned:
+`cache` 函式可用於從 [cache](/docs/12.x/cache) 中獲取值。如果快取中不存在給定的鍵,將返回可選的預設值:
 
 ```php
 $value = cache('key');
@@ -2394,7 +2394,7 @@ $value = cache('key');
 $value = cache('key', 'default');
 ```
 
-You may add items to the cache by passing an array of key / value pairs to the function. You should also pass the number of seconds or duration the cached value should be considered valid:
+你可以透過將鍵/值對陣列傳遞給函式來將項目新增到快取中。你還應該傳遞快取值應被視為有效的秒數或持續時間:
 
 ```php
 cache(['key' => 'value'], 300);
@@ -2405,7 +2405,7 @@ cache(['key' => 'value'], now()->addSeconds(10));
 <a name="method-class-uses-recursive"></a>
 #### `class_uses_recursive()`
 
-The `class_uses_recursive` function returns all traits used by a class, including traits used by all of its parent classes:
+`class_uses_recursive` 函式返回類別使用的所有 trait,包括其所有父類別使用的 trait:
 
 ```php
 $traits = class_uses_recursive(App\Models\User::class);
@@ -2414,7 +2414,7 @@ $traits = class_uses_recursive(App\Models\User::class);
 <a name="method-collect"></a>
 #### `collect()`
 
-The `collect` function creates a [collection](/docs/12.x/collections) instance from the given value:
+`collect` 函式從給定值建立一個 [collection](/docs/12.x/collections) 實例:
 
 ```php
 $collection = collect(['Taylor', 'Abigail']);
@@ -2423,7 +2423,7 @@ $collection = collect(['Taylor', 'Abigail']);
 <a name="method-config"></a>
 #### `config()`
 
-The `config` function gets the value of a [configuration](/docs/12.x/configuration) variable. The configuration values may be accessed using "dot" syntax, which includes the name of the file and the option you wish to access. You may also provide a default value that will be returned if the configuration option does not exist:
+`config` 函式獲取 [configuration](/docs/12.x/configuration) 變數的值。可以使用「點」語法存取設定值,其中包括檔案名稱和你希望存取的選項。你也可以提供一個預設值,如果設定選項不存在,將返回該預設值:
 
 ```php
 $value = config('app.timezone');
@@ -2431,7 +2431,7 @@ $value = config('app.timezone');
 $value = config('app.timezone', $default);
 ```
 
-You may set configuration variables at runtime by passing an array of key / value pairs. However, note that this function only affects the configuration value for the current request and does not update your actual configuration values:
+你可以透過傳遞鍵/值對陣列在執行時設定設定變數。但是,請注意,此函式僅影響當前請求的設定值,不會更新你的實際設定值:
 
 ```php
 config(['app.debug' => true]);
@@ -2440,7 +2440,7 @@ config(['app.debug' => true]);
 <a name="method-context"></a>
 #### `context()`
 
-The `context` function gets the value from the current [context](/docs/12.x/context). You may also provide a default value that will be returned if the context key does not exist:
+`context` 函式從當前 [context](/docs/12.x/context) 中獲取值。你也可以提供一個預設值,如果上下文鍵不存在,將返回該預設值:
 
 ```php
 $value = context('trace_id');
@@ -2448,7 +2448,7 @@ $value = context('trace_id');
 $value = context('trace_id', $default);
 ```
 
-You may set context values by passing an array of key / value pairs:
+你可以透過傳遞鍵/值對陣列來設定上下文值:
 
 ```php
 use Illuminate\Support\Str;
@@ -2459,7 +2459,7 @@ context(['trace_id' => Str::uuid()->toString()]);
 <a name="method-cookie"></a>
 #### `cookie()`
 
-The `cookie` function creates a new [cookie](/docs/12.x/requests#cookies) instance:
+`cookie` 函式建立一個新的 [cookie](/docs/12.x/requests#cookies) 實例:
 
 ```php
 $cookie = cookie('name', 'value', $minutes);
@@ -2468,7 +2468,7 @@ $cookie = cookie('name', 'value', $minutes);
 <a name="method-csrf-field"></a>
 #### `csrf_field()`
 
-The `csrf_field` function generates an HTML `hidden` input field containing the value of the CSRF token. For example, using [Blade syntax](/docs/12.x/blade):
+`csrf_field` 函式產生一個包含 CSRF 權杖值的 HTML `hidden` 輸入欄位。例如,使用 [Blade 語法](/docs/12.x/blade):
 
 ```blade
 {{ csrf_field() }}
@@ -2477,7 +2477,7 @@ The `csrf_field` function generates an HTML `hidden` input field containing the 
 <a name="method-csrf-token"></a>
 #### `csrf_token()`
 
-The `csrf_token` function retrieves the value of the current CSRF token:
+`csrf_token` 函式檢索當前 CSRF 權杖的值:
 
 ```php
 $token = csrf_token();
@@ -2486,18 +2486,18 @@ $token = csrf_token();
 <a name="method-decrypt"></a>
 #### `decrypt()`
 
-The `decrypt` function [decrypts](/docs/12.x/encryption) the given value. You may use this function as an alternative to the `Crypt` facade:
+`decrypt` 函式[解密](/docs/12.x/encryption)給定值。你可以使用此函式作為 `Crypt` facade 的替代方案:
 
 ```php
 $password = decrypt($value);
 ```
 
-For the inverse of `decrypt`, see the [encrypt](#method-encrypt) function.
+有關 `decrypt` 的反向操作,請參閱 [encrypt](#method-encrypt) 函式。
 
 <a name="method-dd"></a>
 #### `dd()`
 
-The `dd` function dumps the given variables and ends the execution of the script:
+`dd` 函式傾印給定變數並結束指令碼的執行:
 
 ```php
 dd($value);
@@ -2505,12 +2505,12 @@ dd($value);
 dd($value1, $value2, $value3, ...);
 ```
 
-If you do not want to halt the execution of your script, use the [dump](#method-dump) function instead.
+如果你不想停止執行指令碼,請改用 [dump](#method-dump) 函式。
 
 <a name="method-dispatch"></a>
 #### `dispatch()`
 
-The `dispatch` function pushes the given [job](/docs/12.x/queues#creating-jobs) onto the Laravel [job queue](/docs/12.x/queues):
+`dispatch` 函式將給定[任務](/docs/12.x/queues#creating-jobs)推送到 Laravel [任務佇列](/docs/12.x/queues):
 
 ```php
 dispatch(new App\Jobs\SendEmails);
@@ -2519,7 +2519,7 @@ dispatch(new App\Jobs\SendEmails);
 <a name="method-dispatch-sync"></a>
 #### `dispatch_sync()`
 
-The `dispatch_sync` function pushes the given job to the [sync](/docs/12.x/queues#synchronous-dispatching) queue so that it is processed immediately:
+`dispatch_sync` 函式將給定任務推送到 [sync](/docs/12.x/queues#synchronous-dispatching) 佇列,以便立即處理:
 
 ```php
 dispatch_sync(new App\Jobs\SendEmails);
@@ -2528,7 +2528,7 @@ dispatch_sync(new App\Jobs\SendEmails);
 <a name="method-dump"></a>
 #### `dump()`
 
-The `dump` function dumps the given variables:
+`dump` 函式傾印給定變數:
 
 ```php
 dump($value);
@@ -2536,23 +2536,23 @@ dump($value);
 dump($value1, $value2, $value3, ...);
 ```
 
-If you want to stop executing the script after dumping the variables, use the [dd](#method-dd) function instead.
+如果你想在傾印變數後停止執行指令碼,請改用 [dd](#method-dd) 函式。
 
 <a name="method-encrypt"></a>
 #### `encrypt()`
 
-The `encrypt` function [encrypts](/docs/12.x/encryption) the given value. You may use this function as an alternative to the `Crypt` facade:
+`encrypt` 函式[加密](/docs/12.x/encryption)給定值。你可以使用此函式作為 `Crypt` facade 的替代方案:
 
 ```php
 $secret = encrypt('my-secret-value');
 ```
 
-For the inverse of `encrypt`, see the [decrypt](#method-decrypt) function.
+有關 `encrypt` 的反向操作,請參閱 [decrypt](#method-decrypt) 函式。
 
 <a name="method-env"></a>
 #### `env()`
 
-The `env` function retrieves the value of an [environment variable](/docs/12.x/configuration#environment-configuration) or returns a default value:
+`env` 函式檢索[環境變數](/docs/12.x/configuration#environment-configuration)的值或返回預設值:
 
 ```php
 $env = env('APP_ENV');
@@ -2561,12 +2561,12 @@ $env = env('APP_ENV', 'production');
 ```
 
 > [!WARNING]
-> If you execute the `config:cache` command during your deployment process, you should be sure that you are only calling the `env` function from within your configuration files. Once the configuration has been cached, the `.env` file will not be loaded and all calls to the `env` function will return external environment variables such as server-level or system-level environment variables or `null`.
+> 如果你在部署過程中執行 `config:cache` 指令,你應該確保只在設定檔中呼叫 `env` 函式。一旦設定被快取,`.env` 檔案將不會被載入,所有對 `env` 函式的呼叫都將返回外部環境變數(如伺服器級別或系統級別的環境變數)或 `null`。
 
 <a name="method-event"></a>
 #### `event()`
 
-The `event` function dispatches the given [event](/docs/12.x/events) to its listeners:
+`event` 函式將給定[事件](/docs/12.x/events)分派給其監聽器:
 
 ```php
 event(new UserRegistered($user));
@@ -2575,7 +2575,7 @@ event(new UserRegistered($user));
 <a name="method-fake"></a>
 #### `fake()`
 
-The `fake` function resolves a [Faker](https://github.com/FakerPHP/Faker) singleton from the container, which can be useful when creating fake data in model factories, database seeding, tests, and prototyping views:
+`fake` 函式從容器中解析 [Faker](https://github.com/FakerPHP/Faker) 單例,這在模型工廠、資料庫填充、測試和原型設計檢視中建立假資料時非常有用:
 
 ```blade
 @for ($i = 0; $i < 10; $i++)
@@ -2589,7 +2589,7 @@ The `fake` function resolves a [Faker](https://github.com/FakerPHP/Faker) single
 @endfor
 ```
 
-By default, the `fake` function will utilize the `app.faker_locale` configuration option in your `config/app.php` configuration. Typically, this configuration option is set via the `APP_FAKER_LOCALE` environment variable. You may also specify the locale by passing it to the `fake` function. Each locale will resolve an individual singleton:
+預設情況下,`fake` 函式將使用 `config/app.php` 設定中的 `app.faker_locale` 設定選項。通常,此設定選項是透過 `APP_FAKER_LOCALE` 環境變數設定的。你也可以透過將其傳遞給 `fake` 函式來指定區域設定。每個區域設定將解析一個單獨的單例:
 
 ```php
 fake('nl_NL')->name()
@@ -2598,7 +2598,7 @@ fake('nl_NL')->name()
 <a name="method-filled"></a>
 #### `filled()`
 
-The `filled` function determines whether the given value is not "blank":
+`filled` 函式判斷給定值是否不為「空白」:
 
 ```php
 filled(0);
@@ -2615,18 +2615,18 @@ filled(collect());
 // false
 ```
 
-For the inverse of `filled`, see the [blank](#method-blank) function.
+有關 `filled` 的反向操作,請參閱 [blank](#method-blank) 函式。
 
 <a name="method-info"></a>
 #### `info()`
 
-The `info` function will write information to your application's [log](/docs/12.x/logging):
+`info` 函式將資訊寫入應用程式的 [log](/docs/12.x/logging):
 
 ```php
 info('Some helpful information!');
 ```
 
-An array of contextual data may also be passed to the function:
+也可以將上下文資料陣列傳遞給該函式:
 
 ```php
 info('User login attempt failed.', ['id' => $user->id]);
@@ -2635,7 +2635,7 @@ info('User login attempt failed.', ['id' => $user->id]);
 <a name="method-literal"></a>
 #### `literal()`
 
-The `literal` function creates a new [stdClass](https://www.php.net/manual/en/class.stdclass.php) instance with the given named arguments as properties:
+`literal` 函式建立一個新的 [stdClass](https://www.php.net/manual/en/class.stdclass.php) 實例,並將給定的命名參數作為屬性:
 
 ```php
 $obj = literal(
@@ -2650,19 +2650,19 @@ $obj->languages; // ['PHP', 'Ruby']
 <a name="method-logger"></a>
 #### `logger()`
 
-The `logger` function can be used to write a `debug` level message to the [log](/docs/12.x/logging):
+`logger` 函式可用於將 `debug` 級別訊息寫入 [log](/docs/12.x/logging):
 
 ```php
 logger('Debug message');
 ```
 
-An array of contextual data may also be passed to the function:
+也可以將上下文資料陣列傳遞給該函式:
 
 ```php
 logger('User has logged in.', ['id' => $user->id]);
 ```
 
-A [logger](/docs/12.x/logging) instance will be returned if no value is passed to the function:
+如果未將任何值傳遞給該函式,將返回 [logger](/docs/12.x/logging) 實例:
 
 ```php
 logger()->error('You are not allowed here.');
@@ -2671,7 +2671,7 @@ logger()->error('You are not allowed here.');
 <a name="method-method-field"></a>
 #### `method_field()`
 
-The `method_field` function generates an HTML `hidden` input field containing the spoofed value of the form's HTTP verb. For example, using [Blade syntax](/docs/12.x/blade):
+`method_field` 函式產生一個包含表單 HTTP 動詞欺騙值的 HTML `hidden` 輸入欄位。例如,使用 [Blade 語法](/docs/12.x/blade):
 
 ```blade
 <form method="POST">
@@ -2682,7 +2682,7 @@ The `method_field` function generates an HTML `hidden` input field containing th
 <a name="method-now"></a>
 #### `now()`
 
-The `now` function creates a new `Illuminate\Support\Carbon` instance for the current time:
+`now` 函式為當前時間建立一個新的 `Illuminate\Support\Carbon` 實例:
 
 ```php
 $now = now();
@@ -2691,7 +2691,7 @@ $now = now();
 <a name="method-old"></a>
 #### `old()`
 
-The `old` function [retrieves](/docs/12.x/requests#retrieving-input) an [old input](/docs/12.x/requests#old-input) value flashed into the session:
+`old` 函式[檢索](/docs/12.x/requests#retrieving-input)快閃到工作階段中的[舊輸入](/docs/12.x/requests#old-input)值:
 
 ```php
 $value = old('value');
@@ -2699,7 +2699,7 @@ $value = old('value');
 $value = old('value', 'default');
 ```
 
-Since the "default value" provided as the second argument to the `old` function is often an attribute of an Eloquent model, Laravel allows you to simply pass the entire Eloquent model as the second argument to the `old` function. When doing so, Laravel will assume the first argument provided to the `old` function is the name of the Eloquent attribute that should be considered the "default value":
+由於作為第二個參數提供給 `old` 函式的「預設值」通常是 Eloquent 模型的屬性,因此 Laravel 允許你簡單地將整個 Eloquent 模型作為第二個參數傳遞給 `old` 函式。這樣做時,Laravel 將假設提供給 `old` 函式的第一個參數是應被視為「預設值」的 Eloquent 屬性名稱:
 
 ```blade
 {{ old('name', $user->name) }}
@@ -2712,7 +2712,7 @@ Since the "default value" provided as the second argument to the `old` function 
 <a name="method-once"></a>
 #### `once()`
 
-The `once` function executes the given callback and caches the result in memory for the duration of the request. Any subsequent calls to the `once` function with the same callback will return the previously cached result:
+`once` 函式執行給定的回呼並將結果快取在記憶體中以供請求期間使用。任何後續使用相同回呼對 `once` 函式的呼叫都將返回先前快取的結果:
 
 ```php
 function random(): int
@@ -2727,7 +2727,7 @@ random(); // 123 (cached result)
 random(); // 123 (cached result)
 ```
 
-When the `once` function is executed from within an object instance, the cached result will be unique to that object instance:
+當從物件實例中執行 `once` 函式時,快取的結果將對該物件實例是唯一的:
 
 ```php
 <?php
@@ -2754,7 +2754,7 @@ $secondService->all(); // (cached result)
 <a name="method-optional"></a>
 #### `optional()`
 
-The `optional` function accepts any argument and allows you to access properties or call methods on that object. If the given object is `null`, properties and methods will return `null` instead of causing an error:
+`optional` 函式接受任何參數,並允許你存取屬性或呼叫該物件上的方法。如果給定物件為 `null`,屬性和方法將返回 `null` 而不是導致錯誤:
 
 ```php
 return optional($user->address)->street;
@@ -2762,7 +2762,7 @@ return optional($user->address)->street;
 {!! old('name', optional($user)->name) !!}
 ```
 
-The `optional` function also accepts a closure as its second argument. The closure will be invoked if the value provided as the first argument is not null:
+`optional` 函式也接受一個閉包作為其第二個參數。如果作為第一個參數提供的值不為 null,將呼叫該閉包:
 
 ```php
 return optional(User::find($id), function (User $user) {
@@ -2773,7 +2773,7 @@ return optional(User::find($id), function (User $user) {
 <a name="method-policy"></a>
 #### `policy()`
 
-The `policy` method retrieves a [policy](/docs/12.x/authorization#creating-policies) instance for a given class:
+`policy` 方法檢索給定類別的 [policy](/docs/12.x/authorization#creating-policies) 實例:
 
 ```php
 $policy = policy(App\Models\User::class);
@@ -2782,7 +2782,7 @@ $policy = policy(App\Models\User::class);
 <a name="method-redirect"></a>
 #### `redirect()`
 
-The `redirect` function returns a [redirect HTTP response](/docs/12.x/responses#redirects), or returns the redirector instance if called with no arguments:
+`redirect` 函式返回 [redirect HTTP response](/docs/12.x/responses#redirects),或者如果呼叫時沒有參數,則返回重新導向器實例:
 
 ```php
 return redirect($to = null, $status = 302, $headers = [], $secure = null);
@@ -2795,13 +2795,13 @@ return redirect()->route('route.name');
 <a name="method-report"></a>
 #### `report()`
 
-The `report` function will report an exception using your [exception handler](/docs/12.x/errors#handling-exceptions):
+`report` 函式將使用你的 [exception handler](/docs/12.x/errors#handling-exceptions) 報告異常:
 
 ```php
 report($e);
 ```
 
-The `report` function also accepts a string as an argument. When a string is given to the function, the function will create an exception with the given string as its message:
+`report` 函式也接受字串作為參數。當將字串提供給函式時,函式將建立一個以給定字串為訊息的異常:
 
 ```php
 report('Something went wrong.');
@@ -2810,7 +2810,7 @@ report('Something went wrong.');
 <a name="method-report-if"></a>
 #### `report_if()`
 
-The `report_if` function will report an exception using your [exception handler](/docs/12.x/errors#handling-exceptions) if a given boolean expression evaluates to `true`:
+`report_if` 函式如果給定的布林表達式評估為 `true`,將使用你的 [exception handler](/docs/12.x/errors#handling-exceptions) 報告異常:
 
 ```php
 report_if($shouldReport, $e);
@@ -2821,7 +2821,7 @@ report_if($shouldReport, 'Something went wrong.');
 <a name="method-report-unless"></a>
 #### `report_unless()`
 
-The `report_unless` function will report an exception using your [exception handler](/docs/12.x/errors#handling-exceptions) if a given boolean expression evaluates to `false`:
+`report_unless` 函式如果給定的布林表達式評估為 `false`,將使用你的 [exception handler](/docs/12.x/errors#handling-exceptions) 報告異常:
 
 ```php
 report_unless($reportingDisabled, $e);
@@ -2832,7 +2832,7 @@ report_unless($reportingDisabled, 'Something went wrong.');
 <a name="method-request"></a>
 #### `request()`
 
-The `request` function returns the current [request](/docs/12.x/requests) instance or obtains an input field's value from the current request:
+`request` 函式返回當前 [request](/docs/12.x/requests) 實例或從當前請求中獲取輸入欄位的值:
 
 ```php
 $request = request();
@@ -2843,7 +2843,7 @@ $value = request('key', $default);
 <a name="method-rescue"></a>
 #### `rescue()`
 
-The `rescue` function executes the given closure and catches any exceptions that occur during its execution. All exceptions that are caught will be sent to your [exception handler](/docs/12.x/errors#handling-exceptions); however, the request will continue processing:
+`rescue` 函式執行給定的閉包並捕獲執行期間發生的任何異常。所有捕獲的異常都將傳送到你的 [exception handler](/docs/12.x/errors#handling-exceptions);但是,請求將繼續處理:
 
 ```php
 return rescue(function () {
@@ -2851,7 +2851,7 @@ return rescue(function () {
 });
 ```
 
-You may also pass a second argument to the `rescue` function. This argument will be the "default" value that should be returned if an exception occurs while executing the closure:
+你也可以將第二個參數傳遞給 `rescue` 函式。此參數將是如果在執行閉包時發生異常應返回的「預設」值:
 
 ```php
 return rescue(function () {
@@ -2865,7 +2865,7 @@ return rescue(function () {
 });
 ```
 
-A `report` argument may be provided to the `rescue` function to determine if the exception should be reported via the `report` function:
+可以向 `rescue` 函式提供 `report` 參數,以確定是否應透過 `report` 函式報告異常:
 
 ```php
 return rescue(function () {
@@ -2878,7 +2878,7 @@ return rescue(function () {
 <a name="method-resolve"></a>
 #### `resolve()`
 
-The `resolve` function resolves a given class or interface name to an instance using the [service container](/docs/12.x/container):
+`resolve` 函式使用 [service container](/docs/12.x/container) 將給定類別或介面名稱解析為實例:
 
 ```php
 $api = resolve('HelpSpot\API');
@@ -2887,7 +2887,7 @@ $api = resolve('HelpSpot\API');
 <a name="method-response"></a>
 #### `response()`
 
-The `response` function creates a [response](/docs/12.x/responses) instance or obtains an instance of the response factory:
+`response` 函式建立 [response](/docs/12.x/responses) 實例或獲取回應工廠的實例:
 
 ```php
 return response('Hello World', 200, $headers);
@@ -2898,7 +2898,7 @@ return response()->json(['foo' => 'bar'], 200, $headers);
 <a name="method-retry"></a>
 #### `retry()`
 
-The `retry` function attempts to execute the given callback until the given maximum attempt threshold is met. If the callback does not throw an exception, its return value will be returned. If the callback throws an exception, it will automatically be retried. If the maximum attempt count is exceeded, the exception will be thrown:
+`retry` 函式嘗試執行給定的回呼,直到達到給定的最大嘗試閾值。如果回呼未拋出異常,則將返回其返回值。如果回呼拋出異常,它將自動重試。如果超過最大嘗試次數,將拋出異常:
 
 ```php
 return retry(5, function () {
@@ -2906,7 +2906,7 @@ return retry(5, function () {
 }, 100);
 ```
 
-If you would like to manually calculate the number of milliseconds to sleep between attempts, you may pass a closure as the third argument to the `retry` function:
+如果你想手動計算嘗試之間睡眠的毫秒數,可以將閉包作為第三個參數傳遞給 `retry` 函式:
 
 ```php
 use Exception;
@@ -2918,7 +2918,7 @@ return retry(5, function () {
 });
 ```
 
-For convenience, you may provide an array as the first argument to the `retry` function. This array will be used to determine how many milliseconds to sleep between subsequent attempts:
+為了方便起見,你可以提供一個陣列作為 `retry` 函式的第一個參數。此陣列將用於確定後續嘗試之間睡眠的毫秒數:
 
 ```php
 return retry([100, 200], function () {
@@ -2926,7 +2926,7 @@ return retry([100, 200], function () {
 });
 ```
 
-To only retry under specific conditions, you may pass a closure as the fourth argument to the `retry` function:
+要僅在特定條件下重試,可以將閉包作為第四個參數傳遞給 `retry` 函式:
 
 ```php
 use App\Exceptions\TemporaryException;
@@ -2942,19 +2942,19 @@ return retry(5, function () {
 <a name="method-session"></a>
 #### `session()`
 
-The `session` function may be used to get or set [session](/docs/12.x/session) values:
+`session` 函式可用於獲取或設定 [session](/docs/12.x/session) 值:
 
 ```php
 $value = session('key');
 ```
 
-You may set values by passing an array of key / value pairs to the function:
+你可以透過將鍵/值對陣列傳遞給函式來設定值:
 
 ```php
 session(['chairs' => 7, 'instruments' => 3]);
 ```
 
-The session store will be returned if no value is passed to the function:
+如果未將任何值傳遞給函式,將返回工作階段儲存區:
 
 ```php
 $value = session()->get('key');
@@ -2965,7 +2965,7 @@ session()->put('key', $value);
 <a name="method-tap"></a>
 #### `tap()`
 
-The `tap` function accepts two arguments: an arbitrary `$value` and a closure. The `$value` will be passed to the closure and then be returned by the `tap` function. The return value of the closure is irrelevant:
+`tap` 函式接受兩個參數:一個任意的 `$value` 和一個閉包。`$value` 將傳遞給閉包,然後由 `tap` 函式返回。閉包的返回值無關緊要:
 
 ```php
 $user = tap(User::first(), function (User $user) {
@@ -2975,7 +2975,7 @@ $user = tap(User::first(), function (User $user) {
 });
 ```
 
-If no closure is passed to the `tap` function, you may call any method on the given `$value`. The return value of the method you call will always be `$value`, regardless of what the method actually returns in its definition. For example, the Eloquent `update` method typically returns an integer. However, we can force the method to return the model itself by chaining the `update` method call through the `tap` function:
+如果未將閉包傳遞給 `tap` 函式,你可以呼叫給定 `$value` 上的任何方法。你呼叫的方法的返回值將始終為 `$value`,無論該方法在定義中實際返回什麼。例如,Eloquent `update` 方法通常返回一個整數。但是,我們可以透過 `tap` 函式連結 `update` 方法呼叫來強制該方法返回模型本身:
 
 ```php
 $user = tap($user)->update([
@@ -2984,7 +2984,7 @@ $user = tap($user)->update([
 ]);
 ```
 
-To add a `tap` method to a class, you may add the `Illuminate\Support\Traits\Tappable` trait to the class. The `tap` method of this trait accepts a Closure as its only argument. The object instance itself will be passed to the Closure and then be returned by the `tap` method:
+要向類別新增 `tap` 方法,你可以將 `Illuminate\Support\Traits\Tappable` trait 新增到類別中。此 trait 的 `tap` 方法接受一個閉包作為其唯一參數。物件實例本身將傳遞給閉包,然後由 `tap` 方法返回:
 
 ```php
 return $user->tap(function (User $user) {
@@ -2995,7 +2995,7 @@ return $user->tap(function (User $user) {
 <a name="method-throw-if"></a>
 #### `throw_if()`
 
-The `throw_if` function throws the given exception if a given boolean expression evaluates to `true`:
+`throw_if` 函式如果給定的布林表達式評估為 `true`,則拋出給定的異常:
 
 ```php
 throw_if(! Auth::user()->isAdmin(), AuthorizationException::class);
@@ -3010,7 +3010,7 @@ throw_if(
 <a name="method-throw-unless"></a>
 #### `throw_unless()`
 
-The `throw_unless` function throws the given exception if a given boolean expression evaluates to `false`:
+`throw_unless` 函式如果給定的布林表達式評估為 `false`,則拋出給定的異常:
 
 ```php
 throw_unless(Auth::user()->isAdmin(), AuthorizationException::class);
@@ -3025,7 +3025,7 @@ throw_unless(
 <a name="method-today"></a>
 #### `today()`
 
-The `today` function creates a new `Illuminate\Support\Carbon` instance for the current date:
+`today` 函式為當前日期建立一個新的 `Illuminate\Support\Carbon` 實例:
 
 ```php
 $today = today();
@@ -3034,7 +3034,7 @@ $today = today();
 <a name="method-trait-uses-recursive"></a>
 #### `trait_uses_recursive()`
 
-The `trait_uses_recursive` function returns all traits used by a trait:
+`trait_uses_recursive` 函式返回 trait 使用的所有 trait:
 
 ```php
 $traits = trait_uses_recursive(\Illuminate\Notifications\Notifiable::class);
@@ -3043,7 +3043,7 @@ $traits = trait_uses_recursive(\Illuminate\Notifications\Notifiable::class);
 <a name="method-transform"></a>
 #### `transform()`
 
-The `transform` function executes a closure on a given value if the value is not [blank](#method-blank) and then returns the return value of the closure:
+`transform` 函式如果給定值不為 [blank](#method-blank),則對該值執行閉包,然後返回閉包的返回值:
 
 ```php
 $callback = function (int $value) {
@@ -3055,7 +3055,7 @@ $result = transform(5, $callback);
 // 10
 ```
 
-A default value or closure may be passed as the third argument to the function. This value will be returned if the given value is blank:
+可以將預設值或閉包作為第三個參數傳遞給該函式。如果給定值為空白,將返回此值:
 
 ```php
 $result = transform(null, $callback, 'The value is blank');
@@ -3066,7 +3066,7 @@ $result = transform(null, $callback, 'The value is blank');
 <a name="method-validator"></a>
 #### `validator()`
 
-The `validator` function creates a new [validator](/docs/12.x/validation) instance with the given arguments. You may use it as an alternative to the `Validator` facade:
+`validator` 函式使用給定的參數建立一個新的 [validator](/docs/12.x/validation) 實例。你可以使用它作為 `Validator` facade 的替代方案:
 
 ```php
 $validator = validator($data, $rules, $messages);
@@ -3075,7 +3075,7 @@ $validator = validator($data, $rules, $messages);
 <a name="method-value"></a>
 #### `value()`
 
-The `value` function returns the value it is given. However, if you pass a closure to the function, the closure will be executed and its returned value will be returned:
+`value` 函式返回給它的值。但是,如果你將閉包傳遞給該函式,則將執行該閉包並返回其返回值:
 
 ```php
 $result = value(true);
@@ -3089,7 +3089,7 @@ $result = value(function () {
 // false
 ```
 
-Additional arguments may be passed to the `value` function. If the first argument is a closure then the additional parameters will be passed to the closure as arguments, otherwise they will be ignored:
+可以將其他參數傳遞給 `value` 函式。如果第一個參數是閉包,則其他參數將作為參數傳遞給閉包,否則它們將被忽略:
 
 ```php
 $result = value(function (string $name) {
@@ -3102,7 +3102,7 @@ $result = value(function (string $name) {
 <a name="method-view"></a>
 #### `view()`
 
-The `view` function retrieves a [view](/docs/12.x/views) instance:
+`view` 函式檢索 [view](/docs/12.x/views) 實例:
 
 ```php
 return view('auth.login');
@@ -3111,7 +3111,7 @@ return view('auth.login');
 <a name="method-with"></a>
 #### `with()`
 
-The `with` function returns the value it is given. If a closure is passed as the second argument to the function, the closure will be executed and its returned value will be returned:
+`with` 函式返回給它的值。如果將閉包作為第二個參數傳遞給該函式,則將執行該閉包並返回其返回值:
 
 ```php
 $callback = function (mixed $value) {
@@ -3134,7 +3134,7 @@ $result = with(5, null);
 <a name="method-when"></a>
 #### `when()`
 
-The `when` function returns the value it is given if a given condition evaluates to `true`. Otherwise, `null` is returned. If a closure is passed as the second argument to the function, the closure will be executed and its returned value will be returned:
+`when` 函式如果給定條件評估為 `true`,則返回給它的值。否則,返回 `null`。如果將閉包作為第二個參數傳遞給該函式,則將執行該閉包並返回其返回值:
 
 ```php
 $value = when(true, 'Hello World');
@@ -3142,7 +3142,7 @@ $value = when(true, 'Hello World');
 $value = when(true, fn () => 'Hello World');
 ```
 
-The `when` function is primarily useful for conditionally rendering HTML attributes:
+`when` 函式主要用於條件式渲染 HTML 屬性:
 
 ```blade
 <div {!! when($condition, 'wire:poll="calculate"') !!}>
@@ -3156,7 +3156,7 @@ The `when` function is primarily useful for conditionally rendering HTML attribu
 <a name="benchmarking"></a>
 ### Benchmarking
 
-Sometimes you may wish to quickly test the performance of certain parts of your application. On those occasions, you may utilize the `Benchmark` support class to measure the number of milliseconds it takes for the given callbacks to complete:
+有時你可能希望快速測試應用程式某些部分的效能。在這種情況下,你可以使用 `Benchmark` 支援類別來測量給定回呼完成所需的毫秒數:
 
 ```php
 <?php
@@ -3172,15 +3172,15 @@ Benchmark::dd([
 ]);
 ```
 
-By default, the given callbacks will be executed once (one iteration), and their duration will be displayed in the browser / console.
+預設情況下,給定的回呼將執行一次(一次迭代),其持續時間將顯示在瀏覽器/控制台中。
 
-To invoke a callback more than once, you may specify the number of iterations that the callback should be invoked as the second argument to the method. When executing a callback more than once, the `Benchmark` class will return the average number of milliseconds it took to execute the callback across all iterations:
+要多次呼叫回呼,你可以指定回呼應被呼叫的迭代次數作為方法的第二個參數。當多次執行回呼時,`Benchmark` 類別將返回在所有迭代中執行回呼所需的平均毫秒數:
 
 ```php
 Benchmark::dd(fn () => User::count(), iterations: 10); // 0.5 ms
 ```
 
-Sometimes, you may want to benchmark the execution of a callback while still obtaining the value returned by the callback. The `value` method will return a tuple containing the value returned by the callback and the number of milliseconds it took to execute the callback:
+有時,你可能希望在對回呼的執行進行基準測試的同時獲取回呼返回的值。`value` 方法將返回一個包含回呼返回的值和執行回呼所需的毫秒數的元組:
 
 ```php
 [$count, $duration] = Benchmark::value(fn () => User::count());
@@ -3189,13 +3189,13 @@ Sometimes, you may want to benchmark the execution of a callback while still obt
 <a name="dates"></a>
 ### Dates
 
-Laravel includes [Carbon](https://carbon.nesbot.com/docs/), a powerful date and time manipulation library. To create a new `Carbon` instance, you may invoke the `now` function. This function is globally available within your Laravel application:
+Laravel 包含 [Carbon](https://carbon.nesbot.com/docs/),這是一個強大的日期和時間操作函式庫。要建立一個新的 `Carbon` 實例,你可以呼叫 `now` 函式。此函式在你的 Laravel 應用程式中全域可用:
 
 ```php
 $now = now();
 ```
 
-Or, you may create a new `Carbon` instance using the `Illuminate\Support\Carbon` class:
+或者,你可以使用 `Illuminate\Support\Carbon` 類別建立一個新的 `Carbon` 實例:
 
 ```php
 use Illuminate\Support\Carbon;
@@ -3203,14 +3203,14 @@ use Illuminate\Support\Carbon;
 $now = Carbon::now();
 ```
 
-For a thorough discussion of Carbon and its features, please consult the [official Carbon documentation](https://carbon.nesbot.com/docs/).
+有關 Carbon 及其功能的詳細討論,請參閱 [Carbon 官方文件](https://carbon.nesbot.com/docs/)。
 
 <a name="deferred-functions"></a>
-### Deferred Functions
+### 延遲函式
 
-While Laravel's [queued jobs](/docs/12.x/queues) allow you to queue tasks for background processing, sometimes you may have simple tasks you would like to defer without configuring or maintaining a long-running queue worker.
+雖然 Laravel 的 [queued jobs](/docs/12.x/queues) 允許你將任務排隊以進行背景處理,但有時你可能有一些簡單的任務希望延遲執行,而無需設定或維護長時間執行的佇列工作執行緒。
 
-Deferred functions allow you to defer the execution of a closure until after the HTTP response has been sent to the user, keeping your application feeling fast and responsive. To defer the execution of a closure, simply pass the closure to the `Illuminate\Support\defer` function:
+延遲函式允許你將閉包的執行延遲到 HTTP 回應傳送給使用者之後,從而保持應用程式的快速回應。要延遲執行閉包,只需將閉包傳遞給 `Illuminate\Support\defer` 函式:
 
 ```php
 use App\Services\Metrics;
@@ -3227,19 +3227,19 @@ Route::post('/orders', function (Request $request) {
 });
 ```
 
-By default, deferred functions will only be executed if the HTTP response, Artisan command, or queued job from which `Illuminate\Support\defer` is invoked completes successfully. This means that deferred functions will not be executed if a request results in a `4xx` or `5xx` HTTP response. If you would like a deferred function to always execute, you may chain the `always` method onto your deferred function:
+預設情況下,只有當呼叫 `Illuminate\Support\defer` 的 HTTP 回應、Artisan 指令或佇列任務成功完成時,才會執行延遲函式。這意味著如果請求導致 `4xx` 或 `5xx` HTTP 回應,則不會執行延遲函式。如果你希望延遲函式始終執行,可以將 `always` 方法連結到你的延遲函式:
 
 ```php
 defer(fn () => Metrics::reportOrder($order))->always();
 ```
 
 > [!WARNING]
-> If you have the [Swoole PHP extension](https://www.php.net/manual/en/book.swoole.php) installed, Laravel's `defer` function may conflict with Swoole's own global `defer` function, leading to web server errors. Make sure you call Laravel's `defer` helper by explicitly namespacing it: `use function Illuminate\Support\defer;`
+> 如果你安裝了 [Swoole PHP extension](https://www.php.net/manual/en/book.swoole.php),Laravel 的 `defer` 函式可能會與 Swoole 自己的全域 `defer` 函式衝突,導致 Web 伺服器錯誤。請確保透過顯式命名空間呼叫 Laravel 的 `defer` 輔助函式: `use function Illuminate\Support\defer;`
 
 <a name="cancelling-deferred-functions"></a>
-#### Cancelling Deferred Functions
+#### 取消延遲函式
 
-If you need to cancel a deferred function before it is executed, you can use the `forget` method to cancel the function by its name. To name a deferred function, provide a second argument to the `Illuminate\Support\defer` function:
+如果你需要在執行之前取消延遲函式,可以使用 `forget` 方法按名稱取消該函式。要命名延遲函式,請將第二個參數提供給 `Illuminate\Support\defer` 函式:
 
 ```php
 defer(fn () => Metrics::report(), 'reportMetrics');
@@ -3248,9 +3248,9 @@ defer()->forget('reportMetrics');
 ```
 
 <a name="disabling-deferred-functions-in-tests"></a>
-#### Disabling Deferred Functions in Tests
+#### 在測試中停用延遲函式
 
-When writing tests, it may be useful to disable deferred functions. You may call `withoutDefer` in your test to instruct Laravel to invoke all deferred functions immediately:
+在編寫測試時,停用延遲函式可能很有用。你可以在測試中呼叫 `withoutDefer` 來指示 Laravel 立即呼叫所有延遲函式:
 
 ```php tab=Pest
 test('without defer', function () {
@@ -3274,7 +3274,7 @@ class ExampleTest extends TestCase
 }
 ```
 
-If you would like to disable deferred functions for all tests within a test case, you may call the `withoutDefer` method from the `setUp` method on your base `TestCase` class:
+如果你想為測試案例中的所有測試停用延遲函式,可以從基礎 `TestCase` 類別的 `setUp` 方法中呼叫 `withoutDefer` 方法:
 
 ```php
 <?php
@@ -3297,7 +3297,7 @@ abstract class TestCase extends BaseTestCase
 <a name="lottery"></a>
 ### Lottery
 
-Laravel's lottery class may be used to execute callbacks based on a set of given odds. This can be particularly useful when you only want to execute code for a percentage of your incoming requests:
+Laravel 的 lottery 類別可用於根據給定的機率執行回呼。當你只想為傳入請求的一定百分比執行程式碼時,這特別有用:
 
 ```php
 use Illuminate\Support\Lottery;
@@ -3308,7 +3308,7 @@ Lottery::odds(1, 20)
     ->choose();
 ```
 
-You may combine Laravel's lottery class with other Laravel features. For example, you may wish to only report a small percentage of slow queries to your exception handler. And, since the lottery class is callable, we may pass an instance of the class into any method that accepts callables:
+你可以將 Laravel 的 lottery 類別與其他 Laravel 功能結合使用。例如,你可能希望只向異常處理常式報告一小部分慢查詢。而且,由於 lottery 類別是可呼叫的,我們可以將該類別的實例傳遞給任何接受可呼叫物件的方法:
 
 ```php
 use Carbon\CarbonInterval;
@@ -3322,9 +3322,9 @@ DB::whenQueryingForLongerThan(
 ```
 
 <a name="testing-lotteries"></a>
-#### Testing Lotteries
+#### 測試 Lotteries
 
-Laravel provides some simple methods to allow you to easily test your application's lottery invocations:
+Laravel 提供了一些簡單的方法,讓你輕鬆測試應用程式的 lottery 呼叫:
 
 ```php
 // Lottery will always win...
@@ -3343,7 +3343,7 @@ Lottery::determineResultsNormally();
 <a name="pipeline"></a>
 ### Pipeline
 
-Laravel's `Pipeline` facade provides a convenient way to "pipe" a given input through a series of invokable classes, closures, or callables, giving each class the opportunity to inspect or modify the input and invoke the next callable in the pipeline:
+Laravel 的 `Pipeline` facade 提供了一種方便的方法,可以將給定的輸入「傳送」到一系列可呼叫的類別、閉包或可呼叫物件中,讓每個類別都有機會檢查或修改輸入,並呼叫管道中的下一個可呼叫物件:
 
 ```php
 use Closure;
@@ -3366,11 +3366,11 @@ $user = Pipeline::send($user)
     ->then(fn (User $user) => $user);
 ```
 
-As you can see, each invokable class or closure in the pipeline is provided the input and a `$next` closure. Invoking the `$next` closure will invoke the next callable in the pipeline. As you may have noticed, this is very similar to [middleware](/docs/12.x/middleware).
+如你所見,管道中的每個可呼叫類別或閉包都會收到輸入和一個 `$next` 閉包。呼叫 `$next` 閉包將呼叫管道中的下一個可呼叫物件。你可能已經注意到,這與 [middleware](/docs/12.x/middleware) 非常相似。
 
-When the last callable in the pipeline invokes the `$next` closure, the callable provided to the `then` method will be invoked. Typically, this callable will simply return the given input. For convenience, if you simply want to return the input after it has been processed, you may use the `thenReturn` method.
+當管道中的最後一個可呼叫物件呼叫 `$next` 閉包時,將呼叫提供給 `then` 方法的可呼叫物件。通常,此可呼叫物件只會返回給定的輸入。為了方便起見,如果你只想在處理後返回輸入,可以使用 `thenReturn` 方法。
 
-Of course, as discussed previously, you are not limited to providing closures to your pipeline. You may also provide invokable classes. If a class name is provided, the class will be instantiated via Laravel's [service container](/docs/12.x/container), allowing dependencies to be injected into the invokable class:
+當然,如前所述,你不僅限於向管道提供閉包。你也可以提供可呼叫的類別。如果提供了類別名稱,則將透過 Laravel 的 [service container](/docs/12.x/container) 實例化該類別,從而允許將依賴項注入到可呼叫類別中:
 
 ```php
 $user = Pipeline::send($user)
@@ -3382,7 +3382,7 @@ $user = Pipeline::send($user)
     ->thenReturn();
 ```
 
-The `withinTransaction` method may be invoked on the pipeline to automatically wrap all steps of the pipeline within a single database transaction:
+可以在管道上呼叫 `withinTransaction` 方法,以自動將管道的所有步驟包裝在單個資料庫交易中:
 
 ```php
 $user = Pipeline::send($user)
@@ -3398,7 +3398,7 @@ $user = Pipeline::send($user)
 <a name="sleep"></a>
 ### Sleep
 
-Laravel's `Sleep` class is a light-weight wrapper around PHP's native `sleep` and `usleep` functions, offering greater testability while also exposing a developer friendly API for working with time:
+Laravel 的 `Sleep` 類別是 PHP 原生 `sleep` 和 `usleep` 函式的輕量級包裝器,提供了更好的可測試性,同時也公開了一個對開發人員友好的 API 來處理時間:
 
 ```php
 use Illuminate\Support\Sleep;
@@ -3412,7 +3412,7 @@ while ($waiting) {
 }
 ```
 
-The `Sleep` class offers a variety of methods that allow you to work with different units of time:
+`Sleep` 類別提供了多種方法,允許你使用不同的時間單位:
 
 ```php
 // Return a value after sleeping...
@@ -3443,16 +3443,16 @@ Sleep::sleep(2);
 Sleep::usleep(5000);
 ```
 
-To easily combine units of time, you may use the `and` method:
+要輕鬆組合時間單位,你可以使用 `and` 方法:
 
 ```php
 Sleep::for(1)->second()->and(10)->milliseconds();
 ```
 
 <a name="testing-sleep"></a>
-#### Testing Sleep
+#### 測試 Sleep
 
-When testing code that utilizes the `Sleep` class or PHP's native sleep functions, your test will pause execution. As you might expect, this makes your test suite significantly slower. For example, imagine you are testing the following code:
+在測試使用 `Sleep` 類別或 PHP 原生 sleep 函式的程式碼時,你的測試將暫停執行。正如你所預料的那樣,這會使你的測試套件明顯變慢。例如,想像你正在測試以下程式碼:
 
 ```php
 $waiting = /* ... */;
@@ -3466,7 +3466,7 @@ while ($waiting) {
 }
 ```
 
-Typically, testing this code would take _at least_ one second. Luckily, the `Sleep` class allows us to "fake" sleeping so that our test suite stays fast:
+通常,測試此程式碼將花費_至少_一秒鐘。幸運的是,`Sleep` 類別允許我們「偽造」睡眠,以便我們的測試套件保持快速:
 
 ```php tab=Pest
 it('waits until ready', function () {
@@ -3485,9 +3485,9 @@ public function test_it_waits_until_ready()
 }
 ```
 
-When faking the `Sleep` class, the actual execution pause is bypassed, leading to a substantially faster test.
+當偽造 `Sleep` 類別時,實際的執行暫停將被繞過,從而導致測試速度大幅提高。
 
-Once the `Sleep` class has been faked, it is possible to make assertions against the expected "sleeps" that should have occurred. To illustrate this, let's imagine we are testing code that pauses execution three times, with each pause increasing by a single second. Using the `assertSequence` method, we can assert that our code "slept" for the proper amount of time while keeping our test fast:
+一旦 `Sleep` 類別被偽造,就可以針對應該發生的預期「睡眠」進行斷言。為了說明這一點,讓我們想像我們正在測試暫停執行三次的程式碼,每次暫停增加一秒鐘。使用 `assertSequence` 方法,我們可以斷言我們的程式碼「睡眠」了適當的時間,同時保持我們的測試快速:
 
 ```php tab=Pest
 it('checks if ready three times', function () {
@@ -3518,7 +3518,7 @@ public function test_it_checks_if_ready_three_times()
 }
 ```
 
-Of course, the `Sleep` class offers a variety of other assertions you may use when testing:
+當然,`Sleep` 類別提供了多種其他斷言,你可以在測試時使用:
 
 ```php
 use Carbon\CarbonInterval as Duration;
@@ -3539,7 +3539,7 @@ Sleep::assertNeverSlept();
 Sleep::assertInsomniac();
 ```
 
-Sometimes it may be useful to perform an action whenever a fake sleep occurs. To achieve this, you may provide a callback to the `whenFakingSleep` method. In the following example, we use Laravel's [time manipulation helpers](/docs/12.x/mocking#interacting-with-time) to instantly progress time by the duration of each sleep:
+有時,在發生偽造睡眠時執行操作可能很有用。為此,你可以向 `whenFakingSleep` 方法提供回呼。在以下範例中,我們使用 Laravel 的 [time manipulation helpers](/docs/12.x/mocking#interacting-with-time) 將時間立即推進每個睡眠的持續時間:
 
 ```php
 use Carbon\CarbonInterval as Duration;
@@ -3554,7 +3554,7 @@ Sleep::whenFakingSleep(function (Duration $duration) {
 });
 ```
 
-As progressing time is a common requirement, the `fake` method accepts a `syncWithCarbon` argument to keep Carbon in sync when sleeping within a test:
+由於推進時間是一個常見的需求,`fake` 方法接受一個 `syncWithCarbon` 參數,以便在測試中睡眠時保持 Carbon 同步:
 
 ```php
 Sleep::fake(syncWithCarbon: true);
@@ -3566,16 +3566,16 @@ Sleep::for(1)->second();
 $start->diffForHumans(); // 1 second ago
 ```
 
-Laravel uses the `Sleep` class internally whenever it is pausing execution. For example, the [retry](#method-retry) helper uses the `Sleep` class when sleeping, allowing for improved testability when using that helper.
+Laravel 在暫停執行時內部使用 `Sleep` 類別。例如,[retry](#method-retry) 輔助函式在睡眠時使用 `Sleep` 類別,從而允許在使用該輔助函式時提高可測試性。
 
 <a name="timebox"></a>
 ### Timebox
 
-Laravel's `Timebox` class ensures that the given callback always takes a fixed amount of time to execute, even if its actual execution completes sooner. This is particularly useful for cryptographic operations and user authentication checks, where attackers might exploit variations in execution time to infer sensitive information.
+Laravel 的 `Timebox` 類別確保給定的回呼始終花費固定的時間來執行,即使其實際執行完成得更快。這對於加密操作和使用者認證檢查特別有用,因為攻擊者可能會利用執行時間的變化來推斷敏感資訊。
 
-If the execution exceeds the fixed duration, `Timebox` has no effect. It is up to the developer to choose a sufficiently long time as the fixed duration to account for worst-case scenarios.
+如果執行時間超過固定持續時間,`Timebox` 將不起作用。開發人員應選擇足夠長的時間作為固定持續時間,以應對最壞的情況。
 
-The call method accepts a closure and a time limit in microseconds, and then executes the closure and waits until the time limit is reached:
+call 方法接受一個閉包和以微秒為單位的時間限制,然後執行閉包並等待直到達到時間限制:
 
 ```php
 use Illuminate\Support\Timebox;
@@ -3585,14 +3585,14 @@ use Illuminate\Support\Timebox;
 }, microseconds: 10000);
 ```
 
-If an exception is thrown within the closure, this class will respect the defined delay and re-throw the exception after the delay.
+如果在閉包內拋出異常,此類別將遵守定義的延遲,並在延遲後重新拋出異常。
 
 <a name="uri"></a>
 ### URI
 
-Laravel's `Uri` class provides a convenient and fluent interface for creating and manipulating URIs. This class wraps the functionality provided by the underlying League URI package and integrates seamlessly with Laravel's routing system.
+Laravel 的 `Uri` 類別提供了一個方便且流暢的介面,用於建立和操作 URI。此類別包裝了底層 League URI 套件提供的功能,並與 Laravel 的路由系統無縫整合。
 
-You can create a `Uri` instance easily using static methods:
+你可以使用靜態方法輕鬆建立 `Uri` 實例:
 
 ```php
 use App\Http\Controllers\UserController;
@@ -3614,7 +3614,7 @@ $uri = Uri::action(InvokableController::class);
 $uri = $request->uri();
 ```
 
-Once you have a URI instance, you can fluently modify it:
+一旦你有了 URI 實例,你可以流暢地修改它:
 
 ```php
 $uri = Uri::of('https://example.com')
@@ -3627,9 +3627,9 @@ $uri = Uri::of('https://example.com')
 ```
 
 <a name="inspecting-uris"></a>
-#### Inspecting URIs
+#### 檢查 URIs
 
-The `Uri` class also allows you to easily inspect the various components of the underlying URI:
+`Uri` 類別還允許你輕鬆檢查底層 URI 的各個元件:
 
 ```php
 $scheme = $uri->scheme();
@@ -3642,42 +3642,42 @@ $fragment = $uri->fragment();
 ```
 
 <a name="manipulating-query-strings"></a>
-#### Manipulating Query Strings
+#### 操作查詢字串
 
-The `Uri` class offers several methods that may be used to manipulate a URI's query string. The `withQuery` method may be used to merge additional query string parameters into the existing query string:
+`Uri` 類別提供了幾種可用於操作 URI 查詢字串的方法。`withQuery` 方法可用於將其他查詢字串參數合併到現有查詢字串中:
 
 ```php
 $uri = $uri->withQuery(['sort' => 'name']);
 ```
 
-The `withQueryIfMissing` method may be used to merge additional query string parameters into the existing query string if the given keys do not already exist in the query string:
+如果給定的鍵在查詢字串中尚不存在,則 `withQueryIfMissing` 方法可用於將其他查詢字串參數合併到現有查詢字串中:
 
 ```php
 $uri = $uri->withQueryIfMissing(['page' => 1]);
 ```
 
-The `replaceQuery` method may be used to complete replace the existing query string with a new one:
+`replaceQuery` 方法可用於完全用新的查詢字串替換現有的查詢字串:
 
 ```php
 $uri = $uri->replaceQuery(['page' => 1]);
 ```
 
-The `pushOntoQuery` method may be used to push additional parameters onto a query string parameter that has an array value:
+`pushOntoQuery` 方法可用於將其他參數推送到具有陣列值的查詢字串參數上:
 
 ```php
 $uri = $uri->pushOntoQuery('filter', ['active', 'pending']);
 ```
 
-The `withoutQuery` method may be used to remove parameters from the query string:
+`withoutQuery` 方法可用於從查詢字串中刪除參數:
 
 ```php
 $uri = $uri->withoutQuery(['page']);
 ```
 
 <a name="generating-responses-from-uris"></a>
-#### Generating Responses From URIs
+#### 從 URIs 產生回應
 
-The `redirect` method may be used to generate a `RedirectResponse` instance to the given URI:
+`redirect` 方法可用於產生給定 URI 的 `RedirectResponse` 實例:
 
 ```php
 $uri = Uri::of('https://example.com');
@@ -3685,7 +3685,7 @@ $uri = Uri::of('https://example.com');
 return $uri->redirect();
 ```
 
-Or, you may simply return the `Uri` instance from a route or controller action, which will automatically generate a redirect response to the returned URI:
+或者,你可以簡單地從路由或控制器動作返回 `Uri` 實例,這將自動產生對返回 URI 的重新導向回應:
 
 ```php
 use Illuminate\Support\Facades\Route;
