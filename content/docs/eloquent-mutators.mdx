@@ -3,30 +3,30 @@ title: Eloquent Mutators
 description: Eloquent mutators 和 casts 讓你轉換屬性值
 ---
 
-# Eloquent: Mutators & Casting
+# Eloquent：變異器和類型轉換 (Eloquent: Mutators & Casting)
 
-- [Introduction](#introduction)
-- [Accessors and Mutators](#accessors-and-mutators)
-    - [Defining an Accessor](#defining-an-accessor)
-    - [Defining a Mutator](#defining-a-mutator)
-- [Attribute Casting](#attribute-casting)
-    - [Array and JSON Casting](#array-and-json-casting)
-    - [Date Casting](#date-casting)
-    - [Enum Casting](#enum-casting)
-    - [Encrypted Casting](#encrypted-casting)
-    - [Query Time Casting](#query-time-casting)
-- [Custom Casts](#custom-casts)
-    - [Value Object Casting](#value-object-casting)
-    - [Array / JSON Serialization](#array-json-serialization)
-    - [Inbound Casting](#inbound-casting)
-    - [Cast Parameters](#cast-parameters)
-    - [Comparing Cast Values](#comparing-cast-values)
-    - [Castables](#castables)
+- [簡介 (Introduction)](#introduction)
+- [訪問器和變異器 (Accessors and Mutators)](#accessors-and-mutators)
+    - [定義訪問器 (Defining an Accessor)](#defining-an-accessor)
+    - [定義變異器 (Defining a Mutator)](#defining-a-mutator)
+- [屬性轉換 (Attribute Casting)](#attribute-casting)
+    - [陣列和 JSON 轉換 (Array and JSON Casting)](#array-and-json-casting)
+    - [日期轉換 (Date Casting)](#date-casting)
+    - [列舉轉換 (Enum Casting)](#enum-casting)
+    - [加密轉換 (Encrypted Casting)](#encrypted-casting)
+    - [查詢時間轉換 (Query Time Casting)](#query-time-casting)
+- [自訂轉換 (Custom Casts)](#custom-casts)
+    - [值物件轉換 (Value Object Casting)](#value-object-casting)
+    - [陣列 / JSON 序列化 (Array / JSON Serialization)](#array-json-serialization)
+    - [入站轉換 (Inbound Casting)](#inbound-casting)
+    - [轉換參數 (Cast Parameters)](#cast-parameters)
+    - [比較轉換值 (Comparing Cast Values)](#comparing-cast-values)
+    - [可轉換的 (Castables)](#castables)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
-Accessors, mutators, and attribute casting allow you to transform Eloquent attribute values when you retrieve or set them on model instances. For example, you may want to use the [Laravel encrypter](/docs/encryption) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on an Eloquent model. Or, you may want to convert a JSON string that is stored in your database to an array when it is accessed via your Eloquent model.
+訪問器、變異器和屬性轉換 allow you to transform Eloquent attribute values when you retrieve or set them on model instances. For example, you may want to use the [Laravel encrypter](/docs/encryption) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on an Eloquent model. Or, you may want to convert a JSON string that is stored in your database to an array when it is accessed via your Eloquent model.
 
 <a name="accessors-and-mutators"></a>
 ## Accessors and Mutators

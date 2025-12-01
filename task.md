@@ -8,36 +8,36 @@
 - [x] pagination
 - [x] migrations
 - [x] redis
-- [ ] eloquent
-- [ ] eloquent-relationships
-- [ ] eloquent-collections
-- [ ] eloquent-factories
-- [ ] eloquent-mutators
-- [ ] http-tests
-- [ ] dusk
-- [ ] broadcasting
-- [ ] cache
-- [ ] billing
-- [ ] cashier-paddle
-- [ ] envoy
-- [ ] folio
-- [ ] fortify
-- [ ] homestead
-- [ ] horizon
-- [ ] mix
-- [ ] mongodb
-- [ ] Octane
-- [ ] Passport
-- [ ] Pennant
-- [ ] Pint
-- [ ] Precognition
-- [ ] Prompts
-- [ ] Pulse
-- [ ] Reverb
-- [ ] Sail
-- [ ] Sanctum
-- [ ] Scout
-- [ ] Socialite
-- [ ] Telescope
-- [ ] Valet
-- [ ] Verification
+- [x] eloquent
+- [x] eloquent-relationships
+- [x] eloquent-collections
+- [x] eloquent-factories
+- [x] eloquent-mutators
+- [x] http-tests
+- [x] dusk
+- [x] broadcasting
+- [x] cache
+- [x] billing
+- [x] cashier-paddle
+- [x] envoy
+- [x] folio
+- [x] fortify
+- [x] homestead
+- [x] horizon
+- [x] mix
+- [x] mongodb
+- [x] Octane
+- [x] Passport
+- [x] Pennant
+- [x] Pint
+- [x] Precognition
+- [x] Prompts
+- [x] Pulse
+- [x] Reverb
+- [x] Sail
+- [x] Sanctum
+- [x] Scout
+- [x] Socialite
+- [x] Telescope
+- [x] Valet
+- [x] Verification
