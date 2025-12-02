@@ -154,3 +154,67 @@
     column-count: 1;
   }
 }
+
+/* Valet support items: show 3 columns, fall back to 2/1 on smaller screens */
+#valet-support ul {
+  column-count: 3;
+  column-gap: 2rem;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+#valet-support li {
+  break-inside: avoid;
+  margin-bottom: 0.5rem;
+}
+
+#valet-support a {
+  display: block;
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  #valet-support ul {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  #valet-support ul {
+    column-count: 1;
+  }
+}
+
+/* Homestead included/optional software lists: 2 columns on desktop */
+#software-list ul,
+#optional-software-list ul {
+  column-count: 2;
+  column-gap: 2rem;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+#software-list li,
+#optional-software-list li {
+  break-inside: avoid;
+  margin-bottom: 0.5rem;
+}
+
+#software-list a,
+#optional-software-list a {
+  display: block;
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  #software-list ul,
+  #optional-software-list ul {
+    column-count: 1;
+  }
+}

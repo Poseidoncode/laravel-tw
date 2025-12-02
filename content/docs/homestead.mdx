@@ -7,36 +7,36 @@ description: Laravel Homestead 是一個官方預封裝的 Vagrant box
 
 - [簡介 (Introduction)](#introduction)
 - [安裝與設定 (Installation and Setup)](#installation-and-setup)
-    - [第一步 (First Steps)](#first-steps)
-    - [設定 Homestead (Configuring Homestead)](#configuring-homestead)
-    - [設定 Nginx 網站 (Configuring Nginx Sites)](#configuring-nginx-sites)
-    - [設定服務 (Configuring Services)](#configuring-services)
-    - [啟動 Vagrant Box (Launching the Vagrant Box)](#launching-the-vagrant-box)
-    - [各專案獨立安裝 (Per Project Installation)](#per-project-installation)
-    - [安裝可選功能 (Installing Optional Features)](#installing-optional-features)
-    - [Aliases](#aliases)
+  - [第一步 (First Steps)](#first-steps)
+  - [設定 Homestead (Configuring Homestead)](#configuring-homestead)
+  - [設定 Nginx 網站 (Configuring Nginx Sites)](#configuring-nginx-sites)
+  - [設定服務 (Configuring Services)](#configuring-services)
+  - [啟動 Vagrant Box (Launching the Vagrant Box)](#launching-the-vagrant-box)
+  - [各專案獨立安裝 (Per Project Installation)](#per-project-installation)
+  - [安裝可選功能 (Installing Optional Features)](#installing-optional-features)
+  - [Aliases](#aliases)
 - [更新 Homestead (Updating Homestead)](#updating-homestead)
 - [日常使用 (Daily Usage)](#daily-usage)
-    - [透過 SSH 連線 (Connecting via SSH)](#connecting-via-ssh)
-    - [新增額外網站 (Adding Additional Sites)](#adding-additional-sites)
-    - [環境變數 (Environment Variables)](#environment-variables)
-    - [連接埠 (Ports)](#ports)
-    - [PHP 版本 (PHP Versions)](#php-versions)
-    - [連線至資料庫 (Connecting to Databases)](#connecting-to-databases)
-    - [資料庫備份 (Database Backups)](#database-backups)
-    - [設定 Cron 排程 (Configuring Cron Schedules)](#configuring-cron-schedules)
-    - [設定 Mailpit (Configuring Mailpit)](#configuring-mailpit)
-    - [設定 Minio (Configuring Minio)](#configuring-minio)
-    - [Laravel Dusk](#laravel-dusk)
-    - [分享你的環境 (Sharing Your Environment)](#sharing-your-environment)
+  - [透過 SSH 連線 (Connecting via SSH)](#connecting-via-ssh)
+  - [新增額外網站 (Adding Additional Sites)](#adding-additional-sites)
+  - [環境變數 (Environment Variables)](#environment-variables)
+  - [連接埠 (Ports)](#ports)
+  - [PHP 版本 (PHP Versions)](#php-versions)
+  - [連線至資料庫 (Connecting to Databases)](#connecting-to-databases)
+  - [資料庫備份 (Database Backups)](#database-backups)
+  - [設定 Cron 排程 (Configuring Cron Schedules)](#configuring-cron-schedules)
+  - [設定 Mailpit (Configuring Mailpit)](#configuring-mailpit)
+  - [設定 Minio (Configuring Minio)](#configuring-minio)
+  - [Laravel Dusk](#laravel-dusk)
+  - [分享你的環境 (Sharing Your Environment)](#sharing-your-environment)
 - [除錯與分析 (Debugging and Profiling)](#debugging-and-profiling)
-    - [使用 Xdebug 對 Web 請求進行除錯 (Debugging Web Requests With Xdebug)](#debugging-web-requests)
-    - [除錯 CLI 應用程式 (Debugging CLI Applications)](#debugging-cli-applications)
-    - [使用 Blackfire 分析應用程式 (Profiling Applications With Blackfire)](#profiling-applications-with-blackfire)
+  - [使用 Xdebug 對 Web 請求進行除錯 (Debugging Web Requests With Xdebug)](#debugging-web-requests)
+  - [除錯 CLI 應用程式 (Debugging CLI Applications)](#debugging-cli-applications)
+  - [使用 Blackfire 分析應用程式 (Profiling Applications With Blackfire)](#profiling-applications-with-blackfire)
 - [網路介面 (Network Interfaces)](#network-interfaces)
 - [擴充 Homestead (Extending Homestead)](#extending-homestead)
 - [供應商特定設定 (Provider Specific Settings)](#provider-specific-settings)
-    - [VirtualBox](#provider-specific-virtualbox)
+  - [VirtualBox](#provider-specific-virtualbox)
 
 <a name="introduction"></a>
 ## 簡介
@@ -55,8 +55,6 @@ Homestead 可以在任何 Windows、macOS 或 Linux 系統上運行，並包含 
 
 <a name="included-software"></a>
 ### 包含的軟體
-
-
 
 <div id="software-list" markdown="1">
 
@@ -95,9 +93,7 @@ Homestead 可以在任何 Windows、macOS 或 Linux 系統上運行，並包含 
 <a name="optional-software"></a>
 ### 可選軟體
 
-
-
-<div id="software-list" markdown="1">
+<div id="optional-software-list" markdown="1">
 
 - Apache
 - Blackfire
@@ -195,8 +191,8 @@ init.bat
 
 ```yaml
 folders:
-    - map: ~/code/project1
-      to: /home/vagrant/project1
+  - map: ~/code/project1
+    to: /home/vagrant/project1
 ```
 
 > [!WARNING]
@@ -206,10 +202,10 @@ folders:
 
 ```yaml
 folders:
-    - map: ~/code/project1
-      to: /home/vagrant/project1
-    - map: ~/code/project2
-      to: /home/vagrant/project2
+  - map: ~/code/project1
+    to: /home/vagrant/project1
+  - map: ~/code/project2
+    to: /home/vagrant/project2
 ```
 
 > [!WARNING]
@@ -219,9 +215,9 @@ folders:
 
 ```yaml
 folders:
-    - map: ~/code/project1
-      to: /home/vagrant/project1
-      type: "nfs"
+  - map: ~/code/project1
+    to: /home/vagrant/project1
+    type: "nfs"
 ```
 
 > [!WARNING]
@@ -231,12 +227,12 @@ folders:
 
 ```yaml
 folders:
-    - map: ~/code/project1
-      to: /home/vagrant/project1
-      type: "rsync"
-      options:
-          rsync__args: ["--verbose", "--archive", "--delete", "-zz"]
-          rsync__exclude: ["node_modules"]
+  - map: ~/code/project1
+    to: /home/vagrant/project1
+    type: "rsync"
+    options:
+      rsync__args: ["--verbose", "--archive", "--delete", "-zz"]
+      rsync__exclude: ["node_modules"]
 ```
 
 <a name="configuring-nginx-sites"></a>
@@ -246,8 +242,8 @@ folders:
 
 ```yaml
 sites:
-    - map: homestead.test
-      to: /home/vagrant/project1/public
+  - map: homestead.test
+    to: /home/vagrant/project1/public
 ```
 
 如果你在配置 Homestead 虛擬機器後變更了 `sites` 屬性，你應該在終端機中執行 `vagrant reload --provision` 指令來更新虛擬機器上的 Nginx 設定。
@@ -279,10 +275,10 @@ Homestead 預設會啟動數個服務；但是，你可以在配置期間自訂�
 
 ```yaml
 services:
-    - enabled:
-        - "postgresql"
-    - disabled:
-        - "mysql"
+  - enabled:
+      - "postgresql"
+  - disabled:
+      - "mysql"
 ```
 
 指定的服務將根據它們在 `enabled` 和 `disabled` 指令中的順序啟動或停止。
@@ -460,10 +456,10 @@ vagrant up
 
 ```yaml
 sites:
-    - map: homestead.test
-      to: /home/vagrant/project1/public
-    - map: another.test
-      to: /home/vagrant/project2/public
+  - map: homestead.test
+    to: /home/vagrant/project1/public
+  - map: another.test
+    to: /home/vagrant/project2/public
 ```
 
 > [!WARNING]
@@ -485,9 +481,9 @@ Homestead 支援數種「類型」的網站，允許你輕鬆運行非基於 Lar
 
 ```yaml
 sites:
-    - map: statamic.test
-      to: /home/vagrant/my-symfony-project/web
-      type: "statamic"
+  - map: statamic.test
+    to: /home/vagrant/my-symfony-project/web
+    type: "statamic"
 ```
 
 可用的網站類型有：`apache`、`apache-proxy`、`apigility`、`expressive`、`laravel`（預設）、`proxy`（用於 nginx）、`silverstripe`、`statamic`、`symfony2`、`symfony4` 和 `zf`。
@@ -499,11 +495,11 @@ sites:
 
 ```yaml
 sites:
-    - map: homestead.test
-      to: /home/vagrant/project1/public
-      params:
-          - key: FOO
-            value: BAR
+  - map: homestead.test
+    to: /home/vagrant/project1/public
+    params:
+      - key: FOO
+        value: BAR
 ```
 
 <a name="environment-variables"></a>
@@ -513,10 +509,10 @@ sites:
 
 ```yaml
 variables:
-    - key: APP_ENV
-      value: local
-    - key: FOO
-      value: bar
+  - key: APP_ENV
+    value: local
+  - key: FOO
+    value: bar
 ```
 
 更新 `Homestead.yaml` 檔案後，請務必執行 `vagrant reload --provision` 指令重新配置機器。這將更新所有已安裝 PHP 版本的 PHP-FPM 設定，並更新 `vagrant` 使用者的環境。
@@ -540,11 +536,11 @@ variables:
 
 ```yaml
 ports:
-    - send: 50000
-      to: 5000
-    - send: 7777
-      to: 777
-      protocol: udp
+  - send: 50000
+    to: 5000
+  - send: 7777
+    to: 777
+    protocol: udp
 ```
 
 以下是你可能希望從主機機器映射到 Vagrant box 的其他 Homestead 服務連接埠清單：
@@ -568,9 +564,9 @@ Homestead 支援在同一虛擬機器上運行多個版本的 PHP。你可以在
 
 ```yaml
 sites:
-    - map: homestead.test
-      to: /home/vagrant/project1/public
-      php: "7.1"
+  - map: homestead.test
+    to: /home/vagrant/project1/public
+    php: "7.1"
 ```
 
 [在你的 Homestead 虛擬機器內](#connecting-via-ssh)，你可以透過 CLI 使用任何支援的 PHP 版本：
@@ -631,9 +627,9 @@ Laravel 透過排程一個每分鐘執行一次的 `schedule:run` Artisan 指令
 
 ```yaml
 sites:
-    - map: homestead.test
-      to: /home/vagrant/project1/public
-      schedule: true
+  - map: homestead.test
+    to: /home/vagrant/project1/public
+    schedule: true
 ```
 
 該網站的 cron job 將定義在 Homestead 虛擬機器的 `/etc/cron.d` 目錄中。
@@ -677,10 +673,10 @@ AWS_DEFAULT_REGION=us-east-1
 
 ```yaml
 buckets:
-    - name: your-bucket
-      policy: public
-    - name: your-private-bucket
-      policy: none
+  - name: your-bucket
+    policy: public
+  - name: your-private-bucket
+    policy: none
 ```
 
 支援的 `policy` 值包括：`none`、`download`、`upload` 和 `public`。
@@ -692,7 +688,7 @@ buckets:
 
 ```yaml
 features:
-    - webdriver: true
+  - webdriver: true
 ```
 
 啟用 `webdriver` 功能後，你應該在終端機中執行 `vagrant reload --provision` 指令。
@@ -764,14 +760,15 @@ xphp /path/to/script
 
 ```yaml
 features:
-    - blackfire:
-        server_id: "server_id"
-        server_token: "server_value"
-        client_id: "client_id"
-        client_token: "client_value"
+  - blackfire:
+      server_id: "server_id"
+      server_token: "server_value"
+      client_id: "client_id"
+      client_token: "client_value"
 ```
 
 Blackfire 伺服器憑證和客戶端憑證 [需要 Blackfire 帳戶](https://blackfire.io/signup)。Blackfire 提供各種選項來分析應用程式，包括 CLI 工具和瀏覽器擴充功能。請 [查看 Blackfire 文件以獲取更多詳細資訊](https://blackfire.io/docs/php/integrations/laravel/index)。
+
 <a name="network-interfaces"></a>
 ## 網路介面
 
@@ -779,35 +776,35 @@ Blackfire 伺服器憑證和客戶端憑證 [需要 Blackfire 帳戶](https://bl
 
 ```yaml
 networks:
-    - type: "private_network"
-      ip: "192.168.10.20"
+  - type: "private_network"
+    ip: "192.168.10.20"
 ```
 
 要啟用 [bridged](https://developer.hashicorp.com/vagrant/docs/networking/public_network) 介面，請為網路配置 `bridge` 設定並將網路類型變更為 `public_network`：
 
 ```yaml
 networks:
-    - type: "public_network"
-      ip: "192.168.10.20"
-      bridge: "en1: Wi-Fi (AirPort)"
+  - type: "public_network"
+    ip: "192.168.10.20"
+    bridge: "en1: Wi-Fi (AirPort)"
 ```
 
 要啟用 [DHCP](https://developer.hashicorp.com/vagrant/docs/networking/public_network#dhcp)，只需從你的設定中移除 `ip` 選項：
 
 ```yaml
 networks:
-    - type: "public_network"
-      bridge: "en1: Wi-Fi (AirPort)"
+  - type: "public_network"
+    bridge: "en1: Wi-Fi (AirPort)"
 ```
 
 要更新網路使用的裝置，你可以將 `dev` 選項新增至網路的設定。預設的 `dev` 值為 `eth0`：
 
 ```yaml
 networks:
-    - type: "public_network"
-      ip: "192.168.10.20"
-      bridge: "en1: Wi-Fi (AirPort)"
-      dev: "enp2s0"
+  - type: "public_network"
+    ip: "192.168.10.20"
+    bridge: "en1: Wi-Fi (AirPort)"
+    dev: "enp2s0"
 ```
 
 <a name="extending-homestead"></a>
@@ -842,5 +839,5 @@ sudo apt-get -y \
 
 ```yaml
 provider: virtualbox
-natdnshostresolver: 'off'
+natdnshostresolver: "off"
 ```

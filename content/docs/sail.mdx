@@ -1,3 +1,4 @@
+---
 title: Laravel Sail
 description: Sail 是 Laravel 的輕量命令列介面
 ---
@@ -5,35 +6,32 @@ description: Sail 是 Laravel 的輕量命令列介面
 # Laravel Sail
 
 - [簡介](#introduction)
-- [安裝與設定](#installation)
-    - [Installing Sail Into Existing Applications](#installing-sail-into-existing-applications)
-    - [Rebuilding Sail Images](#rebuilding-sail-images)
-    - [Configuring A Shell Alias](#configuring-a-shell-alias)
-- [Starting and Stopping Sail](#starting-and-stopping-sail)
-- [Executing Commands](#executing-sail-commands)
-    - [Executing PHP Commands](#executing-php-commands)
-    - [Executing Composer Commands](#executing-composer-commands)
-    - [Executing Artisan Commands](#executing-artisan-commands)
-    - [Executing Node / NPM Commands](#executing-node-npm-commands)
-- [Interacting With Databases](#interacting-with-sail-databases)
-    - [MySQL](#mysql)
-    - [MongoDB](#mongodb)
-    - [Redis](#redis)
-    - [Valkey](#valkey)
-    - [Meilisearch](#meilisearch)
-    - [Typesense](#typesense)
-- [File Storage](#file-storage)
+- [安裝與設定](#installation) - [在既有專案中安裝 Sail](#installing-sail-into-existing-applications) - [重新建立 Sail 映像檔](#rebuilding-sail-images) - [設定 Shell Alias（別名）](#configuring-a-shell-alias)
+- [啟動與停止 Sail](#starting-and-stopping-sail)
+- [執行指令](#executing-sail-commands)
+  - [執行 PHP 指令](#executing-php-commands)
+  - [執行 Composer 指令](#executing-composer-commands)
+  - [執行 Artisan 指令](#executing-artisan-commands)
+  - [執行 Node / NPM 指令](#executing-node-npm-commands)
+- [與資料庫互動](#interacting-with-sail-databases)
+  - [MySQL](#mysql)
+  - [MongoDB](#mongodb)
+  - [Redis](#redis)
+  - [Valkey](#valkey)
+  - [Meilisearch](#meilisearch)
+  - [Typesense](#typesense)
+- [檔案儲存](#file-storage)
 - [執行測試](#running-tests)
   - [Laravel Dusk](#laravel-dusk)
-- [Previewing Emails](#previewing-emails)
-- [Container CLI](#sail-container-cli)
-- [PHP Versions](#sail-php-versions)
-- [Node Versions](#sail-node-versions)
-- [Sharing Your Site](#sharing-your-site)
+- [郵件預覽](#previewing-emails)
+- [容器 CLI](#sail-container-cli)
+- [PHP 版本](#sail-php-versions)
+- [Node 版本](#sail-node-versions)
+- [分享你的網站](#sharing-your-site)
 - [使用 Xdebug 偵錯](#debugging-with-xdebug)
-  - [Xdebug CLI Usage](#xdebug-cli-usage)
-  - [Xdebug Browser Usage](#xdebug-browser-usage)
-- [Customization](#sail-customization)
+  - [Xdebug CLI 使用方式](#xdebug-cli-usage)
+  - [Xdebug 瀏覽器端使用](#xdebug-browser-usage)
+- [自訂化](#sail-customization)
 
 <a name="introduction"></a>
 ## 簡介
@@ -160,10 +158,10 @@ sail stop
 **在 Laravel 文件中你常會看到未以 Sail 呼叫的 Composer、Artisan 或 Node / NPM 指令。**那些範例假設相關工具已安裝於本機。若使用 Sail 作為本機開發環境，請改用 Sail 來執行這些指令：
 
 ```shell
-# Running Artisan commands locally...
+# 在本機執行 Artisan 指令...
 php artisan queue:work
 
-# Running Artisan commands within Laravel Sail...
+# 在 Laravel Sail 容器中執行 Artisan 指令...
 sail artisan queue:work
 ```
 
@@ -296,7 +294,7 @@ AWS_ENDPOINT=http://minio:9000
 AWS_USE_PATH_STYLE_ENDPOINT=true
 ```
 
-In order for Laravel's Flysystem integration to generate proper URLs when using MinIO, you should define the `AWS_URL` environment variable so that it matches your application's local URL and includes the bucket name in the URL path:
+為了讓 Laravel 的 Flysystem 在使用 MinIO 時能正確產生 URL，你應該定義 `AWS_URL` 環境變數，使其和應用程式的本機 URL 相符，且包含 bucket 名稱於 URL 路徑中：
 
 ```ini
 AWS_URL=http://localhost:9000/local
@@ -305,7 +303,7 @@ AWS_URL=http://localhost:9000/local
 你可以在 MinIO 管理介面 (`http://localhost:8900`) 中建立 bucket。MinIO 管理介面預設帳號為 `sail`，預設密碼為 `password`。
 
 > [!WARNING]
-> Generating temporary storage URLs via the `temporaryUrl` method is not supported when using MinIO.
+> 使用 MinIO 時不支援透過 `temporaryUrl` 方法產生暫時性儲存 URL。
 
 <a name="running-tests"></a>
 ## 執行測試
@@ -337,22 +335,22 @@ sail artisan test
 
 ```yaml
 selenium:
-    image: 'selenium/standalone-chrome'
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
-    volumes:
-        - '/dev/shm:/dev/shm'
-    networks:
-        - sail
+  image: "selenium/standalone-chrome"
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  volumes:
+    - "/dev/shm:/dev/shm"
+  networks:
+    - sail
 ```
 
 接著，確保 `compose.yaml` 的 `laravel.test` 服務在 `depends_on` 中包含 `selenium`：
 
 ```yaml
 depends_on:
-    - mysql
-    - redis
-    - selenium
+  - mysql
+  - redis
+  - selenium
 ```
 
 最後，啟動 Sail 並執行 `dusk` 指令即可運行 Dusk 測試：
@@ -368,13 +366,13 @@ sail dusk
 
 ```yaml
 selenium:
-    image: 'selenium/standalone-chromium'
-    extra_hosts:
-        - 'host.docker.internal:host-gateway'
-    volumes:
-        - '/dev/shm:/dev/shm'
-    networks:
-        - sail
+  image: "selenium/standalone-chromium"
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  volumes:
+    - "/dev/shm:/dev/shm"
+  networks:
+    - sail
 ```
 
 <a name="previewing-emails"></a>
@@ -450,9 +448,9 @@ Sail 預設會安裝 Node 22。若要變更建立映像時安裝的 Node 版本�
 
 ```yaml
 build:
-    args:
-        WWWGROUP: '${WWWGROUP}'
-        NODE_VERSION: '18'
+  args:
+    WWWGROUP: "${WWWGROUP}"
+    NODE_VERSION: "18"
 ```
 
 修改 `compose.yaml` 後，請重建映像檔：
@@ -486,8 +484,7 @@ sail share
 sail share --subdomain=my-sail-site
 ```
 
-> [!NOTE]
-> `share` 指令是由 [Expose](https://github.com/beyondcode/expose) 支援，該服務由 BeyondCode 提供，是一套開放原始碼的穿透（tunneling）工具。
+> [!NOTE] > `share` 指令是由 [Expose](https://github.com/beyondcode/expose) 支援，該服務由 BeyondCode 提供，是一套開放原始碼的穿透（tunneling）工具。
 
 <a name="debugging-with-xdebug"></a>
 ## 使用 Xdebug 偵錯
@@ -543,10 +540,10 @@ SAIL_XDEBUG_CONFIG="client_host=172.20.0.2"
 可以使用 `sail debug` 指令在執行 Artisan 指令時啟動偵錯會話：
 
 ```shell
-# Run an Artisan command without Xdebug...
+# 執行 Artisan 指令（無 Xdebug）...
 sail artisan migrate
 
-# Run an Artisan command with Xdebug...
+# 執行 Artisan 指令（含 Xdebug）...
 sail debug migrate
 ```
 
