@@ -5,60 +5,60 @@ description: Laravel Prompts 是一個用於向 CLI 應用程式添加美觀介�
 
 # Prompts
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-- [Available Prompts](#available-prompts)
-    - [Text](#text)
-    - [Textarea](#textarea)
-    - [Password](#password)
-    - [Confirm](#confirm)
-    - [Select](#select)
-    - [Multi-select](#multiselect)
-    - [Suggest](#suggest)
-    - [Search](#search)
-    - [Multi-search](#multisearch)
-    - [Pause](#pause)
-- [Transforming Input Before Validation](#transforming-input-before-validation)
-- [Forms](#forms)
-- [Informational Messages](#informational-messages)
-- [Tables](#tables)
-- [Spin](#spin)
-- [Progress Bar](#progress)
-- [Clearing the Terminal](#clear)
-- [Terminal Considerations](#terminal-considerations)
-- [Unsupported Environments and Fallbacks](#fallbacks)
-- [Testing](#testing)
+- [簡介](#introduction)
+- [安裝](#installation)
+- [可用的提示框](#available-prompts)
+    - [文字輸入 (Text)](#text)
+    - [多行文字輸入 (Textarea)](#textarea)
+    - [密碼輸入 (Password)](#password)
+    - [確認 (Confirm)](#confirm)
+    - [選擇 (Select)](#select)
+    - [多重選擇 (Multi-select)](#multiselect)
+    - [建議 (Suggest)](#suggest)
+    - [搜尋 (Search)](#search)
+    - [多重搜尋 (Multi-search)](#multisearch)
+    - [暫停 (Pause)](#pause)
+- [驗證前轉換輸入](#transforming-input-before-validation)
+- [表單](#forms)
+- [訊息提示](#informational-messages)
+- [表格](#tables)
+- [旋轉指示器](#spin)
+- [進度條](#progress)
+- [清除終端機](#clear)
+- [終端機注意事項](#terminal-considerations)
+- [不支援的環境與備案](#fallbacks)
+- [測試](#testing)
 
 <a name="introduction"></a>
 ## 簡介
 
-[Laravel Prompts](https://github.com/laravel/prompts) is a PHP package for adding beautiful and user-friendly forms to your command-line applications, with browser-like features including placeholder text and validation.
+[Laravel Prompts](https://github.com/laravel/prompts) 是一個 PHP 套件，用於為你的命令列應用程式添加美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
 
 <img src="https://laravel.com/img/docs/prompts-example.png" />
 
-Laravel Prompts is perfect for accepting user input in your [Artisan console commands](/docs/artisan#writing-commands), but it may also be used in any command-line PHP project.
+Laravel Prompts 非常適合在你的 [Artisan 主控台指令](/docs/artisan#writing-commands) 中接受使用者輸入，但它也可以用於任何命令列 PHP 專案。
 
 > [!NOTE]
-> Laravel Prompts supports macOS, Linux, and Windows with WSL. For more information, please see our documentation on [unsupported environments & fallbacks](#fallbacks).
+> Laravel Prompts 支援 macOS、Linux 和 Windows (使用 WSL)。有關更多資訊，請參閱我們關於 [不支援的環境與備案](#fallbacks) 的文件。
 
 <a name="installation"></a>
 ## 安裝
 
-Laravel Prompts is already included with the latest release of Laravel.
+Laravel Prompts 已包含在最新版本的 Laravel 中。
 
-Laravel Prompts may also be installed in your other PHP projects by using the Composer package manager:
+Laravel Prompts 也可以透過 Composer 套件管理器安裝在你的其他 PHP 專案中：
 
 ```shell
 composer require laravel/prompts
 ```
 
 <a name="available-prompts"></a>
-## Available Prompts
+## 可用的提示框 (Available Prompts)
 
 <a name="text"></a>
-### Text
+### 文字輸入 (Text)
 
-The `text` function will prompt the user with the given question, accept their input, and then return it:
+`text` 函式將向使用者提示給定的問題，接受他們的輸入，然後返回它：
 
 ```php
 use function Laravel\Prompts\text;
@@ -66,7 +66,7 @@ use function Laravel\Prompts\text;
 $name = text('What is your name?');
 ```
 
-You may also include placeholder text, a default value, and an informational hint:
+你還可以包含預留位置文字、預設值和提示訊息：
 
 ```php
 $name = text(
@@ -78,9 +78,9 @@ $name = text(
 ```
 
 <a name="text-required"></a>
-#### Required Values
+#### 必填值
 
-If you require a value to be entered, you may pass the `required` argument:
+如果你需要輸入值，可以傳遞 `required` 參數：
 
 ```php
 $name = text(
@@ -89,7 +89,7 @@ $name = text(
 );
 ```
 
-If you would like to customize the validation message, you may also pass a string:
+如果你想自訂驗證訊息，也可以傳遞字串：
 
 ```php
 $name = text(
@@ -99,9 +99,9 @@ $name = text(
 ```
 
 <a name="text-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-Finally, if you would like to perform additional validation logic, you may pass a closure to the `validate` argument:
+最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
 ```php
 $name = text(
@@ -114,9 +114,9 @@ $name = text(
 );
 ```
 
-The closure will receive the value that has been entered and may return an error message, or `null` if the validation passes.
+閉包將接收已輸入的值，並可能返回錯誤訊息，如果驗證通過則返回 `null`。
 
-Alternatively, you may leverage the power of Laravel's [validator](/docs/validation). To do so, provide an array containing the name of the attribute and the desired validation rules to the `validate` argument:
+或者，你可以利用 Laravel 的 [驗證器](/docs/validation) 的強大功能。為此，請提供一個包含屬性名稱和所需驗證規則的陣列給 `validate` 參數：
 
 ```php
 $name = text(
@@ -126,9 +126,9 @@ $name = text(
 ```
 
 <a name="textarea"></a>
-### Textarea
+### 多行文字輸入 (Textarea)
 
-The `textarea` function will prompt the user with the given question, accept their input via a multi-line textarea, and then return it:
+`textarea` 函式將向使用者提示給定的問題，透過多行文字區域接受他們的輸入，然後返回它：
 
 ```php
 use function Laravel\Prompts\textarea;
@@ -136,7 +136,7 @@ use function Laravel\Prompts\textarea;
 $story = textarea('Tell me a story.');
 ```
 
-You may also include placeholder text, a default value, and an informational hint:
+你還可以包含預留位置文字、預設值和提示訊息：
 
 ```php
 $story = textarea(
@@ -147,9 +147,9 @@ $story = textarea(
 ```
 
 <a name="textarea-required"></a>
-#### Required Values
+#### 必填值
 
-If you require a value to be entered, you may pass the `required` argument:
+如果你需要輸入值，可以傳遞 `required` 參數：
 
 ```php
 $story = textarea(
@@ -158,7 +158,7 @@ $story = textarea(
 );
 ```
 
-If you would like to customize the validation message, you may also pass a string:
+如果你想自訂驗證訊息，也可以傳遞字串：
 
 ```php
 $story = textarea(
@@ -168,9 +168,9 @@ $story = textarea(
 ```
 
 <a name="textarea-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-Finally, if you would like to perform additional validation logic, you may pass a closure to the `validate` argument:
+最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
 ```php
 $story = textarea(
@@ -183,9 +183,9 @@ $story = textarea(
 );
 ```
 
-The closure will receive the value that has been entered and may return an error message, or `null` if the validation passes.
+閉包將接收已輸入的值，並可能返回錯誤訊息，如果驗證通過則返回 `null`。
 
-Alternatively, you may leverage the power of Laravel's [validator](/docs/validation). To do so, provide an array containing the name of the attribute and the desired validation rules to the `validate` argument:
+或者，你可以利用 Laravel 的 [驗證器](/docs/validation) 的強大功能。為此，請提供一個包含屬性名稱和所需驗證規則的陣列給 `validate` 參數：
 
 ```php
 $story = textarea(
@@ -195,9 +195,9 @@ $story = textarea(
 ```
 
 <a name="password"></a>
-### Password
+### 密碼輸入 (Password)
 
-The `password` function is similar to the `text` function, but the user's input will be masked as they type in the console. This is useful when asking for sensitive information such as passwords:
+`password` 函式類似於 `text` 函式，但使用者的輸入在控制台中輸入時會被遮蔽。這在詢問密碼等敏感資訊時很有用：
 
 ```php
 use function Laravel\Prompts\password;
@@ -205,7 +205,7 @@ use function Laravel\Prompts\password;
 $password = password('What is your password?');
 ```
 
-You may also include placeholder text and an informational hint:
+你還可以包含預留位置文字和提示訊息：
 
 ```php
 $password = password(
@@ -216,9 +216,9 @@ $password = password(
 ```
 
 <a name="password-required"></a>
-#### Required Values
+#### 必填值
 
-If you require a value to be entered, you may pass the `required` argument:
+如果你需要輸入值，可以傳遞 `required` 參數：
 
 ```php
 $password = password(
@@ -227,7 +227,7 @@ $password = password(
 );
 ```
 
-If you would like to customize the validation message, you may also pass a string:
+如果你想自訂驗證訊息，也可以傳遞字串：
 
 ```php
 $password = password(
@@ -237,9 +237,9 @@ $password = password(
 ```
 
 <a name="password-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-Finally, if you would like to perform additional validation logic, you may pass a closure to the `validate` argument:
+最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
 ```php
 $password = password(
@@ -251,9 +251,9 @@ $password = password(
 );
 ```
 
-The closure will receive the value that has been entered and may return an error message, or `null` if the validation passes.
+閉包將接收已輸入的值，並可能返回錯誤訊息，如果驗證通過則返回 `null`。
 
-Alternatively, you may leverage the power of Laravel's [validator](/docs/validation). To do so, provide an array containing the name of the attribute and the desired validation rules to the `validate` argument:
+或者，你可以利用 Laravel 的 [驗證器](/docs/validation) 的強大功能。為此，請提供一個包含屬性名稱和所需驗證規則的陣列給 `validate` 參數：
 
 ```php
 $password = password(
@@ -263,9 +263,9 @@ $password = password(
 ```
 
 <a name="confirm"></a>
-### Confirm
+### 確認 (Confirm)
 
-If you need to ask the user for a "yes or no" confirmation, you may use the `confirm` function. Users may use the arrow keys or press `y` or `n` to select their response. This function will return either `true` or `false`.
+如果你需要詢問使用者「是或否」的確認，可以使用 `confirm` 函式。使用者可以使用方向鍵或按 `y` 或 `n` 來選擇他們的回應。此函式將返回 `true` 或 `false`。
 
 ```php
 use function Laravel\Prompts\confirm;
@@ -273,7 +273,7 @@ use function Laravel\Prompts\confirm;
 $confirmed = confirm('Do you accept the terms?');
 ```
 
-You may also include a default value, customized wording for the "Yes" and "No" labels, and an informational hint:
+你還可以包含預設值、自訂「是」和「否」標籤的措辭，以及提示訊息：
 
 ```php
 $confirmed = confirm(
@@ -286,9 +286,9 @@ $confirmed = confirm(
 ```
 
 <a name="confirm-required"></a>
-#### Requiring "Yes"
+#### 要求「是」
 
-If necessary, you may require your users to select "Yes" by passing the `required` argument:
+如果有必要，你可以透過傳遞 `required` 參數來要求使用者選擇「是」：
 
 ```php
 $confirmed = confirm(
@@ -297,7 +297,7 @@ $confirmed = confirm(
 );
 ```
 
-If you would like to customize the validation message, you may also pass a string:
+如果你想自訂驗證訊息，也可以傳遞字串：
 
 ```php
 $confirmed = confirm(
@@ -307,9 +307,9 @@ $confirmed = confirm(
 ```
 
 <a name="select"></a>
-### Select
+### 選擇 (Select)
 
-If you need the user to select from a predefined set of choices, you may use the `select` function:
+如果你需要使用者從一組預定義的選項中進行選擇，可以使用 `select` 函式：
 
 ```php
 use function Laravel\Prompts\select;
@@ -320,7 +320,7 @@ $role = select(
 );
 ```
 
-You may also specify the default choice and an informational hint:
+你還可以指定預設選項和提示訊息：
 
 ```php
 $role = select(
@@ -331,7 +331,7 @@ $role = select(
 );
 ```
 
-You may also pass an associative array to the `options` argument to have the selected key returned instead of its value:
+你也可以傳遞關聯陣列給 `options` 參數，以返回選定的鍵而不是其值：
 
 ```php
 $role = select(
@@ -345,7 +345,7 @@ $role = select(
 );
 ```
 
-Up to five options will be displayed before the list begins to scroll. You may customize this by passing the `scroll` argument:
+在列表開始捲動之前，最多會顯示五個選項。你可以透過傳遞 `scroll` 參數來自訂此設定：
 
 ```php
 $role = select(
@@ -356,9 +356,9 @@ $role = select(
 ```
 
 <a name="select-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-Unlike other prompt functions, the `select` function doesn't accept the `required` argument because it is not possible to select nothing. However, you may pass a closure to the `validate` argument if you need to present an option but prevent it from being selected:
+與其他提示函式不同，`select` 函式不接受 `required` 參數，因為不可能不選擇任何內容。但是，如果你需要呈現一個選項但阻止它被選中，你可以傳遞閉包給 `validate` 參數：
 
 ```php
 $role = select(
@@ -375,12 +375,12 @@ $role = select(
 );
 ```
 
-If the `options` argument is an associative array, then the closure will receive the selected key, otherwise it will receive the selected value. The closure may return an error message, or `null` if the validation passes.
+如果 `options` 參數是關聯陣列，那麼閉包將接收選定的鍵，否則它將接收選定的值。閉包可能會返回錯誤訊息，如果驗證通過則返回 `null`。
 
 <a name="multiselect"></a>
-### Multi-select
+### 多重選擇 (Multi-select)
 
-If you need the user to be able to select multiple options, you may use the `multiselect` function:
+如果你需要使用者能夠選擇多個選項，可以使用 `multiselect` 函式：
 
 ```php
 use function Laravel\Prompts\multiselect;
@@ -391,7 +391,7 @@ $permissions = multiselect(
 );
 ```
 
-You may also specify default choices and an informational hint:
+你還可以指定預設選項和提示訊息：
 
 ```php
 use function Laravel\Prompts\multiselect;
@@ -404,7 +404,7 @@ $permissions = multiselect(
 );
 ```
 
-You may also pass an associative array to the `options` argument to return the selected options' keys instead of their values:
+你也可以傳遞關聯陣列給 `options` 參數，以返回選定選項的鍵而不是其值：
 
 ```php
 $permissions = multiselect(
@@ -419,7 +419,7 @@ $permissions = multiselect(
 );
 ```
 
-Up to five options will be displayed before the list begins to scroll. You may customize this by passing the `scroll` argument:
+在列表開始捲動之前，最多會顯示五個選項。你可以透過傳遞 `scroll` 參數來自訂此設定：
 
 ```php
 $categories = multiselect(
@@ -430,9 +430,9 @@ $categories = multiselect(
 ```
 
 <a name="multiselect-required"></a>
-#### Requiring a Value
+#### 必填值
 
-By default, the user may select zero or more options. You may pass the `required` argument to enforce one or more options instead:
+預設情況下，使用者可以選擇零個或多個選項。你可以傳遞 `required` 參數來強制選擇一個或多個選項：
 
 ```php
 $categories = multiselect(
@@ -442,7 +442,7 @@ $categories = multiselect(
 );
 ```
 
-If you would like to customize the validation message, you may provide a string to the `required` argument:
+如果你想自訂驗證訊息，可以提供字串給 `required` 參數：
 
 ```php
 $categories = multiselect(
@@ -453,9 +453,9 @@ $categories = multiselect(
 ```
 
 <a name="multiselect-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-You may pass a closure to the `validate` argument if you need to present an option but prevent it from being selected:
+如果你需要呈現一個選項但阻止它被選中，你可以傳遞閉包給 `validate` 參數：
 
 ```php
 $permissions = multiselect(
@@ -472,12 +472,12 @@ $permissions = multiselect(
 );
 ```
 
-If the `options` argument is an associative array then the closure will receive the selected keys, otherwise it will receive the selected values. The closure may return an error message, or `null` if the validation passes.
+如果 `options` 參數是關聯陣列，那麼閉包將接收選定的鍵，否則它將接收選定的值。閉包可能會返回錯誤訊息，如果驗證通過則返回 `null`。
 
 <a name="suggest"></a>
-### Suggest
+### 建議 (Suggest)
 
-The `suggest` function can be used to provide auto-completion for possible choices. The user can still provide any answer, regardless of the auto-completion hints:
+`suggest` 函式可用於為可能的選擇提供自動完成功能。無論自動完成提示如何，使用者仍然可以提供任何答案：
 
 ```php
 use function Laravel\Prompts\suggest;
@@ -485,7 +485,7 @@ use function Laravel\Prompts\suggest;
 $name = suggest('What is your name?', ['Taylor', 'Dayle']);
 ```
 
-Alternatively, you may pass a closure as the second argument to the `suggest` function. The closure will be called each time the user types an input character. The closure should accept a string parameter containing the user's input so far and return an array of options for auto-completion:
+或者，你可以傳遞閉包作為 `suggest` 函式的第二個參數。每次使用者輸入字元時都會呼叫該閉包。閉包應接受包含使用者目前輸入的字串參數，並返回用於自動完成的選項陣列：
 
 ```php
 $name = suggest(
@@ -495,7 +495,7 @@ $name = suggest(
 )
 ```
 
-You may also include placeholder text, a default value, and an informational hint:
+你還可以包含預留位置文字、預設值和提示訊息：
 
 ```php
 $name = suggest(
@@ -508,9 +508,9 @@ $name = suggest(
 ```
 
 <a name="suggest-required"></a>
-#### Required Values
+#### 必填值
 
-If you require a value to be entered, you may pass the `required` argument:
+如果你需要輸入值，可以傳遞 `required` 參數：
 
 ```php
 $name = suggest(
@@ -520,7 +520,7 @@ $name = suggest(
 );
 ```
 
-If you would like to customize the validation message, you may also pass a string:
+如果你想自訂驗證訊息，也可以傳遞字串：
 
 ```php
 $name = suggest(
@@ -531,9 +531,9 @@ $name = suggest(
 ```
 
 <a name="suggest-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-Finally, if you would like to perform additional validation logic, you may pass a closure to the `validate` argument:
+最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
 ```php
 $name = suggest(
@@ -547,9 +547,9 @@ $name = suggest(
 );
 ```
 
-The closure will receive the value that has been entered and may return an error message, or `null` if the validation passes.
+閉包將接收已輸入的值，並可能返回錯誤訊息，如果驗證通過則返回 `null`。
 
-Alternatively, you may leverage the power of Laravel's [validator](/docs/validation). To do so, provide an array containing the name of the attribute and the desired validation rules to the `validate` argument:
+或者，你可以利用 Laravel 的 [驗證器](/docs/validation) 的強大功能。為此，請提供一個包含屬性名稱和所需驗證規則的陣列給 `validate` 參數：
 
 ```php
 $name = suggest(
@@ -560,9 +560,9 @@ $name = suggest(
 ```
 
 <a name="search"></a>
-### Search
+### 搜尋 (Search)
 
-If you have a lot of options for the user to select from, the `search` function allows the user to type a search query to filter the results before using the arrow keys to select an option:
+如果你有許多選項供使用者選擇，`search` 函式允許使用者輸入搜尋查詢來過濾結果，然後使用方向鍵選擇選項：
 
 ```php
 use function Laravel\Prompts\search;
@@ -575,9 +575,9 @@ $id = search(
 );
 ```
 
-The closure will receive the text that has been typed by the user so far and must return an array of options. If you return an associative array then the selected option's key will be returned, otherwise its value will be returned instead.
+閉包將接收使用者目前輸入的文字，並且必須返回選項陣列。如果你返回關聯陣列，則將返回選定選項的鍵，否則將返回其值。
 
-When filtering an array where you intend to return the value, you should use the `array_values` function or the `values` Collection method to ensure the array doesn't become associative:
+當過濾你打算返回值的陣列時，你應該使用 `array_values` 函式或 `values` 集合方法，以確保陣列不會變成關聯陣列：
 
 ```php
 $names = collect(['Taylor', 'Abigail']);
@@ -591,7 +591,7 @@ $selected = search(
 );
 ```
 
-You may also include placeholder text and an informational hint:
+你還可以包含預留位置文字和提示訊息：
 
 ```php
 $id = search(
@@ -604,7 +604,7 @@ $id = search(
 );
 ```
 
-Up to five options will be displayed before the list begins to scroll. You may customize this by passing the `scroll` argument:
+在列表開始捲動之前，最多會顯示五個選項。你可以透過傳遞 `scroll` 參數來自訂此設定：
 
 ```php
 $id = search(
@@ -617,9 +617,9 @@ $id = search(
 ```
 
 <a name="search-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-If you would like to perform additional validation logic, you may pass a closure to the `validate` argument:
+如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
 ```php
 $id = search(
@@ -637,12 +637,12 @@ $id = search(
 );
 ```
 
-If the `options` closure returns an associative array, then the closure will receive the selected key, otherwise, it will receive the selected value. The closure may return an error message, or `null` if the validation passes.
+如果 `options` 閉包返回關聯陣列，那麼閉包將接收選定的鍵，否則它將接收選定的值。閉包可能會返回錯誤訊息，如果驗證通過則返回 `null`。
 
 <a name="multisearch"></a>
-### Multi-search
+### 多重搜尋 (Multi-search)
 
-If you have a lot of searchable options and need the user to be able to select multiple items, the `multisearch` function allows the user to type a search query to filter the results before using the arrow keys and space-bar to select options:
+如果你有許多可搜尋的選項，並且需要使用者能夠選擇多個項目，`multisearch` 函式允許使用者輸入搜尋查詢來過濾結果，然後使用方向鍵和空白鍵選擇選項：
 
 ```php
 use function Laravel\Prompts\multisearch;
@@ -655,9 +655,9 @@ $ids = multisearch(
 );
 ```
 
-The closure will receive the text that has been typed by the user so far and must return an array of options. If you return an associative array then the selected options' keys will be returned; otherwise, their values will be returned instead.
+閉包將接收使用者目前輸入的文字，並且必須返回選項陣列。如果你返回關聯陣列，則將返回選定選項的鍵；否則，將返回其值。
 
-When filtering an array where you intend to return the value, you should use the `array_values` function or the `values` Collection method to ensure the array doesn't become associative:
+當過濾你打算返回值的陣列時，你應該使用 `array_values` 函式或 `values` 集合方法，以確保陣列不會變成關聯陣列：
 
 ```php
 $names = collect(['Taylor', 'Abigail']);
@@ -671,7 +671,7 @@ $selected = multisearch(
 );
 ```
 
-You may also include placeholder text and an informational hint:
+你還可以包含預留位置文字和提示訊息：
 
 ```php
 $ids = multisearch(
@@ -684,7 +684,7 @@ $ids = multisearch(
 );
 ```
 
-Up to five options will be displayed before the list begins to scroll. You may customize this by providing the `scroll` argument:
+在列表開始捲動之前，最多會顯示五個選項。你可以透過傳遞 `scroll` 參數來自訂此設定：
 
 ```php
 $ids = multisearch(
@@ -697,9 +697,9 @@ $ids = multisearch(
 ```
 
 <a name="multisearch-required"></a>
-#### Requiring a Value
+#### 必填值
 
-By default, the user may select zero or more options. You may pass the `required` argument to enforce one or more options instead:
+預設情況下，使用者可以選擇零個或多個選項。你可以傳遞 `required` 參數來強制選擇一個或多個選項：
 
 ```php
 $ids = multisearch(
@@ -711,7 +711,7 @@ $ids = multisearch(
 );
 ```
 
-If you would like to customize the validation message, you may also provide a string to the `required` argument:
+如果你想自訂驗證訊息，可以提供字串給 `required` 參數：
 
 ```php
 $ids = multisearch(
@@ -724,9 +724,9 @@ $ids = multisearch(
 ```
 
 <a name="multisearch-validation"></a>
-#### Additional Validation
+#### 額外驗證
 
-If you would like to perform additional validation logic, you may pass a closure to the `validate` argument:
+如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
 ```php
 $ids = multisearch(
@@ -744,12 +744,12 @@ $ids = multisearch(
 );
 ```
 
-If the `options` closure returns an associative array, then the closure will receive the selected keys; otherwise, it will receive the selected values. The closure may return an error message, or `null` if the validation passes.
+如果 `options` 閉包返回關聯陣列，那麼閉包將接收選定的鍵；否則，它將接收選定的值。閉包可能會返回錯誤訊息，如果驗證通過則返回 `null`。
 
 <a name="pause"></a>
-### Pause
+### 暫停 (Pause)
 
-The `pause` function may be used to display informational text to the user and wait for them to confirm their desire to proceed by pressing the Enter / Return key:
+`pause` 函式可用於向使用者顯示資訊文字，並等待他們按 Enter / Return 鍵確認是否繼續：
 
 ```php
 use function Laravel\Prompts\pause;
@@ -758,9 +758,9 @@ pause('Press ENTER to continue.');
 ```
 
 <a name="transforming-input-before-validation"></a>
-## Transforming Input Before Validation
+## 驗證前轉換輸入 (Transforming Input Before Validation)
 
-Sometimes you may want to transform the prompt input before validation takes place. For example, you may wish to remove white space from any provided strings. To accomplish this, many of the prompt functions provide a `transform` argument, which accepts a closure:
+有時你可能希望在驗證發生之前轉換提示輸入。例如，你可能希望從任何提供的字串中刪除空白。為了實現這一點，許多提示函式提供了 `transform` 參數，該參數接受一個閉包：
 
 ```php
 $name = text(
@@ -775,9 +775,9 @@ $name = text(
 ```
 
 <a name="forms"></a>
-## Forms
+## 表單 (Forms)
 
-Often, you will have multiple prompts that will be displayed in sequence to collect information before performing additional actions. You may use the `form` function to create a grouped set of prompts for the user to complete:
+通常，你會有許多提示框需要按順序顯示以收集資訊，然後再執行其他操作。你可以使用 `form` 函式來建立一組分組的提示框供使用者完成：
 
 ```php
 use function Laravel\Prompts\form;
@@ -789,7 +789,7 @@ $responses = form()
     ->submit();
 ```
 
-The `submit` method will return a numerically indexed array containing all of the responses from the form's prompts. However, you may provide a name for each prompt via the `name` argument. When a name is provided, the named prompt's response may be accessed via that name:
+`submit` 方法將返回一個數字索引陣列，其中包含來自表單提示框的所有回應。但是，你可以透過 `name` 參數為每個提示框提供名稱。提供名稱後，可以透過該名稱存取命名提示框的回應：
 
 ```php
 use App\Models\User;
@@ -811,9 +811,9 @@ User::create([
 ]);
 ```
 
-The primary benefit of using the `form` function is the ability for the user to return to previous prompts in the form using `CTRL + U`. This allows the user to fix mistakes or alter selections without needing to cancel and restart the entire form.
+使用 `form` 函式的主要好處是使用者可以使用 `CTRL + U` 返回表單中的上一個提示框。這允許使用者修正錯誤或更改選擇，而無需取消並重新啟動整個表單。
 
-If you need more granular control over a prompt in a form, you may invoke the `add` method instead of calling one of the prompt functions directly. The `add` method is passed all previous responses provided by the user:
+如果你需要對表單中的提示框進行更精細的控制，可以呼叫 `add` 方法，而不是直接呼叫其中一個提示框函式。`add` 方法會傳遞使用者提供的所有先前回應：
 
 ```php
 use function Laravel\Prompts\form;
@@ -831,9 +831,9 @@ outro("Your name is {$responses['name']} and you are {$responses['age']} years o
 ```
 
 <a name="informational-messages"></a>
-## Informational Messages
+## 訊息提示 (Informational Messages)
 
-The `note`, `info`, `warning`, `error`, and `alert` functions may be used to display informational messages:
+`note`、`info`、`warning`、`error` 和 `alert` 函式可用於顯示訊息提示：
 
 ```php
 use function Laravel\Prompts\info;
@@ -842,9 +842,9 @@ info('Package installed successfully.');
 ```
 
 <a name="tables"></a>
-## Tables
+## 表格 (Tables)
 
-The `table` function makes it easy to display multiple rows and columns of data. All you need to do is provide the column names and the data for the table:
+`table` 函式使顯示多行和多列資料變得容易。你只需要提供欄位名稱和表格資料：
 
 ```php
 use function Laravel\Prompts\table;
@@ -856,9 +856,9 @@ table(
 ```
 
 <a name="spin"></a>
-## Spin
+## 旋轉指示器 (Spin)
 
-The `spin` function displays a spinner along with an optional message while executing a specified callback. It serves to indicate ongoing processes and returns the callback's results upon completion:
+`spin` 函式在執行指定的回呼時顯示一個旋轉指示器以及可選的訊息。它用於指示正在進行的處理，並在完成後返回回呼的結果：
 
 ```php
 use function Laravel\Prompts\spin;
@@ -870,12 +870,12 @@ $response = spin(
 ```
 
 > [!WARNING]
-> The `spin` function requires the [PCNTL](https://www.php.net/manual/en/book.pcntl.php) PHP extension to animate the spinner. When this extension is not available, a static version of the spinner will appear instead.
+> `spin` 函式需要 [PCNTL](https://www.php.net/manual/en/book.pcntl.php) PHP 擴充功能才能為旋轉指示器設定動畫。當此擴充功能不可用時，將顯示靜態版本的旋轉指示器。
 
 <a name="progress"></a>
-## Progress Bars
+## 進度條 (Progress Bars)
 
-For long running tasks, it can be helpful to show a progress bar that informs users how complete the task is. Using the `progress` function, Laravel will display a progress bar and advance its progress for each iteration over a given iterable value:
+對於長時間執行的任務，顯示進度條以通知使用者任務完成的程度會很有幫助。使用 `progress` 函式，Laravel 將顯示一個進度條，並針對給定可迭代值的每次迭代推進其進度：
 
 ```php
 use function Laravel\Prompts\progress;
@@ -887,9 +887,9 @@ $users = progress(
 );
 ```
 
-The `progress` function acts like a map function and will return an array containing the return value of each iteration of your callback.
+`progress` 函式的作用類似於 map 函式，並將返回一個包含每次迭代回呼返回值的陣列。
 
-The callback may also accept the `Laravel\Prompts\Progress` instance, allowing you to modify the label and hint on each iteration:
+回呼還可以接受 `Laravel\Prompts\Progress` 實例，允許你在每次迭代時修改標籤和提示：
 
 ```php
 $users = progress(
@@ -906,7 +906,7 @@ $users = progress(
 );
 ```
 
-Sometimes, you may need more manual control over how a progress bar is advanced. First, define the total number of steps the process will iterate through. Then, advance the progress bar via the `advance` method after processing each item:
+有時，你可能需要更手動地控制進度條的推進方式。首先，定義該過程將迭代的總步驟數。然後，在處理每個項目後透過 `advance` 方法推進進度條：
 
 ```php
 $progress = progress(label: 'Updating users', steps: 10);
@@ -925,9 +925,9 @@ $progress->finish();
 ```
 
 <a name="clear"></a>
-## Clearing the Terminal
+## 清除終端機 (Clearing the Terminal)
 
-The `clear` function may be used to clear the user's terminal:
+`clear` 函式可用於清除使用者的終端機：
 
 ```php
 use function Laravel\Prompts\clear;
@@ -936,32 +936,33 @@ clear();
 ```
 
 <a name="terminal-considerations"></a>
-## Terminal Considerations
+<a name="terminal-considerations"></a>
+## 終端機注意事項 (Terminal Considerations)
 
 <a name="terminal-width"></a>
-#### Terminal Width
+#### 終端機寬度
 
-If the length of any label, option, or validation message exceeds the number of "columns" in the user's terminal, it will be automatically truncated to fit. Consider minimizing the length of these strings if your users may be using narrower terminals. A typically safe maximum length is 74 characters to support an 80-character terminal.
+如果任何標籤、選項或驗證訊息的長度超過使用者終端機中的「列」數，它將自動截斷以適應。如果你的使用者可能使用較窄的終端機，請考慮最小化這些字串的長度。通常安全的長度上限為 74 個字元，以支援 80 個字元的終端機。
 
 <a name="terminal-height"></a>
-#### Terminal Height
+#### 終端機高度
 
-For any prompts that accept the `scroll` argument, the configured value will automatically be reduced to fit the height of the user's terminal, including space for a validation message.
+對於任何接受 `scroll` 參數的提示框，設定的值將自動減少以適應使用者終端機的高度，包括驗證訊息的空間。
 
 <a name="fallbacks"></a>
-## Unsupported Environments and Fallbacks
+## 不支援的環境與備案 (Unsupported Environments and Fallbacks)
 
-Laravel Prompts supports macOS, Linux, and Windows with WSL. Due to limitations in the Windows version of PHP, it is not currently possible to use Laravel Prompts on Windows outside of WSL.
+Laravel Prompts 支援 macOS、Linux 和 Windows (使用 WSL)。由於 Windows 版本 PHP 的限制，目前無法在 WSL 之外的 Windows 上使用 Laravel Prompts。
 
-For this reason, Laravel Prompts supports falling back to an alternative implementation such as the [Symfony Console Question Helper](https://symfony.com/doc/current/components/console/helpers/questionhelper.html).
+因此，Laravel Prompts 支援退回到替代實作，例如 [Symfony Console Question Helper](https://symfony.com/doc/current/components/console/helpers/questionhelper.html)。
 
 > [!NOTE]
-> When using Laravel Prompts with the Laravel framework, fallbacks for each prompt have been configured for you and will be automatically enabled in unsupported environments.
+> 當在 Laravel 框架中使用 Laravel Prompts 時，每個提示框的備案已為你設定好，並將在不支援的環境中自動啟用。
 
 <a name="fallback-conditions"></a>
-#### Fallback Conditions
+#### 備案條件
 
-If you are not using Laravel or need to customize when the fallback behavior is used, you may pass a boolean to the `fallbackWhen` static method on the `Prompt` class:
+如果你沒有使用 Laravel，或者需要自訂何時使用備案行為，你可以傳遞布林值給 `Prompt` 類別上的 `fallbackWhen` 靜態方法：
 
 ```php
 use Laravel\Prompts\Prompt;
@@ -972,9 +973,9 @@ Prompt::fallbackWhen(
 ```
 
 <a name="fallback-behavior"></a>
-#### Fallback Behavior
+#### 備案行為
 
-If you are not using Laravel or need to customize the fallback behavior, you may pass a closure to the `fallbackUsing` static method on each prompt class:
+如果你沒有使用 Laravel，或者需要自訂備案行為，你可以傳遞閉包給每個提示框類別上的 `fallbackUsing` 靜態方法：
 
 ```php
 use Laravel\Prompts\TextPrompt;
@@ -1006,12 +1007,12 @@ TextPrompt::fallbackUsing(function (TextPrompt $prompt) use ($input, $output) {
 });
 ```
 
-Fallbacks must be configured individually for each prompt class. The closure will receive an instance of the prompt class and must return an appropriate type for the prompt.
+必須為每個提示框類別單獨設定備案。閉包將接收提示框類別的實例，並且必須返回適當的提示框類型。
 
 <a name="testing"></a>
-## Testing
+## 測試 (Testing)
 
-Laravel provides a variety of methods for testing that your command displays the expected Prompt messages:
+Laravel 提供了多種方法來測試你的指令是否顯示預期的 Prompt 訊息：
 
 ```php tab=Pest
 test('report generation', function () {

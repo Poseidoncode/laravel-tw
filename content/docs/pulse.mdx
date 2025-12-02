@@ -30,17 +30,17 @@ description: Laravel Pulse 是一個即時應用程式效能監控儀表板
 <a name="introduction"></a>
 ## 簡介
 
-[Laravel Pulse](https://github.com/laravel/pulse) delivers at-a-glance insights into your application's performance and usage. With Pulse, you can track down bottlenecks like slow jobs and endpoints, find your most active users, and more.
+[Laravel Pulse](https://github.com/laravel/pulse) 可讓你快速檢視應用程式的效能與使用情況。使用 Pulse，你可以找出如慢速工作與端點等瓶頸、辨識最活躍的使用者，以及其他重要資訊。
 
-For in-depth debugging of individual events, check out [Laravel Telescope](/docs/telescope).
+若要深入偵錯個別事件，請參考 [Laravel Telescope](/docs/telescope)。
 
 <a name="installation"></a>
 ## 安裝
 
 > [!WARNING]
-> Pulse's first-party storage implementation currently requires a MySQL, MariaDB, or PostgreSQL database. If you are using a different database engine, you will need a separate MySQL, MariaDB, or PostgreSQL database for your Pulse data.
+> Pulse 的內建儲存實作目前需要 MySQL、MariaDB 或 PostgreSQL。如果你使用不同的資料庫引擎，請為 Pulse 資料另外提供一個 MySQL、MariaDB 或 PostgreSQL 的資料庫。
 
-You may install Pulse using the Composer package manager:
+你可以使用 Composer 套件管理器安裝 Pulse：
 
 ```shell
 composer require laravel/pulse
@@ -52,21 +52,21 @@ Next, you should publish the Pulse configuration and migration files using the `
 php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider"
 ```
 
-Finally, you should run the `migrate` command in order to create the tables needed to store Pulse's data:
+最後，請執行 `migrate` 指令建立儲存 Pulse 資料所需的資料表：
 
 ```shell
 php artisan migrate
 ```
 
-Once Pulse's database migrations have been run, you may access the Pulse dashboard via the `/pulse` route.
+在 Pulse 的資料庫遷移執行完成後，你可以透過 `/pulse` 路由存取 Pulse 儀表板。
 
 > [!NOTE]
-> If you do not want to store Pulse data in your application's primary database, you may [specify a dedicated database connection](#using-a-different-database).
+> 如果你不想將 Pulse 的資料儲存在應用程式的主要資料庫中，可以[指定專用資料庫連線](#using-a-different-database)。
 
 <a name="configuration"></a>
 ### 設定
 
-Many of Pulse's configuration options can be controlled using environment variables. To see the available options, register new recorders, or configure advanced options, you may publish the `config/pulse.php` configuration file:
+Pulse 的多數設定選項可透過環境變數控制。若要查看可用選項、註冊新的記錄器或設定進階選項，可以發佈 `config/pulse.php` 設定檔：
 
 ```shell
 php artisan vendor:publish --tag=pulse-config
@@ -78,7 +78,7 @@ php artisan vendor:publish --tag=pulse-config
 <a name="dashboard-authorization"></a>
 ### Authorization
 
-The Pulse dashboard may be accessed via the `/pulse` route. By default, you will only be able to access this dashboard in the `local` environment, so you will need to configure authorization for your production environments by customizing the `'viewPulse'` authorization gate. You can accomplish this within your application's `app/Providers/AppServiceProvider.php` file:
+Pulse 儀表板可透過 `/pulse` 路由存取。預設情況下，該儀表板僅允許在 `local` 環境存取，如需在生產環境中存取，請透過自訂 `'viewPulse'` 授權閘道來設定。你可以在應用程式的 `app/Providers/AppServiceProvider.php` 中完成此設定：
 
 ```php
 use App\Models\User;
@@ -108,7 +108,7 @@ php artisan vendor:publish --tag=pulse-dashboard
 
 The dashboard is powered by [Livewire](https://livewire.laravel.com/), and allows you to customize the cards and layout without needing to rebuild any JavaScript assets.
 
-Within this file, the `<x-pulse>` component is responsible for rendering the dashboard and provides a grid layout for the cards. If you would like the dashboard to span the full width of the screen, you may provide the `full-width` prop to the component:
+在這個檔案中，`<x-pulse>` 元件負責渲染儀表板並提供卡片的網格佈局。如果你希望儀表板佔滿整個螢幕寬度，可給元件加上 `full-width` 屬性：
 
 ```blade
 <x-pulse full-width>
@@ -116,7 +116,7 @@ Within this file, the `<x-pulse>` component is responsible for rendering the das
 </x-pulse>
 ```
 
-By default, the `<x-pulse>` component will create a 12 column grid, but you may customize this using the `cols` prop:
+預設情況下，`<x-pulse>` 元件會建立一個 12 欄的網格，但你可以使用 `cols` 屬性自訂欄位數：
 
 ```blade
 <x-pulse cols="16">
@@ -141,7 +141,7 @@ Most cards also accept an `expand` prop to show the full card instead of scrolli
 
 For cards that display information about your users, such as the Application Usage card, Pulse will only record the user's ID. When rendering the dashboard, Pulse will resolve the `name` and `email` fields from your default `Authenticatable` model and display avatars using the Gravatar web service.
 
-You may customize the fields and avatar by invoking the `Pulse::user` method within your application's `App\Providers\AppServiceProvider` class.
+你可以在應用程式的 `App\Providers\AppServiceProvider` 類別中透過 `Pulse::user` 方法自訂要顯示的欄位與頭像。
 
 The `user` method accepts a closure which will receive the `Authenticatable` model to be displayed and should return an array containing `name`, `extra`, and `avatar` information for the user:
 
@@ -164,7 +164,7 @@ public function boot(): void
 ```
 
 > [!NOTE]
-> You may completely customize how the authenticated user is captured and retrieved by implementing the `Laravel\Pulse\Contracts\ResolvesUsers` contract and binding it in Laravel's [service container](/docs/container#binding-a-singleton).
+> 你可以透過實作 `Laravel\Pulse\Contracts\ResolvesUsers` 合約並在 Laravel 的 [service container](/docs/container#binding-a-singleton) 中綁定，來完全自訂已驗證使用者的擷取與解析方式。
 
 <a name="dashboard-cards"></a>
 ### Cards
@@ -174,7 +174,7 @@ public function boot(): void
 
 The `<livewire:pulse.servers />` card displays system resource usage for all servers running the `pulse:check` command. Please refer to the documentation regarding the [servers recorder](#servers-recorder) for more information on system resource reporting.
 
-If you replace a server in your infrastructure, you may wish to stop displaying the inactive server in the Pulse dashboard after a given duration. You may accomplish this using the `ignore-after` prop, which accepts the number of seconds after which inactive servers should be removed from the Pulse dashboard. Alternatively, you may provide a relative time formatted string, such as `1 hour` or `3 days and 1 hour`:
+如果你在基礎架構中替換伺服器，可能希望在一段時間後停止在 Pulse 儀表板上顯示不再活動的伺服器。可用 `ignore-after` 屬性達成，該屬性接受秒數，或也可以傳入相對時間字串，例如 `1 hour` 或 `3 days and 1 hour`：
 
 ```blade
 <livewire:pulse.servers ignore-after="3 hours" />
@@ -185,7 +185,7 @@ If you replace a server in your infrastructure, you may wish to stop displaying 
 
 The `<livewire:pulse.usage />` card displays the top 10 users making requests to your application, dispatching jobs, and experiencing slow requests.
 
-If you wish to view all usage metrics on screen at the same time, you may include the card multiple times and specify the `type` attribute:
+如果你想同時在畫面上查看所有使用量度，可多次包含該卡片並指定 `type` 屬性：
 
 ```blade
 <livewire:pulse.usage type="requests" />
@@ -196,12 +196,12 @@ If you wish to view all usage metrics on screen at the same time, you may includ
 To learn how to customize how Pulse retrieves and displays user information, consult our documentation on [resolving users](#dashboard-resolving-users).
 
 > [!NOTE]
-> If your application receives a lot of requests or dispatches a lot of jobs, you may wish to enable [sampling](#sampling). See the [user requests recorder](#user-requests-recorder), [user jobs recorder](#user-jobs-recorder), and [slow jobs recorder](#slow-jobs-recorder) documentation for more information.
+> 若應用程式請求量或派送工作數量很高，建議啟用 [sampling](#sampling)。更多資訊請參閱 [user requests recorder](#user-requests-recorder)、[user jobs recorder](#user-jobs-recorder) 與 [slow jobs recorder](#slow-jobs-recorder) 文件。
 
 <a name="exceptions-card"></a>
 #### Exceptions
 
-The `<livewire:pulse.exceptions />` card shows the frequency and recency of exceptions occurring in your application. By default, exceptions are grouped based on the exception class and location where it occurred. See the [exceptions recorder](#exceptions-recorder) documentation for more information.
+`<livewire:pulse.exceptions />` 卡片會顯示應用程式中例外發生的頻率與最近時間。預設情況下，例外會依其類別與發生位置進行分組。欲了解更多資訊，請參閱 [exceptions recorder](#exceptions-recorder) 的文件。
 
 <a name="queues-card"></a>
 #### Queues
@@ -211,19 +211,19 @@ The `<livewire:pulse.queues />` card shows the throughput of the queues in your 
 <a name="slow-requests-card"></a>
 #### Slow Requests
 
-The `<livewire:pulse.slow-requests />` card shows incoming requests to your application that exceed the configured threshold, which is 1,000ms by default. See the [slow requests recorder](#slow-requests-recorder) documentation for more information.
+`<livewire:pulse.slow-requests />` 卡片會顯示超過設定閾值（預設為 1,000ms）的進入請求。更多細節請參閱 [slow requests recorder](#slow-requests-recorder) 的文件。
 
 <a name="slow-jobs-card"></a>
 #### Slow Jobs
 
-The `<livewire:pulse.slow-jobs />` card shows the queued jobs in your application that exceed the configured threshold, which is 1,000ms by default. See the [slow jobs recorder](#slow-jobs-recorder) documentation for more information.
+`<livewire:pulse.slow-jobs />` 卡片會顯示超過設定閾值（預設為 1,000ms）的排隊工作。更多細節請參閱 [slow jobs recorder](#slow-jobs-recorder) 的文件。
 
 <a name="slow-queries-card"></a>
 #### Slow Queries
 
-The `<livewire:pulse.slow-queries />` card shows the database queries in your application that exceed the configured threshold, which is 1,000ms by default.
+`<livewire:pulse.slow-queries />` 卡片會顯示應用程式中超過設定閾值（預設為 1,000ms）的資料庫查詢。
 
-By default, slow queries are grouped based on the SQL query (without bindings) and the location where it occurred, but you may choose to not capture the location if you wish to group solely on the SQL query.
+預設情況下，慢查詢會依照 SQL（不含綁定參數）與發生位置分組；若你希望僅依 SQL 內容分組，也可以選擇不捕捉位置資訊。
 
 If you encounter rendering performance issues due to extremely large SQL queries receiving syntax highlighting, you may disable highlighting by adding the `without-highlighting` prop:
 
@@ -236,21 +236,21 @@ See the [slow queries recorder](#slow-queries-recorder) documentation for more i
 <a name="slow-outgoing-requests-card"></a>
 #### Slow Outgoing Requests
 
-The `<livewire:pulse.slow-outgoing-requests />` card shows outgoing requests made using Laravel's [HTTP client](/docs/http-client) that exceed the configured threshold, which is 1,000ms by default.
+`<livewire:pulse.slow-outgoing-requests />` 卡片會顯示使用 Laravel 的 [HTTP client](/docs/http-client) 發出的、超過設定閾值（預設為 1,000ms）的外部請求。
 
-By default, entries will be grouped by the full URL. However, you may wish to normalize or group similar outgoing requests using regular expressions. See the [slow outgoing requests recorder](#slow-outgoing-requests-recorder) documentation for more information.
+預設情況下，條目會依完整 URL 分組；不過你可以使用正規表示式來規範或彙整相似的外部請求。更多資訊請參閱 [slow outgoing requests recorder](#slow-outgoing-requests-recorder) 的文件。
 
 <a name="cache-card"></a>
 #### Cache
 
 The `<livewire:pulse.cache />` card shows the cache hit and miss statistics for your application, both globally and for individual keys.
 
-By default, entries will be grouped by key. However, you may wish to normalize or group similar keys using regular expressions. See the [cache interactions recorder](#cache-interactions-recorder) documentation for more information.
+預設情況下，條目會依鍵（key）分組；你也可以使用正規表示式將相似鍵值規範化或彙整。更多內容請參閱 [cache interactions recorder](#cache-interactions-recorder) 的文件。
 
 <a name="capturing-entries"></a>
 ## Capturing Entries
 
-Most Pulse recorders will automatically capture entries based on framework events dispatched by Laravel. However, the [servers recorder](#servers-recorder) and some third-party cards must poll for information regularly. To use these cards, you must run the `pulse:check` daemon on all of your individual application servers:
+大多數 Pulse 記錄器會自動根據 Laravel 發出的框架事件擷取條目；不過 [servers recorder](#servers-recorder) 及部分第三方卡片需要定期輪詢資料。若要使用這些卡片，請在每台應用程式伺服器上執行 `pulse:check` daemon：
 
 ```php
 php artisan pulse:check
@@ -278,9 +278,9 @@ Recorders are responsible for capturing entries from your application to be reco
 
 The `CacheInteractions` recorder captures information about the [cache](/docs/cache) hits and misses occurring in your application for display on the [Cache](#cache-card) card.
 
-You may optionally adjust the [sample rate](#sampling) and ignored key patterns.
+你可以選擇性地調整 [sample rate](#sampling) 與要忽略的鍵模式。
 
-You may also configure key grouping so that similar keys are grouped as a single entry. For example, you may wish to remove unique IDs from keys caching the same type of information. Groups are configured using a regular expression to "find and replace" parts of the key. An example is included in the configuration file:
+你也可以設定鍵的分組，將相似的鍵合併為單一條目。例如，你可能希望移除緩存鍵裡的唯一 ID，使相同類型的資料歸為一組。分組透過正規表示式來「尋找並取代」鍵的一部分；設定檔中附有範例：
 
 ```php
 Recorders\CacheInteractions::class => [
@@ -298,23 +298,23 @@ The first pattern that matches will be used. If no patterns match, then the key 
 
 The `Exceptions` recorder captures information about reportable exceptions occurring in your application for display on the [Exceptions](#exceptions-card) card.
 
-You may optionally adjust the [sample rate](#sampling) and ignored exception patterns. You may also configure whether to capture the location that the exception originated from. The captured location will be displayed on the Pulse dashboard which can help to track down the exception origin; however, if the same exception occurs in multiple locations then it will appear multiple times for each unique location.
+你可以選擇性地調整 [sample rate](#sampling) 與要忽略的例外模式。你也可設定是否要捕捉例外的發生位置。捕捉到的位置會顯示在 Pulse 儀表板上，有助於追查例外來源；但若同一例外在多個位置發生，則會為每一個位置單獨顯示。
 
 <a name="queues-recorder"></a>
 #### Queues
 
 The `Queues` recorder captures information about your application's queues for display on the [Queues](#queues-card).
 
-You may optionally adjust the [sample rate](#sampling) and ignored jobs patterns.
+你可以選擇性地調整 [sample rate](#sampling) 與要忽略的工作模式。
 
 <a name="slow-jobs-recorder"></a>
 #### Slow Jobs
 
 The `SlowJobs` recorder captures information about slow jobs occurring in your application for display on the [Slow Jobs](#slow-jobs-recorder) card.
 
-You may optionally adjust the slow job threshold, [sample rate](#sampling), and ignored job patterns.
+你可以選擇性地調整慢作業閾值、[sample rate](#sampling) 與要忽略的工作模式。
 
-You may have some jobs that you expect to take longer than others. In those cases, you may configure per-job thresholds:
+有些工作可能本就預期會耗時較久，此時你可以為個別工作設定專屬閾值：
 
 ```php
 Recorders\SlowJobs::class => [
@@ -333,7 +333,7 @@ If no regular expression patterns match the job's classname, then the `'default'
 
 The `SlowOutgoingRequests` recorder captures information about outgoing HTTP requests made using Laravel's [HTTP client](/docs/http-client) that exceed the configured threshold for display on the [Slow Outgoing Requests](#slow-outgoing-requests-card) card.
 
-You may optionally adjust the slow outgoing request threshold, [sample rate](#sampling), and ignored URL patterns.
+你可以選擇性地調整慢速外部請求的閾值、[sample rate](#sampling) 與要忽略的 URL 模式。
 
 You may have some outgoing requests that you expect to take longer than others. In those cases, you may configure per-request thresholds:
 
@@ -436,7 +436,7 @@ You may optionally adjust the [sample rate](#sampling) and ignored URL patterns.
 <a name="filtering"></a>
 ### Filtering
 
-As we have seen, many [recorders](#recorders) offer the ability to, via configuration, "ignore" incoming entries based on their value, such as a request's URL. But, sometimes it may be useful to filter out records based on other factors, such as the currently authenticated user. To filter out these records, you may pass a closure to Pulse's `filter` method. Typically, the `filter` method should be invoked within the `boot` method of your application's `AppServiceProvider`:
+如前所述，許多 [recorders](#recorders) 提供透過設定來「忽略」某些條目的能力，例如依請求的 URL 過濾。但有時你可能要根據其他條件（例如已登入的使用者）來過濾資料。要過濾這些條目，可以將閉包（closure）傳給 Pulse 的 `filter` 方法。通常應在應用程式的 `AppServiceProvider` 的 `boot` 方法中呼叫 `filter`：
 
 ```php
 use Illuminate\Support\Facades\Auth;
@@ -479,7 +479,7 @@ PULSE_DB_CONNECTION=pulse
 > [!WARNING]
 > The Redis Ingest requires Redis 6.2 or greater and `phpredis` or `predis` as the application's configured Redis client driver.
 
-By default, Pulse will store entries directly to the [configured database connection](#using-a-different-database) after the HTTP response has been sent to the client or a job has been processed; however, you may use Pulse's Redis ingest driver to send entries to a Redis stream instead. This can be enabled by configuring the `PULSE_INGEST_DRIVER` environment variable:
+預設情況下，Pulse 會在 HTTP 回應送出給客戶端或工作處理完成後，直接將條目寫入所[設定的資料庫連線](#using-a-different-database)；不過你可以改用 Pulse 的 Redis ingest 驅動，將條目傳送到 Redis stream。可以透過設定 `PULSE_INGEST_DRIVER` 環境變數來啟用：
 
 ```ini
 PULSE_INGEST_DRIVER=redis
@@ -494,7 +494,7 @@ PULSE_REDIS_CONNECTION=pulse
 > [!WARNING]
 > When using the Redis ingest driver, your Pulse installation should always use a different Redis connection than your Redis powered queue, if applicable.
 
-When using the Redis ingest, you will need to run the `pulse:work` command to monitor the stream and move entries from Redis into Pulse's database tables.
+當使用 Redis ingest 時，你需要執行 `pulse:work` 指令來監聽 stream，並將條目從 Redis 移入 Pulse 的資料表。
 
 ```php
 php artisan pulse:work
@@ -573,7 +573,7 @@ class TopSellers extends Card
 
 When using Livewire's [lazy loading](https://livewire.laravel.com/docs/lazy) feature, The `Card` component will automatically provide a placeholder that respects the `cols` and `rows` attributes passed to your component.
 
-When writing your Pulse card's corresponding view, you may leverage Pulse's Blade components for a consistent look and feel:
+在撰寫 Pulse 卡片對應的 view 時，你可以使用 Pulse 的 Blade 元件來維持一致的視覺與使用者體驗：
 
 ```blade
 <x-pulse::card :cols="$cols" :rows="$rows" :className="$class" wire:poll.5s="">
@@ -655,7 +655,7 @@ When this card is included on the dashboard, Pulse will automatically include th
 <a name="custom-card-styling-tailwind"></a>
 #### Tailwind CSS
 
-When using Tailwind CSS, you should create a dedicated Tailwind configuration file to avoid loading unnecessary CSS or conflicting with Pulse's Tailwind classes:
+若使用 Tailwind CSS，建議建立專屬的 Tailwind 設定檔，以避免載入不必要的 CSS 或與 Pulse 的 Tailwind 類別造成衝突：
 
 ```js
 export default {
@@ -690,7 +690,7 @@ You will also need to include an `id` or `class` attribute in your card's view t
 <a name="custom-card-data"></a>
 ### Data Capture and Aggregation
 
-Custom cards may fetch and display data from anywhere; however, you may wish to leverage Pulse's powerful and efficient data recording and aggregation system.
+自訂卡片可以從任何來源擷取與顯示資料；不過你也可以善用 Pulse 高效且強大的資料記錄與彙整系統。
 
 <a name="custom-card-data-capture"></a>
 #### Capturing Entries
@@ -721,7 +721,7 @@ The available aggregation methods are:
 <a name="custom-card-data-retrieval"></a>
 #### Retrieving Aggregate Data
 
-When extending Pulse's `Card` Livewire component, you may use the `aggregate` method to retrieve aggregated data for the period being viewed in the dashboard:
+在擴充 Pulse 的 `Card` Livewire 元件時，可使用 `aggregate` 方法取得儀表板檢視期間的彙總資料：
 
 ```php
 class TopSellers extends Card

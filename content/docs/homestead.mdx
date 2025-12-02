@@ -623,11 +623,11 @@ backup: true
 設定完成後，當執行 `vagrant destroy` 指令時，Homestead 會將你的資料庫匯出到 `.backup/mysql_backup` 和 `.backup/postgres_backup` 目錄。這些目錄可以在你安裝 Homestead 的資料夾中找到，或者如果你使用 [各專案獨立安裝](#per-project-installation) 方法，則可以在專案的根目錄中找到。
 
 <a name="configuring-cron-schedules"></a>
-### Configuring Cron Schedules
+### 設定 Cron 排程
 
-Laravel provides a convenient way to [schedule cron jobs](/docs/scheduling) by scheduling a single `schedule:run` Artisan command to run every minute. The `schedule:run` command will examine the job schedule defined in your `routes/console.php` file to determine which scheduled tasks to run.
+Laravel 透過排程一個每分鐘執行一次的 `schedule:run` Artisan 指令，提供了一種方便的方式來 [排程 cron jobs](/docs/scheduling)。`schedule:run` 指令將檢查你的 `routes/console.php` 檔案中定義的作業排程，以決定要執行哪些排程任務。
 
-If you would like the `schedule:run` command to be run for a Homestead site, you may set the `schedule` option to `true` when defining the site:
+如果你希望為 Homestead 網站執行 `schedule:run` 指令，你可以在定義網站時將 `schedule` 選項設定為 `true`：
 
 ```yaml
 sites:
@@ -636,12 +636,12 @@ sites:
       schedule: true
 ```
 
-The cron job for the site will be defined in the `/etc/cron.d` directory of the Homestead virtual machine.
+該網站的 cron job 將定義在 Homestead 虛擬機器的 `/etc/cron.d` 目錄中。
 
 <a name="configuring-mailpit"></a>
-### Configuring Mailpit
+### 設定 Mailpit
 
-[Mailpit](https://github.com/axllent/mailpit) allows you to intercept your outgoing email and examine it without actually sending the mail to its recipients. To get started, update your application's `.env` file to use the following mail settings:
+[Mailpit](https://github.com/axllent/mailpit) 允許你攔截外發電子郵件並進行檢查，而無需實際將郵件發送給收件人。要開始使用，請更新你的應用程式的 `.env` 檔案以使用以下郵件設定：
 
 ```ini
 MAIL_MAILER=smtp
@@ -652,18 +652,18 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
 ```
 
-Once Mailpit has been configured, you may access the Mailpit dashboard at `http://localhost:8025`.
+配置 Mailpit 後，你可以透過 `http://localhost:8025` 存取 Mailpit 儀表板。
 
 <a name="configuring-minio"></a>
-### Configuring Minio
+### 設定 Minio
 
-[Minio](https://github.com/minio/minio) is an open source object storage server with an Amazon S3 compatible API. To install Minio, update your `Homestead.yaml` file with the following configuration option in the [features](#installing-optional-features) section:
+[Minio](https://github.com/minio/minio) 是一個具有 Amazon S3 相容 API 的開源物件儲存伺服器。要安裝 Minio，請在 [features](#installing-optional-features) 區段中使用以下設定選項更新你的 `Homestead.yaml` 檔案：
 
     minio: true
 
-By default, Minio is available on port 9600. You may access the Minio control panel by visiting `http://localhost:9600`. The default access key is `homestead`, while the default secret key is `secretkey`. When accessing Minio, you should always use region `us-east-1`.
+預設情況下，Minio 可在連接埠 9600 上使用。你可以透過造訪 `http://localhost:9600` 存取 Minio 控制面板。預設存取金鑰為 `homestead`，而預設秘密金鑰為 `secretkey`。存取 Minio 時，你應該始終使用區域 `us-east-1`。
 
-In order to use Minio, ensure your `.env` file has the following options:
+為了使用 Minio，請確保你的 `.env` 檔案具有以下選項：
 
 ```ini
 AWS_USE_PATH_STYLE_ENDPOINT=true
@@ -673,7 +673,7 @@ AWS_SECRET_ACCESS_KEY=secretkey
 AWS_DEFAULT_REGION=us-east-1
 ```
 
-To provision Minio powered "S3" buckets, add a `buckets` directive to your `Homestead.yaml` file. After defining your buckets, you should execute the `vagrant reload --provision` command in your terminal:
+要配置由 Minio 驅動的「S3」儲存桶，請將 `buckets` 指令新增至你的 `Homestead.yaml` 檔案。定義儲存桶後，你應該在終端機中執行 `vagrant reload --provision` 指令：
 
 ```yaml
 buckets:
@@ -683,59 +683,59 @@ buckets:
       policy: none
 ```
 
-Supported `policy` values include: `none`, `download`, `upload`, and `public`.
+支援的 `policy` 值包括：`none`、`download`、`upload` 和 `public`。
 
 <a name="laravel-dusk"></a>
 ### Laravel Dusk
 
-In order to run [Laravel Dusk](/docs/dusk) tests within Homestead, you should enable the [webdriver feature](#installing-optional-features) in your Homestead configuration:
+為了在 Homestead 內執行 [Laravel Dusk](/docs/dusk) 測試，你應該在你的 Homestead 設定中啟用 [webdriver feature](#installing-optional-features)：
 
 ```yaml
 features:
     - webdriver: true
 ```
 
-After enabling the `webdriver` feature, you should execute the `vagrant reload --provision` command in your terminal.
+啟用 `webdriver` 功能後，你應該在終端機中執行 `vagrant reload --provision` 指令。
 
 <a name="sharing-your-environment"></a>
-### Sharing Your Environment
+### 分享你的環境
 
-Sometimes you may wish to share what you're currently working on with coworkers or a client. Vagrant has built-in support for this via the `vagrant share` command; however, this will not work if you have multiple sites configured in your `Homestead.yaml` file.
+有時你可能希望與同事或客戶分享你目前正在進行的工作。Vagrant 透過 `vagrant share` 指令內建支援此功能；但是，如果你在 `Homestead.yaml` 檔案中設定了多個網站，這將無法運作。
 
-To solve this problem, Homestead includes its own `share` command. To get started, [SSH into your Homestead virtual machine](#connecting-via-ssh) via `vagrant ssh` and execute the `share homestead.test` command. This command will share the `homestead.test` site from your `Homestead.yaml` configuration file. You may substitute any of your other configured sites for `homestead.test`:
+為了解決這個問題，Homestead 包含了它自己的 `share` 指令。要開始使用，請透過 `vagrant ssh` [SSH 進入你的 Homestead 虛擬機器](#connecting-via-ssh) 並執行 `share homestead.test` 指令。此指令將分享你的 `Homestead.yaml` 設定檔中的 `homestead.test` 網站。你可以用任何其他已設定的網站替換 `homestead.test`：
 
 ```shell
 share homestead.test
 ```
 
-After running the command, you will see an Ngrok screen appear which contains the activity log and the publicly accessible URLs for the shared site. If you would like to specify a custom region, subdomain, or other Ngrok runtime option, you may add them to your `share` command:
+執行指令後，你將看到一個 Ngrok 畫面，其中包含活動日誌和共享網站的可公開存取 URL。如果你想指定自訂區域、子網域或其他 Ngrok 執行時選項，你可以將它們新增至你的 `share` 指令：
 
 ```shell
 share homestead.test -region=eu -subdomain=laravel
 ```
 
-If you need to share content over HTTPS rather than HTTP, using the `sshare` command instead of `share` will enable you to do so.
+如果你需要透過 HTTPS 而不是 HTTP 分享內容，使用 `sshare` 指令代替 `share` 將使你能夠這樣做。
 
 > [!WARNING]
-> Remember, Vagrant is inherently insecure and you are exposing your virtual machine to the Internet when running the `share` command.
+> 請記住，Vagrant 本質上是不安全的，當執行 `share` 指令時，你將你的虛擬機器暴露在網際網路上。
 
 <a name="debugging-and-profiling"></a>
-## Debugging and Profiling
+## 除錯與分析
 
 <a name="debugging-web-requests"></a>
-### Debugging Web Requests With Xdebug
+### 使用 Xdebug 對 Web 請求進行除錯
 
-Homestead includes support for step debugging using [Xdebug](https://xdebug.org). For example, you can access a page in your browser and PHP will connect to your IDE to allow inspection and modification of the running code.
+Homestead 包含使用 [Xdebug](https://xdebug.org) 進行逐步除錯的支援。例如，你可以在瀏覽器中存取頁面，PHP 將連線到你的 IDE 以允許檢查和修改正在運行的程式碼。
 
-By default, Xdebug is already running and ready to accept connections. If you need to enable Xdebug on the CLI, execute the `sudo phpenmod xdebug` command within your Homestead virtual machine. Next, follow your IDE's instructions to enable debugging. Finally, configure your browser to trigger Xdebug with an extension or [bookmarklet](https://www.jetbrains.com/phpstorm/marklets/).
+預設情況下，Xdebug 已經在運行並準備好接受連線。如果你需要在 CLI 上啟用 Xdebug，請在你的 Homestead 虛擬機器內執行 `sudo phpenmod xdebug` 指令。接下來，按照你的 IDE 的說明啟用除錯。最後，設定你的瀏覽器以使用擴充功能或 [bookmarklet](https://www.jetbrains.com/phpstorm/marklets/) 觸發 Xdebug。
 
 > [!WARNING]
-> Xdebug causes PHP to run significantly slower. To disable Xdebug, run `sudo phpdismod xdebug` within your Homestead virtual machine and restart the FPM service.
+> Xdebug 會導致 PHP 運行速度顯著變慢。要停用 Xdebug，請在你的 Homestead 虛擬機器內執行 `sudo phpdismod xdebug` 並重新啟動 FPM 服務。
 
 <a name="autostarting-xdebug"></a>
-#### Autostarting Xdebug
+#### 自動啟動 Xdebug
 
-When debugging functional tests that make requests to the web server, it is easier to autostart debugging rather than modifying tests to pass through a custom header or cookie to trigger debugging. To force Xdebug to start automatically, modify the `/etc/php/7.x/fpm/conf.d/20-xdebug.ini` file inside your Homestead virtual machine and add the following configuration:
+在對向 Web 伺服器發出請求的功能測試進行除錯時，自動啟動除錯比修改測試以傳遞自訂標頭或 cookie 來觸發除錯更容易。要強制 Xdebug 自動啟動，請修改你的 Homestead 虛擬機器內的 `/etc/php/7.x/fpm/conf.d/20-xdebug.ini` 檔案並新增以下設定：
 
 ```ini
 ; If Homestead.yaml contains a different subnet for the IP address, this address may be different...
@@ -745,22 +745,22 @@ xdebug.start_with_request = yes
 ```
 
 <a name="debugging-cli-applications"></a>
-### Debugging CLI Applications
+### 除錯 CLI 應用程式
 
-To debug a PHP CLI application, use the `xphp` shell alias inside your Homestead virtual machine:
+要除錯 PHP CLI 應用程式，請在你的 Homestead 虛擬機器內使用 `xphp` shell alias：
 
 ```shell
 xphp /path/to/script
 ```
 
 <a name="profiling-applications-with-blackfire"></a>
-### Profiling Applications With Blackfire
+### 使用 Blackfire 分析應用程式
 
-[Blackfire](https://blackfire.io/docs/introduction) is a service for profiling web requests and CLI applications. It offers an interactive user interface which displays profile data in call-graphs and timelines. It is built for use in development, staging, and production, with no overhead for end users. In addition, Blackfire provides performance, quality, and security checks on code and `php.ini` configuration settings.
+[Blackfire](https://blackfire.io/docs/introduction) 是一個用於分析 Web 請求和 CLI 應用程式的服務。它提供了一個互動式使用者介面，可在呼叫圖和時間軸中顯示分析資料。它是為開發、預備和生產環境而建構的，對終端使用者沒有開銷。此外，Blackfire 還提供程式碼和 `php.ini` 設定的效能、品質和安全性檢查。
 
-The [Blackfire Player](https://blackfire.io/docs/player/index) is an open-source Web Crawling, Web Testing, and Web Scraping application which can work jointly with Blackfire in order to script profiling scenarios.
+[Blackfire Player](https://blackfire.io/docs/player/index) 是一個開源的 Web 爬蟲、Web 測試和 Web 抓取應用程式，可以與 Blackfire 聯合工作以編寫分析場景腳本。
 
-To enable Blackfire, use the "features" setting in your Homestead configuration file:
+要啟用 Blackfire，請在你的 Homestead 設定檔中使用 "features" 設定：
 
 ```yaml
 features:
@@ -771,12 +771,11 @@ features:
         client_token: "client_value"
 ```
 
-Blackfire server credentials and client credentials [require a Blackfire account](https://blackfire.io/signup). Blackfire offers various options to profile an application, including a CLI tool and browser extension. Please [review the Blackfire documentation for more details](https://blackfire.io/docs/php/integrations/laravel/index).
-
+Blackfire 伺服器憑證和客戶端憑證 [需要 Blackfire 帳戶](https://blackfire.io/signup)。Blackfire 提供各種選項來分析應用程式，包括 CLI 工具和瀏覽器擴充功能。請 [查看 Blackfire 文件以獲取更多詳細資訊](https://blackfire.io/docs/php/integrations/laravel/index)。
 <a name="network-interfaces"></a>
-## Network Interfaces
+## 網路介面
 
-The `networks` property of the `Homestead.yaml` file configures network interfaces for your Homestead virtual machine. You may configure as many interfaces as necessary:
+`Homestead.yaml` 檔案的 `networks` 屬性配置你的 Homestead 虛擬機器的網路介面。你可以根據需要配置任意數量的介面：
 
 ```yaml
 networks:
@@ -784,7 +783,7 @@ networks:
       ip: "192.168.10.20"
 ```
 
-To enable a [bridged](https://developer.hashicorp.com/vagrant/docs/networking/public_network) interface, configure a `bridge` setting for the network and change the network type to `public_network`:
+要啟用 [bridged](https://developer.hashicorp.com/vagrant/docs/networking/public_network) 介面，請為網路配置 `bridge` 設定並將網路類型變更為 `public_network`：
 
 ```yaml
 networks:
@@ -793,7 +792,7 @@ networks:
       bridge: "en1: Wi-Fi (AirPort)"
 ```
 
-To enable [DHCP](https://developer.hashicorp.com/vagrant/docs/networking/public_network#dhcp), just remove the `ip` option from your configuration:
+要啟用 [DHCP](https://developer.hashicorp.com/vagrant/docs/networking/public_network#dhcp)，只需從你的設定中移除 `ip` 選項：
 
 ```yaml
 networks:
@@ -801,7 +800,7 @@ networks:
       bridge: "en1: Wi-Fi (AirPort)"
 ```
 
-To update what device the network is using, you may add a `dev` option to the network's configuration. The default `dev` value is `eth0`:
+要更新網路使用的裝置，你可以將 `dev` 選項新增至網路的設定。預設的 `dev` 值為 `eth0`：
 
 ```yaml
 networks:
@@ -812,11 +811,11 @@ networks:
 ```
 
 <a name="extending-homestead"></a>
-## Extending Homestead
+## 擴充 Homestead
 
-You may extend Homestead using the `after.sh` script in the root of your Homestead directory. Within this file, you may add any shell commands that are necessary to properly configure and customize your virtual machine.
+你可以使用 Homestead 目錄根目錄中的 `after.sh` 指令碼來擴充 Homestead。在此檔案中，你可以新增任何正確配置和自訂虛擬機器所需的 shell 指令。
 
-When customizing Homestead, Ubuntu may ask you if you would like to keep a package's original configuration or overwrite it with a new configuration file. To avoid this, you should use the following command when installing packages in order to avoid overwriting any configuration previously written by Homestead:
+自訂 Homestead 時，Ubuntu 可能會詢問你是否要保留套件的原始設定或用新的設定檔覆寫它。為了避免這種情況，你應該在安裝套件時使用以下指令，以避免覆寫 Homestead 先前寫入的任何設定：
 
 ```shell
 sudo apt-get -y \
@@ -826,12 +825,12 @@ sudo apt-get -y \
 ```
 
 <a name="user-customizations"></a>
-### User Customizations
+### 使用者自訂
 
-When using Homestead with your team, you may want to tweak Homestead to better fit your personal development style. To accomplish this, you may create a `user-customizations.sh` file in the root of your Homestead directory (the same directory containing your `Homestead.yaml` file). Within this file, you may make any customization you would like; however, the `user-customizations.sh` should not be version controlled.
+當與團隊一起使用 Homestead 時，你可能希望調整 Homestead 以更符合你的個人開發風格。為此，你可以在 Homestead 目錄（包含 `Homestead.yaml` 檔案的同一目錄）的根目錄中建立一個 `user-customizations.sh` 檔案。在此檔案中，你可以進行任何你想要的自訂；但是，`user-customizations.sh` 不應受到版本控制。
 
 <a name="provider-specific-settings"></a>
-## Provider Specific Settings
+## 供應商特定設定
 
 <a name="provider-specific-virtualbox"></a>
 ### VirtualBox
@@ -839,7 +838,7 @@ When using Homestead with your team, you may want to tweak Homestead to better f
 <a name="natdnshostresolver"></a>
 #### `natdnshostresolver`
 
-By default, Homestead configures the `natdnshostresolver` setting to `on`. This allows Homestead to use your host operating system's DNS settings. If you would like to override this behavior, add the following configuration options to your `Homestead.yaml` file:
+預設情況下，Homestead 將 `natdnshostresolver` 設定配置為 `on`。這允許 Homestead 使用你的主機作業系統的 DNS 設定。如果你想覆蓋此行為，請將以下設定選項新增至你的 `Homestead.yaml` 檔案：
 
 ```yaml
 provider: virtualbox
