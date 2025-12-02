@@ -5,25 +5,25 @@ description: Laravel 為各種快取後端提供統一的 API
 
 # Cache / Cache (Bilingual)
 
-- [Introduction](#introduction)
-- [Configuration](#configuration)
-    - [Driver Prerequisites](#driver-prerequisites)
-- [Cache Usage](#cache-usage)
-    - [Obtaining a Cache Instance](#obtaining-a-cache-instance)
-    - [Retrieving Items From the Cache](#retrieving-items-from-the-cache)
-    - [Storing Items in the Cache](#storing-items-in-the-cache)
-    - [Removing Items From the Cache](#removing-items-from-the-cache)
-    - [Cache Memoization](#cache-memoization)
-    - [The Cache Helper](#the-cache-helper)
-- [Cache Tags](#cache-tags)
-- [Atomic Locks](#atomic-locks)
-    - [Managing Locks](#managing-locks)
-    - [Managing Locks Across Processes](#managing-locks-across-processes)
-- [Cache Failover](#cache-failover)
-- [Adding Custom Cache Drivers](#adding-custom-cache-drivers)
-    - [Writing the Driver](#writing-the-driver)
-    - [Registering the Driver](#registering-the-driver)
-- [Events](#events)
+- [簡介 (Introduction)](#introduction)
+- [設定 (Configuration)](#configuration)
+    - [驅動程式先決條件 (Driver Prerequisites)](#driver-prerequisites)
+- [快取使用 (Cache Usage)](#cache-usage)
+    - [取得快取實例 (Obtaining a Cache Instance)](#obtaining-a-cache-instance)
+    - [從快取中檢索項目 (Retrieving Items From the Cache)](#retrieving-items-from-the-cache)
+    - [在快取中儲存項目 (Storing Items in the Cache)](#storing-items-in-the-cache)
+    - [從快取中刪除項目 (Removing Items From the Cache)](#removing-items-from-the-cache)
+    - [快取記憶化 (Cache Memoization)](#cache-memoization)
+    - [快取輔助函式 (The Cache Helper)](#the-cache-helper)
+- [快取標籤 (Cache Tags)](#cache-tags)
+- [原子鎖定 (Atomic Locks)](#atomic-locks)
+    - [管理鎖定 (Managing Locks)](#managing-locks)
+    - [跨程序管理鎖定 (Managing Locks Across Processes)](#managing-locks-across-processes)
+- [快取故障轉移 (Cache Failover)](#cache-failover)
+- [新增自訂快取驅動程式 (Adding Custom Cache Drivers)](#adding-custom-cache-drivers)
+    - [編寫驅動程式 (Writing the Driver)](#writing-the-driver)
+    - [註冊驅動程式 (Registering the Driver)](#registering-the-driver)
+- [事件 (Events)](#events)
 
 <a name="introduction"></a>
 ## 簡介
@@ -652,22 +652,54 @@ class AppServiceProvider extends ServiceProvider
 要在每個快取操作上執行程式碼,你可以監聽快取分派的各種[事件](/docs/events):
 
 <div className="overflow-auto">
-
-| Event Name                                   |
-|----------------------------------------------|
-| `Illuminate\Cache\Events\CacheFlushed`       |
-| `Illuminate\Cache\Events\CacheFlushing`      |
-| `Illuminate\Cache\Events\CacheHit`           |
-| `Illuminate\Cache\Events\CacheMissed`        |
-| `Illuminate\Cache\Events\ForgettingKey`      |
-| `Illuminate\Cache\Events\KeyForgetFailed`    |
-| `Illuminate\Cache\Events\KeyForgotten`       |
-| `Illuminate\Cache\Events\KeyWriteFailed`     |
-| `Illuminate\Cache\Events\KeyWritten`         |
-| `Illuminate\Cache\Events\RetrievingKey`      |
-| `Illuminate\Cache\Events\RetrievingManyKeys` |
-| `Illuminate\Cache\Events\WritingKey`         |
-| `Illuminate\Cache\Events\WritingManyKeys`    |
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">事件名稱</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\CacheFlushed`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\CacheFlushing`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\CacheHit`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\CacheMissed`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\ForgettingKey`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\KeyForgetFailed`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\KeyForgotten`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\KeyWriteFailed`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\KeyWritten`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\RetrievingKey`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\RetrievingManyKeys`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\WritingKey`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Cache\Events\WritingManyKeys`</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
