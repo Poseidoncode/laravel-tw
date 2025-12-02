@@ -368,29 +368,96 @@ Instance Methods)
 每個分頁器實例透過以下方法提供額外的分頁資訊：
 
 <div className="overflow-auto">
-
-| 方法                                    | 描述                                                               |
-| --------------------------------------- | ------------------------------------------------------------------ |
-| `$paginator->count()`                   | 取得目前頁面的項目數量。                                           |
-| `$paginator->currentPage()`             | 取得目前頁碼。                                                     |
-| `$paginator->firstItem()`               | 取得結果中第一個項目的結果編號。                                   |
-| `$paginator->getOptions()`              | 取得分頁器選項。                                                   |
-| `$paginator->getUrlRange($start, $end)` | 建立分頁 URL 的範圍。                                              |
-| `$paginator->hasPages()`                | 判斷是否有足夠的項目可以分成多頁。                                 |
-| `$paginator->hasMorePages()`            | 判斷資料儲存中是否還有更多項目。                                   |
-| `$paginator->items()`                   | 取得目前頁面的項目。                                               |
-| `$paginator->lastItem()`                | 取得結果中最後一個項目的結果編號。                                 |
-| `$paginator->lastPage()`                | 取得最後可用頁面的頁碼。（使用 `simplePaginate` 時不可用）。       |
-| `$paginator->nextPageUrl()`             | 取得下一頁的 URL。                                                 |
-| `$paginator->onFirstPage()`             | 判斷分頁器是否在第一頁。                                           |
-| `$paginator->onLastPage()`              | 判斷分頁器是否在最後一頁。                                         |
-| `$paginator->perPage()`                 | 每頁顯示的項目數量。                                               |
-| `$paginator->previousPageUrl()`         | 取得上一頁的 URL。                                                 |
-| `$paginator->total()`                   | 判斷資料儲存中匹配項目的總數。（使用 `simplePaginate` 時不可用）。 |
-| `$paginator->url($page)`                | 取得給定頁碼的 URL。                                               |
-| `$paginator->getPageName()`             | 取得用於儲存頁碼的查詢字串變數。                                   |
-| `$paginator->setPageName($name)`        | 設定用於儲存頁碼的查詢字串變數。                                   |
-| `$paginator->through($callback)`        | 使用回呼函式轉換每個項目。                                         |
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">方法</th>
+            <th className="px-3 py-2">描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`$paginator->count()`</td>
+            <td className="px-3 py-2">取得目前頁面的項目數量。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->currentPage()`</td>
+            <td className="px-3 py-2">取得目前頁碼。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->firstItem()`</td>
+            <td className="px-3 py-2">取得結果中第一個項目的結果編號。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->getOptions()`</td>
+            <td className="px-3 py-2">取得分頁器選項。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->getUrlRange($start, $end)`</td>
+            <td className="px-3 py-2">建立分頁 URL 的範圍。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->hasPages()`</td>
+            <td className="px-3 py-2">判斷是否有足夠的項目可以分成多頁。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->hasMorePages()`</td>
+            <td className="px-3 py-2">判斷資料儲存中是否還有更多項目。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->items()`</td>
+            <td className="px-3 py-2">取得目前頁面的項目。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->lastItem()`</td>
+            <td className="px-3 py-2">取得結果中最後一個項目的結果編號。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->lastPage()`</td>
+            <td className="px-3 py-2">取得最後可用頁面的頁碼。（使用 `simplePaginate` 時不可用）。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->nextPageUrl()`</td>
+            <td className="px-3 py-2">取得下一頁的 URL。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->onFirstPage()`</td>
+            <td className="px-3 py-2">判斷分頁器是否在第一頁。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->onLastPage()`</td>
+            <td className="px-3 py-2">判斷分頁器是否在最後一頁。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->perPage()`</td>
+            <td className="px-3 py-2">每頁顯示的項目數量。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->previousPageUrl()`</td>
+            <td className="px-3 py-2">取得上一頁的 URL。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->total()`</td>
+            <td className="px-3 py-2">判斷資料儲存中匹配項目的總數。（使用 `simplePaginate` 時不可用）。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->url($page)`</td>
+            <td className="px-3 py-2">取得給定頁碼的 URL。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->getPageName()`</td>
+            <td className="px-3 py-2">取得用於儲存頁碼的查詢字串變數。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->setPageName($name)`</td>
+            <td className="px-3 py-2">設定用於儲存頁碼的查詢字串變數。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->through($callback)`</td>
+            <td className="px-3 py-2">使用回呼函式轉換每個項目。</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
@@ -400,24 +467,79 @@ Instance Methods)
 每個游標分頁器實例透過以下方法提供額外的分頁資訊：
 
 <div className="overflow-auto">
-
-| 方法                            | 描述                               |
-| ------------------------------- | ---------------------------------- |
-| `$paginator->count()`           | 取得目前頁面的項目數量。           |
-| `$paginator->cursor()`          | 取得目前的游標實例。               |
-| `$paginator->getOptions()`      | 取得分頁器選項。                   |
-| `$paginator->hasPages()`        | 判斷是否有足夠的項目可以分成多頁。 |
-| `$paginator->hasMorePages()`    | 判斷資料儲存中是否還有更多項目。   |
-| `$paginator->getCursorName()`   | 取得用於儲存游標的查詢字串變數。   |
-| `$paginator->items()`           | 取得目前頁面的項目。               |
-| `$paginator->nextCursor()`      | 取得下一組項目的游標實例。         |
-| `$paginator->nextPageUrl()`     | 取得下一頁的 URL。                 |
-| `$paginator->onFirstPage()`     | 判斷分頁器是否在第一頁。           |
-| `$paginator->onLastPage()`      | 判斷分頁器是否在最後一頁。         |
-| `$paginator->perPage()`         | 每頁顯示的項目數量。               |
-| `$paginator->previousCursor()`  | 取得上一組項目的游標實例。         |
-| `$paginator->previousPageUrl()` | 取得上一頁的 URL。                 |
-| `$paginator->setCursorName()`   | 設定用於儲存游標的查詢字串變數。   |
-| `$paginator->url($cursor)`      | 取得給定游標實例的 URL。           |
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">方法</th>
+            <th className="px-3 py-2">描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`$paginator->count()`</td>
+            <td className="px-3 py-2">取得目前頁面的項目數量。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->cursor()`</td>
+            <td className="px-3 py-2">取得目前的游標實例。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->getOptions()`</td>
+            <td className="px-3 py-2">取得分頁器選項。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->hasPages()`</td>
+            <td className="px-3 py-2">判斷是否有足夠的項目可以分成多頁。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->hasMorePages()`</td>
+            <td className="px-3 py-2">判斷資料儲存中是否還有更多項目。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->getCursorName()`</td>
+            <td className="px-3 py-2">取得用於儲存游標的查詢字串變數。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->items()`</td>
+            <td className="px-3 py-2">取得目前頁面的項目。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->nextCursor()`</td>
+            <td className="px-3 py-2">取得下一組項目的游標實例。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->nextPageUrl()`</td>
+            <td className="px-3 py-2">取得下一頁的 URL。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->onFirstPage()`</td>
+            <td className="px-3 py-2">判斷分頁器是否在第一頁。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->onLastPage()`</td>
+            <td className="px-3 py-2">判斷分頁器是否在最後一頁。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->perPage()`</td>
+            <td className="px-3 py-2">每頁顯示的項目數量。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->previousCursor()`</td>
+            <td className="px-3 py-2">取得上一組項目的游標實例。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->previousPageUrl()`</td>
+            <td className="px-3 py-2">取得上一頁的 URL。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->setCursorName()`</td>
+            <td className="px-3 py-2">設定用於儲存游標的查詢字串變數。</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`$paginator->url($cursor)`</td>
+            <td className="px-3 py-2">取得給定游標實例的 URL。</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
