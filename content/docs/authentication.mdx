@@ -825,24 +825,57 @@ php artisan config:publish hashing
 <a name="events"></a>
 ## 事件 (Events)
 
-Laravel 在認證過程中會觸發各種 [事件](/docs/events)。您可以為以下任何事件 [定義 listeners](/docs/events)：
+Laravel 在認證過程中會觸發各種 [事件](/docs/events)。您可以為以下任何事件 [定義 listeners](/docs/events):
 
 <div className="overflow-auto">
-
-| 事件名稱                                       |
-| ---------------------------------------------- |
-| `Illuminate\Auth\Events\Registered`            |
-| `Illuminate\Auth\Events\Attempting`            |
-| `Illuminate\Auth\Events\Authenticated`         |
-| `Illuminate\Auth\Events\Login`                 |
-| `Illuminate\Auth\Events\Failed`                |
-| `Illuminate\Auth\Events\Validated`             |
-| `Illuminate\Auth\Events\Verified`              |
-| `Illuminate\Auth\Events\Logout`                |
-| `Illuminate\Auth\Events\CurrentDeviceLogout`   |
-| `Illuminate\Auth\Events\OtherDeviceLogout`     |
-| `Illuminate\Auth\Events\Lockout`               |
-| `Illuminate\Auth\Events\PasswordReset`         |
-| `Illuminate\Auth\Events\PasswordResetLinkSent` |
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">事件名稱</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Registered`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Attempting`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Authenticated`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Login`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Failed`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Validated`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Verified`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Logout`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\CurrentDeviceLogout`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\OtherDeviceLogout`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\Lockout`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\PasswordReset`</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">`Illuminate\Auth\Events\PasswordResetLinkSent`</td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
+
