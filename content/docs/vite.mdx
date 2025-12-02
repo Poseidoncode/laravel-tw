@@ -47,7 +47,7 @@ Laravel 透過提供官方外掛和 Blade 指令來載入你的開發和生產�
 ## 安裝 & Setup
 
 > [!NOTE]
-> 以下文件討論如何手動安裝和設定 Laravel Vite 外掛。但是，Laravel 的 [啟動套件](/docs/12.x/starter-kits) 已經包含了所有這些鷹架，是開始使用 Laravel 和 Vite 的最快方式。
+> 以下文件討論如何手動安裝和設定 Laravel Vite 外掛。但是，Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了所有這些鷹架，是開始使用 Laravel 和 Vite 的最快方式。
 
 <a name="installing-node"></a>
 ### Installing Node
@@ -59,7 +59,7 @@ node -v
 npm -v
 ```
 
-你可以使用 [Node 官方網站](https://nodejs.org/en/download/) 的簡易圖形安裝程式輕鬆安裝最新版本的 Node 和 NPM。或者，如果你使用的是 [Laravel Sail](https://laravel.com/docs/12.x/sail)，你可以透過 Sail 呼叫 Node 和 NPM：
+你可以使用 [Node 官方網站](https://nodejs.org/en/download/) 的簡易圖形安裝程式輕鬆安裝最新版本的 Node 和 NPM。或者，如果你使用的是 [Laravel Sail](https://laravel.com/docs/sail)，你可以透過 Sail 呼叫 Node 和 NPM：
 
 ```shell
 ./vendor/bin/sail node -v
@@ -126,7 +126,7 @@ Laravel 外掛還支援多個進入點和進階設定選項，例如 [SSR 進入
 
 如果你的本機開發 Web 伺服器透過 HTTPS 提供應用程式服務，你可能會遇到連線到 Vite 開發伺服器的問題。
 
-如果你使用的是 [Laravel Herd](https://herd.laravel.com) 並已保護該網站，或者你使用的是 [Laravel Valet](/docs/12.x/valet) 並已對你的應用程式執行 [secure 指令](/docs/12.x/valet#securing-sites)，Laravel Vite 外掛將自動為你偵測並使用產生的 TLS 憑證。
+如果你使用的是 [Laravel Herd](https://herd.laravel.com) 並已保護該網站，或者你使用的是 [Laravel Valet](/docs/valet) 並已對你的應用程式執行 [secure 指令](/docs/valet#securing-sites)，Laravel Vite 外掛將自動為你偵測並使用產生的 TLS 憑證。
 
 如果你使用與應用程式目錄名稱不符的主機保護網站，你可以在應用程式的 `vite.config.js` 檔案中手動指定主機：
 
@@ -170,7 +170,7 @@ export default defineConfig({
 <a name="configuring-hmr-in-sail-on-wsl2"></a>
 #### Running the Development Server in Sail on WSL2
 
-當在 Windows Subsystem for Linux 2 (WSL2) 上的 [Laravel Sail](/docs/12.x/sail) 中執行 Vite 開發伺服器時，你應該在 `vite.config.js` 檔案中新增以下設定，以確保瀏覽器可以與開發伺服器通訊：
+當在 Windows Subsystem for Linux 2 (WSL2) 上的 [Laravel Sail](/docs/sail) 中執行 Vite 開發伺服器時，你應該在 `vite.config.js` 檔案中新增以下設定，以確保瀏覽器可以與開發伺服器通訊：
 
 ```js
 // ...
@@ -259,7 +259,7 @@ npm run dev
 npm run build
 ```
 
-如果你在 WSL2 上的 [Sail](/docs/12.x/sail) 中執行開發伺服器，你可能需要一些 [額外的設定](#configuring-hmr-in-sail-on-wsl2) 選項。
+如果你在 WSL2 上的 [Sail](/docs/sail) 中執行開發伺服器，你可能需要一些 [額外的設定](#configuring-hmr-in-sail-on-wsl2) 選項。
 
 <a name="working-with-scripts"></a>
 ## Working With JavaScript
@@ -335,7 +335,7 @@ export default defineConfig({
 ```
 
 > [!NOTE]
-> Laravel 的 [啟動套件](/docs/12.x/starter-kits) 已經包含了正確的 Laravel、Vue 和 Vite 設定。這些啟動套件是開始使用 Laravel、Vue 和 Vite 的最快方式。
+> Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了正確的 Laravel、Vue 和 Vite 設定。這些啟動套件是開始使用 Laravel、Vue 和 Vite 的最快方式。
 
 <a name="react"></a>
 ### React
@@ -373,7 +373,7 @@ export default defineConfig({
 `@viteReactRefresh` 指令必須在 `@vite` 指令之前呼叫。
 
 > [!NOTE]
-> Laravel 的 [啟動套件](/docs/12.x/starter-kits) 已經包含了正確的 Laravel、React 和 Vite 設定。這些啟動套件是開始使用 Laravel、React 和 Vite 的最快方式。
+> Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了正確的 Laravel、React 和 Vite 設定。這些啟動套件是開始使用 Laravel、React 和 Vite 的最快方式。
 
 <a name="inertia"></a>
 ### Inertia
@@ -398,7 +398,7 @@ createInertiaApp({
 如果你在 Inertia 中使用 Vite 的程式碼分割功能，我們建議設定 [資源預先取得 (Asset Prefetching)](#asset-prefetching)。
 
 > [!NOTE]
-> Laravel 的 [啟動套件](/docs/12.x/starter-kits) 已經包含了正確的 Laravel、Inertia 和 Vite 設定。這些啟動套件是開始使用 Laravel、Inertia 和 Vite 的最快方式。
+> Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了正確的 Laravel、Inertia 和 Vite 設定。這些啟動套件是開始使用 Laravel、Inertia 和 Vite 的最快方式。
 
 <a name="url-processing"></a>
 ### URL Processing
@@ -434,7 +434,7 @@ resources/
 ## Working With Stylesheets
 
 > [!NOTE]
-> Laravel 的 [啟動套件](/docs/12.x/starter-kits) 已經包含了正確的 Tailwind 和 Vite 設定。或者，如果你想在不使用我們的啟動套件的情況下使用 Tailwind 和 Laravel，請查看 [Tailwind 的 Laravel 安裝指南](https://tailwindcss.com/docs/guides/laravel)。
+> Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了正確的 Tailwind 和 Vite 設定。或者，如果你想在不使用我們的啟動套件的情況下使用 Tailwind 和 Laravel，請查看 [Tailwind 的 Laravel 安裝指南](https://tailwindcss.com/docs/guides/laravel)。
 
 所有 Laravel 應用程式都已經包含 Tailwind 和設定正確的 `vite.config.js` 檔案。因此，你只需要啟動 Vite 開發伺服器或執行 `dev` Composer 指令，這將同時啟動 Laravel 和 Vite 開發伺服器：
 
@@ -535,7 +535,7 @@ export default defineConfig({
 <a name="blade-aliases"></a>
 ### Aliases
 
-在 JavaScript 應用程式中，為經常參考的目錄 [建立別名](#aliases) 是很常見的。但是，你也可以透過在 `Illuminate\Support\Facades\Vite` 類別上使用 `macro` 方法來建立在 Blade 中使用的別名。通常，「巨集」應該在 [服務提供者](/docs/12.x/providers) 的 `boot` 方法中定義：
+在 JavaScript 應用程式中，為經常參考的目錄 [建立別名](#aliases) 是很常見的。但是，你也可以透過在 `Illuminate\Support\Facades\Vite` 類別上使用 `macro` 方法來建立在 Blade 中使用的別名。通常，「巨集」應該在 [服務提供者](/docs/providers) 的 `boot` 方法中定義：
 
 ```php
 /**
@@ -558,7 +558,7 @@ public function boot(): void
 
 當使用 Vite 的程式碼分割功能建置 SPA 時，所需的資源會在每次頁面導覽時取得。這種行為可能會導致 UI 渲染延遲。如果這對你選擇的前端框架造成問題，Laravel 提供了在初始頁面載入時預先取得應用程式 JavaScript 和 CSS 資源的能力。
 
-你可以透過在 [服務提供者](/docs/12.x/providers) 的 `boot` 方法中呼叫 `Vite::prefetch` 方法來指示 Laravel 預先取得你的資源：
+你可以透過在 [服務提供者](/docs/providers) 的 `boot` 方法中呼叫 `Vite::prefetch` 方法來指示 Laravel 預先取得你的資源：
 
 ```php
 <?php
@@ -746,7 +746,7 @@ php artisan inertia:start-ssr
 ```
 
 > [!NOTE]
-> Laravel 的 [啟動套件](/docs/12.x/starter-kits) 已經包含了正確的 Laravel、Inertia SSR 和 Vite 設定。這些啟動套件是開始使用 Laravel、Inertia SSR 和 Vite 的最快方式。
+> Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了正確的 Laravel、Inertia SSR 和 Vite 設定。這些啟動套件是開始使用 Laravel、Inertia SSR 和 Vite 的最快方式。
 
 <a name="script-and-style-attributes"></a>
 ## Script and Style Tag Attributes
@@ -754,7 +754,7 @@ php artisan inertia:start-ssr
 <a name="content-security-policy-csp-nonce"></a>
 ### Content Security Policy (CSP) Nonce
 
-如果你希望在腳本和樣式標籤中包含 [nonce 屬性](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce) 作為 [內容安全策略](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) 的一部分，你可以使用自訂 [中介軟體](/docs/12.x/middleware) 中的 `useCspNonce` 方法產生或指定 nonce：
+如果你希望在腳本和樣式標籤中包含 [nonce 屬性](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/nonce) 作為 [內容安全策略](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) 的一部分，你可以使用自訂 [中介軟體](/docs/middleware) 中的 `useCspNonce` 方法產生或指定 nonce：
 
 ```php
 <?php
@@ -786,7 +786,7 @@ class AddContentSecurityPolicyHeaders
 
 呼叫 `useCspNonce` 方法後，Laravel 將自動在所有產生的腳本和樣式標籤上包含 `nonce` 屬性。
 
-如果你需要在其他地方指定 nonce，包括 Laravel [啟動套件](/docs/12.x/starter-kits) 中包含的 [Ziggy `@route` 指令](https://github.com/tighten/ziggy#using-routes-with-a-content-security-policy)，你可以使用 `cspNonce` 方法檢索它：
+如果你需要在其他地方指定 nonce，包括 Laravel [啟動套件](/docs/starter-kits) 中包含的 [Ziggy `@route` 指令](https://github.com/tighten/ziggy#using-routes-with-a-content-security-policy)，你可以使用 `cspNonce` 方法檢索它：
 
 ```blade
 @routes(nonce: Vite::cspNonce())
@@ -841,7 +841,7 @@ Vite::useIntegrityKey(false);
 <a name="arbitrary-attributes"></a>
 ### Arbitrary Attributes
 
-如果你需要在腳本和樣式標籤上包含其他屬性，例如 [data-turbo-track](https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change) 屬性，你可以透過 `useScriptTagAttributes` 和 `useStyleTagAttributes` 方法指定它們。通常，此方法應從 [服務提供者](/docs/12.x/providers) 呼叫：
+如果你需要在腳本和樣式標籤上包含其他屬性，例如 [data-turbo-track](https://turbo.hotwired.dev/handbook/drive#reloading-when-assets-change) 屬性，你可以透過 `useScriptTagAttributes` 和 `useStyleTagAttributes` 方法指定它們。通常，此方法應從 [服務提供者](/docs/providers) 呼叫：
 
 ```php
 use Illuminate\Support\Facades\Vite;

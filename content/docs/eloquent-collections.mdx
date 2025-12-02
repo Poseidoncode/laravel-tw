@@ -12,7 +12,7 @@ description: Eloquent 集合是 Collection 類別的強大擴展
 <a name="introduction"></a>
 ## 簡介 (Introduction)
 
-所有 Eloquent 方法傳回一個以上模型結果的有其中也包括由 `get` 方法取得的結果或修過關聯存取的，有其中會回传 `Illuminate\Database\Eloquent\Collection` 類別的實例。Eloquent 集合物件擴展了 Laravel 的 [基簾集合](/docs/12.x/collections)，所以它自然繼承了數十種方法，供你以流墩的方式處理底層 Eloquent 模型陣列。一定要書誈 Laravel 集合文件，中提到了誤你需要了覧等的有用方法！
+所有 Eloquent 方法傳回一個以上模型結果的有其中也包括由 `get` 方法取得的結果或修過關聯存取的，有其中會回传 `Illuminate\Database\Eloquent\Collection` 類別的實例。Eloquent 集合物件擴展了 Laravel 的 [基簾集合](/docs/collections)，所以它自然繼承了數十種方法，供你以流墩的方式處理底層 Eloquent 模型陣列。一定要書誈 Laravel 集合文件，中提到了誤你需要了覧等的有用方法！
 
 所有集合物件也都是可迭代的，允许你像你實作簡單 PHP 陣列一樣運行採報：
 
@@ -39,12 +39,12 @@ $names = User::all()->reject(function (User $user) {
 <a name="eloquent-collection-conversion"></a>
 #### Eloquent 集合轉換 (Eloquent Collection Conversion)
 
-雖然許多 Eloquent 集合模式已回传一個 Eloquent 集合實例，但 `collapse`、`flatten`、`flip`、`keys`、`pluck` 及 `zip` 方法則回传 [基簾集合](/docs/12.x/collections) 實例。但笧次，読 `map` 操作回传一个不包含任何 Eloquent 模型的集合，它會被轉換為基簾集合實例。
+雖然許多 Eloquent 集合模式已回传一個 Eloquent 集合實例，但 `collapse`、`flatten`、`flip`、`keys`、`pluck` 及 `zip` 方法則回传 [基簾集合](/docs/collections) 實例。但笧次，読 `map` 操作回传一个不包含任何 Eloquent 模型的集合，它會被轉換為基簾集合實例。
 
 <a name="available-methods"></a>
 ## 可用方法 (Available Methods)
 
-所有 Eloquent 集合擴展了基簾 [上下蛉集合](/docs/12.x/collections#available-methods) 物件；因此，它們繼承了基簾集合類別所提供的所有強大方法。
+所有 Eloquent 集合擴展了基簾 [上下蛉集合](/docs/collections#available-methods) 物件；因此，它們繼承了基簾集合類別所提供的所有強大方法。
 
 適但，`Illuminate\Database\Eloquent\Collection` 類別也適供了許多一推方法模式來樺輔管理你的模型集合。許多種方法回传 `Illuminate\Database\Eloquent\Collection` 實例；基但，一些模式，後枥 `modelKeys`，回传 `Illuminate\Support\Collection` 實例。
 
@@ -77,7 +77,7 @@ $names = User::all()->reject(function (User $user) {
 <a name="method-append"></a>
 #### `append($attributes)`
 
-The `append` method may be used to indicate that an attribute should be [appended](/docs/12.x/eloquent-serialization#appending-values-to-json) for every model in the collection. This method accepts an array of attributes or a single attribute:
+The `append` method may be used to indicate that an attribute should be [appended](/docs/eloquent-serialization#appending-values-to-json) for every model in the collection. This method accepts an array of attributes or a single attribute:
 
 ```php
 $users->append('team');
@@ -200,7 +200,7 @@ $users->modelKeys();
 <a name="method-makeVisible"></a>
 #### `makeVisible($attributes)`
 
-The `makeVisible` method [makes attributes visible](/docs/12.x/eloquent-serialization#hiding-attributes-from-json) that are typically "hidden" on each model in the collection:
+The `makeVisible` method [makes attributes visible](/docs/eloquent-serialization#hiding-attributes-from-json) that are typically "hidden" on each model in the collection:
 
 ```php
 $users = $users->makeVisible(['address', 'phone_number']);
@@ -209,7 +209,7 @@ $users = $users->makeVisible(['address', 'phone_number']);
 <a name="method-makeHidden"></a>
 #### `makeHidden($attributes)`
 
-The `makeHidden` method [hides attributes](/docs/12.x/eloquent-serialization#hiding-attributes-from-json) that are typically "visible" on each model in the collection:
+The `makeHidden` method [hides attributes](/docs/eloquent-serialization#hiding-attributes-from-json) that are typically "visible" on each model in the collection:
 
 ```php
 $users = $users->makeHidden(['address', 'phone_number']);
@@ -240,7 +240,7 @@ dump($partition[1]::class); // Illuminate\Database\Eloquent\Collection
 <a name="method-setAppends"></a>
 #### `setAppends($attributes)`
 
-The `setAppends` method temporarily overrides all of the [appended attributes](/docs/12.x/eloquent-serialization#appending-values-to-json) on each model in the collection:
+The `setAppends` method temporarily overrides all of the [appended attributes](/docs/eloquent-serialization#appending-values-to-json) on each model in the collection:
 
 ```php
 $users = $users->setAppends(['is_admin']);
@@ -249,7 +249,7 @@ $users = $users->setAppends(['is_admin']);
 <a name="method-setVisible"></a>
 #### `setVisible($attributes)`
 
-The `setVisible` method [temporarily overrides](/docs/12.x/eloquent-serialization#temporarily-modifying-attribute-visibility) all of the visible attributes on each model in the collection:
+The `setVisible` method [temporarily overrides](/docs/eloquent-serialization#temporarily-modifying-attribute-visibility) all of the visible attributes on each model in the collection:
 
 ```php
 $users = $users->setVisible(['id', 'name']);
@@ -258,7 +258,7 @@ $users = $users->setVisible(['id', 'name']);
 <a name="method-setHidden"></a>
 #### `setHidden($attributes)`
 
-The `setHidden` method [temporarily overrides](/docs/12.x/eloquent-serialization#temporarily-modifying-attribute-visibility) all of the hidden attributes on each model in the collection:
+The `setHidden` method [temporarily overrides](/docs/eloquent-serialization#temporarily-modifying-attribute-visibility) all of the hidden attributes on each model in the collection:
 
 ```php
 $users = $users->setHidden(['email', 'password', 'remember_token']);
@@ -291,7 +291,7 @@ $users = $users->unique();
 <a name="method-withoutAppends"></a>
 #### `withoutAppends($attributes)`
 
-The `withoutAppends` method temporarily removes all of the [appended attributes](/docs/12.x/eloquent-serialization#appending-values-to-json) on each model in the collection:
+The `withoutAppends` method temporarily removes all of the [appended attributes](/docs/eloquent-serialization#appending-values-to-json) on each model in the collection:
 
 ```php
 $users = $users->withoutAppends();

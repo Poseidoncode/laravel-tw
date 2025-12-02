@@ -39,7 +39,7 @@ description: 開發 Laravel 套件的指南
 <a name="package-discovery"></a>
 ## 套件發現
 
-Laravel 應用程式的 `bootstrap/providers.php` 檔案包含 Laravel 應該載入的服務提供者列表。但是，你可以不在要求使用者手動將你的服務提供者新增到列表中，而是在套件的 `composer.json` 檔案的 `extra` 部分定義提供者，以便 Laravel 自動載入它。除了服務提供者之外，你還可以列出任何你想要註冊的 [facades](/docs/12.x/facades)：
+Laravel 應用程式的 `bootstrap/providers.php` 檔案包含 Laravel 應該載入的服務提供者列表。但是，你可以不在要求使用者手動將你的服務提供者新增到列表中，而是在套件的 `composer.json` 檔案的 `extra` 部分定義提供者，以便 Laravel 自動載入它。除了服務提供者之外，你還可以列出任何你想要註冊的 [facades](/docs/facades)：
 
 ```json
 "extra": {
@@ -86,9 +86,9 @@ Laravel 應用程式的 `bootstrap/providers.php` 檔案包含 Laravel 應該載
 <a name="service-providers"></a>
 ## 服務提供者
 
-[服務提供者](/docs/12.x/providers)是你的套件與 Laravel 之間的連接點。服務提供者負責將事物綁定到 Laravel 的 [service container](/docs/12.x/container) 中，並通知 Laravel 在哪裡載入套件資源，如視圖、設定和語言檔案。
+[服務提供者](/docs/providers)是你的套件與 Laravel 之間的連接點。服務提供者負責將事物綁定到 Laravel 的 [service container](/docs/container) 中，並通知 Laravel 在哪裡載入套件資源，如視圖、設定和語言檔案。
 
-服務提供者繼承了 `Illuminate\Support\ServiceProvider` 類別，並包含兩個方法：`register` 和 `boot`。基礎 `ServiceProvider` 類別位於 `illuminate/support` Composer 套件中，你應該將其新增到你自己的套件依賴中。要了解更多關於服務提供者的結構和用途，請查看[他們的文檔](/docs/12.x/providers)。
+服務提供者繼承了 `Illuminate\Support\ServiceProvider` 類別，並包含兩個方法：`register` 和 `boot`。基礎 `ServiceProvider` 類別位於 `illuminate/support` Composer 套件中，你應該將其新增到你自己的套件依賴中。要了解更多關於服務提供者的結構和用途，請查看[他們的文檔](/docs/providers)。
 
 <a name="resources"></a>
 ## 資源
@@ -159,7 +159,7 @@ public function boot(): void
 <a name="migrations"></a>
 ### Migrations
 
-如果你的套件包含 [database migrations](/docs/12.x/migrations)，你可以使用 `publishesMigrations` 方法通知 Laravel 給定的目錄或檔案包含 migrations。當 Laravel 發布 migrations 時，它會自動更新其檔案名稱中的時間戳記以反映當前的日期和時間：
+如果你的套件包含 [database migrations](/docs/migrations)，你可以使用 `publishesMigrations` 方法通知 Laravel 給定的目錄或檔案包含 migrations。當 Laravel 發布 migrations 時，它會自動更新其檔案名稱中的時間戳記以反映當前的日期和時間：
 
 ```php
 /**
@@ -176,7 +176,7 @@ public function boot(): void
 <a name="language-files"></a>
 ### 語言檔案
 
-如果你的套件包含[語言檔案](/docs/12.x/localization)，你可以使用 `loadTranslationsFrom` 方法通知 Laravel 如何載入它們。例如，如果你的套件名為 `courier`，你應該將以下內容新增到你的服務提供者的 `boot` 方法中：
+如果你的套件包含[語言檔案](/docs/localization)，你可以使用 `loadTranslationsFrom` 方法通知 Laravel 如何載入它們。例如，如果你的套件名為 `courier`，你應該將以下內容新增到你的服務提供者的 `boot` 方法中：
 
 ```php
 /**
@@ -230,7 +230,7 @@ public function boot(): void
 <a name="views"></a>
 ### 視圖
 
-要向 Laravel 註冊你的套件[視圖](/docs/12.x/views)，你需要告訴 Laravel 視圖位於何處。你可以使用服務提供者的 `loadViewsFrom` 方法來執行此操作。`loadViewsFrom` 方法接受兩個參數：你的視圖模板的路徑和你的套件名稱。例如，如果你的套件名稱是 `courier`，你會將以下內容新增到你的服務提供者的 `boot` 方法中：
+要向 Laravel 註冊你的套件[視圖](/docs/views)，你需要告訴 Laravel 視圖位於何處。你可以使用服務提供者的 `loadViewsFrom` 方法來執行此操作。`loadViewsFrom` 方法接受兩個參數：你的視圖模板的路徑和你的套件名稱。例如，如果你的套件名稱是 `courier`，你會將以下內容新增到你的服務提供者的 `boot` 方法中：
 
 ```php
 /**
@@ -355,7 +355,7 @@ public function boot(): void
 <a name="commands"></a>
 ## 命令
 
-要向 Laravel 註冊你的套件 Artisan 命令，你可以使用 `commands` 方法。此方法需要一個命令類別名稱的陣列。一旦命令被註冊，你就可以使用 [Artisan CLI](/docs/12.x/artisan) 執行它們：
+要向 Laravel 註冊你的套件 Artisan 命令，你可以使用 `commands` 方法。此方法需要一個命令類別名稱的陣列。一旦命令被註冊，你就可以使用 [Artisan CLI](/docs/artisan) 執行它們：
 
 ```php
 use Courier\Console\Commands\InstallCommand;
@@ -378,7 +378,7 @@ public function boot(): void
 <a name="optimize-commands"></a>
 ### 最佳化命令
 
-Laravel 的 [optimize command](/docs/12.x/deployment#optimization) 快取應用程式的設定、事件、路由和視圖。使用 `optimizes` 方法，你可以註冊你的套件自己的 Artisan 命令，這些命令應該在執行 `optimize` 和 `optimize:clear` 命令時被呼叫：
+Laravel 的 [optimize command](/docs/deployment#optimization) 快取應用程式的設定、事件、路由和視圖。使用 `optimizes` 方法，你可以註冊你的套件自己的 Artisan 命令，這些命令應該在執行 `optimize` 和 `optimize:clear` 命令時被呼叫：
 
 ```php
 /**

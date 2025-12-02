@@ -113,12 +113,12 @@ php artisan make:controller ProvisionServer --invokable
 ```
 
 > [!NOTE]
-> Controller 樣板可以使用 [stub 發布](/docs/12.x/artisan#stub-customization) 進行自訂。
+> Controller 樣板可以使用 [stub 發布](/docs/artisan#stub-customization) 進行自訂。
 
 <a name="controller-middleware"></a>
 ## Controller Middleware
 
-[Middleware](/docs/12.x/middleware) 可以在路由檔案中指派給 controller 的路由：
+[Middleware](/docs/middleware) 可以在路由檔案中指派給 controller 的路由：
 
 ```php
 Route::get('/profile', [UserController::class, 'show'])->middleware('auth');
@@ -291,7 +291,7 @@ Route::resource('photos', PhotoController::class)
 <a name="soft-deleted-models"></a>
 #### 軟刪除 Models
 
-通常，隱式 model 繫結不會擷取已經[軟刪除](/docs/12.x/eloquent#soft-deleting)的 models，而是會回傳 404 HTTP 回應。但是，你可以在定義 resource 路由時呼叫 `withTrashed` 方法來指示框架允許軟刪除的 models：
+通常，隱式 model 繫結不會擷取已經[軟刪除](/docs/eloquent#soft-deleting)的 models，而是會回傳 404 HTTP 回應。但是，你可以在定義 resource 路由時呼叫 `withTrashed` 方法來指示框架允許軟刪除的 models：
 
 ```php
 use App\Http\Controllers\PhotoController;
@@ -308,7 +308,7 @@ Route::resource('photos', PhotoController::class)->withTrashed(['show']);
 <a name="specifying-the-resource-model"></a>
 #### 指定 Resource Model
 
-如果你正在使用[路由 model 繫結](/docs/12.x/routing#route-model-binding)並且希望 resource controller 的方法對 model 實例進行型別提示，你可以在產生 controller 時使用 `--model` 選項：
+如果你正在使用[路由 model 繫結](/docs/routing#route-model-binding)並且希望 resource controller 的方法對 model 實例進行型別提示，你可以在產生 controller 時使用 `--model` 選項：
 
 ```shell
 php artisan make:controller PhotoController --model=Photo --resource
@@ -317,7 +317,7 @@ php artisan make:controller PhotoController --model=Photo --resource
 <a name="generating-form-requests"></a>
 #### 產生表單請求
 
-你可以在產生 resource controller 時提供 `--requests` 選項，以指示 Artisan 為 controller 的儲存和更新方法產生 [form request 類別](/docs/12.x/validation#form-request-validation)：
+你可以在產生 resource controller 時提供 `--requests` 選項，以指示 Artisan 為 controller 的儲存和更新方法產生 [form request 類別](/docs/validation#form-request-validation)：
 
 ```shell
 php artisan make:controller PhotoController --model=Photo --resource --requests
@@ -389,7 +389,7 @@ Route::resource('photos.comments', PhotoCommentController::class);
 <a name="scoping-nested-resources"></a>
 #### 限定巢狀 Resources 的範圍
 
-Laravel 的[隱式 model 繫結](/docs/12.x/routing#implicit-model-binding-scoping)功能可以自動限定巢狀繫結的範圍，使得已解析的子 model 被確認屬於父 model。透過在定義巢狀 resource 時使用 `scoped` 方法，你可以啟用自動範圍限定，並指示 Laravel 應該透過哪個欄位擷取子 resource。有關如何完成此操作的更多資訊，請參閱有關[限定 resource 路由範圍](#restful-scoping-resource-routes)的文件。
+Laravel 的[隱式 model 繫結](/docs/routing#implicit-model-binding-scoping)功能可以自動限定巢狀繫結的範圍，使得已解析的子 model 被確認屬於父 model。透過在定義巢狀 resource 時使用 `scoped` 方法，你可以啟用自動範圍限定，並指示 Laravel 應該透過哪個欄位擷取子 resource。有關如何完成此操作的更多資訊，請參閱有關[限定 resource 路由範圍](#restful-scoping-resource-routes)的文件。
 
 <a name="shallow-nesting"></a>
 #### 淺層巢狀
@@ -498,7 +498,7 @@ Route::resource('users', AdminUserController::class)->parameters([
 <a name="restful-scoping-resource-routes"></a>
 ### 限定 Resource 路由範圍
 
-Laravel 的[限定範圍的隱式 model 繫結](/docs/12.x/routing#implicit-model-binding-scoping)功能可以自動限定巢狀繫結的範圍，使得已解析的子 model 被確認屬於父 model。透過在定義巢狀 resource 時使用 `scoped` 方法，你可以啟用自動範圍限定，並指示 Laravel 應該透過哪個欄位擷取子 resource：
+Laravel 的[限定範圍的隱式 model 繫結](/docs/routing#implicit-model-binding-scoping)功能可以自動限定巢狀繫結的範圍，使得已解析的子 model 被確認屬於父 model。透過在定義巢狀 resource 時使用 `scoped` 方法，你可以啟用自動範圍限定，並指示 Laravel 應該透過哪個欄位擷取子 resource：
 
 ```php
 use App\Http\Controllers\PhotoCommentController;
@@ -534,7 +534,7 @@ public function boot(): void
 }
 ```
 
-Laravel 的複數化器支援[數種不同的語言，你可以根據需要進行設定](/docs/12.x/localization#pluralization-language)。自訂動詞和複數化語言後，像 `Route::resource('publicacion', PublicacionController::class)` 這樣的 resource 路由註冊將產生以下 URIs：
+Laravel 的複數化器支援[數種不同的語言，你可以根據需要進行設定](/docs/localization#pluralization-language)。自訂動詞和複數化語言後，像 `Route::resource('publicacion', PublicacionController::class)` 這樣的 resource 路由註冊將產生以下 URIs：
 
 ```text
 /publicacion/crear
@@ -799,7 +799,7 @@ Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
 <a name="constructor-injection"></a>
 #### 建構子注入
 
-Laravel [service container](/docs/12.x/container) 用於解析所有 Laravel controllers。因此，你可以在 controller 的建構子中對其可能需要的任何依賴進行型別提示。宣告的依賴將自動被解析並注入到 controller 實例中：
+Laravel [service container](/docs/container) 用於解析所有 Laravel controllers。因此，你可以在 controller 的建構子中對其可能需要的任何依賴進行型別提示。宣告的依賴將自動被解析並注入到 controller 實例中：
 
 ```php
 <?php

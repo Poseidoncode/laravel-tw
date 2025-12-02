@@ -333,7 +333,7 @@ while ($process->running()) {
 
 Laravel 還使管理並行、非同步程序池變得輕而易舉，讓你可以輕鬆地同時執行許多任務。首先，呼叫 `pool` 方法，該方法接受一個接收 `Illuminate\Process\Pool` 實例的閉包。
 
-在此閉包中，你可以定義屬於池的程序。一旦透過 `start` 方法啟動程序池，你可以透過 `running` 方法存取正在執行的程序 [集合](/docs/12.x/collections)：
+在此閉包中，你可以定義屬於池的程序。一旦透過 `start` 方法啟動程序池，你可以透過 `running` 方法存取正在執行的程序 [集合](/docs/collections)：
 
 ```php
 use Illuminate\Process\Pool;

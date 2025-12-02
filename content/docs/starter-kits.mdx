@@ -24,14 +24,14 @@ description: Laravel 入門套件提供了應用程式開發的起點
 <a name="introduction"></a>
 ## 簡介
 
-為了讓您在建立新的 Laravel 應用程式時能有個領先的起跑點，我們很高興能提供 [應用程式啟動套件 (application starter kits)](https://laravel.com/starter-kits)。這些啟動套件能讓您在建立下一個 Laravel 應用程式時快速上手，並包含了註冊和驗證應用程式使用者所需的路由、控制器和視圖。這些啟動套件使用 [Laravel Fortify](/docs/12.x/fortify) 來提供驗證功能。
+為了讓您在建立新的 Laravel 應用程式時能有個領先的起跑點，我們很高興能提供 [應用程式啟動套件 (application starter kits)](https://laravel.com/starter-kits)。這些啟動套件能讓您在建立下一個 Laravel 應用程式時快速上手，並包含了註冊和驗證應用程式使用者所需的路由、控制器和視圖。這些啟動套件使用 [Laravel Fortify](/docs/fortify) 來提供驗證功能。
 
 雖然我們歡迎您使用這些啟動套件，但它們並非強制性的。您完全可以透過安裝一份全新的 Laravel，從頭開始建立您自己的應用程式。無論哪種方式，我們都知道您將會打造出色的作品！
 
 <a name="creating-an-application"></a>
 ## 使用啟動套件建立應用程式
 
-要使用我們的啟動套件之一來建立新的 Laravel 應用程式，您首先應該 [安裝 PHP 和 Laravel CLI 工具](/docs/12.x/installation#installing-php)。如果您已經安裝了 PHP 和 Composer，您可以透過 Composer 安裝 Laravel 安裝程式 CLI 工具：
+要使用我們的啟動套件之一來建立新的 Laravel 應用程式，您首先應該 [安裝 PHP 和 Laravel CLI 工具](/docs/installation#installing-php)。如果您已經安裝了 PHP 和 Composer，您可以透過 Composer 安裝 Laravel 安裝程式 CLI 工具：
 
 ```shell
 composer global require laravel/installer
@@ -278,9 +278,9 @@ Livewire 啟動套件中包含的驗證頁面（例如登入頁面和註冊頁�
 <a name="two-factor-authentication"></a>
 ## 兩因素驗證
 
-所有啟動套件都包含由 [Laravel Fortify](/docs/12.x/fortify#two-factor-authentication) 驅動的內建兩因素驗證 (2FA)，為使用者帳戶增加了一層額外的安全性。使用者可以使用任何支援基於時間的一次性密碼 (TOTP) 的驗證器應用程式來保護他們的帳戶。
+所有啟動套件都包含由 [Laravel Fortify](/docs/fortify#two-factor-authentication) 驅動的內建兩因素驗證 (2FA)，為使用者帳戶增加了一層額外的安全性。使用者可以使用任何支援基於時間的一次性密碼 (TOTP) 的驗證器應用程式來保護他們的帳戶。
 
-兩因素驗證預設為啟用，並支援 [Fortify](/docs/12.x/fortify#two-factor-authentication) 提供的所有選項：
+兩因素驗證預設為啟用，並支援 [Fortify](/docs/fortify#two-factor-authentication) 提供的所有選項：
 
 ```php
 Features::twoFactorAuthentication([

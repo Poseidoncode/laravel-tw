@@ -190,7 +190,7 @@ $request->validate([
 <a name="quick-displaying-the-validation-errors"></a>
 ### 顯示驗證錯誤
 
-那麼，如果傳入的請求欄位未通過給定的驗證規則會發生什麼？如前所述，Laravel 將自動將使用者重新導向回他們先前的位置。此外，所有驗證錯誤和 [請求輸入](/docs/12.x/requests#retrieving-old-input) 將自動 [快閃到 Session](/docs/12.x/session#flash-data)。
+那麼，如果傳入的請求欄位未通過給定的驗證規則會發生什麼？如前所述，Laravel 將自動將使用者重新導向回他們先前的位置。此外，所有驗證錯誤和 [請求輸入](/docs/requests#retrieving-old-input) 將自動 [快閃到 Session](/docs/session#flash-data)。
 
 `Illuminate\View\Middleware\ShareErrorsFromSession` 中介軟體會將 `$errors` 變數與應用程式的所有視圖共用，該中介軟體由 `web` 中介軟體群組提供。當應用此中介軟體時，`$errors` 變數將始終在你的視圖中可用，讓你可以方便地假設 `$errors` 變數始終已定義並可安全使用。`$errors` 變數將是 `Illuminate\Support\MessageBag` 的實例。有關使用此物件的更多資訊，請 [查看其文件](#working-with-error-messages)。
 
@@ -221,7 +221,7 @@ Laravel 的內建驗證規則都有一個錯誤訊息，位於應用程式的 `l
 
 在 `lang/en/validation.php` 檔案中，你會找到每個驗證規則的翻譯項目。你可以根據應用程式的需求自由更改或修改這些訊息。
 
-此外，你可以將此檔案複製到另一個語言目錄，以翻譯應用程式語言的訊息。要了解有關 Laravel 在地化的更多資訊，請查看完整的 [在地化文件](/docs/12.x/localization)。
+此外，你可以將此檔案複製到另一個語言目錄，以翻譯應用程式語言的訊息。要了解有關 Laravel 在地化的更多資訊，請查看完整的 [在地化文件](/docs/localization)。
 
 > [!WARNING]
 > 預設情況下，Laravel 應用程式骨架不包含 `lang` 目錄。如果你想自訂 Laravel 的語言檔案，你可以透過 `lang:publish` Artisan 指令發佈它們。
@@ -234,7 +234,7 @@ Laravel 的內建驗證規則都有一個錯誤訊息，位於應用程式的 `l
 <a name="the-at-error-directive"></a>
 #### `@error` 指令
 
-你可以使用 `@error` [Blade](/docs/12.x/blade) 指令快速判斷給定屬性是否存在驗證錯誤訊息。在 `@error` 指令中，你可以輸出 `$message` 變數來顯示錯誤訊息：
+你可以使用 `@error` [Blade](/docs/blade) 指令快速判斷給定屬性是否存在驗證錯誤訊息。在 `@error` 指令中，你可以輸出 `$message` 變數來顯示錯誤訊息：
 
 ```blade
 <!-- /resources/views/post/create.blade.php -->
@@ -262,15 +262,15 @@ Laravel 的內建驗證規則都有一個錯誤訊息，位於應用程式的 `l
 <a name="repopulating-forms"></a>
 ### 重新填入表單
 
-當 Laravel 因驗證錯誤而產生重新導向回應時，框架將自動 [將所有請求輸入快閃到 Session](/docs/12.x/session#flash-data)。這樣做是為了讓你可以在下一次請求期間方便地存取輸入，並重新填入使用者嘗試提交的表單。
+當 Laravel 因驗證錯誤而產生重新導向回應時，框架將自動 [將所有請求輸入快閃到 Session](/docs/session#flash-data)。這樣做是為了讓你可以在下一次請求期間方便地存取輸入，並重新填入使用者嘗試提交的表單。
 
-要從先前的請求中檢索快閃輸入，請在 `Illuminate\Http\Request` 實例上呼叫 `old` 方法。`old` 方法將從 [Session](/docs/12.x/session) 中提取先前快閃的輸入資料：
+要從先前的請求中檢索快閃輸入，請在 `Illuminate\Http\Request` 實例上呼叫 `old` 方法。`old` 方法將從 [Session](/docs/session) 中提取先前快閃的輸入資料：
 
 ```php
 $title = $request->old('title');
 ```
 
-Laravel 也提供了一個全域 `old` 輔助函式。如果你在 [Blade 樣板](/docs/12.x/blade) 中顯示舊輸入，使用 `old` 輔助函式重新填入表單會更方便。如果給定欄位沒有舊輸入，將回傳 `null`：
+Laravel 也提供了一個全域 `old` 輔助函式。如果你在 [Blade 樣板](/docs/blade) 中顯示舊輸入，使用 `old` 輔助函式重新填入表單會更方便。如果給定欄位沒有舊輸入，將回傳 `null`：
 
 ```blade
 <input type="text" name="title" value="{{ old('title') }}">
@@ -351,7 +351,7 @@ public function rules(): array
 ```
 
 > [!NOTE]
-> 你可以在 `rules` 方法的簽章中型別提示你需要的任何依賴項。它們將透過 Laravel [服務容器](/docs/12.x/container) 自動解析。
+> 你可以在 `rules` 方法的簽章中型別提示你需要的任何依賴項。它們將透過 Laravel [服務容器](/docs/container) 自動解析。
 
 那麼，驗證規則是如何評估的呢？你所要做的就是在控制器方法上型別提示請求。傳入的表單請求會在呼叫控制器方法之前進行驗證，這意味著你不需要在控制器中塞滿任何驗證邏輯：
 
@@ -379,7 +379,7 @@ public function store(StorePostRequest $request): RedirectResponse
 如果驗證失敗，將產生一個重新導向回應，將使用者送回他們先前的位置。錯誤也將快閃到 Session 中，以便顯示。如果請求是 XHR 請求，將回傳一個帶有 422 狀態碼的 HTTP 回應給使用者，其中包含 [驗證錯誤的 JSON 表示](#validation-error-response-format)。
 
 > [!NOTE]
-> 需要為你的 Inertia 驅動的 Laravel 前端新增即時表單請求驗證嗎？查看 [Laravel Precognition](/docs/12.x/precognition)。
+> 需要為你的 Inertia 驅動的 Laravel 前端新增即時表單請求驗證嗎？查看 [Laravel Precognition](/docs/precognition)。
 
 <a name="performing-additional-validation-on-form-requests"></a>
 #### 執行額外驗證
@@ -473,7 +473,7 @@ protected $redirectRoute = 'dashboard';
 <a name="authorizing-form-requests"></a>
 ### 授權表單請求
 
-表單請求類別還包含一個 `authorize` 方法。在此方法中，你可以判斷經過身份驗證的使用者是否確實有權限更新給定資源。例如，你可以判斷使用者是否確實擁有他們嘗試更新的部落格留言。最有可能的是，你將在此方法中與你的 [授權閘道和策略](/docs/12.x/authorization) 進行互動：
+表單請求類別還包含一個 `authorize` 方法。在此方法中，你可以判斷經過身份驗證的使用者是否確實有權限更新給定資源。例如，你可以判斷使用者是否確實擁有他們嘗試更新的部落格留言。最有可能的是，你將在此方法中與你的 [授權閘道和策略](/docs/authorization) 進行互動：
 
 ```php
 use App\Models\Comment;
@@ -495,7 +495,7 @@ public function authorize(): bool
 Route::post('/comment/{comment}');
 ```
 
-因此，如果你的應用程式利用了 [路由模型綁定](/docs/12.x/routing#route-model-binding)，你的程式碼可以透過將解析的模型作為請求的屬性來存取，從而變得更加簡潔：
+因此，如果你的應用程式利用了 [路由模型綁定](/docs/routing#route-model-binding)，你的程式碼可以透過將解析的模型作為請求的屬性來存取，從而變得更加簡潔：
 
 ```php
 return $this->user()->can('update', $this->comment);
@@ -516,7 +516,7 @@ public function authorize(): bool
 ```
 
 > [!NOTE]
-> 你可以在 `authorize` 方法的簽章中型別提示你需要的任何依賴項。它們將透過 Laravel [服務容器](/docs/12.x/container) 自動解析。
+> 你可以在 `authorize` 方法的簽章中型別提示你需要的任何依賴項。它們將透過 Laravel [服務容器](/docs/container) 自動解析。
 
 <a name="customizing-the-error-messages"></a>
 ### 自訂錯誤訊息
@@ -591,7 +591,7 @@ protected function passedValidation(): void
 <a name="manually-creating-validators"></a>
 ## 手動建立驗證器
 
-如果你不想在請求上使用 `validate` 方法，你可以使用 `Validator` [Facade](/docs/12.x/facades) 手動建立驗證器實例。Facade 上的 `make` 方法會產生一個新的驗證器實例：
+如果你不想在請求上使用 `validate` 方法，你可以使用 `Validator` [Facade](/docs/facades) 手動建立驗證器實例。Facade 上的 `make` 方法會產生一個新的驗證器實例：
 
 ```php
 <?php
@@ -807,7 +807,7 @@ If you would like to add additional fields to the validated data, you may call t
 $validated = $request->safe()->merge(['name' => 'Taylor Otwell']);
 ```
 
-If you would like to retrieve the validated data as a [collection](/docs/12.x/collections) instance, you may call the `collect` method:
+If you would like to retrieve the validated data as a [collection](/docs/collections) instance, you may call the `collect` method:
 
 ```php
 $collection = $request->safe()->collect();
@@ -877,7 +877,7 @@ Laravel 的內建驗證規則都有一個錯誤訊息，位於應用程式的 `l
 
 在 `lang/en/validation.php` 檔案中，你會找到每個驗證規則的翻譯項目。你可以根據應用程式的需求自由更改或修改這些訊息。
 
-此外，你可以將此檔案複製到另一個語言目錄，以翻譯應用程式語言的訊息。要了解有關 Laravel 在地化的更多資訊，請查看完整的 [在地化文件](/docs/12.x/localization)。
+此外，你可以將此檔案複製到另一個語言目錄，以翻譯應用程式語言的訊息。要了解有關 Laravel 在地化的更多資訊，請查看完整的 [在地化文件](/docs/localization)。
 
 > [!WARNING]
 > 預設情況下，Laravel 應用程式骨架不包含 `lang` 目錄。如果你想自訂 Laravel 的語言檔案，你可以透過 `lang:publish` Artisan 指令發佈它們。
@@ -1392,7 +1392,7 @@ Validator::make($data, [
 <a name="rule-current-password"></a>
 #### current_password
 
-驗證的欄位必須與經過身份驗證的使用者的密碼相符。你可以使用規則的第一個參數指定 [身份驗證 Guard](/docs/12.x/authentication)：
+驗證的欄位必須與經過身份驗證的使用者的密碼相符。你可以使用規則的第一個參數指定 [身份驗證 Guard](/docs/authentication)：
 
 ```php
 'password' => 'current_password:api'
@@ -2821,7 +2821,7 @@ $request->validate([
 
 #### 翻譯驗證訊息
 
-你可以提供 [翻譯字串鍵](/docs/12.x/localization) 而不是向 `$fail` 閉包提供文字錯誤訊息，並指示 Laravel 翻譯錯誤訊息：
+你可以提供 [翻譯字串鍵](/docs/localization) 而不是向 `$fail` 閉包提供文字錯誤訊息，並指示 Laravel 翻譯錯誤訊息：
 
 ```php
 if (strtoupper($value) !== $value) {

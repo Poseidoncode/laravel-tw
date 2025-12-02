@@ -159,7 +159,7 @@ Mcp::web('/mcp/weather', WeatherServer::class)
 <a name="local-servers"></a>
 ### 本地伺服器
 
-本地伺服器作為 Artisan 命令執行，非常適合建立本地 AI 助手整合，如 [Laravel Boost](/docs/12.x/installation#installing-laravel-boost)。使用 `local` 方法註冊本地伺服器：
+本地伺服器作為 Artisan 命令執行，非常適合建立本地 AI 助手整合，如 [Laravel Boost](/docs/installation#installing-laravel-boost)。使用 `local` 方法註冊本地伺服器：
 
 ```php
 use App\Mcp\Servers\WeatherServer;
@@ -332,7 +332,7 @@ class CurrentWeatherTool extends Tool
 
 JSON Schema 定義提供了工具參數的基本結構，但你可能還想強制執行更複雜的驗證規則。
 
-Laravel MCP 與 Laravel 的[驗證功能](/docs/12.x/validation)無縫整合。你可以在工具的 `handle` 方法中驗證傳入的工具參數：
+Laravel MCP 與 Laravel 的[驗證功能](/docs/validation)無縫整合。你可以在工具的 `handle` 方法中驗證傳入的工具參數：
 
 ```php
 <?php
@@ -375,7 +375,7 @@ $validated = $request->validate([
 <a name="tool-dependency-injection"></a>
 #### 工具依賴注入
 
-Laravel [service container](/docs/12.x/container) 用於解析所有工具。因此，你可以在建構函式中對工具可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到工具實例中：
+Laravel [service container](/docs/container) 用於解析所有工具。因此，你可以在建構函式中對工具可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到工具實例中：
 
 ```php
 <?php
@@ -692,7 +692,7 @@ class DescribeWeatherPrompt extends Prompt
 
 提示參數會根據其定義自動驗證，但你可能還想強制執行更複雜的驗證規則。
 
-Laravel MCP 與 Laravel 的[驗證功能](/docs/12.x/validation)無縫整合。你可以在提示的 `handle` 方法中驗證傳入的提示參數：
+Laravel MCP 與 Laravel 的[驗證功能](/docs/validation)無縫整合。你可以在提示的 `handle` 方法中驗證傳入的提示參數：
 
 ```php
 <?php
@@ -734,7 +734,7 @@ $validated = $request->validate([
 <a name="prompt-dependency-injection"></a>
 ### 提示依賴注入
 
-Laravel [service container](/docs/12.x/container) 用於解析所有提示。因此，你可以在建構函式中對提示可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到提示實例中：
+Laravel [service container](/docs/container) 用於解析所有提示。因此，你可以在建構函式中對提示可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到提示實例中：
 
 ```php
 <?php
@@ -986,7 +986,7 @@ class WeatherGuidelinesResource extends Resource
 <a name="resource-dependency-injection"></a>
 ### 資源依賴注入
 
-Laravel [service container](/docs/12.x/container) 用於解析所有資源。因此，你可以在建構函式中對資源可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到資源實例中：
+Laravel [service container](/docs/container) 用於解析所有資源。因此，你可以在建構函式中對資源可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到資源實例中：
 
 ```php
 <?php
@@ -1184,12 +1184,12 @@ class CurrentWeatherTool extends Tool
 
 就像路由一樣，你可以使用 middleware 驗證 Web MCP 伺服器。為你的 MCP 伺服器新增驗證將要求使用者在使用伺服器的任何功能之前進行驗證。
 
-有兩種方法可以驗證對你的 MCP 伺服器的存取：透過 [Laravel Sanctum](/docs/12.x/sanctum) 進行簡單的基於 token 的驗證，或透過 `Authorization` HTTP 標頭傳遞的任何 token。或者，你可以使用 [Laravel Passport](/docs/12.x/passport) 透過 OAuth 進行驗證。
+有兩種方法可以驗證對你的 MCP 伺服器的存取：透過 [Laravel Sanctum](/docs/sanctum) 進行簡單的基於 token 的驗證，或透過 `Authorization` HTTP 標頭傳遞的任何 token。或者，你可以使用 [Laravel Passport](/docs/passport) 透過 OAuth 進行驗證。
 
 <a name="oauth"></a>
 ### OAuth 2.1
 
-保護你的 Web MCP 伺服器最強大的方法是使用 [Laravel Passport](/docs/12.x/passport) 進行 OAuth。
+保護你的 Web MCP 伺服器最強大的方法是使用 [Laravel Passport](/docs/passport) 進行 OAuth。
 
 透過 OAuth 驗證你的 MCP 伺服器時，在你的 `routes/ai.php` 檔案中呼叫 `Mcp::oauthRoutes` 方法以註冊所需的 OAuth2 發現和客戶端註冊路由。然後，將 Passport 的 `auth:api` middleware 套用到你的 `routes/ai.php` 檔案中的 `Mcp::web` 路由：
 
@@ -1205,7 +1205,7 @@ Mcp::web('/mcp/weather', WeatherExample::class)
 
 #### 新的 Passport 安裝
 
-如果你的應用程式尚未使​​用 Laravel Passport，請按照 Passport 的[安裝和部署指南](/docs/12.x/passport#installation)將 Passport 新增到你的應用程式中。在繼續之前，你應該擁有一個 `OAuthenticatable` 模型、新的驗證 guard 和 passport keys。
+如果你的應用程式尚未使​​用 Laravel Passport，請按照 Passport 的[安裝和部署指南](/docs/passport#installation)將 Passport 新增到你的應用程式中。在繼續之前，你應該擁有一個 `OAuthenticatable` 模型、新的驗證 guard 和 passport keys。
 
 接下來，你應該發布 Laravel MCP 提供的 Passport 授權視圖：
 
@@ -1246,12 +1246,12 @@ Laravel MCP 透過上面討論的 `Mcp::oauthRoutes` 方法，新增、宣傳並
 
 OAuth2.1 是 Model Context Protocol 規範中記錄的驗證機制，並且是 MCP 客戶端中最廣泛支援的。因此，我們建議在可能的情況下使用 Passport。
 
-如果你的應用程式已經在使用 [Sanctum](/docs/12.x/sanctum)，那麼新增 Passport 可能會很麻煩。在這種情況下，我們建議使用不帶 Passport 的 Sanctum，直到你有明確且必要的需求使用僅支援 OAuth 的 MCP 客戶端。
+如果你的應用程式已經在使用 [Sanctum](/docs/sanctum)，那麼新增 Passport 可能會很麻煩。在這種情況下，我們建議使用不帶 Passport 的 Sanctum，直到你有明確且必要的需求使用僅支援 OAuth 的 MCP 客戶端。
 
 <a name="sanctum"></a>
 ### Sanctum
 
-如果你想使用 [Sanctum](/docs/12.x/sanctum) 保護你的 MCP 伺服器，只需將 Sanctum 的驗證 middleware 新增到你的 `routes/ai.php` 檔案中的伺服器即可。然後，確保你的 MCP 客戶端提供 `Authorization: Bearer <token>` 標頭以確保驗證成功：
+如果你想使用 [Sanctum](/docs/sanctum) 保護你的 MCP 伺服器，只需將 Sanctum 的驗證 middleware 新增到你的 `routes/ai.php` 檔案中的伺服器即可。然後，確保你的 MCP 客戶端提供 `Authorization: Bearer <token>` 標頭以確保驗證成功：
 
 ```php
 use App\Mcp\Servers\WeatherExample;
@@ -1269,7 +1269,7 @@ Mcp::web('/mcp/demo', WeatherExample::class)
 <a name="authorization"></a>
 ## 授權
 
-你可以透過 `$request->user()` 方法存取目前驗證的使用者，允許你在 MCP 工具和資源中執行[授權檢查](/docs/12.x/authorization)：
+你可以透過 `$request->user()` 方法存取目前驗證的使用者，允許你在 MCP 工具和資源中執行[授權檢查](/docs/authorization)：
 
 ```php
 use Laravel\Mcp\Request;

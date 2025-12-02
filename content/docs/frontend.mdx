@@ -18,7 +18,7 @@ description: 使用 Laravel 進行前端開發的選項
 <a name="introduction"></a>
 ## 簡介
 
-Laravel 是一個後端框架，提供了構建現代 Web 應用程式所需的所有功能，例如 [路由](/docs/12.x/routing)、[驗證](/docs/12.x/validation)、[快取](/docs/12.x/cache)、[佇列](/docs/12.x/queues)、[檔案儲存](/docs/12.x/filesystem) 等。然而，我們認為為開發人員提供美觀的全端體驗非常重要，包括用於構建應用程式前端的強大方法。
+Laravel 是一個後端框架，提供了構建現代 Web 應用程式所需的所有功能，例如 [路由](/docs/routing)、[驗證](/docs/validation)、[快取](/docs/cache)、[佇列](/docs/queues)、[檔案儲存](/docs/filesystem) 等。然而，我們認為為開發人員提供美觀的全端體驗非常重要，包括用於構建應用程式前端的強大方法。
 
 在使用 Laravel 構建應用程式時，主要有兩種方法來處理前端開發，您選擇哪種方法取決於您是想利用 PHP 構建前端，還是使用 Vue 和 React 等 JavaScript 框架。我們將在下面討論這兩個選項，以便您能夠就應用程式的最佳前端開發方法做出明智的決定。
 
@@ -38,7 +38,7 @@ Laravel 是一個後端框架，提供了構建現代 Web 應用程式所需的�
 </div>
 ```
 
-在 Laravel 中，這種渲染 HTML 的方法仍然可以使用 [視圖](/docs/12.x/views) 和 [Blade](/docs/12.x/blade) 來實現。Blade 是一種極其輕量級的模板語言，它提供了方便、簡短的語法來顯示資料、迭代資料等：
+在 Laravel 中，這種渲染 HTML 的方法仍然可以使用 [視圖](/docs/views) 和 [Blade](/docs/blade) 來實現。Blade 是一種極其輕量級的模板語言，它提供了方便、簡短的語法來顯示資料、迭代資料等：
 
 ```blade
 <div>
@@ -102,12 +102,12 @@ class Counter extends Component
 
 對許多人來說，Livewire 徹底改變了 Laravel 的前端開發，使他們能夠在舒適的 Laravel 環境中構建現代、動態的 Web 應用程式。通常，使用 Livewire 的開發人員也會使用 [Alpine.js](https://alpinejs.dev/) 將 JavaScript「撒」到他們的前端，僅在需要的地方使用，例如為了渲染對話視窗。
 
-如果您是 Laravel 的新手，我們建議您先熟悉 [視圖](/docs/12.x/views) 和 [Blade](/docs/12.x/blade) 的基本用法。然後，查閱官方 [Laravel Livewire 文件](https://livewire.laravel.com/docs)，學習如何使用互動式 Livewire 元件將您的應用程式提升到一個新的水平。
+如果您是 Laravel 的新手，我們建議您先熟悉 [視圖](/docs/views) 和 [Blade](/docs/blade) 的基本用法。然後，查閱官方 [Laravel Livewire 文件](https://livewire.laravel.com/docs)，學習如何使用互動式 Livewire 元件將您的應用程式提升到一個新的水平。
 
 <a name="php-starter-kits"></a>
 ### 啟動套件
 
-如果您想使用 PHP 和 Livewire 構建前端，您可以利用我們的 [Livewire 啟動套件](/docs/12.x/starter-kits) 來快速開始您的應用程式開發。
+如果您想使用 PHP 和 Livewire 構建前端，您可以利用我們的 [Livewire 啟動套件](/docs/starter-kits) 來快速開始您的應用程式開發。
 
 <a name="using-react-or-vue"></a>
 ## 使用 React 或 Vue
@@ -174,16 +174,16 @@ export default function Show({ user }) {
 <a name="inertia-starter-kits"></a>
 ### 啟動套件
 
-如果您想使用 Inertia 和 Vue / React 構建前端，您可以利用我們的 [React 或 Vue 應用程式啟動套件](/docs/12.x/starter-kits) 來快速開始您的應用程式開發。這兩個啟動套件都使用 Inertia、Vue / React、[Tailwind](https://tailwindcss.com) 和 [Vite](https://vitejs.dev) 為您的應用程式後端和前端驗證流程搭建鷹架，以便您可以開始構建您的下一個偉大創意。
+如果您想使用 Inertia 和 Vue / React 構建前端，您可以利用我們的 [React 或 Vue 應用程式啟動套件](/docs/starter-kits) 來快速開始您的應用程式開發。這兩個啟動套件都使用 Inertia、Vue / React、[Tailwind](https://tailwindcss.com) 和 [Vite](https://vitejs.dev) 為您的應用程式後端和前端驗證流程搭建鷹架，以便您可以開始構建您的下一個偉大創意。
 
 <a name="bundling-assets"></a>
 ## 資產打包
 
 無論您選擇使用 Blade 和 Livewire 還是 Vue / React 和 Inertia 開發前端，您都可能需要將應用程式的 CSS 打包成生產就緒的資產。當然，如果您選擇使用 Vue 或 React 構建應用程式的前端，您還需要將元件打包成瀏覽器就緒的 JavaScript 資產。
 
-預設情況下，Laravel 使用 [Vite](https://vitejs.dev) 來打包您的資產。Vite 在本機開發期間提供閃電般的構建時間和近乎瞬時的熱模組替換 (HMR)。在所有新的 Laravel 應用程式中，包括使用我們的 [啟動套件](/docs/12.x/starter-kits) 的應用程式，您都會找到一個 `vite.config.js` 檔案，該檔案載入了我們輕量級的 Laravel Vite 外掛程式，使 Vite 在 Laravel 應用程式中使用起來非常愉快。
+預設情況下，Laravel 使用 [Vite](https://vitejs.dev) 來打包您的資產。Vite 在本機開發期間提供閃電般的構建時間和近乎瞬時的熱模組替換 (HMR)。在所有新的 Laravel 應用程式中，包括使用我們的 [啟動套件](/docs/starter-kits) 的應用程式，您都會找到一個 `vite.config.js` 檔案，該檔案載入了我們輕量級的 Laravel Vite 外掛程式，使 Vite 在 Laravel 應用程式中使用起來非常愉快。
 
-開始使用 Laravel 和 Vite 的最快方法是使用 [我們的應用程式啟動套件](/docs/12.x/starter-kits) 開始您的應用程式開發，該套件透過提供前端和後端驗證鷹架來快速啟動您的應用程式。
+開始使用 Laravel 和 Vite 的最快方法是使用 [我們的應用程式啟動套件](/docs/starter-kits) 開始您的應用程式開發，該套件透過提供前端和後端驗證鷹架來快速啟動您的應用程式。
 
 > [!NOTE]
-> 有關將 Vite 與 Laravel 配合使用的更多詳細文件，請參閱我們 [關於打包和編譯資產的專用文件](/docs/12.x/vite)。
+> 有關將 Vite 與 Laravel 配合使用的更多詳細文件，請參閱我們 [關於打包和編譯資產的專用文件](/docs/vite)。
