@@ -5,51 +5,51 @@ description: Laravel MCP 提供 Model Context Protocol 整合
 
 # Laravel MCP
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-    - [Publishing Routes](#publishing-routes)
-- [Creating Servers](#creating-servers)
-    - [Server Registration](#server-registration)
-    - [Web Servers](#web-servers)
-    - [Local Servers](#local-servers)
-- [Tools](#tools)
-    - [Creating Tools](#creating-tools)
-    - [Tool Input Schemas](#tool-input-schemas)
-    - [Validating Tool Arguments](#validating-tool-arguments)
-    - [Tool Dependency Injection](#tool-dependency-injection)
-    - [Tool Annotations](#tool-annotations)
-    - [Conditional Tool Registration](#conditional-tool-registration)
-    - [Tool Responses](#tool-responses)
-- [Prompts](#prompts)
-    - [Creating Prompts](#creating-prompts)
-    - [Prompt Arguments](#prompt-arguments)
-    - [Validating Prompt Arguments](#validating-prompt-arguments)
-    - [Prompt Dependency Injection](#prompt-dependency-injection)
-    - [Conditional Prompt Registration](#conditional-prompt-registration)
-    - [Prompt Responses](#prompt-responses)
-- [Resources](#resources)
-    - [Creating Resources](#creating-resources)
-    - [Resource URI and MIME Type](#resource-uri-and-mime-type)
-    - [Resource Request](#resource-request)
-    - [Resource Dependency Injection](#resource-dependency-injection)
-    - [Conditional Resource Registration](#conditional-resource-registration)
-    - [Resource Responses](#resource-responses)
+- [簡介 (Introduction)](#introduction)
+- [安裝 (Installation)](#installation)
+    - [發布路由 (Publishing Routes)](#publishing-routes)
+- [建立伺服器 (Creating Servers)](#creating-servers)
+    - [伺服器註冊 (Server Registration)](#server-registration)
+    - [Web 伺服器 (Web Servers)](#web-servers)
+    - [本地伺服器 (Local Servers)](#local-servers)
+- [工具 (Tools)](#tools)
+    - [建立工具 (Creating Tools)](#creating-tools)
+    - [工具輸入 Schemas (Tool Input Schemas)](#tool-input-schemas)
+    - [驗證工具參數 (Validating Tool Arguments)](#validating-tool-arguments)
+    - [工具依賴注入 (Tool Dependency Injection)](#tool-dependency-injection)
+    - [工具註解 (Tool Annotations)](#tool-annotations)
+    - [條件式工具註冊 (Conditional Tool Registration)](#conditional-tool-registration)
+    - [工具回應 (Tool Responses)](#tool-responses)
+- [提示 (Prompts)](#prompts)
+    - [建立提示 (Creating Prompts)](#creating-prompts)
+    - [提示參數 (Prompt Arguments)](#prompt-arguments)
+    - [驗證提示參數 (Validating Prompt Arguments)](#validating-prompt-arguments)
+    - [提示依賴注入 (Prompt Dependency Injection)](#prompt-dependency-injection)
+    - [條件式提示註冊 (Conditional Prompt Registration)](#conditional-prompt-registration)
+    - [提示回應 (Prompt Responses)](#prompt-responses)
+- [資源 (Resources)](#resources)
+    - [建立資源 (Creating Resources)](#creating-resources)
+    - [資源 URI 和 MIME 類型 (Resource URI and MIME Type)](#resource-uri-and-mime-type)
+    - [資源請求 (Resource Request)](#resource-request)
+    - [資源依賴注入 (Resource Dependency Injection)](#resource-dependency-injection)
+    - [條件式資源註冊 (Conditional Resource Registration)](#conditional-resource-registration)
+    - [資源回應 (Resource Responses)](#resource-responses)
 - [Metadata](#metadata)
-- [Authentication](#authentication)
+- [驗證 (Authentication)](#authentication)
     - [OAuth 2.1](#oauth)
     - [Sanctum](#sanctum)
-- [Authorization](#authorization)
-- [Testing Servers](#testing-servers)
+- [授權 (Authorization)](#authorization)
+- [測試伺服器 (Testing Servers)](#testing-servers)
     - [MCP Inspector](#mcp-inspector)
-    - [Unit Tests](#unit-tests)
+    - [單元測試 (Unit Tests)](#unit-tests)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel MCP](https://github.com/laravel/mcp) 為 AI 客戶端提供了一種簡單優雅的方式，透過 [Model Context Protocol](https://modelcontextprotocol.io/docs/getting-started/intro) 與你的 Laravel 應用程式互動。它提供了一個表達力強、流暢的介面來定義伺服器、工具、資源和提示，從而實現與你的應用程式的 AI 驅動互動。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 要開始使用，請使用 Composer 套件管理器將 Laravel MCP 安裝到你的專案中：
 
@@ -58,7 +58,7 @@ composer require laravel/mcp
 ```
 
 <a name="publishing-routes"></a>
-### 發布路由
+### 發布路由 (Publishing Routes)
 
 安裝 Laravel MCP 後，執行 `vendor:publish` Artisan 命令來發布 `routes/ai.php` 檔案，你將在其中定義你的 MCP 伺服器：
 
@@ -69,7 +69,7 @@ php artisan vendor:publish --tag=ai-routes
 此命令會在你的應用程式的 `routes` 目錄中建立 `routes/ai.php` 檔案，你將使用它來註冊你的 MCP 伺服器。
 
 <a name="creating-servers"></a>
-## 建立伺服器
+## 建立伺服器 (Creating Servers)
 
 你可以使用 `make:mcp-server` Artisan 命令建立一個 MCP 伺服器。伺服器充當中央通訊點，向 AI 客戶端公開 MCP 功能，如工具、資源和提示：
 
@@ -133,12 +133,12 @@ class WeatherServer extends Server
 ```
 
 <a name="server-registration"></a>
-### 伺服器註冊
+### 伺服器註冊 (Server Registration)
 
 建立伺服器後，你必須在 `routes/ai.php` 檔案中註冊它以使其可存取。Laravel MCP 提供兩種註冊伺服器的方法：用於 HTTP 可存取伺服器的 `web` 和用於命令列伺服器的 `local`。
 
 <a name="web-servers"></a>
-### Web 伺服器
+### Web 伺服器 (Web Servers)
 
 Web 伺服器是最常見的伺服器類型，可透過 HTTP POST 請求存取，使其成為遠端 AI 客戶端或 Web 整合的理想選擇。使用 `web` 方法註冊 Web 伺服器：
 
@@ -157,7 +157,7 @@ Mcp::web('/mcp/weather', WeatherServer::class)
 ```
 
 <a name="local-servers"></a>
-### 本地伺服器
+### 本地伺服器 (Local Servers)
 
 本地伺服器作為 Artisan 命令執行，非常適合建立本地 AI 助手整合，如 [Laravel Boost](/docs/installation#installing-laravel-boost)。使用 `local` 方法註冊本地伺服器：
 
@@ -171,7 +171,7 @@ Mcp::local('weather', WeatherServer::class);
 一旦註冊，你通常不需要自己手動執行 `mcp:start` Artisan 命令。相反，設定你的 MCP 客戶端（AI 代理）來啟動伺服器或使用 [MCP Inspector](#mcp-inspector)。
 
 <a name="tools"></a>
-## 工具
+## 工具 (Tools)
 
 工具使你的伺服器能夠公開 AI 客戶端可以呼叫的功能。它們允許語言模型執行動作、執行程式碼或與外部系統互動：
 
@@ -221,7 +221,7 @@ class CurrentWeatherTool extends Tool
 ```
 
 <a name="creating-tools"></a>
-### 建立工具
+### 建立工具 (Creating Tools)
 
 要建立工具，請執行 `make:mcp-tool` Artisan 命令：
 
@@ -292,7 +292,7 @@ class CurrentWeatherTool extends Tool
 > 描述是工具 metadata 的關鍵部分，因為它幫助 AI 模型了解何時以及如何有效地使用該工具。
 
 <a name="tool-input-schemas"></a>
-### 工具輸入 Schemas
+### 工具輸入 Schemas (Tool Input Schemas)
 
 工具可以定義輸入 schemas 來指定它們接受來自 AI 客戶端的哪些參數。使用 Laravel 的 `Illuminate\JsonSchema\JsonSchema` 建構器來定義你的工具的輸入需求：
 
@@ -328,7 +328,7 @@ class CurrentWeatherTool extends Tool
 ```
 
 <a name="validating-tool-arguments"></a>
-### 驗證工具參數
+### 驗證工具參數 (Validating Tool Arguments)
 
 JSON Schema 定義提供了工具參數的基本結構，但你可能還想強制執行更複雜的驗證規則。
 
@@ -373,7 +373,7 @@ $validated = $request->validate([
 ```
 
 <a name="tool-dependency-injection"></a>
-#### 工具依賴注入
+#### 工具依賴注入 (Tool Dependency Injection)
 
 Laravel [service container](/docs/container) 用於解析所有工具。因此，你可以在建構函式中對工具可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到工具實例中：
 
@@ -427,7 +427,7 @@ class CurrentWeatherTool extends Tool
 ```
 
 <a name="tool-annotations"></a>
-### 工具註解
+### 工具註解 (Tool Annotations)
 
 你可以使用 [annotations](https://modelcontextprotocol.io/specification/2025-06-18/schema#toolannotations) 增強你的工具，以向 AI 客戶端提供額外的 metadata。這些註解幫助 AI 模型了解工具的行為和功能。註解透過屬性新增到工具中：
 
@@ -458,7 +458,7 @@ class CurrentWeatherTool extends Tool
 | `#[IsOpenWorld]`   | boolean | 指示該工具可能會與外部實體互動。                                        |
 
 <a name="conditional-tool-registration"></a>
-### 條件式工具註冊
+### 條件式工具註冊 (Conditional Tool Registration)
 
 你可以透過在工具類別中實作 `shouldRegister` 方法在執行時有條件地註冊工具。此方法允許你根據應用程式狀態、設定或請求參數判斷工具是否應該可用：
 
@@ -485,7 +485,7 @@ class CurrentWeatherTool extends Tool
 當工具的 `shouldRegister` 方法回傳 `false` 時，它將不會出現在可用工具列表中，並且無法被 AI 客戶端呼叫。
 
 <a name="tool-responses"></a>
-### 工具回應
+### 工具回應 (Tool Responses)
 
 工具必須回傳 `Laravel\Mcp\Response` 的實例。Response 類別提供了幾種方便的方法來建立不同類型的回應：
 
@@ -579,12 +579,12 @@ class CurrentWeatherTool extends Tool
 使用 Web 伺服器時，串流回應會自動開啟 SSE (Server-Sent Events) 串流，將每個產生的訊息作為事件發送給客戶端。
 
 <a name="prompts"></a>
-## Prompts
+## 提示 (Prompts)
 
 [Prompts](https://modelcontextprotocol.io/specification/2025-06-18/server/prompts) 使你的伺服器能夠分享可重複使用的提示模板，AI 客戶端可以使用這些模板與語言模型互動。它們提供了一種標準化的方式來結構化常見的查詢和互動。
 
 <a name="creating-prompts"></a>
-### 建立提示
+### 建立提示 (Creating Prompts)
 
 要建立提示，請執行 `make:mcp-prompt` Artisan 命令：
 
@@ -655,7 +655,7 @@ class DescribeWeatherPrompt extends Prompt
 > 描述是提示 metadata 的關鍵部分，因為它幫助 AI 模型了解何時以及如何充分利用該提示。
 
 <a name="prompt-arguments"></a>
-### 提示參數
+### 提示參數 (Prompt Arguments)
 
 提示可以定義參數，允許 AI 客戶端使用特定值自訂提示模板。使用 `arguments` 方法定義你的提示接受哪些參數：
 
@@ -688,7 +688,7 @@ class DescribeWeatherPrompt extends Prompt
 ```
 
 <a name="validating-prompt-arguments"></a>
-### 驗證提示參數
+### 驗證提示參數 (Validating Prompt Arguments)
 
 提示參數會根據其定義自動驗證，但你可能還想強制執行更複雜的驗證規則。
 
@@ -732,7 +732,7 @@ $validated = $request->validate([
 ```
 
 <a name="prompt-dependency-injection"></a>
-### 提示依賴注入
+### 提示依賴注入 (Prompt Dependency Injection)
 
 Laravel [service container](/docs/container) 用於解析所有提示。因此，你可以在建構函式中對提示可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到提示實例中：
 
@@ -784,7 +784,7 @@ class DescribeWeatherPrompt extends Prompt
 ```
 
 <a name="conditional-prompt-registration"></a>
-### 條件式提示註冊
+### 條件式提示註冊 (Conditional Prompt Registration)
 
 你可以透過在提示類別中實作 `shouldRegister` 方法在執行時有條件地註冊提示。此方法允許你根據應用程式狀態、設定或請求參數判斷提示是否應該可用：
 
@@ -811,7 +811,7 @@ class CurrentWeatherPrompt extends Prompt
 當提示的 `shouldRegister` 方法回傳 `false` 時，它將不會出現在可用提示列表中，並且無法被 AI 客戶端呼叫。
 
 <a name="prompt-responses"></a>
-### 提示回應
+### 提示回應 (Prompt Responses)
 
 提示可以回傳單個 `Laravel\Mcp\Response` 或 `Laravel\Mcp\Response` 實例的可迭代物件。這些回應封裝了將發送給 AI 客戶端的內容：
 
@@ -850,12 +850,12 @@ class DescribeWeatherPrompt extends Prompt
 你可以使用 `asAssistant()` 方法來指示回應訊息應被視為來自 AI 助手，而普通訊息則被視為使用者輸入。
 
 <a name="resources"></a>
-## 資源
+## 資源 (Resources)
 
 [Resources](https://modelcontextprotocol.io/specification/2025-06-18/server/resources) 使你的伺服器能夠公開 AI 客戶端可以讀取並在與語言模型互動時用作上下文的資料和內容。它們提供了一種分享靜態或動態資訊（如文件、設定或任何有助於通知 AI 回應的資料）的方式。
 
 <a name="creating-resources"></a>
-## 建立資源
+## 建立資源 (Creating Resources)
 
 要建立資源，請執行 `make:mcp-resource` Artisan 命令：
 
@@ -926,7 +926,7 @@ class WeatherGuidelinesResource extends Resource
 > 描述是資源 metadata 的關鍵部分，因為它幫助 AI 模型了解何時以及如何有效地使用該資源。
 
 <a name="resource-uri-and-mime-type"></a>
-### 資源 URI 和 MIME 類型
+### 資源 URI 和 MIME 類型 (Resource URI and MIME Type)
 
 每個資源都由唯一的 URI 識別，並具有關聯的 MIME 類型，幫助 AI 客戶端了解資源的格式。
 
@@ -958,7 +958,7 @@ class WeatherGuidelinesResource extends Resource
 URI 和 MIME 類型幫助 AI 客戶端判斷如何適當地處理和解釋資源內容。
 
 <a name="resource-request"></a>
-### 資源請求
+### 資源請求 (Resource Request)
 
 與工具和提示不同，資源無法定義輸入 schemas 或參數。但是，你仍然可以在資源的 `handle` 方法中與請求物件互動：
 
@@ -984,7 +984,7 @@ class WeatherGuidelinesResource extends Resource
 ```
 
 <a name="resource-dependency-injection"></a>
-### 資源依賴注入
+### 資源依賴注入 (Resource Dependency Injection)
 
 Laravel [service container](/docs/container) 用於解析所有資源。因此，你可以在建構函式中對資源可能需要的任何依賴進行型別提示。宣告的依賴將自動解析並注入到資源實例中：
 
@@ -1036,7 +1036,7 @@ class WeatherGuidelinesResource extends Resource
 ```
 
 <a name="conditional-resource-registration"></a>
-### 條件式資源註冊
+### 條件式資源註冊 (Conditional Resource Registration)
 
 你可以透過在資源類別中實作 `shouldRegister` 方法在執行時有條件地註冊資源。此方法允許你根據應用程式狀態、設定或請求參數判斷資源是否應該可用：
 
@@ -1063,7 +1063,7 @@ class WeatherGuidelinesResource extends Resource
 當資源的 `shouldRegister` 方法回傳 `false` 時，它將不會出現在可用資源列表中，並且無法被 AI 客戶端存取。
 
 <a name="resource-responses"></a>
-### 資源回應
+### 資源回應 (Resource Responses)
 
 資源必須回傳 `Laravel\Mcp\Response` 的實例。Response 類別提供了幾種方便的方法來建立不同類型的回應：
 

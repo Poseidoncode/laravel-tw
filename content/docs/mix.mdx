@@ -11,18 +11,19 @@ description: Laravel Mix 提供了流暢的 API 來定義 webpack 建構步驟
 ## 簡介
 
 > [!WARNING]
-> Laravel Mix is a legacy package that is no longer actively maintained. [Vite](/docs/vite) may be used as a modern alternative.
+> Laravel Mix 是一個遺留套件，不再積極維護。您可以使用 [Vite](/docs/vite) 作為現代的替代方案。
 
-[Laravel Mix](https://github.com/laravel-mix/laravel-mix), a package developed by [Laracasts](https://laracasts.com) creator Jeffrey Way, provides a fluent API for defining [webpack](https://webpack.js.org) build steps for your Laravel application using several common CSS and JavaScript pre-processors.
+[Laravel Mix](https://github.com/laravel-mix/laravel-mix) 是由 Laracasts 創辦人 Jeffrey Way 所開發的套件，提供一個流暢的 API，讓您使用多種常見的 CSS 與 JavaScript 預處理器來定義 Laravel 應用的 [webpack](https://webpack.js.org) 建構步驟。
 
-In other words, Mix makes it a cinch to compile and minify your application's CSS and JavaScript files. Through simple method chaining, you can fluently define your asset pipeline. For example:
+換言之，Mix 讓編譯與壓縮應用程式的 CSS 與 JavaScript 變得非常簡單。透過簡潔的方法串接（method chaining），您可以清楚地定義資產管線。範例如下：
 
 ```js
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css');
+mix
+  .js("resources/js/app.js", "public/js")
+  .postCss("resources/css/app.css", "public/css");
 ```
 
-If you've ever been confused and overwhelmed about getting started with webpack and asset compilation, you will love Laravel Mix. However, you are not required to use it while developing your application; you are free to use any asset pipeline tool you wish, or even none at all.
+如果您曾對如何開始使用 webpack 與進行資產編譯感到困惑，Laravel Mix 會讓這些流程變得容易許多。不過，使用 Mix 並非必要：在開發時您可以自由選擇任何喜歡的資產處理工具，甚至可以完全不使用。
 
 > [!NOTE]
-> Vite has replaced Laravel Mix in new Laravel installations. For Mix documentation, please visit the [official Laravel Mix](https://laravel-mix.com/) website. If you would like to switch to Vite, please see our [Vite migration guide](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-laravel-mix-to-vite).
+> 在新的 Laravel 安裝中，Vite 已取代 Laravel Mix。如需 Mix 的文件，請參閱官方 Laravel Mix 網站（https://laravel-mix.com/）。若欲改用 Vite，請參考我們的 [Vite 遷移指南](https://github.com/laravel/vite-plugin/blob/main/UPGRADE.md#migrating-from-laravel-mix-to-vite)。

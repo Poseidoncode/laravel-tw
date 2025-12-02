@@ -5,115 +5,117 @@ description: Laravel Cashier Paddle 提供 Paddle 訂閱計費服務的整合
 
 # Laravel Cashier (Paddle)
 
-- [Introduction](#introduction)
-- [Upgrading Cashier](#upgrading-cashier)
-- [Installation](#installation)
+- [簡介 (Introduction)](#introduction)
+- [升級 Cashier (Upgrading Cashier)](#upgrading-cashier)
+- [安裝 (Installation)](#installation)
     - [Paddle Sandbox](#paddle-sandbox)
-- [Configuration](#configuration)
-    - [Billable Model](#billable-model)
+- [設定 (Configuration)](#configuration)
+    - [Billable 模型 (Billable Model)](#billable-model)
     - [API Keys](#api-keys)
     - [Paddle JS](#paddle-js)
-    - [Currency Configuration](#currency-configuration)
-    - [Overriding Default Models](#overriding-default-models)
-- [Quickstart](#quickstart)
-    - [Selling Products](#quickstart-selling-products)
-    - [Selling Subscriptions](#quickstart-selling-subscriptions)
-- [Checkout Sessions](#checkout-sessions)
-    - [Overlay Checkout](#overlay-checkout)
-    - [Inline Checkout](#inline-checkout)
-    - [Guest Checkouts](#guest-checkouts)
-- [Price Previews](#price-previews)
-    - [Customer Price Previews](#customer-price-previews)
-    - [Discounts](#price-discounts)
-- [Customers](#customers)
-    - [Customer Defaults](#customer-defaults)
-    - [Retrieving Customers](#retrieving-customers)
-    - [Creating Customers](#creating-customers)
-- [Subscriptions](#subscriptions)
-    - [Creating Subscriptions](#creating-subscriptions)
-    - [Checking Subscription Status](#checking-subscription-status)
-    - [Subscription Single Charges](#subscription-single-charges)
-    - [Updating Payment Information](#updating-payment-information)
-    - [Changing Plans](#changing-plans)
-    - [Subscription Quantity](#subscription-quantity)
-    - [Subscriptions With Multiple Products](#subscriptions-with-multiple-products)
-    - [Multiple Subscriptions](#multiple-subscriptions)
-    - [Pausing Subscriptions](#pausing-subscriptions)
-    - [Canceling Subscriptions](#canceling-subscriptions)
-- [Subscription Trials](#subscription-trials)
-    - [With Payment Method Up Front](#with-payment-method-up-front)
-    - [Without Payment Method Up Front](#without-payment-method-up-front)
-    - [Extend or Activate a Trial](#extend-or-activate-a-trial)
-- [Handling Paddle Webhooks](#handling-paddle-webhooks)
-    - [Defining Webhook Event Handlers](#defining-webhook-event-handlers)
-    - [Verifying Webhook Signatures](#verifying-webhook-signatures)
-- [Single Charges](#single-charges)
-    - [Charging for Products](#charging-for-products)
-    - [Refunding Transactions](#refunding-transactions)
-    - [Crediting Transactions](#crediting-transactions)
-- [Transactions](#transactions)
-    - [Past and Upcoming Payments](#past-and-upcoming-payments)
-- [Testing](#testing)
+    - [貨幣設定 (Currency Configuration)](#currency-configuration)
+    - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
+- [快速開始 (Quickstart)](#quickstart)
+    - [銷售產品 (Selling Products)](#quickstart-selling-products)
+    - [銷售訂閱 (Selling Subscriptions)](#quickstart-selling-subscriptions)
+- [結帳 Session (Checkout Sessions)](#checkout-sessions)
+    - [Overlay 結帳 (Overlay Checkout)](#overlay-checkout)
+    - [Inline 結帳 (Inline Checkout)](#inline-checkout)
+    - [訪客結帳 (Guest Checkouts)](#guest-checkouts)
+- [價格預覽 (Price Previews)](#price-previews)
+    - [客戶價格預覽 (Customer Price Previews)](#customer-price-previews)
+    - [折扣 (Discounts)](#price-discounts)
+- [客戶 (Customers)](#customers)
+    - [客戶預設值 (Customer Defaults)](#customer-defaults)
+    - [取得客戶 (Retrieving Customers)](#retrieving-customers)
+    - [建立客戶 (Creating Customers)](#creating-customers)
+- [訂閱 (Subscriptions)](#subscriptions)
+    - [建立訂閱 (Creating Subscriptions)](#creating-subscriptions)
+    - [檢查訂閱狀態 (Checking Subscription Status)](#checking-subscription-status)
+    - [訂閱單次收費 (Subscription Single Charges)](#subscription-single-charges)
+    - [更新付款資訊 (Updating Payment Information)](#updating-payment-information)
+    - [變更方案 (Changing Plans)](#changing-plans)
+    - [訂閱數量 (Subscription Quantity)](#subscription-quantity)
+    - [多產品訂閱 (Subscriptions With Multiple Products)](#subscriptions-with-multiple-products)
+    - [多重訂閱 (Multiple Subscriptions)](#multiple-subscriptions)
+    - [暫停訂閱 (Pausing Subscriptions)](#pausing-subscriptions)
+    - [取消訂閱 (Canceling Subscriptions)](#canceling-subscriptions)
+- [訂閱試用 (Subscription Trials)](#subscription-trials)
+    - [預先提供付款方式 (With Payment Method Up Front)](#with-payment-method-up-front)
+    - [未預先提供付款方式 (Without Payment Method Up Front)](#without-payment-method-up-front)
+    - [延長或啟用試用 (Extend or Activate a Trial)](#extend-or-activate-a-trial)
+- [處理 Paddle Webhooks (Handling Paddle Webhooks)](#handling-paddle-webhooks)
+    - [定義 Webhook 事件處理器 (Defining Webhook Event Handlers)](#defining-webhook-event-handlers)
+    - [驗證 Webhook 簽章 (Verifying Webhook Signatures)](#verifying-webhook-signatures)
+- [單次收費 (Single Charges)](#single-charges)
+    - [產品收費 (Charging for Products)](#charging-for-products)
+    - [退款 (Refunding Transactions)](#refunding-transactions)
+    - [交易入帳 (Crediting Transactions)](#crediting-transactions)
+- [交易 (Transactions)](#transactions)
+    - [過去與即將到來的付款 (Past and Upcoming Payments)](#past-and-upcoming-payments)
+- [測試 (Testing)](#testing)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 > [!WARNING]
-> This documentation is for Cashier Paddle 2.x's integration with Paddle Billing. If you're still using Paddle Classic, you should use [Cashier Paddle 1.x](https://github.com/laravel/cashier-paddle/tree/1.x).
+> 本文件適用於 Cashier Paddle 2.x 與 Paddle Billing 的整合。如果你仍在使用 Paddle Classic，應使用 [Cashier Paddle 1.x](https://github.com/laravel/cashier-paddle/tree/1.x)。
 
-[Laravel Cashier Paddle](https://github.com/laravel/cashier-paddle) provides an expressive, fluent interface to [Paddle's](https://paddle.com) subscription billing services. It handles almost all of the boilerplate subscription billing code you are dreading. In addition to basic subscription management, Cashier can handle: swapping subscriptions, subscription "quantities", subscription pausing, cancelation grace periods, and more.
+[Laravel Cashier Paddle](https://github.com/laravel/cashier-paddle) 為 [Paddle](https://paddle.com) 的訂閱計費服務提供了一個語意化且流暢的介面。它幾乎處理了所有你害怕編寫的訂閱計費樣板程式碼。除了基本的訂閱管理外，Cashier 還可以處理：更換訂閱、訂閱「數量」、暫停訂閱、取消寬限期等等。
 
-Before digging into Cashier Paddle, we recommend you also review Paddle's [concept guides](https://developer.paddle.com/concepts/overview) and [API documentation](https://developer.paddle.com/api-reference/overview).
+在深入研究 Cashier Paddle 之前，我們建議你也閱讀 Paddle 的 [概念指南](https://developer.paddle.com/concepts/overview) 和 [API 文件](https://developer.paddle.com/api-reference/overview)。
 
 <a name="upgrading-cashier"></a>
-## Upgrading Cashier
+<a name="upgrading-cashier"></a>
+## 升級 Cashier (Upgrading Cashier)
 
-When upgrading to a new version of Cashier, it's important that you carefully review [the upgrade guide](https://github.com/laravel/cashier-paddle/blob/master/UPGRADE.md).
+升級到新版本的 Cashier 時，請務必仔細閱讀 [升級指南](https://github.com/laravel/cashier-paddle/blob/master/UPGRADE.md)。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
-First, install the Cashier package for Paddle using the Composer package manager:
+首先，使用 Composer 套件管理器安裝 Paddle 的 Cashier 套件：
 
 ```shell
 composer require laravel/cashier-paddle
 ```
 
-Next, you should publish the Cashier migration files using the `vendor:publish` Artisan command:
+接下來，你應該使用 `vendor:publish` Artisan 指令發布 Cashier 的遷移檔案：
 
 ```shell
 php artisan vendor:publish --tag="cashier-migrations"
 ```
 
-Then, you should run your application's database migrations. The Cashier migrations will create a new `customers` table. In addition, new `subscriptions` and `subscription_items` tables will be created to store all of your customer's subscriptions. Lastly, a new `transactions` table will be created to store all of the Paddle transactions associated with your customers:
+然後，你應該執行應用程式的資料庫遷移。Cashier 遷移將建立一個新的 `customers` 資料表。此外，還將建立新的 `subscriptions` 和 `subscription_items` 資料表來儲存所有客戶的訂閱。最後，將建立一個新的 `transactions` 資料表來儲存與你的客戶相關的所有 Paddle 交易：
 
 ```shell
 php artisan migrate
 ```
 
 > [!WARNING]
-> To ensure Cashier properly handles all Paddle events, remember to [set up Cashier's webhook handling](#handling-paddle-webhooks).
+> 為了確保 Cashier 正確處理所有 Paddle 事件，請記得 [設定 Cashier 的 Webhook 處理](#handling-paddle-webhooks)。
 
 <a name="paddle-sandbox"></a>
 ### Paddle Sandbox
 
-During local and staging development, you should [register a Paddle Sandbox account](https://sandbox-login.paddle.com/signup). This account will give you a sandboxed environment to test and develop your applications without making actual payments. You may use Paddle's [test card numbers](https://developer.paddle.com/concepts/payment-methods/credit-debit-card#test-payment-method) to simulate various payment scenarios.
+在本地和預備環境開發期間，你應該 [註冊一個 Paddle Sandbox 帳號](https://sandbox-login.paddle.com/signup)。此帳號將為你提供一個沙盒環境來測試和開發你的應用程式，而無需進行實際付款。你可以使用 Paddle 的 [測試卡號](https://developer.paddle.com/concepts/payment-methods/credit-debit-card#test-payment-method) 來模擬各種付款情境。
 
-When using the Paddle Sandbox environment, you should set the `PADDLE_SANDBOX` environment variable to `true` within your application's `.env` file:
+使用 Paddle Sandbox 環境時，你應該在應用程式的 `.env` 檔案中將 `PADDLE_SANDBOX` 環境變數設定為 `true`：
 
 ```ini
 PADDLE_SANDBOX=true
 ```
 
-After you have finished developing your application you may [apply for a Paddle vendor account](https://paddle.com). Before your application is placed into production, Paddle will need to approve your application's domain.
+完成應用程式開發後，你可以 [申請 Paddle 供應商帳號](https://paddle.com)。在你的應用程式投入生產環境之前，Paddle 需要核准你的應用程式網域。
 
 <a name="configuration"></a>
-## 設定
+<a name="configuration"></a>
+## 設定 (Configuration)
 
 <a name="billable-model"></a>
-### Billable Model
+### Billable 模型 (Billable Model)
 
-Before using Cashier, you must add the `Billable` trait to your user model definition. This trait provides various methods to allow you to perform common billing tasks, such as creating subscriptions and updating payment method information:
+在使用 Cashier 之前，你必須將 `Billable` trait 新增到你的使用者模型定義中。這個 trait 提供了各種方法，讓你執行常見的計費任務，例如建立訂閱和更新付款方式資訊：
 
 ```php
 use Laravel\Paddle\Billable;
@@ -124,7 +126,7 @@ class User extends Authenticatable
 }
 ```
 
-If you have billable entities that are not users, you may also add the trait to those classes:
+如果你有非使用者的計費實體，你也可以將該 trait 新增到這些類別中：
 
 ```php
 use Illuminate\Database\Eloquent\Model;
@@ -139,7 +141,7 @@ class Team extends Model
 <a name="api-keys"></a>
 ### API Keys
 
-Next, you should configure your Paddle keys in your application's `.env` file. You can retrieve your Paddle API keys from the Paddle control panel:
+接下來，你應該在應用程式的 `.env` 檔案中設定你的 Paddle 金鑰。你可以從 Paddle 控制面板取得你的 Paddle API 金鑰：
 
 ```ini
 PADDLE_CLIENT_SIDE_TOKEN=your-paddle-client-side-token
@@ -149,14 +151,14 @@ PADDLE_WEBHOOK_SECRET="your-paddle-webhook-secret"
 PADDLE_SANDBOX=true
 ```
 
-The `PADDLE_SANDBOX` environment variable should be set to `true` when you are using [Paddle's Sandbox environment](#paddle-sandbox). The `PADDLE_SANDBOX` variable should be set to `false` if you are deploying your application to production and are using Paddle's live vendor environment.
+當你使用 [Paddle 的 Sandbox 環境](#paddle-sandbox) 時，`PADDLE_SANDBOX` 環境變數應設定為 `true`。如果你將應用程式部署到生產環境並使用 Paddle 的即時供應商環境，則 `PADDLE_SANDBOX` 變數應設定為 `false`。
 
-The `PADDLE_RETAIN_KEY` is optional and should only be set if you're using Paddle with [Retain](https://developer.paddle.com/concepts/retain/overview).
+`PADDLE_RETAIN_KEY` 是選用的，只有在你使用 Paddle 與 [Retain](https://developer.paddle.com/concepts/retain/overview) 時才需要設定。
 
 <a name="paddle-js"></a>
 ### Paddle JS
 
-Paddle relies on its own JavaScript library to initiate the Paddle checkout widget. You can load the JavaScript library by placing the `@paddleJS` Blade directive right before your application layout's closing `</head>` tag:
+Paddle 依賴其自己的 JavaScript 函式庫來啟動 Paddle 結帳小工具。你可以透過將 `@paddleJS` Blade 指令放置在應用程式版面配置的結束 `</head>` 標籤之前來載入 JavaScript 函式庫：
 
 ```blade
 <head>
@@ -167,21 +169,21 @@ Paddle relies on its own JavaScript library to initiate the Paddle checkout widg
 ```
 
 <a name="currency-configuration"></a>
-### Currency Configuration
+### 貨幣設定 (Currency Configuration)
 
-You can specify a locale to be used when formatting money values for display on invoices. Internally, Cashier utilizes [PHP's `NumberFormatter` class](https://www.php.net/manual/en/class.numberformatter.php) to set the currency locale:
+你可以指定一個語系，用於在發票上顯示貨幣值時進行格式化。Cashier 內部使用 [PHP 的 `NumberFormatter` 類別](https://www.php.net/manual/en/class.numberformatter.php) 來設定貨幣語系：
 
 ```ini
 CASHIER_CURRENCY_LOCALE=nl_BE
 ```
 
 > [!WARNING]
-> In order to use locales other than `en`, ensure the `ext-intl` PHP extension is installed and configured on your server.
+> 為了使用 `en` 以外的語系，請確保你的伺服器上已安裝並設定 `ext-intl` PHP 擴充功能。
 
 <a name="overriding-default-models"></a>
-### Overriding Default Models
+### 覆寫預設模型 (Overriding Default Models)
 
-You are free to extend the models used internally by Cashier by defining your own model and extending the corresponding Cashier model:
+你可以自由擴充 Cashier 內部使用的模型，方法是定義你自己的模型並擴充相應的 Cashier 模型：
 
 ```php
 use Laravel\Paddle\Subscription as CashierSubscription;
@@ -192,7 +194,7 @@ class Subscription extends CashierSubscription
 }
 ```
 
-After defining your model, you may instruct Cashier to use your custom model via the `Laravel\Paddle\Cashier` class. Typically, you should inform Cashier about your custom models in the `boot` method of your application's `App\Providers\AppServiceProvider` class:
+定義模型後，你可以透過 `Laravel\Paddle\Cashier` 類別指示 Cashier 使用你的自訂模型。通常，你應該在應用程式的 `App\Providers\AppServiceProvider` 類別的 `boot` 方法中通知 Cashier 關於你的自訂模型：
 
 ```php
 use App\Models\Cashier\Subscription;
@@ -209,17 +211,17 @@ public function boot(): void
 ```
 
 <a name="quickstart"></a>
-## Quickstart
+## 快速開始 (Quickstart)
 
 <a name="quickstart-selling-products"></a>
-### Selling Products
+### 銷售產品 (Selling Products)
 
 > [!NOTE]
-> Before utilizing Paddle Checkout, you should define Products with fixed prices in your Paddle dashboard. In addition, you should [configure Paddle's webhook handling](#handling-paddle-webhooks).
+> 在使用 Paddle Checkout 之前，你應該在 Paddle 儀表板中定義具有固定價格的產品。此外，你應該 [設定 Paddle 的 Webhook 處理](#handling-paddle-webhooks)。
 
-Offering product and subscription billing via your application can be intimidating. However, thanks to Cashier and [Paddle's Checkout Overlay](https://developer.paddle.com/concepts/sell/overlay-checkout), you can easily build modern, robust payment integrations.
+透過你的應用程式提供產品和訂閱計費可能會令人望而生畏。然而，感謝 Cashier 和 [Paddle 的 Checkout Overlay](https://developer.paddle.com/concepts/sell/overlay-checkout)，你可以輕鬆建立現代化、強大的付款整合。
 
-To charge customers for non-recurring, single-charge products, we'll utilize Cashier to charge customers with Paddle's Checkout Overlay, where they will provide their payment details and confirm their purchase. Once the payment has been made via the Checkout Overlay, the customer will be redirected to a success URL of your choosing within your application:
+為了向客戶收取非經常性、單次收費產品的費用，我們將利用 Cashier 透過 Paddle 的 Checkout Overlay 向客戶收費，他們將在其中提供付款詳細資訊並確認購買。透過 Checkout Overlay 完成付款後，客戶將被重新導向到你在應用程式中選擇的成功 URL：
 
 ```php
 use Illuminate\Http\Request;
@@ -232,11 +234,11 @@ Route::get('/buy', function (Request $request) {
 })->name('checkout');
 ```
 
-As you can see in the example above, we will utilize Cashier's provided `checkout` method to create a checkout object to present the customer the Paddle Checkout Overlay for a given "price identifier". When using Paddle, "prices" refer to [defined prices for specific products](https://developer.paddle.com/build/products/create-products-prices).
+如上例所示，我們將利用 Cashier 提供的 `checkout` 方法來建立一個 checkout 物件，以便為給定的「價格識別碼」向客戶顯示 Paddle Checkout Overlay。使用 Paddle 時，「價格」是指 [特定產品的定義價格](https://developer.paddle.com/build/products/create-products-prices)。
 
-If necessary, the `checkout` method will automatically create a customer in Paddle and connect that Paddle customer record to the corresponding user in your application's database. After completing the checkout session, the customer will be redirected to a dedicated success page where you can display an informational message to the customer.
+如有必要，`checkout` 方法將自動在 Paddle 中建立一個客戶，並將該 Paddle 客戶記錄連接到你應用程式資料庫中的相應使用者。完成結帳 session 後，客戶將被重新導向到專用的成功頁面，你可以在該頁面向客戶顯示資訊訊息。
 
-In the `buy` view, we will include a button to display the Checkout Overlay. The `paddle-button` Blade component is included with Cashier Paddle; however, you may also [manually render an overlay checkout](#manually-rendering-an-overlay-checkout):
+在 `buy` 視圖中，我們將包含一個按鈕來顯示 Checkout Overlay。Cashier Paddle 包含 `paddle-button` Blade 元件；但是，你也可以 [手動渲染 overlay checkout](#manually-rendering-an-overlay-checkout)：
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
@@ -245,11 +247,11 @@ In the `buy` view, we will include a button to display the Checkout Overlay. The
 ```
 
 <a name="providing-meta-data-to-paddle-checkout"></a>
-#### Providing Meta Data to Paddle Checkout
+#### 提供 Meta Data 給 Paddle Checkout
 
-When selling products, it's common to keep track of completed orders and purchased products via `Cart` and `Order` models defined by your own application. When redirecting customers to Paddle's Checkout Overlay to complete a purchase, you may need to provide an existing order identifier so that you can associate the completed purchase with the corresponding order when the customer is redirected back to your application.
+銷售產品時，通常會透過應用程式定義的 `Cart` 和 `Order` 模型來追蹤已完成的訂單和購買的產品。當將客戶重新導向到 Paddle 的 Checkout Overlay 以完成購買時，你可能需要提供現有的訂單識別碼，以便在客戶被重新導向回你的應用程式時，將已完成的購買與相應的訂單關聯起來。
 
-To accomplish this, you may provide an array of custom data to the `checkout` method. Let's imagine that a pending `Order` is created within our application when a user begins the checkout process. Remember, the `Cart` and `Order` models in this example are illustrative and not provided by Cashier. You are free to implement these concepts based on the needs of your own application:
+為此，你可以向 `checkout` 方法提供一個自訂資料陣列。讓我們想像一下，當使用者開始結帳流程時，我們的應用程式中會建立一個待處理的 `Order`。請記住，此範例中的 `Cart` 和 `Order` 模型僅供說明，並非由 Cashier 提供。你可以根據自己應用程式的需求自由實作這些概念：
 
 ```php
 use App\Models\Cart;
@@ -270,11 +272,11 @@ Route::get('/cart/{cart}/checkout', function (Request $request, Cart $cart) {
 })->name('checkout');
 ```
 
-As you can see in the example above, when a user begins the checkout process, we will provide all of the cart / order's associated Paddle price identifiers to the `checkout` method. Of course, your application is responsible for associating these items with the "shopping cart" or order as a customer adds them. We also provide the order's ID to the Paddle Checkout Overlay via the `customData` method.
+如上例所示，當使用者開始結帳流程時，我們將向 `checkout` 方法提供所有購物車 / 訂單相關的 Paddle 價格識別碼。當然，你的應用程式負責在客戶新增項目時將這些項目與「購物車」或訂單關聯起來。我們還透過 `customData` 方法將訂單 ID 提供給 Paddle Checkout Overlay。
 
-Of course, you will likely want to mark the order as "complete" once the customer has finished the checkout process. To accomplish this, you may listen to the webhooks dispatched by Paddle and raised via events by Cashier to store order information in your database.
+當然，一旦客戶完成結帳流程，你可能會希望將訂單標記為「已完成」。為此，你可以監聽 Paddle 發送的 webhook 並由 Cashier 透過事件引發，以將訂單資訊儲存在你的資料庫中。
 
-To get started, listen for the `TransactionCompleted` event dispatched by Cashier. Typically, you should register the event listener in the `boot` method of your application's `AppServiceProvider`:
+首先，監聽 Cashier 發送的 `TransactionCompleted` 事件。通常，你應該在應用程式的 `AppServiceProvider` 的 `boot` 方法中註冊事件監聽器：
 
 ```php
 use App\Listeners\CompleteOrder;
@@ -290,7 +292,7 @@ public function boot(): void
 }
 ```
 
-In this example, the `CompleteOrder` listener might look like the following:
+在此範例中，`CompleteOrder` 監聽器可能如下所示：
 
 ```php
 namespace App\Listeners;
@@ -315,19 +317,19 @@ class CompleteOrder
 }
 ```
 
-Please refer to Paddle's documentation for more information on the [data contained by the `transaction.completed` event](https://developer.paddle.com/webhooks/transactions/transaction-completed).
+有關 [`transaction.completed` 事件包含的資料](https://developer.paddle.com/webhooks/transactions/transaction-completed) 的更多資訊，請參閱 Paddle 的文件。
 
 <a name="quickstart-selling-subscriptions"></a>
-### Selling Subscriptions
+### 銷售訂閱 (Selling Subscriptions)
 
 > [!NOTE]
-> Before utilizing Paddle Checkout, you should define Products with fixed prices in your Paddle dashboard. In addition, you should [configure Paddle's webhook handling](#handling-paddle-webhooks).
+> 在使用 Paddle Checkout 之前，你應該在 Paddle 儀表板中定義具有固定價格的產品。此外，你應該 [設定 Paddle 的 Webhook 處理](#handling-paddle-webhooks)。
 
-Offering product and subscription billing via your application can be intimidating. However, thanks to Cashier and [Paddle's Checkout Overlay](https://developer.paddle.com/concepts/sell/overlay-checkout), you can easily build modern, robust payment integrations.
+透過你的應用程式提供產品和訂閱計費可能會令人望而生畏。然而，感謝 Cashier 和 [Paddle 的 Checkout Overlay](https://developer.paddle.com/concepts/sell/overlay-checkout)，你可以輕鬆建立現代化、強大的付款整合。
 
-To learn how to sell subscriptions using Cashier and Paddle's Checkout Overlay, let's consider the simple scenario of a subscription service with a basic monthly (`price_basic_monthly`) and yearly (`price_basic_yearly`) plan. These two prices could be grouped under a "Basic" product (`pro_basic`) in our Paddle dashboard. In addition, our subscription service might offer an "Expert" plan as `pro_expert`.
+要學習如何使用 Cashier 和 Paddle 的 Checkout Overlay 銷售訂閱，讓我們考慮一個簡單的訂閱服務情境，其中包含基本的月繳 (`price_basic_monthly`) 和年繳 (`price_basic_yearly`) 方案。這兩個價格可以在我們的 Paddle 儀表板中歸類為「Basic」產品 (`pro_basic`)。此外，我們的訂閱服務可能提供「Expert」方案作為 `pro_expert`。
 
-First, let's discover how a customer can subscribe to our services. Of course, you can imagine the customer might click a "subscribe" button for the Basic plan on our application's pricing page. This button will invoke a Paddle Checkout Overlay for their chosen plan. To get started, let's initiate a checkout session via the `checkout` method:
+首先，讓我們了解客戶如何訂閱我們的服務。當然，你可以想像客戶可能會點擊我們應用程式定價頁面上 Basic 方案的「訂閱」按鈕。此按鈕將為他們選擇的方案呼叫 Paddle Checkout Overlay。首先，讓我們透過 `checkout` 方法啟動一個結帳 session：
 
 ```php
 use Illuminate\Http\Request;
@@ -340,7 +342,7 @@ Route::get('/subscribe', function (Request $request) {
 })->name('subscribe');
 ```
 
-In the `subscribe` view, we will include a button to display the Checkout Overlay. The `paddle-button` Blade component is included with Cashier Paddle; however, you may also [manually render an overlay checkout](#manually-rendering-an-overlay-checkout):
+在 `subscribe` 視圖中，我們將包含一個按鈕來顯示 Checkout Overlay。Cashier Paddle 包含 `paddle-button` Blade 元件；但是，你也可以 [手動渲染 overlay checkout](#manually-rendering-an-overlay-checkout)：
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
@@ -348,9 +350,9 @@ In the `subscribe` view, we will include a button to display the Checkout Overla
 </x-paddle-button>
 ```
 
-Now, when the Subscribe button is clicked, the customer will be able to enter their payment details and initiate their subscription. To know when their subscription has actually started (since some payment methods require a few seconds to process), you should also [configure Cashier's webhook handling](#handling-paddle-webhooks).
+現在，當點擊訂閱按鈕時，客戶將能夠輸入他們的付款詳細資訊並啟動他們的訂閱。要知道他們的訂閱何時實際開始（因為某些付款方式需要幾秒鐘來處理），你還應該 [設定 Cashier 的 Webhook 處理](#handling-paddle-webhooks)。
 
-Now that customers can start subscriptions, we need to restrict certain portions of our application so that only subscribed users can access them. Of course, we can always determine a user's current subscription status via the `subscribed` method provided by Cashier's `Billable` trait:
+既然客戶可以開始訂閱，我們需要限制應用程式的某些部分，以便只有訂閱的使用者才能存取它們。當然，我們始終可以透過 Cashier 的 `Billable` trait 提供的 `subscribed` 方法來確定使用者的目前訂閱狀態：
 
 ```blade
 @if ($user->subscribed())
@@ -358,7 +360,7 @@ Now that customers can start subscriptions, we need to restrict certain portions
 @endif
 ```
 
-We can even easily determine if a user is subscribed to specific product or price:
+我們甚至可以輕鬆確定使用者是否訂閱了特定產品或價格：
 
 ```blade
 @if ($user->subscribedToProduct('pro_basic'))
@@ -371,9 +373,9 @@ We can even easily determine if a user is subscribed to specific product or pric
 ```
 
 <a name="quickstart-building-a-subscribed-middleware"></a>
-#### Building a Subscribed Middleware
+#### 建立訂閱 Middleware
 
-For convenience, you may wish to create a [middleware](/docs/middleware) which determines if the incoming request is from a subscribed user. Once this middleware has been defined, you may easily assign it to a route to prevent users that are not subscribed from accessing the route:
+為了方便起見，你可能希望建立一個 [middleware](/docs/middleware) 來確定傳入的請求是否來自已訂閱的使用者。定義此 middleware 後，你可以輕鬆地將其指派給路由，以防止未訂閱的使用者存取該路由：
 
 ```php
 <?php
@@ -401,7 +403,7 @@ class Subscribed
 }
 ```
 
-Once the middleware has been defined, you may assign it to a route:
+定義 middleware 後，你可以將其指派給路由：
 
 ```php
 use App\Http\Middleware\Subscribed;
@@ -412,9 +414,9 @@ Route::get('/dashboard', function () {
 ```
 
 <a name="quickstart-allowing-customers-to-manage-their-billing-plan"></a>
-#### Allowing Customers to Manage Their Billing Plan
+#### 允許客戶管理他們的計費方案
 
-Of course, customers may want to change their subscription plan to another product or "tier". In our example from above, we'd want to allow the customer to change their plan from a monthly subscription to a yearly subscription. For this you'll need to implement something like a button that leads to the below route:
+當然，客戶可能希望將其訂閱方案變更為其他產品或「層級」。在上面的範例中，我們希望允許客戶將其方案從月繳訂閱變更為年繳訂閱。為此，你需要實作類似按鈕的東西，該按鈕導向以下路由：
 
 ```php
 use Illuminate\Http\Request;
@@ -426,7 +428,7 @@ Route::put('/subscription/{price}/swap', function (Request $request, $price) {
 })->name('subscription.swap');
 ```
 
-Besides swapping plans you'll also need to allow your customers to cancel their subscription. Like swapping plans, provide a button that leads to the following route:
+除了更換方案外，你還需要允許客戶取消訂閱。與更換方案一樣，提供一個導向以下路由的按鈕：
 
 ```php
 use Illuminate\Http\Request;
@@ -438,22 +440,22 @@ Route::put('/subscription/cancel', function (Request $request, $price) {
 })->name('subscription.cancel');
 ```
 
-And now your subscription will get canceled at the end of its billing period.
+現在，你的訂閱將在其計費週期結束時取消。
 
 > [!NOTE]
-> As long as you have configured Cashier's webhook handling, Cashier will automatically keep your application's Cashier-related database tables in sync by inspecting the incoming webhooks from Paddle. So, for example, when you cancel a customer's subscription via Paddle's dashboard, Cashier will receive the corresponding webhook and mark the subscription as "canceled" in your application's database.
+> 只要你已設定 Cashier 的 Webhook 處理，Cashier 將透過檢查來自 Paddle 的傳入 Webhook 自動保持應用程式的 Cashier 相關資料庫資料表同步。因此，例如，當你透過 Paddle 的儀表板取消客戶的訂閱時，Cashier 將收到相應的 Webhook 並將應用程式資料庫中的訂閱標記為「已取消」。
 
 <a name="checkout-sessions"></a>
-## Checkout Sessions
+## 結帳 Session (Checkout Sessions)
 
-Most operations to bill customers are performed using "checkouts" via Paddle's [Checkout Overlay widget](https://developer.paddle.com/build/checkout/build-overlay-checkout) or by utilizing [inline checkout](https://developer.paddle.com/build/checkout/build-branded-inline-checkout).
+大多數向客戶收費的操作都是透過 Paddle 的 [Checkout Overlay 小工具](https://developer.paddle.com/build/checkout/build-overlay-checkout) 或利用 [inline checkout](https://developer.paddle.com/build/checkout/build-branded-inline-checkout) 使用「checkouts」執行的。
 
-Before processing checkout payments using Paddle, you should define your application's [default payment link](https://developer.paddle.com/build/transactions/default-payment-link#set-default-link) in your Paddle checkout settings dashboard.
+在使用 Paddle 處理結帳付款之前，你應該在 Paddle 結帳設定儀表板中定義應用程式的 [預設付款連結](https://developer.paddle.com/build/transactions/default-payment-link#set-default-link)。
 
 <a name="overlay-checkout"></a>
-### Overlay Checkout
+### Overlay 結帳 (Overlay Checkout)
 
-Before displaying the Checkout Overlay widget, you must generate a checkout session using Cashier. A checkout session will inform the checkout widget of the billing operation that should be performed:
+在顯示 Checkout Overlay 小工具之前，你必須使用 Cashier 產生一個結帳 session。結帳 session 將通知結帳小工具應執行的計費操作：
 
 ```php
 use Illuminate\Http\Request;
@@ -466,7 +468,7 @@ Route::get('/buy', function (Request $request) {
 });
 ```
 
-Cashier includes a `paddle-button` [Blade component](/docs/blade#components). You may pass the checkout session to this component as a "prop". Then, when this button is clicked, Paddle's checkout widget will be displayed:
+Cashier 包含一個 `paddle-button` [Blade 元件](/docs/blade#components)。你可以將結帳 session 作為「prop」傳遞給此元件。然後，當點擊此按鈕時，將顯示 Paddle 的結帳小工具：
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
@@ -474,7 +476,7 @@ Cashier includes a `paddle-button` [Blade component](/docs/blade#components). Yo
 </x-paddle-button>
 ```
 
-By default, this will display the widget using Paddle's default styling. You can customize the widget by adding [Paddle supported attributes](https://developer.paddle.com/paddlejs/html-data-attributes) like the  `data-theme='light'` attribute to the component:
+預設情況下，這將使用 Paddle 的預設樣式顯示小工具。你可以透過將 [Paddle 支援的屬性](https://developer.paddle.com/paddlejs/html-data-attributes)（如 `data-theme='light'` 屬性）新增到元件來自訂小工具：
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4" data-theme="light">
@@ -482,15 +484,15 @@ By default, this will display the widget using Paddle's default styling. You can
 </x-paddle-button>
 ```
 
-The Paddle checkout widget is asynchronous. Once the user creates a subscription within the widget, Paddle will send your application a webhook so that you may properly update the subscription state in your application's database. Therefore, it's important that you properly [set up webhooks](#handling-paddle-webhooks) to accommodate for state changes from Paddle.
+Paddle 結帳小工具是非同步的。一旦使用者在小工具中建立訂閱，Paddle 將向你的應用程式發送一個 webhook，以便你可以正確更新應用程式資料庫中的訂閱狀態。因此，正確 [設定 webhook](#handling-paddle-webhooks) 以適應 Paddle 的狀態變更非常重要。
 
 > [!WARNING]
-> After a subscription state change, the delay for receiving the corresponding webhook is typically minimal but you should account for this in your application by considering that your user's subscription might not be immediately available after completing the checkout.
+> 訂閱狀態變更後，接收相應 webhook 的延遲通常很短，但你應該在應用程式中考慮到這一點，即使用者的訂閱可能不會在完成結帳後立即生效。
 
 <a name="manually-rendering-an-overlay-checkout"></a>
-#### Manually Rendering an Overlay Checkout
+#### 手動渲染 Overlay Checkout
 
-You may also manually render an overlay checkout without using Laravel's built-in Blade components. To get started, generate the checkout session [as demonstrated in previous examples](#overlay-checkout):
+你也可以手動渲染 overlay checkout，而不使用 Laravel 內建的 Blade 元件。首先，[如前面的範例所示](#overlay-checkout) 產生結帳 session：
 
 ```php
 use Illuminate\Http\Request;
@@ -503,7 +505,7 @@ Route::get('/buy', function (Request $request) {
 });
 ```
 
-Next, you may use Paddle.js to initialize the checkout. In this example, we will create a link that is assigned the `paddle_button` class. Paddle.js will detect this class and display the overlay checkout when the link is clicked:
+接下來，你可以使用 Paddle.js 初始化結帳。在此範例中，我們將建立一個分配了 `paddle_button` 類別的連結。Paddle.js 將偵測此類別並在點擊連結時顯示 overlay checkout：
 
 ```blade
 <?php
@@ -525,11 +527,11 @@ $custom = $checkout->getCustomData();
 ```
 
 <a name="inline-checkout"></a>
-### Inline Checkout
+### Inline 結帳 (Inline Checkout)
 
-If you don't want to make use of Paddle's "overlay" style checkout widget, Paddle also provides the option to display the widget inline. While this approach does not allow you to adjust any of the checkout's HTML fields, it allows you to embed the widget within your application.
+如果你不想使用 Paddle 的「overlay」樣式結帳小工具，Paddle 也提供了內嵌顯示小工具的選項。雖然這種方法不允許你調整任何結帳的 HTML 欄位，但它允許你將小工具嵌入到你的應用程式中。
 
-To make it easy for you to get started with inline checkout, Cashier includes a `paddle-checkout` Blade component. To get started, you should [generate a checkout session](#overlay-checkout):
+為了讓你輕鬆開始使用 inline checkout，Cashier 包含一個 `paddle-checkout` Blade 元件。首先，你應該 [產生一個結帳 session](#overlay-checkout)：
 
 ```php
 use Illuminate\Http\Request;
@@ -542,24 +544,24 @@ Route::get('/buy', function (Request $request) {
 });
 ```
 
-Then, you may pass the checkout session to the component's `checkout` attribute:
+然後，你可以將結帳 session 傳遞給元件的 `checkout` 屬性：
 
 ```blade
 <x-paddle-checkout :checkout="$checkout" className="w-full" />
 ```
 
-To adjust the height of the inline checkout component, you may pass the `height` attribute to the Blade component:
+要調整 inline checkout 元件的高度，你可以將 `height` 屬性傳遞給 Blade 元件：
 
 ```blade
 <x-paddle-checkout :checkout="$checkout" className="w-full" height="500" />
 ```
 
-Please consult Paddle's [guide on Inline Checkout](https://developer.paddle.com/build/checkout/build-branded-inline-checkout) and [available checkout settings](https://developer.paddle.com/build/checkout/set-up-checkout-default-settings) for further details on the inline checkout's customization options.
+有關 inline checkout 自訂選項的更多詳細資訊，請參閱 Paddle 的 [Inline Checkout 指南](https://developer.paddle.com/build/checkout/build-branded-inline-checkout) 和 [可用的結帳設定](https://developer.paddle.com/build/checkout/set-up-checkout-default-settings)。
 
 <a name="manually-rendering-an-inline-checkout"></a>
-#### Manually Rendering an Inline Checkout
+#### 手動渲染 Inline Checkout
 
-You may also manually render an inline checkout without using Laravel's built-in Blade components. To get started, generate the checkout session [as demonstrated in previous examples](#inline-checkout):
+你也可以手動渲染 inline checkout，而不使用 Laravel 內建的 Blade 元件。首先，[如前面的範例所示](#inline-checkout) 產生結帳 session：
 
 ```php
 use Illuminate\Http\Request;
@@ -572,7 +574,7 @@ Route::get('/buy', function (Request $request) {
 });
 ```
 
-Next, you may use Paddle.js to initialize the checkout. In this example, we will demonstrate this using [Alpine.js](https://github.com/alpinejs/alpine); however, you are free to modify this example for your own frontend stack:
+接下來，你可以使用 Paddle.js 初始化結帳。在此範例中，我們將使用 [Alpine.js](https://github.com/alpinejs/alpine) 進行示範；但是，你可以根據自己的前端堆疊自由修改此範例：
 
 ```blade
 <?php
@@ -589,9 +591,9 @@ $options['settings']['frameInitialHeight'] = 366;
 ```
 
 <a name="guest-checkouts"></a>
-### Guest Checkouts
+### 訪客結帳 (Guest Checkouts)
 
-Sometimes, you may need to create a checkout session for users that do not need an account with your application. To do so, you may use the `guest` method:
+有時，你可能需要為不需要應用程式帳號的使用者建立結帳 session。為此，你可以使用 `guest` 方法：
 
 ```php
 use Illuminate\Http\Request;
@@ -605,12 +607,12 @@ Route::get('/buy', function (Request $request) {
 });
 ```
 
-Then, you may provide the checkout session to the [Paddle button](#overlay-checkout) or [inline checkout](#inline-checkout) Blade components.
+然後，你可以將結帳 session 提供給 [Paddle 按鈕](#overlay-checkout) 或 [inline checkout](#inline-checkout) Blade 元件。
 
 <a name="price-previews"></a>
-## Price Previews
+## 價格預覽 (Price Previews)
 
-Paddle allows you to customize prices per currency, essentially allowing you to configure different prices for different countries. Cashier Paddle allows you to retrieve all of these prices using the `previewPrices` method. This method accepts the price IDs you wish to retrieve prices for:
+Paddle 允許你自訂每種貨幣的價格，基本上允許你為不同國家/地區設定不同的價格。Cashier Paddle 允許你使用 `previewPrices` 方法取得所有這些價格。此方法接受你希望取得價格的價格 ID：
 
 ```php
 use Laravel\Paddle\Cashier;
@@ -618,7 +620,7 @@ use Laravel\Paddle\Cashier;
 $prices = Cashier::previewPrices(['pri_123', 'pri_456']);
 ```
 
-The currency will be determined based on the IP address of the request; however, you may optionally provide a specific country to retrieve prices for:
+貨幣將根據請求的 IP 位址決定；但是，你可以選擇性地提供特定國家/地區以取得價格：
 
 ```php
 use Laravel\Paddle\Cashier;
@@ -629,7 +631,7 @@ $prices = Cashier::previewPrices(['pri_123', 'pri_456'], ['address' => [
 ]]);
 ```
 
-After retrieving the prices you may display them however you wish:
+取得價格後，你可以隨意顯示它們：
 
 ```blade
 <ul>
@@ -639,7 +641,7 @@ After retrieving the prices you may display them however you wish:
 </ul>
 ```
 
-You may also display the subtotal price and tax amount separately:
+你也可以分別顯示小計價格和稅額：
 
 ```blade
 <ul>
@@ -649,12 +651,12 @@ You may also display the subtotal price and tax amount separately:
 </ul>
 ```
 
-For more information, [checkout Paddle's API documentation regarding price previews](https://developer.paddle.com/api-reference/pricing-preview/preview-prices).
+有關更多資訊，請 [查看 Paddle 關於價格預覽的 API 文件](https://developer.paddle.com/api-reference/pricing-preview/preview-prices)。
 
 <a name="customer-price-previews"></a>
-### Customer Price Previews
+### 客戶價格預覽 (Customer Price Previews)
 
-If a user is already a customer and you would like to display the prices that apply to that customer, you may do so by retrieving the prices directly from the customer instance:
+如果使用者已經是客戶，並且你想顯示適用於該客戶的價格，你可以直接從客戶實例取得價格：
 
 ```php
 use App\Models\User;
@@ -662,12 +664,12 @@ use App\Models\User;
 $prices = User::find(1)->previewPrices(['pri_123', 'pri_456']);
 ```
 
-Internally, Cashier will use the user's customer ID to retrieve the prices in their currency. So, for example, a user living in the United States will see prices in US dollars while a user in Belgium will see prices in Euros. If no matching currency can be found, the default currency of the product will be used. You can customize all prices of a product or subscription plan in the Paddle control panel.
+Cashier 內部將使用使用者的客戶 ID 來取得其貨幣的價格。因此，例如，居住在美國的使用者將看到以美元為單位的價格，而居住在比利時的使用者將看到以歐元為單位的價格。如果找不到相符的貨幣，將使用產品的預設貨幣。你可以在 Paddle 控制面板中自訂產品或訂閱方案的所有價格。
 
 <a name="price-discounts"></a>
-### Discounts
+### 折扣 (Discounts)
 
-You may also choose to display prices after a discount. When calling the `previewPrices` method, you provide the discount ID via the `discount_id` option:
+你也可以選擇顯示折扣後的價格。呼叫 `previewPrices` 方法時，透過 `discount_id` 選項提供折扣 ID：
 
 ```php
 use Laravel\Paddle\Cashier;
@@ -677,7 +679,7 @@ $prices = Cashier::previewPrices(['pri_123', 'pri_456'], [
 ]);
 ```
 
-Then, display the calculated prices:
+然後，顯示計算出的價格：
 
 ```blade
 <ul>
@@ -688,12 +690,12 @@ Then, display the calculated prices:
 ```
 
 <a name="customers"></a>
-## Customers
+## 客戶 (Customers)
 
 <a name="customer-defaults"></a>
-### Customer Defaults
+### 客戶預設值 (Customer Defaults)
 
-Cashier allows you to define some useful defaults for your customers when creating checkout sessions. Setting these defaults allow you to pre-fill a customer's email address and name so that they can immediately move on to the payment portion of the checkout widget. You can set these defaults by overriding the following methods on your billable model:
+Cashier 允許你在建立結帳 session 時為客戶定義一些有用的預設值。設定這些預設值允許你預先填寫客戶的電子郵件地址和姓名，以便他們可以立即進入結帳小工具的付款部分。你可以透過覆寫 billable 模型上的以下方法來設定這些預設值：
 
 ```php
 /**
@@ -713,12 +715,12 @@ public function paddleEmail(): string|null
 }
 ```
 
-These defaults will be used for every action in Cashier that generates a [checkout session](#checkout-sessions).
+這些預設值將用於 Cashier 中產生 [結帳 session](#checkout-sessions) 的每個操作。
 
 <a name="retrieving-customers"></a>
-### Retrieving Customers
+### 取得客戶 (Retrieving Customers)
 
-You can retrieve a customer by their Paddle Customer ID using the `Cashier::findBillable` method. This method will return an instance of the billable model:
+你可以使用 `Cashier::findBillable` 方法透過 Paddle 客戶 ID 取得客戶。此方法將回傳 billable 模型的實例：
 
 ```php
 use Laravel\Paddle\Cashier;
@@ -727,27 +729,27 @@ $user = Cashier::findBillable($customerId);
 ```
 
 <a name="creating-customers"></a>
-### Creating Customers
+### 建立客戶 (Creating Customers)
 
-Occasionally, you may wish to create a Paddle customer without beginning a subscription. You may accomplish this using the `createAsCustomer` method:
+有時，你可能希望建立一個 Paddle 客戶而不開始訂閱。你可以使用 `createAsCustomer` 方法來完成此操作：
 
 ```php
 $customer = $user->createAsCustomer();
 ```
 
-An instance of `Laravel\Paddle\Customer` is returned. Once the customer has been created in Paddle, you may begin a subscription at a later date. You may provide an optional `$options` array to pass in any additional [customer creation parameters that are supported by the Paddle API](https://developer.paddle.com/api-reference/customers/create-customer):
+將回傳 `Laravel\Paddle\Customer` 的實例。一旦在 Paddle 中建立了客戶，你可以在以後開始訂閱。你可以提供一個選用的 `$options` 陣列來傳入 [Paddle API 支援的任何其他客戶建立參數](https://developer.paddle.com/api-reference/customers/create-customer)：
 
 ```php
 $customer = $user->createAsCustomer($options);
 ```
 
 <a name="subscriptions"></a>
-## Subscriptions
+## 訂閱 (Subscriptions)
 
 <a name="creating-subscriptions"></a>
-### Creating Subscriptions
+### 建立訂閱 (Creating Subscriptions)
 
-To create a subscription, first retrieve an instance of your billable model from your database, which will typically be an instance of `App\Models\User`. Once you have retrieved the model instance, you may use the `subscribe` method to create the model's checkout session:
+要建立訂閱，首先從資料庫中取得 billable 模型的實例，通常是 `App\Models\User` 的實例。取得模型實例後，你可以使用 `subscribe` 方法來建立模型的結帳 session：
 
 ```php
 use Illuminate\Http\Request;
@@ -760,9 +762,9 @@ Route::get('/user/subscribe', function (Request $request) {
 });
 ```
 
-The first argument given to the `subscribe` method is the specific price the user is subscribing to. This value should correspond to the price's identifier in Paddle. The `returnTo` method accepts a URL that your user will be redirected to after they successfully complete the checkout. The second argument passed to the `subscribe` method should be the internal "type" of the subscription. If your application only offers a single subscription, you might call this `default` or `primary`. This subscription type is only for internal application usage and is not meant to be displayed to users. In addition, it should not contain spaces and it should never be changed after creating the subscription.
+提供給 `subscribe` 方法的第一個參數是使用者訂閱的特定價格。此值應對應於 Paddle 中的價格識別碼。`returnTo` 方法接受一個 URL，使用者在成功完成結帳後將被重新導向到該 URL。傳遞給 `subscribe` 方法的第二個參數應該是訂閱的內部「類型」。如果你的應用程式僅提供單一訂閱，你可以將其稱為 `default` 或 `primary`。此訂閱類型僅供內部應用程式使用，不適合向使用者顯示。此外，它不應包含空格，並且在建立訂閱後絕不應更改。
 
-You may also provide an array of custom metadata regarding the subscription using the `customData` method:
+你也可以使用 `customData` 方法提供有關訂閱的自訂中繼資料陣列：
 
 ```php
 $checkout = $request->user()->subscribe($premium = 'pri_123', 'default')
@@ -770,7 +772,7 @@ $checkout = $request->user()->subscribe($premium = 'pri_123', 'default')
     ->returnTo(route('home'));
 ```
 
-Once a subscription checkout session has been created, the checkout session may be provided to the `paddle-button` [Blade component](#overlay-checkout) that is included with Cashier Paddle:
+建立訂閱結帳 session 後，可以將結帳 session 提供給 Cashier Paddle 包含的 `paddle-button` [Blade 元件](#overlay-checkout)：
 
 ```blade
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
@@ -778,12 +780,12 @@ Once a subscription checkout session has been created, the checkout session may 
 </x-paddle-button>
 ```
 
-After the user has finished their checkout, a `subscription_created` webhook will be dispatched from Paddle. Cashier will receive this webhook and setup the subscription for your customer. In order to make sure all webhooks are properly received and handled by your application, ensure you have properly [setup webhook handling](#handling-paddle-webhooks).
+使用者完成結帳後，Paddle 將發送 `subscription_created` webhook。Cashier 將接收此 webhook 並為你的客戶設定訂閱。為了確保應用程式正確接收和處理所有 webhook，請確保你已正確 [設定 webhook 處理](#handling-paddle-webhooks)。
 
 <a name="checking-subscription-status"></a>
-### Checking Subscription Status
+### 檢查訂閱狀態 (Checking Subscription Status)
 
-Once a user is subscribed to your application, you may check their subscription status using a variety of convenient methods. First, the `subscribed` method returns `true` if the user has a valid subscription, even if the subscription is currently within its trial period:
+一旦使用者訂閱了你的應用程式，你可以使用各種方便的方法檢查他們的訂閱狀態。首先，`subscribed` 方法在使用者擁有有效訂閱時回傳 `true`，即使訂閱目前處於試用期內：
 
 ```php
 if ($user->subscribed()) {
@@ -791,7 +793,7 @@ if ($user->subscribed()) {
 }
 ```
 
-If your application offers multiple subscriptions, you may specify the subscription when invoking the `subscribed` method:
+如果你的應用程式提供多個訂閱，你可以在呼叫 `subscribed` 方法時指定訂閱：
 
 ```php
 if ($user->subscribed('default')) {
@@ -799,7 +801,7 @@ if ($user->subscribed('default')) {
 }
 ```
 
-The `subscribed` method also makes a great candidate for a [route middleware](/docs/middleware), allowing you to filter access to routes and controllers based on the user's subscription status:
+`subscribed` 方法也非常適合作為 [路由 middleware](/docs/middleware)，允許你根據使用者的訂閱狀態過濾對路由和控制器的存取：
 
 ```php
 <?php
@@ -829,7 +831,7 @@ class EnsureUserIsSubscribed
 }
 ```
 
-If you would like to determine if a user is still within their trial period, you may use the `onTrial` method. This method can be useful for determining if you should display a warning to the user that they are still on their trial period:
+如果你想確定使用者是否仍在試用期內，可以使用 `onTrial` 方法。此方法對於確定是否應向使用者顯示他們仍在試用期內的警告很有用：
 
 ```php
 if ($user->subscription()->onTrial()) {
@@ -837,7 +839,7 @@ if ($user->subscription()->onTrial()) {
 }
 ```
 
-The `subscribedToPrice` method may be used to determine if the user is subscribed to a given plan based on a given Paddle price ID. In this example, we will determine if the user's `default` subscription is actively subscribed to the monthly price:
+`subscribedToPrice` 方法可用於根據給定的 Paddle 價格 ID 確定使用者是否訂閱了給定的方案。在此範例中，我們將確定使用者的 `default` 訂閱是否主動訂閱了月繳價格：
 
 ```php
 if ($user->subscribedToPrice($monthly = 'pri_123', 'default')) {
@@ -845,7 +847,7 @@ if ($user->subscribedToPrice($monthly = 'pri_123', 'default')) {
 }
 ```
 
-The `recurring` method may be used to determine if the user is currently on an active subscription and is no longer within their trial period or on a grace period:
+`recurring` 方法可用於確定使用者目前是否處於有效訂閱中，並且不再處於試用期或寬限期內：
 
 ```php
 if ($user->subscription()->recurring()) {
@@ -854,9 +856,9 @@ if ($user->subscription()->recurring()) {
 ```
 
 <a name="canceled-subscription-status"></a>
-#### Canceled Subscription Status
+#### 已取消訂閱狀態 (Canceled Subscription Status)
 
-To determine if the user was once an active subscriber but has canceled their subscription, you may use the `canceled` method:
+要確定使用者是否曾經是活躍訂閱者但已取消訂閱，可以使用 `canceled` 方法：
 
 ```php
 if ($user->subscription()->canceled()) {
@@ -864,7 +866,7 @@ if ($user->subscription()->canceled()) {
 }
 ```
 
-You may also determine if a user has canceled their subscription, but are still on their "grace period" until the subscription fully expires. For example, if a user cancels a subscription on March 5th that was originally scheduled to expire on March 10th, the user is on their "grace period" until March 10th. In addition, the `subscribed` method will still return `true` during this time:
+你也可以確定使用者是否已取消訂閱，但仍處於「寬限期」，直到訂閱完全過期。例如，如果使用者在 3 月 5 日取消了原定於 3 月 10 日過期的訂閱，則使用者在 3 月 10 日之前處於「寬限期」。此外，在此期間 `subscribed` 方法仍將回傳 `true`：
 
 ```php
 if ($user->subscription()->onGracePeriod()) {
@@ -873,9 +875,9 @@ if ($user->subscription()->onGracePeriod()) {
 ```
 
 <a name="past-due-status"></a>
-#### Past Due Status
+#### 逾期狀態 (Past Due Status)
 
-If a payment fails for a subscription, it will be marked as `past_due`. When your subscription is in this state it will not be active until the customer has updated their payment information. You may determine if a subscription is past due using the `pastDue` method on the subscription instance:
+如果訂閱付款失敗，它將被標記為 `past_due`。當你的訂閱處於此狀態時，直到客戶更新其付款資訊之前，它將不會處於啟用狀態。你可以使用訂閱實例上的 `pastDue` 方法確定訂閱是否逾期：
 
 ```php
 if ($user->subscription()->pastDue()) {
@@ -883,7 +885,7 @@ if ($user->subscription()->pastDue()) {
 }
 ```
 
-When a subscription is past due, you should instruct the user to [update their payment information](#updating-payment-information).
+當訂閱逾期時，你應該指示使用者 [更新他們的付款資訊](#updating-payment-information)。
 
 If you would like subscriptions to still be considered valid when they are `past_due`, you may use the `keepPastDueSubscriptionsActive` method provided by Cashier. Typically, this method should be called in the `register` method of your `AppServiceProvider`:
 

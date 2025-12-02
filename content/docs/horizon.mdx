@@ -5,69 +5,69 @@ description: Laravel Horizon 為 Laravel Redis 佇列提供了美觀的儀表板
 
 # Laravel Horizon
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-    - [Configuration](#configuration)
-    - [Dashboard Authorization](#dashboard-authorization)
-    - [Max Job Attempts](#max-job-attempts)
-    - [Job Timeout](#job-timeout)
+- [簡介 (Introduction)](#introduction)
+- [安裝 (Installation)](#installation)
+    - [設定 (Configuration)](#configuration)
+    - [儀表板授權 (Dashboard Authorization)](#dashboard-authorization)
+    - [最大 Job 嘗試次數 (Max Job Attempts)](#max-job-attempts)
+    - [Job 超時 (Job Timeout)](#job-timeout)
     - [Job Backoff](#job-backoff)
-    - [Silenced Jobs](#silenced-jobs)
-- [Balancing Strategies](#balancing-strategies)
-    - [Auto Balancing](#auto-balancing)
-    - [Simple Balancing](#simple-balancing)
-    - [No Balancing](#no-balancing)
-- [Upgrading Horizon](#upgrading-horizon)
-- [Running Horizon](#running-horizon)
-    - [Deploying Horizon](#deploying-horizon)
-- [Tags](#tags)
-- [Notifications](#notifications)
-- [Metrics](#metrics)
-- [Deleting Failed Jobs](#deleting-failed-jobs)
-- [Clearing Jobs From Queues](#clearing-jobs-from-queues)
+    - [靜音 Job (Silenced Jobs)](#silenced-jobs)
+- [平衡策略 (Balancing Strategies)](#balancing-strategies)
+    - [自動平衡 (Auto Balancing)](#auto-balancing)
+    - [簡易平衡 (Simple Balancing)](#simple-balancing)
+    - [無平衡 (No Balancing)](#no-balancing)
+- [升級 Horizon (Upgrading Horizon)](#upgrading-horizon)
+- [執行 Horizon (Running Horizon)](#running-horizon)
+    - [部署 Horizon (Deploying Horizon)](#deploying-horizon)
+- [標籤 (Tags)](#tags)
+- [通知 (Notifications)](#notifications)
+- [指標 (Metrics)](#metrics)
+- [刪除失敗的 Job (Deleting Failed Jobs)](#deleting-failed-jobs)
+- [清除佇列中的 Job (Clearing Jobs From Queues)](#clearing-jobs-from-queues)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 > [!NOTE]
-> Before digging into Laravel Horizon, you should familiarize yourself with Laravel's base [queue services](/docs/queues). Horizon augments Laravel's queue with additional features that may be confusing if you are not already familiar with the basic queue features offered by Laravel.
+> 在深入了解 Laravel Horizon 之前，你應該先熟悉 Laravel 的基礎 [佇列服務](/docs/queues)。Horizon 為 Laravel 的佇列增加了額外的功能，如果你還不熟悉 Laravel 提供的基本佇列功能，可能會感到困惑。
 
-[Laravel Horizon](https://github.com/laravel/horizon) provides a beautiful dashboard and code-driven configuration for your Laravel powered [Redis queues](/docs/queues). Horizon allows you to easily monitor key metrics of your queue system such as job throughput, runtime, and job failures.
+[Laravel Horizon](https://github.com/laravel/horizon) 為你的 Laravel [Redis 佇列](/docs/queues) 提供了一個美觀的儀表板和程式碼驅動的設定。Horizon 讓你能夠輕鬆監控佇列系統的關鍵指標，例如 Job 吞吐量、執行時間和 Job 失敗情況。
 
-When using Horizon, all of your queue worker configuration is stored in a single, simple configuration file. By defining your application's worker configuration in a version controlled file, you may easily scale or modify your application's queue workers when deploying your application.
+使用 Horizon 時，你所有的佇列 Worker 設定都儲存在一個簡單的設定檔中。透過在版本控制的檔案中定義應用程式的 Worker 設定，你在部署應用程式時可以輕鬆擴展或修改應用程式的佇列 Worker。
 
 <img src="https://laravel.com/img/docs/horizon-example.png" />
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 > [!WARNING]
-> Laravel Horizon requires that you use [Redis](https://redis.io) to power your queue. Therefore, you should ensure that your queue connection is set to `redis` in your application's `config/queue.php` configuration file.
+> Laravel Horizon 要求你使用 [Redis](https://redis.io) 來驅動你的佇列。因此，你應該確保應用程式的 `config/queue.php` 設定檔中的佇列連線設定為 `redis`。
 
-You may install Horizon into your project using the Composer package manager:
+你可以使用 Composer 套件管理器將 Horizon 安裝到你的專案中：
 
 ```shell
 composer require laravel/horizon
 ```
 
-After installing Horizon, publish its assets using the `horizon:install` Artisan command:
+安裝 Horizon 後，使用 `horizon:install` Artisan 指令發布其資源：
 
 ```shell
 php artisan horizon:install
 ```
 
 <a name="configuration"></a>
-### 設定
+### 設定 (Configuration)
 
-After publishing Horizon's assets, its primary configuration file will be located at `config/horizon.php`. This configuration file allows you to configure the queue worker options for your application. Each configuration option includes a description of its purpose, so be sure to thoroughly explore this file.
+發布 Horizon 的資源後，其主要設定檔將位於 `config/horizon.php`。此設定檔允許你設定應用程式的佇列 Worker 選項。每個設定選項都包含其用途的說明，因此請務必仔細閱讀此檔案。
 
 > [!WARNING]
-> Horizon uses a Redis connection named `horizon` internally. This Redis connection name is reserved and should not be assigned to another Redis connection in the `database.php` configuration file or as the value of the `use` option in the `horizon.php` configuration file.
+> Horizon 內部使用名為 `horizon` 的 Redis 連線。此 Redis 連線名稱是保留的，不應指派給 `database.php` 設定檔中的其他 Redis 連線，也不應作為 `horizon.php` 設定檔中 `use` 選項的值。
 
 <a name="environments"></a>
-#### Environments
+#### 環境 (Environments)
 
-After installation, the primary Horizon configuration option that you should familiarize yourself with is the `environments` configuration option. This configuration option is an array of environments that your application runs on and defines the worker process options for each environment. By default, this entry contains a `production` and `local` environment. However, you are free to add more environments as needed:
+安裝後，你應該熟悉的主要 Horizon 設定選項是 `environments` 設定選項。此設定選項是一個陣列，包含你的應用程式執行的環境，並定義了每個環境的 Worker Process 選項。預設情況下，此項目包含 `production` 和 `local` 環境。但是，你可以根據需要自由添加更多環境：
 
 ```php
 'environments' => [
@@ -87,7 +87,7 @@ After installation, the primary Horizon configuration option that you should fam
 ],
 ```
 
-You may also define a wildcard environment (`*`) which will be used when no other matching environment is found:
+你也可以定義一個萬用字元環境 (`*`)，當找不到其他相符的環境時將使用該環境：
 
 ```php
 'environments' => [
@@ -101,22 +101,22 @@ You may also define a wildcard environment (`*`) which will be used when no othe
 ],
 ```
 
-When you start Horizon, it will use the worker process configuration options for the environment that your application is running on. Typically, the environment is determined by the value of the `APP_ENV` [environment variable](/docs/configuration#determining-the-current-environment). For example, the default `local` Horizon environment is configured to start three worker processes and automatically balance the number of worker processes assigned to each queue. The default `production` environment is configured to start a maximum of 10 worker processes and automatically balance the number of worker processes assigned to each queue.
+當你啟動 Horizon 時，它將使用你的應用程式目前執行環境的 Worker Process 設定選項。通常，環境由 `APP_ENV` [環境變數](/docs/configuration#determining-the-current-environment) 的值決定。例如，預設的 `local` Horizon 環境設定為啟動三個 Worker Process，並自動平衡指派給每個佇列的 Worker Process 數量。預設的 `production` 環境設定為啟動最多 10 個 Worker Process，並自動平衡指派給每個佇列的 Worker Process 數量。
 
 > [!WARNING]
-> You should ensure that the `environments` portion of your `horizon` configuration file contains an entry for each [environment](/docs/configuration#environment-configuration) on which you plan to run Horizon.
+> 你應該確保 `horizon` 設定檔的 `environments` 部分包含你計劃執行 Horizon 的每個 [環境](/docs/configuration#environment-configuration) 的項目。
 
 <a name="supervisors"></a>
 #### Supervisors
 
-As you can see in Horizon's default configuration file, each environment can contain one or more "supervisors". By default, the configuration file defines this supervisor as `supervisor-1`; however, you are free to name your supervisors whatever you want. Each supervisor is essentially responsible for "supervising" a group of worker processes and takes care of balancing worker processes across queues.
+正如你在 Horizon 的預設設定檔中看到的，每個環境可以包含一個或多個 "supervisors"。預設情況下，設定檔將此 supervisor 定義為 `supervisor-1`；但是，你可以自由地將你的 supervisors 命名為任何你想要的名稱。每個 supervisor 本質上負責 "監督" 一組 Worker Process，並負責跨佇列平衡 Worker Process。
 
-You may add additional supervisors to a given environment if you would like to define a new group of worker processes that should run in that environment. You may choose to do this if you would like to define a different balancing strategy or worker process count for a given queue used by your application.
+如果你想定義一組應該在該環境中執行的新 Worker Process，你可以向給定的環境添加額外的 supervisors。如果你想為應用程式使用的給定佇列定義不同的平衡策略或 Worker Process 數量，你可以選擇這樣做。
 
 <a name="maintenance-mode"></a>
-#### Maintenance Mode
+#### 維護模式 (Maintenance Mode)
 
-While your application is in [maintenance mode](/docs/configuration#maintenance-mode), queued jobs will not be processed by Horizon unless the supervisor's `force` option is defined as `true` within the Horizon configuration file:
+當你的應用程式處於 [維護模式](/docs/configuration#maintenance-mode) 時，除非在 Horizon 設定檔中將 supervisor 的 `force` 選項定義為 `true`，否則 Horizon 不會處理佇列中的 Job：
 
 ```php
 'environments' => [
@@ -130,14 +130,14 @@ While your application is in [maintenance mode](/docs/configuration#maintenance-
 ```
 
 <a name="default-values"></a>
-#### Default Values
+#### 預設值 (Default Values)
 
-Within Horizon's default configuration file, you will notice a `defaults` configuration option. This configuration option specifies the default values for your application's [supervisors](#supervisors). The supervisor's default configuration values will be merged into the supervisor's configuration for each environment, allowing you to avoid unnecessary repetition when defining your supervisors.
+在 Horizon 的預設設定檔中，你會注意到一個 `defaults` 設定選項。此設定選項指定了應用程式 [supervisors](#supervisors) 的預設值。Supervisor 的預設設定值將合併到每個環境的 supervisor 設定中，讓你在此定義 supervisors 時避免不必要的重複。
 
 <a name="dashboard-authorization"></a>
-### Dashboard Authorization
+### 儀表板授權 (Dashboard Authorization)
 
-The Horizon dashboard may be accessed via the `/horizon` route. By default, you will only be able to access this dashboard in the `local` environment. However, within your `app/Providers/HorizonServiceProvider.php` file, there is an [authorization gate](/docs/authorization#gates) definition. This authorization gate controls access to Horizon in **non-local** environments. You are free to modify this gate as needed to restrict access to your Horizon installation:
+Horizon 儀表板可以透過 `/horizon` 路由存取。預設情況下，你只能在 `local` 環境中存取此儀表板。但是，在你的 `app/Providers/HorizonServiceProvider.php` 檔案中，有一個 [授權 Gate](/docs/authorization#gates) 定義。此授權 Gate 控制在 **非本地** 環境中對 Horizon 的存取。你可以根據需要自由修改此 Gate 以限制對 Horizon 安裝的存取：
 
 ```php
 /**
@@ -156,17 +156,17 @@ protected function gate(): void
 ```
 
 <a name="alternative-authentication-strategies"></a>
-#### Alternative Authentication Strategies
+#### 替代身分驗證策略 (Alternative Authentication Strategies)
 
-Remember that Laravel automatically injects the authenticated user into the gate closure. If your application is providing Horizon security via another method, such as IP restrictions, then your Horizon users may not need to "login". Therefore, you will need to change `function (User $user)` closure signature above to `function (User $user = null)` in order to force Laravel to not require authentication.
+請記住，Laravel 會自動將經過身分驗證的使用者注入到 Gate Closure 中。如果你的應用程式透過其他方法（例如 IP 限制）提供 Horizon 安全性，那麼你的 Horizon 使用者可能不需要 "登入"。因此，你需要將上面的 `function (User $user)` Closure 簽名更改為 `function (User $user = null)`，以強制 Laravel 不要求身分驗證。
 
 <a name="max-job-attempts"></a>
-### Max Job Attempts
+### 最大 Job 嘗試次數 (Max Job Attempts)
 
 > [!NOTE]
-> Before refining these options, make sure you are familiar with Laravel's default [queue services](/docs/queues#max-job-attempts-and-timeout) and the concept of 'attempts'.
+> 在調整這些選項之前，請確保你熟悉 Laravel 的預設 [佇列服務](/docs/queues#max-job-attempts-and-timeout) 和 'attempts' 的概念。
 
-You can define the maximum number of attempts a job can consume within a supervisor's configuration:
+你可以在 supervisor 的設定中定義 Job 可以消耗的最大嘗試次數：
 
 ```php
 'environments' => [
@@ -180,18 +180,18 @@ You can define the maximum number of attempts a job can consume within a supervi
 ```
 
 > [!NOTE]
-> This option is similar to the `--tries` option when using the Artisan command to process queues.
+> 此選項類似於使用 Artisan 指令處理佇列時的 `--tries` 選項。
 
-Adjusting the `tries` option is essential when using middlewares such as `WithoutOverlapping` or `RateLimited` because they consume attempts. To handle this, adjust the `tries` configuration value either at the supervisor level or by defining the `$tries` property on the job class.
+當使用 `WithoutOverlapping` 或 `RateLimited` 等 Middleware 時，調整 `tries` 選項至關重要，因為它們會消耗嘗試次數。為了處理這個問題，請在 supervisor 層級調整 `tries` 設定值，或在 Job 類別上定義 `$tries` 屬性。
 
-If you don't set the `tries` option, Horizon defaults to a single attempt, unless the job class defines `$tries`, which takes precedence over the Horizon configuration.
+如果你沒有設定 `tries` 選項，Horizon 預設為單次嘗試，除非 Job 類別定義了 `$tries`，這將優先於 Horizon 設定。
 
-Setting `tries` or `$tries` to 0 allows unlimited attempts, which is ideal when the number of attempts is uncertain. To prevent endless failures, you can limit the number of exceptions allowed by setting the `$maxExceptions` property on the job class.
+將 `tries` 或 `$tries` 設定為 0 允許無限次嘗試，這在嘗試次數不確定時非常理想。為了防止無休止的失敗，你可以透過在 Job 類別上設定 `$maxExceptions` 屬性來限制允許的例外數量。
 
 <a name="job-timeout"></a>
-### Job Timeout
+### Job 超時 (Job Timeout)
 
-Similarly, you can set a `timeout` value at the supervisor level, which specifies how many seconds a worker process can run a job before it's forcefully terminated. Once terminated, the job will either be retried or marked as failed, depending on your queue configuration:
+同樣地，你可以在 supervisor 層級設定 `timeout` 值，它指定 Worker Process 在強制終止 Job 之前可以執行多少秒。一旦終止，Job 將根據你的佇列設定被重試或標記為失敗：
 
 ```php
 'environments' => [
@@ -205,12 +205,12 @@ Similarly, you can set a `timeout` value at the supervisor level, which specifie
 ```
 
 > [!WARNING]
-> When using the `auto` balancing strategy, Horizon will consider in-progress workers as "hanging" and force-kill them after the Horizon timeout during scale down. Always ensure the Horizon timeout is greater than any job-level timeout, otherwise jobs may be terminated mid-execution. In addition, the `timeout` value should always be at least a few seconds shorter than the `retry_after` value defined in your `config/queue.php` configuration file. Otherwise, your jobs may be processed twice.
+> 當使用 `auto` 平衡策略時，Horizon 會將執行中的 Worker 視為 "掛起"，並在縮減規模期間超過 Horizon 超時後強制終止它們。始終確保 Horizon 超時大於任何 Job 層級的超時，否則 Job 可能會在執行中途被終止。此外，`timeout` 值應始終比 `config/queue.php` 設定檔中定義的 `retry_after` 值短幾秒。否則，你的 Job 可能會被處理兩次。
 
 <a name="job-backoff"></a>
 ### Job Backoff
 
-You can define the `backoff` value at the supervisor level to specify how long Horizon should wait before retrying a job that encounters an unhandled exception:
+你可以在 supervisor 層級定義 `backoff` 值，以指定 Horizon 在重試遇到未處理例外的 Job 之前應等待多長時間：
 
 ```php
 'environments' => [
@@ -223,7 +223,7 @@ You can define the `backoff` value at the supervisor level to specify how long H
 ],
 ```
 
-You may also configure "exponential" backoffs by using an array for the `backoff` value. In this example, the retry delay will be 1 second for the first retry, 5 seconds for the second retry, 10 seconds for the third retry, and 10 seconds for every subsequent retry if there are more attempts remaining:
+你也可以透過為 `backoff` 值使用陣列來設定 "指數" backoffs。在此範例中，第一次重試的延遲將為 1 秒，第二次重試為 5 秒，第三次重試為 10 秒，如果還有剩餘嘗試次數，則後續每次重試均為 10 秒：
 
 ```php
 'environments' => [
@@ -237,9 +237,9 @@ You may also configure "exponential" backoffs by using an array for the `backoff
 ```
 
 <a name="silenced-jobs"></a>
-### Silenced Jobs
+### 靜音 Job (Silenced Jobs)
 
-Sometimes, you may not be interested in viewing certain jobs dispatched by your application or third-party packages. Instead of these jobs taking up space in your "Completed Jobs" list, you can silence them. To get started, add the job's class name to the `silenced` configuration option in your application's `horizon` configuration file:
+有時，你可能對檢視應用程式或第三方套件分派的某些 Job 不感興趣。你可以將這些 Job 靜音，而不是讓它們佔用 "Completed Jobs" 列表中的空間。要開始使用，請將 Job 的類別名稱添加到應用程式 `horizon` 設定檔中的 `silenced` 設定選項中：
 
 ```php
 'silenced' => [
@@ -247,7 +247,7 @@ Sometimes, you may not be interested in viewing certain jobs dispatched by your 
 ],
 ```
 
-In addition to silencing individual job classes, Horizon also supports silencing jobs based on [tags](#tags). This can be useful if you want to hide multiple jobs that share a common tag:
+除了靜音個別 Job 類別之外，Horizon 還支援基於 [標籤](#tags) 靜音 Job。如果你想隱藏共用相同標籤的多個 Job，這會很有用：
 
 ```php
 'silenced_tags' => [
@@ -255,7 +255,7 @@ In addition to silencing individual job classes, Horizon also supports silencing
 ],
 ```
 
-Alternatively, the job you wish to silence can implement the `Laravel\Horizon\Contracts\Silenced` interface. If a job implements this interface, it will automatically be silenced, even if it is not present in the `silenced` configuration array:
+或者，你希望靜音的 Job 可以實作 `Laravel\Horizon\Contracts\Silenced` 介面。如果 Job 實作了此介面，即使它不存在於 `silenced` 設定陣列中，也會自動被靜音：
 
 ```php
 use Laravel\Horizon\Contracts\Silenced;
@@ -269,25 +269,25 @@ class ProcessPodcast implements ShouldQueue, Silenced
 ```
 
 <a name="balancing-strategies"></a>
-## Balancing Strategies
+## 平衡策略 (Balancing Strategies)
 
-Each supervisor can process one or more queues but unlike Laravel's default queue system, Horizon allows you to choose from three worker balancing strategies: `auto`, `simple`, and `false`.
+每個 supervisor 可以處理一個或多個佇列，但與 Laravel 的預設佇列系統不同，Horizon 允許你從三種 Worker 平衡策略中進行選擇：`auto`、`simple` 和 `false`。
 
 <a name="auto-balancing"></a>
-### Auto Balancing
+### 自動平衡 (Auto Balancing)
 
-The `auto` strategy, which is the default strategy, adjusts the number of worker processes per queue based on the current workload of the queue. For example, if your `notifications` queue has 1,000 pending jobs while your `default` queue is empty, Horizon will allocate more workers to your `notifications` queue until the queue is empty.
+`auto` 策略是預設策略，它根據佇列目前的負載調整每個佇列的 Worker Process 數量。例如，如果你的 `notifications` 佇列有 1,000 個待處理 Job，而你的 `default` 佇列是空的，Horizon 將分配更多 Worker 到你的 `notifications` 佇列，直到佇列清空。
 
-When using the `auto` strategy, you may also configure the `minProcesses` and `maxProcesses` configuration options:
+當使用 `auto` 策略時，你也可以設定 `minProcesses` 和 `maxProcesses` 設定選項：
 
 <div className="content-list" markdown="1">
 
-- `minProcesses` defines the minimum number of worker processes per queue. This value must be greater than or equal to 1.
-- `maxProcesses` defines the maximum total number of worker processes Horizon may scale up to across all queues. This value should typically be greater than the number of queues multiplied by the `minProcesses` value. To prevent the supervisor from spawning any processes, you may set this value to 0.
+- `minProcesses` 定義每個佇列的最小 Worker Process 數量。此值必須大於或等於 1。
+- `maxProcesses` 定義 Horizon 可以跨所有佇列擴展的最大總 Worker Process 數量。此值通常應大於佇列數量乘以 `minProcesses` 值。為了防止 supervisor 產生任何 Process，你可以將此值設定為 0。
 
 </div>
 
-For example, you may configure Horizon to maintain at least one process per queue and scale up to a total of 10 worker processes:
+例如，你可以設定 Horizon 為每個佇列維持至少一個 Process，並擴展到總共 10 個 Worker Process：
 
 ```php
 'environments' => [
@@ -306,23 +306,23 @@ For example, you may configure Horizon to maintain at least one process per queu
 ],
 ```
 
-The `autoScalingStrategy` configuration option determines how Horizon will assign more worker processes to queues. You can choose between two strategies:
+`autoScalingStrategy` 設定選項決定 Horizon 如何將更多 Worker Process 指派給佇列。你可以選擇兩種策略：
 
 <div className="content-list" markdown="1">
 
-- The `time` strategy will assign workers based on the total estimated amount of time it will take to clear the queue.
-- The `size` strategy will assign workers based on the total number of jobs on the queue.
+- `time` 策略將根據清除佇列所需的總估計時間來指派 Worker。
+- `size` 策略將根據佇列上的總 Job 數量來指派 Worker。
 
 </div>
 
-The `balanceMaxShift` and `balanceCooldown` configuration values determine how quickly Horizon will scale to meet worker demand. In the example above, a maximum of one new process will be created or destroyed every three seconds. You are free to tweak these values as necessary based on your application's needs.
+`balanceMaxShift` 和 `balanceCooldown` 設定值決定 Horizon 擴展以滿足 Worker 需求的速度。在上面的範例中，每三秒鐘最多建立或銷毀一個新 Process。你可以根據應用程式的需求自由調整這些值。
 
 <a name="auto-queue-priorities"></a>
-#### Queue Priorities and Auto Balancing
+#### 佇列優先順序和自動平衡 (Queue Priorities and Auto Balancing)
 
-When using the `auto` balancing strategy, Horizon does not enforce strict priority between queues. The order of queues in a supervisor's configuration does not affect how worker processes are assigned. Instead, Horizon relies on the selected `autoScalingStrategy` to dynamically allocate worker processes based on queue load.
+當使用 `auto` 平衡策略時，Horizon 不會在佇列之間強制執行嚴格的優先順序。Supervisor 設定中佇列的順序不會影響 Worker Process 的指派方式。相反，Horizon 依賴選定的 `autoScalingStrategy` 根據佇列負載動態分配 Worker Process。
 
-For example, in the following configuration, the high queue is not prioritized over the default queue, despite appearing first in the list:
+例如，在以下設定中，儘管 `high` 佇列在列表中排在第一位，但它並不比 `default` 佇列優先：
 
 ```php
 'environments' => [
@@ -337,7 +337,7 @@ For example, in the following configuration, the high queue is not prioritized o
 ],
 ```
 
-If you need to enforce a relative priority between queues, you may define multiple supervisors and explicitly allocate processing resources:
+如果你需要在佇列之間強制執行相對優先順序，你可以定義多個 supervisors 並明確分配處理資源：
 
 ```php
 'environments' => [
@@ -358,15 +358,15 @@ If you need to enforce a relative priority between queues, you may define multip
 ],
 ```
 
-In this example, the default `queue` can scale up to 10 processes, while the `images` queue is limited to one process. This configuration ensures that your queues can scale independently.
+在此範例中，`default` 佇列可以擴展到 10 個 Process，而 `images` 佇列限制為一個 Process。此設定確保你的佇列可以獨立擴展。
 
 > [!NOTE]
-> When dispatching resource-intensive jobs, it's sometimes best to assign them to a dedicated queue with a limited `maxProcesses` value. Otherwise, these jobs could consume excessive CPU resources and overload your system.
+> 當分派資源密集型 Job 時，有時最好將它們指派給具有有限 `maxProcesses` 值的專用佇列。否則，這些 Job 可能會消耗過多的 CPU 資源並使你的系統過載。
 
 <a name="simple-balancing"></a>
-### Simple Balancing
+### 簡易平衡 (Simple Balancing)
 
-The `simple` strategy distributes worker processes evenly across the specified queues. With this strategy, Horizon does not automatically scale the number of worker processes. Rather, it uses a fixed number of processes:
+`simple` 策略將 Worker Process 平均分配到指定的佇列。使用此策略，Horizon 不會自動擴展 Worker Process 的數量。相反，它使用固定數量的 Process：
 
 ```php
 'environments' => [
@@ -381,9 +381,9 @@ The `simple` strategy distributes worker processes evenly across the specified q
 ],
 ```
 
-In the example above, Horizon will assign 5 processes to each queue, splitting the total of 10 evenly.
+在上面的範例中，Horizon 將為每個佇列指派 5 個 Process，將總共 10 個 Process 平均分配。
 
-If you'd like to control the number of worker processes assigned to each queue individually, you can define multiple supervisors:
+如果你想控制指派給每個佇列的 Worker Process 數量，你可以定義多個 supervisors：
 
 ```php
 'environments' => [
@@ -404,12 +404,12 @@ If you'd like to control the number of worker processes assigned to each queue i
 ],
 ```
 
-With this configuration, Horizon will assign 10 processes to the `default` queue and 2 processes to the `notifications` queue.
+透過此設定，Horizon 將指派 10 個 Process 給 `default` 佇列，並指派 2 個 Process 給 `notifications` 佇列。
 
 <a name="no-balancing"></a>
-### No Balancing
+### 無平衡 (No Balancing)
 
-When the `balance` option is set to `false`, Horizon processes queues strictly in the order they're listed, similar to Laravel's default queue system. However, it will still scale the number of worker processes if jobs begin to accumulate:
+當 `balance` 選項設定為 `false` 時，Horizon 嚴格按照列出的順序處理佇列，類似於 Laravel 的預設佇列系統。但是，如果 Job 開始累積，它仍然會擴展 Worker Process 的數量：
 
 ```php
 'environments' => [
@@ -425,32 +425,32 @@ When the `balance` option is set to `false`, Horizon processes queues strictly i
 ],
 ```
 
-In the example above, jobs in the `default` queue are always prioritized over jobs in the `notifications` queue. For instance, if there are 1,000 jobs in `default` and only 10 in `notifications`, Horizon will fully process all `default` jobs before handling any from `notifications`.
+在上面的範例中，`default` 佇列中的 Job 總是優先於 `notifications` 佇列中的 Job。例如，如果 `default` 中有 1,000 個 Job，而 `notifications` 中只有 10 個，Horizon 將在處理 `notifications` 中的任何 Job 之前完全處理所有 `default` Job。
 
-You can control Horizon's ability to scale worker processes using the `minProcesses` and `maxProcesses` options:
+你可以使用 `minProcesses` 和 `maxProcesses` 選項控制 Horizon 擴展 Worker Process 的能力：
 
 <div className="content-list" markdown="1">
 
-- `minProcesses` defines the minimum number of worker processes in total. This value must be greater than or equal to 1.
-- `maxProcesses` defines the maximum total number of worker processes Horizon may scale up to.
+- `minProcesses` 定義總共的最小 Worker Process 數量。此值必須大於或等於 1。
+- `maxProcesses` 定義 Horizon 可以擴展到的最大總 Worker Process 數量。
 
 </div>
 
 <a name="upgrading-horizon"></a>
-## Upgrading Horizon
+## 升級 Horizon (Upgrading Horizon)
 
-When upgrading to a new major version of Horizon, it's important that you carefully review [the upgrade guide](https://github.com/laravel/horizon/blob/master/UPGRADE.md).
+當升級到 Horizon 的新主要版本時，請務必仔細閱讀 [升級指南](https://github.com/laravel/horizon/blob/master/UPGRADE.md)。
 
 <a name="running-horizon"></a>
-## Running Horizon
+## 執行 Horizon (Running Horizon)
 
-Once you have configured your supervisors and workers in your application's `config/horizon.php` configuration file, you may start Horizon using the `horizon` Artisan command. This single command will start all of the configured worker processes for the current environment:
+一旦你在應用程式的 `config/horizon.php` 設定檔中設定了 supervisors 和 workers，你就可以使用 `horizon` Artisan 指令啟動 Horizon。這個單一指令將啟動目前環境的所有已設定 Worker Process：
 
 ```shell
 php artisan horizon
 ```
 
-You may pause the Horizon process and instruct it to continue processing jobs using the `horizon:pause` and `horizon:continue` Artisan commands:
+你可以使用 `horizon:pause` 和 `horizon:continue` Artisan 指令暫停 Horizon Process 並指示其繼續處理 Job：
 
 ```shell
 php artisan horizon:pause
@@ -458,7 +458,7 @@ php artisan horizon:pause
 php artisan horizon:continue
 ```
 
-You may also pause and continue specific Horizon [supervisors](#supervisors) using the `horizon:pause-supervisor` and `horizon:continue-supervisor` Artisan commands:
+你也可以使用 `horizon:pause-supervisor` 和 `horizon:continue-supervisor` Artisan 指令暫停和繼續特定的 Horizon [supervisors](#supervisors)：
 
 ```shell
 php artisan horizon:pause-supervisor supervisor-1
@@ -466,51 +466,51 @@ php artisan horizon:pause-supervisor supervisor-1
 php artisan horizon:continue-supervisor supervisor-1
 ```
 
-You may check the current status of the Horizon process using the `horizon:status` Artisan command:
+你可以使用 `horizon:status` Artisan 指令檢查 Horizon Process 的目前狀態：
 
 ```shell
 php artisan horizon:status
 ```
 
-You may check the current status of a specific Horizon [supervisor](#supervisors) using the `horizon:supervisor-status` Artisan command:
+你可以使用 `horizon:supervisor-status` Artisan 指令檢查特定 Horizon [supervisor](#supervisors) 的目前狀態：
 
 ```shell
 php artisan horizon:supervisor-status supervisor-1
 ```
 
-You may gracefully terminate the Horizon process using the `horizon:terminate` Artisan command. Any jobs that are currently being processed will be completed and then Horizon will stop executing:
+你可以使用 `horizon:terminate` Artisan 指令優雅地終止 Horizon Process。任何目前正在處理的 Job 都將完成，然後 Horizon 將停止執行：
 
 ```shell
 php artisan horizon:terminate
 ```
 
 <a name="deploying-horizon"></a>
-### Deploying Horizon
+### 部署 Horizon (Deploying Horizon)
 
-When you're ready to deploy Horizon to your application's actual server, you should configure a process monitor to monitor the `php artisan horizon` command and restart it if it exits unexpectedly. Don't worry, we'll discuss how to install a process monitor below.
+當你準備好將 Horizon 部署到應用程式的實際伺服器時，你應該設定一個 Process 監視器來監視 `php artisan horizon` 指令，並在其意外退出時重新啟動它。別擔心，我們將在下面討論如何安裝 Process 監視器。
 
-During your application's deployment process, you should instruct the Horizon process to terminate so that it will be restarted by your process monitor and receive your code changes:
+在應用程式的部署過程中，你應該指示 Horizon Process 終止，以便 Process 監視器重新啟動它並接收你的程式碼變更：
 
 ```shell
 php artisan horizon:terminate
 ```
 
 <a name="installing-supervisor"></a>
-#### Installing Supervisor
+#### 安裝 Supervisor (Installing Supervisor)
 
-Supervisor is a process monitor for the Linux operating system and will automatically restart your `horizon` process if it stops executing. To install Supervisor on Ubuntu, you may use the following command. If you are not using Ubuntu, you can likely install Supervisor using your operating system's package manager:
+Supervisor 是 Linux 作業系統的 Process 監視器，如果 `horizon` Process 停止執行，它將自動重新啟動該 Process。要在 Ubuntu 上安裝 Supervisor，你可以使用以下指令。如果你不使用 Ubuntu，你可能可以使用作業系統的套件管理器安裝 Supervisor：
 
 ```shell
 sudo apt-get install supervisor
 ```
 
 > [!NOTE]
-> If configuring Supervisor yourself sounds overwhelming, consider using [Laravel Cloud](https://cloud.laravel.com), which can manage background processes for your Laravel applications.
+> 如果自行設定 Supervisor 聽起來很麻煩，請考慮使用 [Laravel Cloud](https://cloud.laravel.com)，它可以管理 Laravel 應用程式的背景 Process。
 
 <a name="supervisor-configuration"></a>
-#### Supervisor Configuration
+#### Supervisor 設定 (Supervisor Configuration)
 
-Supervisor configuration files are typically stored within your server's `/etc/supervisor/conf.d` directory. Within this directory, you may create any number of configuration files that instruct supervisor how your processes should be monitored. For example, let's create a `horizon.conf` file that starts and monitors a `horizon` process:
+Supervisor 設定檔通常儲存在伺服器的 `/etc/supervisor/conf.d` 目錄中。在此目錄中，你可以建立任意數量的設定檔，指示 Supervisor 應如何監視你的 Process。例如，讓我們建立一個 `horizon.conf` 檔案，該檔案啟動並監視 `horizon` Process：
 
 ```ini
 [program:horizon]
@@ -524,15 +524,15 @@ stdout_logfile=/home/forge/example.com/horizon.log
 stopwaitsecs=3600
 ```
 
-When defining your Supervisor configuration, you should ensure that the value of `stopwaitsecs` is greater than the number of seconds consumed by your longest running job. Otherwise, Supervisor may kill the job before it is finished processing.
+定義 Supervisor 設定時，你應該確保 `stopwaitsecs` 的值大於最長執行 Job 所消耗的秒數。否則，Supervisor 可能會在 Job 完成處理之前將其殺死。
 
 > [!WARNING]
-> While the examples above are valid for Ubuntu based servers, the location and file extension expected of Supervisor configuration files may vary between other server operating systems. Please consult your server's documentation for more information.
+> 雖然上面的範例適用於基於 Ubuntu 的伺服器，但 Supervisor 設定檔預期的位置和副檔名可能因其他伺服器作業系統而異。請參閱你的伺服器文件以獲取更多資訊。
 
 <a name="starting-supervisor"></a>
-#### Starting Supervisor
+#### 啟動 Supervisor (Starting Supervisor)
 
-Once the configuration file has been created, you may update the Supervisor configuration and start the monitored processes using the following commands:
+建立設定檔後，你可以使用以下指令更新 Supervisor 設定並啟動受監視的 Process：
 
 ```shell
 sudo supervisorctl reread
@@ -543,12 +543,12 @@ sudo supervisorctl start horizon
 ```
 
 > [!NOTE]
-> For more information on running Supervisor, consult the [Supervisor documentation](http://supervisord.org/index.html).
+> 有關執行 Supervisor 的更多資訊，請參閱 [Supervisor 文件](http://supervisord.org/index.html)。
 
 <a name="tags"></a>
-## Tags
+## 標籤 (Tags)
 
-Horizon allows you to assign "tags" to jobs, including mailables, broadcast events, notifications, and queued event listeners. In fact, Horizon will intelligently and automatically tag most jobs depending on the Eloquent models that are attached to the job. For example, take a look at the following job:
+Horizon 允許你將 "tags" 指派給 Job，包括 mailables、廣播事件、通知和佇列事件監聽器。事實上，Horizon 會根據附加到 Job 的 Eloquent 模型，智慧地自動標記大多數 Job。例如，看看下面的 Job：
 
 ```php
 <?php
@@ -580,7 +580,7 @@ class RenderVideo implements ShouldQueue
 }
 ```
 
-If this job is queued with an `App\Models\Video` instance that has an `id` attribute of `1`, it will automatically receive the tag `App\Models\Video:1`. This is because Horizon will search the job's properties for any Eloquent models. If Eloquent models are found, Horizon will intelligently tag the job using the model's class name and primary key:
+如果此 Job 與具有 `id` 屬性為 `1` 的 `App\Models\Video` 實例一起排入佇列，它將自動接收標籤 `App\Models\Video:1`。這是因為 Horizon 會搜尋 Job 的屬性以尋找任何 Eloquent 模型。如果找到 Eloquent 模型，Horizon 將使用模型的類別名稱和主鍵智慧地標記 Job：
 
 ```php
 use App\Jobs\RenderVideo;
@@ -592,9 +592,9 @@ RenderVideo::dispatch($video);
 ```
 
 <a name="manually-tagging-jobs"></a>
-#### Manually Tagging Jobs
+#### 手動標記 Job (Manually Tagging Jobs)
 
-If you would like to manually define the tags for one of your queueable objects, you may define a `tags` method on the class:
+如果你想手動定義其中一個可排入佇列物件的標籤，你可以在類別上定義一個 `tags` 方法：
 
 ```php
 class RenderVideo implements ShouldQueue
@@ -612,9 +612,9 @@ class RenderVideo implements ShouldQueue
 ```
 
 <a name="manually-tagging-event-listeners"></a>
-#### Manually Tagging Event Listeners
+#### 手動標記事件監聽器 (Manually Tagging Event Listeners)
 
-When retrieving the tags for a queued event listener, Horizon will automatically pass the event instance to the `tags` method, allowing you to add event data to the tags:
+當檢索佇列事件監聽器的標籤時，Horizon 會自動將事件實例傳遞給 `tags` 方法，讓你將事件資料添加到標籤中：
 
 ```php
 class SendRenderNotifications implements ShouldQueue
@@ -632,12 +632,12 @@ class SendRenderNotifications implements ShouldQueue
 ```
 
 <a name="notifications"></a>
-## Notifications
+## 通知 (Notifications)
 
 > [!WARNING]
-> When configuring Horizon to send Slack or SMS notifications, you should review the [prerequisites for the relevant notification channel](/docs/notifications).
+> 當設定 Horizon 發送 Slack 或 SMS 通知時，你應該查看 [相關通知頻道的先決條件](/docs/notifications)。
 
-If you would like to be notified when one of your queues has a long wait time, you may use the `Horizon::routeMailNotificationsTo`, `Horizon::routeSlackNotificationsTo`, and `Horizon::routeSmsNotificationsTo` methods. You may call these methods from the `boot` method of your application's `App\Providers\HorizonServiceProvider`:
+如果你想在其中一個佇列有很長的等待時間時收到通知，你可以使用 `Horizon::routeMailNotificationsTo`、`Horizon::routeSlackNotificationsTo` 和 `Horizon::routeSmsNotificationsTo` 方法。你可以從應用程式的 `App\Providers\HorizonServiceProvider` 的 `boot` 方法呼叫這些方法：
 
 ```php
 /**
@@ -654,9 +654,9 @@ public function boot(): void
 ```
 
 <a name="configuring-notification-wait-time-thresholds"></a>
-#### Configuring Notification Wait Time Thresholds
+#### 設定通知等待時間閾值 (Configuring Notification Wait Time Thresholds)
 
-You may configure how many seconds are considered a "long wait" within your application's `config/horizon.php` configuration file. The `waits` configuration option within this file allows you to control the long wait threshold for each connection / queue combination. Any undefined connection / queue combinations will default to a long wait threshold of 60 seconds:
+你可以在應用程式的 `config/horizon.php` 設定檔中設定多少秒被視為 "長時間等待"。此檔案中的 `waits` 設定選項允許你控制每個連線 / 佇列組合的長時間等待閾值。任何未定義的連線 / 佇列組合將預設為 60 秒的長時間等待閾值：
 
 ```php
 'waits' => [
@@ -666,12 +666,12 @@ You may configure how many seconds are considered a "long wait" within your appl
 ],
 ```
 
-Setting a queue's threshold to `0` will disable long wait notifications for that queue.
+將佇列的閾值設定為 `0` 將停用該佇列的長時間等待通知。
 
 <a name="metrics"></a>
-## Metrics
+## 指標 (Metrics)
 
-Horizon includes a metrics dashboard which provides information regarding your job and queue wait times and throughput. In order to populate this dashboard, you should configure Horizon's `snapshot` Artisan command to run every five minutes in your application's `routes/console.php` file:
+Horizon 包含一個指標儀表板，提供有關 Job 和佇列等待時間及吞吐量的資訊。為了填充此儀表板，你應該在應用程式的 `routes/console.php` 檔案中設定 Horizon 的 `snapshot` Artisan 指令每五分鐘執行一次：
 
 ```php
 use Illuminate\Support\Facades\Schedule;
@@ -679,37 +679,37 @@ use Illuminate\Support\Facades\Schedule;
 Schedule::command('horizon:snapshot')->everyFiveMinutes();
 ```
 
-If you would like to delete all metric data, you can invoke the `horizon:clear-metrics` Artisan command:
+如果你想刪除所有指標資料，你可以呼叫 `horizon:clear-metrics` Artisan 指令：
 
 ```shell
 php artisan horizon:clear-metrics
 ```
 
 <a name="deleting-failed-jobs"></a>
-## Deleting Failed Jobs
+## 刪除失敗的 Job (Deleting Failed Jobs)
 
-If you would like to delete a failed job, you may use the `horizon:forget` command. The `horizon:forget` command accepts the ID or UUID of the failed job as its only argument:
+如果你想刪除失敗的 Job，你可以使用 `horizon:forget` 指令。`horizon:forget` 指令接受失敗 Job 的 ID 或 UUID 作為其唯一參數：
 
 ```shell
 php artisan horizon:forget 5
 ```
 
-If you would like to delete all failed jobs, you may provide the `--all` option to the `horizon:forget` command:
+如果你想刪除所有失敗的 Job，你可以向 `horizon:forget` 指令提供 `--all` 選項：
 
 ```shell
 php artisan horizon:forget --all
 ```
 
 <a name="clearing-jobs-from-queues"></a>
-## Clearing Jobs From Queues
+## 清除佇列中的 Job (Clearing Jobs From Queues)
 
-If you would like to delete all jobs from your application's default queue, you may do so using the `horizon:clear` Artisan command:
+如果你想刪除應用程式預設佇列中的所有 Job，你可以使用 `horizon:clear` Artisan 指令：
 
 ```shell
 php artisan horizon:clear
 ```
 
-You may provide the `queue` option to delete jobs from a specific queue:
+你可以提供 `queue` 選項來刪除特定佇列中的 Job：
 
 ```shell
 php artisan horizon:clear --queue=emails

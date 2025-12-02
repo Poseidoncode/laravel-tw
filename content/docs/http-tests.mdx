@@ -3,7 +3,7 @@ title: Http Tests
 description: 使用 Laravel 測試 HTTP 請求和回應
 ---
 
-# HTTP Tests / HTTP Tests (Bilingual)
+# HTTP Tests
 
 - [簡介 (Introduction)](#introduction)
 - [發送請求 (Making Requests)](#making-requests)
@@ -2012,14 +2012,14 @@ $response->assertViewMissing($key);
 ```
 
 <a name="authentication-assertions"></a>
-### Authentication Assertions
+### 認證斷言 (Authentication Assertions)
 
-Laravel also provides a variety of authentication related assertions that you may utilize within your application's feature tests. Note that these methods are invoked on the test class itself and not the `Illuminate\Testing\TestResponse` instance returned by methods such as `get` and `post`.
+Laravel 還提供了各種與認證相關的斷言，你可以在應用程式的功能測試中使用這些斷言。請注意，這些方法是在測試類別本身上呼叫的，而不是在 `get` 和 `post` 等方法回傳的 `Illuminate\Testing\TestResponse` 實例上呼叫的。
 
 <a name="assert-authenticated"></a>
 #### assertAuthenticated
 
-Assert that a user is authenticated:
+斷言使用者已認證：
 
 ```php
 $this->assertAuthenticated($guard = null);
@@ -2028,7 +2028,7 @@ $this->assertAuthenticated($guard = null);
 <a name="assert-guest"></a>
 #### assertGuest
 
-Assert that a user is not authenticated:
+斷言使用者未認證：
 
 ```php
 $this->assertGuest($guard = null);
@@ -2037,21 +2037,21 @@ $this->assertGuest($guard = null);
 <a name="assert-authenticated-as"></a>
 #### assertAuthenticatedAs
 
-Assert that a specific user is authenticated:
+斷言特定使用者已認證：
 
 ```php
 $this->assertAuthenticatedAs($user, $guard = null);
 ```
 
 <a name="validation-assertions"></a>
-## Validation Assertions
+## 驗證斷言 (Validation Assertions)
 
-Laravel provides two primary validation related assertions that you may use to ensure the data provided in your request was either valid or invalid.
+Laravel 提供了兩個主要的驗證相關斷言，你可以使用它們來確保請求中提供的資料有效或無效。
 
 <a name="validation-assert-valid"></a>
 #### assertValid
 
-Assert that the response has no validation errors for the given keys. This method may be used for asserting against responses where the validation errors are returned as a JSON structure or where the validation errors have been flashed to the session:
+斷言回應對於給定的鍵沒有驗證錯誤。此方法可用於對驗證錯誤作為 JSON 結構回傳或驗證錯誤已快閃到 session 的回應進行斷言：
 
 ```php
 // Assert that no validation errors are present...
@@ -2064,13 +2064,13 @@ $response->assertValid(['name', 'email']);
 <a name="validation-assert-invalid"></a>
 #### assertInvalid
 
-Assert that the response has validation errors for the given keys. This method may be used for asserting against responses where the validation errors are returned as a JSON structure or where the validation errors have been flashed to the session:
+斷言回應對於給定的鍵具有驗證錯誤。此方法可用於對驗證錯誤作為 JSON 結構回傳或驗證錯誤已快閃到 session 的回應進行斷言：
 
 ```php
 $response->assertInvalid(['name', 'email']);
 ```
 
-You may also assert that a given key has a particular validation error message. When doing so, you may provide the entire message or only a small portion of the message:
+你還可以斷言給定鍵具有特定的驗證錯誤訊息。這樣做時，你可以提供整個訊息或僅提供訊息的一小部分：
 
 ```php
 $response->assertInvalid([

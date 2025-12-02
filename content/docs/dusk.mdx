@@ -3,53 +3,53 @@ title: Dusk
 description: Laravel Dusk 提供了簡單易用的瀏覽器自動化和測試 API
 ---
 
-# Laravel Dusk / Laravel Dusk (Bilingual)
+# Laravel Dusk
 
-- [Introduction](#introduction)
-- [Installation](#installation)
-  - [Managing ChromeDriver Installations](#managing-chromedriver-installations)
-  - [Using Other Browsers](#using-other-browsers)
-- [Getting Started](#getting-started)
-  - [Generating Tests](#generating-tests)
-  - [Resetting the Database After Each Test](#resetting-the-database-after-each-test)
-  - [Running Tests](#running-tests)
-  - [Environment Handling](#environment-handling)
-- [Browser Basics](#browser-basics)
-  - [Creating Browsers](#creating-browsers)
-  - [Navigation](#navigation)
-  - [Resizing Browser Windows](#resizing-browser-windows)
-  - [Browser Macros](#browser-macros)
-  - [Authentication](#authentication)
-  - [Cookies](#cookies)
-  - [Executing JavaScript](#executing-javascript)
-  - [Taking a Screenshot](#taking-a-screenshot)
-  - [Storing Console Output to Disk](#storing-console-output-to-disk)
-  - [Storing Page Source to Disk](#storing-page-source-to-disk)
-- [Interacting With Elements](#interacting-with-elements)
-  - [Dusk Selectors](#dusk-selectors)
-  - [Text, Values, and Attributes](#text-values-and-attributes)
-  - [Interacting With Forms](#interacting-with-forms)
-  - [Attaching Files](#attaching-files)
-  - [Pressing Buttons](#pressing-buttons)
-  - [Clicking Links](#clicking-links)
-  - [Using the Keyboard](#using-the-keyboard)
-  - [Using the Mouse](#using-the-mouse)
-  - [JavaScript Dialogs](#javascript-dialogs)
-  - [Interacting With Inline Frames](#interacting-with-iframes)
-  - [Scoping Selectors](#scoping-selectors)
-  - [Waiting for Elements](#waiting-for-elements)
-  - [Scrolling an Element Into View](#scrolling-an-element-into-view)
-- [Available Assertions](#available-assertions)
-- [Pages](#pages)
-  - [Generating Pages](#generating-pages)
-  - [Configuring Pages](#configuring-pages)
-  - [Navigating to Pages](#navigating-to-pages)
-  - [Shorthand Selectors](#shorthand-selectors)
-  - [Page Methods](#page-methods)
-- [Components](#components)
-  - [Generating Components](#generating-components)
-  - [Using Components](#using-components)
-- [Continuous Integration](#continuous-integration)
+- [簡介](#introduction)
+- [安裝](#installation)
+  - [管理 ChromeDriver 安裝](#managing-chromedriver-installations)
+  - [使用其他瀏覽器](#using-other-browsers)
+- [開始使用](#getting-started)
+  - [生成測試](#generating-tests)
+  - [在每次測試後重置數據庫](#resetting-the-database-after-each-test)
+  - [運行測試](#running-tests)
+  - [環境處理](#environment-handling)
+- [瀏覽器基礎](#browser-basics)
+  - [創建瀏覽器](#creating-browsers)
+  - [導航](#navigation)
+  - [調整瀏覽器窗口大小](#resizing-browser-windows)
+  - [瀏覽器宏](#browser-macros)
+  - [身份驗證](#authentication)
+  - [Cookie](#cookies)
+  - [執行 JavaScript](#executing-javascript)
+  - [拍攝屏幕截圖](#taking-a-screenshot)
+  - [將控制台輸出存儲到磁盤](#storing-console-output-to-disk)
+  - [將頁面源存儲到磁盤](#storing-page-source-to-disk)
+- [與元素互動](#interacting-with-elements)
+  - [Dusk 選擇器](#dusk-selectors)
+  - [文本、值與屬性](#text-values-and-attributes)
+  - [與表單互動](#interacting-with-forms)
+  - [附加檔案](#attaching-files)
+  - [按鈕操作](#pressing-buttons)
+  - [點擊連結](#clicking-links)
+  - [使用鍵盤](#using-the-keyboard)
+  - [使用滑鼠](#using-the-mouse)
+  - [JavaScript 對話框](#javascript-dialogs)
+  - [與內嵌框架（iframe）互動](#interacting-with-iframes)
+  - [選擇器作用域](#scoping-selectors)
+  - [等待元素](#waiting-for-elements)
+  - [將元素捲到可視區](#scrolling-an-element-into-view)
+- [可用的斷言](#available-assertions)
+- [頁面](#pages)
+  - [生成頁面](#generating-pages)
+  - [配置頁面](#configuring-pages)
+  - [導航到頁面](#navigating-to-pages)
+  - [簡寫選擇器](#shorthand-selectors)
+  - [頁面方法](#page-methods)
+- [元件](#components)
+  - [生成元件](#generating-components)
+  - [使用元件](#using-components)
+- [持續整合](#continuous-integration)
   - [Heroku CI](#running-tests-on-heroku-ci)
   - [Travis CI](#running-tests-on-travis-ci)
   - [GitHub Actions](#running-tests-on-github-actions)
@@ -58,37 +58,37 @@ description: Laravel Dusk 提供了簡單易用的瀏覽器自動化和測試 AP
 <a name="introduction"></a>
 ## 簡介
 
-> [!WARNING] > [Pest 4](https://pestphp.com/) now includes automated browser testing which offers significant performance and usability improvements compared to Laravel Dusk. For new projects, we recommend using Pest for browser testing.
+> [!WARNING] > [Pest 4](https://pestphp.com/) 現在包含了自動化瀏覽器測試功能，相比 Laravel Dusk 提供了顯著的性能和可用性改進。對於新項目，我們建議使用 Pest 進行瀏覽器測試。
 
-[Laravel Dusk](https://github.com/laravel/dusk) provides an expressive, easy-to-use browser automation and testing API. By default, Dusk does not require you to install JDK or Selenium on your local computer. Instead, Dusk uses a standalone [ChromeDriver](https://sites.google.com/chromium.org/driver) installation. However, you are free to utilize any other Selenium compatible driver you wish.
+[Laravel Dusk](https://github.com/laravel/dusk) 提供了一個表達性強、易於使用的瀏覽器自動化和測試 API。默認情況下，Dusk 不需要您在本地電腦上安裝 JDK 或 Selenium。相反，Dusk 使用一個獨立的 [ChromeDriver](https://sites.google.com/chromium.org/driver) 安裝。不過，您也可以自由使用任何其他兼容 Selenium 的驅動程序。
 
 <a name="installation"></a>
 ## 安裝
 
-To get started, you should install [Google Chrome](https://www.google.com/chrome) and add the `laravel/dusk` Composer dependency to your project:
+開始使用之前，您應該安裝 [Google Chrome](https://www.google.com/chrome) 並將 `laravel/dusk` Composer 依賴項添加到您的項目中：
 
 ```shell
 composer require laravel/dusk --dev
 ```
 
 > [!WARNING]
-> If you are manually registering Dusk's service provider, you should **never** register it in your production environment, as doing so could lead to arbitrary users being able to authenticate with your application.
+> 如果您手動註冊 Dusk 的服務提供者，**千萬不要**在生產環境中註冊它，因為這樣可能會導致任意用戶能夠驗證您的應用程序。
 
-After installing the Dusk package, execute the `dusk:install` Artisan command. The `dusk:install` command will create a `tests/Browser` directory, an example Dusk test, and install the Chrome Driver binary for your operating system:
+安裝 Dusk 包後，執行 `dusk:install` Artisan 命令。`dusk:install` 命令將創建一個 `tests/Browser` 目錄、一個示例 Dusk 測試和為您的操作系統安裝 Chrome Driver 二進制文件：
 
 ```shell
 php artisan dusk:install
 ```
 
-Next, set the `APP_URL` environment variable in your application's `.env` file. This value should match the URL you use to access your application in a browser.
+接下來，在應用程序的 `.env` 文件中設置 `APP_URL` 環境變數。這個值應該與您在瀏覽器中訪問應用程序的 URL 相匹配。
 
 > [!NOTE]
-> If you are using [Laravel Sail](/docs/sail) to manage your local development environment, please also consult the Sail documentation on [configuring and running Dusk tests](/docs/sail#laravel-dusk).
+> 如果您使用 [Laravel Sail](/docs/sail) 來管理本地開發環境，請同時查閱 Sail 文檔中有關 [配置和運行 Dusk 測試](/docs/sail#laravel-dusk) 的部分。
 
 <a name="managing-chromedriver-installations"></a>
-### Managing ChromeDriver Installations
+### 管理 ChromeDriver 安裝
 
-If you would like to install a different version of ChromeDriver than what is installed by Laravel Dusk via the `dusk:install` command, you may use the `dusk:chrome-driver` command:
+如果您想安裝與 Laravel Dusk 通過 `dusk:install` 命令安裝的不同版本的 ChromeDriver，您可以使用 `dusk:chrome-driver` 命令：
 
 ```shell
 # Install the latest version of ChromeDriver for your OS...
@@ -105,14 +105,14 @@ php artisan dusk:chrome-driver --detect
 ```
 
 > [!WARNING]
-> Dusk requires the `chromedriver` binaries to be executable. If you're having problems running Dusk, you should ensure the binaries are executable using the following command: `chmod -R 0755 vendor/laravel/dusk/bin/`.
+> Dusk 要求 `chromedriver` 二進制文件必須是可執行的。如果您在運行 Dusk 時遇到問題，您應該使用以下命令確保二進制文件是可執行的：`chmod -R 0755 vendor/laravel/dusk/bin/`。
 
 <a name="using-other-browsers"></a>
-### Using Other Browsers
+### 使用其他瀏覽器
 
-By default, Dusk uses Google Chrome and a standalone [ChromeDriver](https://sites.google.com/chromium.org/driver) installation to run your browser tests. However, you may start your own Selenium server and run your tests against any browser you wish.
+默認情況下，Dusk 使用 Google Chrome 和獨立的 [ChromeDriver](https://sites.google.com/chromium.org/driver) 安裝來運行您的瀏覽器測試。不過，您可以啟動自己的 Selenium 服務器並針對任何您希望的瀏覽器運行測試。
 
-To get started, open your `tests/DuskTestCase.php` file, which is the base Dusk test case for your application. Within this file, you can remove the call to the `startChromeDriver` method. This will stop Dusk from automatically starting the ChromeDriver:
+開始使用，打開 `tests/DuskTestCase.php` 文件，這是您應用程序的基礎 Dusk 測試用例。在此文件中，您可以移除對 `startChromeDriver` 方法的調用。這將停止 Dusk 自動啟動 ChromeDriver：
 
 ```php
 /**
@@ -126,7 +126,7 @@ public static function prepare(): void
 }
 ```
 
-Next, you may modify the `driver` method to connect to the URL and port of your choice. In addition, you may modify the "desired capabilities" that should be passed to the WebDriver:
+接下來，您可以修改 `driver` 方法以連接到您選擇的 URL 和端口。此外，您可以修改應傳遞給 WebDriver 的 "desired capabilities"：
 
 ```php
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -146,23 +146,23 @@ protected function driver(): RemoteWebDriver
 ## 開始使用
 
 <a name="generating-tests"></a>
-### Generating Tests
+### 生成測試
 
-To generate a Dusk test, use the `dusk:make` Artisan command. The generated test will be placed in the `tests/Browser` directory:
+要生成 Dusk 測試，使用 `dusk:make` Artisan 命令。生成的測試將放在 `tests/Browser` 目錄中：
 
 ```shell
 php artisan dusk:make LoginTest
 ```
 
 <a name="resetting-the-database-after-each-test"></a>
-### Resetting the Database After Each Test
+### 在每次測試後重置數據庫
 
-Most of the tests you write will interact with pages that retrieve data from your application's database; however, your Dusk tests should never use the `RefreshDatabase` trait. The `RefreshDatabase` trait leverages database transactions which will not be applicable or available across HTTP requests. Instead, you have two options: the `DatabaseMigrations` trait and the `DatabaseTruncation` trait.
+您編寫的大多數測試都會與從應用程序數據庫檢索數據的頁面進行交互；但是，您的 Dusk 測試不應該使用 `RefreshDatabase` trait。`RefreshDatabase` trait 利用數據庫事務，這將不適用或不可用於 HTTP 請求。相反，您有兩個選項：`DatabaseMigrations` trait 和 `DatabaseTruncation` trait。
 
 <a name="reset-migrations"></a>
-#### Using Database Migrations
+#### 使用數據庫遷移
 
-The `DatabaseMigrations` trait will run your database migrations before each test. However, dropping and re-creating your database tables for each test is typically slower than truncating the tables:
+`DatabaseMigrations` trait 將在每次測試前運行您的數據庫遷移。但是，為每次測試刪除和重新創建數據庫表通常比截斷表要慢：
 
 ```php tab=Pest
 <?php
@@ -193,12 +193,12 @@ class ExampleTest extends DuskTestCase
 ```
 
 > [!WARNING]
-> SQLite in-memory databases may not be used when executing Dusk tests. Since the browser executes within its own process, it will not be able to access the in-memory databases of other processes.
+> 執行 Dusk 測試時不能使用 SQLite 內存數據庫。由於瀏覽器在其自己的進程中執行，它無法訪問其他進程的內存數據庫。
 
 <a name="reset-truncation"></a>
-#### Using Database Truncation
+#### 使用數據庫截斷
 
-The `DatabaseTruncation` trait will migrate your database on the first test in order to ensure your database tables have been properly created. However, on subsequent tests, the database's tables will simply be truncated - providing a speed boost over re-running all of your database migrations:
+`DatabaseTruncation` trait 將在第一次測試時遷移您的數據庫以確保您的數據庫表已正確創建。但是，在隨後的測試中，數據庫的表將被簡單地截斷 - 比重新運行所有數據庫遷移提供了速度提升：
 
 ```php tab=Pest
 <?php
@@ -229,10 +229,10 @@ class ExampleTest extends DuskTestCase
 }
 ```
 
-By default, this trait will truncate all tables except the `migrations` table. If you would like to customize the tables that should be truncated, you may define a `$tablesToTruncate` property on your test class:
+默認情況下，此 trait 將截斷除 `migrations` 表外的所有表。如果您想自定義應截斷的表，您可以在測試類上定義 `$tablesToTruncate` 屬性：
 
 > [!NOTE]
-> If you are using Pest, you should define properties or methods on the base `DuskTestCase` class or on any class your test file extends.
+> 如果您使用 Pest，您應該在基礎 `DuskTestCase` 類上或您的測試文件擴展的任何類上定義屬性或方法。
 
 ```php
 /**
@@ -243,7 +243,7 @@ By default, this trait will truncate all tables except the `migrations` table. I
 protected $tablesToTruncate = ['users'];
 ```
 
-Alternatively, you may define an `$exceptTables` property on your test class to specify which tables should be excluded from truncation:
+或者，您可以在測試類上定義 `$exceptTables` 屬性以指定應從截斷中排除的表：
 
 ```php
 /**
@@ -254,7 +254,7 @@ Alternatively, you may define an `$exceptTables` property on your test class to 
 protected $exceptTables = ['users'];
 ```
 
-To specify the database connections that should have their tables truncated, you may define a `$connectionsToTruncate` property on your test class:
+要指定應截斷其表的數據庫連接，您可以在測試類上定義 `$connectionsToTruncate` 屬性：
 
 ```php
 /**
@@ -265,7 +265,7 @@ To specify the database connections that should have their tables truncated, you
 protected $connectionsToTruncate = ['mysql'];
 ```
 
-If you would like to execute code before or after database truncation is performed, you may define `beforeTruncatingDatabase` or `afterTruncatingDatabase` methods on your test class:
+如果您想在執行數據庫截斷前或後執行代碼，您可以在測試類上定義 `beforeTruncatingDatabase` 或 `afterTruncatingDatabase` 方法：
 
 ```php
 /**
@@ -286,33 +286,33 @@ protected function afterTruncatingDatabase(): void
 ```
 
 <a name="running-tests"></a>
-### Running Tests
+### 運行測試
 
-To run your browser tests, execute the `dusk` Artisan command:
+要運行您的瀏覽器測試，執行 `dusk` Artisan 命令：
 
 ```shell
 php artisan dusk
 ```
 
-If you had test failures the last time you ran the `dusk` command, you may save time by re-running the failing tests first using the `dusk:fails` command:
+如果您上次運行 `dusk` 命令時出現測試失敗，您可以使用 `dusk:fails` 命令首先重新運行失敗的測試來節省時間：
 
 ```shell
 php artisan dusk:fails
 ```
 
-The `dusk` command accepts any argument that is normally accepted by the Pest / PHPUnit test runner, such as allowing you to only run the tests for a given [group](https://docs.phpunit.de/en/10.5/annotations.html#group):
+`dusk` 命令接受 Pest / PHPUnit 測試運行器通常接受的任何參數，例如允許您只運行給定 [group](https://docs.phpunit.de/en/10.5/annotations.html#group) 的測試：
 
 ```shell
 php artisan dusk --group=foo
 ```
 
 > [!NOTE]
-> If you are using [Laravel Sail](/docs/sail) to manage your local development environment, please consult the Sail documentation on [configuring and running Dusk tests](/docs/sail#laravel-dusk).
+> 如果您使用 [Laravel Sail](/docs/sail) 來管理本地開發環境，請查閱 Sail 文檔中有關 [配置和運行 Dusk 測試](/docs/sail#laravel-dusk) 的部分。
 
 <a name="manually-starting-chromedriver"></a>
-#### Manually Starting ChromeDriver
+#### 手動啟動 ChromeDriver
 
-By default, Dusk will automatically attempt to start ChromeDriver. If this does not work for your particular system, you may manually start ChromeDriver before running the `dusk` command. If you choose to start ChromeDriver manually, you should comment out the following line of your `tests/DuskTestCase.php` file:
+默認情況下，Dusk 將自動嘗試啟動 ChromeDriver。如果這對您的特定系統不起作用，您可以在運行 `dusk` 命令之前手動啟動 ChromeDriver。如果您選擇手動啟動 ChromeDriver，您應該註釋掉 `tests/DuskTestCase.php` 文件中的以下行：
 
 ```php
 /**
@@ -326,7 +326,7 @@ public static function prepare(): void
 }
 ```
 
-In addition, if you start ChromeDriver on a port other than 9515, you should modify the `driver` method of the same class to reflect the correct port:
+此外，如果您在 9515 以外的端口上啟動 ChromeDriver，您應該修改同一類的 `driver` 方法以反映正確的端口：
 
 ```php
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -343,19 +343,19 @@ protected function driver(): RemoteWebDriver
 ```
 
 <a name="environment-handling"></a>
-### Environment Handling
+### 環境處理
 
-To force Dusk to use its own environment file when running tests, create a `.env.dusk.{environment}` file in the root of your project. For example, if you will be initiating the `dusk` command from your `local` environment, you should create a `.env.dusk.local` file.
+要強制 Dusk 在運行測試時使用其自己的環境文件，請在項目根目錄中創建 `.env.dusk.{environment}` 文件。例如，如果您將從 `local` 環境啟動 `dusk` 命令，您應該創建 `.env.dusk.local` 文件。
 
-When running tests, Dusk will back-up your `.env` file and rename your Dusk environment to `.env`. Once the tests have completed, your `.env` file will be restored.
+運行測試時，Dusk 將備份您的 `.env` 文件並將您的 Dusk 環境重命名為 `.env`。測試完成後，您的 `.env` 文件將被恢復。
 
 <a name="browser-basics"></a>
-## Browser Basics
+## 瀏覽器基礎
 
 <a name="creating-browsers"></a>
-### Creating Browsers
+### 創建瀏覽器
 
-To get started, let's write a test that verifies we can log into our application. After generating a test, we can modify it to navigate to the login page, enter some credentials, and click the "Login" button. To create a browser instance, you may call the `browse` method from within your Dusk test:
+開始使用，讓我們編寫一個測試來驗證我們可以登錄到應用程序。生成測試後，我們可以修改它以導航到登錄頁面、輸入一些憑據並點擊 "登錄" 按鈕。要創建瀏覽器實例，您可以在 Dusk 測試中調用 `browse` 方法：
 
 ```php tab=Pest
 <?php
@@ -415,12 +415,12 @@ class ExampleTest extends DuskTestCase
 }
 ```
 
-As you can see in the example above, the `browse` method accepts a closure. A browser instance will automatically be passed to this closure by Dusk and is the main object used to interact with and make assertions against your application.
+正如您在上面的示例中所看到的，`browse` 方法接受一個閉包。瀏覽器實例將由 Dusk 自動傳遞到此閉包，是用於與應用程序交互和進行斷言的主要對象。
 
 <a name="creating-multiple-browsers"></a>
-#### Creating Multiple Browsers
+#### 創建多個瀏覽器
 
-Sometimes you may need multiple browsers in order to properly carry out a test. For example, multiple browsers may be needed to test a chat screen that interacts with websockets. To create multiple browsers, simply add more browser arguments to the signature of the closure given to the `browse` method:
+有時您可能需要多個瀏覽器才能正確執行測試。例如，測試與 websocket 交互的聊天屏幕可能需要多個瀏覽器。要創建多個瀏覽器，只需將更多瀏覽器參數添加到提供給 `browse` 方法的閉包的簽名中：
 
 ```php
 $this->browse(function (Browser $first, Browser $second) {
@@ -440,21 +440,21 @@ $this->browse(function (Browser $first, Browser $second) {
 ```
 
 <a name="navigation"></a>
-### Navigation
+### 導航
 
-The `visit` method may be used to navigate to a given URI within your application:
+`visit` 方法可用於導航到應用程序中的給定 URI：
 
 ```php
 $browser->visit('/login');
 ```
 
-You may use the `visitRoute` method to navigate to a [named route](/docs/routing#named-routes):
+您可以使用 `visitRoute` 方法導航到 [命名路由](/docs/routing#named-routes)：
 
 ```php
 $browser->visitRoute($routeName, $parameters);
 ```
 
-You may navigate "back" and "forward" using the `back` and `forward` methods:
+您可以使用 `back` 和 `forward` 方法"後退"和"前進"：
 
 ```php
 $browser->back();
@@ -462,49 +462,49 @@ $browser->back();
 $browser->forward();
 ```
 
-You may use the `refresh` method to refresh the page:
+您可以使用 `refresh` 方法刷新頁面：
 
 ```php
 $browser->refresh();
 ```
 
 <a name="resizing-browser-windows"></a>
-### Resizing Browser Windows
+### 調整瀏覽器窗口大小
 
-You may use the `resize` method to adjust the size of the browser window:
+您可以使用 `resize` 方法調整瀏覽器窗口的大小：
 
 ```php
 $browser->resize(1920, 1080);
 ```
 
-The `maximize` method may be used to maximize the browser window:
+`maximize` 方法可用於最大化瀏覽器窗口：
 
 ```php
 $browser->maximize();
 ```
 
-The `fitContent` method will resize the browser window to match the size of its content:
+`fitContent` 方法將調整瀏覽器窗口大小以匹配其內容的大小：
 
 ```php
 $browser->fitContent();
 ```
 
-When a test fails, Dusk will automatically resize the browser to fit the content prior to taking a screenshot. You may disable this feature by calling the `disableFitOnFailure` method within your test:
+當測試失敗時，Dusk 將自動調整瀏覽器大小以在拍攝屏幕截圖前適應內容。您可以通過在測試中調用 `disableFitOnFailure` 方法來禁用此功能：
 
 ```php
 $browser->disableFitOnFailure();
 ```
 
-You may use the `move` method to move the browser window to a different position on your screen:
+您可以使用 `move` 方法將瀏覽器窗口移動到屏幕上的不同位置：
 
 ```php
 $browser->move($x = 100, $y = 100);
 ```
 
 <a name="browser-macros"></a>
-### Browser Macros
+### 瀏覽器宏
 
-If you would like to define a custom browser method that you can re-use in a variety of your tests, you may use the `macro` method on the `Browser` class. Typically, you should call this method from a [service provider's](/docs/providers) `boot` method:
+如果您想定義可在各種測試中重複使用的自定義瀏覽器方法，您可以在 `Browser` 類上使用 `macro` 方法。通常，您應該從 [服務提供者的](/docs/providers) `boot` 方法中調用此方法：
 
 ```php
 <?php
@@ -530,7 +530,7 @@ class DuskServiceProvider extends ServiceProvider
 }
 ```
 
-The `macro` function accepts a name as its first argument, and a closure as its second. The macro's closure will be executed when calling the macro as a method on a `Browser` instance:
+`macro` 函數接受名稱作為第一個參數，閉包作為第二個參數。宏的閉包將在作為 `Browser` 實例上的方法調用宏時執行：
 
 ```php
 $this->browse(function (Browser $browser) use ($user) {
@@ -541,9 +541,9 @@ $this->browse(function (Browser $browser) use ($user) {
 ```
 
 <a name="authentication"></a>
-### Authentication
+### 身份驗證
 
-Often, you will be testing pages that require authentication. You can use Dusk's `loginAs` method in order to avoid interacting with your application's login screen during every test. The `loginAs` method accepts a primary key associated with your authenticatable model or an authenticatable model instance:
+通常，您將測試需要身份驗證的頁面。您可以使用 Dusk 的 `loginAs` 方法以避免在每次測試期間與應用程序的登錄屏幕交互。`loginAs` 方法接受與可認證模型相關聯的主鍵或可認證模型實例：
 
 ```php
 use App\Models\User;
@@ -556,12 +556,12 @@ $this->browse(function (Browser $browser) {
 ```
 
 > [!WARNING]
-> After using the `loginAs` method, the user session will be maintained for all tests within the file.
+> 使用 `loginAs` 方法後，用戶會話將為文件中的所有測試保持。
 
 <a name="cookies"></a>
-### Cookies
+### Cookie
 
-You may use the `cookie` method to get or set an encrypted cookie's value. By default, all of the cookies created by Laravel are encrypted:
+您可以使用 `cookie` 方法獲取或設置加密 cookie 的值。默認情況下，Laravel 創建的所有 cookie 都是加密的：
 
 ```php
 $browser->cookie('name');
@@ -569,7 +569,7 @@ $browser->cookie('name');
 $browser->cookie('name', 'Taylor');
 ```
 
-You may use the `plainCookie` method to get or set an unencrypted cookie's value:
+您可以使用 `plainCookie` 方法獲取或設置未加密 cookie 的值：
 
 ```php
 $browser->plainCookie('name');
@@ -577,16 +577,16 @@ $browser->plainCookie('name');
 $browser->plainCookie('name', 'Taylor');
 ```
 
-You may use the `deleteCookie` method to delete the given cookie:
+您可以使用 `deleteCookie` 方法刪除給定的 cookie：
 
 ```php
 $browser->deleteCookie('name');
 ```
 
 <a name="executing-javascript"></a>
-### Executing JavaScript
+### 執行 JavaScript
 
-You may use the `script` method to execute arbitrary JavaScript statements within the browser:
+您可以使用 `script` 方法在瀏覽器中執行任意 JavaScript 語句：
 
 ```php
 $browser->script('document.documentElement.scrollTop = 0');
@@ -600,51 +600,51 @@ $output = $browser->script('return window.location.pathname');
 ```
 
 <a name="taking-a-screenshot"></a>
-### Taking a Screenshot
+### 拍攝屏幕截圖
 
-You may use the `screenshot` method to take a screenshot and store it with the given filename. All screenshots will be stored within the `tests/Browser/screenshots` directory:
+您可以使用 `screenshot` 方法拍攝屏幕截圖並使用給定的文件名存儲它。所有屏幕截圖將存儲在 `tests/Browser/screenshots` 目錄中：
 
 ```php
 $browser->screenshot('filename');
 ```
 
-The `responsiveScreenshots` method may be used to take a series of screenshots at various breakpoints:
+`responsiveScreenshots` 方法可用於在各種斷點處拍攝一系列屏幕截圖：
 
 ```php
 $browser->responsiveScreenshots('filename');
 ```
 
-The `screenshotElement` method may be used to take a screenshot of a specific element on the page:
+`screenshotElement` 方法可用於拍攝頁面上特定元素的屏幕截圖：
 
 ```php
 $browser->screenshotElement('#selector', 'filename');
 ```
 
 <a name="storing-console-output-to-disk"></a>
-### Storing Console Output to Disk
+### 將控制台輸出存儲到磁盤
 
-You may use the `storeConsoleLog` method to write the current browser's console output to disk with the given filename. Console output will be stored within the `tests/Browser/console` directory:
+您可以使用 `storeConsoleLog` 方法將當前瀏覽器的控制台輸出寫入磁盤，並使用給定的文件名。控制台輸出將存儲在 `tests/Browser/console` 目錄中：
 
 ```php
 $browser->storeConsoleLog('filename');
 ```
 
 <a name="storing-page-source-to-disk"></a>
-### Storing Page Source to Disk
+### 將頁面源存儲到磁盤
 
-You may use the `storeSource` method to write the current page's source to disk with the given filename. The page source will be stored within the `tests/Browser/source` directory:
+您可以使用 `storeSource` 方法將當前頁面的源寫入磁盤，並使用給定的文件名。頁面源將存儲在 `tests/Browser/source` 目錄中：
 
 ```php
 $browser->storeSource('filename');
 ```
 
 <a name="interacting-with-elements"></a>
-## Interacting With Elements
+## 與元素互動
 
 <a name="dusk-selectors"></a>
-### Dusk Selectors
+### Dusk 選擇器
 
-Choosing good CSS selectors for interacting with elements is one of the hardest parts of writing Dusk tests. Over time, frontend changes can cause CSS selectors like the following to break your tests:
+為與元素交互選擇好的 CSS 選擇器是編寫 Dusk 測試最難的部分之一。隨著時間的推移，前端更改可能會導致 CSS 選擇器如下所示破壞您的測試：
 
 ```html
 // HTML...
@@ -658,7 +658,7 @@ Choosing good CSS selectors for interacting with elements is one of the hardest 
 $browser->click('.login-page .container div > button');
 ```
 
-Dusk selectors allow you to focus on writing effective tests rather than remembering CSS selectors. To define a selector, add a `dusk` attribute to your HTML element. Then, when interacting with a Dusk browser, prefix the selector with `@` to manipulate the attached element within your test:
+Dusk 選擇器允許您專注於編寫有效的測試，而不是記住 CSS 選擇器。要定義選擇器，請向您的 HTML 元素添加 `dusk` 屬性。然後，在與 Dusk 瀏覽器交互時，在選擇器前加上 `@` 前綴以在測試中操作附加的元素：
 
 ```html
 // HTML...
@@ -672,7 +672,7 @@ Dusk selectors allow you to focus on writing effective tests rather than remembe
 $browser->click('@login-button');
 ```
 
-If desired, you may customize the HTML attribute that the Dusk selector utilizes via the `selectorHtmlAttribute` method. Typically, this method should be called from the `boot` method of your application's `AppServiceProvider`:
+如果需要，您可以通過 `selectorHtmlAttribute` 方法自定義 Dusk 選擇器使用的 HTML 屬性。通常，此方法應從應用程序 `AppServiceProvider` 的 `boot` 方法調用：
 
 ```php
 use Laravel\Dusk\Dusk;
@@ -681,12 +681,12 @@ Dusk::selectorHtmlAttribute('data-dusk');
 ```
 
 <a name="text-values-and-attributes"></a>
-### Text, Values, and Attributes
+### 文本、值與屬性
 
 <a name="retrieving-setting-values"></a>
-#### Retrieving and Setting Values
+#### 獲取與設置值
 
-Dusk provides several methods for interacting with the current value, display text, and attributes of elements on the page. For example, to get the "value" of an element that matches a given CSS or Dusk selector, use the `value` method:
+Dusk 提供了數種方法，用於與頁面上元素的當前值、顯示文字與屬性進行互動。例如，要取得與給定 CSS 或 Dusk 選擇器相匹配的元素的 "值"，可使用 `value` 方法：
 
 ```php
 // Retrieve the value...
@@ -696,58 +696,58 @@ $value = $browser->value('selector');
 $browser->value('selector', 'value');
 ```
 
-You may use the `inputValue` method to get the "value" of an input element that has a given field name:
+您可以使用 `inputValue` 方法來獲取具有指定欄位名稱的輸入元素的 "值"：
 
 ```php
 $value = $browser->inputValue('field');
 ```
 
 <a name="retrieving-text"></a>
-#### Retrieving Text
+#### 獲取文本
 
-The `text` method may be used to retrieve the display text of an element that matches the given selector:
+`text` 方法可用於檢索與指定選擇器匹配的元素的顯示文本：
 
 ```php
 $text = $browser->text('selector');
 ```
 
 <a name="retrieving-attributes"></a>
-#### Retrieving Attributes
+#### 獲取屬性
 
-Finally, the `attribute` method may be used to retrieve the value of an attribute of an element matching the given selector:
+最後，`attribute` 方法可用於檢索匹配指定選擇器的元素的屬性值：
 
 ```php
 $attribute = $browser->attribute('selector', 'value');
 ```
 
 <a name="interacting-with-forms"></a>
-### Interacting With Forms
+### 與表單互動
 
 <a name="typing-values"></a>
-#### Typing Values
+#### 輸入值
 
-Dusk provides a variety of methods for interacting with forms and input elements. First, let's take a look at an example of typing text into an input field:
+Dusk 提供了多種與表單和輸入元素互動的方法。首先，我們先看一個向輸入欄位輸入文字的範例：
 
 ```php
 $browser->type('email', 'taylor@laravel.com');
 ```
 
-Note that, although the method accepts one if necessary, we are not required to pass a CSS selector into the `type` method. If a CSS selector is not provided, Dusk will search for an `input` or `textarea` field with the given `name` attribute.
+注意：雖然此方法在必要時可接受一個選擇器，但並不要求您一定在 `type` 方法中傳入 CSS 選擇器。如果沒有提供 CSS 選擇器，Dusk 會尋找具有給定 `name` 屬性的 `input` 或 `textarea` 欄位。
 
-To append text to a field without clearing its content, you may use the `append` method:
+要在不清除原有內容的情況下向欄位追加文字，您可以使用 `append` 方法：
 
 ```php
 $browser->type('tags', 'foo')
     ->append('tags', ', bar, baz');
 ```
 
-You may clear the value of an input using the `clear` method:
+您可以使用 `clear` 方法清除輸入欄位的值：
 
 ```php
 $browser->clear('email');
 ```
 
-You can instruct Dusk to type slowly using the `typeSlowly` method. By default, Dusk will pause for 100 milliseconds between key presses. To customize the amount of time between key presses, you may pass the appropriate number of milliseconds as the third argument to the method:
+您可以使用 `typeSlowly` 方法指示 Dusk 以較慢的速度輸入。預設情況下，Dusk 會在每次按鍵間停頓 100 毫秒。要自訂按鍵間的時間，請將所需的毫秒數作為該方法的第三個參數：
 
 ```php
 $browser->typeSlowly('mobile', '+1 (202) 555-5555');
@@ -755,7 +755,7 @@ $browser->typeSlowly('mobile', '+1 (202) 555-5555');
 $browser->typeSlowly('mobile', '+1 (202) 555-5555', 300);
 ```
 
-You may use the `appendSlowly` method to append text slowly:
+您可以使用 `appendSlowly` 方法以較慢速度追加文字：
 
 ```php
 $browser->type('tags', 'foo')
@@ -763,72 +763,72 @@ $browser->type('tags', 'foo')
 ```
 
 <a name="dropdowns"></a>
-#### Dropdowns
+#### 下拉選單
 
-To select a value available on a `select` element, you may use the `select` method. Like the `type` method, the `select` method does not require a full CSS selector. When passing a value to the `select` method, you should pass the underlying option value instead of the display text:
+要從 `select` 元素中選擇一個可用的值，您可以使用 `select` 方法。與 `type` 方法一樣，`select` 方法並不需要完整的 CSS 選擇器。當向 `select` 方法傳遞值時，應該傳入內部 option 的 value，而非顯示文字：
 
 ```php
 $browser->select('size', 'Large');
 ```
 
-You may select a random option by omitting the second argument:
+您也可以省略第二個參數來隨機選擇一個選項：
 
 ```php
 $browser->select('size');
 ```
 
-By providing an array as the second argument to the `select` method, you can instruct the method to select multiple options:
+將一個陣列作為 `select` 方法的第二個參數，可以讓該方法選擇多個選項：
 
 ```php
 $browser->select('categories', ['Art', 'Music']);
 ```
 
 <a name="checkboxes"></a>
-#### Checkboxes
+#### 複選框
 
-To "check" a checkbox input, you may use the `check` method. Like many other input related methods, a full CSS selector is not required. If a CSS selector match can't be found, Dusk will search for a checkbox with a matching `name` attribute:
+要勾選一個 checkbox 輸入欄位，您可以使用 `check` 方法。與其他輸入相關方法類似，不需要完整的 CSS 選擇器。如果找不到 CSS 選擇器匹配，Dusk 會尋找具有匹配 `name` 屬性的 checkbox：
 
 ```php
 $browser->check('terms');
 ```
 
-The `uncheck` method may be used to "uncheck" a checkbox input:
+`uncheck` 方法可用於取消勾選 checkbox 輸入：
 
 ```php
 $browser->uncheck('terms');
 ```
 
 <a name="radio-buttons"></a>
-#### Radio Buttons
+#### 單選框
 
-To "select" a `radio` input option, you may use the `radio` method. Like many other input related methods, a full CSS selector is not required. If a CSS selector match can't be found, Dusk will search for a `radio` input with matching `name` and `value` attributes:
+要選擇一個 `radio` 輸入選項，您可以使用 `radio` 方法。與其他輸入相關方法類似，並不需要完整的 CSS 選擇器。如果找不到 CSS 匹配，Dusk 會尋找具有匹配 `name` 和 `value` 屬性的 `radio` 元素：
 
 ```php
 $browser->radio('size', 'large');
 ```
 
 <a name="attaching-files"></a>
-### Attaching Files
+### 附加檔案
 
-The `attach` method may be used to attach a file to a `file` input element. Like many other input related methods, a full CSS selector is not required. If a CSS selector match can't be found, Dusk will search for a `file` input with a matching `name` attribute:
+`attach` 方法可用於向 `file` 輸入元素附加檔案。與其他輸入相關的方法一樣，不需要完整的 CSS 選擇器。如果找不到 CSS 選擇的匹配，Dusk 會尋找具有相應 `name` 屬性的 `file` 輸入元素：
 
 ```php
 $browser->attach('photo', __DIR__.'/photos/mountains.png');
 ```
 
 > [!WARNING]
-> The attach function requires the `Zip` PHP extension to be installed and enabled on your server.
+> 附加檔案功能需要在您的伺服器上安裝並啟用 `Zip` PHP 擴充功能。
 
 <a name="pressing-buttons"></a>
-### Pressing Buttons
+### 按鈕操作
 
-The `press` method may be used to click a button element on the page. The argument given to the `press` method may be either the display text of the button or a CSS / Dusk selector:
+`press` 方法可用於點擊頁面上的按鈕元素。傳遞給 `press` 方法的參數可以是按鈕的顯示文字或 CSS / Dusk 選擇器：
 
 ```php
 $browser->press('Login');
 ```
 
-When submitting forms, many applications disable the form's submission button after it is pressed and then re-enable the button when the form submission's HTTP request is complete. To press a button and wait for the button to be re-enabled, you may use the `pressAndWaitFor` method:
+在提交表單時，許多應用會在按下提交按鈕後禁用該按鈕，直到 HTTP 請求完成並重新啟用按鈕。要按下按鈕並等待按鈕重新啟用，您可以使用 `pressAndWaitFor` 方法：
 
 ```php
 // Press the button and wait a maximum of 5 seconds for it to be enabled...
@@ -839,15 +839,15 @@ $browser->pressAndWaitFor('Save', 1);
 ```
 
 <a name="clicking-links"></a>
-### Clicking Links
+### 點擊連結
 
-To click a link, you may use the `clickLink` method on the browser instance. The `clickLink` method will click the link that has the given display text:
+要點擊鏈結，您可以在瀏覽器實例上使用 `clickLink` 方法。`clickLink` 方法會點擊具有指定顯示文字的鏈結：
 
 ```php
 $browser->clickLink($linkText);
 ```
 
-You may use the `seeLink` method to determine if a link with the given display text is visible on the page:
+您可以使用 `seeLink` 方法判斷頁面上是否可見具有指定顯示文字的鏈結：
 
 ```php
 if ($browser->seeLink($linkText)) {
@@ -859,27 +859,27 @@ if ($browser->seeLink($linkText)) {
 > These methods interact with jQuery. If jQuery is not available on the page, Dusk will automatically inject it into the page so it is available for the test's duration.
 
 <a name="using-the-keyboard"></a>
-### Using the Keyboard
+### 使用鍵盤
 
-The `keys` method allows you to provide more complex input sequences to a given element than normally allowed by the `type` method. For example, you may instruct Dusk to hold modifier keys while entering values. In this example, the `shift` key will be held while `taylor` is entered into the element matching the given selector. After `taylor` is typed, `swift` will be typed without any modifier keys:
+`keys` 方法允許您對指定元素提供比 `type` 方法更複雜的輸入序列。例如，您可以指示 Dusk 在輸入值時按住修飾鍵。在此示例中，輸入 `taylor` 時會按住 `shift` 鍵，之後輸入 `swift` 時則不會按任何修飾鍵：
 
 ```php
 $browser->keys('selector', ['{shift}', 'taylor'], 'swift');
 ```
 
-Another valuable use case for the `keys` method is sending a "keyboard shortcut" combination to the primary CSS selector for your application:
+另一個 `keys` 方法的實用案例是向應用程式的主要 CSS 選擇器發送「鍵盤快捷鍵」組合：
 
 ```php
 $browser->keys('.app', ['{command}', 'j']);
 ```
 
 > [!NOTE]
-> All modifier keys such as `{command}` are wrapped in `{}` characters, and match the constants defined in the `Facebook\WebDriver\WebDriverKeys` class, which can be [found on GitHub](https://github.com/php-webdriver/php-webdriver/blob/master/lib/WebDriverKeys.php).
+> 所有修飾鍵（例如 `{command}`）皆以 `{}` 包裹，並對應 `Facebook\\WebDriver\\WebDriverKeys` 類中定義的常數，可在 [GitHub](https://github.com/php-webdriver/php-webdriver/blob/master/lib/WebDriverKeys.php) 上找到。
 
 <a name="fluent-keyboard-interactions"></a>
-#### Fluent Keyboard Interactions
+#### 鍵盤進階交互
 
-Dusk also provides a `withKeyboard` method, allowing you to fluently perform complex keyboard interactions via the `Laravel\Dusk\Keyboard` class. The `Keyboard` class provides `press`, `release`, `type`, and `pause` methods:
+Dusk 也提供 `withKeyboard` 方法，允許您透過 `Laravel\Dusk\Keyboard` 類順暢地執行複雜的鍵盤互動操作。`Keyboard` 類提供 `press`、`release`、`type` 與 `pause` 方法：
 
 ```php
 use Laravel\Dusk\Keyboard;
@@ -893,9 +893,9 @@ $browser->withKeyboard(function (Keyboard $keyboard) {
 ```
 
 <a name="keyboard-macros"></a>
-#### Keyboard Macros
+#### 鍵盤巨集
 
-If you would like to define custom keyboard interactions that you can easily re-use throughout your test suite, you may use the `macro` method provided by the `Keyboard` class. Typically, you should call this method from a [service provider's](/docs/providers) `boot` method:
+如果您想定義可在測試套件中重複使用的自定義鍵盤互動，可以使用 `Keyboard` 類提供的 `macro` 方法。通常建議在服務提供者（service provider）的 `boot` 方法中調用此方法：
 
 ```php
 <?php
@@ -933,7 +933,7 @@ class DuskServiceProvider extends ServiceProvider
 }
 ```
 
-The `macro` function accepts a name as its first argument and a closure as its second. The macro's closure will be executed when calling the macro as a method on a `Keyboard` instance:
+`macro` 函數接受名稱作為第一個參數，閉包作為第二個參數。當在 `Keyboard` 實例上以方法方式呼叫該宏時，宏的閉包將被執行：
 
 ```php
 $browser->click('@textarea')
@@ -943,30 +943,30 @@ $browser->click('@textarea')
 ```
 
 <a name="using-the-mouse"></a>
-### Using the Mouse
+### 使用滑鼠
 
 <a name="clicking-on-elements"></a>
-#### Clicking on Elements
+#### 點擊元素
 
-The `click` method may be used to click on an element matching the given CSS or Dusk selector:
+`click` 方法可用於點擊匹配給定 CSS 或 Dusk 選擇器的元素：
 
 ```php
 $browser->click('.selector');
 ```
 
-The `clickAtXPath` method may be used to click on an element matching the given XPath expression:
+`clickAtXPath` 方法可用於點擊匹配給定 XPath 表達式的元素：
 
 ```php
 $browser->clickAtXPath('//div[@class = "selector"]');
 ```
 
-The `clickAtPoint` method may be used to click on the topmost element at a given pair of coordinates relative to the viewable area of the browser:
+`clickAtPoint` 方法可用於點擊相對於瀏覽器可視區域給定座標對上方的最上層元素：
 
 ```php
 $browser->clickAtPoint($x = 0, $y = 0);
 ```
 
-The `doubleClick` method may be used to simulate the double click of a mouse:
+`doubleClick` 方法可用於模擬滑鼠的雙擊操作：
 
 ```php
 $browser->doubleClick();
@@ -974,7 +974,7 @@ $browser->doubleClick();
 $browser->doubleClick('.selector');
 ```
 
-The `rightClick` method may be used to simulate the right click of a mouse:
+`rightClick` 方法可用於模擬滑鼠的右鍵點擊操作：
 
 ```php
 $browser->rightClick();
@@ -982,7 +982,7 @@ $browser->rightClick();
 $browser->rightClick('.selector');
 ```
 
-The `clickAndHold` method may be used to simulate a mouse button being clicked and held down. A subsequent call to the `releaseMouse` method will undo this behavior and release the mouse button:
+`clickAndHold` 方法可用於模擬滑鼠按鈕被按下並保持不放。隨後呼叫 `releaseMouse` 方法可取消此操作並釋放滑鼠按鈕：
 
 ```php
 $browser->clickAndHold('.selector');
@@ -992,7 +992,7 @@ $browser->clickAndHold()
     ->releaseMouse();
 ```
 
-The `controlClick` method may be used to simulate the `ctrl+click` event within the browser:
+`controlClick` 方法可用於在瀏覽器中模擬 `ctrl+click` 事件：
 
 ```php
 $browser->controlClick();
@@ -1001,24 +1001,24 @@ $browser->controlClick('.selector');
 ```
 
 <a name="mouseover"></a>
-#### Mouseover
+#### 滑鼠懸停
 
-The `mouseover` method may be used when you need to move the mouse over an element matching the given CSS or Dusk selector:
+當您需要將滑鼠移到匹配給定 CSS 或 Dusk 選擇器的元素上方時，可以使用 `mouseover` 方法：
 
 ```php
 $browser->mouseover('.selector');
 ```
 
 <a name="drag-drop"></a>
-#### Drag and Drop
+#### 拖放操作
 
-The `drag` method may be used to drag an element matching the given selector to another element:
+`drag` 方法可用於將匹配給定選擇器的元素拖動到另一個元素上：
 
 ```php
 $browser->drag('.from-selector', '.to-selector');
 ```
 
-Or, you may drag an element in a single direction:
+或者，您也可以將元素向單一方向拖動：
 
 ```php
 $browser->dragLeft('.selector', $pixels = 10);
@@ -1027,49 +1027,49 @@ $browser->dragUp('.selector', $pixels = 10);
 $browser->dragDown('.selector', $pixels = 10);
 ```
 
-Finally, you may drag an element by a given offset:
+最後，您可以通過指定偏移量拖動元素：
 
 ```php
 $browser->dragOffset('.selector', $x = 10, $y = 10);
 ```
 
 <a name="javascript-dialogs"></a>
-### JavaScript Dialogs
+### JavaScript 對話框
 
-Dusk provides various methods to interact with JavaScript Dialogs. For example, you may use the `waitForDialog` method to wait for a JavaScript dialog to appear. This method accepts an optional argument indicating how many seconds to wait for the dialog to appear:
+Dusk 提供了多種方法與 JavaScript 對話框（Dialog）交互。例如，您可以使用 `waitForDialog` 方法等待 JavaScript 對話框出現。該方法接受一個可選數值參數，用於指定等待對話框出現的秒數：
 
 ```php
 $browser->waitForDialog($seconds = null);
 ```
 
-The `assertDialogOpened` method may be used to assert that a dialog has been displayed and contains the given message:
+`assertDialogOpened` 方法可用於斷言對話框已顯示並包含給定訊息：
 
 ```php
 $browser->assertDialogOpened('Dialog message');
 ```
 
-If the JavaScript dialog contains a prompt, you may use the `typeInDialog` method to type a value into the prompt:
+如果 JavaScript 對話框包含提示（prompt），您可以使用 `typeInDialog` 方法在提示中輸入值：
 
 ```php
 $browser->typeInDialog('Hello World');
 ```
 
-To close an open JavaScript dialog by clicking the "OK" button, you may invoke the `acceptDialog` method:
+要通過點擊「OK」按鈕關閉開啟的 JavaScript 對話框，您可以調用 `acceptDialog` 方法：
 
 ```php
 $browser->acceptDialog();
 ```
 
-To close an open JavaScript dialog by clicking the "Cancel" button, you may invoke the `dismissDialog` method:
+要通過點擊「取消（Cancel）」按鈕關閉開啟的 JavaScript 對話框，您可以調用 `dismissDialog` 方法：
 
 ```php
 $browser->dismissDialog();
 ```
 
 <a name="interacting-with-iframes"></a>
-### Interacting With Inline Frames
+### 與內嵌框架（iframe）互動
 
-If you need to interact with elements within an iframe, you may use the `withinFrame` method. All element interactions that take place within the closure provided to the `withinFrame` method will be scoped to the context of the specified iframe:
+如果您需要與 iframe 內的元素交互，可以使用 `withinFrame` 方法。傳入 `withinFrame` 閉包中的所有元素交互都將被作用於該指定 iframe 的上下文中：
 
 ```php
 $browser->withinFrame('#credit-card-details', function ($browser) {
@@ -1081,9 +1081,9 @@ $browser->withinFrame('#credit-card-details', function ($browser) {
 ```
 
 <a name="scoping-selectors"></a>
-### Scoping Selectors
+### 選擇器作用域
 
-Sometimes you may wish to perform several operations while scoping all of the operations within a given selector. For example, you may wish to assert that some text exists only within a table and then click a button within that table. You may use the `with` method to accomplish this. All operations performed within the closure given to the `with` method will be scoped to the original selector:
+有時您可能想在指定選擇器的作用域內執行多個操作。例如，您可能希望斷言某些文字僅存在於表格中，然後在該表格內點擊按鈕。您可以使用 `with` 方法來實現此目的。傳入 `with` 閉包的所有操作都會被限定在原始選擇器的範圍內：
 
 ```php
 $browser->with('.table', function (Browser $table) {
@@ -1092,7 +1092,7 @@ $browser->with('.table', function (Browser $table) {
 });
 ```
 
-You may occasionally need to execute assertions outside of the current scope. You may use the `elsewhere` and `elsewhereWhenAvailable` methods to accomplish this:
+有時您可能需要在當前作用域之外執行斷言。可以使用 `elsewhere` 與 `elsewhereWhenAvailable` 方法來實現這一點：
 
 ```php
 $browser->with('.table', function (Browser $table) {
@@ -1111,35 +1111,35 @@ $browser->with('.table', function (Browser $table) {
 ```
 
 <a name="waiting-for-elements"></a>
-### Waiting for Elements
+### 等待元素
 
-When testing applications that use JavaScript extensively, it often becomes necessary to "wait" for certain elements or data to be available before proceeding with a test. Dusk makes this a cinch. Using a variety of methods, you may wait for elements to become visible on the page or even wait until a given JavaScript expression evaluates to `true`.
+當測試大量使用 JavaScript 的應用時，通常需要在繼續測試之前「等待」某些元素或資料可用。Dusk 讓這件事變得非常簡單。透過多種方法，您可以等待元素在頁面上變為可見，甚至等待某個 JavaScript 表達式評估為 `true`。
 
 <a name="waiting"></a>
-#### Waiting
+#### 等待
 
-If you just need to pause the test for a given number of milliseconds, use the `pause` method:
+如果您只需要讓測試暫停指定的毫秒數，請使用 `pause` 方法：
 
 ```php
 $browser->pause(1000);
 ```
 
-If you need to pause the test only if a given condition is `true`, use the `pauseIf` method:
+如果您僅在某個條件為 `true` 時暫停測試，請使用 `pauseIf` 方法：
 
 ```php
 $browser->pauseIf(App::environment('production'), 1000);
 ```
 
-Likewise, if you need to pause the test unless a given condition is `true`, you may use the `pauseUnless` method:
+同樣地，如果您需要在某個條件不是 `true` 時暫停測試，可以使用 `pauseUnless` 方法：
 
 ```php
 $browser->pauseUnless(App::environment('testing'), 1000);
 ```
 
 <a name="waiting-for-selectors"></a>
-#### Waiting for Selectors
+#### 等待選擇器
 
-The `waitFor` method may be used to pause the execution of the test until the element matching the given CSS or Dusk selector is displayed on the page. By default, this will pause the test for a maximum of five seconds before throwing an exception. If necessary, you may pass a custom timeout threshold as the second argument to the method:
+`waitFor` 方法可用於暫停測試執行，直到匹配給定 CSS 或 Dusk 選擇器的元素出現在頁面上。預設情況下，這會在拋出例外之前最多等待五秒。如有必要，您可以將自訂超時閾值作為第二個參數傳入該方法：
 
 ```php
 // Wait a maximum of five seconds for the selector...
@@ -1149,7 +1149,7 @@ $browser->waitFor('.selector');
 $browser->waitFor('.selector', 1);
 ```
 
-You may also wait until the element matching the given selector contains the given text:
+您也可以等待匹配指定選擇器的元素包含給定文字：
 
 ```php
 // Wait a maximum of five seconds for the selector to contain the given text...
@@ -1159,7 +1159,7 @@ $browser->waitForTextIn('.selector', 'Hello World');
 $browser->waitForTextIn('.selector', 'Hello World', 1);
 ```
 
-You may also wait until the element matching the given selector is missing from the page:
+您也可以等待匹配指定選擇器的元素從頁面上消失：
 
 ```php
 // Wait a maximum of five seconds until the selector is missing...
@@ -1169,7 +1169,7 @@ $browser->waitUntilMissing('.selector');
 $browser->waitUntilMissing('.selector', 1);
 ```
 
-Or, you may wait until the element matching the given selector is enabled or disabled:
+或者，您也可以等待匹配指定選擇器的元素變為可用或被禁用：
 
 ```php
 // Wait a maximum of five seconds until the selector is enabled...
@@ -1186,9 +1186,9 @@ $browser->waitUntilDisabled('.selector', 1);
 ```
 
 <a name="scoping-selectors-when-available"></a>
-#### Scoping Selectors When Available
+#### 在可用時限定作用域
 
-Occasionally, you may wish to wait for an element to appear that matches a given selector and then interact with the element. For example, you may wish to wait until a modal window is available and then press the "OK" button within the modal. The `whenAvailable` method may be used to accomplish this. All element operations performed within the given closure will be scoped to the original selector:
+有時您可能想等待一個匹配指定選擇器的元素出現，然後再與該元素交互。例如，您可能希望等待模態視窗可用，然後在該模態中按下「OK」按鈕。可以使用 `whenAvailable` 方法來完成此操作。傳入 `whenAvailable` 的閉包中執行的所有元素操作都會被限定在該選擇器的範圍內：
 
 ```php
 $browser->whenAvailable('.modal', function (Browser $modal) {
@@ -1198,9 +1198,9 @@ $browser->whenAvailable('.modal', function (Browser $modal) {
 ```
 
 <a name="waiting-for-text"></a>
-#### Waiting for Text
+#### 等待文字
 
-The `waitForText` method may be used to wait until the given text is displayed on the page:
+`waitForText` 方法可用於等待頁面上顯示指定文字：
 
 ```php
 // Wait a maximum of five seconds for the text...
@@ -1210,7 +1210,7 @@ $browser->waitForText('Hello World');
 $browser->waitForText('Hello World', 1);
 ```
 
-You may use the `waitUntilMissingText` method to wait until the displayed text has been removed from the page:
+您可以使用 `waitUntilMissingText` 方法等待頁面上顯示的文字被移除：
 
 ```php
 // Wait a maximum of five seconds for the text to be removed...
@@ -1221,9 +1221,9 @@ $browser->waitUntilMissingText('Hello World', 1);
 ```
 
 <a name="waiting-for-links"></a>
-#### Waiting for Links
+#### 等待連結
 
-The `waitForLink` method may be used to wait until the given link text is displayed on the page:
+`waitForLink` 方法可用於等待頁面上顯示指定的鏈結文字：
 
 ```php
 // Wait a maximum of five seconds for the link...
@@ -1234,9 +1234,9 @@ $browser->waitForLink('Create', 1);
 ```
 
 <a name="waiting-for-inputs"></a>
-#### Waiting for Inputs
+#### 等待輸入欄位
 
-The `waitForInput` method may be used to wait until the given input field is visible on the page:
+`waitForInput` 方法可用於等待指定的輸入欄位在頁面上可見：
 
 ```php
 // Wait a maximum of five seconds for the input...
@@ -1247,9 +1247,9 @@ $browser->waitForInput($field, 1);
 ```
 
 <a name="waiting-on-the-page-location"></a>
-#### Waiting on the Page Location
+#### 等待頁面位置
 
-When making a path assertion such as `$browser->assertPathIs('/home')`, the assertion can fail if `window.location.pathname` is being updated asynchronously. You may use the `waitForLocation` method to wait for the location to be a given value:
+當執行像 `$browser->assertPathIs('/home')` 這樣的路徑斷言時，如果 `window.location.pathname` 被異步更新，該斷言可能會失敗。您可以使用 `waitForLocation` 方法等待頁面位置變為指定的值：
 
 ```php
 $browser->waitForLocation('/secret');
@@ -1261,16 +1261,16 @@ The `waitForLocation` method can also be used to wait for the current window loc
 $browser->waitForLocation('https://example.com/path');
 ```
 
-You may also wait for a [named route's](/docs/routing#named-routes) location:
+您也可以等待某個 [命名路由](/docs/routing#named-routes) 的位置：
 
 ```php
 $browser->waitForRoute($routeName, $parameters);
 ```
 
 <a name="waiting-for-page-reloads"></a>
-#### Waiting for Page Reloads
+#### 等待頁面重新載入
 
-If you need to wait for a page to reload after performing an action, use the `waitForReload` method:
+如果您需要在執行某個操作後等待頁面重新載入，請使用 `waitForReload` 方法：
 
 ```php
 use Laravel\Dusk\Browser;
@@ -1281,7 +1281,7 @@ $browser->waitForReload(function (Browser $browser) {
 ->assertSee('Success!');
 ```
 
-Since the need to wait for the page to reload typically occurs after clicking a button, you may use the `clickAndWaitForReload` method for convenience:
+由於通常在點擊按鈕後需要等待頁面重新載入，您可以使用 `clickAndWaitForReload` 方法以便捷完成此操作：
 
 ```php
 $browser->clickAndWaitForReload('.selector')
@@ -1289,9 +1289,9 @@ $browser->clickAndWaitForReload('.selector')
 ```
 
 <a name="waiting-on-javascript-expressions"></a>
-#### Waiting on JavaScript Expressions
+#### 等待 JavaScript 表達式
 
-Sometimes you may wish to pause the execution of a test until a given JavaScript expression evaluates to `true`. You may easily accomplish this using the `waitUntil` method. When passing an expression to this method, you do not need to include the `return` keyword or an ending semi-colon:
+有時您可能希望暫停測試執行，直到某個 JavaScript 表達式評估為 `true`。您可以使用 `waitUntil` 方法輕鬆實現。傳遞表達式給該方法時，無需包含 `return` 關鍵字或結尾分號：
 
 ```php
 // Wait a maximum of five seconds for the expression to be true...
@@ -1302,9 +1302,9 @@ $browser->waitUntil('App.data.servers.length > 0', 1);
 ```
 
 <a name="waiting-on-vue-expressions"></a>
-#### Waiting on Vue Expressions
+#### 等待 Vue 表達式
 
-The `waitUntilVue` and `waitUntilVueIsNot` methods may be used to wait until a [Vue component](https://vuejs.org) attribute has a given value:
+`waitUntilVue` 與 `waitUntilVueIsNot` 方法可用於等待 [Vue 元件](https://vuejs.org) 的某個屬性達到指定值：
 
 ```php
 // Wait until the component attribute contains the given value...
@@ -1315,7 +1315,7 @@ $browser->waitUntilVueIsNot('user.name', null, '@user');
 ```
 
 <a name="waiting-for-javascript-events"></a>
-#### Waiting for JavaScript Events
+#### 等待 JavaScript 事件
 
 The `waitForEvent` method can be used to pause the execution of a test until a JavaScript event occurs:
 
@@ -1323,7 +1323,7 @@ The `waitForEvent` method can be used to pause the execution of a test until a J
 $browser->waitForEvent('load');
 ```
 
-The event listener is attached to the current scope, which is the `body` element by default. When using a scoped selector, the event listener will be attached to the matching element:
+事件監聽器會附加到當前作用域，預設情況下為 `body` 元素。使用範圍選擇器時，事件監聽器會附加到匹配的元素上：
 
 ```php
 $browser->with('iframe', function (Browser $iframe) {
@@ -1332,13 +1332,13 @@ $browser->with('iframe', function (Browser $iframe) {
 });
 ```
 
-You may also provide a selector as the second argument to the `waitForEvent` method to attach the event listener to a specific element:
+您也可以將選擇器作為第二個參數傳遞給 `waitForEvent` 方法，以將事件監聽器附加到指定元素上：
 
 ```php
 $browser->waitForEvent('load', '.selector');
 ```
 
-You may also wait for events on the `document` and `window` objects:
+您也可以等待 `document` 與 `window` 物件上的事件：
 
 ```php
 // Wait until the document is scrolled...
@@ -1349,9 +1349,9 @@ $browser->waitForEvent('resize', 'window', 5);
 ```
 
 <a name="waiting-with-a-callback"></a>
-#### Waiting With a Callback
+#### 使用回呼等待
 
-Many of the "wait" methods in Dusk rely on the underlying `waitUsing` method. You may use this method directly to wait for a given closure to return `true`. The `waitUsing` method accepts the maximum number of seconds to wait, the interval at which the closure should be evaluated, the closure, and an optional failure message:
+Dusk 中許多「等待」方法都依賴於底層的 `waitUsing` 方法。您可以直接使用該方法等待某個閉包返回 `true`。`waitUsing` 方法接受最大等待秒數、應評估閉包的間隔時間、閉包本身，以及可選的失敗訊息：
 
 ```php
 $browser->waitUsing(10, 1, function () use ($something) {
@@ -1360,9 +1360,9 @@ $browser->waitUsing(10, 1, function () use ($something) {
 ```
 
 <a name="scrolling-an-element-into-view"></a>
-### Scrolling an Element Into View
+### 將元素捲到可視區
 
-Sometimes you may not be able to click on an element because it is outside of the viewable area of the browser. The `scrollIntoView` method will scroll the browser window until the element at the given selector is within the view:
+有時您無法點擊元素，因為它位於瀏覽器可視區域之外。`scrollIntoView` 方法會捲動瀏覽器視窗，直到指定選擇器的元素進入可視範圍：
 
 ```php
 $browser->scrollIntoView('.selector')
@@ -1370,9 +1370,9 @@ $browser->scrollIntoView('.selector')
 ```
 
 <a name="available-assertions"></a>
-## Available Assertions
+## 可用的斷言
 
-Dusk provides a variety of assertions that you may make against your application. All of the available assertions are documented in the list below:
+Dusk 提供了多種可以對應用程式進行的斷言。所有可用的斷言已在下方列表中記載：
 
 <div className="collection-method-list">
 
@@ -1463,7 +1463,7 @@ Dusk provides a variety of assertions that you may make against your application
 <a name="assert-title"></a>
 #### assertTitle
 
-Assert that the page title matches the given text:
+斷言頁面標題與給定文字相符：
 
 ```php
 $browser->assertTitle($title);
@@ -1472,7 +1472,7 @@ $browser->assertTitle($title);
 <a name="assert-title-contains"></a>
 #### assertTitleContains
 
-Assert that the page title contains the given text:
+斷言頁面標題包含給定文字：
 
 ```php
 $browser->assertTitleContains($title);
@@ -1481,7 +1481,7 @@ $browser->assertTitleContains($title);
 <a name="assert-url-is"></a>
 #### assertUrlIs
 
-Assert that the current URL (without the query string) matches the given string:
+斷言當前 URL（不含查詢字串）與給定字串相符：
 
 ```php
 $browser->assertUrlIs($url);
@@ -1490,7 +1490,7 @@ $browser->assertUrlIs($url);
 <a name="assert-scheme-is"></a>
 #### assertSchemeIs
 
-Assert that the current URL scheme matches the given scheme:
+斷言當前 URL 的協議（scheme）與給定的協議相符：
 
 ```php
 $browser->assertSchemeIs($scheme);
@@ -1499,7 +1499,7 @@ $browser->assertSchemeIs($scheme);
 <a name="assert-scheme-is-not"></a>
 #### assertSchemeIsNot
 
-Assert that the current URL scheme does not match the given scheme:
+斷言當前 URL 的協議（scheme）不匹配給定的協議：
 
 ```php
 $browser->assertSchemeIsNot($scheme);
@@ -1508,7 +1508,7 @@ $browser->assertSchemeIsNot($scheme);
 <a name="assert-host-is"></a>
 #### assertHostIs
 
-Assert that the current URL host matches the given host:
+斷言當前 URL 的主機（host）與給定主機相符：
 
 ```php
 $browser->assertHostIs($host);
@@ -1517,7 +1517,7 @@ $browser->assertHostIs($host);
 <a name="assert-host-is-not"></a>
 #### assertHostIsNot
 
-Assert that the current URL host does not match the given host:
+斷言當前 URL 的主機（host）不匹配給定主機：
 
 ```php
 $browser->assertHostIsNot($host);
@@ -1526,7 +1526,7 @@ $browser->assertHostIsNot($host);
 <a name="assert-port-is"></a>
 #### assertPortIs
 
-Assert that the current URL port matches the given port:
+斷言當前 URL 的埠（port）與給定埠相符：
 
 ```php
 $browser->assertPortIs($port);
@@ -1535,7 +1535,7 @@ $browser->assertPortIs($port);
 <a name="assert-port-is-not"></a>
 #### assertPortIsNot
 
-Assert that the current URL port does not match the given port:
+斷言當前 URL 的埠（port）不匹配給定埠：
 
 ```php
 $browser->assertPortIsNot($port);
@@ -1544,7 +1544,7 @@ $browser->assertPortIsNot($port);
 <a name="assert-path-begins-with"></a>
 #### assertPathBeginsWith
 
-Assert that the current URL path begins with the given path:
+斷言當前 URL 的路徑以給定路徑開頭：
 
 ```php
 $browser->assertPathBeginsWith('/home');
@@ -1553,7 +1553,7 @@ $browser->assertPathBeginsWith('/home');
 <a name="assert-path-ends-with"></a>
 #### assertPathEndsWith
 
-Assert that the current URL path ends with the given path:
+斷言當前 URL 的路徑以給定路徑結尾：
 
 ```php
 $browser->assertPathEndsWith('/home');
@@ -1562,7 +1562,7 @@ $browser->assertPathEndsWith('/home');
 <a name="assert-path-contains"></a>
 #### assertPathContains
 
-Assert that the current URL path contains the given path:
+斷言當前 URL 的路徑包含給定路徑：
 
 ```php
 $browser->assertPathContains('/home');
@@ -1571,7 +1571,7 @@ $browser->assertPathContains('/home');
 <a name="assert-path-is"></a>
 #### assertPathIs
 
-Assert that the current path matches the given path:
+斷言當前路徑與給定路徑相符：
 
 ```php
 $browser->assertPathIs('/home');
@@ -1580,7 +1580,7 @@ $browser->assertPathIs('/home');
 <a name="assert-path-is-not"></a>
 #### assertPathIsNot
 
-Assert that the current path does not match the given path:
+斷言當前路徑不匹配給定路徑：
 
 ```php
 $browser->assertPathIsNot('/home');
@@ -1589,7 +1589,7 @@ $browser->assertPathIsNot('/home');
 <a name="assert-route-is"></a>
 #### assertRouteIs
 
-Assert that the current URL matches the given [named route's](/docs/routing#named-routes) URL:
+斷言當前 URL 與給定的命名路由（named route）的 URL 相符：
 
 ```php
 $browser->assertRouteIs($name, $parameters);
@@ -1598,13 +1598,13 @@ $browser->assertRouteIs($name, $parameters);
 <a name="assert-query-string-has"></a>
 #### assertQueryStringHas
 
-Assert that the given query string parameter is present:
+斷言給定的查詢字串參數存在：
 
 ```php
 $browser->assertQueryStringHas($name);
 ```
 
-Assert that the given query string parameter is present and has a given value:
+斷言給定的查詢字串參數存在且具有指定值：
 
 ```php
 $browser->assertQueryStringHas($name, $value);
@@ -1613,7 +1613,7 @@ $browser->assertQueryStringHas($name, $value);
 <a name="assert-query-string-missing"></a>
 #### assertQueryStringMissing
 
-Assert that the given query string parameter is missing:
+斷言給定的查詢字串參數不存在：
 
 ```php
 $browser->assertQueryStringMissing($name);
@@ -1622,7 +1622,7 @@ $browser->assertQueryStringMissing($name);
 <a name="assert-fragment-is"></a>
 #### assertFragmentIs
 
-Assert that the URL's current hash fragment matches the given fragment:
+斷言 URL 當前的 hash 片段與給定片段相符：
 
 ```php
 $browser->assertFragmentIs('anchor');
@@ -1631,7 +1631,7 @@ $browser->assertFragmentIs('anchor');
 <a name="assert-fragment-begins-with"></a>
 #### assertFragmentBeginsWith
 
-Assert that the URL's current hash fragment begins with the given fragment:
+斷言 URL 當前的 hash 片段以給定片段開頭：
 
 ```php
 $browser->assertFragmentBeginsWith('anchor');
@@ -1640,7 +1640,7 @@ $browser->assertFragmentBeginsWith('anchor');
 <a name="assert-fragment-is-not"></a>
 #### assertFragmentIsNot
 
-Assert that the URL's current hash fragment does not match the given fragment:
+斷言 URL 當前的 hash 片段不匹配給定片段：
 
 ```php
 $browser->assertFragmentIsNot('anchor');
@@ -1649,7 +1649,7 @@ $browser->assertFragmentIsNot('anchor');
 <a name="assert-has-cookie"></a>
 #### assertHasCookie
 
-Assert that the given encrypted cookie is present:
+斷言指定的加密 cookie 存在：
 
 ```php
 $browser->assertHasCookie($name);
@@ -1658,7 +1658,7 @@ $browser->assertHasCookie($name);
 <a name="assert-has-plain-cookie"></a>
 #### assertHasPlainCookie
 
-Assert that the given unencrypted cookie is present:
+斷言指定的未加密 cookie 存在：
 
 ```php
 $browser->assertHasPlainCookie($name);
@@ -1667,7 +1667,7 @@ $browser->assertHasPlainCookie($name);
 <a name="assert-cookie-missing"></a>
 #### assertCookieMissing
 
-Assert that the given encrypted cookie is not present:
+斷言指定的加密 cookie 不存在：
 
 ```php
 $browser->assertCookieMissing($name);
@@ -1676,7 +1676,7 @@ $browser->assertCookieMissing($name);
 <a name="assert-plain-cookie-missing"></a>
 #### assertPlainCookieMissing
 
-Assert that the given unencrypted cookie is not present:
+斷言指定的未加密 cookie 不存在：
 
 ```php
 $browser->assertPlainCookieMissing($name);
@@ -1685,7 +1685,7 @@ $browser->assertPlainCookieMissing($name);
 <a name="assert-cookie-value"></a>
 #### assertCookieValue
 
-Assert that an encrypted cookie has a given value:
+斷言加密 cookie 具有指定值：
 
 ```php
 $browser->assertCookieValue($name, $value);
@@ -1694,7 +1694,7 @@ $browser->assertCookieValue($name, $value);
 <a name="assert-plain-cookie-value"></a>
 #### assertPlainCookieValue
 
-Assert that an unencrypted cookie has a given value:
+斷言未加密 cookie 具有指定值：
 
 ```php
 $browser->assertPlainCookieValue($name, $value);
@@ -1703,7 +1703,7 @@ $browser->assertPlainCookieValue($name, $value);
 <a name="assert-see"></a>
 #### assertSee
 
-Assert that the given text is present on the page:
+斷言頁面上存在給定的文字：
 
 ```php
 $browser->assertSee($text);
@@ -1712,7 +1712,7 @@ $browser->assertSee($text);
 <a name="assert-dont-see"></a>
 #### assertDontSee
 
-Assert that the given text is not present on the page:
+斷言頁面上不存在給定的文字：
 
 ```php
 $browser->assertDontSee($text);
@@ -1721,7 +1721,7 @@ $browser->assertDontSee($text);
 <a name="assert-see-in"></a>
 #### assertSeeIn
 
-Assert that the given text is present within the selector:
+斷言指定選擇器內存在給定文字：
 
 ```php
 $browser->assertSeeIn($selector, $text);
@@ -1730,7 +1730,7 @@ $browser->assertSeeIn($selector, $text);
 <a name="assert-dont-see-in"></a>
 #### assertDontSeeIn
 
-Assert that the given text is not present within the selector:
+斷言指定選擇器內不存在給定文字：
 
 ```php
 $browser->assertDontSeeIn($selector, $text);
@@ -1739,7 +1739,7 @@ $browser->assertDontSeeIn($selector, $text);
 <a name="assert-see-anything-in"></a>
 #### assertSeeAnythingIn
 
-Assert that any text is present within the selector:
+斷言指定選擇器內存在任意文字：
 
 ```php
 $browser->assertSeeAnythingIn($selector);
@@ -1748,7 +1748,7 @@ $browser->assertSeeAnythingIn($selector);
 <a name="assert-see-nothing-in"></a>
 #### assertSeeNothingIn
 
-Assert that no text is present within the selector:
+斷言指定選擇器內沒有文字：
 
 ```php
 $browser->assertSeeNothingIn($selector);
@@ -1757,7 +1757,7 @@ $browser->assertSeeNothingIn($selector);
 <a name="assert-count"></a>
 #### assertCount
 
-Assert that elements matching the given selector appear the specified number of times:
+斷言匹配指定選擇器的元素出現指定次數：
 
 ```php
 $browser->assertCount($selector, $count);
@@ -1766,7 +1766,7 @@ $browser->assertCount($selector, $count);
 <a name="assert-script"></a>
 #### assertScript
 
-Assert that the given JavaScript expression evaluates to the given value:
+斷言指定的 JavaScript 表達式計算後等於給定值：
 
 ```php
 $browser->assertScript('window.isLoaded')
@@ -1776,7 +1776,7 @@ $browser->assertScript('window.isLoaded')
 <a name="assert-source-has"></a>
 #### assertSourceHas
 
-Assert that the given source code is present on the page:
+斷言頁面中存在給定的原始碼：
 
 ```php
 $browser->assertSourceHas($code);
@@ -1785,7 +1785,7 @@ $browser->assertSourceHas($code);
 <a name="assert-source-missing"></a>
 #### assertSourceMissing
 
-Assert that the given source code is not present on the page:
+斷言頁面中不存在給定的原始碼：
 
 ```php
 $browser->assertSourceMissing($code);
@@ -1794,7 +1794,7 @@ $browser->assertSourceMissing($code);
 <a name="assert-see-link"></a>
 #### assertSeeLink
 
-Assert that the given link is present on the page:
+斷言頁面中存在給定的鏈結：
 
 ```php
 $browser->assertSeeLink($linkText);
@@ -1803,7 +1803,7 @@ $browser->assertSeeLink($linkText);
 <a name="assert-dont-see-link"></a>
 #### assertDontSeeLink
 
-Assert that the given link is not present on the page:
+斷言頁面中不存在給定的鏈結：
 
 ```php
 $browser->assertDontSeeLink($linkText);
@@ -1812,7 +1812,7 @@ $browser->assertDontSeeLink($linkText);
 <a name="assert-input-value"></a>
 #### assertInputValue
 
-Assert that the given input field has the given value:
+斷言指定的輸入欄位具有給定值：
 
 ```php
 $browser->assertInputValue($field, $value);
@@ -1821,7 +1821,7 @@ $browser->assertInputValue($field, $value);
 <a name="assert-input-value-is-not"></a>
 #### assertInputValueIsNot
 
-Assert that the given input field does not have the given value:
+斷言指定的輸入欄位不具有給定值：
 
 ```php
 $browser->assertInputValueIsNot($field, $value);
@@ -1830,7 +1830,7 @@ $browser->assertInputValueIsNot($field, $value);
 <a name="assert-checked"></a>
 #### assertChecked
 
-Assert that the given checkbox is checked:
+斷言指定的 checkbox 已被勾選：
 
 ```php
 $browser->assertChecked($field);
@@ -1839,7 +1839,7 @@ $browser->assertChecked($field);
 <a name="assert-not-checked"></a>
 #### assertNotChecked
 
-Assert that the given checkbox is not checked:
+斷言指定的 checkbox 未被勾選：
 
 ```php
 $browser->assertNotChecked($field);
@@ -1848,7 +1848,7 @@ $browser->assertNotChecked($field);
 <a name="assert-indeterminate"></a>
 #### assertIndeterminate
 
-Assert that the given checkbox is in an indeterminate state:
+斷言指定的 checkbox 處於不確定（indeterminate）狀態：
 
 ```php
 $browser->assertIndeterminate($field);
@@ -1857,7 +1857,7 @@ $browser->assertIndeterminate($field);
 <a name="assert-radio-selected"></a>
 #### assertRadioSelected
 
-Assert that the given radio field is selected:
+斷言指定的 radio 欄位被選取：
 
 ```php
 $browser->assertRadioSelected($field, $value);
@@ -1866,7 +1866,7 @@ $browser->assertRadioSelected($field, $value);
 <a name="assert-radio-not-selected"></a>
 #### assertRadioNotSelected
 
-Assert that the given radio field is not selected:
+斷言指定的 radio 欄位未被選取：
 
 ```php
 $browser->assertRadioNotSelected($field, $value);
@@ -1875,7 +1875,7 @@ $browser->assertRadioNotSelected($field, $value);
 <a name="assert-selected"></a>
 #### assertSelected
 
-Assert that the given dropdown has the given value selected:
+斷言指定的下拉選單已選擇給定的值：
 
 ```php
 $browser->assertSelected($field, $value);
@@ -1884,7 +1884,7 @@ $browser->assertSelected($field, $value);
 <a name="assert-not-selected"></a>
 #### assertNotSelected
 
-Assert that the given dropdown does not have the given value selected:
+斷言指定的下拉選單未選擇給定的值：
 
 ```php
 $browser->assertNotSelected($field, $value);
@@ -1893,7 +1893,7 @@ $browser->assertNotSelected($field, $value);
 <a name="assert-select-has-options"></a>
 #### assertSelectHasOptions
 
-Assert that the given array of values are available to be selected:
+斷言給定的一組值可供選擇：
 
 ```php
 $browser->assertSelectHasOptions($field, $values);
@@ -1902,7 +1902,7 @@ $browser->assertSelectHasOptions($field, $values);
 <a name="assert-select-missing-options"></a>
 #### assertSelectMissingOptions
 
-Assert that the given array of values are not available to be selected:
+斷言給定的一組值不可供選擇：
 
 ```php
 $browser->assertSelectMissingOptions($field, $values);
@@ -1911,7 +1911,7 @@ $browser->assertSelectMissingOptions($field, $values);
 <a name="assert-select-has-option"></a>
 #### assertSelectHasOption
 
-Assert that the given value is available to be selected on the given field:
+斷言給定的值可在指定欄位上被選取：
 
 ```php
 $browser->assertSelectHasOption($field, $value);
@@ -1920,7 +1920,7 @@ $browser->assertSelectHasOption($field, $value);
 <a name="assert-select-missing-option"></a>
 #### assertSelectMissingOption
 
-Assert that the given value is not available to be selected:
+斷言給定的值不可被選取：
 
 ```php
 $browser->assertSelectMissingOption($field, $value);
@@ -1929,7 +1929,7 @@ $browser->assertSelectMissingOption($field, $value);
 <a name="assert-value"></a>
 #### assertValue
 
-Assert that the element matching the given selector has the given value:
+斷言匹配指定選擇器的元素具有給定值：
 
 ```php
 $browser->assertValue($selector, $value);
@@ -1938,7 +1938,7 @@ $browser->assertValue($selector, $value);
 <a name="assert-value-is-not"></a>
 #### assertValueIsNot
 
-Assert that the element matching the given selector does not have the given value:
+斷言匹配指定選擇器的元素不具有給定值：
 
 ```php
 $browser->assertValueIsNot($selector, $value);
@@ -1947,7 +1947,7 @@ $browser->assertValueIsNot($selector, $value);
 <a name="assert-attribute"></a>
 #### assertAttribute
 
-Assert that the element matching the given selector has the given value in the provided attribute:
+斷言匹配指定選擇器的元素在指定屬性中具有給定值：
 
 ```php
 $browser->assertAttribute($selector, $attribute, $value);
@@ -1956,7 +1956,7 @@ $browser->assertAttribute($selector, $attribute, $value);
 <a name="assert-attribute-missing"></a>
 #### assertAttributeMissing
 
-Assert that the element matching the given selector is missing the provided attribute:
+斷言匹配指定選擇器的元素缺少指定屬性：
 
 ```php
 $browser->assertAttributeMissing($selector, $attribute);
@@ -1965,7 +1965,7 @@ $browser->assertAttributeMissing($selector, $attribute);
 <a name="assert-attribute-contains"></a>
 #### assertAttributeContains
 
-Assert that the element matching the given selector contains the given value in the provided attribute:
+斷言匹配指定選擇器的元素在指定屬性中包含給定值：
 
 ```php
 $browser->assertAttributeContains($selector, $attribute, $value);
@@ -1974,7 +1974,7 @@ $browser->assertAttributeContains($selector, $attribute, $value);
 <a name="assert-attribute-doesnt-contain"></a>
 #### assertAttributeDoesntContain
 
-Assert that the element matching the given selector does not contain the given value in the provided attribute:
+斷言匹配指定選擇器的元素在指定屬性中不包含給定值：
 
 ```php
 $browser->assertAttributeDoesntContain($selector, $attribute, $value);
@@ -1983,13 +1983,13 @@ $browser->assertAttributeDoesntContain($selector, $attribute, $value);
 <a name="assert-aria-attribute"></a>
 #### assertAriaAttribute
 
-Assert that the element matching the given selector has the given value in the provided aria attribute:
+斷言匹配指定選擇器的元素在指定 aria 屬性中具有給定值：
 
 ```php
 $browser->assertAriaAttribute($selector, $attribute, $value);
 ```
 
-For example, given the markup `<button aria-label="Add"></button>`, you may assert against the `aria-label` attribute like so:
+例如，給定標記 `<button aria-label="Add"></button>`，您可以像下面這樣對 `aria-label` 屬性進行斷言：
 
 ```php
 $browser->assertAriaAttribute('button', 'label', 'Add')
@@ -1998,13 +1998,13 @@ $browser->assertAriaAttribute('button', 'label', 'Add')
 <a name="assert-data-attribute"></a>
 #### assertDataAttribute
 
-Assert that the element matching the given selector has the given value in the provided data attribute:
+斷言匹配指定選擇器的元素在指定 data 屬性中具有給定值：
 
 ```php
 $browser->assertDataAttribute($selector, $attribute, $value);
 ```
 
-For example, given the markup `<tr id="row-1" data-content="attendees"></tr>`, you may assert against the `data-label` attribute like so:
+例如，給定標記 `<tr id="row-1" data-content="attendees"></tr>`，您可以像下面這樣對 `data-label`（或 `data-content`）屬性進行斷言：
 
 ```php
 $browser->assertDataAttribute('#row-1', 'content', 'attendees')
@@ -2013,7 +2013,7 @@ $browser->assertDataAttribute('#row-1', 'content', 'attendees')
 <a name="assert-visible"></a>
 #### assertVisible
 
-Assert that the element matching the given selector is visible:
+斷言匹配指定選擇器的元素可見：
 
 ```php
 $browser->assertVisible($selector);
@@ -2022,7 +2022,7 @@ $browser->assertVisible($selector);
 <a name="assert-present"></a>
 #### assertPresent
 
-Assert that the element matching the given selector is present in the source:
+斷言匹配指定選擇器的元素在原始碼中存在：
 
 ```php
 $browser->assertPresent($selector);
@@ -2031,7 +2031,7 @@ $browser->assertPresent($selector);
 <a name="assert-not-present"></a>
 #### assertNotPresent
 
-Assert that the element matching the given selector is not present in the source:
+斷言匹配指定選擇器的元素在原始碼中不存在：
 
 ```php
 $browser->assertNotPresent($selector);
@@ -2040,7 +2040,7 @@ $browser->assertNotPresent($selector);
 <a name="assert-missing"></a>
 #### assertMissing
 
-Assert that the element matching the given selector is not visible:
+斷言匹配指定選擇器的元素不可見：
 
 ```php
 $browser->assertMissing($selector);
@@ -2049,7 +2049,7 @@ $browser->assertMissing($selector);
 <a name="assert-input-present"></a>
 #### assertInputPresent
 
-Assert that an input with the given name is present:
+斷言具有指定名稱的輸入欄位存在：
 
 ```php
 $browser->assertInputPresent($name);
@@ -2058,7 +2058,7 @@ $browser->assertInputPresent($name);
 <a name="assert-input-missing"></a>
 #### assertInputMissing
 
-Assert that an input with the given name is not present in the source:
+斷言具有指定名稱的輸入欄位在原始碼中不存在：
 
 ```php
 $browser->assertInputMissing($name);
@@ -2067,7 +2067,7 @@ $browser->assertInputMissing($name);
 <a name="assert-dialog-opened"></a>
 #### assertDialogOpened
 
-Assert that a JavaScript dialog with the given message has been opened:
+斷言已開啟帶有指定訊息的 JavaScript 對話框：
 
 ```php
 $browser->assertDialogOpened($message);
@@ -2076,7 +2076,7 @@ $browser->assertDialogOpened($message);
 <a name="assert-enabled"></a>
 #### assertEnabled
 
-Assert that the given field is enabled:
+斷言指定欄位已啟用：
 
 ```php
 $browser->assertEnabled($field);
@@ -2085,7 +2085,7 @@ $browser->assertEnabled($field);
 <a name="assert-disabled"></a>
 #### assertDisabled
 
-Assert that the given field is disabled:
+斷言指定欄位已被禁用：
 
 ```php
 $browser->assertDisabled($field);
@@ -2094,7 +2094,7 @@ $browser->assertDisabled($field);
 <a name="assert-button-enabled"></a>
 #### assertButtonEnabled
 
-Assert that the given button is enabled:
+斷言指定按鈕已啟用：
 
 ```php
 $browser->assertButtonEnabled($button);
@@ -2103,7 +2103,7 @@ $browser->assertButtonEnabled($button);
 <a name="assert-button-disabled"></a>
 #### assertButtonDisabled
 
-Assert that the given button is disabled:
+斷言指定按鈕已被禁用：
 
 ```php
 $browser->assertButtonDisabled($button);
@@ -2112,7 +2112,7 @@ $browser->assertButtonDisabled($button);
 <a name="assert-focused"></a>
 #### assertFocused
 
-Assert that the given field is focused:
+斷言指定欄位已獲取焦點：
 
 ```php
 $browser->assertFocused($field);
@@ -2121,7 +2121,7 @@ $browser->assertFocused($field);
 <a name="assert-not-focused"></a>
 #### assertNotFocused
 
-Assert that the given field is not focused:
+斷言指定欄位未獲取焦點：
 
 ```php
 $browser->assertNotFocused($field);
@@ -2130,7 +2130,7 @@ $browser->assertNotFocused($field);
 <a name="assert-authenticated"></a>
 #### assertAuthenticated
 
-Assert that the user is authenticated:
+斷言使用者已通過認證（已登入）：
 
 ```php
 $browser->assertAuthenticated();
@@ -2139,7 +2139,7 @@ $browser->assertAuthenticated();
 <a name="assert-guest"></a>
 #### assertGuest
 
-Assert that the user is not authenticated:
+斷言使用者未通過認證（未登入）：
 
 ```php
 $browser->assertGuest();
@@ -2148,7 +2148,7 @@ $browser->assertGuest();
 <a name="assert-authenticated-as"></a>
 #### assertAuthenticatedAs
 
-Assert that the user is authenticated as the given user:
+斷言使用者已以指定帳號通過認證：
 
 ```php
 $browser->assertAuthenticatedAs($user);
@@ -2157,7 +2157,7 @@ $browser->assertAuthenticatedAs($user);
 <a name="assert-vue"></a>
 #### assertVue
 
-Dusk even allows you to make assertions on the state of [Vue component](https://vuejs.org) data. For example, imagine your application contains the following Vue component:
+Dusk 甚至允許您對 [Vue 組件](https://vuejs.org) 的資料狀態進行斷言。例如，假設您的應用程式包含以下 Vue 組件：
 
 ```html
 <!-- HTML... -->
@@ -2181,7 +2181,7 @@ Vue.component("profile", {
 });
 ```
 
-You may assert on the state of the Vue component like so:
+您可以像下面這樣對 Vue 組件的狀態進行斷言：
 
 ```php tab=Pest
 test('vue', function () {
@@ -2208,7 +2208,7 @@ public function test_vue(): void
 <a name="assert-vue-is-not"></a>
 #### assertVueIsNot
 
-Assert that a given Vue component data property does not match the given value:
+斷言給定的 Vue 組件資料屬性不等於指定值：
 
 ```php
 $browser->assertVueIsNot($property, $value, $componentSelector = null);
@@ -2217,7 +2217,7 @@ $browser->assertVueIsNot($property, $value, $componentSelector = null);
 <a name="assert-vue-contains"></a>
 #### assertVueContains
 
-Assert that a given Vue component data property is an array and contains the given value:
+斷言給定的 Vue 組件資料屬性為陣列且包含指定值：
 
 ```php
 $browser->assertVueContains($property, $value, $componentSelector = null);
@@ -2226,35 +2226,35 @@ $browser->assertVueContains($property, $value, $componentSelector = null);
 <a name="assert-vue-doesnt-contain"></a>
 #### assertVueDoesntContain
 
-Assert that a given Vue component data property is an array and does not contain the given value:
+斷言給定的 Vue 組件資料屬性為陣列且不包含指定值：
 
 ```php
 $browser->assertVueDoesntContain($property, $value, $componentSelector = null);
 ```
 
 <a name="pages"></a>
-## Pages
+## 頁面
 
-Sometimes, tests require several complicated actions to be performed in sequence. This can make your tests harder to read and understand. Dusk Pages allow you to define expressive actions that may then be performed on a given page via a single method. Pages also allow you to define short-cuts to common selectors for your application or for a single page.
+有時候，測試需要按順序執行多個複雜操作，這可能讓您的測試變得較難閱讀和理解。Dusk Pages 允許您定義可表述的操作，之後可透過單一方法在特定頁面上執行。Pages 也允許您為應用或單一頁面定義常用選擇器的捷徑。
 
 <a name="generating-pages"></a>
-### Generating Pages
+### 生成頁面
 
-To generate a page object, execute the `dusk:page` Artisan command. All page objects will be placed in your application's `tests/Browser/Pages` directory:
+要生成頁面物件，請執行 `dusk:page` Artisan 命令。所有頁面物件會放置在應用程式的 `tests/Browser/Pages` 目錄中：
 
 ```shell
 php artisan dusk:page Login
 ```
 
 <a name="configuring-pages"></a>
-### Configuring Pages
+### 配置頁面
 
-By default, pages have three methods: `url`, `assert`, and `elements`. We will discuss the `url` and `assert` methods now. The `elements` method will be [discussed in more detail below](#shorthand-selectors).
+預設情況下，頁面包含三個方法：`url`、`assert` 和 `elements`。現在我們會說明 `url` 與 `assert` 方法。`elements` 方法將在後文的 [簡寫選擇器](#shorthand-selectors) 部分詳細討論。
 
 <a name="the-url-method"></a>
-#### The `url` Method
+#### `url` 方法
 
-The `url` method should return the path of the URL that represents the page. Dusk will use this URL when navigating to the page in the browser:
+`url` 方法應回傳代表該頁面的 URL 路徑。Dusk 在瀏覽器中導航到頁面時會使用該 URL：
 
 ```php
 /**
@@ -2267,13 +2267,13 @@ public function url(): string
 ```
 
 <a name="the-assert-method"></a>
-#### The `assert` Method
+#### `assert` 方法
 
-The `assert` method may make any assertions necessary to verify that the browser is actually on the given page. It is not actually necessary to place anything within this method; however, you are free to make these assertions if you wish. These assertions will be run automatically when navigating to the page:
+`assert` 方法可以執行任何必要的斷言以驗證瀏覽器是否位於指定頁面。實際上，此方法內不必放入任何內容；不過若您願意，仍可在此執行斷言。當導航到該頁面時，這些斷言會自動執行：
 
 ```php
 /**
- * Assert that the browser is on the page.
+ * 斷言瀏覽器位於該頁面。
  */
 public function assert(Browser $browser): void
 {
@@ -2282,9 +2282,9 @@ public function assert(Browser $browser): void
 ```
 
 <a name="navigating-to-pages"></a>
-### Navigating to Pages
+### 導航到頁面
 
-Once a page has been defined, you may navigate to it using the `visit` method:
+定義頁面後，您可以使用 `visit` 方法導航到該頁面：
 
 ```php
 use Tests\Browser\Pages\Login;
@@ -2292,7 +2292,7 @@ use Tests\Browser\Pages\Login;
 $browser->visit(new Login);
 ```
 
-Sometimes you may already be on a given page and need to "load" the page's selectors and methods into the current test context. This is common when pressing a button and being redirected to a given page without explicitly navigating to it. In this situation, you may use the `on` method to load the page:
+有時您可能已經在某個頁面上，並需要將該頁面的選擇器與方法載入當前測試上下文。這在按下按鈕後被重定向到某頁面但未顯式導航時很常見。在這種情況下，您可以使用 `on` 方法載入該頁面：
 
 ```php
 use Tests\Browser\Pages\CreatePlaylist;
@@ -2304,9 +2304,9 @@ $browser->visit('/dashboard')
 ```
 
 <a name="shorthand-selectors"></a>
-### Shorthand Selectors
+### 簡寫選擇器
 
-The `elements` method within page classes allows you to define quick, easy-to-remember shortcuts for any CSS selector on your page. For example, let's define a shortcut for the "email" input field of the application's login page:
+頁面類中的 `elements` 方法允許您為頁面上的任意 CSS 選擇器定義簡潔且易記的快捷鍵。例如，我們可以為應用程式登入頁面的 "email" 輸入欄位定義一個快捷鍵：
 
 ```php
 /**
@@ -2322,16 +2322,16 @@ public function elements(): array
 }
 ```
 
-Once the shortcut has been defined, you may use the shorthand selector anywhere you would typically use a full CSS selector:
+定義快捷選擇器後，您可以在任何通常使用完整 CSS 選擇器的地方使用該簡寫選擇器：
 
 ```php
 $browser->type('@email', 'taylor@laravel.com');
 ```
 
 <a name="global-shorthand-selectors"></a>
-#### Global Shorthand Selectors
+#### 全局簡寫選擇器
 
-After installing Dusk, a base `Page` class will be placed in your `tests/Browser/Pages` directory. This class contains a `siteElements` method which may be used to define global shorthand selectors that should be available on every page throughout your application:
+安裝 Dusk 後，會在 `tests/Browser/Pages` 目錄中生成一個基礎的 `Page` 類。該類包含一個 `siteElements` 方法，可用於定義在整個應用程式中每個頁面都可用的全局簡寫選擇器：
 
 ```php
 /**
@@ -2348,9 +2348,9 @@ public static function siteElements(): array
 ```
 
 <a name="page-methods"></a>
-### Page Methods
+### 頁面方法
 
-In addition to the default methods defined on pages, you may define additional methods which may be used throughout your tests. For example, let's imagine we are building a music management application. A common action for one page of the application might be to create a playlist. Instead of re-writing the logic to create a playlist in each test, you may define a `createPlaylist` method on a page class:
+除了頁面上定義的預設方法外，您還可以定義其他方法以在測試中重複使用。例如，假設我們正在構建一個音樂管理應用，某頁面常見的操作可能是建立播放清單。與其在每個測試中重寫建立播放清單的邏輯，您可以在頁面類上定義 `createPlaylist` 方法：
 
 ```php
 <?php
@@ -2376,7 +2376,7 @@ class Dashboard extends Page
 }
 ```
 
-Once the method has been defined, you may use it within any test that utilizes the page. The browser instance will automatically be passed as the first argument to custom page methods:
+方法定義後，您可以在任何使用該頁面的測試中使用它。瀏覽器實例會自動作為第一個參數傳入自定義的頁面方法：
 
 ```php
 use Tests\Browser\Pages\Dashboard;
@@ -2387,20 +2387,20 @@ $browser->visit(new Dashboard)
 ```
 
 <a name="components"></a>
-## Components
+## 元件
 
-Components are similar to Dusk's "page objects", but are intended for pieces of UI and functionality that are re-used throughout your application, such as a navigation bar or notification window. As such, components are not bound to specific URLs.
+元件（Components）類似於 Dusk 的「頁面物件（page objects）」，但它們更適用於在應用程式中反覆使用的 UI 或功能片段，例如導覽列或通知視窗。因此，元件並不綁定於特定的 URL。
 
 <a name="generating-components"></a>
-### Generating Components
+### 生成元件
 
-To generate a component, execute the `dusk:component` Artisan command. New components are placed in the `tests/Browser/Components` directory:
+要生成元件，請執行 `dusk:component` Artisan 命令。新的元件會放在 `tests/Browser/Components` 目錄中：
 
 ```shell
 php artisan dusk:component DatePicker
 ```
 
-As shown above, a "date picker" is an example of a component that might exist throughout your application on a variety of pages. It can become cumbersome to manually write the browser automation logic to select a date in dozens of tests throughout your test suite. Instead, we can define a Dusk component to represent the date picker, allowing us to encapsulate that logic within the component:
+如上所示，「日期選擇器（date picker）」是一個可能在應用程式多個頁面中出現的元件例子。在整個測試套件中，手動為數十個測試編寫選擇日期的瀏覽器自動化邏輯會變得繁瑣。取而代之，我們可以定義一個 Dusk 元件來表徵日期選擇器，並將該邏輯封裝在元件內：
 
 ```php
 <?php
@@ -2421,7 +2421,7 @@ class DatePicker extends BaseComponent
     }
 
     /**
-     * Assert that the browser page contains the component.
+    * 斷言瀏覽器頁面包含該組件。
      */
     public function assert(Browser $browser): void
     {
@@ -2463,9 +2463,9 @@ class DatePicker extends BaseComponent
 ```
 
 <a name="using-components"></a>
-### Using Components
+### 使用元件
 
-Once the component has been defined, we can easily select a date within the date picker from any test. And, if the logic necessary to select a date changes, we only need to update the component:
+元件定義完成後，我們可以在任何測試中輕鬆地在日期選擇器中選擇日期。如果選擇日期所需的邏輯改變，我們只需更新該元件即可：
 
 ```php tab=Pest
 <?php
@@ -2515,7 +2515,7 @@ class ExampleTest extends DuskTestCase
 }
 ```
 
-The `component` method may be used to retrieve a browser instance scoped to the given component:
+`component` 方法可用於取得限定於指定元件範圍的瀏覽器實例：
 
 ```php
 $datePicker = $browser->component(new DatePickerComponent);
@@ -2526,15 +2526,15 @@ $datePicker->assertSee('January');
 ```
 
 <a name="continuous-integration"></a>
-## Continuous Integration
+## 持續整合
 
 > [!WARNING]
-> Most Dusk continuous integration configurations expect your Laravel application to be served using the built-in PHP development server on port 8000. Therefore, before continuing, you should ensure that your continuous integration environment has an `APP_URL` environment variable value of `http://127.0.0.1:8000`.
+> 大多數 Dusk 的持續整合（CI）配置預期您的 Laravel 應用會使用內建的 PHP 開發伺服器在 8000 端口提供服務。因此在繼續之前，請確認您的持續整合環境中 `APP_URL` 環境變數設為 `http://127.0.0.1:8000`。
 
 <a name="running-tests-on-heroku-ci"></a>
 ### Heroku CI
 
-To run Dusk tests on [Heroku CI](https://www.heroku.com/continuous-integration), add the following Google Chrome buildpack and scripts to your Heroku `app.json` file:
+要在 [Heroku CI](https://www.heroku.com/continuous-integration) 上執行 Dusk 測試，請在 Heroku 的 `app.json` 文件中添加以下 Google Chrome buildpack 與腳本：
 
 ```json
 {
@@ -2558,7 +2558,7 @@ To run Dusk tests on [Heroku CI](https://www.heroku.com/continuous-integration),
 <a name="running-tests-on-travis-ci"></a>
 ### Travis CI
 
-To run your Dusk tests on [Travis CI](https://travis-ci.org), use the following `.travis.yml` configuration. Since Travis CI is not a graphical environment, we will need to take some extra steps in order to launch a Chrome browser. In addition, we will use `php artisan serve` to launch PHP's built-in web server:
+要在 [Travis CI](https://travis-ci.org) 上運行 Dusk 測試，請使用下列 `.travis.yml` 配置。由於 Travis CI 不是圖形化環境，我們需要採取額外步驟來啟動 Chrome 瀏覽器。此外，我們會使用 `php artisan serve` 啟動 PHP 的內建 Web 伺服器：
 
 ```yaml
 language: php
@@ -2586,7 +2586,7 @@ script:
 <a name="running-tests-on-github-actions"></a>
 ### GitHub Actions
 
-If you are using [GitHub Actions](https://github.com/features/actions) to run your Dusk tests, you may use the following configuration file as a starting point. Like TravisCI, we will use the `php artisan serve` command to launch PHP's built-in web server:
+如果您使用 [GitHub Actions](https://github.com/features/actions) 來運行 Dusk 測試，可以使用下列配置作為起點。與 Travis CI 類似，我們將使用 `php artisan serve` 命令啟動 PHP 內建的 Web 伺服器：
 
 ```yaml
 name: CI
@@ -2636,7 +2636,7 @@ jobs:
 <a name="running-tests-on-chipper-ci"></a>
 ### Chipper CI
 
-If you are using [Chipper CI](https://chipperci.com) to run your Dusk tests, you may use the following configuration file as a starting point. We will use PHP's built-in server to run Laravel so we can listen for requests:
+如果您使用 [Chipper CI](https://chipperci.com) 來運行 Dusk 測試，可以使用下列配置作為起點。此處我們會使用 PHP 的內建伺服器來運行 Laravel，以便監聽請求：
 
 ```yaml
 # file .chipperci.yml
@@ -2679,4 +2679,4 @@ pipeline:
       php artisan dusk --env=ci
 ```
 
-To learn more about running Dusk tests on Chipper CI, including how to use databases, consult the [official Chipper CI documentation](https://chipperci.com/docs/testing/laravel-dusk-new/).
+如需瞭解更多在 Chipper CI 上運行 Dusk 測試（包括如何使用資料庫）的資訊，請參考 [官方 Chipper CI 文檔](https://chipperci.com/docs/testing/laravel-dusk-new/)。
