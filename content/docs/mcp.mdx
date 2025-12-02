@@ -1180,7 +1180,7 @@ class CurrentWeatherTool extends Tool
 ```
 
 <a name="authentication"></a>
-## 驗證
+## 驗證 (Authentication)
 
 就像路由一樣，你可以使用 middleware 驗證 Web MCP 伺服器。為你的 MCP 伺服器新增驗證將要求使用者在使用伺服器的任何功能之前進行驗證。
 
@@ -1203,7 +1203,7 @@ Mcp::web('/mcp/weather', WeatherExample::class)
     ->middleware('auth:api');
 ```
 
-#### 新的 Passport 安裝
+#### 新的 Passport 安裝 (New Passport Installation)
 
 如果你的應用程式尚未使​​用 Laravel Passport，請按照 Passport 的[安裝和部署指南](/docs/passport#installation)將 Passport 新增到你的應用程式中。在繼續之前，你應該擁有一個 `OAuthenticatable` 模型、新的驗證 guard 和 passport keys。
 
@@ -1236,7 +1236,7 @@ public function boot(): void
 > [!NOTE]
 > 在這種情況下，我們只是使用 OAuth 作為底層可驗證模型的轉換層。我們忽略了 OAuth 的許多方面，例如 scopes。
 
-#### 使用現有的 Passport 安裝
+#### 使用現有的 Passport 安裝 (Using Existing Passport Installation)
 
 如果你的應用程式已經在使用 Laravel Passport，Laravel MCP 應該可以在你現有的 Passport 安裝中無縫運作，但目前不支援自訂 scopes，因為 OAuth 主要用作底層可驗證模型的轉換層。
 
@@ -1262,12 +1262,12 @@ Mcp::web('/mcp/demo', WeatherExample::class)
 ```
 
 <a name="custom-mcp-authentication"></a>
-#### 自訂 MCP 驗證
+#### 自訂 MCP 驗證 (Custom MCP Authentication)
 
 如果你的應用程式發布自己的自訂 API tokens，你可以透過將你希望的任何 middleware 指派給你的 `Mcp::web` 路由來驗證你的 MCP 伺服器。你的自訂 middleware 可以手動檢查 `Authorization` 標頭以驗證傳入的 MCP 請求。
 
 <a name="authorization"></a>
-## 授權
+## 授權 (Authorization)
 
 你可以透過 `$request->user()` 方法存取目前驗證的使用者，允許你在 MCP 工具和資源中執行[授權檢查](/docs/authorization)：
 
@@ -1289,7 +1289,7 @@ public function handle(Request $request): Response
 ```
 
 <a name="testing-servers"></a>
-## 測試伺服器
+## 測試伺服器 (Testing Servers)
 
 你可以使用內建的 MCP Inspector 或編寫單元測試來測試你的 MCP 伺服器。
 
@@ -1311,7 +1311,7 @@ php artisan mcp:inspector weather
 此命令啟動 MCP Inspector 並提供客戶端設定，你可以將其複製到你的 MCP 客戶端以確保一切設定正確。如果你的 Web 伺服器受驗證 middleware 保護，請確保在連線時包含所需的標頭，例如 `Authorization` bearer token。
 
 <a name="unit-tests"></a>
-### 單元測試
+### 單元測試 (Unit Tests)
 
 你可以為你的 MCP 伺服器、工具、資源和提示編寫單元測試。
 
