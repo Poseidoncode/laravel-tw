@@ -1,42 +1,42 @@
 ---
-title: Eloquent Mutators
-description: Eloquent mutators 和 casts 讓你轉換屬性值
+title: Eloquent 變異器
+description: Eloquent 變異器和轉換讓你轉換屬性值
 ---
 
-# Eloquent：變異器和類型轉換 (Eloquent: Mutators & Casting)
+# Eloquent：變異器和類型轉換
 
-- [簡介 (Introduction)](#introduction)
-- [訪問器和變異器 (Accessors and Mutators)](#accessors-and-mutators)
-    - [定義訪問器 (Defining an Accessor)](#defining-an-accessor)
-    - [定義變異器 (Defining a Mutator)](#defining-a-mutator)
-- [屬性轉換 (Attribute Casting)](#attribute-casting)
-    - [陣列和 JSON 轉換 (Array and JSON Casting)](#array-and-json-casting)
-    - [日期轉換 (Date Casting)](#date-casting)
-    - [列舉轉換 (Enum Casting)](#enum-casting)
-    - [加密轉換 (Encrypted Casting)](#encrypted-casting)
-    - [查詢時間轉換 (Query Time Casting)](#query-time-casting)
-- [自訂轉換 (Custom Casts)](#custom-casts)
-    - [值物件轉換 (Value Object Casting)](#value-object-casting)
-    - [陣列 / JSON 序列化 (Array / JSON Serialization)](#array-json-serialization)
-    - [入站轉換 (Inbound Casting)](#inbound-casting)
-    - [轉換參數 (Cast Parameters)](#cast-parameters)
-    - [比較轉換值 (Comparing Cast Values)](#comparing-cast-values)
-    - [可轉換的 (Castables)](#castables)
+- [簡介](#introduction)
+- [訪問器和變異器](#accessors-and-mutators)
+  - [定義訪問器](#defining-an-accessor)
+  - [定義變異器](#defining-a-mutator)
+- [屬性轉換](#attribute-casting)
+  - [陣列和 JSON 轉換](#array-and-json-casting)
+  - [日期轉換](#date-casting)
+  - [列舉轉換](#enum-casting)
+  - [加密轉換](#encrypted-casting)
+  - [查詢時間轉換](#query-time-casting)
+- [自訂轉換](#custom-casts)
+  - [值物件轉換](#value-object-casting)
+  - [陣列 / JSON 序列化](#array-json-serialization)
+  - [入站轉換](#inbound-casting)
+  - [轉換參數](#cast-parameters)
+  - [比較轉換值](#comparing-cast-values)
+  - [可轉換的](#castables)
 
 <a name="introduction"></a>
-## 簡介 (Introduction)
+## 簡介
 
-訪問器、變異器和屬性轉換 allow you to transform Eloquent attribute values when you retrieve or set them on model instances. For example, you may want to use the [Laravel encrypter](/docs/encryption) to encrypt a value while it is stored in the database, and then automatically decrypt the attribute when you access it on an Eloquent model. Or, you may want to convert a JSON string that is stored in your database to an array when it is accessed via your Eloquent model.
+訪問器、變異器和屬性轉換允許你在檢索或在模型實例上設定時轉換 Eloquent 屬性值。例如，你可能想使用 [Laravel 加密工具](/docs/encryption) 在值儲存在資料庫時將其加密，然後在訪問 Eloquent 模型上的屬性時自動解密。或者，你可能想轉換儲存在資料庫中的 JSON 字符串，當通過 Eloquent 模型訪問時將其轉換為陣列。
 
 <a name="accessors-and-mutators"></a>
-## Accessors and Mutators
+## 訪問器和變異器
 
 <a name="defining-an-accessor"></a>
-### Defining an Accessor
+### 定義訪問器
 
-An accessor transforms an Eloquent attribute value when it is accessed. To define an accessor, create a protected method on your model to represent the accessible attribute. This method name should correspond to the "camel case" representation of the true underlying model attribute / database column when applicable.
+訪問器在訪問 Eloquent 屬性值時進行轉換。要定義訪問器，請在模型上建立一個受保護的方法來表示可訪問的屬性。此方法名稱應與真實基礎模型屬性/資料庫列的「駝峰大小寫」表示相對應。
 
-In this example, we'll define an accessor for the `first_name` attribute. The accessor will automatically be called by Eloquent when attempting to retrieve the value of the `first_name` attribute. All attribute accessor / mutator methods must declare a return type-hint of `Illuminate\Database\Eloquent\Casts\Attribute`:
+在此範例中，我們為 `first_name` 屬性定義訪問器。當 Eloquent 嘗試檢索 `first_name` 屬性的值時，訪問器將被自動呼叫。所有屬性訪問器/變異器方法必須宣告返回類型提示為 `Illuminate\Database\Eloquent\Casts\Attribute`：
 
 ```php
 <?php
@@ -60,9 +60,9 @@ class User extends Model
 }
 ```
 
-All accessor methods return an `Attribute` instance which defines how the attribute will be accessed and, optionally, mutated. In this example, we are only defining how the attribute will be accessed. To do so, we supply the `get` argument to the `Attribute` class constructor.
+所有訪問器方法都返回一個 `Attribute` 實例，定義屬性將如何被訪問，以及可選地進行變異。在此範例中，我們僅定義屬性將如何被訪問。為此，我們向 `Attribute` 類別建構子提供 `get` 參數。
 
-As you can see, the original value of the column is passed to the accessor, allowing you to manipulate and return the value. To access the value of the accessor, you may simply access the `first_name` attribute on a model instance:
+如你所見，列的原始值被傳遞給訪問器，允許你操縱並返回該值。要訪問訪問器的值，你可以簡單地訪問模型實例上的 `first_name` 屬性：
 
 ```php
 use App\Models\User;
@@ -73,12 +73,12 @@ $firstName = $user->first_name;
 ```
 
 > [!NOTE]
-> If you would like these computed values to be added to the array / JSON representations of your model, [you will need to append them](/docs/eloquent-serialization#appending-values-to-json).
+> 如果你想將這些計算值新增到模型的陣列/JSON 表示中，[你需要附加它們](/docs/eloquent-serialization#appending-values-to-json)。
 
 <a name="building-value-objects-from-multiple-attributes"></a>
-#### Building Value Objects From Multiple Attributes
+#### 從多個屬性建構值物件
 
-Sometimes your accessor may need to transform multiple model attributes into a single "value object". To do so, your `get` closure may accept a second argument of `$attributes`, which will be automatically supplied to the closure and will contain an array of all of the model's current attributes:
+有時你的訪問器可能需要將多個模型屬性轉換為單個「值物件」。為此，你的 `get` 閉包可能接受第二個 `$attributes` 參數，該參數將自動提供給閉包，並將包含模型所有目前屬性的陣列：
 
 ```php
 use App\Support\Address;
@@ -99,9 +99,9 @@ protected function address(): Attribute
 ```
 
 <a name="accessor-caching"></a>
-#### Accessor Caching
+#### 訪問器快取
 
-When returning value objects from accessors, any changes made to the value object will automatically be synced back to the model before the model is saved. This is possible because Eloquent retains instances returned by accessors so it can return the same instance each time the accessor is invoked:
+當從訪問器返回值物件時，對值物件所做的任何更改將在保存模型前自動同步回模型。這是可能的，因為 Eloquent 保留訪問器返回的實例，因此每次呼叫訪問器時都可以返回相同的實例：
 
 ```php
 use App\Models\User;
@@ -114,7 +114,7 @@ $user->address->lineTwo = 'Updated Address Line 2 Value';
 $user->save();
 ```
 
-However, you may sometimes wish to enable caching for primitive values like strings and booleans, particularly if they are computationally intensive. To accomplish this, you may invoke the `shouldCache` method when defining your accessor:
+但是，你有時可能希望為像字符串和布林這樣的原始值啟用快取，特別是如果它們計算密集。為此，你可以在定義訪問器時呼叫 `shouldCache` 方法：
 
 ```php
 protected function hash(): Attribute
@@ -125,7 +125,7 @@ protected function hash(): Attribute
 }
 ```
 
-If you would like to disable the object caching behavior of attributes, you may invoke the `withoutObjectCaching` method when defining the attribute:
+如果你想停用屬性的物件快取行為，你可以在定義屬性時呼叫 `withoutObjectCaching` 方法：
 
 ```php
 /**
@@ -143,9 +143,9 @@ protected function address(): Attribute
 ```
 
 <a name="defining-a-mutator"></a>
-### Defining a Mutator
+### 定義變異器
 
-A mutator transforms an Eloquent attribute value when it is set. To define a mutator, you may provide the `set` argument when defining your attribute. Let's define a mutator for the `first_name` attribute. This mutator will be automatically called when we attempt to set the value of the `first_name` attribute on the model:
+變異器在設定 Eloquent 屬性值時進行轉換。要定義變異器，你可以在定義屬性時提供 `set` 參數。讓我們為 `first_name` 屬性定義一個變異器。當我們嘗試在模型上設定 `first_name` 屬性的值時，此變異器將被自動呼叫：
 
 ```php
 <?php
@@ -170,7 +170,7 @@ class User extends Model
 }
 ```
 
-The mutator closure will receive the value that is being set on the attribute, allowing you to manipulate the value and return the manipulated value. To use our mutator, we only need to set the `first_name` attribute on an Eloquent model:
+變異器閉包將接收要在屬性上設定的值，允許你操縱該值並返回已操縱的值。要使用我們的變異器，我們只需要在 Eloquent 模型上設定 `first_name` 屬性：
 
 ```php
 use App\Models\User;
@@ -180,12 +180,12 @@ $user = User::find(1);
 $user->first_name = 'Sally';
 ```
 
-In this example, the `set` callback will be called with the value `Sally`. The mutator will then apply the `strtolower` function to the name and set its resulting value in the model's internal `$attributes` array.
+在此範例中，`set` 回呼將被呼叫且值為 `Sally`。變異器將隨後對名稱應用 `strtolower` 函數，並在模型的內部 `$attributes` 陣列中設定其結果值。
 
 <a name="mutating-multiple-attributes"></a>
-#### Mutating Multiple Attributes
+#### 變異多個屬性
 
-Sometimes your mutator may need to set multiple attributes on the underlying model. To do so, you may return an array from the `set` closure. Each key in the array should correspond with an underlying attribute / database column associated with the model:
+有時你的變異器可能需要在基礎模型上設定多個屬性。為此，你可以從 `set` 閉包返回一個陣列。陣列中的每個鍵應對應於與模型關聯的基礎屬性/資料庫列：
 
 ```php
 use App\Support\Address;
@@ -210,11 +210,11 @@ protected function address(): Attribute
 ```
 
 <a name="attribute-casting"></a>
-## Attribute Casting
+## 屬性轉換
 
-Attribute casting provides functionality similar to accessors and mutators without requiring you to define any additional methods on your model. Instead, your model's `casts` method provides a convenient way of converting attributes to common data types.
+屬性轉換提供類似於訪問器和變異器的功能，無需在你的模型上定義任何額外的方法。相反，你的模型的 `casts` 方法提供了一種方便的方法來將屬性轉換為常見的資料類型。
 
-The `casts` method should return an array where the key is the name of the attribute being cast and the value is the type you wish to cast the column to. The supported cast types are:
+`casts` 方法應返回一個陣列，其中鍵是被轉換屬性的名稱，值是你希望將列轉換為的類型。支援的轉換類型有：
 
 <div className="content-list" markdown="1">
 
@@ -244,7 +244,7 @@ The `casts` method should return an array where the key is the name of the attri
 
 </div>
 
-To demonstrate attribute casting, let's cast the `is_admin` attribute, which is stored in our database as an integer (`0` or `1`) to a boolean value:
+為了示範屬性轉換，讓我們將 `is_admin` 屬性轉換為布林值，該屬性在我們的資料庫中儲存為整數（`0` 或 `1`）：
 
 ```php
 <?php
@@ -269,7 +269,7 @@ class User extends Model
 }
 ```
 
-After defining the cast, the `is_admin` attribute will always be cast to a boolean when you access it, even if the underlying value is stored in the database as an integer:
+定義轉換後，即使基礎值在資料庫中儲存為整數，`is_admin` 屬性在你訪問它時也將始終被轉換為布林值：
 
 ```php
 $user = App\Models\User::find(1);
@@ -279,7 +279,7 @@ if ($user->is_admin) {
 }
 ```
 
-If you need to add a new, temporary cast at runtime, you may use the `mergeCasts` method. These cast definitions will be added to any of the casts already defined on the model:
+如果你需要在運行時新增臨時轉換，你可以使用 `mergeCasts` 方法。這些轉換定義將被新增到模型上已定義的任何轉換中：
 
 ```php
 $user->mergeCasts([
@@ -289,12 +289,12 @@ $user->mergeCasts([
 ```
 
 > [!WARNING]
-> Attributes that are `null` will not be cast. In addition, you should never define a cast (or an attribute) that has the same name as a relationship or assign a cast to the model's primary key.
+> 值為 `null` 的屬性將不會被轉換。此外，你永遠不應定義與關係同名的轉換（或屬性），或為模型的主鍵分配轉換。
 
 <a name="stringable-casting"></a>
-#### Stringable Casting
+#### 字符串化轉換
 
-You may use the `Illuminate\Database\Eloquent\Casts\AsStringable` cast class to cast a model attribute to a [fluent Illuminate\Support\Stringable object](/docs/strings#fluent-strings-method-list):
+你可以使用 `Illuminate\Database\Eloquent\Casts\AsStringable` 轉換類別將模型屬性轉換為 [fluent Illuminate\Support\Stringable 物件](/docs/strings#fluent-strings-method-list)：
 
 ```php
 <?php
@@ -321,9 +321,9 @@ class User extends Model
 ```
 
 <a name="array-and-json-casting"></a>
-### Array and JSON Casting
+### 陣列和 JSON 轉換
 
-The `array` cast is particularly useful when working with columns that are stored as serialized JSON. For example, if your database has a `JSON` or `TEXT` field type that contains serialized JSON, adding the `array` cast to that attribute will automatically deserialize the attribute to a PHP array when you access it on your Eloquent model:
+`array` 轉換特別適用於處理儲存為序列化 JSON 的列。例如，如果你的資料庫有包含序列化 JSON 的 `JSON` 或 `TEXT` 欄位類型，將 `array` 轉換新增到該屬性將在你通過 Eloquent 模型訪問時自動將屬性反序列化為 PHP 陣列：
 
 ```php
 <?php
@@ -348,7 +348,7 @@ class User extends Model
 }
 ```
 
-Once the cast is defined, you may access the `options` attribute and it will automatically be deserialized from JSON into a PHP array. When you set the value of the `options` attribute, the given array will automatically be serialized back into JSON for storage:
+定義轉換後，你可以訪問 `options` 屬性，它將自動從 JSON 反序列化為 PHP 陣列。當你設定 `options` 屬性的值時，給定的陣列將自動被序列化回 JSON 以供儲存：
 
 ```php
 use App\Models\User;
@@ -364,7 +364,7 @@ $user->options = $options;
 $user->save();
 ```
 
-To update a single field of a JSON attribute with a more terse syntax, you may [make the attribute mass assignable](/docs/eloquent#mass-assignment-json-columns) and use the `->` operator when calling the `update` method:
+要使用更簡潔的語法更新 JSON 屬性的單個欄位，你可以 [使屬性可大量分配](/docs/eloquent#mass-assignment-json-columns)，並在呼叫 `update` 方法時使用 `->` 運算子：
 
 ```php
 $user = User::find(1);
@@ -373,9 +373,9 @@ $user->update(['options->key' => 'value']);
 ```
 
 <a name="json-and-unicode"></a>
-#### JSON and Unicode
+#### JSON 和 Unicode
 
-If you would like to store an array attribute as JSON with unescaped Unicode characters, you may use the `json:unicode` cast:
+如果你想將陣列屬性儲存為帶有未轉義 Unicode 字符的 JSON，你可以使用 `json:unicode` 轉換：
 
 ```php
 /**
@@ -392,9 +392,9 @@ protected function casts(): array
 ```
 
 <a name="array-object-and-collection-casting"></a>
-#### Array Object and Collection Casting
+#### 陣列物件和集合轉換
 
-Although the standard `array` cast is sufficient for many applications, it does have some disadvantages. Since the `array` cast returns a primitive type, it is not possible to mutate an offset of the array directly. For example, the following code will trigger a PHP error:
+雖然標準 `array` 轉換對許多應用程式來說是充分的，但它確實有一些缺點。由於 `array` 轉換返回原始類型，無法直接變異陣列的偏移量。例如，以下代碼將觸發 PHP 錯誤：
 
 ```php
 $user = User::find(1);
@@ -402,7 +402,7 @@ $user = User::find(1);
 $user->options['key'] = $value;
 ```
 
-To solve this, Laravel offers an `AsArrayObject` cast that casts your JSON attribute to an [ArrayObject](https://www.php.net/manual/en/class.arrayobject.php) class. This feature is implemented using Laravel's [custom cast](#custom-casts) implementation, which allows Laravel to intelligently cache and transform the mutated object such that individual offsets may be modified without triggering a PHP error. To use the `AsArrayObject` cast, simply assign it to an attribute:
+為了解決這個問題，Laravel 提供了一個 `AsArrayObject` 轉換，將你的 JSON 屬性轉換為 [ArrayObject](https://www.php.net/manual/en/class.arrayobject.php) 類別。此功能是使用 Laravel 的 [自訂轉換](#custom-casts) 實現來實現的，這允許 Laravel 智慧地快取和轉換變異的物件，以便可以修改單個偏移量而不會觸發 PHP 錯誤。要使用 `AsArrayObject` 轉換，只需將其分配給屬性：
 
 ```php
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
@@ -420,7 +420,7 @@ protected function casts(): array
 }
 ```
 
-Similarly, Laravel offers an `AsCollection` cast that casts your JSON attribute to a Laravel [Collection](/docs/collections) instance:
+類似地，Laravel 提供了一個 `AsCollection` 轉換，將你的 JSON 屬性轉換為 Laravel [集合](/docs/collections) 實例：
 
 ```php
 use Illuminate\Database\Eloquent\Casts\AsCollection;
@@ -438,7 +438,7 @@ protected function casts(): array
 }
 ```
 
-If you would like the `AsCollection` cast to instantiate a custom collection class instead of Laravel's base collection class, you may provide the collection class name as a cast argument:
+如果你想要 `AsCollection` 轉換例項化自訂集合類別而不是 Laravel 的基礎集合類別，你可以提供集合類別名稱作為轉換參數：
 
 ```php
 use App\Collections\OptionCollection;
@@ -457,7 +457,7 @@ protected function casts(): array
 }
 ```
 
-The `of` method may be used to indicate collection items should be mapped into a given class via the collection's [mapInto method](/docs/collections#method-mapinto):
+`of` 方法可用於表示集合項應通過集合的 [mapInto 方法](/docs/collections#method-mapinto) 對應到給定的類別：
 
 ```php
 use App\ValueObjects\Option;
@@ -476,7 +476,7 @@ protected function casts(): array
 }
 ```
 
-When mapping collections to objects, the object should implement the `Illuminate\Contracts\Support\Arrayable` and `JsonSerializable` interfaces to define how their instances should be serialized into the database as JSON:
+當對應集合到物件時，物件應實現 `Illuminate\Contracts\Support\Arrayable` 和 `JsonSerializable` 介面，以定義其實例應如何序列化為資料庫中的 JSON：
 
 ```php
 <?php
@@ -529,11 +529,11 @@ class Option implements Arrayable, JsonSerializable
 ```
 
 <a name="date-casting"></a>
-### Date Casting
+### 日期轉換
 
-By default, Eloquent will cast the `created_at` and `updated_at` columns to instances of [Carbon](https://github.com/briannesbitt/Carbon), which extends the PHP `DateTime` class and provides an assortment of helpful methods. You may cast additional date attributes by defining additional date casts within your model's `casts` method. Typically, dates should be cast using the `datetime` or `immutable_datetime` cast types.
+預設情況下，Eloquent 將 `created_at` 和 `updated_at` 列轉換為 [Carbon](https://github.com/briannesbitt/Carbon) 的實例，它擴展了 PHP `DateTime` 類別並提供了大量有用的方法。你可以通過在模型的 `casts` 方法中定義其他日期轉換來轉換其他日期屬性。通常，日期應使用 `datetime` 或 `immutable_datetime` 轉換類型進行轉換。
 
-When defining a `date` or `datetime` cast, you may also specify the date's format. This format will be used when the [model is serialized to an array or JSON](/docs/eloquent-serialization):
+定義 `date` 或 `datetime` 轉換時，你也可以指定日期的格式。當 [模型被序列化為陣列或 JSON](/docs/eloquent-serialization) 時，將使用此格式：
 
 ```php
 /**
@@ -549,9 +549,9 @@ protected function casts(): array
 }
 ```
 
-When a column is cast as a date, you may set the corresponding model attribute value to a UNIX timestamp, date string (`Y-m-d`), date-time string, or a `DateTime` / `Carbon` instance. The date's value will be correctly converted and stored in your database.
+將列轉換為日期時，你可以將對應的模型屬性值設定為 UNIX 時間戳、日期字符串（`Y-m-d`）、日期時間字符串或 `DateTime` / `Carbon` 實例。日期的值將被正確轉換並儲存在你的資料庫中。
 
-You may customize the default serialization format for all of your model's dates by defining a `serializeDate` method on your model. This method does not affect how your dates are formatted for storage in the database:
+你可以通過在模型上定義 `serializeDate` 方法來自訂所有模型日期的預設序列化格式。此方法不會影響你的日期如何格式化以儲存在資料庫中：
 
 ```php
 /**
@@ -563,7 +563,7 @@ protected function serializeDate(DateTimeInterface $date): string
 }
 ```
 
-To specify the format that should be used when actually storing a model's dates within your database, you should define a `$dateFormat` property on your model:
+要指定應在實際將模型的日期儲存在資料庫中時使用的格式，你應在模型上定義 `$dateFormat` 屬性：
 
 ```php
 /**
@@ -575,16 +575,16 @@ protected $dateFormat = 'U';
 ```
 
 <a name="date-casting-and-timezones"></a>
-#### Date Casting, Serialization, and Timezones
+#### 日期轉換、序列化和時區
 
-By default, the `date` and `datetime` casts will serialize dates to a UTC ISO-8601 date string (`YYYY-MM-DDTHH:MM:SS.uuuuuuZ`), regardless of the timezone specified in your application's `timezone` configuration option. You are strongly encouraged to always use this serialization format, as well as to store your application's dates in the UTC timezone by not changing your application's `timezone` configuration option from its default `UTC` value. Consistently using the UTC timezone throughout your application will provide the maximum level of interoperability with other date manipulation libraries written in PHP and JavaScript.
+預設情況下，`date` 和 `datetime` 轉換將日期序列化為 UTC ISO-8601 日期字符串（`YYYY-MM-DDTHH:MM:SS.uuuuuuZ`），無論應用程式的 `timezone` 設定選項中指定的時區如何。我們強烈建議始終使用此序列化格式，以及通過不更改應用程式的 `timezone` 設定選項從其預設 `UTC` 值來將應用程式的日期儲存在 UTC 時區中。在整個應用程式中始終一致地使用 UTC 時區將提供與使用 PHP 和 JavaScript 編寫的其他日期操縱庫的最大互操作性。
 
-If a custom format is applied to the `date` or `datetime` cast, such as `datetime:Y-m-d H:i:s`, the inner timezone of the Carbon instance will be used during date serialization. Typically, this will be the timezone specified in your application's `timezone` configuration option. However, it's important to note that `timestamp` columns such as `created_at` and `updated_at` are exempt from this behavior and are always formatted in UTC, regardless of the application's timezone setting.
+如果將自訂格式應用於 `date` 或 `datetime` 轉換，例如 `datetime:Y-m-d H:i:s`，Carbon 實例的內部時區將在日期序列化期間使用。通常，這將是應用程式的 `timezone` 設定選項中指定的時區。但是，重要的是要注意，`timestamp` 列（例如 `created_at` 和 `updated_at`）免除此行為，無論應用程式的時區設定如何，始終以 UTC 格式化。
 
 <a name="enum-casting"></a>
-### Enum Casting
+### 列舉轉換
 
-Eloquent also allows you to cast your attribute values to PHP [Enums](https://www.php.net/manual/en/language.enumerations.backed.php). To accomplish this, you may specify the attribute and enum you wish to cast in your model's `casts` method:
+Eloquent 也允許你將屬性值轉換為 PHP [列舉](https://www.php.net/manual/en/language.enumerations.backed.php)。為了完成此操作，你可以在模型的 `casts` 方法中指定你希望轉換的屬性和列舉：
 
 ```php
 use App\Enums\ServerStatus;
@@ -602,7 +602,7 @@ protected function casts(): array
 }
 ```
 
-Once you have defined the cast on your model, the specified attribute will be automatically cast to and from an enum when you interact with the attribute:
+在模型上定義轉換後，指定的屬性將在你與屬性進行互動時自動轉換為列舉或從列舉轉換：
 
 ```php
 if ($server->status == ServerStatus::Provisioned) {
@@ -613,9 +613,9 @@ if ($server->status == ServerStatus::Provisioned) {
 ```
 
 <a name="casting-arrays-of-enums"></a>
-#### Casting Arrays of Enums
+#### 轉換列舉陣列
 
-Sometimes you may need your model to store an array of enum values within a single column. To accomplish this, you may utilize the `AsEnumArrayObject` or `AsEnumCollection` casts provided by Laravel:
+有時你可能需要模型在單個列中儲存列舉值的陣列。為了完成此操作，你可以利用 Laravel 提供的 `AsEnumArrayObject` 或 `AsEnumCollection` 轉換：
 
 ```php
 use App\Enums\ServerStatus;
@@ -635,21 +635,21 @@ protected function casts(): array
 ```
 
 <a name="encrypted-casting"></a>
-### Encrypted Casting
+### 加密轉換
 
-The `encrypted` cast will encrypt a model's attribute value using Laravel's built-in [encryption](/docs/encryption) features. In addition, the `encrypted:array`, `encrypted:collection`, `encrypted:object`, `AsEncryptedArrayObject`, and `AsEncryptedCollection` casts work like their unencrypted counterparts; however, as you might expect, the underlying value is encrypted when stored in your database.
+`encrypted` 轉換將使用 Laravel 的內置 [加密](/docs/encryption) 功能加密模型的屬性值。此外，`encrypted:array`、`encrypted:collection`、`encrypted:object`、`AsEncryptedArrayObject` 和 `AsEncryptedCollection` 轉換的行為類似於它們的未加密對應物；但是，如你所預期的，基礎值在儲存在資料庫時被加密。
 
-As the final length of the encrypted text is not predictable and is longer than its plain text counterpart, make sure the associated database column is of `TEXT` type or larger. In addition, since the values are encrypted in the database, you will not be able to query or search encrypted attribute values.
+由於加密文字的最終長度是不可預測的且比其純文字對應物更長，請確保關聯的資料庫列是 `TEXT` 類型或更大。此外，由於值在資料庫中被加密，你將無法查詢或搜尋加密的屬性值。
 
 <a name="key-rotation"></a>
-#### Key Rotation
+#### 金鑰輪換
 
-As you may know, Laravel encrypts strings using the `key` configuration value specified in your application's `app` configuration file. Typically, this value corresponds to the value of the `APP_KEY` environment variable. If you need to rotate your application's encryption key, you will need to manually re-encrypt your encrypted attributes using the new key.
+如你所知，Laravel 使用應用程式 `app` 設定檔中指定的 `key` 設定值來加密字符串。通常，此值對應於 `APP_KEY` 環境變數的值。如果你需要輪換應用程式的加密金鑰，你將需要使用新金鑰手動重新加密加密的屬性。
 
 <a name="query-time-casting"></a>
-### Query Time Casting
+### 查詢時間轉換
 
-Sometimes you may need to apply casts while executing a query, such as when selecting a raw value from a table. For example, consider the following query:
+有時你可能需要在執行查詢時應用轉換，例如從表中選擇原始值時。例如，考慮以下查詢：
 
 ```php
 use App\Models\Post;
@@ -662,7 +662,7 @@ $users = User::select([
 ])->get();
 ```
 
-The `last_posted_at` attribute on the results of this query will be a simple string. It would be wonderful if we could apply a `datetime` cast to this attribute when executing the query. Thankfully, we may accomplish this using the `withCasts` method:
+此查詢結果上的 `last_posted_at` 屬性將是一個簡單的字符串。如果我們可以在執行查詢時對此屬性應用 `datetime` 轉換，那就太棒了。值得慶幸的是，我們可以使用 `withCasts` 方法完成此操作：
 
 ```php
 $users = User::select([
@@ -675,15 +675,15 @@ $users = User::select([
 ```
 
 <a name="custom-casts"></a>
-## Custom Casts
+## 自訂轉換
 
-Laravel has a variety of built-in, helpful cast types; however, you may occasionally need to define your own cast types. To create a cast, execute the `make:cast` Artisan command. The new cast class will be placed in your `app/Casts` directory:
+Laravel 有各種內置的、有用的轉換類型；但是，你可能偶爾需要定義自己的轉換類型。要建立轉換，請執行 `make:cast` Artisan 命令。新轉換類別將放在你的 `app/Casts` 目錄中：
 
 ```shell
 php artisan make:cast AsJson
 ```
 
-All custom cast classes implement the `CastsAttributes` interface. Classes that implement this interface must define a `get` and `set` method. The `get` method is responsible for transforming a raw value from the database into a cast value, while the `set` method should transform a cast value into a raw value that can be stored in the database. As an example, we will re-implement the built-in `json` cast type as a custom cast type:
+所有自訂轉換類別實現 `CastsAttributes` 介面。實現此介面的類別必須定義 `get` 和 `set` 方法。`get` 方法負責將資料庫中的原始值轉換為轉換值，而 `set` 方法應將轉換值轉換為可儲存在資料庫中的原始值。例如，我們將把內置的 `json` 轉換類型重新實現為自訂轉換類型：
 
 ```php
 <?php
@@ -726,7 +726,7 @@ class AsJson implements CastsAttributes
 }
 ```
 
-Once you have defined a custom cast type, you may attach it to a model attribute using its class name:
+定義自訂轉換類型後，你可以使用其類別名稱將其附加到模型屬性：
 
 ```php
 <?php
@@ -753,11 +753,11 @@ class User extends Model
 ```
 
 <a name="value-object-casting"></a>
-### Value Object Casting
+### 值物件轉換
 
-You are not limited to casting values to primitive types. You may also cast values to objects. Defining custom casts that cast values to objects is very similar to casting to primitive types; however, if your value object encompasses more than one database column, the `set` method must return an array of key / value pairs that will be used to set raw, storable values on the model. If your value object only affects a single column, you should simply return the storable value.
+你不限於將值轉換為原始類型。你也可以將值轉換為物件。定義將值轉換為物件的自訂轉換與轉換為原始類型非常相似；但是，如果你的值物件涵蓋多個資料庫列，`set` 方法必須返回一個鍵/值對的陣列，將用於在模型上設定原始的、可儲存的值。如果你的值物件僅影響單個列，你應簡單地返回可儲存的值。
 
-As an example, we will define a custom cast class that casts multiple model values into a single `Address` value object. We will assume the `Address` value object has two public properties: `lineOne` and `lineTwo`:
+例如，我們將定義一個自訂轉換類別，將多個模型值轉換為單個 `Address` 值物件。我們將假設 `Address` 值物件有兩個公開屬性：`lineOne` 和 `lineTwo`：
 
 ```php
 <?php
@@ -812,7 +812,7 @@ class AsAddress implements CastsAttributes
 }
 ```
 
-When casting to value objects, any changes made to the value object will automatically be synced back to the model before the model is saved:
+將值物件進行轉換時，對值物件所做的任何更改將在保存模型前自動同步回模型：
 
 ```php
 use App\Models\User;
@@ -825,14 +825,14 @@ $user->save();
 ```
 
 > [!NOTE]
-> If you plan to serialize your Eloquent models containing value objects to JSON or arrays, you should implement the `Illuminate\Contracts\Support\Arrayable` and `JsonSerializable` interfaces on the value object.
+> 如果你計劃將包含值物件的 Eloquent 模型序列化為 JSON 或陣列，你應在值物件上實現 `Illuminate\Contracts\Support\Arrayable` 和 `JsonSerializable` 介面。
 
 <a name="value-object-caching"></a>
-#### Value Object Caching
+#### 值物件快取
 
-When attributes that are cast to value objects are resolved, they are cached by Eloquent. Therefore, the same object instance will be returned if the attribute is accessed again.
+當解析被轉換為值物件的屬性時，它們由 Eloquent 進行快取。因此，如果再次訪問該屬性，將返回相同的物件實例。
 
-If you would like to disable the object caching behavior of custom cast classes, you may declare a public `withoutObjectCaching` property on your custom cast class:
+如果你想停用自訂轉換類別的物件快取行為，你可以在自訂轉換類別上宣告一個公開的 `withoutObjectCaching` 屬性：
 
 ```php
 class AsAddress implements CastsAttributes
@@ -844,11 +844,11 @@ class AsAddress implements CastsAttributes
 ```
 
 <a name="array-json-serialization"></a>
-### Array / JSON Serialization
+### 陣列 / JSON 序列化
 
-When an Eloquent model is converted to an array or JSON using the `toArray` and `toJson` methods, your custom cast value objects will typically be serialized as well as long as they implement the `Illuminate\Contracts\Support\Arrayable` and `JsonSerializable` interfaces. However, when using value objects provided by third-party libraries, you may not have the ability to add these interfaces to the object.
+當使用 `toArray` 和 `toJson` 方法將 Eloquent 模型轉換為陣列或 JSON 時，你的自訂轉換值物件通常也會被序列化，只要它們實現 `Illuminate\Contracts\Support\Arrayable` 和 `JsonSerializable` 介面。但是，當使用第三方庫提供的值物件時，你可能無法向物件新增這些介面。
 
-Therefore, you may specify that your custom cast class will be responsible for serializing the value object. To do so, your custom cast class should implement the `Illuminate\Contracts\Database\Eloquent\SerializesCastableAttributes` interface. This interface states that your class should contain a `serialize` method which should return the serialized form of your value object:
+因此，你可以指定你的自訂轉換類別將負責序列化值物件。為此，你的自訂轉換類別應實現 `Illuminate\Contracts\Database\Eloquent\SerializesCastableAttributes` 介面。此介面規定你的類別應包含一個 `serialize` 方法，該方法應返回值物件的序列化形式：
 
 ```php
 /**
@@ -867,17 +867,17 @@ public function serialize(
 ```
 
 <a name="inbound-casting"></a>
-### Inbound Casting
+### 入站轉換
 
-Occasionally, you may need to write a custom cast class that only transforms values that are being set on the model and does not perform any operations when attributes are being retrieved from the model.
+有時，你可能需要編寫一個自訂轉換類別，它僅轉換在模型上設定的值，而不會在從模型檢索屬性時執行任何操作。
 
-Inbound only custom casts should implement the `CastsInboundAttributes` interface, which only requires a `set` method to be defined. The `make:cast` Artisan command may be invoked with the `--inbound` option to generate an inbound only cast class:
+入站專用自訂轉換應實現 `CastsInboundAttributes` 介面，它僅要求定義 `set` 方法。`make:cast` Artisan 命令可以使用 `--inbound` 選項來呼叫以生成入站專用轉換類別：
 
 ```shell
 php artisan make:cast AsHash --inbound
 ```
 
-A classic example of an inbound only cast is a "hashing" cast. For example, we may define a cast that hashes inbound values via a given algorithm:
+入站專用轉換的一個典型例子是「雜湊」轉換。例如，我們可能定義一個通過給定演算法轉換入站值的轉換：
 
 ```php
 <?php
@@ -915,9 +915,9 @@ class AsHash implements CastsInboundAttributes
 ```
 
 <a name="cast-parameters"></a>
-### Cast Parameters
+### 轉換參數
 
-When attaching a custom cast to a model, cast parameters may be specified by separating them from the class name using a `:` character and comma-delimiting multiple parameters. The parameters will be passed to the constructor of the cast class:
+將自訂轉換附加到模型時，可以通過使用 `:` 字符從類別名稱中分隔並逗號分隔多個參數來指定轉換參數。參數將被傳遞到轉換類別的建構子：
 
 ```php
 /**
@@ -934,11 +934,11 @@ protected function casts(): array
 ```
 
 <a name="comparing-cast-values"></a>
-### Comparing Cast Values
+### 比較轉換值
 
-If you would like to define how two given cast values should be compared to determine if they have been changed, your custom cast class may implement the `Illuminate\Contracts\Database\Eloquent\ComparesCastableAttributes` interface. This allows you to have fine-grained control over which values Eloquent considers changed and thus saves to the database when a model is updated.
+如果你想定義兩個給定的轉換值應如何進行比較以確定它們是否已改變，你的自訂轉換類別可能實現 `Illuminate\Contracts\Database\Eloquent\ComparesCastableAttributes` 介面。這允許你對 Eloquent 認為哪些值已改變並因此在更新模型時儲存到資料庫進行細粒度控制。
 
-This interface states that your class should contain a `compare` method which should return `true` if the given values are considered equal:
+此介面規定你的類別應包含一個 `compare` 方法，如果給定的值被認為相等，該方法應返回 `true`：
 
 ```php
 /**
@@ -961,9 +961,9 @@ public function compare(
 ```
 
 <a name="castables"></a>
-### Castables
+### 可轉換的
 
-You may want to allow your application's value objects to define their own custom cast classes. Instead of attaching the custom cast class to your model, you may alternatively attach a value object class that implements the `Illuminate\Contracts\Database\Eloquent\Castable` interface:
+你可能想允許你應用程式的值物件定義自己的自訂轉換類別。與其將自訂轉換類別附加到模型，不如可以選擇附加一個實現 `Illuminate\Contracts\Database\Eloquent\Castable` 介面的值物件類別：
 
 ```php
 use App\ValueObjects\Address;
@@ -976,7 +976,7 @@ protected function casts(): array
 }
 ```
 
-Objects that implement the `Castable` interface must define a `castUsing` method that returns the class name of the custom caster class that is responsible for casting to and from the `Castable` class:
+實現 `Castable` 介面的物件必須定義一個 `castUsing` 方法，該方法返回負責轉換至和從 `Castable` 類別轉換的自訂轉換程式類別的類別名稱：
 
 ```php
 <?php
@@ -1000,7 +1000,7 @@ class Address implements Castable
 }
 ```
 
-When using `Castable` classes, you may still provide arguments in the `casts` method definition. The arguments will be passed to the `castUsing` method:
+使用 `Castable` 類別時，你仍然可以在 `casts` 方法定義中提供參數。參數將被傳遞到 `castUsing` 方法：
 
 ```php
 use App\ValueObjects\Address;
@@ -1014,9 +1014,9 @@ protected function casts(): array
 ```
 
 <a name="anonymous-cast-classes"></a>
-#### Castables & Anonymous Cast Classes
+#### 可轉換的和匿名轉換類別
 
-By combining "castables" with PHP's [anonymous classes](https://www.php.net/manual/en/language.oop5.anonymous.php), you may define a value object and its casting logic as a single castable object. To accomplish this, return an anonymous class from your value object's `castUsing` method. The anonymous class should implement the `CastsAttributes` interface:
+通過結合「可轉換的」與 PHP 的 [匿名類別](https://www.php.net/manual/en/language.oop5.anonymous.php)，你可以將值物件及其轉換邏輯定義為單個可轉換物件。為此，從值物件的 `castUsing` 方法返回匿名類別。匿名類別應實現 `CastsAttributes` 介面：
 
 ```php
 <?php
