@@ -1374,87 +1374,89 @@ $browser->scrollIntoView('.selector')
 
 Dusk provides a variety of assertions that you may make against your application. All of the available assertions are documented in the list below:
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[assertTitle](#assert-title)
-[assertTitleContains](#assert-title-contains)
-[assertUrlIs](#assert-url-is)
-[assertSchemeIs](#assert-scheme-is)
-[assertSchemeIsNot](#assert-scheme-is-not)
-[assertHostIs](#assert-host-is)
-[assertHostIsNot](#assert-host-is-not)
-[assertPortIs](#assert-port-is)
-[assertPortIsNot](#assert-port-is-not)
-[assertPathBeginsWith](#assert-path-begins-with)
-[assertPathEndsWith](#assert-path-ends-with)
-[assertPathContains](#assert-path-contains)
-[assertPathIs](#assert-path-is)
-[assertPathIsNot](#assert-path-is-not)
-[assertRouteIs](#assert-route-is)
-[assertQueryStringHas](#assert-query-string-has)
-[assertQueryStringMissing](#assert-query-string-missing)
-[assertFragmentIs](#assert-fragment-is)
-[assertFragmentBeginsWith](#assert-fragment-begins-with)
-[assertFragmentIsNot](#assert-fragment-is-not)
-[assertHasCookie](#assert-has-cookie)
-[assertHasPlainCookie](#assert-has-plain-cookie)
-[assertCookieMissing](#assert-cookie-missing)
-[assertPlainCookieMissing](#assert-plain-cookie-missing)
-[assertCookieValue](#assert-cookie-value)
-[assertPlainCookieValue](#assert-plain-cookie-value)
-[assertSee](#assert-see)
-[assertDontSee](#assert-dont-see)
-[assertSeeIn](#assert-see-in)
-[assertDontSeeIn](#assert-dont-see-in)
-[assertSeeAnythingIn](#assert-see-anything-in)
-[assertSeeNothingIn](#assert-see-nothing-in)
-[assertCount](#assert-count)
-[assertScript](#assert-script)
-[assertSourceHas](#assert-source-has)
-[assertSourceMissing](#assert-source-missing)
-[assertSeeLink](#assert-see-link)
-[assertDontSeeLink](#assert-dont-see-link)
-[assertInputValue](#assert-input-value)
-[assertInputValueIsNot](#assert-input-value-is-not)
-[assertChecked](#assert-checked)
-[assertNotChecked](#assert-not-checked)
-[assertIndeterminate](#assert-indeterminate)
-[assertRadioSelected](#assert-radio-selected)
-[assertRadioNotSelected](#assert-radio-not-selected)
-[assertSelected](#assert-selected)
-[assertNotSelected](#assert-not-selected)
-[assertSelectHasOptions](#assert-select-has-options)
-[assertSelectMissingOptions](#assert-select-missing-options)
-[assertSelectHasOption](#assert-select-has-option)
-[assertSelectMissingOption](#assert-select-missing-option)
-[assertValue](#assert-value)
-[assertValueIsNot](#assert-value-is-not)
-[assertAttribute](#assert-attribute)
-[assertAttributeMissing](#assert-attribute-missing)
-[assertAttributeContains](#assert-attribute-contains)
-[assertAttributeDoesntContain](#assert-attribute-doesnt-contain)
-[assertAriaAttribute](#assert-aria-attribute)
-[assertDataAttribute](#assert-data-attribute)
-[assertVisible](#assert-visible)
-[assertPresent](#assert-present)
-[assertNotPresent](#assert-not-present)
-[assertMissing](#assert-missing)
-[assertInputPresent](#assert-input-present)
-[assertInputMissing](#assert-input-missing)
-[assertDialogOpened](#assert-dialog-opened)
-[assertEnabled](#assert-enabled)
-[assertDisabled](#assert-disabled)
-[assertButtonEnabled](#assert-button-enabled)
-[assertButtonDisabled](#assert-button-disabled)
-[assertFocused](#assert-focused)
-[assertNotFocused](#assert-not-focused)
-[assertAuthenticated](#assert-authenticated)
-[assertGuest](#assert-guest)
-[assertAuthenticatedAs](#assert-authenticated-as)
-[assertVue](#assert-vue)
-[assertVueIsNot](#assert-vue-is-not)
-[assertVueContains](#assert-vue-contains)
-[assertVueDoesntContain](#assert-vue-doesnt-contain)
+<ul>
+  <li>[assertTitle](#assert-title)</li>
+  <li>[assertTitleContains](#assert-title-contains)</li>
+  <li>[assertUrlIs](#assert-url-is)</li>
+  <li>[assertSchemeIs](#assert-scheme-is)</li>
+  <li>[assertSchemeIsNot](#assert-scheme-is-not)</li>
+  <li>[assertHostIs](#assert-host-is)</li>
+  <li>[assertHostIsNot](#assert-host-is-not)</li>
+  <li>[assertPortIs](#assert-port-is)</li>
+  <li>[assertPortIsNot](#assert-port-is-not)</li>
+  <li>[assertPathBeginsWith](#assert-path-begins-with)</li>
+  <li>[assertPathEndsWith](#assert-path-ends-with)</li>
+  <li>[assertPathContains](#assert-path-contains)</li>
+  <li>[assertPathIs](#assert-path-is)</li>
+  <li>[assertPathIsNot](#assert-path-is-not)</li>
+  <li>[assertRouteIs](#assert-route-is)</li>
+  <li>[assertQueryStringHas](#assert-query-string-has)</li>
+  <li>[assertQueryStringMissing](#assert-query-string-missing)</li>
+  <li>[assertFragmentIs](#assert-fragment-is)</li>
+  <li>[assertFragmentBeginsWith](#assert-fragment-begins-with)</li>
+  <li>[assertFragmentIsNot](#assert-fragment-is-not)</li>
+  <li>[assertHasCookie](#assert-has-cookie)</li>
+  <li>[assertHasPlainCookie](#assert-has-plain-cookie)</li>
+  <li>[assertCookieMissing](#assert-cookie-missing)</li>
+  <li>[assertPlainCookieMissing](#assert-plain-cookie-missing)</li>
+  <li>[assertCookieValue](#assert-cookie-value)</li>
+  <li>[assertPlainCookieValue](#assert-plain-cookie-value)</li>
+  <li>[assertSee](#assert-see)</li>
+  <li>[assertDontSee](#assert-dont-see)</li>
+  <li>[assertSeeIn](#assert-see-in)</li>
+  <li>[assertDontSeeIn](#assert-dont-see-in)</li>
+  <li>[assertSeeAnythingIn](#assert-see-anything-in)</li>
+  <li>[assertSeeNothingIn](#assert-see-nothing-in)</li>
+  <li>[assertCount](#assert-count)</li>
+  <li>[assertScript](#assert-script)</li>
+  <li>[assertSourceHas](#assert-source-has)</li>
+  <li>[assertSourceMissing](#assert-source-missing)</li>
+  <li>[assertSeeLink](#assert-see-link)</li>
+  <li>[assertDontSeeLink](#assert-dont-see-link)</li>
+  <li>[assertInputValue](#assert-input-value)</li>
+  <li>[assertInputValueIsNot](#assert-input-value-is-not)</li>
+  <li>[assertChecked](#assert-checked)</li>
+  <li>[assertNotChecked](#assert-not-checked)</li>
+  <li>[assertIndeterminate](#assert-indeterminate)</li>
+  <li>[assertRadioSelected](#assert-radio-selected)</li>
+  <li>[assertRadioNotSelected](#assert-radio-not-selected)</li>
+  <li>[assertSelected](#assert-selected)</li>
+  <li>[assertNotSelected](#assert-not-selected)</li>
+  <li>[assertSelectHasOptions](#assert-select-has-options)</li>
+  <li>[assertSelectMissingOptions](#assert-select-missing-options)</li>
+  <li>[assertSelectHasOption](#assert-select-has-option)</li>
+  <li>[assertSelectMissingOption](#assert-select-missing-option)</li>
+  <li>[assertValue](#assert-value)</li>
+  <li>[assertValueIsNot](#assert-value-is-not)</li>
+  <li>[assertAttribute](#assert-attribute)</li>
+  <li>[assertAttributeMissing](#assert-attribute-missing)</li>
+  <li>[assertAttributeContains](#assert-attribute-contains)</li>
+  <li>[assertAttributeDoesntContain](#assert-attribute-doesnt-contain)</li>
+  <li>[assertAriaAttribute](#assert-aria-attribute)</li>
+  <li>[assertDataAttribute](#assert-data-attribute)</li>
+  <li>[assertVisible](#assert-visible)</li>
+  <li>[assertPresent](#assert-present)</li>
+  <li>[assertNotPresent](#assert-not-present)</li>
+  <li>[assertMissing](#assert-missing)</li>
+  <li>[assertInputPresent](#assert-input-present)</li>
+  <li>[assertInputMissing](#assert-input-missing)</li>
+  <li>[assertDialogOpened](#assert-dialog-opened)</li>
+  <li>[assertEnabled](#assert-enabled)</li>
+  <li>[assertDisabled](#assert-disabled)</li>
+  <li>[assertButtonEnabled](#assert-button-enabled)</li>
+  <li>[assertButtonDisabled](#assert-button-disabled)</li>
+  <li>[assertFocused](#assert-focused)</li>
+  <li>[assertNotFocused](#assert-not-focused)</li>
+  <li>[assertAuthenticated](#assert-authenticated)</li>
+  <li>[assertGuest](#assert-guest)</li>
+  <li>[assertAuthenticatedAs](#assert-authenticated-as)</li>
+  <li>[assertVue](#assert-vue)</li>
+  <li>[assertVueIsNot](#assert-vue-is-not)</li>
+  <li>[assertVueContains](#assert-vue-contains)</li>
+  <li>[assertVueDoesntContain](#assert-vue-doesnt-contain)</li>
+</ul>
 
 </div>
 

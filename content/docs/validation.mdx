@@ -7,39 +7,39 @@ description: Laravel 提供多種不同的方式來驗證應用程式的輸入�
 
 - [簡介](#introduction)
 - [驗證快速入門](#validation-quickstart)
-    - [定義路由](#quick-defining-the-routes)
-    - [建立控制器](#quick-creating-the-controller)
-    - [編寫驗證邏輯](#quick-writing-the-validation-logic)
-    - [顯示驗證錯誤](#quick-displaying-the-validation-errors)
-    - [重新填入表單](#repopulating-forms)
-    - [關於可選欄位的說明](#a-note-on-optional-fields)
-    - [驗證錯誤回應格式](#validation-error-response-format)
+  - [定義路由](#quick-defining-the-routes)
+  - [建立控制器](#quick-creating-the-controller)
+  - [編寫驗證邏輯](#quick-writing-the-validation-logic)
+  - [顯示驗證錯誤](#quick-displaying-the-validation-errors)
+  - [重新填入表單](#repopulating-forms)
+  - [關於可選欄位的說明](#a-note-on-optional-fields)
+  - [驗證錯誤回應格式](#validation-error-response-format)
 - [表單請求驗證](#form-request-validation)
-    - [建立表單請求](#creating-form-requests)
-    - [授權表單請求](#authorizing-form-requests)
-    - [自訂錯誤訊息](#customizing-the-error-messages)
-    - [準備驗證輸入](#preparing-input-for-validation)
+  - [建立表單請求](#creating-form-requests)
+  - [授權表單請求](#authorizing-form-requests)
+  - [自訂錯誤訊息](#customizing-the-error-messages)
+  - [準備驗證輸入](#preparing-input-for-validation)
 - [手動建立驗證器](#manually-creating-validators)
-    - [自動重新導向](#automatic-redirection)
-    - [命名錯誤包](#named-error-bags)
-    - [自訂錯誤訊息](#manual-customizing-the-error-messages)
-    - [執行額外驗證](#performing-additional-validation)
+  - [自動重新導向](#automatic-redirection)
+  - [命名錯誤包](#named-error-bags)
+  - [自訂錯誤訊息](#manual-customizing-the-error-messages)
+  - [執行額外驗證](#performing-additional-validation)
 - [處理已驗證的輸入](#working-with-validated-input)
 - [處理錯誤訊息](#working-with-error-messages)
-    - [在語言檔案中指定自訂訊息](#specifying-custom-messages-in-language-files)
-    - [在語言檔案中指定屬性](#specifying-attribute-in-language-files)
-    - [在語言檔案中指定值](#specifying-values-in-language-files)
+  - [在語言檔案中指定自訂訊息](#specifying-custom-messages-in-language-files)
+  - [在語言檔案中指定屬性](#specifying-attribute-in-language-files)
+  - [在語言檔案中指定值](#specifying-values-in-language-files)
 - [可用的驗證規則](#available-validation-rules)
 - [有條件地新增規則](#conditionally-adding-rules)
 - [驗證陣列](#validating-arrays)
-    - [驗證巢狀陣列輸入](#validating-nested-array-input)
-    - [錯誤訊息索引和位置](#error-message-indexes-and-positions)
+  - [驗證巢狀陣列輸入](#validating-nested-array-input)
+  - [錯誤訊息索引和位置](#error-message-indexes-and-positions)
 - [驗證檔案](#validating-files)
 - [驗證密碼](#validating-passwords)
 - [自訂驗證規則](#custom-validation-rules)
-    - [使用規則物件](#using-rule-objects)
-    - [使用閉包](#using-closures)
-    - [隱式規則](#implicit-rules)
+  - [使用規則物件](#using-rule-objects)
+  - [使用閉包](#using-closures)
+  - [隱式規則](#implicit-rules)
 
 <a name="introduction"></a>
 ## 簡介
@@ -300,22 +300,16 @@ $request->validate([
 
 ```json
 {
-    "message": "The team name must be a string. (and 4 more errors)",
-    "errors": {
-        "team_name": [
-            "The team name must be a string.",
-            "The team name must be at least 1 characters."
-        ],
-        "authorization.role": [
-            "The selected authorization.role is invalid."
-        ],
-        "users.0.email": [
-            "The users.0.email field is required."
-        ],
-        "users.2.email": [
-            "The users.2.email 必須是有效的電子郵件地址。"
-        ]
-    }
+  "message": "The team name must be a string. (and 4 more errors)",
+  "errors": {
+    "team_name": [
+      "The team name must be a string.",
+      "The team name must be at least 1 characters."
+    ],
+    "authorization.role": ["The selected authorization.role is invalid."],
+    "users.0.email": ["The users.0.email field is required."],
+    "users.2.email": ["The users.2.email 必須是有效的電子郵件地址。"]
+  }
 }
 ```
 
@@ -953,180 +947,196 @@ The credit card number field is required when payment type is credit card.
 
 #### 布林值
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Accepted](#rule-accepted)
-[Accepted If](#rule-accepted-if)
-[Boolean](#rule-boolean)
-[Declined](#rule-declined)
-[Declined If](#rule-declined-if)
+<ul>
+  <li>[Accepted](#rule-accepted)</li>
+  <li>[Accepted If](#rule-accepted-if)</li>
+  <li>[Boolean](#rule-boolean)</li>
+  <li>[Declined](#rule-declined)</li>
+  <li>[Declined If](#rule-declined-if)</li>
+</ul>
 
 </div>
 
 #### 字串
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Active URL](#rule-active-url)
-[Alpha](#rule-alpha)
-[Alpha Dash](#rule-alpha-dash)
-[Alpha Numeric](#rule-alpha-num)
-[Ascii](#rule-ascii)
-[Confirmed](#rule-confirmed)
-[Current Password](#rule-current-password)
-[Different](#rule-different)
-[Doesnt Start With](#rule-doesnt-start-with)
-[Doesnt End With](#rule-doesnt-end-with)
-[Email](#rule-email)
-[Ends With](#rule-ends-with)
-[Enum](#rule-enum)
-[Hex Color](#rule-hex-color)
-[In](#rule-in)
-[IP Address](#rule-ip)
-[JSON](#rule-json)
-[Lowercase](#rule-lowercase)
-[MAC Address](#rule-mac)
-[Max](#rule-max)
-[Min](#rule-min)
-[Not In](#rule-not-in)
-[Regular Expression](#rule-regex)
-[Not Regular Expression](#rule-not-regex)
-[Same](#rule-same)
-[Size](#rule-size)
-[Starts With](#rule-starts-with)
-[String](#rule-string)
-[Uppercase](#rule-uppercase)
-[URL](#rule-url)
-[ULID](#rule-ulid)
-[UUID](#rule-uuid)
+<ul>
+  <li>[Active URL](#rule-active-url)</li>
+  <li>[Alpha](#rule-alpha)</li>
+  <li>[Alpha Dash](#rule-alpha-dash)</li>
+  <li>[Alpha Numeric](#rule-alpha-num)</li>
+  <li>[Ascii](#rule-ascii)</li>
+  <li>[Confirmed](#rule-confirmed)</li>
+  <li>[Current Password](#rule-current-password)</li>
+  <li>[Different](#rule-different)</li>
+  <li>[Doesnt Start With](#rule-doesnt-start-with)</li>
+  <li>[Doesnt End With](#rule-doesnt-end-with)</li>
+  <li>[Email](#rule-email)</li>
+  <li>[Ends With](#rule-ends-with)</li>
+  <li>[Enum](#rule-enum)</li>
+  <li>[Hex Color](#rule-hex-color)</li>
+  <li>[In](#rule-in)</li>
+  <li>[IP Address](#rule-ip)</li>
+  <li>[JSON](#rule-json)</li>
+  <li>[Lowercase](#rule-lowercase)</li>
+  <li>[MAC Address](#rule-mac)</li>
+  <li>[Max](#rule-max)</li>
+  <li>[Min](#rule-min)</li>
+  <li>[Not In](#rule-not-in)</li>
+  <li>[Regular Expression](#rule-regex)</li>
+  <li>[Not Regular Expression](#rule-not-regex)</li>
+  <li>[Same](#rule-same)</li>
+  <li>[Size](#rule-size)</li>
+  <li>[Starts With](#rule-starts-with)</li>
+  <li>[String](#rule-string)</li>
+  <li>[Uppercase](#rule-uppercase)</li>
+  <li>[URL](#rule-url)</li>
+  <li>[ULID](#rule-ulid)</li>
+  <li>[UUID](#rule-uuid)</li>
+</ul>
 
 </div>
 
 #### 數字
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Between](#rule-between)
-[Decimal](#rule-decimal)
-[Different](#rule-different)
-[Digits](#rule-digits)
-[Digits Between](#rule-digits-between)
-[Greater Than](#rule-gt)
-[Greater Than Or Equal](#rule-gte)
-[Integer](#rule-integer)
-[Less Than](#rule-lt)
-[Less Than Or Equal](#rule-lte)
-[Max](#rule-max)
-[Max Digits](#rule-max-digits)
-[Min](#rule-min)
-[Min Digits](#rule-min-digits)
-[Multiple Of](#rule-multiple-of)
-[Numeric](#rule-numeric)
-[Same](#rule-same)
-[Size](#rule-size)
+<ul>
+  <li>[Between](#rule-between)</li>
+  <li>[Decimal](#rule-decimal)</li>
+  <li>[Different](#rule-different)</li>
+  <li>[Digits](#rule-digits)</li>
+  <li>[Digits Between](#rule-digits-between)</li>
+  <li>[Greater Than](#rule-gt)</li>
+  <li>[Greater Than Or Equal](#rule-gte)</li>
+  <li>[Integer](#rule-integer)</li>
+  <li>[Less Than](#rule-lt)</li>
+  <li>[Less Than Or Equal](#rule-lte)</li>
+  <li>[Max](#rule-max)</li>
+  <li>[Max Digits](#rule-max-digits)</li>
+  <li>[Min](#rule-min)</li>
+  <li>[Min Digits](#rule-min-digits)</li>
+  <li>[Multiple Of](#rule-multiple-of)</li>
+  <li>[Numeric](#rule-numeric)</li>
+  <li>[Same](#rule-same)</li>
+  <li>[Size](#rule-size)</li>
+</ul>
 
 </div>
 
 #### 陣列
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Array](#rule-array)
-[Between](#rule-between)
-[Contains](#rule-contains)
-[Doesnt Contain](#rule-doesnt-contain)
-[Distinct](#rule-distinct)
-[In Array](#rule-in-array)
-[In Array Keys](#rule-in-array-keys)
-[List](#rule-list)
-[Max](#rule-max)
-[Min](#rule-min)
-[Size](#rule-size)
+<ul>
+  <li>[Array](#rule-array)</li>
+  <li>[Between](#rule-between)</li>
+  <li>[Contains](#rule-contains)</li>
+  <li>[Doesnt Contain](#rule-doesnt-contain)</li>
+  <li>[Distinct](#rule-distinct)</li>
+  <li>[In Array](#rule-in-array)</li>
+  <li>[In Array Keys](#rule-in-array-keys)</li>
+  <li>[List](#rule-list)</li>
+  <li>[Max](#rule-max)</li>
+  <li>[Min](#rule-min)</li>
+  <li>[Size](#rule-size)</li>
+</ul>
 
 </div>
 
 #### 日期
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[After](#rule-after)
-[After Or Equal](#rule-after-or-equal)
-[Before](#rule-before)
-[Before Or Equal](#rule-before-or-equal)
-[Date](#rule-date)
-[Date Equals](#rule-date-equals)
-[Date Format](#rule-date-format)
-[Different](#rule-different)
-[Timezone](#rule-timezone)
+<ul>
+  <li>[After](#rule-after)</li>
+  <li>[After Or Equal](#rule-after-or-equal)</li>
+  <li>[Before](#rule-before)</li>
+  <li>[Before Or Equal](#rule-before-or-equal)</li>
+  <li>[Date](#rule-date)</li>
+  <li>[Date Equals](#rule-date-equals)</li>
+  <li>[Date Format](#rule-date-format)</li>
+  <li>[Different](#rule-different)</li>
+  <li>[Timezone](#rule-timezone)</li>
+</ul>
 
 </div>
 
 #### 檔案
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Between](#rule-between)
-[Dimensions](#rule-dimensions)
-[Encoding](#rule-encoding)
-[Extensions](#rule-extensions)
-[File](#rule-file)
-[Image](#rule-image)
-[Max](#rule-max)
-[MIME Types](#rule-mimetypes)
-[MIME Type By File Extension](#rule-mimes)
-[Size](#rule-size)
+<ul>
+  <li>[Between](#rule-between)</li>
+  <li>[Dimensions](#rule-dimensions)</li>
+  <li>[Encoding](#rule-encoding)</li>
+  <li>[Extensions](#rule-extensions)</li>
+  <li>[File](#rule-file)</li>
+  <li>[Image](#rule-image)</li>
+  <li>[Max](#rule-max)</li>
+  <li>[MIME Types](#rule-mimetypes)</li>
+  <li>[MIME Type By File Extension](#rule-mimes)</li>
+  <li>[Size](#rule-size)</li>
+</ul>
 
 </div>
 
 #### 資料庫
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Exists](#rule-exists)
-[Unique](#rule-unique)
+<ul>
+  <li>[Exists](#rule-exists)</li>
+  <li>[Unique](#rule-unique)</li>
+</ul>
 
 </div>
 
 #### 工具
 
-<div className="collection-method-list" markdown="1">
+<div className="collection-method-list">
 
-[Any Of](#rule-anyof)
-[Bail](#rule-bail)
-[Exclude](#rule-exclude)
-[Exclude If](#rule-exclude-if)
-[Exclude Unless](#rule-exclude-unless)
-[Exclude With](#rule-exclude-with)
-[Exclude Without](#rule-exclude-without)
-[Filled](#rule-filled)
-[Missing](#rule-missing)
-[Missing If](#rule-missing-if)
-[Missing Unless](#rule-missing-unless)
-[Missing With](#rule-missing-with)
-[Missing With All](#rule-missing-with-all)
-[Nullable](#rule-nullable)
-[Present](#rule-present)
-[Present If](#rule-present-if)
-[Present Unless](#rule-present-unless)
-[Present With](#rule-present-with)
-[Present With All](#rule-present-with-all)
-[Prohibited](#rule-prohibited)
-[Prohibited If](#rule-prohibited-if)
-[Prohibited If Accepted](#rule-prohibited-if-accepted)
-[Prohibited If Declined](#rule-prohibited-if-declined)
-[Prohibited Unless](#rule-prohibited-unless)
-[Prohibits](#rule-prohibits)
-[Required](#rule-required)
-[Required If](#rule-required-if)
-[Required If Accepted](#rule-required-if-accepted)
-[Required If Declined](#rule-required-if-declined)
-[Required Unless](#rule-required-unless)
-[Required With](#rule-required-with)
-[Required With All](#rule-required-with-all)
-[Required Without](#rule-required-without)
-[Required Without All](#rule-required-without-all)
-[Required Array Keys](#rule-required-array-keys)
-[存在時驗證](#validating-when-present)
+<ul>
+  <li>[Any Of](#rule-anyof)</li>
+  <li>[Bail](#rule-bail)</li>
+  <li>[Exclude](#rule-exclude)</li>
+  <li>[Exclude If](#rule-exclude-if)</li>
+  <li>[Exclude Unless](#rule-exclude-unless)</li>
+  <li>[Exclude With](#rule-exclude-with)</li>
+  <li>[Exclude Without](#rule-exclude-without)</li>
+  <li>[Filled](#rule-filled)</li>
+  <li>[Missing](#rule-missing)</li>
+  <li>[Missing If](#rule-missing-if)</li>
+  <li>[Missing Unless](#rule-missing-unless)</li>
+  <li>[Missing With](#rule-missing-with)</li>
+  <li>[Missing With All](#rule-missing-with-all)</li>
+  <li>[Nullable](#rule-nullable)</li>
+  <li>[Present](#rule-present)</li>
+  <li>[Present If](#rule-present-if)</li>
+  <li>[Present Unless](#rule-present-unless)</li>
+  <li>[Present With](#rule-present-with)</li>
+  <li>[Present With All](#rule-present-with-all)</li>
+  <li>[Prohibited](#rule-prohibited)</li>
+  <li>[Prohibited If](#rule-prohibited-if)</li>
+  <li>[Prohibited If Accepted](#rule-prohibited-if-accepted)</li>
+  <li>[Prohibited If Declined](#rule-prohibited-if-declined)</li>
+  <li>[Prohibited Unless](#rule-prohibited-unless)</li>
+  <li>[Prohibits](#rule-prohibits)</li>
+  <li>[Required](#rule-required)</li>
+  <li>[Required If](#rule-required-if)</li>
+  <li>[Required If Accepted](#rule-required-if-accepted)</li>
+  <li>[Required If Declined](#rule-required-if-declined)</li>
+  <li>[Required Unless](#rule-required-unless)</li>
+  <li>[Required With](#rule-required-with)</li>
+  <li>[Required With All](#rule-required-with-all)</li>
+  <li>[Required Without](#rule-required-without)</li>
+  <li>[Required Without All](#rule-required-without-all)</li>
+  <li>[Required Array Keys](#rule-required-array-keys)</li>
+  <li>[存在時驗證](#validating-when-present)</li>
+</ul>
 
 </div>
 
@@ -1471,7 +1481,7 @@ use Illuminate\Validation\Rule;
 'avatar' => 'dimensions:min_width=100,min_height=200'
 ```
 
-可用的限制包括：_min\_width_、_max\_width_、_min\_height_、_max\_height_、_width_、_height_、_ratio_。
+可用的限制包括：_min_width_、_max_width_、_min_height_、_max_height_、_width_、_height_、_ratio_。
 
 _ratio_ 限制應表示為寬度除以高度。這可以透過分數（如 `3/2`）或浮點數（如 `1.5`）來指定：
 
@@ -1565,8 +1575,7 @@ $request->validate([
 ]);
 ```
 
-> [!WARNING]
-> `dns` 和 `spoof` 驗證器需要 PHP `intl` 擴充功能。
+> [!WARNING] > `dns` 和 `spoof` 驗證器需要 PHP `intl` 擴充功能。
 
 <a name="rule-encoding"></a>
 #### encoding:*encoding_type*
@@ -2076,6 +2085,7 @@ Validator::make($request->all(), [
     'role_id' => Rule::prohibitedIf(fn () => $request->user()->is_admin),
 ]);
 ```
+
 <a name="rule-prohibited-if-accepted"></a>
 #### prohibited_if_accepted:_anotherfield_,...
 

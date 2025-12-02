@@ -6,15 +6,15 @@ description: Collection 類別提供流暢便利的方式來處理陣列資料
 # Collections
 
 - [簡介](#introduction)
-    - [建立集合](#creating-collections)
-    - [擴充集合](#extending-collections)
+  - [建立集合](#creating-collections)
+  - [擴充集合](#extending-collections)
 - [可用方法](#available-methods)
 - [高階訊息](#higher-order-messages)
 - [惰性集合](#lazy-collections)
-    - [簡介](#lazy-collection-introduction)
-    - [建立惰性集合](#creating-lazy-collections)
-    - [Enumerable 合約](#the-enumerable-contract)
-    - [惰性集合方法](#lazy-collection-methods)
+  - [簡介](#lazy-collection-introduction)
+  - [建立惰性集合](#creating-lazy-collections)
+  - [Enumerable 合約](#the-enumerable-contract)
+  - [惰性集合方法](#lazy-collection-methods)
 
 <a name="introduction"></a>
 ## 簡介
@@ -42,8 +42,7 @@ $collection = collect([1, 2, 3]);
 
 你也可以使用 [make](#method-make) 和 [fromJson](#method-fromjson) 方法來建立集合。
 
-> [!NOTE]
-> [Eloquent](/docs/eloquent) 查詢的結果總是作為 `Collection` 實例返回。
+> [!NOTE] > [Eloquent](/docs/eloquent) 查詢的結果總是作為 `Collection` 實例返回。
 
 <a name="extending-collections"></a>
 ### 擴充集合
@@ -97,171 +96,169 @@ $translated = $collection->toLocale('es');
 
 對於剩餘的大部分集合文件，我們將討論 `Collection` 類別上可用的每個方法。請記住，所有這些方法都可以鏈式呼叫，以流暢地操作底層陣列。此外，幾乎每個方法都返回一個新的 `Collection` 實例，允許你在必要時保留集合的原始副本：
 
+<div className="collection-method-list">
 
-
-<div className="collection-method-list" markdown="1">
-
-- [after](#method-after)
-- [all](#method-all)
-- [average](#method-average)
-- [avg](#method-avg)
-- [before](#method-before)
-- [chunk](#method-chunk)
-- [chunkWhile](#method-chunkwhile)
-- [collapse](#method-collapse)
-- [collapseWithKeys](#method-collapsewithkeys)
-- [collect](#method-collect)
-- [combine](#method-combine)
-- [concat](#method-concat)
-- [contains](#method-contains)
-- [containsOneItem](#method-containsoneitem)
-- [containsStrict](#method-containsstrict)
-- [count](#method-count)
-- [countBy](#method-countBy)
-- [crossJoin](#method-crossjoin)
-- [dd](#method-dd)
-- [diff](#method-diff)
-- [diffAssoc](#method-diffassoc)
-- [diffAssocUsing](#method-diffassocusing)
-- [diffKeys](#method-diffkeys)
-- [doesntContain](#method-doesntcontain)
-- [doesntContainStrict](#method-doesntcontainstrict)
-- [dot](#method-dot)
-- [dump](#method-dump)
-- [duplicates](#method-duplicates)
-- [duplicatesStrict](#method-duplicatesstrict)
-- [each](#method-each)
-- [eachSpread](#method-eachspread)
-- [ensure](#method-ensure)
-- [every](#method-every)
-- [except](#method-except)
-- [filter](#method-filter)
-- [first](#method-first)
-- [firstOrFail](#method-first-or-fail)
-- [firstWhere](#method-first-where)
-- [flatMap](#method-flatmap)
-- [flatten](#method-flatten)
-- [flip](#method-flip)
-- [forget](#method-forget)
-- [forPage](#method-forpage)
-- [fromJson](#method-fromjson)
-- [get](#method-get)
-- [groupBy](#method-groupby)
-- [has](#method-has)
-- [hasAny](#method-hasany)
-- [implode](#method-implode)
-- [intersect](#method-intersect)
-- [intersectUsing](#method-intersectusing)
-- [intersectAssoc](#method-intersectAssoc)
-- [intersectAssocUsing](#method-intersectassocusing)
-- [intersectByKeys](#method-intersectbykeys)
-- [isEmpty](#method-isempty)
-- [isNotEmpty](#method-isnotempty)
-- [join](#method-join)
-- [keyBy](#method-keyby)
-- [keys](#method-keys)
-- [last](#method-last)
-- [lazy](#method-lazy)
-- [macro](#method-macro)
-- [make](#method-make)
-- [map](#method-map)
-- [mapInto](#method-mapinto)
-- [mapSpread](#method-mapspread)
-- [mapToGroups](#method-maptogroups)
-- [mapWithKeys](#method-mapwithkeys)
-- [max](#method-max)
-- [median](#method-median)
-- [merge](#method-merge)
-- [mergeRecursive](#method-mergerecursive)
-- [min](#method-min)
-- [mode](#method-mode)
-- [multiply](#method-multiply)
-- [nth](#method-nth)
-- [only](#method-only)
-- [pad](#method-pad)
-- [partition](#method-partition)
-- [percentage](#method-percentage)
-- [pipe](#method-pipe)
-- [pipeInto](#method-pipeinto)
-- [pipeThrough](#method-pipethrough)
-- [pluck](#method-pluck)
-- [pop](#method-pop)
-- [prepend](#method-prepend)
-- [pull](#method-pull)
-- [push](#method-push)
-- [put](#method-put)
-- [random](#method-random)
-- [range](#method-range)
-- [reduce](#method-reduce)
-- [reduceSpread](#method-reduce-spread)
-- [reject](#method-reject)
-- [replace](#method-replace)
-- [replaceRecursive](#method-replacerecursive)
-- [reverse](#method-reverse)
-- [search](#method-search)
-- [select](#method-select)
-- [shift](#method-shift)
-- [shuffle](#method-shuffle)
-- [skip](#method-skip)
-- [skipUntil](#method-skipuntil)
-- [skipWhile](#method-skipwhile)
-- [slice](#method-slice)
-- [sliding](#method-sliding)
-- [sole](#method-sole)
-- [some](#method-some)
-- [sort](#method-sort)
-- [sortBy](#method-sortby)
-- [sortByDesc](#method-sortbydesc)
-- [sortDesc](#method-sortdesc)
-- [sortKeys](#method-sortkeys)
-- [sortKeysDesc](#method-sortkeysdesc)
-- [sortKeysUsing](#method-sortkeysusing)
-- [splice](#method-splice)
-- [split](#method-split)
-- [splitIn](#method-splitin)
-- [sum](#method-sum)
-- [take](#method-take)
-- [takeUntil](#method-takeuntil)
-- [takeWhile](#method-takewhile)
-- [tap](#method-tap)
-- [times](#method-times)
-- [toArray](#method-toarray)
-- [toJson](#method-tojson)
-- [toPrettyJson](#method-to-pretty-json)
-- [transform](#method-transform)
-- [undot](#method-undot)
-- [union](#method-union)
-- [unique](#method-unique)
-- [uniqueStrict](#method-uniquestrict)
-- [unless](#method-unless)
-- [unlessEmpty](#method-unlessempty)
-- [unlessNotEmpty](#method-unlessnotempty)
-- [unwrap](#method-unwrap)
-- [value](#method-value)
-- [values](#method-values)
-- [when](#method-when)
-- [whenEmpty](#method-whenempty)
-- [whenNotEmpty](#method-whennotempty)
-- [where](#method-where)
-- [whereStrict](#method-wherestrict)
-- [whereBetween](#method-wherebetween)
-- [whereIn](#method-wherein)
-- [whereInStrict](#method-whereinstrict)
-- [whereInstanceOf](#method-whereinstanceof)
-- [whereNotBetween](#method-wherenotbetween)
-- [whereNotIn](#method-wherenotin)
-- [whereNotInStrict](#method-wherenotinstrict)
-- [whereNotNull](#method-wherenotnull)
-- [whereNull](#method-wherenull)
-- [wrap](#method-wrap)
-- [zip](#method-zip)
+<ul>
+  <li>[after](#method-after)</li>
+  <li>[all](#method-all)</li>
+  <li>[average](#method-average)</li>
+  <li>[avg](#method-avg)</li>
+  <li>[before](#method-before)</li>
+  <li>[chunk](#method-chunk)</li>
+  <li>[chunkWhile](#method-chunkwhile)</li>
+  <li>[collapse](#method-collapse)</li>
+  <li>[collapseWithKeys](#method-collapsewithkeys)</li>
+  <li>[collect](#method-collect)</li>
+  <li>[combine](#method-combine)</li>
+  <li>[concat](#method-concat)</li>
+  <li>[contains](#method-contains)</li>
+  <li>[containsOneItem](#method-containsoneitem)</li>
+  <li>[containsStrict](#method-containsstrict)</li>
+  <li>[count](#method-count)</li>
+  <li>[countBy](#method-countBy)</li>
+  <li>[crossJoin](#method-crossjoin)</li>
+  <li>[dd](#method-dd)</li>
+  <li>[diff](#method-diff)</li>
+  <li>[diffAssoc](#method-diffassoc)</li>
+  <li>[diffAssocUsing](#method-diffassocusing)</li>
+  <li>[diffKeys](#method-diffkeys)</li>
+  <li>[doesntContain](#method-doesntcontain)</li>
+  <li>[doesntContainStrict](#method-doesntcontainstrict)</li>
+  <li>[dot](#method-dot)</li>
+  <li>[dump](#method-dump)</li>
+  <li>[duplicates](#method-duplicates)</li>
+  <li>[duplicatesStrict](#method-duplicatesstrict)</li>
+  <li>[each](#method-each)</li>
+  <li>[eachSpread](#method-eachspread)</li>
+  <li>[ensure](#method-ensure)</li>
+  <li>[every](#method-every)</li>
+  <li>[except](#method-except)</li>
+  <li>[filter](#method-filter)</li>
+  <li>[first](#method-first)</li>
+  <li>[firstOrFail](#method-first-or-fail)</li>
+  <li>[firstWhere](#method-first-where)</li>
+  <li>[flatMap](#method-flatmap)</li>
+  <li>[flatten](#method-flatten)</li>
+  <li>[flip](#method-flip)</li>
+  <li>[forget](#method-forget)</li>
+  <li>[forPage](#method-forpage)</li>
+  <li>[fromJson](#method-fromjson)</li>
+  <li>[get](#method-get)</li>
+  <li>[groupBy](#method-groupby)</li>
+  <li>[has](#method-has)</li>
+  <li>[hasAny](#method-hasany)</li>
+  <li>[implode](#method-implode)</li>
+  <li>[intersect](#method-intersect)</li>
+  <li>[intersectUsing](#method-intersectusing)</li>
+  <li>[intersectAssoc](#method-intersectAssoc)</li>
+  <li>[intersectAssocUsing](#method-intersectassocusing)</li>
+  <li>[intersectByKeys](#method-intersectbykeys)</li>
+  <li>[isEmpty](#method-isempty)</li>
+  <li>[isNotEmpty](#method-isnotempty)</li>
+  <li>[join](#method-join)</li>
+  <li>[keyBy](#method-keyby)</li>
+  <li>[keys](#method-keys)</li>
+  <li>[last](#method-last)</li>
+  <li>[lazy](#method-lazy)</li>
+  <li>[macro](#method-macro)</li>
+  <li>[make](#method-make)</li>
+  <li>[map](#method-map)</li>
+  <li>[mapInto](#method-mapinto)</li>
+  <li>[mapSpread](#method-mapspread)</li>
+  <li>[mapToGroups](#method-maptogroups)</li>
+  <li>[mapWithKeys](#method-mapwithkeys)</li>
+  <li>[max](#method-max)</li>
+  <li>[median](#method-median)</li>
+  <li>[merge](#method-merge)</li>
+  <li>[mergeRecursive](#method-mergerecursive)</li>
+  <li>[min](#method-min)</li>
+  <li>[mode](#method-mode)</li>
+  <li>[multiply](#method-multiply)</li>
+  <li>[nth](#method-nth)</li>
+  <li>[only](#method-only)</li>
+  <li>[pad](#method-pad)</li>
+  <li>[partition](#method-partition)</li>
+  <li>[percentage](#method-percentage)</li>
+  <li>[pipe](#method-pipe)</li>
+  <li>[pipeInto](#method-pipeinto)</li>
+  <li>[pipeThrough](#method-pipethrough)</li>
+  <li>[pluck](#method-pluck)</li>
+  <li>[pop](#method-pop)</li>
+  <li>[prepend](#method-prepend)</li>
+  <li>[pull](#method-pull)</li>
+  <li>[push](#method-push)</li>
+  <li>[put](#method-put)</li>
+  <li>[random](#method-random)</li>
+  <li>[range](#method-range)</li>
+  <li>[reduce](#method-reduce)</li>
+  <li>[reduceSpread](#method-reduce-spread)</li>
+  <li>[reject](#method-reject)</li>
+  <li>[replace](#method-replace)</li>
+  <li>[replaceRecursive](#method-replacerecursive)</li>
+  <li>[reverse](#method-reverse)</li>
+  <li>[search](#method-search)</li>
+  <li>[select](#method-select)</li>
+  <li>[shift](#method-shift)</li>
+  <li>[shuffle](#method-shuffle)</li>
+  <li>[skip](#method-skip)</li>
+  <li>[skipUntil](#method-skipuntil)</li>
+  <li>[skipWhile](#method-skipwhile)</li>
+  <li>[slice](#method-slice)</li>
+  <li>[sliding](#method-sliding)</li>
+  <li>[sole](#method-sole)</li>
+  <li>[some](#method-some)</li>
+  <li>[sort](#method-sort)</li>
+  <li>[sortBy](#method-sortby)</li>
+  <li>[sortByDesc](#method-sortbydesc)</li>
+  <li>[sortDesc](#method-sortdesc)</li>
+  <li>[sortKeys](#method-sortkeys)</li>
+  <li>[sortKeysDesc](#method-sortkeysdesc)</li>
+  <li>[sortKeysUsing](#method-sortkeysusing)</li>
+  <li>[splice](#method-splice)</li>
+  <li>[split](#method-split)</li>
+  <li>[splitIn](#method-splitin)</li>
+  <li>[sum](#method-sum)</li>
+  <li>[take](#method-take)</li>
+  <li>[takeUntil](#method-takeuntil)</li>
+  <li>[takeWhile](#method-takewhile)</li>
+  <li>[tap](#method-tap)</li>
+  <li>[times](#method-times)</li>
+  <li>[toArray](#method-toarray)</li>
+  <li>[toJson](#method-tojson)</li>
+  <li>[toPrettyJson](#method-to-pretty-json)</li>
+  <li>[transform](#method-transform)</li>
+  <li>[undot](#method-undot)</li>
+  <li>[union](#method-union)</li>
+  <li>[unique](#method-unique)</li>
+  <li>[uniqueStrict](#method-uniquestrict)</li>
+  <li>[unless](#method-unless)</li>
+  <li>[unlessEmpty](#method-unlessempty)</li>
+  <li>[unlessNotEmpty](#method-unlessnotempty)</li>
+  <li>[unwrap](#method-unwrap)</li>
+  <li>[value](#method-value)</li>
+  <li>[values](#method-values)</li>
+  <li>[when](#method-when)</li>
+  <li>[whenEmpty](#method-whenempty)</li>
+  <li>[whenNotEmpty](#method-whennotempty)</li>
+  <li>[where](#method-where)</li>
+  <li>[whereStrict](#method-wherestrict)</li>
+  <li>[whereBetween](#method-wherebetween)</li>
+  <li>[whereIn](#method-wherein)</li>
+  <li>[whereInStrict](#method-whereinstrict)</li>
+  <li>[whereInstanceOf](#method-whereinstanceof)</li>
+  <li>[whereNotBetween](#method-wherenotbetween)</li>
+  <li>[whereNotIn](#method-wherenotin)</li>
+  <li>[whereNotInStrict](#method-wherenotinstrict)</li>
+  <li>[whereNotNull](#method-wherenotnull)</li>
+  <li>[whereNull](#method-wherenull)</li>
+  <li>[wrap](#method-wrap)</li>
+  <li>[zip](#method-zip)</li>
+</ul>
 
 </div>
 
 <a name="method-listing"></a>
 ## 方法列表
-
-
 
 <a name="method-after"></a>
 #### `after()`
@@ -795,7 +792,7 @@ $diff->all();
 
 `doesntContain` 方法判斷集合是否不包含給定的項目。你可以傳遞一個閉包給 `doesntContain` 方法，以判斷集合中是否不存在符合給定真值測試的元素：
 
-```php
+````php
 $collection = collect([1, 2, 3, 4, 5]);
 
 ```php
@@ -804,7 +801,7 @@ $collection->doesntContain(function (int $value, int $key) {
 });
 
 // false
-```
+````
 
 或者，你可以傳遞一個字串給 `doesntContain` 方法，以判斷集合是否不包含給定的項目值：
 
@@ -968,8 +965,7 @@ return $collection->ensure([User::class, Customer::class]);
 return $collection->ensure('int');
 ```
 
-> [!WARNING]
-> `ensure` 方法不保證不同類型的元素以後不會被新增到集合中。
+> [!WARNING] > `ensure` 方法不保證不同類型的元素以後不會被新增到集合中。
 
 <a name="method-every"></a>
 #### `every()`
@@ -2020,7 +2016,7 @@ $min = collect([1, 2, 3, 4, 5])->min();
 <a name="method-mode"></a>
 #### `mode()`
 
-`mode` 方法返回給定鍵的 [眾數](https://en.wikipedia.org/wiki/Mode_(statistics))：
+`mode` 方法返回給定鍵的 [眾數](<https://en.wikipedia.org/wiki/Mode_(statistics)>)：
 
 ```php
 $mode = collect([
@@ -2406,9 +2402,9 @@ $collection->all();
 $collection = collect([1, 2, 3, 4]);
 
 $collection->push(5, 6, 7);
- 
+
 $collection->all();
- 
+
 // [1, 2, 3, 4, 5, 6, 7]
 ```
 
@@ -2796,7 +2792,7 @@ $subset->all();
 
 `slice` 方法返回從給定索引開始的集合切片：
 
-```php
+````php
 $collection = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
 
 ```php
@@ -2805,7 +2801,7 @@ $slice = $collection->slice(4);
 $slice->all();
 
 // [5, 6, 7, 8, 9, 10]
-```
+````
 
 如果你想限制返回切片的大小，請將所需大小作為第二個參數傳遞給該方法：
 
@@ -3371,8 +3367,7 @@ $collection->toArray();
 */
 ```
 
-> [!WARNING]
-> `toArray` 也將集合中所有是 `Arrayable` 實例的嵌套物件轉換為陣列。如果你想獲取集合底層的原始陣列，請改用 [all](#method-all) 方法。
+> [!WARNING] > `toArray` 也將集合中所有是 `Arrayable` 實例的嵌套物件轉換為陣列。如果你想獲取集合底層的原始陣列，請改用 [all](#method-all) 方法。
 
 <a name="method-tojson"></a>
 #### `toJson()`
@@ -4163,121 +4158,121 @@ LazyCollection::make(function () {
 
 幾乎所有在 `Collection` 類別上可用的方法也都可以在 `LazyCollection` 類別上使用。這兩個類別都實現了 `Illuminate\Support\Enumerable` 契約，該契約定義了以下方法：
 
+<div className="collection-method-list">
 
-
-<div className="collection-method-list" markdown="1">
-
-[all](#method-all)
-[average](#method-average)
-[avg](#method-avg)
-[chunk](#method-chunk)
-[chunkWhile](#method-chunkwhile)
-[collapse](#method-collapse)
-[collect](#method-collect)
-[combine](#method-combine)
-[concat](#method-concat)
-[contains](#method-contains)
-[containsStrict](#method-containsstrict)
-[count](#method-count)
-[countBy](#method-countBy)
-[crossJoin](#method-crossjoin)
-[dd](#method-dd)
-[diff](#method-diff)
-[diffAssoc](#method-diffassoc)
-[diffKeys](#method-diffkeys)
-[dump](#method-dump)
-[duplicates](#method-duplicates)
-[duplicatesStrict](#method-duplicatesstrict)
-[each](#method-each)
-[eachSpread](#method-eachspread)
-[every](#method-every)
-[except](#method-except)
-[filter](#method-filter)
-[first](#method-first)
-[firstOrFail](#method-first-or-fail)
-[firstWhere](#method-first-where)
-[flatMap](#method-flatmap)
-[flatten](#method-flatten)
-[flip](#method-flip)
-[forPage](#method-forpage)
-[get](#method-get)
-[groupBy](#method-groupby)
-[has](#method-has)
-[implode](#method-implode)
-[intersect](#method-intersect)
-[intersectAssoc](#method-intersectAssoc)
-[intersectByKeys](#method-intersectbykeys)
-[isEmpty](#method-isempty)
-[isNotEmpty](#method-isnotempty)
-[join](#method-join)
-[keyBy](#method-keyby)
-[keys](#method-keys)
-[last](#method-last)
-[macro](#method-macro)
-[make](#method-make)
-[map](#method-map)
-[mapInto](#method-mapinto)
-[mapSpread](#method-mapspread)
-[mapToGroups](#method-maptogroups)
-[mapWithKeys](#method-mapwithkeys)
-[max](#method-max)
-[median](#method-median)
-[merge](#method-merge)
-[mergeRecursive](#method-mergerecursive)
-[min](#method-min)
-[mode](#method-mode)
-[nth](#method-nth)
-[only](#method-only)
-[pad](#method-pad)
-[partition](#method-partition)
-[pipe](#method-pipe)
-[pluck](#method-pluck)
-[random](#method-random)
-[reduce](#method-reduce)
-[reject](#method-reject)
-[replace](#method-replace)
-[replaceRecursive](#method-replacerecursive)
-[reverse](#method-reverse)
-[search](#method-search)
-[shuffle](#method-shuffle)
-[skip](#method-skip)
-[slice](#method-slice)
-[sole](#method-sole)
-[some](#method-some)
-[sort](#method-sort)
-[sortBy](#method-sortby)
-[sortByDesc](#method-sortbydesc)
-[sortKeys](#method-sortkeys)
-[sortKeysDesc](#method-sortkeysdesc)
-[split](#method-split)
-[sum](#method-sum)
-[take](#method-take)
-[tap](#method-tap)
-[times](#method-times)
-[toArray](#method-toarray)
-[toJson](#method-tojson)
-[union](#method-union)
-[unique](#method-unique)
-[uniqueStrict](#method-uniquestrict)
-[unless](#method-unless)
-[unlessEmpty](#method-unlessempty)
-[unlessNotEmpty](#method-unlessnotempty)
-[unwrap](#method-unwrap)
-[values](#method-values)
-[when](#method-when)
-[whenEmpty](#method-whenempty)
-[whenNotEmpty](#method-whennotempty)
-[where](#method-where)
-[whereStrict](#method-wherestrict)
-[whereBetween](#method-wherebetween)
-[whereIn](#method-wherein)
-[whereInStrict](#method-whereinstrict)
-[whereInstanceOf](#method-whereinstanceof)
-[whereNotBetween](#method-wherenotbetween)
-[whereNotIn](#method-wherenotin)
-[whereNotInStrict](#method-wherenotinstrict)
-[wrap](#method-wrap)
-[zip](#method-zip)
+<ul>
+  <li>[all](#method-all)</li>
+  <li>[average](#method-average)</li>
+  <li>[avg](#method-avg)</li>
+  <li>[chunk](#method-chunk)</li>
+  <li>[chunkWhile](#method-chunkwhile)</li>
+  <li>[collapse](#method-collapse)</li>
+  <li>[collect](#method-collect)</li>
+  <li>[combine](#method-combine)</li>
+  <li>[concat](#method-concat)</li>
+  <li>[contains](#method-contains)</li>
+  <li>[containsStrict](#method-containsstrict)</li>
+  <li>[count](#method-count)</li>
+  <li>[countBy](#method-countBy)</li>
+  <li>[crossJoin](#method-crossjoin)</li>
+  <li>[dd](#method-dd)</li>
+  <li>[diff](#method-diff)</li>
+  <li>[diffAssoc](#method-diffassoc)</li>
+  <li>[diffKeys](#method-diffkeys)</li>
+  <li>[dump](#method-dump)</li>
+  <li>[duplicates](#method-duplicates)</li>
+  <li>[duplicatesStrict](#method-duplicatesstrict)</li>
+  <li>[each](#method-each)</li>
+  <li>[eachSpread](#method-eachspread)</li>
+  <li>[every](#method-every)</li>
+  <li>[except](#method-except)</li>
+  <li>[filter](#method-filter)</li>
+  <li>[first](#method-first)</li>
+  <li>[firstOrFail](#method-first-or-fail)</li>
+  <li>[firstWhere](#method-first-where)</li>
+  <li>[flatMap](#method-flatmap)</li>
+  <li>[flatten](#method-flatten)</li>
+  <li>[flip](#method-flip)</li>
+  <li>[forPage](#method-forpage)</li>
+  <li>[get](#method-get)</li>
+  <li>[groupBy](#method-groupby)</li>
+  <li>[has](#method-has)</li>
+  <li>[implode](#method-implode)</li>
+  <li>[intersect](#method-intersect)</li>
+  <li>[intersectAssoc](#method-intersectAssoc)</li>
+  <li>[intersectByKeys](#method-intersectbykeys)</li>
+  <li>[isEmpty](#method-isempty)</li>
+  <li>[isNotEmpty](#method-isnotempty)</li>
+  <li>[join](#method-join)</li>
+  <li>[keyBy](#method-keyby)</li>
+  <li>[keys](#method-keys)</li>
+  <li>[last](#method-last)</li>
+  <li>[macro](#method-macro)</li>
+  <li>[make](#method-make)</li>
+  <li>[map](#method-map)</li>
+  <li>[mapInto](#method-mapinto)</li>
+  <li>[mapSpread](#method-mapspread)</li>
+  <li>[mapToGroups](#method-maptogroups)</li>
+  <li>[mapWithKeys](#method-mapwithkeys)</li>
+  <li>[max](#method-max)</li>
+  <li>[median](#method-median)</li>
+  <li>[merge](#method-merge)</li>
+  <li>[mergeRecursive](#method-mergerecursive)</li>
+  <li>[min](#method-min)</li>
+  <li>[mode](#method-mode)</li>
+  <li>[nth](#method-nth)</li>
+  <li>[only](#method-only)</li>
+  <li>[pad](#method-pad)</li>
+  <li>[partition](#method-partition)</li>
+  <li>[pipe](#method-pipe)</li>
+  <li>[pluck](#method-pluck)</li>
+  <li>[random](#method-random)</li>
+  <li>[reduce](#method-reduce)</li>
+  <li>[reject](#method-reject)</li>
+  <li>[replace](#method-replace)</li>
+  <li>[replaceRecursive](#method-replacerecursive)</li>
+  <li>[reverse](#method-reverse)</li>
+  <li>[search](#method-search)</li>
+  <li>[shuffle](#method-shuffle)</li>
+  <li>[skip](#method-skip)</li>
+  <li>[slice](#method-slice)</li>
+  <li>[sole](#method-sole)</li>
+  <li>[some](#method-some)</li>
+  <li>[sort](#method-sort)</li>
+  <li>[sortBy](#method-sortby)</li>
+  <li>[sortByDesc](#method-sortbydesc)</li>
+  <li>[sortKeys](#method-sortkeys)</li>
+  <li>[sortKeysDesc](#method-sortkeysdesc)</li>
+  <li>[split](#method-split)</li>
+  <li>[sum](#method-sum)</li>
+  <li>[take](#method-take)</li>
+  <li>[tap](#method-tap)</li>
+  <li>[times](#method-times)</li>
+  <li>[toArray](#method-toarray)</li>
+  <li>[toJson](#method-tojson)</li>
+  <li>[union](#method-union)</li>
+  <li>[unique](#method-unique)</li>
+  <li>[uniqueStrict](#method-uniquestrict)</li>
+  <li>[unless](#method-unless)</li>
+  <li>[unlessEmpty](#method-unlessempty)</li>
+  <li>[unlessNotEmpty](#method-unlessnotempty)</li>
+  <li>[unwrap](#method-unwrap)</li>
+  <li>[values](#method-values)</li>
+  <li>[when](#method-when)</li>
+  <li>[whenEmpty](#method-whenempty)</li>
+  <li>[whenNotEmpty](#method-whennotempty)</li>
+  <li>[where](#method-where)</li>
+  <li>[whereStrict](#method-wherestrict)</li>
+  <li>[whereBetween](#method-wherebetween)</li>
+  <li>[whereIn](#method-wherein)</li>
+  <li>[whereInStrict](#method-whereinstrict)</li>
+  <li>[whereInstanceOf](#method-whereinstanceof)</li>
+  <li>[whereNotBetween](#method-wherenotbetween)</li>
+  <li>[whereNotIn](#method-wherenotin)</li>
+  <li>[whereNotInStrict](#method-wherenotinstrict)</li>
+  <li>[wrap](#method-wrap)</li>
+  <li>[zip](#method-zip)</li>
+</ul>
 
 </div>
 
