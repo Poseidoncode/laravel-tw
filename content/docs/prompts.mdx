@@ -3,19 +3,19 @@ title: "提示 (Prompts)"
 description: Laravel Prompts 是一個用於向 CLI 應用程式添加美觀介面的套件
 ---
 
-    - [文字輸入 (Text)](#text)
-    - [多行文字輸入 (Textarea)](#textarea)
-    - [密碼輸入 (Password)](#password)
-    - [確認 (Confirm)](#confirm)
-    - [選擇 (Select)](#select)
-    - [多重選擇 (Multi-select)](#multiselect)
-    - [建議 (Suggest)](#suggest)
-    - [搜尋 (Search)](#search)
-    - [多重搜尋 (Multi-search)](#multisearch)
-    - [暫停 (Pause)](#pause)
+    - [文字輸入](#text)
+    - [多行文字輸入](#textarea)
+    - [密碼輸入](#password)
+    - [確認](#confirm)
+    - [選擇](#select)
+    - [多重選擇](#multiselect)
+    - [建議](#suggest)
+    - [搜尋](#search)
+    - [多重搜尋](#multisearch)
+    - [暫停](#pause)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Prompts](https://github.com/laravel/prompts) 是一個 PHP 套件，用於為你的命令列應用程式添加美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
 
@@ -27,7 +27,7 @@ Laravel Prompts 非常適合在你的 [Artisan 主控台指令](/docs/artisan#wr
 > Laravel Prompts 支援 macOS、Linux 和 Windows (使用 WSL)。有關更多資訊，請參閱我們關於 [不支援的環境與備案](#fallbacks) 的文件。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 Laravel Prompts 已包含在最新版本的 Laravel 中。
 
@@ -63,7 +63,7 @@ $name = text(
 ```
 
 <a name="text-required"></a>
-#### 必填值
+#### 必填值 (Text Required)
 
 如果你需要輸入值，可以傳遞 `required` 參數：
 
@@ -84,7 +84,7 @@ $name = text(
 ```
 
 <a name="text-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Text Validation)
 
 最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
@@ -132,7 +132,7 @@ $story = textarea(
 ```
 
 <a name="textarea-required"></a>
-#### 必填值
+#### 必填值 (Textarea Required)
 
 如果你需要輸入值，可以傳遞 `required` 參數：
 
@@ -153,7 +153,7 @@ $story = textarea(
 ```
 
 <a name="textarea-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Textarea Validation)
 
 最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
@@ -201,7 +201,7 @@ $password = password(
 ```
 
 <a name="password-required"></a>
-#### 必填值
+#### 必填值 (Password Required)
 
 如果你需要輸入值，可以傳遞 `required` 參數：
 
@@ -222,7 +222,7 @@ $password = password(
 ```
 
 <a name="password-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Password Validation)
 
 最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
@@ -271,7 +271,7 @@ $confirmed = confirm(
 ```
 
 <a name="confirm-required"></a>
-#### 要求「是」
+#### 要求「是」 (Confirm Required)
 
 如果有必要，你可以透過傳遞 `required` 參數來要求使用者選擇「是」：
 
@@ -341,7 +341,7 @@ $role = select(
 ```
 
 <a name="select-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Select Validation)
 
 與其他提示函式不同，`select` 函式不接受 `required` 參數，因為不可能不選擇任何內容。但是，如果你需要呈現一個選項但阻止它被選中，你可以傳遞閉包給 `validate` 參數：
 
@@ -415,7 +415,7 @@ $categories = multiselect(
 ```
 
 <a name="multiselect-required"></a>
-#### 必填值
+#### 必填值 (Multiselect Required)
 
 預設情況下，使用者可以選擇零個或多個選項。你可以傳遞 `required` 參數來強制選擇一個或多個選項：
 
@@ -438,7 +438,7 @@ $categories = multiselect(
 ```
 
 <a name="multiselect-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Multiselect Validation)
 
 如果你需要呈現一個選項但阻止它被選中，你可以傳遞閉包給 `validate` 參數：
 
@@ -493,7 +493,7 @@ $name = suggest(
 ```
 
 <a name="suggest-required"></a>
-#### 必填值
+#### 必填值 (Suggest Required)
 
 如果你需要輸入值，可以傳遞 `required` 參數：
 
@@ -516,7 +516,7 @@ $name = suggest(
 ```
 
 <a name="suggest-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Suggest Validation)
 
 最後，如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
@@ -602,7 +602,7 @@ $id = search(
 ```
 
 <a name="search-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Search Validation)
 
 如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
@@ -682,7 +682,7 @@ $ids = multisearch(
 ```
 
 <a name="multisearch-required"></a>
-#### 必填值
+#### 必填值 (Multisearch Required)
 
 預設情況下，使用者可以選擇零個或多個選項。你可以傳遞 `required` 參數來強制選擇一個或多個選項：
 
@@ -709,7 +709,7 @@ $ids = multisearch(
 ```
 
 <a name="multisearch-validation"></a>
-#### 額外驗證
+#### 額外驗證 (Multisearch Validation)
 
 如果你想執行額外的驗證邏輯，可以傳遞閉包給 `validate` 參數：
 
@@ -920,16 +920,15 @@ clear();
 ```
 
 <a name="terminal-considerations"></a>
-<a name="terminal-considerations"></a>
 ## 終端機注意事項 (Terminal Considerations)
 
 <a name="terminal-width"></a>
-#### 終端機寬度
+#### 終端機寬度 (Terminal Width)
 
 如果任何標籤、選項或驗證訊息的長度超過使用者終端機中的「列」數，它將自動截斷以適應。如果你的使用者可能使用較窄的終端機，請考慮最小化這些字串的長度。通常安全的長度上限為 74 個字元，以支援 80 個字元的終端機。
 
 <a name="terminal-height"></a>
-#### 終端機高度
+#### 終端機高度 (Terminal Height)
 
 對於任何接受 `scroll` 參數的提示框，設定的值將自動減少以適應使用者終端機的高度，包括驗證訊息的空間。
 
@@ -944,7 +943,7 @@ Laravel Prompts 支援 macOS、Linux 和 Windows (使用 WSL)。由於 Windows �
 > 當在 Laravel 框架中使用 Laravel Prompts 時，每個提示框的備案已為你設定好，並將在不支援的環境中自動啟用。
 
 <a name="fallback-conditions"></a>
-#### 備案條件
+#### 備案條件 (Fallback Conditions)
 
 如果你沒有使用 Laravel，或者需要自訂何時使用備案行為，你可以傳遞布林值給 `Prompt` 類別上的 `fallbackWhen` 靜態方法：
 
@@ -957,7 +956,7 @@ Prompt::fallbackWhen(
 ```
 
 <a name="fallback-behavior"></a>
-#### 備案行為
+#### 備案行為 (Fallback Behavior)
 
 如果你沒有使用 Laravel，或者需要自訂備案行為，你可以傳遞閉包給每個提示框類別上的 `fallbackUsing` 靜態方法：
 

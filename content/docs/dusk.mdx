@@ -56,14 +56,14 @@ description: Laravel Dusk 提供了簡單易用的瀏覽器自動化和測試 AP
   - [Chipper CI](#running-tests-on-chipper-ci)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 > [!WARNING] > [Pest 4](https://pestphp.com/) 現在包含了自動化瀏覽器測試功能，相比 Laravel Dusk 提供了顯著的性能和可用性改進。對於新項目，我們建議使用 Pest 進行瀏覽器測試。
 
 [Laravel Dusk](https://github.com/laravel/dusk) 提供了一個表達性強、易於使用的瀏覽器自動化和測試 API。默認情況下，Dusk 不需要您在本地電腦上安裝 JDK 或 Selenium。相反，Dusk 使用一個獨立的 [ChromeDriver](https://sites.google.com/chromium.org/driver) 安裝。不過，您也可以自由使用任何其他兼容 Selenium 的驅動程序。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 開始使用之前，您應該安裝 [Google Chrome](https://www.google.com/chrome) 並將 `laravel/dusk` Composer 依賴項添加到您的項目中：
 
@@ -86,7 +86,7 @@ php artisan dusk:install
 > 如果您使用 [Laravel Sail](/docs/sail) 來管理本地開發環境，請同時查閱 Sail 文檔中有關 [配置和運行 Dusk 測試](/docs/sail#laravel-dusk) 的部分。
 
 <a name="managing-chromedriver-installations"></a>
-### 管理 ChromeDriver 安裝
+### 管理 ChromeDriver 安裝 (Managing Chromedriver Installations)
 
 如果您想安裝與 Laravel Dusk 通過 `dusk:install` 命令安裝的不同版本的 ChromeDriver，您可以使用 `dusk:chrome-driver` 命令：
 
@@ -108,7 +108,7 @@ php artisan dusk:chrome-driver --detect
 > Dusk 要求 `chromedriver` 二進制文件必須是可執行的。如果您在運行 Dusk 時遇到問題，您應該使用以下命令確保二進制文件是可執行的：`chmod -R 0755 vendor/laravel/dusk/bin/`。
 
 <a name="using-other-browsers"></a>
-### 使用其他瀏覽器
+### 使用其他瀏覽器 (Using Other Browsers)
 
 默認情況下，Dusk 使用 Google Chrome 和獨立的 [ChromeDriver](https://sites.google.com/chromium.org/driver) 安裝來運行您的瀏覽器測試。不過，您可以啟動自己的 Selenium 服務器並針對任何您希望的瀏覽器運行測試。
 
@@ -143,10 +143,10 @@ protected function driver(): RemoteWebDriver
 ```
 
 <a name="getting-started"></a>
-## 開始使用
+## 開始使用 (Getting Started)
 
 <a name="generating-tests"></a>
-### 生成測試
+### 生成測試 (Generating Tests)
 
 要生成 Dusk 測試，使用 `dusk:make` Artisan 命令。生成的測試將放在 `tests/Browser` 目錄中：
 
@@ -155,12 +155,12 @@ php artisan dusk:make LoginTest
 ```
 
 <a name="resetting-the-database-after-each-test"></a>
-### 在每次測試後重置數據庫
+### 在每次測試後重置數據庫 (Resetting The Database After Each Test)
 
 您編寫的大多數測試都會與從應用程序數據庫檢索數據的頁面進行交互；但是，您的 Dusk 測試不應該使用 `RefreshDatabase` trait。`RefreshDatabase` trait 利用數據庫事務，這將不適用或不可用於 HTTP 請求。相反，您有兩個選項：`DatabaseMigrations` trait 和 `DatabaseTruncation` trait。
 
 <a name="reset-migrations"></a>
-#### 使用數據庫遷移
+#### 使用數據庫遷移 (Reset Migrations)
 
 `DatabaseMigrations` trait 將在每次測試前運行您的數據庫遷移。但是，為每次測試刪除和重新創建數據庫表通常比截斷表要慢：
 
@@ -196,7 +196,7 @@ class ExampleTest extends DuskTestCase
 > 執行 Dusk 測試時不能使用 SQLite 內存數據庫。由於瀏覽器在其自己的進程中執行，它無法訪問其他進程的內存數據庫。
 
 <a name="reset-truncation"></a>
-#### 使用數據庫截斷
+#### 使用數據庫截斷 (Reset Truncation)
 
 `DatabaseTruncation` trait 將在第一次測試時遷移您的數據庫以確保您的數據庫表已正確創建。但是，在隨後的測試中，數據庫的表將被簡單地截斷 - 比重新運行所有數據庫遷移提供了速度提升：
 
@@ -286,7 +286,7 @@ protected function afterTruncatingDatabase(): void
 ```
 
 <a name="running-tests"></a>
-### 運行測試
+### 運行測試 (Running Tests)
 
 要運行您的瀏覽器測試，執行 `dusk` Artisan 命令：
 
@@ -310,7 +310,7 @@ php artisan dusk --group=foo
 > 如果您使用 [Laravel Sail](/docs/sail) 來管理本地開發環境，請查閱 Sail 文檔中有關 [配置和運行 Dusk 測試](/docs/sail#laravel-dusk) 的部分。
 
 <a name="manually-starting-chromedriver"></a>
-#### 手動啟動 ChromeDriver
+#### 手動啟動 ChromeDriver (Manually Starting Chromedriver)
 
 默認情況下，Dusk 將自動嘗試啟動 ChromeDriver。如果這對您的特定系統不起作用，您可以在運行 `dusk` 命令之前手動啟動 ChromeDriver。如果您選擇手動啟動 ChromeDriver，您應該註釋掉 `tests/DuskTestCase.php` 文件中的以下行：
 
@@ -343,17 +343,17 @@ protected function driver(): RemoteWebDriver
 ```
 
 <a name="environment-handling"></a>
-### 環境處理
+### 環境處理 (Environment Handling)
 
 要強制 Dusk 在運行測試時使用其自己的環境文件，請在項目根目錄中創建 `.env.dusk.{environment}` 文件。例如，如果您將從 `local` 環境啟動 `dusk` 命令，您應該創建 `.env.dusk.local` 文件。
 
 運行測試時，Dusk 將備份您的 `.env` 文件並將您的 Dusk 環境重命名為 `.env`。測試完成後，您的 `.env` 文件將被恢復。
 
 <a name="browser-basics"></a>
-## 瀏覽器基礎
+## 瀏覽器基礎 (Browser Basics)
 
 <a name="creating-browsers"></a>
-### 創建瀏覽器
+### 創建瀏覽器 (Creating Browsers)
 
 開始使用，讓我們編寫一個測試來驗證我們可以登錄到應用程序。生成測試後，我們可以修改它以導航到登錄頁面、輸入一些憑據並點擊 "登錄" 按鈕。要創建瀏覽器實例，您可以在 Dusk 測試中調用 `browse` 方法：
 
@@ -418,7 +418,7 @@ class ExampleTest extends DuskTestCase
 正如您在上面的示例中所看到的，`browse` 方法接受一個閉包。瀏覽器實例將由 Dusk 自動傳遞到此閉包，是用於與應用程序交互和進行斷言的主要對象。
 
 <a name="creating-multiple-browsers"></a>
-#### 創建多個瀏覽器
+#### 創建多個瀏覽器 (Creating Multiple Browsers)
 
 有時您可能需要多個瀏覽器才能正確執行測試。例如，測試與 websocket 交互的聊天屏幕可能需要多個瀏覽器。要創建多個瀏覽器，只需將更多瀏覽器參數添加到提供給 `browse` 方法的閉包的簽名中：
 
@@ -440,7 +440,7 @@ $this->browse(function (Browser $first, Browser $second) {
 ```
 
 <a name="navigation"></a>
-### 導航
+### 導航 (Navigation)
 
 `visit` 方法可用於導航到應用程序中的給定 URI：
 
@@ -469,7 +469,7 @@ $browser->refresh();
 ```
 
 <a name="resizing-browser-windows"></a>
-### 調整瀏覽器窗口大小
+### 調整瀏覽器窗口大小 (Resizing Browser Windows)
 
 您可以使用 `resize` 方法調整瀏覽器窗口的大小：
 
@@ -502,7 +502,7 @@ $browser->move($x = 100, $y = 100);
 ```
 
 <a name="browser-macros"></a>
-### 瀏覽器宏
+### 瀏覽器宏 (Browser Macros)
 
 如果您想定義可在各種測試中重複使用的自定義瀏覽器方法，您可以在 `Browser` 類上使用 `macro` 方法。通常，您應該從 [服務提供者的](/docs/providers) `boot` 方法中調用此方法：
 
@@ -541,7 +541,7 @@ $this->browse(function (Browser $browser) use ($user) {
 ```
 
 <a name="authentication"></a>
-### 身份驗證
+### 身份驗證 (Authentication)
 
 通常，您將測試需要身份驗證的頁面。您可以使用 Dusk 的 `loginAs` 方法以避免在每次測試期間與應用程序的登錄屏幕交互。`loginAs` 方法接受與可認證模型相關聯的主鍵或可認證模型實例：
 
@@ -584,7 +584,7 @@ $browser->deleteCookie('name');
 ```
 
 <a name="executing-javascript"></a>
-### 執行 JavaScript
+### 執行 JavaScript (Executing Javascript)
 
 您可以使用 `script` 方法在瀏覽器中執行任意 JavaScript 語句：
 
@@ -600,7 +600,7 @@ $output = $browser->script('return window.location.pathname');
 ```
 
 <a name="taking-a-screenshot"></a>
-### 拍攝屏幕截圖
+### 拍攝屏幕截圖 (Taking A Screenshot)
 
 您可以使用 `screenshot` 方法拍攝屏幕截圖並使用給定的文件名存儲它。所有屏幕截圖將存儲在 `tests/Browser/screenshots` 目錄中：
 
@@ -621,7 +621,7 @@ $browser->screenshotElement('#selector', 'filename');
 ```
 
 <a name="storing-console-output-to-disk"></a>
-### 將控制台輸出存儲到磁盤
+### 將控制台輸出存儲到磁盤 (Storing Console Output To Disk)
 
 您可以使用 `storeConsoleLog` 方法將當前瀏覽器的控制台輸出寫入磁盤，並使用給定的文件名。控制台輸出將存儲在 `tests/Browser/console` 目錄中：
 
@@ -630,7 +630,7 @@ $browser->storeConsoleLog('filename');
 ```
 
 <a name="storing-page-source-to-disk"></a>
-### 將頁面源存儲到磁盤
+### 將頁面源存儲到磁盤 (Storing Page Source To Disk)
 
 您可以使用 `storeSource` 方法將當前頁面的源寫入磁盤，並使用給定的文件名。頁面源將存儲在 `tests/Browser/source` 目錄中：
 
@@ -639,10 +639,10 @@ $browser->storeSource('filename');
 ```
 
 <a name="interacting-with-elements"></a>
-## 與元素互動
+## 與元素互動 (Interacting With Elements)
 
 <a name="dusk-selectors"></a>
-### Dusk 選擇器
+### Dusk 選擇器 (Dusk Selectors)
 
 為與元素交互選擇好的 CSS 選擇器是編寫 Dusk 測試最難的部分之一。隨著時間的推移，前端更改可能會導致 CSS 選擇器如下所示破壞您的測試：
 
@@ -681,10 +681,10 @@ Dusk::selectorHtmlAttribute('data-dusk');
 ```
 
 <a name="text-values-and-attributes"></a>
-### 文本、值與屬性
+### 文本、值與屬性 (Text Values And Attributes)
 
 <a name="retrieving-setting-values"></a>
-#### 獲取與設置值
+#### 獲取與設置值 (Retrieving Setting Values)
 
 Dusk 提供了數種方法，用於與頁面上元素的當前值、顯示文字與屬性進行互動。例如，要取得與給定 CSS 或 Dusk 選擇器相匹配的元素的 "值"，可使用 `value` 方法：
 
@@ -703,7 +703,7 @@ $value = $browser->inputValue('field');
 ```
 
 <a name="retrieving-text"></a>
-#### 獲取文本
+#### 獲取文本 (Retrieving Text)
 
 `text` 方法可用於檢索與指定選擇器匹配的元素的顯示文本：
 
@@ -712,7 +712,7 @@ $text = $browser->text('selector');
 ```
 
 <a name="retrieving-attributes"></a>
-#### 獲取屬性
+#### 獲取屬性 (Retrieving Attributes)
 
 最後，`attribute` 方法可用於檢索匹配指定選擇器的元素的屬性值：
 
@@ -721,10 +721,10 @@ $attribute = $browser->attribute('selector', 'value');
 ```
 
 <a name="interacting-with-forms"></a>
-### 與表單互動
+### 與表單互動 (Interacting With Forms)
 
 <a name="typing-values"></a>
-#### 輸入值
+#### 輸入值 (Typing Values)
 
 Dusk 提供了多種與表單和輸入元素互動的方法。首先，我們先看一個向輸入欄位輸入文字的範例：
 
@@ -763,7 +763,7 @@ $browser->type('tags', 'foo')
 ```
 
 <a name="dropdowns"></a>
-#### 下拉選單
+#### 下拉選單 (Dropdowns)
 
 要從 `select` 元素中選擇一個可用的值，您可以使用 `select` 方法。與 `type` 方法一樣，`select` 方法並不需要完整的 CSS 選擇器。當向 `select` 方法傳遞值時，應該傳入內部 option 的 value，而非顯示文字：
 
@@ -784,7 +784,7 @@ $browser->select('categories', ['Art', 'Music']);
 ```
 
 <a name="checkboxes"></a>
-#### 複選框
+#### 複選框 (Checkboxes)
 
 要勾選一個 checkbox 輸入欄位，您可以使用 `check` 方法。與其他輸入相關方法類似，不需要完整的 CSS 選擇器。如果找不到 CSS 選擇器匹配，Dusk 會尋找具有匹配 `name` 屬性的 checkbox：
 
@@ -799,7 +799,7 @@ $browser->uncheck('terms');
 ```
 
 <a name="radio-buttons"></a>
-#### 單選框
+#### 單選框 (Radio Buttons)
 
 要選擇一個 `radio` 輸入選項，您可以使用 `radio` 方法。與其他輸入相關方法類似，並不需要完整的 CSS 選擇器。如果找不到 CSS 匹配，Dusk 會尋找具有匹配 `name` 和 `value` 屬性的 `radio` 元素：
 
@@ -808,7 +808,7 @@ $browser->radio('size', 'large');
 ```
 
 <a name="attaching-files"></a>
-### 附加檔案
+### 附加檔案 (Attaching Files)
 
 `attach` 方法可用於向 `file` 輸入元素附加檔案。與其他輸入相關的方法一樣，不需要完整的 CSS 選擇器。如果找不到 CSS 選擇的匹配，Dusk 會尋找具有相應 `name` 屬性的 `file` 輸入元素：
 
@@ -820,7 +820,7 @@ $browser->attach('photo', __DIR__.'/photos/mountains.png');
 > 附加檔案功能需要在您的伺服器上安裝並啟用 `Zip` PHP 擴充功能。
 
 <a name="pressing-buttons"></a>
-### 按鈕操作
+### 按鈕操作 (Pressing Buttons)
 
 `press` 方法可用於點擊頁面上的按鈕元素。傳遞給 `press` 方法的參數可以是按鈕的顯示文字或 CSS / Dusk 選擇器：
 
@@ -839,7 +839,7 @@ $browser->pressAndWaitFor('Save', 1);
 ```
 
 <a name="clicking-links"></a>
-### 點擊連結
+### 點擊連結 (Clicking Links)
 
 要點擊鏈結，您可以在瀏覽器實例上使用 `clickLink` 方法。`clickLink` 方法會點擊具有指定顯示文字的鏈結：
 
@@ -859,7 +859,7 @@ if ($browser->seeLink($linkText)) {
 > These methods interact with jQuery. If jQuery is not available on the page, Dusk will automatically inject it into the page so it is available for the test's duration.
 
 <a name="using-the-keyboard"></a>
-### 使用鍵盤
+### 使用鍵盤 (Using The Keyboard)
 
 `keys` 方法允許您對指定元素提供比 `type` 方法更複雜的輸入序列。例如，您可以指示 Dusk 在輸入值時按住修飾鍵。在此示例中，輸入 `taylor` 時會按住 `shift` 鍵，之後輸入 `swift` 時則不會按任何修飾鍵：
 
@@ -877,7 +877,7 @@ $browser->keys('.app', ['{command}', 'j']);
 > 所有修飾鍵（例如 `{command}`）皆以 `{}` 包裹，並對應 `Facebook\\WebDriver\\WebDriverKeys` 類中定義的常數，可在 [GitHub](https://github.com/php-webdriver/php-webdriver/blob/master/lib/WebDriverKeys.php) 上找到。
 
 <a name="fluent-keyboard-interactions"></a>
-#### 鍵盤進階交互
+#### 鍵盤進階交互 (Fluent Keyboard Interactions)
 
 Dusk 也提供 `withKeyboard` 方法，允許您透過 `Laravel\Dusk\Keyboard` 類順暢地執行複雜的鍵盤互動操作。`Keyboard` 類提供 `press`、`release`、`type` 與 `pause` 方法：
 
@@ -893,7 +893,7 @@ $browser->withKeyboard(function (Keyboard $keyboard) {
 ```
 
 <a name="keyboard-macros"></a>
-#### 鍵盤巨集
+#### 鍵盤巨集 (Keyboard Macros)
 
 如果您想定義可在測試套件中重複使用的自定義鍵盤互動，可以使用 `Keyboard` 類提供的 `macro` 方法。通常建議在服務提供者（service provider）的 `boot` 方法中調用此方法：
 
@@ -943,10 +943,10 @@ $browser->click('@textarea')
 ```
 
 <a name="using-the-mouse"></a>
-### 使用滑鼠
+### 使用滑鼠 (Using The Mouse)
 
 <a name="clicking-on-elements"></a>
-#### 點擊元素
+#### 點擊元素 (Clicking On Elements)
 
 `click` 方法可用於點擊匹配給定 CSS 或 Dusk 選擇器的元素：
 
@@ -1001,7 +1001,7 @@ $browser->controlClick('.selector');
 ```
 
 <a name="mouseover"></a>
-#### 滑鼠懸停
+#### 滑鼠懸停 (Mouseover)
 
 當您需要將滑鼠移到匹配給定 CSS 或 Dusk 選擇器的元素上方時，可以使用 `mouseover` 方法：
 
@@ -1010,7 +1010,7 @@ $browser->mouseover('.selector');
 ```
 
 <a name="drag-drop"></a>
-#### 拖放操作
+#### 拖放操作 (Drag Drop)
 
 `drag` 方法可用於將匹配給定選擇器的元素拖動到另一個元素上：
 
@@ -1034,7 +1034,7 @@ $browser->dragOffset('.selector', $x = 10, $y = 10);
 ```
 
 <a name="javascript-dialogs"></a>
-### JavaScript 對話框
+### JavaScript 對話框 (Javascript Dialogs)
 
 Dusk 提供了多種方法與 JavaScript 對話框（Dialog）交互。例如，您可以使用 `waitForDialog` 方法等待 JavaScript 對話框出現。該方法接受一個可選數值參數，用於指定等待對話框出現的秒數：
 
@@ -1067,7 +1067,7 @@ $browser->dismissDialog();
 ```
 
 <a name="interacting-with-iframes"></a>
-### 與內嵌框架（iframe）互動
+### 與內嵌框架（iframe）互動 (Interacting With Iframes)
 
 如果您需要與 iframe 內的元素交互，可以使用 `withinFrame` 方法。傳入 `withinFrame` 閉包中的所有元素交互都將被作用於該指定 iframe 的上下文中：
 
@@ -1081,7 +1081,7 @@ $browser->withinFrame('#credit-card-details', function ($browser) {
 ```
 
 <a name="scoping-selectors"></a>
-### 選擇器作用域
+### 選擇器作用域 (Scoping Selectors)
 
 有時您可能想在指定選擇器的作用域內執行多個操作。例如，您可能希望斷言某些文字僅存在於表格中，然後在該表格內點擊按鈕。您可以使用 `with` 方法來實現此目的。傳入 `with` 閉包的所有操作都會被限定在原始選擇器的範圍內：
 
@@ -1111,12 +1111,12 @@ $browser->with('.table', function (Browser $table) {
 ```
 
 <a name="waiting-for-elements"></a>
-### 等待元素
+### 等待元素 (Waiting For Elements)
 
 當測試大量使用 JavaScript 的應用時，通常需要在繼續測試之前「等待」某些元素或資料可用。Dusk 讓這件事變得非常簡單。透過多種方法，您可以等待元素在頁面上變為可見，甚至等待某個 JavaScript 表達式評估為 `true`。
 
 <a name="waiting"></a>
-#### 等待
+#### 等待 (Waiting)
 
 如果您只需要讓測試暫停指定的毫秒數，請使用 `pause` 方法：
 
@@ -1137,7 +1137,7 @@ $browser->pauseUnless(App::environment('testing'), 1000);
 ```
 
 <a name="waiting-for-selectors"></a>
-#### 等待選擇器
+#### 等待選擇器 (Waiting For Selectors)
 
 `waitFor` 方法可用於暫停測試執行，直到匹配給定 CSS 或 Dusk 選擇器的元素出現在頁面上。預設情況下，這會在拋出例外之前最多等待五秒。如有必要，您可以將自訂超時閾值作為第二個參數傳入該方法：
 
@@ -1186,7 +1186,7 @@ $browser->waitUntilDisabled('.selector', 1);
 ```
 
 <a name="scoping-selectors-when-available"></a>
-#### 在可用時限定作用域
+#### 在可用時限定作用域 (Scoping Selectors When Available)
 
 有時您可能想等待一個匹配指定選擇器的元素出現，然後再與該元素交互。例如，您可能希望等待模態視窗可用，然後在該模態中按下「OK」按鈕。可以使用 `whenAvailable` 方法來完成此操作。傳入 `whenAvailable` 的閉包中執行的所有元素操作都會被限定在該選擇器的範圍內：
 
@@ -1198,7 +1198,7 @@ $browser->whenAvailable('.modal', function (Browser $modal) {
 ```
 
 <a name="waiting-for-text"></a>
-#### 等待文字
+#### 等待文字 (Waiting For Text)
 
 `waitForText` 方法可用於等待頁面上顯示指定文字：
 
@@ -1221,7 +1221,7 @@ $browser->waitUntilMissingText('Hello World', 1);
 ```
 
 <a name="waiting-for-links"></a>
-#### 等待連結
+#### 等待連結 (Waiting For Links)
 
 `waitForLink` 方法可用於等待頁面上顯示指定的鏈結文字：
 
@@ -1234,7 +1234,7 @@ $browser->waitForLink('Create', 1);
 ```
 
 <a name="waiting-for-inputs"></a>
-#### 等待輸入欄位
+#### 等待輸入欄位 (Waiting For Inputs)
 
 `waitForInput` 方法可用於等待指定的輸入欄位在頁面上可見：
 
@@ -1247,7 +1247,7 @@ $browser->waitForInput($field, 1);
 ```
 
 <a name="waiting-on-the-page-location"></a>
-#### 等待頁面位置
+#### 等待頁面位置 (Waiting On The Page Location)
 
 當執行像 `$browser->assertPathIs('/home')` 這樣的路徑斷言時，如果 `window.location.pathname` 被異步更新，該斷言可能會失敗。您可以使用 `waitForLocation` 方法等待頁面位置變為指定的值：
 
@@ -1268,7 +1268,7 @@ $browser->waitForRoute($routeName, $parameters);
 ```
 
 <a name="waiting-for-page-reloads"></a>
-#### 等待頁面重新載入
+#### 等待頁面重新載入 (Waiting For Page Reloads)
 
 如果您需要在執行某個操作後等待頁面重新載入，請使用 `waitForReload` 方法：
 
@@ -1289,7 +1289,7 @@ $browser->clickAndWaitForReload('.selector')
 ```
 
 <a name="waiting-on-javascript-expressions"></a>
-#### 等待 JavaScript 表達式
+#### 等待 JavaScript 表達式 (Waiting On Javascript Expressions)
 
 有時您可能希望暫停測試執行，直到某個 JavaScript 表達式評估為 `true`。您可以使用 `waitUntil` 方法輕鬆實現。傳遞表達式給該方法時，無需包含 `return` 關鍵字或結尾分號：
 
@@ -1302,7 +1302,7 @@ $browser->waitUntil('App.data.servers.length > 0', 1);
 ```
 
 <a name="waiting-on-vue-expressions"></a>
-#### 等待 Vue 表達式
+#### 等待 Vue 表達式 (Waiting On Vue Expressions)
 
 `waitUntilVue` 與 `waitUntilVueIsNot` 方法可用於等待 [Vue 元件](https://vuejs.org) 的某個屬性達到指定值：
 
@@ -1315,7 +1315,7 @@ $browser->waitUntilVueIsNot('user.name', null, '@user');
 ```
 
 <a name="waiting-for-javascript-events"></a>
-#### 等待 JavaScript 事件
+#### 等待 JavaScript 事件 (Waiting For Javascript Events)
 
 The `waitForEvent` method can be used to pause the execution of a test until a JavaScript event occurs:
 
@@ -1349,7 +1349,7 @@ $browser->waitForEvent('resize', 'window', 5);
 ```
 
 <a name="waiting-with-a-callback"></a>
-#### 使用回呼等待
+#### 使用回呼等待 (Waiting With A Callback)
 
 Dusk 中許多「等待」方法都依賴於底層的 `waitUsing` 方法。您可以直接使用該方法等待某個閉包返回 `true`。`waitUsing` 方法接受最大等待秒數、應評估閉包的間隔時間、閉包本身，以及可選的失敗訊息：
 
@@ -1360,7 +1360,7 @@ $browser->waitUsing(10, 1, function () use ($something) {
 ```
 
 <a name="scrolling-an-element-into-view"></a>
-### 將元素捲到可視區
+### 將元素捲到可視區 (Scrolling An Element Into View)
 
 有時您無法點擊元素，因為它位於瀏覽器可視區域之外。`scrollIntoView` 方法會捲動瀏覽器視窗，直到指定選擇器的元素進入可視範圍：
 
@@ -1370,7 +1370,7 @@ $browser->scrollIntoView('.selector')
 ```
 
 <a name="available-assertions"></a>
-## 可用的斷言
+## 可用的斷言 (Available Assertions)
 
 Dusk 提供了多種可以對應用程式進行的斷言。所有可用的斷言已在下方列表中記載：
 
@@ -2233,12 +2233,12 @@ $browser->assertVueDoesntContain($property, $value, $componentSelector = null);
 ```
 
 <a name="pages"></a>
-## 頁面
+## 頁面 (Pages)
 
 有時候，測試需要按順序執行多個複雜操作，這可能讓您的測試變得較難閱讀和理解。Dusk Pages 允許您定義可表述的操作，之後可透過單一方法在特定頁面上執行。Pages 也允許您為應用或單一頁面定義常用選擇器的捷徑。
 
 <a name="generating-pages"></a>
-### 生成頁面
+### 生成頁面 (Generating Pages)
 
 要生成頁面物件，請執行 `dusk:page` Artisan 命令。所有頁面物件會放置在應用程式的 `tests/Browser/Pages` 目錄中：
 
@@ -2247,12 +2247,12 @@ php artisan dusk:page Login
 ```
 
 <a name="configuring-pages"></a>
-### 配置頁面
+### 配置頁面 (Configuring Pages)
 
 預設情況下，頁面包含三個方法：`url`、`assert` 和 `elements`。現在我們會說明 `url` 與 `assert` 方法。`elements` 方法將在後文的 [簡寫選擇器](#shorthand-selectors) 部分詳細討論。
 
 <a name="the-url-method"></a>
-#### `url` 方法
+#### `url` 方法 (The Url Method)
 
 `url` 方法應回傳代表該頁面的 URL 路徑。Dusk 在瀏覽器中導航到頁面時會使用該 URL：
 
@@ -2267,7 +2267,7 @@ public function url(): string
 ```
 
 <a name="the-assert-method"></a>
-#### `assert` 方法
+#### `assert` 方法 (The Assert Method)
 
 `assert` 方法可以執行任何必要的斷言以驗證瀏覽器是否位於指定頁面。實際上，此方法內不必放入任何內容；不過若您願意，仍可在此執行斷言。當導航到該頁面時，這些斷言會自動執行：
 
@@ -2282,7 +2282,7 @@ public function assert(Browser $browser): void
 ```
 
 <a name="navigating-to-pages"></a>
-### 導航到頁面
+### 導航到頁面 (Navigating To Pages)
 
 定義頁面後，您可以使用 `visit` 方法導航到該頁面：
 
@@ -2304,7 +2304,7 @@ $browser->visit('/dashboard')
 ```
 
 <a name="shorthand-selectors"></a>
-### 簡寫選擇器
+### 簡寫選擇器 (Shorthand Selectors)
 
 頁面類中的 `elements` 方法允許您為頁面上的任意 CSS 選擇器定義簡潔且易記的快捷鍵。例如，我們可以為應用程式登入頁面的 "email" 輸入欄位定義一個快捷鍵：
 
@@ -2329,7 +2329,7 @@ $browser->type('@email', 'taylor@laravel.com');
 ```
 
 <a name="global-shorthand-selectors"></a>
-#### 全局簡寫選擇器
+#### 全局簡寫選擇器 (Global Shorthand Selectors)
 
 安裝 Dusk 後，會在 `tests/Browser/Pages` 目錄中生成一個基礎的 `Page` 類。該類包含一個 `siteElements` 方法，可用於定義在整個應用程式中每個頁面都可用的全局簡寫選擇器：
 
@@ -2348,7 +2348,7 @@ public static function siteElements(): array
 ```
 
 <a name="page-methods"></a>
-### 頁面方法
+### 頁面方法 (Page Methods)
 
 除了頁面上定義的預設方法外，您還可以定義其他方法以在測試中重複使用。例如，假設我們正在構建一個音樂管理應用，某頁面常見的操作可能是建立播放清單。與其在每個測試中重寫建立播放清單的邏輯，您可以在頁面類上定義 `createPlaylist` 方法：
 
@@ -2387,12 +2387,12 @@ $browser->visit(new Dashboard)
 ```
 
 <a name="components"></a>
-## 元件
+## 元件 (Components)
 
 元件（Components）類似於 Dusk 的「頁面物件（page objects）」，但它們更適用於在應用程式中反覆使用的 UI 或功能片段，例如導覽列或通知視窗。因此，元件並不綁定於特定的 URL。
 
 <a name="generating-components"></a>
-### 生成元件
+### 生成元件 (Generating Components)
 
 要生成元件，請執行 `dusk:component` Artisan 命令。新的元件會放在 `tests/Browser/Components` 目錄中：
 
@@ -2463,7 +2463,7 @@ class DatePicker extends BaseComponent
 ```
 
 <a name="using-components"></a>
-### 使用元件
+### 使用元件 (Using Components)
 
 元件定義完成後，我們可以在任何測試中輕鬆地在日期選擇器中選擇日期。如果選擇日期所需的邏輯改變，我們只需更新該元件即可：
 
@@ -2526,7 +2526,7 @@ $datePicker->assertSee('January');
 ```
 
 <a name="continuous-integration"></a>
-## 持續整合
+## 持續整合 (Continuous Integration)
 
 > [!WARNING]
 > 大多數 Dusk 的持續整合（CI）配置預期您的 Laravel 應用會使用內建的 PHP 開發伺服器在 8000 端口提供服務。因此在繼續之前，請確認您的持續整合環境中 `APP_URL` 環境變數設為 `http://127.0.0.1:8000`。

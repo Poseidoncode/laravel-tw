@@ -28,7 +28,7 @@ description: Laravel 提供簡單的方式來授權使用者動作
 - [授權與 Inertia](#authorization-and-inertia)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 除了提供內建的 [認證](/docs/authentication) 服務外，Laravel 還提供了一種簡單的方式來授權使用者對給定資源的動作。例如，即使使用者已經認證，他們可能沒有被授權更新或刪除由您的應用程式管理的某些 Eloquent models 或資料庫記錄。Laravel 的授權功能提供了一種簡單、有組織的方式來管理這些類型的授權檢查。
 
@@ -138,7 +138,7 @@ if (Gate::none(['update-post', 'delete-post'], $post)) {
 ```
 
 <a name="authorizing-or-throwing-exceptions"></a>
-#### 授權或拋出例外
+#### 授權或拋出例外 (Authorizing Or Throwing Exceptions)
 
 如果您想嘗試授權動作並在使用者不被允許執行給定動作時自動拋出 `Illuminate\Auth\Access\AuthorizationException`，您可以使用 `Gate` facade 的 `authorize` 方法。`AuthorizationException` 的實例會由 Laravel 自動轉換為 403 HTTP 回應：
 
@@ -149,7 +149,7 @@ Gate::authorize('update-post', $post);
 ```
 
 <a name="gates-supplying-additional-context"></a>
-#### 提供額外的上下文
+#### 提供額外的上下文 (Gates Supplying Additional Context)
 
 用於授權能力的 gate 方法（`allows`、`denies`、`check`、`any`、`none`、`authorize`、`can`、`cannot`）和授權 [Blade 指令](#via-blade-templates)（`@can`、`@cannot`、`@canany`）可以接收陣列作為其第二個引數。這些陣列元素作為參數傳遞給 gate 閉包，並可用於在做出授權決定時提供額外的上下文：
 
@@ -211,7 +211,7 @@ Gate::authorize('edit-settings');
 ```
 
 <a name="customizing-gate-response-status"></a>
-#### 自訂 HTTP 回應狀態
+#### 自訂 HTTP 回應狀態 (Customizing Gate Response Status)
 
 當動作透過 Gate 被拒絕時，會回傳 `403` HTTP 回應；但是，有時回傳替代的 HTTP 狀態碼可能很有用。您可以使用 `Illuminate\Auth\Access\Response` 類別上的 `denyWithStatus` 靜態建構函式來自訂失敗授權檢查回傳的 HTTP 狀態碼：
 
@@ -313,7 +313,7 @@ php artisan make:policy PostPolicy --model=Post
 ### 註冊 Policies (Registering Policies)
 
 <a name="policy-discovery"></a>
-#### Policy 發現
+#### Policy 發現 (Policy Discovery)
 
 預設情況下，只要 model 和 policy 遵循標準的 Laravel 命名慣例，Laravel 就會自動發現 policies。具體來說，policies 必須位於包含您的 models 的目錄或其上層的 `Policies` 目錄中。因此，例如，models 可能放置在 `app/Models` 目錄中，而 policies 可能放置在 `app/Policies` 目錄中。在這種情況下，Laravel 將先在 `app/Models/Policies` 中檢查 policies，然後在 `app/Policies` 中檢查。此外，policy 名稱必須與 model 名稱相符並具有 `Policy` 後綴。因此，`User` model 將對應於 `UserPolicy` policy 類別。
 
@@ -328,7 +328,7 @@ Gate::guessPolicyNamesUsing(function (string $modelClass) {
 ```
 
 <a name="manually-registering-policies"></a>
-#### 手動註冊 Policies
+#### 手動註冊 Policies (Manually Registering Policies)
 
 使用 `Gate` facade，您可以在應用程式的 `AppServiceProvider` 的 `boot` 方法中手動註冊 policies 及其對應的 models：
 
@@ -445,7 +445,7 @@ Gate::authorize('update', $post);
 ```
 
 <a name="customizing-policy-response-status"></a>
-#### 自訂 HTTP 回應狀態
+#### 自訂 HTTP 回應狀態 (Customizing Policy Response Status)
 
 當動作透過 policy 方法被拒絕時，會回傳 `403` HTTP 回應；但是，有時回傳替代的 HTTP 狀態碼可能很有用。您可以使用 `Illuminate\Auth\Access\Response` 類別上的 `denyWithStatus` 靜態建構函式來自訂失敗授權檢查回傳的 HTTP 狀態碼：
 
@@ -587,7 +587,7 @@ class PostController extends Controller
 如果給定 model 已 [註冊 policy](#registering-policies)，`can` 方法將自動呼叫適當的 policy 並回傳布林結果。如果沒有為該 model 註冊 policy，`can` 方法將嘗試呼叫與給定動作名稱相符的基於閉包的 Gate。
 
 <a name="user-model-actions-that-dont-require-models"></a>
-#### 不需要 Models 的動作
+#### 不需要 Models 的動作 (User Model Actions That Dont Require Models)
 
 請記住，某些動作可能對應於像 `create` 這樣不需要 model 實例的 policy 方法。在這些情況下，您可以將類別名稱傳遞給 `can` 方法。類別名稱將用於確定在授權動作時使用哪個 policy：
 
@@ -654,7 +654,7 @@ class PostController extends Controller
 ```
 
 <a name="controller-actions-that-dont-require-models"></a>
-#### 不需要 Models 的動作
+#### 不需要 Models 的動作 (Controller Actions That Dont Require Models)
 
 如前所述，某些 policy 方法（如 `create`）不需要 model 實例。在這些情況下，您應該將類別名稱傳遞給 `authorize` 方法。類別名稱將用於確定在授權動作時使用哪個 policy：
 
@@ -705,7 +705,7 @@ Route::put('/post/{'{post}'}', function (Post $post) {
 ```
 
 <a name="middleware-actions-that-dont-require-models"></a>
-#### 不需要 Models 的動作
+#### 不需要 Models 的動作 (Middleware Actions That Dont Require Models)
 
 同樣，某些 policy 方法（如 `create`）不需要 model 實例。在這些情況下，您可以將類別名稱傳遞給 middleware。類別名稱將用於確定在授權動作時使用哪個 policy：
 
@@ -769,7 +769,7 @@ Route::post('/post', function () {
 ```
 
 <a name="blade-actions-that-dont-require-models"></a>
-#### 不需要 Models 的動作
+#### 不需要 Models 的動作 (Blade Actions That Dont Require Models)
 
 像大多數其他授權方法一樣，如果動作不需要 model 實例，您可以將類別名稱傳遞給 `@can` 和 `@cannot` 指令：
 

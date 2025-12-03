@@ -3,32 +3,32 @@ title: "Fortify "
 description: Fortify 是 Laravel 的前端無關驗證後端實作
 ---
 
-- [簡介 (Introduction)](#introduction)
-  - [什麼是 Fortify？ (What is Fortify?)](#what-is-fortify)
-  - [何時該使用 Fortify？ (When Should I Use Fortify?)](#when-should-i-use-fortify)
-- [安裝 (Installation)](#installation)
-  - [Fortify 功能 (Fortify Features)](#fortify-features)
-  - [停用視圖 (Disabling Views)](#disabling-views)
-- [認證 (Authentication)](#authentication)
-  - [自訂使用者認證 (Customizing User Authentication)](#customizing-user-authentication)
-  - [自訂認證 Pipeline (Customizing the Authentication Pipeline)](#customizing-the-authentication-pipeline)
-  - [自訂重新導向 (Customizing Redirects)](#customizing-authentication-redirects)
-- [雙重認證 (Two-Factor Authentication)](#two-factor-authentication)
-  - [啟用雙重認證 (Enabling Two-Factor Authentication)](#enabling-two-factor-authentication)
-  - [使用雙重認證進行認證 (Authenticating With Two-Factor Authentication)](#authenticating-with-two-factor-authentication)
-  - [停用雙重認證 (Disabling Two-Factor Authentication)](#disabling-two-factor-authentication)
-- [註冊 (Registration)](#registration)
-  - [自訂註冊 (Customizing Registration)](#customizing-registration)
-- [重設密碼 (Password Reset)](#password-reset)
-  - [請求重設密碼連結 (Requesting a Password Reset Link)](#requesting-a-password-reset-link)
-  - [重設密碼 (Resetting the Password)](#resetting-the-password)
-  - [自訂重設密碼 (Customizing Password Resets)](#customizing-password-resets)
-- [電子郵件驗證 (Email Verification)](#email-verification)
-  - [保護路由 (Protecting Routes)](#protecting-routes)
-- [密碼確認 (Password Confirmation)](#password-confirmation)
+- [簡介](#introduction)
+  - [什麼是 Fortify？](#what-is-fortify)
+  - [何時該使用 Fortify？](#when-should-i-use-fortify)
+- [安裝](#installation)
+  - [Fortify 功能](#fortify-features)
+  - [停用視圖](#disabling-views)
+- [認證](#authentication)
+  - [自訂使用者認證](#customizing-user-authentication)
+  - [自訂認證 Pipeline](#customizing-the-authentication-pipeline)
+  - [自訂重新導向](#customizing-authentication-redirects)
+- [雙重認證](#two-factor-authentication)
+  - [啟用雙重認證](#enabling-two-factor-authentication)
+  - [使用雙重認證進行認證](#authenticating-with-two-factor-authentication)
+  - [停用雙重認證](#disabling-two-factor-authentication)
+- [註冊](#registration)
+  - [自訂註冊](#customizing-registration)
+- [重設密碼](#password-reset)
+  - [請求重設密碼連結](#requesting-a-password-reset-link)
+  - [重設密碼](#resetting-the-password)
+  - [自訂重設密碼](#customizing-password-resets)
+- [電子郵件驗證](#email-verification)
+  - [保護路由](#protecting-routes)
+- [密碼確認](#password-confirmation)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Fortify](https://github.com/laravel/fortify) 是 Laravel 的一個與前端無關的後端認證實作。Fortify 註冊了實作 Laravel 所有認證功能所需的路由和控制器，包括登入、註冊、重設密碼、電子郵件驗證等。安裝 Fortify 後，你可以執行 `route:list` Artisan 指令來查看 Fortify 註冊的路由。
 
@@ -60,7 +60,7 @@ Laravel Fortify 本質上是將我們應用程式入門套件的路由和控制�
 如果你選擇手動與 Laravel 的認證服務互動而不是使用 Fortify，你可以按照 [認證](/docs/authentication)、[重設密碼](/docs/passwords) 和 [電子郵件驗證](/docs/verification) 文件中的說明進行操作。
 
 <a name="laravel-fortify-and-laravel-sanctum"></a>
-#### Laravel Fortify 與 Laravel Sanctum
+#### Laravel Fortify 與 Laravel Sanctum (Laravel Fortify And Laravel Sanctum)
 
 有些開發者會對 [Laravel Sanctum](/docs/sanctum) 和 Laravel Fortify 之間的區別感到困惑。因為這兩個套件解決了兩個不同但相關的問題，Laravel Fortify 和 Laravel Sanctum 並不是互斥或競爭的套件。
 
@@ -69,7 +69,7 @@ Laravel Sanctum 僅關注管理 API Token 以及使用 Session Cookie 或 Token 
 如果你試圖為提供 API 或作為單頁應用程式後端的應用程式手動建構認證層，完全有可能同時使用 Laravel Fortify（用於使用者註冊、重設密碼等）和 Laravel Sanctum（API Token 管理、Session 認證）。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 要開始使用，請使用 Composer 套件管理器安裝 Fortify：
 
@@ -114,7 +114,7 @@ php artisan migrate
 ```
 
 <a name="disabling-views-and-password-reset"></a>
-#### 停用視圖和重設密碼
+#### 停用視圖和重設密碼 (Disabling Views And Password Reset)
 
 如果你選擇停用 Fortify 的視圖，並且將為你的應用程式實作重設密碼功能，你仍然應該定義一個名為 `password.reset` 的路由，該路由負責顯示應用程式的「重設密碼」視圖。這是必要的，因為 Laravel 的 `Illuminate\Auth\Notifications\ResetPassword` 通知將透過 `password.reset` 命名路由產生重設密碼 URL。
 
@@ -422,7 +422,7 @@ Fortify 將負責定義回傳此視圖的 `/forgot-password` 端點。你的 `fo
 `/forgot-password` 端點需要一個字串 `email` 欄位。此欄位 / 資料庫欄位的名稱應與應用程式 `fortify` 設定檔中的 `email` 設定值相符。
 
 <a name="handling-the-password-reset-link-request-response"></a>
-#### 處理重設密碼連結請求回應
+#### 處理重設密碼連結請求回應 (Handling The Password Reset Link Request Response)
 
 如果重設密碼連結請求成功，Fortify 會將使用者重新導向回 `/forgot-password` 端點，並向使用者發送一封電子郵件，其中包含他們可以用來重設密碼的安全連結。如果請求是 XHR 請求，則會回傳 200 HTTP 回應。
 
@@ -469,7 +469,7 @@ Fortify 將負責定義顯示此視圖的路由。你的 `reset-password` 模板
 `/reset-password` 端點需要一個字串 `email` 欄位、一個 `password` 欄位、一個 `password_confirmation` 欄位，以及一個名為 `token` 的隱藏欄位，其中包含 `request()->route('token')` 的值。「email」欄位 / 資料庫欄位的名稱應與應用程式 `fortify` 設定檔中定義的 `email` 設定值相符。
 
 <a name="handling-the-password-reset-response"></a>
-#### 處理重設密碼回應
+#### 處理重設密碼回應 (Handling The Password Reset Response)
 
 如果重設密碼請求成功，Fortify 會將重新導向回 `/login` 路由，以便使用者可以使用新密碼登入。此外，將設定一個 `status` Session 變數，以便你可以在登入畫面上顯示重設成功的狀態：
 
@@ -520,7 +520,7 @@ public function boot(): void
 你的 `verify-email` 模板應包含一條訊息，指示使用者點擊發送到其電子郵件地址的電子郵件驗證連結。
 
 <a name="resending-email-verification-links"></a>
-#### 重新發送電子郵件驗證連結
+#### 重新發送電子郵件驗證連結 (Resending Email Verification Links)
 
 如果願意，你可以在應用程式的 `verify-email` 模板中新增一個按鈕，該按鈕會觸發對 `/email/verification-notification` 端點的 POST 請求。當此端點收到請求時，新的驗證電子郵件連結將透過電子郵件發送給使用者，如果前一個連結被意外刪除或遺失，使用者可以獲取新的驗證連結。
 

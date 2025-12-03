@@ -8,12 +8,12 @@ title: Console 測試 (console-tests)
 - [Console 事件](#console-events)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 除了簡化 HTTP 測試外，Laravel 還提供了一個簡單的 API 來測試你應用程式的[自訂 console 命令](/docs/{{version}}/artisan)。
 
 <a name="success-failure-expectations"></a>
-## 成功 / 失敗預期
+## 成功 / 失敗預期 (Success Failure Expectations)
 
 首先，讓我們探索如何對 Artisan 命令的結束碼進行斷言。為了達成這個目的，我們會使用 `artisan` 方法在測試中調用 Artisan 命令。然後，我們會使用 `assertExitCode` 方法來斷言該命令以指定的結束碼完成：
 
@@ -48,7 +48,7 @@ $this->artisan('inspire')->assertFailed();
 ```
 
 <a name="input-output-expectations"></a>
-## 輸入 / 輸出預期
+## 輸入 / 輸出預期 (Input Output Expectations)
 
 Laravel 允許你使用 `expectsQuestion` 方法輕鬆地「模擬」console 命令的使用者輸入。此外，你可以使用 `assertExitCode` 和 `expectsOutput` 方法來指定你預期由 console 命令輸出的結束碼和文字。例如，考慮以下 console 命令：
 
@@ -169,7 +169,7 @@ public function test_console_command(): void
 ```
 
 <a name="confirmation-expectations"></a>
-#### 確認預期
+#### 確認預期 (Confirmation Expectations)
 
 當撰寫一個預期以「是」或「否」形式進行確認的命令時，你可以使用 `expectsConfirmation` 方法：
 
@@ -180,7 +180,7 @@ $this->artisan('module:import')
 ```
 
 <a name="table-expectations"></a>
-#### 表格預期
+#### 表格預期 (Table Expectations)
 
 如果你的命令使用 Artisan 的 `table` 方法顯示資訊表格，為整個表格撰寫輸出預期可能會很繁瑣。相反地，你可以使用 `expectsTable` 方法。這個方法接受表格的標題作為第一個引數，表格的資料作為第二個引數：
 
@@ -196,7 +196,7 @@ $this->artisan('users:all')
 ```
 
 <a name="console-events"></a>
-## Console 事件
+## Console 事件 (Console Events)
 
 預設情況下，在執行應用程式的測試時不會派發 `Illuminate\Console\Events\CommandStarting` 和 `Illuminate\Console\Events\CommandFinished` 事件。然而，你可以透過在類別中加入 `Illuminate\Foundation\Testing\WithConsoleEvents` trait 來為指定的測試類別啟用這些事件：
 

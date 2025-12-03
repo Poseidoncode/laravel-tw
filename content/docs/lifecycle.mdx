@@ -13,17 +13,17 @@ description: 請求生命週期 (Request Lifecycle)
 - [聚焦 Service Providers](#focus-on-service-providers)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 在「現實世界」中使用任何工具時，如果您了解該工具的運作方式，您會感到更有信心。應用程式開發也不例外。當您了解開發工具的功能時，您會感到更自在並更有信心地使用它們。
 
 本文件的目標是讓您對 Laravel 框架的運作方式有一個良好的、高層次的概覽。透過更了解整體框架，一切都會感覺不再那麼「神奇」，您將更有信心地建立您的應用程式。如果您不能立即理解所有術語，請不要灰心！試著掌握正在發生的事情的基本概念，隨著您探索文件的其他部分，您的知識將會增長。
 
 <a name="lifecycle-overview"></a>
-## 生命週期概覽
+## 生命週期概覽 (Lifecycle Overview)
 
 <a name="first-steps"></a>
-### 第一步
+### 第一步 (First Steps)
 
 所有進入 Laravel 應用程式的請求的入口點都是 `public/index.php` 檔案。您的 Web 伺服器 (Apache / Nginx) 設定將所有請求導向此檔案。`index.php` 檔案不包含太多程式碼。相反，它是載入框架其餘部分的起點。
 
@@ -52,7 +52,7 @@ Laravel 將遍歷此 Providers 清單並實例化每個 Provider。實例化 Pro
 雖然框架內部使用了數十個 Service Providers，但您也可以選擇建立自己的 Service Providers。您可以在 `bootstrap/providers.php` 檔案中找到應用程式正在使用的使用者定義或第三方 Service Providers 的清單。
 
 <a name="routing"></a>
-### 路由
+### 路由 (Routing)
 
 一旦應用程式啟動並且所有 Service Providers 都已註冊，`Request` 將被移交給 Router 進行調度。Router 將把請求調度到路由或 Controller，以及執行任何特定於路由的 Middleware。
 
@@ -61,14 +61,14 @@ Middleware 提供了一種方便的機制來過濾或檢查進入應用程式的
 如果請求通過了所有符合的路由分配的 Middleware，則將執行路由或 Controller 方法，並且路由或 Controller 方法返回的回應將透過路由的 Middleware 鏈送回。
 
 <a name="finishing-up"></a>
-### 完成
+### 完成 (Finishing Up)
 
 一旦路由或 Controller 方法返回回應，回應將向外傳回透過路由的 Middleware，讓應用程式有機會修改或檢查傳出的回應。
 
 最後，一旦回應傳回透過 Middleware，HTTP Kernel 的 `handle` 方法將回應物件返回給應用程式實例的 `handleRequest`，此方法呼叫返回的回應上的 `send` 方法。`send` 方法將回應內容發送給使用者的網頁瀏覽器。我們現在已經完成了整個 Laravel 請求生命週期的旅程！
 
 <a name="focus-on-service-providers"></a>
-## 聚焦 Service Providers
+## 聚焦 Service Providers (Focus On Service Providers)
 
 Service Providers 確實是啟動 Laravel 應用程式的關鍵。建立應用程式實例，註冊 Service Providers，並將請求移交給已啟動的應用程式。真的就這麼簡單！
 

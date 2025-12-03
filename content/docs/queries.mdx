@@ -40,7 +40,7 @@ description: Laravel Query Builder 提供方便流暢的介面來建立和執行
 - [除錯](#debugging)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 的資料庫查詢建構器提供了一個方便、流暢的介面來建立和執行資料庫查詢。它可以用於執行應用程式中大多數的資料庫操作，並且與 Laravel 支援的所有資料庫系統完美配合。
 
@@ -53,7 +53,7 @@ Laravel 查詢建構器使用 PDO 參數綁定來保護您的應用程式免受 
 ## 執行資料庫查詢 (Running Database Queries)
 
 <a name="retrieving-all-rows-from-a-table"></a>
-#### 從資料表取得所有列
+#### 從資料表取得所有列 (Retrieving All Rows From A Table)
 
 您可以使用 `DB` facade 提供的 `table` 方法來開始查詢。`table` 方法為給定的資料表回傳一個流暢的查詢建構器實例，允許您在查詢上串接更多的約束條件，然後最後使用 `get` 方法取得查詢結果：
 
@@ -95,7 +95,7 @@ foreach ($users as $user) {
 > Laravel collections 提供了各種極其強大的方法來映射和減少資料。有關 Laravel collections 的更多資訊，請查看 [collection 文件](/docs/collections)。
 
 <a name="retrieving-a-single-row-column-from-a-table"></a>
-#### 從資料表取得單一列 / 欄位
+#### 從資料表取得單一列 / 欄位 (Retrieving A Single Row Column From A Table)
 
 如果您只需要從資料庫資料表取得單一列，您可以使用 `DB` facade 的 `first` 方法。此方法將回傳單一 `stdClass` 物件：
 
@@ -124,7 +124,7 @@ $user = DB::table('users')->find(3);
 ```
 
 <a name="retrieving-a-list-of-column-values"></a>
-#### 取得欄位值清單
+#### 取得欄位值清單 (Retrieving A List Of Column Values)
 
 如果您想取得包含單一欄位值的 `Illuminate\Support\Collection` 實例，您可以使用 `pluck` 方法。在此範例中，我們將取得使用者標題的 collection：
 
@@ -253,7 +253,7 @@ $price = DB::table('orders')
 ```
 
 <a name="determining-if-records-exist"></a>
-#### 判斷記錄是否存在
+#### 判斷記錄是否存在 (Determining If Records Exist)
 
 您可以使用 `exists` 和 `doesntExist` 方法來判斷是否存在符合查詢約束條件的記錄，而不是使用 `count` 方法：
 
@@ -271,7 +271,7 @@ if (DB::table('orders')->where('finalized', 1)->doesntExist()) {
 ## Select 陳述式 (Select Statements)
 
 <a name="specifying-a-select-clause"></a>
-#### 指定 Select 子句
+#### 指定 Select 子句 (Specifying A Select Clause)
 
 您可能並不總是想從資料庫資料表中選取所有欄位。使用 `select` 方法，您可以為查詢指定自訂的「select」子句：
 
@@ -1194,7 +1194,7 @@ $corporations = DB::table('corporations')
 ```
 
 <a name="latest-oldest"></a>
-#### `latest` 和 `oldest` 方法
+#### `latest` 和 `oldest` 方法 (Latest Oldest)
 
 `latest` 和 `oldest` 方法讓您可以輕鬆地依據日期對結果進行排序。預設情況下，結果將依據資料表的 `created_at` 欄位排序。或者，您可以傳遞要排序的欄位名稱：
 
@@ -1246,7 +1246,7 @@ $usersOrderedByEmail = $query->reorderDesc('email')->get();
 ### 分組 (Grouping)
 
 <a name="groupby-having"></a>
-#### `groupBy` 和 `having` 方法
+#### `groupBy` 和 `having` 方法 (Groupby Having)
 
 如您所預期的，`groupBy` 和 `having` 方法可用於對查詢結果進行分組。`having` 方法的簽章與 `where` 方法類似：
 

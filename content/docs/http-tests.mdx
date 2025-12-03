@@ -5,23 +5,23 @@ description: 使用 Laravel 測試 HTTP 請求和回應
 
 # HTTP Tests
 
-- [簡介 (Introduction)](#introduction)
-- [發送請求 (Making Requests)](#making-requests)
-  - [自訂請求標頭 (Customizing Request Headers)](#customizing-request-headers)
+- [簡介](#introduction)
+- [發送請求](#making-requests)
+  - [自訂請求標頭](#customizing-request-headers)
   - [Cookies](#cookies)
-  - [Session / 認證 (Session / Authentication)](#session-and-authentication)
-  - [除錯回應 (Debugging Responses)](#debugging-responses)
-  - [例外處理 (Exception Handling)](#exception-handling)
-- [測試 JSON API (Testing JSON APIs)](#testing-json-apis)
-  - [流暢 JSON 測試 (Fluent JSON Testing)](#fluent-json-testing)
-- [測試檔案上傳 (Testing File Uploads)](#testing-file-uploads)
-- [測試視圖 (Testing Views)](#testing-views)
-  - [渲染 Blade 和組件 (Rendering Blade and Components)](#rendering-blade-and-components)
-- [快取路由 (Caching Routes)](#caching-routes)
-- [可用斷言 (Available Assertions)](#available-assertions)
-  - [回應斷言 (Response Assertions)](#response-assertions)
-  - [認證斷言 (Authentication Assertions)](#authentication-assertions)
-  - [驗證斷言 (Validation Assertions)](#validation-assertions)
+  - [Session / 認證](#session-and-authentication)
+  - [除錯回應](#debugging-responses)
+  - [例外處理](#exception-handling)
+- [測試 JSON API](#testing-json-apis)
+  - [流暢 JSON 測試](#fluent-json-testing)
+- [測試檔案上傳](#testing-file-uploads)
+- [測試視圖](#testing-views)
+  - [渲染 Blade 和組件](#rendering-blade-and-components)
+- [快取路由](#caching-routes)
+- [可用斷言](#available-assertions)
+  - [回應斷言](#response-assertions)
+  - [認證斷言](#authentication-assertions)
+  - [驗證斷言](#validation-assertions)
 
 <a name="introduction"></a>
 ## 簡介 (Introduction)
@@ -512,7 +512,6 @@ $this->assertTrue($response['created']);
 > [!NOTE] > `assertJson` 方法將回應轉換為陣列，以驗證給定陣列是否存在於應用程式回傳的 JSON 回應中。因此，如果 JSON 回應中有其他屬性，只要給定片段存在，此測試仍將通過。
 
 <a name="verifying-exact-match"></a>
-<a name="verifying-exact-match"></a>
 #### 斷言完全 JSON 匹配 (Asserting Exact JSON Matches)
 
 如前所述，`assertJson` 方法可用於斷言 JSON 片段是否存在於 JSON 回應中。如果你想驗證給定陣列是否 **完全匹配** 應用程式回傳的 JSON，你應該使用 `assertExactJson` 方法：
@@ -556,7 +555,6 @@ class ExampleTest extends TestCase
 }
 ```
 
-<a name="verifying-json-paths"></a>
 <a name="verifying-json-paths"></a>
 #### 斷言 JSON 路徑 (Asserting on JSON Paths)
 
@@ -603,7 +601,6 @@ class ExampleTest extends TestCase
 $response->assertJsonPath('team.owner.name', fn (string $name) => strlen($name) >= 3);
 ```
 
-<a name="fluent-json-testing"></a>
 <a name="fluent-json-testing"></a>
 ### 流暢 JSON 測試 (Fluent JSON Testing)
 
@@ -658,7 +655,6 @@ public function test_fluent_json(): void
 但是，你應該注意，在斷言鏈中不包含 `etc` 方法並不能確保不會將其他屬性新增到嵌套在 JSON 物件中的陣列中。`etc` 方法僅確保在呼叫 `etc` 方法的嵌套級別上不存在其他屬性。
 
 <a name="asserting-json-attribute-presence-and-absence"></a>
-<a name="asserting-json-attribute-presence-and-absence"></a>
 #### 斷言屬性存在 / 缺失 (Asserting Attribute Presence / Absence)
 
 要斷言屬性存在或缺失，你可以使用 `has` 和 `missing` 方法：
@@ -689,7 +685,6 @@ $response->assertJson(fn (AssertableJson $json) =>
 ```
 
 <a name="asserting-against-json-collections"></a>
-<a name="asserting-against-json-collections"></a>
 #### 對 JSON 集合進行斷言 (Asserting Against JSON Collections)
 
 通常，你的路由將回傳包含多個項目的 JSON 回應，例如多個使用者：
@@ -716,7 +711,6 @@ $response
     );
 ```
 
-<a name="scoping-json-collection-assertions"></a>
 <a name="scoping-json-collection-assertions"></a>
 #### 範圍 JSON 集合斷言 (Scoping JSON Collection Assertions)
 
@@ -764,7 +758,6 @@ $response
     );
 ```
 
-<a name="asserting-json-types"></a>
 <a name="asserting-json-types"></a>
 #### 斷言 JSON 類型 (Asserting JSON Types)
 
@@ -851,7 +844,6 @@ Storage::fake('avatars');
 Storage::disk('avatars')->assertMissing('missing.jpg');
 ```
 
-<a name="fake-file-customization"></a>
 <a name="fake-file-customization"></a>
 #### 虛擬檔案自訂 (Fake File Customization)
 

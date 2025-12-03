@@ -3,14 +3,14 @@ title: 速率限制 (Rate Limiting)
 description: Laravel 提供了簡單易用的速率限制功能
 ---
 
-- [簡介 (Introduction)](#introduction)
-  - [快取設定 (Cache Configuration)](#cache-configuration)
-- [基本用法 (Basic Usage)](#basic-usage)
-  - [手動遞增嘗試次數 (Manually Incrementing Attempts)](#manually-incrementing-attempts)
-  - [清除嘗試次數 (Clearing Attempts)](#clearing-attempts)
+- [簡介](#introduction)
+  - [快取設定](#cache-configuration)
+- [基本用法](#basic-usage)
+  - [手動遞增嘗試次數](#manually-incrementing-attempts)
+  - [清除嘗試次數](#clearing-attempts)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 包含一個簡單易用的速率限制抽象層，它結合你的應用程式的 [快取](cache)，提供了一種簡單的方法來限制在指定時間視窗內的任何動作。
 
@@ -18,7 +18,7 @@ Laravel 包含一個簡單易用的速率限制抽象層，它結合你的應用
 > 如果你對限制傳入 HTTP 請求的速率感興趣，請參閱 [速率限制器 middleware 文件](/docs/routing#rate-limiting)。
 
 <a name="cache-configuration"></a>
-### 快取設定
+### 快取設定 (Cache Configuration)
 
 通常，速率限制器會使用你的應用程式的 `cache` 設定檔中 `default` 鍵定義的預設應用程式快取。但是，你可以透過在應用程式的 `cache` 設定檔中定義 `limiter` 鍵來指定速率限制器應使用哪個快取驅動程式：
 
@@ -29,7 +29,7 @@ Laravel 包含一個簡單易用的速率限制抽象層，它結合你的應用
 ```
 
 <a name="basic-usage"></a>
-## 基本用法
+## 基本用法 (Basic Usage)
 
 `Illuminate\Support\Facades\RateLimiter` facade 可用於與速率限制器互動。速率限制器提供的最簡單方法是 `attempt` 方法，它會在給定秒數內對給定的回呼進行速率限制。
 
@@ -65,7 +65,7 @@ $executed = RateLimiter::attempt(
 ```
 
 <a name="manually-incrementing-attempts"></a>
-### 手動遞增嘗試次數
+### 手動遞增嘗試次數 (Manually Incrementing Attempts)
 
 如果你想手動與速率限制器互動，還有多種其他方法可用。例如，你可以呼叫 `tooManyAttempts` 方法來確定給定的速率限制器鍵是否已超過其每分鐘允許的最大嘗試次數：
 
@@ -100,7 +100,7 @@ RateLimiter::increment('send-message:'.$user->id, amount: 5);
 ```
 
 <a name="determining-limiter-availability"></a>
-#### 判斷限制器可用性
+#### 判斷限制器可用性 (Determining Limiter Availability)
 
 當一個鍵沒有剩餘嘗試次數時，`availableIn` 方法會傳回直到有更多嘗試次數可用為止的剩餘秒數：
 
@@ -119,7 +119,7 @@ RateLimiter::increment('send-message:'.$user->id);
 ```
 
 <a name="clearing-attempts"></a>
-### 清除嘗試次數
+### 清除嘗試次數 (Clearing Attempts)
 
 你可以使用 `clear` 方法重置給定速率限制器鍵的嘗試次數。例如，當收件者閱讀給定訊息時，你可以重置嘗試次數：
 

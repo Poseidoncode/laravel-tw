@@ -25,15 +25,15 @@ description: Laravel 的 Request 類別提供了物件導向的方式來與當�
 - [設定受信任的主機](#configuring-trusted-hosts)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 的 `Illuminate\Http\Request` 類別提供了物件導向的方式來與應用程式目前正在處理的 HTTP 請求互動，以及檢索與請求一起提交的輸入、Cookie 和檔案。
 
 <a name="interacting-with-the-request"></a>
-## 與 Request 互動
+## 與 Request 互動 (Interacting With The Request)
 
 <a name="accessing-the-request"></a>
-### 存取 Request
+### 存取 Request (Accessing The Request)
 
 要透過依賴注入取得當前 HTTP 請求的實例，你應該在路由閉包或 Controller 方法上型別提示 `Illuminate\Http\Request` 類別。傳入的請求實例將由 Laravel [Service Container](/docs/container) 自動注入:
 
@@ -72,7 +72,7 @@ Route::get('/', function (Request $request) {
 ```
 
 <a name="dependency-injection-route-parameters"></a>
-#### 依賴注入與路由參數
+#### 依賴注入與路由參數 (Dependency Injection Route Parameters)
 
 如果你的 Controller 方法還期望從路由參數接收輸入，你應該在其他依賴項後列出路由參數。例如，如果你的路由定義如下:
 
@@ -107,12 +107,12 @@ class UserController extends Controller
 ```
 
 <a name="request-path-and-method"></a>
-### Request 路徑、主機與方法
+### Request 路徑、主機與方法 (Request Path And Method)
 
 `Illuminate\Http\Request` 實例提供了各種方法來檢查傳入的 HTTP 請求，並擴充了 `Symfony\Component\HttpFoundation\Request` 類別。我們將在下面討論幾個最重要的方法。
 
 <a name="retrieving-the-request-path"></a>
-#### 取得 Request 路徑
+#### 取得 Request 路徑 (Retrieving The Request Path)
 
 `path` 方法回傳請求的路徑資訊。因此，如果傳入的請求目標是 `http://example.com/foo/bar`，`path` 方法將回傳 `foo/bar`:
 
@@ -121,7 +121,7 @@ $uri = $request->path();
 ```
 
 <a name="inspecting-the-request-path"></a>
-#### 檢查 Request 路徑 / 路由
+#### 檢查 Request 路徑 / 路由 (Inspecting The Request Path)
 
 `is` 方法允許你驗證傳入的請求路徑是否符合給定的模式。在使用此方法時，你可以使用 `*` 字元作為萬用字元:
 
@@ -140,7 +140,7 @@ if ($request->routeIs('admin.*')) {
 ```
 
 <a name="retrieving-the-request-url"></a>
-#### 取得 Request URL
+#### 取得 Request URL (Retrieving The Request Url)
 
 要取得傳入請求的完整 URL，你可以使用 `url` 或 `fullUrl` 方法。`url` 方法將回傳不含查詢字串的 URL，而 `fullUrl` 方法則包含查詢字串:
 
@@ -163,7 +163,7 @@ $request->fullUrlWithoutQuery(['type']);
 ```
 
 <a name="retrieving-the-request-host"></a>
-#### 取得 Request 主機
+#### 取得 Request 主機 (Retrieving The Request Host)
 
 你可以透過 `host`、`httpHost` 和 `schemeAndHttpHost` 方法取得傳入請求的「主機」:
 
@@ -174,7 +174,7 @@ $request->schemeAndHttpHost();
 ```
 
 <a name="retrieving-the-request-method"></a>
-#### 取得 Request 方法
+#### 取得 Request 方法 (Retrieving The Request Method)
 
 `method` 方法會回傳請求的 HTTP 動詞。你可以使用 `isMethod` 方法來驗證 HTTP 動詞是否符合給定的字串:
 
@@ -187,7 +187,7 @@ if ($request->isMethod('post')) {
 ```
 
 <a name="request-headers"></a>
-### Request 標頭
+### Request 標頭 (Request Headers)
 
 你可以使用 `header` 方法從 `Illuminate\Http\Request` 實例取得請求標頭。如果請求中不存在該標頭，將回傳 `null`。然而，`header` 方法接受一個可選的第二個參數，如果請求中不存在該標頭，將回傳該參數:
 
@@ -212,7 +212,7 @@ $token = $request->bearerToken();
 ```
 
 <a name="request-ip-address"></a>
-### Request IP 位址
+### Request IP 位址 (Request Ip Address)
 
 `ip` 方法可用於取得向你的應用程式發出請求的客戶端的 IP 位址:
 
@@ -229,7 +229,7 @@ $ipAddresses = $request->ips();
 一般來說，IP 位址應該被視為不可信任的、使用者控制的輸入，僅用於資訊目的。
 
 <a name="content-negotiation"></a>
-### 內容協商
+### 內容協商 (Content Negotiation)
 
 Laravel 提供了幾種方法來透過 `Accept` 標頭檢查傳入請求所請求的內容類型。首先，`getAcceptableContentTypes` 方法將回傳一個包含請求接受的所有內容類型的陣列:
 
@@ -283,13 +283,13 @@ Route::get('/', function (ServerRequestInterface $request) {
 > 如果你從路由或 Controller 回傳 PSR-7 回應實例，它將自動轉換回 Laravel 回應實例並由框架顯示。
 
 <a name="input"></a>
-## 輸入
+## 輸入 (Input)
 
 <a name="retrieving-input"></a>
-### 取得輸入
+### 取得輸入 (Retrieving Input)
 
 <a name="retrieving-all-input-data"></a>
-#### 取得所有輸入資料
+#### 取得所有輸入資料 (Retrieving All Input Data)
 
 你可以使用 `all` 方法以 `array` 形式取得所有傳入請求的輸入資料。無論傳入的請求是來自 HTML 表單還是 XHR 請求，都可以使用此方法:
 
@@ -312,7 +312,7 @@ $request->collect('users')->each(function (string $user) {
 ```
 
 <a name="retrieving-an-input-value"></a>
-#### 取得輸入值
+#### 取得輸入值 (Retrieving An Input Value)
 
 使用幾個簡單的方法，你可以從你的 `Illuminate\Http\Request` 實例存取所有使用者輸入，而不必擔心請求使用了哪個 HTTP 動詞。無論 HTTP 動詞如何，`input` 方法都可用於取得使用者輸入:
 
@@ -341,7 +341,7 @@ $input = $request->input();
 ```
 
 <a name="retrieving-input-from-the-query-string"></a>
-#### 從查詢字串取得輸入
+#### 從查詢字串取得輸入 (Retrieving Input From The Query String)
 
 雖然 `input` 方法從整個請求負載(包括查詢字串)取得值，但 `query` 方法只會從查詢字串取得值:
 
@@ -362,7 +362,7 @@ $query = $request->query();
 ```
 
 <a name="retrieving-json-input-values"></a>
-#### 取得 JSON 輸入值
+#### 取得 JSON 輸入值 (Retrieving Json Input Values)
 
 當向你的應用程式發送 JSON 請求時，只要請求的 `Content-Type` 標頭正確設定為 `application/json`，你就可以透過 `input` 方法存取 JSON 資料。你甚至可以使用「點」語法來取得巢狀在 JSON 陣列 / 物件中的值:
 
@@ -371,7 +371,7 @@ $name = $request->input('user.name');
 ```
 
 <a name="retrieving-stringable-input-values"></a>
-#### 取得可字串化的輸入值
+#### 取得可字串化的輸入值 (Retrieving Stringable Input Values)
 
 你可以使用 `string` 方法將請求資料作為 [Illuminate\Support\Stringable](/docs/strings) 的實例取得，而不是將請求的輸入資料作為基本 `string` 取得:
 
@@ -380,7 +380,7 @@ $name = $request->string('name')->trim();
 ```
 
 <a name="retrieving-integer-input-values"></a>
-#### 取得整數輸入值
+#### 取得整數輸入值 (Retrieving Integer Input Values)
 
 要將輸入值作為整數取得，你可以使用 `integer` 方法。此方法將嘗試將輸入值轉換為整數。如果輸入不存在或轉換失敗，它將回傳你指定的預設值。這對於分頁或其他數值輸入特別有用:
 
@@ -389,7 +389,7 @@ $perPage = $request->integer('per_page');
 ```
 
 <a name="retrieving-boolean-input-values"></a>
-#### 取得布林值輸入值
+#### 取得布林值輸入值 (Retrieving Boolean Input Values)
 
 處理像核取方塊這樣的 HTML 元素時，你的應用程式可能會收到實際上是字串的「真值」。例如，「true」或「on」。為了方便起見，你可以使用 `boolean` 方法將這些值作為布林值取得。`boolean` 方法對於 1、「1」、true、「true」、「on」和「yes」回傳 `true`。所有其他值將回傳 `false`:
 
@@ -398,7 +398,7 @@ $archived = $request->boolean('archived');
 ```
 
 <a name="retrieving-array-input-values"></a>
-#### 取得陣列輸入值
+#### 取得陣列輸入值 (Retrieving Array Input Values)
 
 可以使用 `array` 方法取得包含陣列的輸入值。此方法將始終將輸入值轉換為陣列。如果請求不包含具有給定名稱的輸入值，將回傳空陣列:
 
@@ -407,7 +407,7 @@ $versions = $request->array('versions');
 ```
 
 <a name="retrieving-date-input-values"></a>
-#### 取得日期輸入值
+#### 取得日期輸入值 (Retrieving Date Input Values)
 
 為了方便起見，包含日期 / 時間的輸入值可以使用 `date` 方法作為 Carbon 實例取得。如果請求不包含具有給定名稱的輸入值，將回傳 `null`:
 
@@ -424,7 +424,7 @@ $elapsed = $request->date('elapsed', '!H:i', 'Europe/Madrid');
 如果輸入值存在但格式無效，將拋出 `InvalidArgumentException`;因此，建議你在呼叫 `date` 方法之前驗證輸入。
 
 <a name="retrieving-enum-input-values"></a>
-#### 取得列舉輸入值
+#### 取得列舉輸入值 (Retrieving Enum Input Values)
 
 對應於 [PHP 列舉](https://www.php.net/manual/en/language.types.enumerations.php)的輸入值也可以從請求中取得。如果請求不包含具有給定名稱的輸入值，或列舉沒有與輸入值匹配的支援值，將回傳 `null`。`enum` 方法接受輸入值的名稱和列舉類別作為其第一個和第二個參數:
 
@@ -449,7 +449,7 @@ $products = $request->enums('products', Product::class);
 ```
 
 <a name="retrieving-input-via-dynamic-properties"></a>
-#### 透過動態屬性取得輸入
+#### 透過動態屬性取得輸入 (Retrieving Input Via Dynamic Properties)
 
 你也可以使用 `Illuminate\Http\Request` 實例上的動態屬性來存取使用者輸入。例如，如果你的應用程式的表單之一包含 `name` 欄位，你可以像這樣存取欄位的值:
 
@@ -460,7 +460,7 @@ $name = $request->name;
 使用動態屬性時，Laravel 將首先在請求負載中尋找參數的值。如果不存在，Laravel 將在匹配路由的參數中搜尋該欄位。
 
 <a name="retrieving-a-portion-of-the-input-data"></a>
-#### 取得輸入資料的一部分
+#### 取得輸入資料的一部分 (Retrieving A Portion Of The Input Data)
 
 如果你需要取得輸入資料的子集，你可以使用 `only` 和 `except` 方法。這兩個方法都接受單個 `array` 或動態參數列表:
 
@@ -477,7 +477,7 @@ $input = $request->except('credit_card');
 > [!WARNING] > `only` 方法回傳你請求的所有鍵 / 值對;但是，它不會回傳請求中不存在的鍵 / 值對。
 
 <a name="input-presence"></a>
-### 輸入存在性
+### 輸入存在性 (Input Presence)
 
 你可以使用 `has` 方法來判斷請求中是否存在值。如果請求中存在該值，`has` 方法會回傳 `true`:
 
@@ -586,7 +586,7 @@ $request->whenMissing('name', function () {
 ```
 
 <a name="merging-additional-input"></a>
-### 合併額外輸入
+### 合併額外輸入 (Merging Additional Input)
 
 有時你可能需要手動將額外的輸入合併到請求的現有輸入資料中。為了實現這一點，你可以使用 `merge` 方法。如果請求中已經存在給定的輸入鍵，它將被提供給 `merge` 方法的資料覆蓋:
 
@@ -601,12 +601,12 @@ $request->mergeIfMissing(['votes' => 0]);
 ```
 
 <a name="old-input"></a>
-### 舊輸入
+### 舊輸入 (Old Input)
 
 Laravel 允許你在下一次請求期間保留來自一次請求的輸入。此功能對於在檢測到驗證錯誤後重新填充表單特別有用。但是，如果你使用 Laravel 包含的[驗證功能](/docs/validation)，你可能不需要手動直接使用這些 Session 輸入快閃方法，因為 Laravel 的一些內建驗證功能會自動呼叫它們。
 
 <a name="flashing-input-to-the-session"></a>
-#### 將輸入快閃到 Session
+#### 將輸入快閃到 Session (Flashing Input To The Session)
 
 `Illuminate\Http\Request` 類別上的 `flash` 方法會將當前輸入快閃到 [Session](/docs/session)，以便在使用者的下一次請求期間可用:
 
@@ -623,7 +623,7 @@ $request->flashExcept('password');
 ```
 
 <a name="flashing-input-then-redirecting"></a>
-#### 快閃輸入然後重新導向
+#### 快閃輸入然後重新導向 (Flashing Input Then Redirecting)
 
 由於你通常希望將輸入快閃到 Session，然後重新導向到上一頁，你可以使用 `withInput` 方法輕鬆地將輸入快閃鏈結到重新導向上:
 
@@ -638,7 +638,7 @@ return redirect('/form')->withInput(
 ```
 
 <a name="retrieving-old-input"></a>
-#### 取得舊輸入
+#### 取得舊輸入 (Retrieving Old Input)
 
 要從上一次請求中取得快閃的輸入，請在 `Illuminate\Http\Request` 的實例上呼叫 `old` 方法。`old` 方法將從 [Session](/docs/session) 中拉取先前快閃的輸入資料:
 
@@ -656,7 +656,7 @@ Laravel 還提供了一個全域 `old` 輔助函式。如果你在 [Blade 模板
 ### Cookie
 
 <a name="retrieving-cookies-from-requests"></a>
-#### 從 Request 取得 Cookie
+#### 從 Request 取得 Cookie (Retrieving Cookies From Requests)
 
 Laravel 框架建立的所有 Cookie 都經過加密並使用驗證碼簽名，這意味著如果客戶端更改了它們，它們將被視為無效。要從請求中取得 Cookie 值，請在 `Illuminate\Http\Request` 實例上使用 `cookie` 方法:
 
@@ -665,7 +665,7 @@ $value = $request->cookie('name');
 ```
 
 <a name="input-trimming-and-normalization"></a>
-## 輸入修整與正規化
+## 輸入修整與正規化 (Input Trimming And Normalization)
 
 預設情況下，Laravel 在應用程式的全域 Middleware 堆疊中包含 `Illuminate\Foundation\Http\Middleware\TrimStrings` 和 `Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull` Middleware。這些 Middleware 會自動修整請求中的所有傳入字串欄位，並將任何空字串欄位轉換為 `null`。這使你不必在路由和 Controller 中擔心這些正規化問題。
 
@@ -700,10 +700,10 @@ use Illuminate\Foundation\Http\Middleware\TrimStrings;
 ```
 
 <a name="files"></a>
-## 檔案
+## 檔案 (Files)
 
 <a name="retrieving-uploaded-files"></a>
-### 取得上傳的檔案
+### 取得上傳的檔案 (Retrieving Uploaded Files)
 
 你可以使用 `file` 方法或使用動態屬性從 `Illuminate\Http\Request` 實例取得上傳的檔案。`file` 方法回傳 `Illuminate\Http\UploadedFile` 類別的實例，它擴充了 PHP `SplFileInfo` 類別，並提供了各種與檔案互動的方法:
 
@@ -722,7 +722,7 @@ if ($request->hasFile('photo')) {
 ```
 
 <a name="validating-successful-uploads"></a>
-#### 驗證成功上傳
+#### 驗證成功上傳 (Validating Successful Uploads)
 
 除了檢查檔案是否存在之外，你還可以透過 `isValid` 方法驗證上傳檔案時沒有問題:
 
@@ -733,7 +733,7 @@ if ($request->file('photo')->isValid()) {
 ```
 
 <a name="file-paths-extensions"></a>
-#### 檔案路徑和副檔名
+#### 檔案路徑和副檔名 (File Paths Extensions)
 
 `UploadedFile` 類別還包含存取檔案完全限定路徑及其副檔名的方法。`extension` 方法將嘗試根據其內容猜測檔案的副檔名。此副檔名可能與客戶端提供的副檔名不同:
 
@@ -744,12 +744,12 @@ $extension = $request->photo->extension();
 ```
 
 <a name="other-file-methods"></a>
-#### 其他檔案方法
+#### 其他檔案方法 (Other File Methods)
 
 `UploadedFile` 實例上還有各種其他可用的方法。查看[類別的 API 文件](https://github.com/symfony/symfony/blob/6.0/src/Symfony/Component/HttpFoundation/File/UploadedFile.php)以獲取有關這些方法的更多資訊。
 
 <a name="storing-uploaded-files"></a>
-### 儲存上傳的檔案
+### 儲存上傳的檔案 (Storing Uploaded Files)
 
 要儲存上傳的檔案，你通常會使用你配置的[檔案系統](/docs/filesystem)之一。`UploadedFile` 類別有一個 `store` 方法，它會將上傳的檔案移動到你的磁碟之一，這可能是你本地檔案系統上的位置或像 Amazon S3 這樣的雲端儲存位置。
 
@@ -775,7 +775,7 @@ $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 > 有關 Laravel 中檔案儲存的更多資訊，請查看完整的[檔案儲存文件](/docs/filesystem)。
 
 <a name="configuring-trusted-proxies"></a>
-## 設定受信任的代理
+## 設定受信任的代理 (Configuring Trusted Proxies)
 
 在終止 TLS / SSL 憑證的負載平衡器後面執行應用程式時，你可能會注意到你的應用程式在使用 `url` 輔助函式時有時不會產生 HTTPS 連結。通常這是因為你的應用程式正在從你的負載平衡器在連接埠 80 上轉發流量，並且不知道它應該產生安全連結。
 
@@ -807,7 +807,7 @@ $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 > 如果你使用 AWS Elastic Load Balancing，`headers` 值應該是 `Request::HEADER_X_FORWARDED_AWS_ELB`。如果你的負載平衡器使用來自 [RFC 7239](https://www.rfc-editor.org/rfc/rfc7239#section-4) 的標準 `Forwarded` 標頭，`headers` 值應該是 `Request::HEADER_FORWARDED`。有關可在 `headers` 值中使用的常數的更多資訊，請查看 Symfony 關於[信任代理](https://symfony.com/doc/current/deployment/proxies.html)的文件。
 
 <a name="trusting-all-proxies"></a>
-#### 信任所有代理
+#### 信任所有代理 (Trusting All Proxies)
 
 如果你使用 Amazon AWS 或其他「雲端」負載平衡器提供者，你可能不知道實際平衡器的 IP 位址。在這種情況下，你可以使用 `*` 來信任所有代理:
 
@@ -818,7 +818,7 @@ $path = $request->photo->storeAs('images', 'filename.jpg', 's3');
 ```
 
 <a name="configuring-trusted-hosts"></a>
-## 設定受信任的主機
+## 設定受信任的主機 (Configuring Trusted Hosts)
 
 預設情況下，Laravel 會回應它收到的所有請求，而不管 HTTP 請求的 `Host` 標頭的內容如何。此外，在 Web 請求期間產生應用程式的絕對 URL 時，將使用 `Host` 標頭的值。
 

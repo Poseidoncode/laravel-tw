@@ -9,7 +9,7 @@ description: Laravel 提供多種建立重新導向的方式
 - [重新導向並帶入快閃 Session 資料](#redirecting-with-flashed-session-data)
 
 <a name="creating-redirects"></a>
-## 建立重新導向
+## 建立重新導向 (Creating Redirects)
 
 重新導向回應是 `Illuminate\Http\RedirectResponse` 類別的實例，包含將使用者重新導向到另一個 URL 所需的適當標頭。有幾種方式可以產生 `RedirectResponse` 實例。最簡單的方法是使用全域 `redirect` 輔助函式：
 
@@ -30,7 +30,7 @@ Route::post('/user/profile', function () {
 ```
 
 <a name="redirecting-named-routes"></a>
-## 重新導向到命名路由
+## 重新導向到命名路由 (Redirecting Named Routes)
 
 當你不帶參數呼叫 `redirect` 輔助函式時，會回傳 `Illuminate\Routing\Redirector` 的實例，允許你呼叫 `Redirector` 實例上的任何方法。例如，要產生 `RedirectResponse` 到命名路由，你可以使用 `route` 方法：
 
@@ -53,7 +53,7 @@ return to_route('profile', ['id' => 1]);
 ```
 
 <a name="populating-parameters-via-eloquent-models"></a>
-#### 透過 Eloquent Models 填充參數
+#### 透過 Eloquent Models 填充參數 (Populating Parameters Via Eloquent Models)
 
 如果你要重新導向到一個帶有「ID」參數的路由，且該參數是從 Eloquent model 填充的，你可以直接傳遞 model 本身。ID 會自動被擷取：
 
@@ -76,7 +76,7 @@ public function getRouteKey(): mixed
 ```
 
 <a name="redirecting-controller-actions"></a>
-## 重新導向到控制器動作
+## 重新導向到控制器動作 (Redirecting Controller Actions)
 
 你也可以產生重新導向到[控制器動作](/docs/{{version}}/controllers)。為此，請將控制器和動作名稱傳遞給 `action` 方法：
 
@@ -95,7 +95,7 @@ return redirect()->action(
 ```
 
 <a name="redirecting-with-flashed-session-data"></a>
-## 重新導向並帶入快閃 Session 資料
+## 重新導向並帶入快閃 Session 資料 (Redirecting With Flashed Session Data)
 
 重新導向到新的 URL 並[將資料快閃到 session](/docs/{{version}}/session#flash-data) 通常是同時完成的。通常，這是在成功執行操作後將成功訊息快閃到 session 時完成的。為了方便起見，你可以在單一流暢的方法鏈中建立 `RedirectResponse` 實例並將資料快閃到 session：
 

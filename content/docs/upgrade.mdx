@@ -6,7 +6,7 @@ description: Laravel 版本升級指南
 - [從 11.x 升級到 12.0](#upgrade-12.0)
 
 <a name="high-impact-changes"></a>
-## 高影響變更
+## 高影響變更 (High Impact Changes)
 
 <div className="content-list" markdown="1">
 
@@ -16,7 +16,7 @@ description: Laravel 版本升級指南
 </div>
 
 <a name="medium-impact-changes"></a>
-## 中等影響變更
+## 中等影響變更 (Medium Impact Changes)
 
 <div className="content-list" markdown="1">
 
@@ -25,7 +25,7 @@ description: Laravel 版本升級指南
 </div>
 
 <a name="low-impact-changes"></a>
-## 低影響變更
+## 低影響變更 (Low Impact Changes)
 
 <div className="content-list" markdown="1">
 
@@ -40,7 +40,7 @@ description: Laravel 版本升級指南
 </div>
 
 <a name="upgrade-12.0"></a>
-## 從 11.x 升級到 12.0
+## 從 11.x 升級到 12.0 (Upgrade 12.0)
 
 #### 預估升級時間：5 分鐘
 
@@ -48,7 +48,7 @@ description: Laravel 版本升級指南
 > 我們嘗試記錄每個可能的破壞性變更。由於這些破壞性變更有些在 framework 的隱蔽部分，只有一部分這些變更可能實際影響你的應用程式。想要節省時間嗎？你可以使用 [Laravel Shift](https://laravelshift.com/) 來協助自動化你的應用程式升級。
 
 <a name="updating-dependencies"></a>
-### 更新依賴套件
+### 更新依賴套件 (Updating Dependencies)
 
 **影響可能性：高**
 
@@ -70,7 +70,7 @@ description: Laravel 版本升級指南
 已移除對 [Carbon 2.x](https://carbon.nesbot.com/docs/) 的支援。所有 Laravel 12 應用程式現在需要 [Carbon 3.x](https://carbon.nesbot.com/docs/#api-carbon-3)。
 
 <a name="updating-the-laravel-installer"></a>
-### 更新 Laravel 安裝器
+### 更新 Laravel 安裝器 (Updating The Laravel Installer)
 
 如果你使用 Laravel 安裝器 CLI 工具來建立新的 Laravel 應用程式，你應該更新你的安裝器以與 Laravel 12.x 和[新的 Laravel 入門套件](https://laravel.com/starter-kits)相容。如果你透過 `composer global require` 安裝了 Laravel 安裝器，你可以使用 `composer global update` 來更新安裝器：
 
@@ -96,10 +96,10 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 或者，如果你使用 [Laravel Herd](https://herd.laravel.com) 內建的 Laravel 安裝器，你應該將 Herd 安裝更新到最新版本。
 
 <a name="authentication"></a>
-### 驗證
+### 驗證 (Authentication)
 
 <a name="updated-databasetokenrepository-constructor-signature"></a>
-#### 更新 `DatabaseTokenRepository` 建構函式簽章
+#### 更新 `DatabaseTokenRepository` 建構函式簽章 (Updated Databasetokenrepository Constructor Signature)
 
 **影響可能性：非常低**
 
@@ -109,7 +109,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ### Concurrency
 
 <a name="concurrency-result-index-mapping"></a>
-#### Concurrency 結果索引映射
+#### Concurrency 結果索引映射 (Concurrency Result Index Mapping)
 
 **影響可能性：低**
 
@@ -128,7 +128,7 @@ $result = Concurrency::run([
 ### Container
 
 <a name="container-class-dependency-resolution"></a>
-#### Container 類別依賴解析
+#### Container 類別依賴解析 (Container Class Dependency Resolution)
 
 **影響可能性：低**
 
@@ -150,10 +150,10 @@ $example->date === null;
 ```
 
 <a name="database"></a>
-### 資料庫
+### 資料庫 (Database)
 
 <a name="multi-schema-database-inspecting"></a>
-#### 多 Schema 資料庫檢視
+#### 多 Schema 資料庫檢視 (Multi Schema Database Inspecting)
 
 **影響可能性：低**
 
@@ -186,7 +186,7 @@ $tables = Schema::getTableListing(schema: 'main', schemaQualified: false);
 `db:table` 和 `db:show` 命令現在會在 MySQL、MariaDB 和 SQLite 上輸出所有 schemas 的結果，就像 PostgreSQL 和 SQL Server 一樣。
 
 <a name="updated-blueprint-constructor-signature"></a>
-#### 更新 `Blueprint` 建構函式簽章
+#### 更新 `Blueprint` 建構函式簽章 (Updated Blueprint Constructor Signature)
 
 **影響可能性：非常低**
 
@@ -196,7 +196,7 @@ $tables = Schema::getTableListing(schema: 'main', schemaQualified: false);
 ### Eloquent
 
 <a name="models-and-uuidv7"></a>
-#### Models 與 UUIDv7
+#### Models 與 UUIDv7 (Models And Uuidv7)
 
 **影響可能性：中等**
 
@@ -210,10 +210,10 @@ use Illuminate\Database\Eloquent\Concerns\HasVersion4Uuids as HasUuids; // [tl! 
 `HasVersion7Uuids` trait 已被移除。如果你之前使用這個 trait，你應該改用 `HasUuids` trait，它現在提供相同的行為。
 
 <a name="requests"></a>
-### 請求
+### 請求 (Requests)
 
 <a name="nested-array-request-merging"></a>
-#### 巢狀陣列請求合併
+#### 巢狀陣列請求合併 (Nested Array Request Merging)
 
 **影響可能性：低**
 
@@ -226,20 +226,20 @@ $request->mergeIfMissing([
 ```
 
 <a name="storage"></a>
-### 儲存
+### 儲存 (Storage)
 
 <a name="local-filesystem-disk-default-root-path"></a>
-#### 本地檔案系統磁碟預設根路徑
+#### 本地檔案系統磁碟預設根路徑 (Local Filesystem Disk Default Root Path)
 
 **影響可能性：低**
 
 如果你的應用程式沒有在檔案系統設定中明確定義 `local` 磁碟，Laravel 現在會將本地磁碟的根目錄預設為 `storage/app/private`。在之前的版本中，這預設為 `storage/app`。因此，除非另有設定，否則呼叫 `Storage::disk('local')` 將從 `storage/app/private` 讀取和寫入。若要恢復之前的行為，你可以手動定義 `local` 磁碟並設定所需的根路徑。
 
 <a name="validation"></a>
-### 驗證
+### 驗證 (Validation)
 
 <a name="image-validation"></a>
-#### Image 驗證現在排除 SVGs
+#### Image 驗證現在排除 SVGs (Image Validation)
 
 **影響可能性：低**
 
@@ -255,6 +255,6 @@ use Illuminate\Validation\Rules\File;
 ```
 
 <a name="miscellaneous"></a>
-### 其他
+### 其他 (Miscellaneous)
 
 我們也鼓勵你檢視 `laravel/laravel` [GitHub 儲存庫](https://github.com/laravel/laravel)中的變更。雖然這些變更中有許多不是必需的，但你可能希望將這些檔案與你的應用程式保持同步。這些變更中的一些會在此升級指南中介紹，但其他的，例如設定檔或註解的變更，則不會。你可以使用 [GitHub 比較工具](https://github.com/laravel/laravel/compare/11.x...12.x)輕鬆查看變更，並選擇哪些更新對你來說是重要的。

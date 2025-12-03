@@ -3,58 +3,58 @@ title: "通知 (Notifications)"
 description: Laravel 提供支援透過多種管道傳送通知
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [產生通知 (Generating Notifications)](#generating-notifications)
-- [發送通知 (Sending Notifications)](#sending-notifications)
-  - [使用 Notifiable Trait (Using the Notifiable Trait)](#using-the-notifiable-trait)
-  - [使用 Notification Facade (Using the Notification Facade)](#using-the-notification-facade)
-  - [指定傳送頻道 (Specifying Delivery Channels)](#specifying-delivery-channels)
-  - [佇列通知 (Queueing Notifications)](#queueing-notifications)
-  - [隨需通知 (On-Demand Notifications)](#on-demand-notifications)
-- [郵件通知 (Mail Notifications)](#mail-notifications)
-  - [格式化郵件訊息 (Formatting Mail Messages)](#formatting-mail-messages)
-  - [自訂寄件者 (Customizing the Sender)](#customizing-the-sender)
-  - [自訂收件者 (Customizing the Recipient)](#customizing-the-recipient)
-  - [自訂主旨 (Customizing the Subject)](#customizing-the-subject)
-  - [自訂 Mailer (Customizing the Mailer)](#customizing-the-mailer)
-  - [自訂樣板 (Customizing the Templates)](#customizing-the-templates)
-  - [附件 (Attachments)](#mail-attachments)
-  - [新增標籤與 Metadata (Adding Tags and Metadata)](#adding-tags-metadata)
-  - [自訂 Symfony 訊息 (Customizing the Symfony Message)](#customizing-the-symfony-message)
-  - [使用 Mailables (Using Mailables)](#using-mailables)
-  - [預覽郵件通知 (Previewing Mail Notifications)](#previewing-mail-notifications)
-- [Markdown 郵件通知 (Markdown Mail Notifications)](#markdown-mail-notifications)
-  - [產生訊息 (Generating the Message)](#generating-the-message)
-  - [撰寫訊息 (Writing the Message)](#writing-the-message)
-  - [自訂元件 (Customizing the Components)](#customizing-the-components)
-- [資料庫通知 (Database Notifications)](#database-notifications)
-  - [先決條件 (Prerequisites)](#database-prerequisites)
-  - [格式化資料庫通知 (Formatting Database Notifications)](#formatting-database-notifications)
-  - [存取通知 (Accessing the Notifications)](#accessing-the-notifications)
-  - [將通知標記為已讀 (Marking Notifications as Read)](#marking-notifications-as-read)
-- [廣播通知 (Broadcast Notifications)](#broadcast-notifications)
-  - [先決條件 (Prerequisites)](#broadcast-prerequisites)
-  - [格式化廣播通知 (Formatting Broadcast Notifications)](#formatting-broadcast-notifications)
-  - [監聽通知 (Listening for Notifications)](#listening-for-notifications)
-- [SMS 通知 (SMS Notifications)](#sms-notifications)
-  - [先決條件 (Prerequisites)](#sms-prerequisites)
-  - [格式化 SMS 通知 (Formatting SMS Notifications)](#formatting-sms-notifications)
-  - [自訂 "From" 號碼 (Customizing the "From" Number)](#customizing-the-from-number)
-  - [新增客戶參考 (Adding a Client Reference)](#adding-a-client-reference)
-  - [路由 SMS 通知 (Routing SMS Notifications)](#routing-sms-notifications)
-- [Slack 通知 (Slack Notifications)](#slack-notifications)
-  - [先決條件 (Prerequisites)](#slack-prerequisites)
-  - [格式化 Slack 通知 (Formatting Slack Notifications)](#formatting-slack-notifications)
-  - [Slack 互動 (Slack Interactivity)](#slack-interactivity)
-  - [路由 Slack 通知 (Routing Slack Notifications)](#routing-slack-notifications)
-  - [通知外部 Slack 工作區 (Notifying External Slack Workspaces)](#notifying-external-slack-workspaces)
-- [在地化通知 (Localizing Notifications)](#localizing-notifications)
-- [測試 (Testing)](#testing)
-- [通知事件 (Notification Events)](#notification-events)
-- [自訂頻道 (Custom Channels)](#custom-channels)
+- [簡介](#introduction)
+- [產生通知](#generating-notifications)
+- [發送通知](#sending-notifications)
+  - [使用 Notifiable Trait](#using-the-notifiable-trait)
+  - [使用 Notification Facade](#using-the-notification-facade)
+  - [指定傳送頻道](#specifying-delivery-channels)
+  - [佇列通知](#queueing-notifications)
+  - [隨需通知](#on-demand-notifications)
+- [郵件通知](#mail-notifications)
+  - [格式化郵件訊息](#formatting-mail-messages)
+  - [自訂寄件者](#customizing-the-sender)
+  - [自訂收件者](#customizing-the-recipient)
+  - [自訂主旨](#customizing-the-subject)
+  - [自訂 Mailer](#customizing-the-mailer)
+  - [自訂樣板](#customizing-the-templates)
+  - [附件](#mail-attachments)
+  - [新增標籤與 Metadata](#adding-tags-metadata)
+  - [自訂 Symfony 訊息](#customizing-the-symfony-message)
+  - [使用 Mailables](#using-mailables)
+  - [預覽郵件通知](#previewing-mail-notifications)
+- [Markdown 郵件通知](#markdown-mail-notifications)
+  - [產生訊息](#generating-the-message)
+  - [撰寫訊息](#writing-the-message)
+  - [自訂元件](#customizing-the-components)
+- [資料庫通知](#database-notifications)
+  - [先決條件](#database-prerequisites)
+  - [格式化資料庫通知](#formatting-database-notifications)
+  - [存取通知](#accessing-the-notifications)
+  - [將通知標記為已讀](#marking-notifications-as-read)
+- [廣播通知](#broadcast-notifications)
+  - [先決條件](#broadcast-prerequisites)
+  - [格式化廣播通知](#formatting-broadcast-notifications)
+  - [監聽通知](#listening-for-notifications)
+- [SMS 通知](#sms-notifications)
+  - [先決條件](#sms-prerequisites)
+  - [格式化 SMS 通知](#formatting-sms-notifications)
+  - [自訂 "From" 號碼](#customizing-the-from-number)
+  - [新增客戶參考](#adding-a-client-reference)
+  - [路由 SMS 通知](#routing-sms-notifications)
+- [Slack 通知](#slack-notifications)
+  - [先決條件](#slack-prerequisites)
+  - [格式化 Slack 通知](#formatting-slack-notifications)
+  - [Slack 互動](#slack-interactivity)
+  - [路由 Slack 通知](#routing-slack-notifications)
+  - [通知外部 Slack 工作區](#notifying-external-slack-workspaces)
+- [在地化通知](#localizing-notifications)
+- [測試](#testing)
+- [通知事件](#notification-events)
+- [自訂頻道](#custom-channels)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 除了支援 [發送電子郵件](/docs/mail) 之外，Laravel 還支援透過多種傳送頻道發送通知，包括電子郵件、SMS（透過 [Vonage](https://www.vonage.com/communications-apis/)，前身為 Nexmo）和 [Slack](https://slack.com)。此外，還有許多 [社群建立的通知頻道](https://laravel-notification-channels.com/about/#suggesting-a-new-channel) 可用於透過數十種不同的頻道發送通知！通知也可以儲存在資料庫中，以便在你的網頁介面上顯示。
 
@@ -431,7 +431,7 @@ class InvoicePaid extends Notification implements ShouldQueue
 > 要了解有關解決這些問題的更多資訊，請查看關於 [佇列任務和資料庫交易](/docs/queues#jobs-and-database-transactions) 的文件。
 
 <a name="determining-if-the-queued-notification-should-be-sent"></a>
-#### 決定是否應發送佇列通知 (Determining if a Queued Notification Should Be
+#### 決定是否應發送佇列通知 (Determining if a Queued Notification Should Be (Determining If The Queued Notification Should Be Sent)
 Sent)
 
 在佇列通知被分派到佇列進行背景處理後，它通常會被佇列 worker 接受並發送給預期的收件者。
@@ -1481,7 +1481,7 @@ public function toSlack(object $notifiable): SlackMessage
 ```
 
 <a name="using-slacks-block-kit-builder-template"></a>
-#### 使用 Slack 的 Block Kit Builder 樣板 (Using Slack's Block Kit Builder
+#### 使用 Slack 的 Block Kit Builder 樣板 (Using Slack's Block Kit Builder (Using Slacks Block Kit Builder Template)
 Template)
 
 除了使用流暢的訊息建構器方法來建構你的 Block Kit 訊息之外，你還可以將 Slack 的 Block Kit Builder 產生的原始 JSON payload 提供給 `usingBlockKitTemplate` 方法：
@@ -1611,7 +1611,7 @@ return (new SlackMessage)
 ```
 
 <a name="routing-slack-notifications"></a>
-### Routing Slack Notifications
+### Routing Slack Notifications (Routing Slack Notifications)
 
 To direct Slack notifications to the appropriate Slack team and channel, define a `routeNotificationForSlack` method on your notifiable model. This method can return one of three values:
 
@@ -1645,7 +1645,7 @@ class User extends Authenticatable
 ```
 
 <a name="notifying-external-slack-workspaces"></a>
-### Notifying External Slack Workspaces
+### Notifying External Slack Workspaces (Notifying External Slack Workspaces)
 
 > [!NOTE]
 > Before sending notifications to external Slack workspaces, your Slack App must be [distributed](#slack-app-distribution).

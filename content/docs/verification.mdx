@@ -3,19 +3,19 @@ title: 電子郵件驗證 (Email Verification)
 description: Laravel 提供了方便的電子郵件驗證服務
 ---
 
-- [Introduction (簡介)](#introduction)
-  - [Model Preparation (Model 準備)](#model-preparation)
-  - [Database Preparation (資料庫準備)](#database-preparation)
-- [Routing (路由)](#verification-routing)
-  - [The Email Verification Notice (電子郵件驗證通知)](#the-email-verification-notice)
-  - [The Email Verification Handler (電子郵件驗證處理器)](#the-email-verification-handler)
-  - [Resending the Verification Email (重新發送驗證電子郵件)](#resending-the-verification-email)
-  - [Protecting Routes (保護路由)](#protecting-routes)
-- [Customization (自訂)](#customization)
-- [Events (事件)](#events)
+- [Introduction](#introduction)
+  - [Model Preparation](#model-preparation)
+  - [Database Preparation](#database-preparation)
+- [Routing](#verification-routing)
+  - [The Email Verification Notice](#the-email-verification-notice)
+  - [The Email Verification Handler](#the-email-verification-handler)
+  - [Resending the Verification Email](#resending-the-verification-email)
+  - [Protecting Routes](#protecting-routes)
+- [Customization](#customization)
+- [Events](#events)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (簡介)
 
 許多 Web 應用程式在使用者使用應用程式之前，會要求使用者驗證其電子郵件地址。Laravel 提供了方便的內建服務來發送和驗證電子郵件驗證請求，而不是強迫你為每個應用程式手動重新實作此功能。
 
@@ -23,7 +23,7 @@ description: Laravel 提供了方便的電子郵件驗證服務
 > 想要快速開始嗎？在全新的 Laravel 應用程式中安裝其中一個 [Laravel 應用程式入門套件](/docs/starter-kits)。入門套件將負責為你建立整個身份驗證系統，包括電子郵件驗證支援。
 
 <a name="model-preparation"></a>
-### Model 準備
+### Model 準備 (Model 準備)
 
 在開始之前，請確認你的 `App\Models\User` model 實作了 `Illuminate\Contracts\Auth\MustVerifyEmail` contract：
 
@@ -55,12 +55,12 @@ event(new Registered($user));
 ```
 
 <a name="database-preparation"></a>
-### 資料庫準備
+### 資料庫準備 (資料庫準備)
 
 接下來，你的 `users` 資料表必須包含一個 `email_verified_at` 欄位，用來儲存使用者電子郵件地址驗證的日期和時間。通常，這包含在 Laravel 預設的 `0001_01_01_000000_create_users_table.php` 資料庫遷移中。
 
 <a name="verification-routing"></a>
-## 路由
+## 路由 (路由)
 
 為了正確實作電子郵件驗證，需要定義三個路由。首先，需要一個路由來向使用者顯示通知，告知他們應該點擊 Laravel 在註冊後發送給他們的驗證電子郵件中的電子郵件驗證連結。
 
@@ -69,7 +69,7 @@ event(new Registered($user));
 第三，如果使用者不小心遺失了第一個驗證連結，需要一個路由來重新發送驗證連結。
 
 <a name="the-email-verification-notice"></a>
-### 電子郵件驗證通知
+### 電子郵件驗證通知 (電子郵件驗證通知)
 
 如前所述，應該定義一個路由，該路由將返回一個視圖，指示使用者點擊 Laravel 在註冊後發送給他們的電子郵件驗證連結。當使用者在未先驗證其電子郵件地址的情況下嘗試存取應用程式的其他部分時，將向使用者顯示此視圖。請記住，只要你的 `App\Models\User` model 實作了 `MustVerifyEmail` 介面，該連結就會自動發送給使用者：
 
@@ -85,7 +85,7 @@ Route::get('/email/verify', function () {
 > 手動實作電子郵件驗證時，你需要自己定義驗證通知視圖的內容。如果你想要包含所有必要的身份驗證和驗證視圖的 scaffolding，請查看 [Laravel 應用程式入門套件](/docs/starter-kits)。
 
 <a name="the-email-verification-handler"></a>
-### 電子郵件驗證處理器
+### 電子郵件驗證處理器 (電子郵件驗證處理器)
 
 接下來，我們需要定義一個路由，該路由將處理使用者點擊發送給他們的電子郵件驗證連結時產生的請求。此路由應命名為 `verification.verify`，並分配 `auth` 和 `signed` middleware：
 
@@ -104,7 +104,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 接下來，我們可以直接在請求上呼叫 `fulfill` 方法。此方法將在經過身份驗證的使用者上呼叫 `markEmailAsVerified` 方法，並分派 `Illuminate\Auth\Events\Verified` 事件。`markEmailAsVerified` 方法可透過 `Illuminate\Foundation\Auth\User` 基類在預設的 `App\Models\User` model 中使用。一旦使用者的電子郵件地址經過驗證，你可以將他們重新導向到你希望的任何地方。
 
 <a name="resending-the-verification-email"></a>
-### 重新發送驗證電子郵件
+### 重新發送驗證電子郵件 (重新發送驗證電子郵件)
 
 有時使用者可能會放錯地方或不小心刪除了電子郵件地址驗證電子郵件。為了適應這種情況，你可能希望定義一個路由，允許使用者請求重新發送驗證電子郵件。然後，你可以透過在 [驗證通知視圖](#the-email-verification-notice) 中放置一個簡單的表單提交按鈕來向此路由發出請求：
 
@@ -119,7 +119,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 ```
 
 <a name="protecting-routes"></a>
-### 保護路由
+### 保護路由 (保護路由)
 
 [路由 Middleware](/docs/middleware) 可用於僅允許經過驗證的使用者存取給定的路由。Laravel 包含一個 `verified` [middleware 別名](/docs/middleware#middleware-aliases)，它是 `Illuminate\Auth\Middleware\EnsureEmailIsVerified` middleware 類別的別名。由於此別名已由 Laravel 自動註冊，因此你只需將 `verified` middleware 附加到路由定義即可。通常，此 middleware 與 `auth` middleware 配對使用：
 
@@ -132,10 +132,10 @@ Route::get('/profile', function () {
 如果未經身份驗證的使用者嘗試存取已分配此 middleware 的路由，他們將自動重新導向到 `verification.notice` [命名路由](/docs/routing#named-routes)。
 
 <a name="customization"></a>
-## 自訂
+## 自訂 (自訂)
 
 <a name="verification-email-customization"></a>
-#### 驗證電子郵件自訂
+#### 驗證電子郵件自訂 (Verification Email Customization)
 
 雖然預設的電子郵件驗證通知應能滿足大多數應用程式的需求，但 Laravel 允許你自訂電子郵件驗證郵件訊息的建構方式。
 
@@ -165,6 +165,6 @@ public function boot(): void
 > 要了解有關郵件通知的更多資訊，請參閱 [郵件通知文件](/docs/notifications#mail-notifications)。
 
 <a name="events"></a>
-## 事件
+## 事件 (事件)
 
 使用 [Laravel 應用程式入門套件](/docs/starter-kits) 時，Laravel 會在電子郵件驗證過程中分派 `Illuminate\Auth\Events\Verified` [事件](/docs/events)。如果你正在為應用程式手動處理電子郵件驗證，你可能希望在驗證完成後手動分派這些事件。

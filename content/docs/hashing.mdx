@@ -14,14 +14,14 @@ description: Laravel Hash facade 提供了安全的 Bcrypt 和 Argon2 雜湊功�
 - [雜湊演算法驗證](#hash-algorithm-verification)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 Laravel `Hash` [facade](/docs/facades) 提供了安全的 Bcrypt 和 Argon2 雜湊功能，用於儲存使用者密碼。如果您使用的是 [Laravel 應用程式入門套件](/docs/starter-kits) 之一，預設將使用 Bcrypt 進行註冊和驗證。
 
 Bcrypt 是雜湊密碼的絕佳選擇，因為其「工作因子」是可調整的，這意味著隨著硬體效能的提升，產生雜湊所需的時間可以增加。在雜湊密碼時，慢是好的。演算法雜湊密碼所需的時間越長，惡意使用者產生所有可能字串雜湊值的「彩虹表」所需的時間就越長，這些彩虹表可能會被用於對應用程式進行暴力攻擊。
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 預設情況下，Laravel 在雜湊資料時使用 `bcrypt` 雜湊驅動程式。但是，也支援其他幾種雜湊驅動程式，包括 [argon](https://en.wikipedia.org/wiki/Argon2) 和 [argon2id](https://en.wikipedia.org/wiki/Argon2)。
 
@@ -32,10 +32,10 @@ php artisan config:publish hashing
 ```
 
 <a name="basic-usage"></a>
-## 基本用法
+## 基本用法 (Basic Usage)
 
 <a name="hashing-passwords"></a>
-### 雜湊密碼
+### 雜湊密碼 (Hashing Passwords)
 
 您可以透過在 `Hash` facade 上呼叫 `make` 方法來雜湊密碼：
 
@@ -67,7 +67,7 @@ class PasswordController extends Controller
 ```
 
 <a name="adjusting-the-bcrypt-work-factor"></a>
-#### 調整 Bcrypt 工作因子
+#### 調整 Bcrypt 工作因子 (Adjusting The Bcrypt Work Factor)
 
 如果您使用的是 Bcrypt 演算法，`make` 方法允許您使用 `rounds` 選項來管理演算法的工作因子；但是，Laravel 管理的預設工作因子對於大多數應用程式來說是可以接受的：
 
@@ -78,7 +78,7 @@ $hashed = Hash::make('password', [
 ```
 
 <a name="adjusting-the-argon2-work-factor"></a>
-#### 調整 Argon2 工作因子
+#### 調整 Argon2 工作因子 (Adjusting The Argon2 Work Factor)
 
 如果您使用的是 Argon2 演算法，`make` 方法允許您使用 `memory`、`time` 和 `threads` 選項來管理演算法的工作因子；但是，Laravel 管理的預設值對於大多數應用程式來說是可以接受的：
 
@@ -94,7 +94,7 @@ $hashed = Hash::make('password', [
 > 有關這些選項的更多資訊，請參考 [PHP 官方關於 Argon 雜湊的文件](https://secure.php.net/manual/en/function.password-hash.php)。
 
 <a name="verifying-that-a-password-matches-a-hash"></a>
-### 驗證密碼是否與雜湊匹配
+### 驗證密碼是否與雜湊匹配 (Verifying That A Password Matches A Hash)
 
 `Hash` facade 提供的 `check` 方法允許您驗證給定的純文字字串是否對應於給定的雜湊：
 
@@ -105,7 +105,7 @@ if (Hash::check('plain-text', $hashedPassword)) {
 ```
 
 <a name="determining-if-a-password-needs-to-be-rehashed"></a>
-### 判斷密碼是否需要重新雜湊
+### 判斷密碼是否需要重新雜湊 (Determining If A Password Needs To Be Rehashed)
 
 `Hash` facade 提供的 `needsRehash` 方法允許您判斷自密碼被雜湊以來，雜湊器使用的工作因子是否已變更。有些應用程式選擇在應用程式的驗證過程中執行此檢查：
 
@@ -116,7 +116,7 @@ if (Hash::needsRehash($hashed)) {
 ```
 
 <a name="hash-algorithm-verification"></a>
-## 雜湊演算法驗證
+## 雜湊演算法驗證 (Hash Algorithm Verification)
 
 為了防止雜湊演算法被竄改，Laravel 的 `Hash::check` 方法會先驗證給定的雜湊是否使用應用程式選定的雜湊演算法產生。如果演算法不同，將拋出 `RuntimeException` 例外。
 

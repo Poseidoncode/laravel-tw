@@ -32,7 +32,7 @@ description: Sail 是 Laravel 的輕量命令列介面
 - [自訂化](#sail-customization)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Sail](https://github.com/laravel/sail) 是一個輕量的命令列介面，用來管理 Laravel 預設的 Docker 開發環境。Sail 提供了一個快速且無痛的起點，讓你可以使用 PHP、MySQL 和 Redis 建置 Laravel 應用程式，而不需要事先具備 Docker 的使用經驗。
 
@@ -41,12 +41,12 @@ Sail 的核心包含專案根目錄下的 `compose.yaml` 檔與 `sail` 腳本。
 Laravel Sail 支援 macOS、Linux，以及透過 [WSL2](https://docs.microsoft.com/en-us/windows/wsl/about) 的 Windows。
 
 <a name="installation"></a>
-## 安裝與設定
+## 安裝與設定 (Installation)
 
 Laravel Sail 會自動隨所有新的 Laravel 專案安裝，因此你可以立即開始使用。
 
 <a name="installing-sail-into-existing-applications"></a>
-### 在既有專案中安裝 Sail
+### 在既有專案中安裝 Sail (Installing Sail Into Existing Applications)
 
 如果想在既有的 Laravel 專案中使用 Sail，可以透過 Composer 套件管理器安裝。下列步驟假設你的本機開發環境允許安裝 Composer 相依套件：
 
@@ -70,7 +70,7 @@ php artisan sail:install
 > 如果你在 Linux 上使用 Docker Desktop，請使用 `default` Docker context，執行 `docker context use default`。若在容器內遇到檔案權限錯誤，可能需要將 `SUPERVISOR_PHP_USER` 環境變數設為 `root`。
 
 <a name="adding-additional-services"></a>
-#### 新增額外服務
+#### 新增額外服務 (Adding Additional Services)
 
 若要為現有 Sail 安裝新增其他服務，可執行 `sail:add` Artisan 指令：
 
@@ -79,7 +79,7 @@ php artisan sail:add
 ```
 
 <a name="using-devcontainers"></a>
-#### 使用 Devcontainer
+#### 使用 Devcontainer (Using Devcontainers)
 
 如果你希望在 [Devcontainer](https://code.visualstudio.com/docs/remote/containers) 中開發，執行 `sail:install` 時可以加上 `--devcontainer` 選項，此選項會將預設的 `.devcontainer/devcontainer.json` 檔發佈到應用程式根目錄：
 
@@ -88,7 +88,7 @@ php artisan sail:install --devcontainer
 ```
 
 <a name="rebuilding-sail-images"></a>
-### 重新建立 Sail 映像檔
+### 重新建立 Sail 映像檔 (Rebuilding Sail Images)
 
 有時你會想要完全重建 Sail 映像，以確保映像內的套件與軟體皆為最新，這可以使用 `build` 指令完成：
 
@@ -101,7 +101,7 @@ sail up
 ```
 
 <a name="configuring-a-shell-alias"></a>
-### 設定 Shell Alias（別名）
+### 設定 Shell Alias（別名） (Configuring A Shell Alias)
 
 預設情況下，Sail 指令透過隨專案提供的 `vendor/bin/sail` 腳本呼叫：
 
@@ -124,7 +124,7 @@ sail up
 ```
 
 <a name="starting-and-stopping-sail"></a>
-## 啟動與停止 Sail
+## 啟動與停止 Sail (Starting And Stopping Sail)
 
 Laravel Sail 的 `compose.yaml` 檔定義了一組協作的 Docker 容器，協助你開發 Laravel 應用。每個容器都是 `compose.yaml` 中 `services` 的一個項目，而 `laravel.test` 則為主要的應用容器，負責對外提供服務。
 
@@ -149,7 +149,7 @@ sail stop
 ```
 
 <a name="executing-sail-commands"></a>
-## 執行指令
+## 執行指令 (Executing Sail Commands)
 
 使用 Laravel Sail 時，應用程式會在 Docker 容器中執行並與本機隔離。但 Sail 提供了方便的方式在容器內執行各種指令，例如 PHP、Artisan、Composer 與 Node / NPM 指令。
 
@@ -164,7 +164,7 @@ sail artisan queue:work
 ```
 
 <a name="executing-php-commands"></a>
-### 執行 PHP 指令
+### 執行 PHP 指令 (Executing Php Commands)
 
 你可以使用 `php` 指令在容器內執行 PHP，指令會以專案設定的 PHP 版本執行。如需了解 Sail 支援的 PHP 版本，請參考 [PHP 版本說明](#sail-php-versions)：
 
@@ -175,7 +175,7 @@ sail php script.php
 ```
 
 <a name="executing-composer-commands"></a>
-### 執行 Composer 指令
+### 執行 Composer 指令 (Executing Composer Commands)
 
 在容器內可使用 `composer` 執行 Composer 指令，Sail 的應用容器已內建 Composer：
 
@@ -184,7 +184,7 @@ sail composer require laravel/sanctum
 ```
 
 <a name="executing-artisan-commands"></a>
-### 執行 Artisan 指令
+### 執行 Artisan 指令 (Executing Artisan Commands)
 
 可在容器內使用 `artisan` 執行 Laravel Artisan 指令：
 
@@ -193,7 +193,7 @@ sail artisan queue:work
 ```
 
 <a name="executing-node-npm-commands"></a>
-### 執行 Node / NPM 指令
+### 執行 Node / NPM 指令 (Executing Node Npm Commands)
 
 Node 指令可使用 `node` 執行；NPM 指令可使用 `npm` 執行：
 
@@ -210,7 +210,7 @@ sail yarn
 ```
 
 <a name="interacting-with-sail-databases"></a>
-## 與資料庫互動
+## 與資料庫互動 (Interacting With Sail Databases)
 
 <a name="mysql"></a>
 ### MySQL
@@ -276,7 +276,7 @@ TYPESENSE_API_KEY=xyz
 在本機上可透過 `http://localhost:8108` 存取 Typesense 的 API。
 
 <a name="file-storage"></a>
-## 檔案儲存
+## 檔案儲存 (File Storage)
 
 如果你在生產環境使用 Amazon S3 儲存檔案，可在安裝 Sail 時一併安裝 [MinIO](https://min.io) 服務。MinIO 提供與 S3 相容的 API，讓你在本機上使用 Laravel 的 `s3` 驅動進行開發，而不必在生產 S3 中建立測試用的 bucket。若選擇安裝 MinIO，`compose.yaml` 會新增 MinIO 的設定區塊。
 
@@ -304,7 +304,7 @@ AWS_URL=http://localhost:9000/local
 > 使用 MinIO 時不支援透過 `temporaryUrl` 方法產生暫時性儲存 URL。
 
 <a name="running-tests"></a>
-## 執行測試
+## 執行測試 (Running Tests)
 
 Laravel 內建很棒的測試支援，你可以用 Sail 的 `test` 指令執行應用程式的 [功能測試與單元測試](/docs/testing)。任何傳給 Pest / PHPUnit 的 CLI 選項也可傳給 `test`：
 
@@ -358,7 +358,7 @@ sail dusk
 ```
 
 <a name="selenium-on-apple-silicon"></a>
-#### 在 Apple Silicon 上使用 Selenium
+#### 在 Apple Silicon 上使用 Selenium (Selenium On Apple Silicon)
 
 若你的機器為 Apple Silicon，`selenium` 服務應使用 `selenium/standalone-chromium` 映像檔：
 
@@ -374,7 +374,7 @@ selenium:
 ```
 
 <a name="previewing-emails"></a>
-## 郵件預覽
+## 郵件預覽 (Previewing Emails)
 
 Sail 的預設 `compose.yaml` 包含 [Mailpit](https://github.com/axllent/mailpit) 服務。Mailpit 會攔截本機開發期間應用發出的郵件，並提供瀏覽器中的簡易介面供你預覽郵件。Sail 中 Mailpit 的預設主機為 `mailpit`，郵件服務對外以埠號 1025 提供：
 
@@ -387,7 +387,7 @@ MAIL_ENCRYPTION=null
 Sail 執行時，你可以在瀏覽器開啟 http://localhost:8025 存取 Mailpit 管理介面。
 
 <a name="sail-container-cli"></a>
-## 容器 CLI
+## 容器 CLI (Sail Container Cli)
 
 你可以使用 `shell` 指令進入應用程式的容器開啟 Bash，檢查檔案、已安裝的服務或執行任意 shell 指令：
 
@@ -404,7 +404,7 @@ sail tinker
 ```
 
 <a name="sail-php-versions"></a>
-## PHP 版本
+## PHP 版本 (Sail Php Versions)
 
 Sail 目前支援以 PHP 8.4、8.3、8.2、8.1 或 8.0 提供應用程式服務；預設版本為 PHP 8.4。要變更應用使用的 PHP 版本，請在 `compose.yaml` 的 `laravel.test` 容器 `build` 定義中更新對應路徑：
 
@@ -440,7 +440,7 @@ sail up
 ```
 
 <a name="sail-node-versions"></a>
-## Node 版本
+## Node 版本 (Sail Node Versions)
 
 Sail 預設會安裝 Node 22。若要變更建立映像時安裝的 Node 版本，請在 `compose.yaml` 中修改 `laravel.test` 服務的 `build.args`：
 
@@ -460,7 +460,7 @@ sail up
 ```
 
 <a name="sharing-your-site"></a>
-## 分享你的網站
+## 分享你的網站 (Sharing Your Site)
 
 有時你可能需要把本機網站公開分享給同事預覽或測試 webhook。使用 `share` 指令可以做到這件事；執行後會產生一個隨機的 `laravel-sail.site` URL 供你使用：
 
@@ -485,7 +485,7 @@ sail share --subdomain=my-sail-site
 > [!NOTE] > `share` 指令是由 [Expose](https://github.com/beyondcode/expose) 支援，該服務由 BeyondCode 提供，是一套開放原始碼的穿透（tunneling）工具。
 
 <a name="debugging-with-xdebug"></a>
-## 使用 Xdebug 偵錯
+## 使用 Xdebug 偵錯 (Debugging With Xdebug)
 
 Sail 的 Docker 設定支援 [Xdebug](https://xdebug.org/)，這是廣受使用的 PHP 偵錯工具。要啟用 Xdebug，請先 [發佈你的 Sail 設定](#sail-customization)，然後在 `.env` 中加入下列變數以設定 Xdebug：
 
@@ -533,7 +533,7 @@ SAIL_XDEBUG_CONFIG="client_host=172.20.0.2"
 ```
 
 <a name="xdebug-cli-usage"></a>
-### Xdebug CLI 使用方式
+### Xdebug CLI 使用方式 (Xdebug Cli Usage)
 
 可以使用 `sail debug` 指令在執行 Artisan 指令時啟動偵錯會話：
 
@@ -546,7 +546,7 @@ sail debug migrate
 ```
 
 <a name="xdebug-browser-usage"></a>
-### Xdebug 瀏覽器端使用
+### Xdebug 瀏覽器端使用 (Xdebug Browser Usage)
 
 若你想在瀏覽器互動的情況下偵錯應用程式，請參考 [Xdebug 官方教學](https://xdebug.org/docs/step_debug#web-application) 以啟動瀏覽器端的 Xdebug 會話。
 
@@ -556,7 +556,7 @@ sail debug migrate
 > Laravel Sail 依賴 `artisan serve` 來提供應用程式服務。自 Laravel 8.53.0 開始，`artisan serve` 才接受 `XDEBUG_CONFIG` 與 `XDEBUG_MODE` 變數；舊版（8.52.0 及更早）不支援，無法接受偵錯連線。
 
 <a name="sail-customization"></a>
-## 自訂化
+## 自訂化 (Sail Customization)
 
 Sail 本質上就是 Docker，因此你可以自訂其中幾乎所有設定。要發佈 Sail 自帶的 Dockerfile 與相關設定檔，請執行 `sail:publish` 指令：
 

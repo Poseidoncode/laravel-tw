@@ -21,7 +21,7 @@ description: Blade 是 Laravel 內建的簡單但強大的樣板引擎
   - [註解](#comments)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 Blade 是 Laravel 內建的簡單但強大的樣板引擎。與某些 PHP 樣板引擎不同，Blade 並不會限制您在樣板中使用原生 PHP。事實上，所有 Blade 樣板都會被編譯成純 PHP 並快取直到被修改，這表示 Blade 幾乎不會為您的應用程式增加額外負擔。Blade 樣板檔案使用 `.blade.php` 副檔名，通常儲存在 `resources/views` 目錄中。
 
@@ -34,12 +34,12 @@ Route::get('/', function () {
 ```
 
 <a name="supercharging-blade-with-livewire"></a>
-### 使用 Livewire 強化 Blade
+### 使用 Livewire 強化 Blade (Supercharging Blade With Livewire)
 
 想要將 Blade 樣板提升到更進階的互動介面，且減少前端框架的複雜性嗎？請查看 [Laravel Livewire](https://livewire.laravel.com)。Livewire 讓您能撰寫帶有動態功能的 Blade 元件，這些功能通常只有使用像是 React 或 Vue 的前端框架才容易實現。透過 Livewire，您可以在不需大量客戶端渲染或額外建置流程的情況下，建立現代且具反應性的前端介面。
 
 <a name="displaying-data"></a>
-## 顯示資料
+## 顯示資料 (Displaying Data)
 
 您可以在 Blade 檢視中透過將變數包在大括號來顯示傳入的資料。例如，給定下列路由：
 
@@ -65,7 +65,7 @@ The current UNIX timestamp is {{ time() }}.
 ```
 
 <a name="html-entity-encoding"></a>
-### HTML 實體編碼
+### HTML 實體編碼 (Html Entity Encoding)
 
 預設情況下，Blade（以及 Laravel 的 `e` 函式）會對 HTML 實體進行雙重編碼。如果您想要停用雙重編碼，可在 `AppServiceProvider` 的 `boot` 方法中呼叫 `Blade::withoutDoubleEncoding`：
 
@@ -90,7 +90,7 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 <a name="displaying-unescaped-data"></a>
-#### 顯示未轉義的資料
+#### 顯示未轉義的資料 (Displaying Unescaped Data)
 
 預設情況下，Blade 的 `{{ }}` 陳述式會自動透過 PHP 的 `htmlspecialchars` 進行轉義。如果您不希望資料被轉義，可以使用下列語法：
 
@@ -102,7 +102,7 @@ Hello, {!! $name !!}.
 > 在 echo 使用使用者提供的內容時務必小心。通常應使用經過轉義的 `{{ }}` 語法來避免顯示使用者輸入時發生 XSS。
 
 <a name="blade-and-javascript-frameworks"></a>
-### Blade 與 JavaScript 框架
+### Blade 與 JavaScript 框架 (Blade And Javascript Frameworks)
 
 由於許多 JavaScript 框架也使用大括號來表示要在瀏覽器中呈現的表達式，您可以在表達式前加上 `@` 符號以告知 Blade 保持該表達式不被處理。例如：
 
@@ -125,7 +125,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="rendering-json"></a>
-#### 呈現 JSON
+#### 呈現 JSON (Rendering Json)
 
 有時您可能會將陣列傳遞到檢視，並希望將其以 JSON 呈現以初始化 JavaScript 變數。舉例：
 
@@ -155,7 +155,7 @@ Hello, @{{ name }}.
 > 您應僅使用 `Js::from` 方法來渲染現有變數為 JSON。Blade 的解析基於正規表示式，嘗試將複雜表達式直接傳入指令可能導致意外錯誤。
 
 <a name="the-at-verbatim-directive"></a>
-#### `@verbatim` 指令
+#### `@verbatim` 指令 (The At Verbatim Directive)
 
 如果在範本中大量顯示 JavaScript 變數，您可以使用 `@verbatim` 指令包住該區段，避免每個 Blade echo 前都加上 `@` 符號：
 
@@ -168,12 +168,12 @@ Hello, @{{ name }}.
 ```
 
 <a name="blade-directives"></a>
-## Blade 指令
+## Blade 指令 (Blade Directives)
 
 除了樣板繼承與顯示資料之外，Blade 也提供了便捷的語法糖來對應常見的 PHP 控制結構（例如條件與迴圈）。這些指令使得在模板中撰寫控制流程更清晰且易讀。
 
 <a name="if-statements"></a>
-### If 條件
+### If 條件 (If Statements)
 
 您可以使用 `@if`、`@elseif`、`@else` 與 `@endif` 指令來建立 `if` 條件，這些指令與對應的 PHP 敘述行為相同：
 
@@ -208,7 +208,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="authentication-directives"></a>
-#### 驗證相關指令
+#### 驗證相關指令 (Authentication Directives)
 
 `@auth` 與 `@guest` 指令可快速判斷目前使用者是否已通過認證或為訪客：
 
@@ -231,7 +231,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="environment-directives"></a>
-#### 環境判斷指令
+#### 環境判斷指令 (Environment Directives)
 
 使用 `@production` 可以在生產環境中顯示特定內容：
 
@@ -254,7 +254,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="section-directives"></a>
-#### 區段指令
+#### 區段指令 (Section Directives)
 
 `@hasSection` 可用來判斷指定的 section 是否有內容：
 
@@ -279,7 +279,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="session-directives"></a>
-#### Session 指令
+#### Session 指令 (Session Directives)
 
 `@session` 指令可用來檢查一個 session 值是否存在。若存在，`@session` 與 `@endsession` 之間的內容會被評估。在 `@session` 內可使用 `$value` 來顯示該 session 值：
 
@@ -292,7 +292,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="context-directives"></a>
-#### Context 指令
+#### Context 指令 (Context Directives)
 
 `@context` 指令用於判斷是否有指定的 context 值存在。若存在，`@context` 與 `@endcontext` 間的內容將會被評估，並可透過 `$value` 取得該值：
 
@@ -303,7 +303,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="switch-statements"></a>
-### Switch 條件
+### Switch 條件 (Switch Statements)
 
 您可以使用 `@switch`、`@case`、`@break`、`@default` 與 `@endswitch` 指令建立 switch 結構：
 
@@ -323,7 +323,7 @@ Hello, @{{ name }}.
 ```
 
 <a name="loops"></a>
-### 迴圈
+### 迴圈 (Loops)
 
 Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一致：
 
@@ -379,7 +379,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 ```
 
 <a name="the-loop-variable"></a>
-### Loop 變數
+### Loop 變數 (The Loop Variable)
 
 在 `foreach` 迴圈內，Blade 會提供一個 `$loop` 變數，包含許多有用的屬性，例如目前迭代的索引或是否為第一/最後一筆：
 
@@ -429,7 +429,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 </div>
 
 <a name="conditional-classes"></a>
-### 條件式 class 與 style
+### 條件式 class 與 style (Conditional Classes)
 
 `@class` 指令可根據條件組合 CSS class。該指令接受一個陣列，鍵為 class（或 class 列表），值為布林表達式；若陣列元素使用數字鍵，該 class 將永遠包含：
 
@@ -465,7 +465,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 ```
 
 <a name="additional-attributes"></a>
-### 其他 HTML 屬性輔助指令
+### 其他 HTML 屬性輔助指令 (Additional Attributes)
 
 為了方便，Blade 提供了多個簡短指令來輸出常見的 HTML 屬性：
 
@@ -487,7 +487,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 ```
 
 <a name="including-subviews"></a>
-### 包含子檢視
+### 包含子檢視 (Including Subviews)
 
 `@include` 指令允許在一個檢視中包含另一個 Blade 檢視。所有在父檢視可用的變數，預設也會在被包含的檢視中可用：
 
@@ -530,7 +530,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 > 請避免在 Blade 檢視中使用 `__DIR__` 與 `__FILE__` 常數，因為它們會指向編譯後、快取的檢視位置。
 
 <a name="rendering-views-for-collections"></a>
-#### 為集合渲染檢視
+#### 為集合渲染檢視 (Rendering Views For Collections)
 
 您可以使用 `@each` 指令在一行中結合迴圈與 include：
 
@@ -548,7 +548,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 > 透過 `@each` 渲染的檢視不會繼承父檢視的變數；若子檢視需要父檢視的變數，請改用 `@foreach` + `@include`。
 
 <a name="the-once-directive"></a>
-### `@once` 指令
+### `@once` 指令 (The Once Directive)
 
 `@once` 指令可讓某段內容在單次渲染循環中僅被評估一次。這對於在迴圈中渲染元件時，只想將一段 JavaScript 推到頁面 header 的情境特別有用：
 
@@ -581,7 +581,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 ```
 
 <a name="raw-php"></a>
-### 原始 PHP
+### 原始 PHP (Raw Php)
 
 在某些情況下，將 PHP 程式碼嵌入檢視會很有用。您可以使用 `@php` 指令在樣板中執行一段原生 PHP：
 
@@ -617,7 +617,7 @@ Blade 也提供了對 PHP 迴圈結構的簡潔指令，行為與原生 PHP 一�
 ```
 
 <a name="comments"></a>
-### 註解
+### 註解 (Comments)
 
 Blade 也允許在檢視中定義註解。與 HTML 註解不同，Blade 註解不會出現在最終輸出的 HTML 中：
 
@@ -645,7 +645,7 @@ php artisan make:component Forms/Input
 ```
 
 <a name="manually-registering-package-components"></a>
-#### 手動註冊套件元件
+#### 手動註冊套件元件 (Manually Registering Package Components)
 
 若您正在開發包含 Blade 元件的套件，需要手動在 service provider 的 `boot` 方法中註冊元件：
 
@@ -678,7 +678,7 @@ Blade::componentNamespace('Nightshade\\Views\\Components', 'nightshade');
 ```
 
 <a name="rendering-components"></a>
-### 渲染元件
+### 渲染元件 (Rendering Components)
 
 要顯示元件，可在 Blade 樣板中使用以 `x-` 開頭、後接元件 class 名稱（kebab-case）的標籤：
 
@@ -696,7 +696,7 @@ Blade::componentNamespace('Nightshade\\Views\\Components', 'nightshade');
 若想條件式渲染元件，可在元件 class 中定義 `shouldRender` 方法；若回傳 `false`，元件將不會被渲染。
 
 <a name="index-components"></a>
-### Index 元件
+### Index 元件 (Index Components)
 
 當元件目錄名稱與檔案名稱相同時，Laravel 會自動將其視為「根」元件。例如 `Card/Card.php` 可直接使用 `<x-card>` 來渲染：
 
@@ -708,7 +708,7 @@ Blade::componentNamespace('Nightshade\\Views\\Components', 'nightshade');
 ```
 
 <a name="passing-data-to-components"></a>
-### 傳遞資料給元件
+### 傳遞資料給元件 (Passing Data To Components)
 
 您可以透過 HTML 屬性將資料傳遞給 Blade 元件。簡單的原始值可使用一般 HTML 屬性字串；PHP 表達式與變數則需使用 `:` 前綴的屬性：
 
@@ -749,7 +749,7 @@ class Alert extends Component
 ```
 
 <a name="casing"></a>
-#### 命名慣例
+#### 命名慣例 (Casing)
 
 元件建構子參數應使用 `camelCase`，在 HTML 屬性中則使用 `kebab-case`：
 
@@ -758,7 +758,7 @@ class Alert extends Component
 ```
 
 <a name="short-attribute-syntax"></a>
-#### 簡短屬性語法
+#### 簡短屬性語法 (Short Attribute Syntax)
 
 當屬性名稱與變數名稱相同時，可使用簡短語法：
 
@@ -771,7 +771,7 @@ class Alert extends Component
 ```
 
 <a name="escaping-attribute-rendering"></a>
-#### 跳脫屬性渲染
+#### 跳脫屬性渲染 (Escaping Attribute Rendering)
 
 由於某些 JavaScript 框架（如 Alpine.js）也使用冒號前綴，您可以使用雙冒號 `::` 告知 Blade 該屬性不是 PHP 表達式：
 
@@ -782,7 +782,7 @@ class Alert extends Component
 ```
 
 <a name="component-methods"></a>
-#### 元件方法
+#### 元件方法 (Component Methods)
 
 除了 public 屬性外，元件 class 上的任何 public 方法也可在元件樣板中呼叫：
 
@@ -793,7 +793,7 @@ class Alert extends Component
 ```
 
 <a name="additional-dependencies"></a>
-#### 額外依賴
+#### 額外依賴 (Additional Dependencies)
 
 若元件需要 Laravel Service Container 的依賴，可在資料屬性之前列出，容器會自動注入：
 
@@ -806,7 +806,7 @@ public function __construct(
 ```
 
 <a name="hiding-attributes-and-methods"></a>
-#### 隱藏屬性與方法
+#### 隱藏屬性與方法 (Hiding Attributes And Methods)
 
 若要防止某些 public 屬性或方法暴露給元件樣板，可將它們加入 `$except` 陣列：
 
@@ -815,7 +815,7 @@ protected $except = ['type'];
 ```
 
 <a name="component-attributes"></a>
-### 元件屬性
+### 元件屬性 (Component Attributes)
 
 我們已經了解如何傳遞資料屬性給元件；但有時您可能需要指定額外的 HTML 屬性，例如 `class`，這些屬性並非元件運作所必須。一般而言，您會希望將這些屬性向下傳遞到元件樣板的根元素。
 
@@ -828,7 +828,7 @@ protected $except = ['type'];
 ```
 
 <a name="default-merged-attributes"></a>
-#### 預設與合併屬性
+#### 預設與合併屬性 (Default Merged Attributes)
 
 有時您可能需要指定屬性的預設值，或將額外值合併到元件的某些屬性中。可使用 attribute bag 的 `merge` 方法：
 
@@ -853,7 +853,7 @@ protected $except = ['type'];
 ```
 
 <a name="conditionally-merge-classes"></a>
-#### 條件式合併 class
+#### 條件式合併 class (Conditionally Merge Classes)
 
 可使用 `class` 方法在條件為 `true` 時合併 class：
 
@@ -872,7 +872,7 @@ protected $except = ['type'];
 ```
 
 <a name="non-class-attribute-merging"></a>
-#### 非 class 屬性的合併
+#### 非 class 屬性的合併 (Non Class Attribute Merging)
 
 對於非 `class` 的屬性，`merge` 方法提供的值會被視為「預設值」。與 `class` 不同的是，這些屬性不會合併，而是被覆蓋：
 
@@ -907,7 +907,7 @@ protected $except = ['type'];
 ```
 
 <a name="filtering-attributes"></a>
-#### 擷取與過濾屬性
+#### 擷取與過濾屬性 (Filtering Attributes)
 
 可使用 `filter` 方法過濾屬性：
 
@@ -948,7 +948,7 @@ protected $except = ['type'];
 ```
 
 <a name="reserved-keywords"></a>
-### 保留關鍵字
+### 保留關鍵字 (Reserved Keywords)
 
 以下關鍵字為 Blade 內部使用，不可作為元件的 public 屬性或方法名稱：
 
@@ -1032,7 +1032,7 @@ protected $except = ['type'];
 ```
 
 <a name="slot-attributes"></a>
-#### 插槽屬性
+#### 插槽屬性 (Slot Attributes)
 
 與 Blade 元件一樣，您可以為插槽指定額外屬性（如 CSS class）：
 
@@ -1072,7 +1072,7 @@ protected $except = ['type'];
 ```
 
 <a name="inline-component-views"></a>
-### 行內元件檢視
+### 行內元件檢視 (Inline Component Views)
 
 對於非常小的元件，同時管理 class 與檢視檔案可能會顯得繁瑣。您可以直接從 `render` 方法回傳元件的標記：
 
@@ -1094,7 +1094,7 @@ php artisan make:component Alert --inline
 ```
 
 <a name="dynamic-components"></a>
-### 動態元件
+### 動態元件 (Dynamic Components)
 
 有時您可能需要渲染一個在執行階段才能決定的元件。可使用 Laravel 內建的 `dynamic-component`：
 
@@ -1105,7 +1105,7 @@ php artisan make:component Alert --inline
 ```
 
 <a name="manually-registering-components"></a>
-### 手動註冊元件
+### 手動註冊元件 (Manually Registering Components)
 
 若您正在撰寫套件或將元件放在非慣例目錄，需要手動在 service provider 的 `boot` 方法中註冊：
 
@@ -1141,7 +1141,7 @@ php artisan make:component forms.input --view
 ```
 
 <a name="anonymous-index-components"></a>
-### 匿名 Index 元件
+### 匿名 Index 元件 (Anonymous Index Components)
 
 當某元件是由多個 Blade 檔組成時，您可能想把這些檔案整理在同一個資料夾下。例如一個 accordion 元件：
 
@@ -1168,7 +1168,7 @@ Blade 允許您將名稱與目錄相同的檔案放在目錄裡，並將它視�
 ```
 
 <a name="data-properties-attributes"></a>
-### 匿名元件的資料屬性與 Attributes
+### 匿名元件的資料屬性與 Attributes (Data Properties Attributes)
 
 由於匿名元件沒有對應的 class，您可以透過 `@props` 指令指定哪些屬性應視為「資料變數」，其他屬性則會放入 attribute bag：
 
@@ -1183,7 +1183,7 @@ Blade 允許您將名稱與目錄相同的檔案放在目錄裡，並將它視�
 ```
 
 <a name="accessing-parent-data"></a>
-### 存取父元件資料：@aware
+### 存取父元件資料：@aware (Accessing Parent Data)
 
 有時候您會希望在子元件中存取父元件的屬性。可使用 `@aware` 指令：
 
@@ -1210,7 +1210,7 @@ Blade 允許您將名稱與目錄相同的檔案放在目錄裡，並將它視�
 > [!WARNING] > `@aware` 只能存取以 HTML 屬性明確傳入父元件的資料，無法取得只在 `@props` 內設定、但未顯式傳入的預設值。
 
 <a name="anonymous-component-paths"></a>
-### 匿名元件路徑
+### 匿名元件路徑 (Anonymous Component Paths)
 
 除了預設的 `resources/views/components` 目錄外，您也可以在 service provider 中註冊額外的匿名元件路徑：
 
@@ -1237,7 +1237,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 ## 建立版型 (Layouts)
 
 <a name="layouts-using-components"></a>
-### 使用元件的版型
+### 使用元件的版型 (Layouts Using Components)
 
 多數 Web 應用程式在各頁面之間都共享相同的版面結構。若每個檢視都重複整個 HTML 外框，維護將非常麻煩。幸好，我們可以使用單一 [Blade 元件](#components) 來定義版型，並在整個應用中重複使用。
 
@@ -1285,10 +1285,10 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 ```
 
 <a name="layouts-using-template-inheritance"></a>
-### 使用樣板繼承的版型
+### 使用樣板繼承的版型 (Layouts Using Template Inheritance)
 
 <a name="defining-a-layout"></a>
-#### 定義版型
+#### 定義版型 (Defining A Layout)
 
 在 Components 出現之前，Blade 主要透過「樣板繼承」來建立版型：
 
@@ -1312,7 +1312,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 ```
 
 <a name="extending-a-layout"></a>
-#### 繼承版型
+#### 繼承版型 (Extending A Layout)
 
 子檢視可透過 `@extends` 指令指定要繼承的版型，並在其中定義 `@section` 內容：
 
@@ -1344,7 +1344,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 ## 表單 (Forms)
 
 <a name="csrf-field"></a>
-### CSRF 欄位
+### CSRF 欄位 (Csrf Field)
 
 所有 HTML 表單都應包含隱藏的 CSRF token 欄位，讓 [CSRF 保護](/docs/csrf) middleware 能驗證請求。可使用 `@csrf` 指令產生此欄位：
 
@@ -1357,7 +1357,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 ```
 
 <a name="method-field"></a>
-### HTTP Method 欄位
+### HTTP Method 欄位 (Method Field)
 
 由於 HTML 表單無法直接送出 `PUT`、`PATCH` 或 `DELETE` 請求，您可以透過隱藏欄位 `_method` 來「欺騙」HTTP 方法。`@method` 指令可以自動產生該欄位：
 
@@ -1370,7 +1370,7 @@ Blade::anonymousComponentPath(__DIR__.'/../components', 'dashboard');
 ```
 
 <a name="validation-errors"></a>
-### 驗證錯誤
+### 驗證錯誤 (Validation Errors)
 
 `@error` 指令可快速檢查特定欄位是否有[驗證錯誤訊息](/docs/validation#quick-displaying-the-validation-errors)。在 `@error` 區塊中，可使用 `$message` 來顯示訊息：
 
@@ -1453,7 +1453,7 @@ Blade 允許您將內容推送到具名的「stack」，並在其他檢視或版
 ```
 
 <a name="rendering-inline-blade-templates"></a>
-## 渲染行內 Blade 樣板
+## 渲染行內 Blade 樣板 (Rendering Inline Blade Templates)
 
 有時您可能只想將一小段 Blade 字串轉成 HTML，可使用 `Blade::render`：
 
@@ -1474,7 +1474,7 @@ return Blade::render(
 ```
 
 <a name="rendering-blade-fragments"></a>
-## 渲染 Blade Fragments
+## 渲染 Blade Fragments (Rendering Blade Fragments)
 
 在搭配 [Turbo](https://turbo.hotwired.dev/) 或 [htmx](https://htmx.org/) 等前端工具時，您可能只需要回傳 Blade 模板的一小部分。可使用 `@fragment` / `@endfragment`：
 
@@ -1509,7 +1509,7 @@ view('dashboard', ['users' => $users])
 ```
 
 <a name="extending-blade"></a>
-## 擴充 Blade
+## 擴充 Blade (Extending Blade)
 
 Blade 允許您使用 `directive` 方法定義自訂指令。當 Blade 編譯器遇到該指令時，會呼叫您提供的 callback，並將指令的表達式傳入：
 
@@ -1525,7 +1525,7 @@ Blade::directive('datetime', function (string $expression) {
 > 更新自訂指令邏輯後，必須清除快取檢視。可使用 `php artisan view:clear`。
 
 <a name="custom-echo-handlers"></a>
-### 自訂 Echo Handler
+### 自訂 Echo Handler (Custom Echo Handlers)
 
 當您在 Blade 中 echo 某個物件時，會呼叫該物件的 `__toString` 方法。不過，若您無法控制該方法（例如來自第三方套件的 class），可以使用 `Blade::stringable` 註冊自訂處理：
 
@@ -1539,7 +1539,7 @@ Blade::stringable(function (Money $money) {
 ```
 
 <a name="custom-if-statements"></a>
-### 自訂 If 指令
+### 自訂 If 指令 (Custom If Statements)
 
 若只需要簡單的自訂條件判斷，比起撰寫完整指令更方便的方式是使用 `Blade::if`：
 

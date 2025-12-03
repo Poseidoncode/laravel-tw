@@ -26,14 +26,14 @@ description: Laravel Pulse 是一個即時應用程式效能監控儀表板
   - [資料擷取與彙整](#custom-card-data)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Pulse](https://github.com/laravel/pulse) 可讓你快速檢視應用程式的效能與使用情況。使用 Pulse，你可以找出如慢速工作與端點等瓶頸、辨識最活躍的使用者，以及其他重要資訊。
 
 若要深入偵錯個別事件，請參考 [Laravel Telescope](/docs/telescope)。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 > [!WARNING]
 > Pulse 的內建儲存實作目前需要 MySQL、MariaDB 或 PostgreSQL。如果你使用不同的資料庫引擎，請為 Pulse 資料另外提供一個 MySQL、MariaDB 或 PostgreSQL 的資料庫。
@@ -62,7 +62,7 @@ php artisan migrate
 > 如果你不想將 Pulse 的資料儲存在應用程式的主要資料庫中，可以[指定專用資料庫連線](#using-a-different-database)。
 
 <a name="configuration"></a>
-### 設定
+### 設定 (Configuration)
 
 Pulse 的多數設定選項可透過環境變數控制。若要查看可用選項、註冊新的記錄器或設定進階選項，可以發佈 `config/pulse.php` 設定檔：
 
@@ -71,10 +71,10 @@ php artisan vendor:publish --tag=pulse-config
 ```
 
 <a name="dashboard"></a>
-## 儀表板
+## 儀表板 (Dashboard)
 
 <a name="dashboard-authorization"></a>
-### 授權
+### 授權 (Dashboard Authorization)
 
 Pulse 儀表板可透過 `/pulse` 路由存取。預設情況下，該儀表板僅允許在 `local` 環境存取，如需在生產環境中存取，請透過自訂 `'viewPulse'` 授權閘道來設定。你可以在應用程式的 `app/Providers/AppServiceProvider.php` 中完成此設定：
 
@@ -96,7 +96,7 @@ public function boot(): void
 ```
 
 <a name="dashboard-customization"></a>
-### 自訂
+### 自訂 (Dashboard Customization)
 
 The Pulse dashboard cards and layout may be configured by publishing the dashboard view. The dashboard view will be published to `resources/views/vendor/pulse/dashboard.blade.php`:
 
@@ -135,7 +135,7 @@ php artisan vendor:publish --tag=pulse-dashboard
 ```
 
 <a name="dashboard-resolving-users"></a>
-### 使用者解析
+### 使用者解析 (Dashboard Resolving Users)
 
 對於顯示使用者資訊的卡片（例如 Application Usage 卡），Pulse 只會記錄使用者的 ID。在渲染儀表板時，Pulse 會從你的預設 `Authenticatable` 模型解析 `name` 與 `email` 欄位，並使用 Gravatar 服務顯示頭像。
 
@@ -165,10 +165,10 @@ public function boot(): void
 > 你可以透過實作 `Laravel\Pulse\Contracts\ResolvesUsers` 合約並在 Laravel 的 [service container](/docs/container#binding-a-singleton) 中綁定，來完全自訂已驗證使用者的擷取與解析方式。
 
 <a name="dashboard-cards"></a>
-### 卡片
+### 卡片 (Dashboard Cards)
 
 <a name="servers-card"></a>
-#### 伺服器
+#### 伺服器 (Servers Card)
 
 `<livewire:pulse.servers />` 卡片會呈現所有執行 `pulse:check` 指令之伺服器的系統資源使用情況。更多系統資源報告資訊請參閱 [Servers 記錄器](#servers-recorder) 的文件。
 
@@ -179,7 +179,7 @@ public function boot(): void
 ```
 
 <a name="application-usage-card"></a>
-#### 應用程式使用狀況
+#### 應用程式使用狀況 (Application Usage Card)
 
 `<livewire:pulse.usage />` 卡片會顯示對你的應用程式發出請求、派送工作或遇到慢請求的前 10 名使用者。
 
@@ -197,26 +197,26 @@ To learn how to customize how Pulse retrieves and displays user information, con
 > 若應用程式請求量或派送工作數量很高，建議啟用 [sampling](#sampling)。更多資訊請參閱 [user requests recorder](#user-requests-recorder)、[user jobs recorder](#user-jobs-recorder) 與 [slow jobs recorder](#slow-jobs-recorder) 文件。
 
 <a name="exceptions-card"></a>
-#### 例外
+#### 例外 (Exceptions Card)
 
 `<livewire:pulse.exceptions />` 卡片會顯示應用程式中例外發生的頻率與最近時間。預設情況下，例外會依其類別與發生位置進行分組。欲了解更多資訊，請參閱 [exceptions recorder](#exceptions-recorder) 的文件。
 
 <a name="queues-card"></a>
-#### 佇列
+#### 佇列 (Queues Card)
 
 `<livewire:pulse.queues />` 卡片會顯示應用程式佇列的吞吐量，包括已排隊、處理中、已處理、已釋放與失敗的工作數量。更多資訊請參閱 [Queues 記錄器](#queues-recorder) 的文件。
 
 <a name="slow-requests-card"></a>
-#### 慢速請求
+#### 慢速請求 (Slow Requests Card)
 
 `<livewire:pulse.slow-requests />` 卡片會顯示超過設定閾值（預設為 1,000ms）的進入請求。更多細節請參閱 [slow requests recorder](#slow-requests-recorder) 的文件。
 
 <a name="slow-jobs-card"></a>
-#### 慢作業
+#### 慢作業 (Slow Jobs Card)
 `<livewire:pulse.slow-jobs />` 卡片會顯示超過設定閾值（預設為 1,000ms）的排隊工作。更多細節請參閱 [slow jobs recorder](#slow-jobs-recorder) 的文件。
 
 <a name="slow-queries-card"></a>
-#### 慢查詢
+#### 慢查詢 (Slow Queries Card)
 
 `<livewire:pulse.slow-queries />` 卡片會顯示應用程式中超過設定閾值（預設為 1,000ms）的資料庫查詢。
 
@@ -231,14 +231,14 @@ To learn how to customize how Pulse retrieves and displays user information, con
 See the [slow queries recorder](#slow-queries-recorder) documentation for more information.
 
 <a name="slow-outgoing-requests-card"></a>
-#### 慢速外部請求
+#### 慢速外部請求 (Slow Outgoing Requests Card)
 
 `<livewire:pulse.slow-outgoing-requests />` 卡片會顯示使用 Laravel 的 [HTTP client](/docs/http-client) 發出的、超過設定閾值（預設為 1,000ms）的外部請求。
 
 預設情況下，條目會依完整 URL 分組；不過你可以使用正規表示式來規範或彙整相似的外部請求。更多資訊請參閱 [slow outgoing requests recorder](#slow-outgoing-requests-recorder) 的文件。
 
 <a name="cache-card"></a>
-#### 快取
+#### 快取 (Cache Card)
 
 The `<livewire:pulse.cache />` card shows the cache hit and miss statistics for your application, both globally and for individual keys.
 
@@ -271,7 +271,7 @@ php artisan pulse:restart
 Recorders are responsible for capturing entries from your application to be recorded in the Pulse database. Recorders are registered and configured in the `recorders` section of the [Pulse configuration file](#configuration).
 
 <a name="cache-interactions-recorder"></a>
-#### 快取互動
+#### 快取互動 (Cache Interactions Recorder)
 
 The `CacheInteractions` recorder captures information about the [cache](/docs/cache) hits and misses occurring in your application for display on the [Cache](#cache-card) card.
 
@@ -291,21 +291,21 @@ Recorders\CacheInteractions::class => [
 會使用第一個符合的模式；若沒有任何模式符合，則鍵（key）會原樣擷取。
 
 <a name="exceptions-recorder"></a>
-#### 例外
+#### 例外 (Exceptions Recorder)
 
 The `Exceptions` recorder captures information about reportable exceptions occurring in your application for display on the [Exceptions](#exceptions-card) card.
 
 你可以選擇性地調整 [sample rate](#sampling) 與要忽略的例外模式。你也可設定是否要捕捉例外的發生位置。捕捉到的位置會顯示在 Pulse 儀表板上，有助於追查例外來源；但若同一例外在多個位置發生，則會為每一個位置單獨顯示。
 
 <a name="queues-recorder"></a>
-#### 佇列
+#### 佇列 (Queues Recorder)
 
 The `Queues` recorder captures information about your application's queues for display on the [Queues](#queues-card).
 
 你可以選擇性地調整 [sample rate](#sampling) 與要忽略的工作模式。
 
 <a name="slow-jobs-recorder"></a>
-#### 慢作業
+#### 慢作業 (Slow Jobs Recorder)
 
 The `SlowJobs` recorder captures information about slow jobs occurring in your application for display on the [Slow Jobs](#slow-jobs-recorder) card.
 
@@ -326,7 +326,7 @@ Recorders\SlowJobs::class => [
 If no regular expression patterns match the job's classname, then the `'default'` value will be used.
 
 <a name="slow-outgoing-requests-recorder"></a>
-#### 慢速外部請求
+#### 慢速外部請求 (Slow Outgoing Requests Recorder)
 
 The `SlowOutgoingRequests` recorder captures information about outgoing HTTP requests made using Laravel's [HTTP client](/docs/http-client) that exceed the configured threshold for display on the [Slow Outgoing Requests](#slow-outgoing-requests-card) card.
 
@@ -362,7 +362,7 @@ Recorders\SlowOutgoingRequests::class => [
 會使用第一個符合的模式；若沒有任何模式符合，則 URL 會原樣擷取。
 
 <a name="slow-queries-recorder"></a>
-#### 慢查詢
+#### 慢查詢 (Slow Queries Recorder)
 
 The `SlowQueries` recorder captures any database queries in your application that exceed the configured threshold for display on the [Slow Queries](#slow-queries-card) card.
 
@@ -383,7 +383,7 @@ Recorders\SlowQueries::class => [
 If no regular expression patterns match the query's SQL, then the `'default'` value will be used.
 
 <a name="slow-requests-recorder"></a>
-#### 慢速請求
+#### 慢速請求 (Slow Requests Recorder)
 
 The `Requests` recorder captures information about requests made to your application for display on the [Slow Requests](#slow-requests-card) and [Application Usage](#application-usage-card) cards.
 
@@ -404,7 +404,7 @@ Recorders\SlowRequests::class => [
 If no regular expression patterns match the request's URL, then the `'default'` value will be used.
 
 <a name="servers-recorder"></a>
-#### 伺服器
+#### 伺服器 (Servers Recorder)
 
 The `Servers` recorder captures CPU, memory, and storage usage of the servers that power your application for display on the [Servers](#servers-card) card. This recorder requires the [pulse:check command](#capturing-entries) to be running on each of the servers you wish to monitor.
 

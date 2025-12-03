@@ -3,39 +3,39 @@ title: "事件 (Events)"
 description: Laravel events 提供簡單的觀察者模式實作
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [產生事件和監聽器 (Generating Events and Listeners)](#generating-events-and-listeners)
-- [註冊事件和監聽器 (Registering Events and Listeners)](#registering-events-and-listeners)
-  - [事件發現 (Event Discovery)](#event-discovery)
-  - [手動註冊事件 (Manually Registering Events)](#manually-registering-events)
-  - [閉包監聽器 (Closure Listeners)](#closure-listeners)
-- [定義事件 (Defining Events)](#defining-events)
-- [定義監聽器 (Defining Listeners)](#defining-listeners)
-- [佇列事件監聽器 (Queued Event Listeners)](#queued-event-listeners)
-  - [手動與佇列互動 (Manually Interacting With the Queue)](#manually-interacting-with-the-queue)
-  - [佇列事件監聽器和資料庫交易 (Queued Event Listeners and Database Transactions)](#queued-event-listeners-and-database-transactions)
-  - [佇列監聽器中介軟體 (Queued Listener Middleware)](#queued-listener-middleware)
-  - [加密的佇列監聽器 (Encrypted Queued Listeners)](#encrypted-queued-listeners)
-  - [處理失敗的任務 (Handling Failed Jobs)](#handling-failed-jobs)
-- [分派事件 (Dispatching Events)](#dispatching-events)
-  - [在資料庫交易後分派事件 (Dispatching Events After Database Transactions)](#dispatching-events-after-database-transactions)
-  - [延遲事件 (Deferring Events)](#deferring-events)
-- [事件訂閱者 (Event Subscribers)](#event-subscribers)
-  - [編寫事件訂閱者 (Writing Event Subscribers)](#writing-event-subscribers)
-  - [註冊事件訂閱者 (Registering Event Subscribers)](#registering-event-subscribers)
-- [測試 (Testing)](#testing)
-  - [偽造部分事件 (Faking a Subset of Events)](#faking-a-subset-of-events)
-  - [範圍事件偽造 (Scoped Events Fakes)](#scoped-event-fakes)
+- [簡介](#introduction)
+- [產生事件和監聽器](#generating-events-and-listeners)
+- [註冊事件和監聽器](#registering-events-and-listeners)
+  - [事件發現](#event-discovery)
+  - [手動註冊事件](#manually-registering-events)
+  - [閉包監聽器](#closure-listeners)
+- [定義事件](#defining-events)
+- [定義監聽器](#defining-listeners)
+- [佇列事件監聽器](#queued-event-listeners)
+  - [手動與佇列互動](#manually-interacting-with-the-queue)
+  - [佇列事件監聽器和資料庫交易](#queued-event-listeners-and-database-transactions)
+  - [佇列監聽器中介軟體](#queued-listener-middleware)
+  - [加密的佇列監聽器](#encrypted-queued-listeners)
+  - [處理失敗的任務](#handling-failed-jobs)
+- [分派事件](#dispatching-events)
+  - [在資料庫交易後分派事件](#dispatching-events-after-database-transactions)
+  - [延遲事件](#deferring-events)
+- [事件訂閱者](#event-subscribers)
+  - [編寫事件訂閱者](#writing-event-subscribers)
+  - [註冊事件訂閱者](#registering-event-subscribers)
+- [測試](#testing)
+  - [偽造部分事件](#faking-a-subset-of-events)
+  - [範圍事件偽造](#scoped-event-fakes)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 的事件提供了一個簡單的觀察者模式實作,允許你訂閱和監聽應用程式中發生的各種事件。事件類別通常儲存在 `app/Events` 目錄中,而它們的監聽器則儲存在 `app/Listeners` 中。如果你在應用程式中看不到這些目錄,請不要擔心,因為當你使用 Artisan 控制台指令產生事件和監聽器時,它們會為你建立。
 
 事件是解耦應用程式各個方面的好方法,因為單個事件可以有多個不相互依賴的監聽器。例如,你可能希望每次訂單發貨時向使用者發送 Slack 通知。你可以觸發一個 `App\Events\OrderShipped` 事件,監聽器可以接收該事件並用它來分派 Slack 通知,而不是將訂單處理程式碼與 Slack 通知程式碼耦合。
 
 <a name="generating-events-and-listeners"></a>
-## 產生事件和監聽器
+## 產生事件和監聽器 (Generating Events and Listeners)
 
 要快速產生事件和監聽器,你可以使用 `make:event` 和 `make:listener` Artisan 指令:
 
@@ -54,10 +54,10 @@ php artisan make:listener
 ```
 
 <a name="registering-events-and-listeners"></a>
-## 註冊事件和監聽器
+## 註冊事件和監聽器 (Registering Events and Listeners)
 
 <a name="event-discovery"></a>
-### 事件發現
+### 事件發現 (Event Discovery)
 
 預設情況下,Laravel 會透過掃描應用程式的 `Listeners` 目錄自動尋找並註冊你的事件監聽器。當 Laravel 找到任何以 `handle` 或 `__invoke` 開頭的監聽器類別方法時,Laravel 會將這些方法註冊為方法簽章中類型提示的事件的事件監聽器:
 
@@ -111,12 +111,12 @@ php artisan event:list
 ```
 
 <a name="event-discovery-in-production"></a>
-#### 生產環境中的事件發現
+#### 生產環境中的事件發現 (Event Discovery In Production)
 
 要提高應用程式的速度,你應該使用 `optimize` 或 `event:cache` Artisan 指令快取應用程式所有監聽器的清單。通常,此指令應作為應用程式[部署程序](/docs/deployment#optimization)的一部分執行。框架將使用此清單來加速事件註冊程序。`event:clear` 指令可用於銀毀事件快取。
 
 <a name="manually-registering-events"></a>
-### 手動註冊事件
+### 手動註冊事件 (Manually Registering Events)
 
 使用 `Event` facade,你可以在應用程式的 `AppServiceProvider` 的 `boot` 方法中手動註冊事件及其對應的監聽器:
 
@@ -144,7 +144,7 @@ php artisan event:list
 ```
 
 <a name="closure-listeners"></a>
-### 閉包監聽器
+### 閉包監聽器 (Closure Listeners)
 
 通常,監聽器被定義為類別;但是,你也可以在應用程式的 `AppServiceProvider` 的 `boot` 方法中手動註冊基於閉包的事件監聽器:
 
@@ -164,7 +164,7 @@ public function boot(): void
 ```
 
 <a name="queuable-anonymous-event-listeners"></a>
-#### 可佇列的匿名事件監聽器
+#### 可佇列的匿名事件監聽器 (Queuable Anonymous Event Listeners)
 
 當註冊基於閉包的事件監聽器時,你可以將監聽器閉包包裝在 `Illuminate\Events\queueable` 函式中,以指示 Laravel 使用[佇列](/docs/queues)執行監聽器:
 
@@ -208,7 +208,7 @@ Event::listen(queueable(function (PodcastProcessed $event) {
 ```
 
 <a name="wildcard-event-listeners"></a>
-#### 萬用字元事件監聽器
+#### 萬用字元事件監聽器 (Wildcard Event Listeners)
 
 你也可以使用 `*` 字元作為萬用字元參數來註冊監聽器,允許你在同一個監聽器上捕獲多個事件。萬用字元監聽器接收事件名稱作為其第一個參數,並接收整個事件資料陣列作為其第二個參數:
 
@@ -219,7 +219,7 @@ Event::listen('event.*', function (string $eventName, array $data) {
 ```
 
 <a name="defining-events"></a>
-## 定義事件
+## 定義事件 (Defining Events)
 
 事件類別本質上是一個資料容器,它保存與事件相關的資訊。例如,讓我們假設一個 `App\Events\OrderShipped` 事件接收一個 [Eloquent ORM](/docs/eloquent) 物件:
 
@@ -249,7 +249,7 @@ class OrderShipped
 如你所見,此事件類別不包含邏輯。它是購買的 `App\Models\Order` 實例的容器。如果使用 PHP 的 `serialize` 函式序列化事件物件,例如當使用[佇列監聽器](#queued-event-listeners)時,事件使用的 `SerializesModels` trait 將優雅地序列化任何 Eloquent 模型。
 
 <a name="defining-listeners"></a>
-## 定義監聽器
+## 定義監聽器 (Defining Listeners)
 
 接下來,讓我們看看我們範例事件的監聽器。事件監聽器在其 `handle` 方法中接收事件實例。當使用 `--event` 選項呼叫 `make:listener` Artisan 指令時,它會自動匯入適當的事件類別並在 `handle` 方法中類型提示事件。在 `handle` 方法中,你可以執行任何必要的操作來回應事件:
 
@@ -281,12 +281,12 @@ class SendShipmentNotification
 > 你的事件監聽器也可以在其建構函式上類型提示它們需要的任何依賴項。所有事件監聽器都透過 Laravel [服務容器](/docs/container)解析,因此依賴項將自動注入。
 
 <a name="stopping-the-propagation-of-an-event"></a>
-#### 停止事件的傳播
+#### 停止事件的傳播 (Stopping The Propagation Of An Event)
 
 有時,你可能希望停止事件向其他監聽器的傳播。你可以透過從監聽器的 `handle` 方法返回 `false` 來完成此操作。
 
 <a name="queued-event-listeners"></a>
-## 佇列事件監聽器
+## 佇列事件監聽器 (Queued Event Listeners)
 
 如果你的監聽器將執行緩慢的任務(如發送電子郵件或發出 HTTP 請求),佇列監聽器可能會有所幫助。在使用佇列監聽器之前,請確保[設定你的佇列](/docs/queues)並在伺服器或本地開發環境上啟動佇列工作程序。
 
@@ -309,7 +309,7 @@ class SendShipmentNotification implements ShouldQueue
 就是這樣!現在,當由此監聽器處理的事件被分派時,監聽器將由事件分派程序使用 Laravel 的[佇列系統](/docs/queues)自動佇列。如果當監聽器由佇列執行時沒有拋出異常,佇列任務將在完成處理後自動刪除。
 
 <a name="customizing-the-queue-connection-queue-name"></a>
-#### 自訂佇列連線、名稱和延遲
+#### 自訂佇列連線、名稱和延遲 (Customizing The Queue Connection Queue Name)
 
 如果你想自訂事件監聽器的佇列連線、佇列名稱或佇列延遲時間,你可以在監聽器類別上定義 `$connection`、`$queue` 或 `$delay` 屬性:
 
@@ -375,7 +375,7 @@ public function withDelay(OrderShipped $event): int
 ```
 
 <a name="conditionally-queueing-listeners"></a>
-#### 條件式佇列監聽器
+#### 條件式佇列監聽器 (Conditionally Queueing Listeners)
 
 有時,你可能需要根據一些僅在執行時期可用的資料來確定監聽器是否應該被佇列。要完成此操作,可以將 `shouldQueue` 方法新增到監聽器以確定監聽器是否應該被佇列。如果 `shouldQueue` 方法返回 `false`,監聽器將不會被佇列:
 
@@ -408,7 +408,7 @@ class RewardGiftCard implements ShouldQueue
 ```
 
 <a name="manually-interacting-with-the-queue"></a>
-### 手動與佇列互動
+### 手動與佇列互動 (Manually Interacting With the Queue)
 
 如果你需要手動存取監聽器底層佇列任務的 `delete` 和 `release` 方法,你可以使用 `Illuminate\Queue\InteractsWithQueue` trait 來完成。此 trait 在產生的監聽器上預設匯入,並提供對這些方法的存取:
 
@@ -438,7 +438,7 @@ class SendShipmentNotification implements ShouldQueue
 ```
 
 <a name="queued-event-listeners-and-database-transactions"></a>
-### 佇列事件監聽器和資料庫交易
+### 佇列事件監聽器和資料庫交易 (Queued Event Listeners and Database Transactions)
 
 當佇列監聽器在資料庫交易中被分派時,它們可能會在資料庫交易提交之前由佇列處理。當這種情況發生時,你在資料庫交易期間對模型或資料庫記錄所做的任何更新可能還未反映在資料庫中。此外,在交易中建立的任何模型或資料庫記錄可能不存在於資料庫中。如果你的監聽器依賴於這些模型,當處理分派佇列監聽器的任務時可能會發生意外錯誤。
 
@@ -462,7 +462,7 @@ class SendShipmentNotification implements ShouldQueueAfterCommit
 > 要了解更多關於解決這些問題的資訊,請查閱有關[佇列任務和資料庫交易](/docs/queues#jobs-and-database-transactions)的文件。
 
 <a name="queued-listener-middleware"></a>
-### 佇列監聽器中介軟體
+### 佇列監聽器中介軟體 (Queued Listener Middleware)
 
 佇列監聽器也可以利用[任務中介軟體](/docs/queues#job-middleware)。任務中介軟體允許你在佇列監聽器的執行周圍包裝自訂邏輯,減少監聽器本身的樣板程式碼。建立任務中介軟體後,可以透過從監聽器的 `middleware` 方法返回它們來將它們附加到監聽器:
 
@@ -498,7 +498,7 @@ class SendShipmentNotification implements ShouldQueue
 ```
 
 <a name="encrypted-queued-listeners"></a>
-#### 加密的佇列監聽器
+#### 加密的佇列監聽器 (Encrypted Queued Listeners)
 
 Laravel 允許你透過[加密](/docs/encryption)確保佇列監聽器資料的隱私性和完整性。要開始,只需將 `ShouldBeEncrypted` 介面新增到監聽器類別。一旦將此介面新增到類別,Laravel 將在將監聽器推送到佇列之前自動加密你的監聽器:
 
@@ -518,7 +518,7 @@ class SendShipmentNotification implements ShouldQueue, ShouldBeEncrypted
 ```
 
 <a name="handling-failed-jobs"></a>
-### 處理失敗的任務
+### 處理失敗的任務 (Handling Failed Jobs)
 
 有時你的佇列事件監聽器可能會失敗。如果佇列監聽器超過佇列工作程序定義的最大嘗試次數,將在你的監聽器上呼叫 `failed` 方法。`failed` 方法接收事件實例和導致失敗的 `Throwable`:
 
@@ -555,7 +555,7 @@ class SendShipmentNotification implements ShouldQueue
 ```
 
 <a name="specifying-queued-listener-maximum-attempts"></a>
-#### 指定佇列監聽器最大嘗試次數
+#### 指定佇列監聽器最大嘗試次數 (Specifying Queued Listener Maximum Attempts)
 
 如果你的一個佇列監聽器遇到錯誤,你可能不希望它無限期地繼續重試。因此,Laravel 提供了各種方法來指定監聽器可以嘗試多少次或多長時間。
 
@@ -600,7 +600,7 @@ public function retryUntil(): DateTime
 如果 `retryUntil` 和 `tries` 都被定義,Laravel 會優先使用 `retryUntil` 方法。
 
 <a name="specifying-queued-listener-backoff"></a>
-#### 指定佇列監聽器退避
+#### 指定佇列監聽器退避 (Specifying Queued Listener Backoff)
 
 如果你想設定 Laravel 在重試遇到異常的監聽器之前應等待多少秒,你可以在監聽器類別上定義 `backoff` 屬性:
 
@@ -640,7 +640,7 @@ public function backoff(OrderShipped $event): array
 ```
 
 <a name="specifying-queued-listener-max-exceptions"></a>
-#### 指定佇列監聽器最大異常數
+#### 指定佇列監聽器最大異常數 (Specifying Queued Listener Max Exceptions)
 
 有時你可能希望指定佇列監聽器可以嘗試多次,但如果重試是由給定數量的未處理異常觸發的(而不是直接由 `release` 方法釋放),則應該失敗。要完成此操作,你可以在監聽器類別上定義 `maxExceptions` 屬性:
 
@@ -684,7 +684,7 @@ class SendShipmentNotification implements ShouldQueue
 在此範例中,監聽器將被重試最多 25 次。但是,如果監聽器拋出三個未處理的異常,監聽器將失敗。
 
 <a name="specifying-queued-listener-timeout"></a>
-#### 指定佇列監聽器逾時
+#### 指定佇列監聽器逾時 (Specifying Queued Listener Timeout)
 
 通常,你大致知道你期望佇列監聽器需要多長時間。因此,Laravel 允許你指定「逾時」值。如果監聽器處理的時間超過逾時值指定的秒數,處理監聽器的工作程序將以錯誤退出。你可以透過在監聽器類別上定義 `timeout` 屬性來定義監聽器允許執行的最大秒數:
 
@@ -729,7 +729,7 @@ class SendShipmentNotification implements ShouldQueue
 ```
 
 <a name="dispatching-events"></a>
-## 分派事件
+## 分派事件 (Dispatching Events)
 
 要分派一個事件,你可以在事件上呼叫靜態 `dispatch` 方法。此方法由 `Illuminate\Foundation\Events\Dispatchable` trait 提供給事件。傳遞給 `dispatch` 方法的任何參數都將傳遞給事件的建構函式:
 
@@ -773,7 +773,7 @@ OrderShipped::dispatchUnless($condition, $order);
 > 當測試時,斷言某些事件已被分派而不實際觸發它們的監聽器可能會有所幫助。Laravel 的[內建測試輔助函式](#testing)讓這變得輕而易舉。
 
 <a name="dispatching-events-after-database-transactions"></a>
-### 在資料庫交易後分派事件
+### 在資料庫交易後分派事件 (Dispatching Events After Database Transactions)
 
 有時,你可能希望指示 Laravel 僅在活躍的資料庫交易提交後才分派事件。要這樣做,你可以在事件類別上實現 `ShouldDispatchAfterCommit` 介面。
 
@@ -804,7 +804,7 @@ class OrderShipped implements ShouldDispatchAfterCommit
 ```
 
 <a name="deferring-events"></a>
-### 延遲事件
+### 延遲事件 (Deferring Events)
 
 延遲事件允許你延遲模型事件的分派和事件監聽器的執行,直到特定的程式碼區塊完成為止。當你需要確保在觸發事件監聽器之前建立所有相關記錄時,這特別有用。
 
@@ -837,10 +837,10 @@ Event::defer(function () {
 ```
 
 <a name="event-subscribers"></a>
-## 事件訂閱者
+## 事件訂閱者 (Event Subscribers)
 
 <a name="writing-event-subscribers"></a>
-### 編寫事件訂閱者
+### 編寫事件訂閱者 (Writing Event Subscribers)
 
 事件訂閱者是可以從訂閱者類別本身訂閱多個事件的類別,允許你在單個類別中定義多個事件處理程序。訂閱者應該定義一個 `subscribe` 方法,該方法接收一個事件分派程序實例。你可以在給定的分派程序上呼叫 `listen` 方法來註冊事件監聽器:
 
@@ -922,7 +922,7 @@ class UserEventSubscriber
 ```
 
 <a name="registering-event-subscribers"></a>
-### 註冊事件訂閱者
+### 註冊事件訂閱者 (Registering Event Subscribers)
 
 編寫訂閱者後,如果它們遵循 Laravel 的[事件發現慣例](#event-discovery),Laravel 將自動註冊訂閱者內的處理程序方法。否則,你可以使用 `Event` facade 的 `subscribe` 方法手動註冊你的訂閱者。通常,這應該在應用程式的 `AppServiceProvider` 的 `boot` 方法中完成:
 
@@ -948,7 +948,7 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 <a name="testing"></a>
-## 測試
+## 測試 (Testing)
 
 當測試分派事件的程式碼時,你可能希望指示 Laravel 不要實際執行事件的監聽器,因為監聽器的程式碼可以直接且獨立於分派相應事件的程式碼進行測試。當然,要測試監聽器本身,你可以實例化一個監聽器實例並在測試中直接呼叫 `handle` 方法。
 
@@ -1043,7 +1043,7 @@ Event::assertListening(
 > 在呼叫 `Event::fake()` 之後,不會執行任何事件監聽器。因此,如果你的測試使用依賴於事件的模型工廠,例如在模型的 `creating` 事件期間建立 UUID,你應該在使用工廠**之後**呼叫 `Event::fake()`。
 
 <a name="faking-a-subset-of-events"></a>
-### 僽造事件子集
+### 僽造事件子集 (Faking a Subset of Events)
 
 如果你只想為特定的事件集僽造事件監聽器,你可以將它們傳遞給 `fake` 或 `fakeFor` 方法:
 
@@ -1094,7 +1094,7 @@ Event::fake()->except([
 ```
 
 <a name="scoped-event-fakes"></a>
-### 作用域事件僽造
+### 作用域事件僽造 (Scoped Events Fakes)
 
 如果你只想為測試的一部分僽造事件監聽器,你可以使用 `fakeFor` 方法:
 

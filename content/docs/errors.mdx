@@ -15,24 +15,24 @@ title: "錯誤處理 (Error Handling)"
   - [自訂 HTTP 錯誤頁面](#custom-http-error-pages)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 當你開始一個新的 Laravel 專案時，錯誤和例外處理已經為你設定好了；然而，在任何時候，你都可以在應用程式的 `bootstrap/app.php` 中使用 `withExceptions` 方法來管理例外如何被回報和渲染。
 
 提供給 `withExceptions` 閉包的 `$exceptions` 物件是 `Illuminate\Foundation\Configuration\Exceptions` 的實例，負責管理應用程式中的例外處理。我們將在這份文件中深入探討這個物件。
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 `config/app.php` 設定檔中的 `debug` 選項決定了向使用者實際顯示多少關於錯誤的資訊。預設情況下，此選項會遵循儲存在 `.env` 檔案中的 `APP_DEBUG` 環境變數的值。
 
 在本地開發期間，你應該將 `APP_DEBUG` 環境變數設定為 `true`。**在你的正式環境中，此值應始終為 `false`。如果在正式環境中將該值設定為 `true`，你會有將敏感設定值暴露給應用程式終端使用者的風險。**
 
 <a name="handling-exceptions"></a>
-## 處理例外
+## 處理例外 (Handling Exceptions)
 
 <a name="reporting-exceptions"></a>
-### 回報例外
+### 回報例外 (Reporting Exceptions)
 
 在 Laravel 中，例外回報用於記錄例外或將它們發送到外部服務，如 [Sentry](https://github.com/getsentry/sentry-laravel) 或 [Flare](https://flareapp.io)。預設情況下，例外會根據你的[日誌](/docs/{{version}}/logging)設定進行記錄。然而，你可以自由地以任何方式記錄例外。
 
@@ -68,7 +68,7 @@ use App\Exceptions\InvalidOrderException;
 > 要自訂特定例外的例外回報，你也可以使用[可回報例外](/docs/{{version}}/errors#renderable-exceptions)。
 
 <a name="global-log-context"></a>
-#### 全域日誌上下文
+#### 全域日誌上下文 (Global Log Context)
 
 如果可用，Laravel 會自動將當前使用者的 ID 作為上下文資料新增到每個例外的日誌訊息中。你可以在應用程式的 `bootstrap/app.php` 檔案中使用 `context` 例外方法來定義你自己的全域上下文資料。這些資訊將包含在你應用程式寫入的每個例外日誌訊息中：
 
@@ -81,7 +81,7 @@ use App\Exceptions\InvalidOrderException;
 ```
 
 <a name="exception-log-context"></a>
-#### 例外日誌上下文
+#### 例外日誌上下文 (Exception Log Context)
 
 雖然在每個日誌訊息中新增上下文可能很有用，但有時特定例外可能具有你想要包含在日誌中的獨特上下文。透過在應用程式的其中一個例外上定義 `context` 方法，你可以指定與該例外相關的任何資料，這些資料應該新增到例外的日誌條目中：
 
@@ -109,7 +109,7 @@ class InvalidOrderException extends Exception
 ```
 
 <a name="the-report-helper"></a>
-#### `report` 輔助函式
+#### `report` 輔助函式 (The Report Helper)
 
 有時你可能需要回報例外但繼續處理當前請求。`report` 輔助函式允許你快速回報例外，而不向使用者渲染錯誤頁面：
 
@@ -127,7 +127,7 @@ public function isValid(string $value): bool
 ```
 
 <a name="deduplicating-reported-exceptions"></a>
-#### 去重回報的例外
+#### 去重回報的例外 (Deduplicating Reported Exceptions)
 
 如果你在整個應用程式中使用 `report` 函式，你可能偶爾會多次回報相同的例外，在日誌中建立重複的條目。
 
@@ -157,7 +157,7 @@ report($caught); // ignored
 ```
 
 <a name="exception-log-levels"></a>
-### 例外日誌層級
+### 例外日誌層級 (Exception Log Levels)
 
 當訊息寫入應用程式的[日誌](/docs/{{version}}/logging)時，訊息會以指定的[日誌層級](/docs/{{version}}/logging#log-levels)寫入，表示被記錄訊息的嚴重性或重要性。
 
@@ -175,7 +175,7 @@ use Psr\Log\LogLevel;
 ```
 
 <a name="ignoring-exceptions-by-type"></a>
-### 依類型忽略例外
+### 依類型忽略例外 (Ignoring Exceptions By Type)
 
 在建構應用程式時，會有一些類型的例外是你永遠不想回報的。要忽略這些例外，你可以在應用程式的 `bootstrap/app.php` 檔案中使用 `dontReport` 例外方法。提供給此方法的任何類別都永遠不會被回報；然而，它們仍然可能具有自訂渲染邏輯：
 
@@ -230,7 +230,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 ```
 
 <a name="rendering-exceptions"></a>
-### 渲染例外
+### 渲染例外 (Rendering Exceptions)
 
 預設情況下，Laravel 例外處理器會將例外轉換為 HTTP 回應。然而，你可以自由地為特定類型的例外註冊自訂渲染閉包。你可以透過在應用程式的 `bootstrap/app.php` 檔案中使用 `render` 例外方法來完成此操作。
 
@@ -265,7 +265,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 ```
 
 <a name="rendering-exceptions-as-json"></a>
-#### 將例外渲染為 JSON
+#### 將例外渲染為 JSON (Rendering Exceptions As Json)
 
 渲染例外時，Laravel 會根據請求的 `Accept` 標頭自動判斷例外應該渲染為 HTML 還是 JSON 回應。如果你想自訂 Laravel 如何判斷要渲染 HTML 還是 JSON 例外回應，你可以使用 `shouldRenderJsonWhen` 方法：
 
@@ -285,7 +285,7 @@ use Throwable;
 ```
 
 <a name="customizing-the-exception-response"></a>
-#### 自訂例外回應
+#### 自訂例外回應 (Customizing The Exception Response)
 
 極少數情況下，你可能需要自訂 Laravel 例外處理器渲染的整個 HTTP 回應。為達成此目的，你可以使用 `respond` 方法註冊回應自訂閉包：
 
@@ -306,7 +306,7 @@ use Symfony\Component\HttpFoundation\Response;
 ```
 
 <a name="renderable-exceptions"></a>
-### 可回報和可渲染的例外
+### 可回報和可渲染的例外 (Renderable Exceptions)
 
 與其在應用程式的 `bootstrap/app.php` 檔案中定義自訂回報和渲染行為，你可以直接在應用程式的例外上定義 `report` 和 `render` 方法。當這些方法存在時，框架會自動呼叫它們：
 
@@ -379,7 +379,7 @@ public function report(): bool
 > 你可以對 `report` 方法的任何必需依賴進行類型提示，它們將自動被 Laravel 的 [service container](/docs/{{version}}/container) 注入到方法中。
 
 <a name="throttling-reported-exceptions"></a>
-### 節流回報的例外
+### 節流回報的例外 (Throttling Reported Exceptions)
 
 如果你的應用程式回報了非常大量的例外，你可能想要節流實際記錄或發送到應用程式外部錯誤追蹤服務的例外數量。
 
@@ -465,7 +465,7 @@ use Throwable;
 ```
 
 <a name="http-exceptions"></a>
-## HTTP 例外
+## HTTP 例外 (Http Exceptions)
 
 有些例外描述來自伺服器的 HTTP 錯誤碼。例如，這可能是「找不到頁面」錯誤（404）、「未授權錯誤」（401），甚至是開發者產生的 500 錯誤。為了從應用程式的任何地方產生這樣的回應，你可以使用 `abort` 輔助函式：
 
@@ -474,7 +474,7 @@ abort(404);
 ```
 
 <a name="custom-http-error-pages"></a>
-### 自訂 HTTP 錯誤頁面
+### 自訂 HTTP 錯誤頁面 (Custom Http Error Pages)
 
 Laravel 讓你可以輕鬆地為各種 HTTP 狀態碼顯示自訂錯誤頁面。例如，要自訂 404 HTTP 狀態碼的錯誤頁面，請建立一個 `resources/views/errors/404.blade.php` 視圖範本。這個視圖將為你的應用程式產生的所有 404 錯誤進行渲染。此目錄中的視圖應該以它們對應的 HTTP 狀態碼命名。由 `abort` 函式引發的 `Symfony\Component\HttpKernel\Exception\HttpException` 實例會作為 `$exception` 變數傳遞給視圖：
 
@@ -489,7 +489,7 @@ php artisan vendor:publish --tag=laravel-errors
 ```
 
 <a name="fallback-http-error-pages"></a>
-#### 備用 HTTP 錯誤頁面
+#### 備用 HTTP 錯誤頁面 (Fallback Http Error Pages)
 
 你也可以為特定系列的 HTTP 狀態碼定義「備用」錯誤頁面。如果發生的特定 HTTP 狀態碼沒有對應的頁面，這個頁面將被渲染。為達成此目的，請在你的應用程式的 `resources/views/errors` 目錄中定義 `4xx.blade.php` 範本和 `5xx.blade.php` 範本。
 

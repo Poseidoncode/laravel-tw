@@ -3,18 +3,18 @@ title: "Precognition"
 description: Laravel Precognition 允許你在使用者完成表單之前預先驗證
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [即時驗證 (Live Validation)](#live-validation)
-  - [使用 Vue (Using Vue)](#using-vue)
-  - [使用 Vue 和 Inertia (Using Vue and Inertia)](#using-vue-and-inertia)
-  - [使用 React (Using React)](#using-react)
-  - [使用 React 和 Inertia (Using React and Inertia)](#using-react-and-inertia)
-  - [使用 Alpine 和 Blade (Using Alpine and Blade)](#using-alpine)
-  - [設定 Axios (Configuring Axios)](#configuring-axios)
-- [自訂驗證規則 (Customizing Validation Rules)](#customizing-validation-rules)
-- [處理檔案上傳 (Handling File Uploads)](#handling-file-uploads)
-- [管理副作用 (Managing Side-Effects)](#managing-side-effects)
-- [測試 (Testing)](#testing)
+- [簡介](#introduction)
+- [即時驗證](#live-validation)
+  - [使用 Vue](#using-vue)
+  - [使用 Vue 和 Inertia](#using-vue-and-inertia)
+  - [使用 React](#using-react)
+  - [使用 React 和 Inertia](#using-react-and-inertia)
+  - [使用 Alpine 和 Blade](#using-alpine)
+  - [設定 Axios](#configuring-axios)
+- [自訂驗證規則](#customizing-validation-rules)
+- [處理檔案上傳](#handling-file-uploads)
+- [管理副作用](#managing-side-effects)
+- [測試](#testing)
 
 <a name="introduction"></a>
 ## 簡介 (Introduction)
@@ -593,7 +593,7 @@ Alternatively, if you would like to submit the form via XHR you may use the form
 ```
 
 <a name="configuring-axios"></a>
-### Configuring Axios
+### Configuring Axios (Configuring Axios)
 
 The Precognition validation libraries use the [Axios](https://github.com/axios/axios) HTTP client to send requests to your application's backend. For convenience, the Axios instance may be customized if required by your application. For example, when using the `laravel-precognition-vue` library, you may add additional request headers to each outgoing request in your application's `resources/js/app.js` file:
 
@@ -619,7 +619,7 @@ client.use(window.axios);
 > The Inertia flavored Precognition libraries will only use the configured Axios instance for validation requests. Form submissions will always be sent by Inertia.
 
 <a name="customizing-validation-rules"></a>
-## Customizing Validation Rules
+## Customizing Validation Rules (Customizing Validation Rules)
 
 It is possible to customize the validation rules executed during a precognitive request by using the request's `isPrecognitive` method.
 
@@ -656,7 +656,7 @@ class StoreUserRequest extends FormRequest
 ```
 
 <a name="handling-file-uploads"></a>
-## Handling File Uploads
+## Handling File Uploads (Handling File Uploads)
 
 By default, Laravel Precognition does not upload or validate files during a precognitive validation request. This ensure that large files are not unnecessarily uploaded multiple times.
 
@@ -689,7 +689,7 @@ form.validateFiles();
 ```
 
 <a name="managing-side-effects"></a>
-## Managing Side-Effects
+## Managing Side-Effects (Managing Side-Effects)
 
 When adding the `HandlePrecognitiveRequests` middleware to a route, you should consider if there are any side-effects in _other_ middleware that should be skipped during a precognitive request.
 
@@ -721,7 +721,7 @@ class InteractionMiddleware
 ```
 
 <a name="testing"></a>
-## Testing
+## Testing (Testing)
 
 If you would like to make precognitive requests in your tests, Laravel's `TestCase` includes a `withPrecognition` helper which will add the `Precognition` request header.
 

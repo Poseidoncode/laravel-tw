@@ -10,12 +10,12 @@ description: CSRF 保護 (CSRF Protection)
 - [X-XSRF-Token](#csrf-x-xsrf-token)
 
 <a name="csrf-introduction"></a>
-## 簡介
+## 簡介 (Csrf Introduction)
 
 跨站請求偽造 (Cross-site request forgery) 是一種惡意攻擊，會在使用者已通過驗證的情況下代為執行未經授權的操作。所幸，Laravel 讓你可以輕鬆防止 [CSRF 攻擊](https://en.wikipedia.org/wiki/Cross-site_request_forgery)。
 
 <a name="csrf-explanation"></a>
-#### 漏洞說明
+#### 漏洞說明 (Csrf Explanation)
 
 若你對跨站請求偽造不熟悉，我們來看一個可能被濫用的例子。假設應用程式有個 `/user/email` 路由，可接受 `POST` 請求來修改已驗證使用者的 Email。通常該路由會期待 `email` 輸入欄位包含使用者想改用的 Email。
 
@@ -36,7 +36,7 @@ description: CSRF 保護 (CSRF Protection)
 為了避免這種漏洞，我們需要在每個進來的 `POST`、`PUT`、`PATCH` 或 `DELETE` 請求上檢查一組惡意應用程式無法得知的秘密 Session 值。
 
 <a name="preventing-csrf-requests"></a>
-## 防止 CSRF 請求
+## 防止 CSRF 請求 (Preventing Csrf Requests)
 
 Laravel 會為每個由應用程式管理的作用中 [使用者 Session](/docs/session) 自動產生一組 CSRF「Token」。這組 Token 用來確認實際發出請求的人就是該已驗證使用者。由於 Token 儲存在使用者的 Session 中，且每次重新產生 Session 時都會更新，惡意應用程式無法取得它。
 
@@ -68,12 +68,12 @@ Route::get('/token', function (Request $request) {
 預設包含在 `web` Middleware 群組內的 `Illuminate\Foundation\Http\Middleware\ValidateCsrfToken` [Middleware](/docs/middleware) 會自動驗證請求輸入中的 Token 是否與 Session 儲存的 Token 相符。當兩者一致時，我們便能確認是已驗證使用者正在發起請求。
 
 <a name="csrf-tokens-and-spas"></a>
-### CSRF Token 與 SPA
+### CSRF Token 與 SPA (Csrf Tokens And Spas)
 
 若你正在建立以 Laravel 作為 API 後端的 SPA，請參考 [Laravel Sanctum 文件](/docs/sanctum)，瞭解如何與 API 進行驗證並防止 CSRF 漏洞。
 
 <a name="csrf-excluding-uris"></a>
-### 從 CSRF 保護中排除 URI
+### 從 CSRF 保護中排除 URI (Csrf Excluding Uris)
 
 有時你可能想將某些 URI 排除在 CSRF 保護之外。例如，若你使用 [Stripe](https://stripe.com) 處理付款並採用他們的 Webhook 系統，就必須將 Stripe Webhook 處理路由排除，因為 Stripe 無法得知要傳給你路由的 CSRF Token。
 

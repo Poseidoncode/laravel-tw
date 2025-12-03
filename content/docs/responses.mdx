@@ -20,15 +20,15 @@ description: Laravel 提供多種方式回傳 Response,包括字串、陣列、J
 - [串流 Response](#streamed-responses)
   - [使用串流 Response](#consuming-streamed-responses)
   - [串流 JSON Response](#streamed-json-responses)
-  - [事件串流 (SSE)](#event-streams)
+  - [事件串流](#event-streams)
   - [串流下載](#streamed-downloads)
 - [Response 巨集](#response-macros)
 
 <a name="creating-responses"></a>
-## 建立 Response
+## 建立 Response (Creating Responses)
 
 <a name="strings-arrays"></a>
-#### 字串與陣列
+#### 字串與陣列 (Strings Arrays)
 
 所有路由和 Controller 都應該回傳一個 Response 以發送回使用者的瀏覽器。Laravel 提供了幾種不同的方式來回傳 Response。最基本的 Response 是從路由或 Controller 回傳字串。框架會自動將字串轉換為完整的 HTTP Response:
 
@@ -50,7 +50,7 @@ Route::get('/', function () {
 > 你知道你也可以從路由或 Controller 回傳 [Eloquent 集合](/docs/eloquent-collections)嗎?它們會自動轉換為 JSON。試試看!
 
 <a name="response-objects"></a>
-#### Response 物件
+#### Response 物件 (Response Objects)
 
 通常,你不會只是從路由動作回傳簡單的字串或陣列。相反,你將回傳完整的 `Illuminate\Http\Response` 實例或 [view](/docs/views)。
 
@@ -64,7 +64,7 @@ Route::get('/home', function () {
 ```
 
 <a name="eloquent-models-and-collections"></a>
-#### Eloquent 模型與集合
+#### Eloquent 模型與集合 (Eloquent Models And Collections)
 
 你也可以直接從路由和 Controller 回傳 [Eloquent ORM](/docs/eloquent) 模型和集合。當你這樣做時,Laravel 會自動將模型和集合轉換為 JSON Response,同時遵守模型的[隱藏屬性](/docs/eloquent-serialization#hiding-attributes-from-json):
 
@@ -77,7 +77,7 @@ Route::get('/user/{'{user}'}', function (User $user) {
 ```
 
 <a name="attaching-headers-to-responses"></a>
-### 將標頭附加到 Response
+### 將標頭附加到 Response (Attaching Headers To Responses)
 
 請記住,大多數 Response 方法都是可鏈結的,允許流暢地建構 Response 實例。例如,你可以使用 `header` 方法在將 Response 發送回使用者之前向 Response 新增一系列標頭:
 
@@ -117,7 +117,7 @@ Route::middleware('cache.headers:public;max_age=2628000;etag')->group(function (
 ```
 
 <a name="attaching-cookies-to-responses"></a>
-### 將 Cookie 附加到 Response
+### 將 Cookie 附加到 Response (Attaching Cookies To Responses)
 
 你可以使用 `cookie` 方法將 Cookie 附加到傳出的 `Illuminate\Http\Response` 實例。你應該將名稱、值和 Cookie 應被視為有效的分鐘數傳遞給此方法:
 
@@ -144,7 +144,7 @@ Cookie::queue('name', 'value', $minutes);
 ```
 
 <a name="generating-cookie-instances"></a>
-#### 產生 Cookie 實例
+#### 產生 Cookie 實例 (Generating Cookie Instances)
 
 如果你想產生一個 `Symfony\Component\HttpFoundation\Cookie` 實例,該實例可以在稍後附加到 Response 實例,你可以使用全域 `cookie` 輔助函式。除非將此 Cookie 附加到 Response 實例,否則不會發送回客戶端:
 
@@ -155,7 +155,7 @@ return response('Hello World')->cookie($cookie);
 ```
 
 <a name="expiring-cookies-early"></a>
-#### 提前過期 Cookie
+#### 提前過期 Cookie (Expiring Cookies Early)
 
 你可以透過傳出 Response 的 `withoutCookie` 方法使其過期來移除 Cookie:
 
@@ -170,7 +170,7 @@ Cookie::expire('name');
 ```
 
 <a name="cookies-and-encryption"></a>
-### Cookie 與加密
+### Cookie 與加密 (Cookies And Encryption)
 
 預設情況下,由於 `Illuminate\Cookie\Middleware\EncryptCookies` Middleware,Laravel 產生的所有 Cookie 都經過加密和簽名,因此客戶端無法修改或讀取它們。如果你想為應用程式產生的 Cookie 子集停用加密,你可以在應用程式的 `bootstrap/app.php` 檔案中使用 `encryptCookies` 方法:
 
@@ -183,7 +183,7 @@ Cookie::expire('name');
 ```
 
 <a name="redirects"></a>
-## 重新導向
+## 重新導向 (Redirects)
 
 重新導向 Response 是 `Illuminate\Http\RedirectResponse` 類別的實例,並包含將使用者重新導向到另一個 URL 所需的適當標頭。有幾種方法可以產生 `RedirectResponse` 實例。最簡單的方法是使用全域 `redirect` 輔助函式:
 
@@ -204,7 +204,7 @@ Route::post('/user/profile', function () {
 ```
 
 <a name="redirecting-named-routes"></a>
-### 重新導向到命名路由
+### 重新導向到命名路由 (Redirecting Named Routes)
 
 當你在沒有參數的情況下呼叫 `redirect` 輔助函式時,會回傳 `Illuminate\Routing\Redirector` 的實例,允許你呼叫 `Redirector` 實例上的任何方法。例如,要產生到命名路由的 `RedirectResponse`,你可以使用 `route` 方法:
 
@@ -221,7 +221,7 @@ return redirect()->route('profile', ['id' => 1]);
 ```
 
 <a name="populating-parameters-via-eloquent-models"></a>
-#### 透過 Eloquent 模型填充參數
+#### 透過 Eloquent 模型填充參數 (Populating Parameters Via Eloquent Models)
 
 如果你要重新導向到具有從 Eloquent 模型填充的「ID」參數的路由,你可以直接傳遞模型本身。ID 將自動提取:
 
@@ -244,7 +244,7 @@ public function getRouteKey(): mixed
 ```
 
 <a name="redirecting-controller-actions"></a>
-### 重新導向到 Controller 動作
+### 重新導向到 Controller 動作 (Redirecting Controller Actions)
 
 你也可以產生到 [Controller 動作](/docs/controllers)的重新導向。為此,將 Controller 和動作名稱傳遞給 `action` 方法:
 
@@ -263,7 +263,7 @@ return redirect()->action(
 ```
 
 <a name="redirecting-external-domains"></a>
-### 重新導向到外部網域
+### 重新導向到外部網域 (Redirecting External Domains)
 
 有時你可能需要重新導向到應用程式之外的網域。你可以透過呼叫 `away` 方法來實現,該方法會建立一個 `RedirectResponse`,而不進行任何額外的 URL 編碼、驗證或驗證:
 
@@ -272,7 +272,7 @@ return redirect()->away('https://www.google.com');
 ```
 
 <a name="redirecting-with-flashed-session-data"></a>
-### 使用快閃的 Session 資料重新導向
+### 使用快閃的 Session 資料重新導向 (Redirecting With Flashed Session Data)
 
 重新導向到新 URL 並[將資料快閃到 Session](/docs/session#flash-data) 通常同時完成。通常,這是在成功執行動作後完成的,當你向 Session 快閃成功訊息時。為了方便起見,你可以建立一個 `RedirectResponse` 實例並在單一流暢的方法鏈中將資料快閃到 Session:
 
@@ -295,7 +295,7 @@ Route::post('/user/profile', function () {
 ```
 
 <a name="redirecting-with-input"></a>
-#### 使用輸入重新導向
+#### 使用輸入重新導向 (Redirecting With Input)
 
 你可以使用 `RedirectResponse` 實例提供的 `withInput` 方法在將使用者重新導向到新位置之前將當前請求的輸入資料快閃到 Session。如果使用者遇到驗證錯誤,通常會這樣做。一旦輸入被快閃到 Session,你可以在下一次請求期間輕鬆[取得它](/docs/requests#retrieving-old-input)以重新填充表單:
 
@@ -304,7 +304,7 @@ return back()->withInput();
 ```
 
 <a name="other-response-types"></a>
-## 其他 Response 類型
+## 其他 Response 類型 (Other Response Types)
 
 `response` 輔助函式可用於產生其他類型的 Response 實例。當在沒有參數的情況下呼叫 `response` 輔助函式時,會回傳 `Illuminate\Contracts\Routing\ResponseFactory` [Contract](/docs/contracts) 的實作。此 Contract 提供了幾種有用的方法來產生 Response。
 
@@ -342,7 +342,7 @@ return response()
 ```
 
 <a name="file-downloads"></a>
-### 檔案下載
+### 檔案下載 (File Downloads)
 
 `download` 方法可用於產生強制使用者瀏覽器下載給定路徑檔案的 Response。`download` 方法接受檔案名稱作為該方法的第二個參數,這將決定下載檔案的使用者看到的檔案名稱。最後,你可以將 HTTP 標頭陣列作為該方法的第三個參數傳遞:
 
@@ -356,7 +356,7 @@ return response()->download($pathToFile, $name, $headers);
 > 管理檔案下載的 Symfony HttpFoundation 要求正在下載的檔案具有 ASCII 檔案名稱。
 
 <a name="file-responses"></a>
-### 檔案 Response
+### 檔案 Response (File Responses)
 
 `file` 方法可用於直接在使用者的瀏覽器中顯示檔案(例如圖片或 PDF),而不是啟動下載。此方法接受檔案的絕對路徑作為其第一個參數,並將標頭陣列作為其第二個參數:
 
@@ -367,7 +367,7 @@ return response()->file($pathToFile, $headers);
 ```
 
 <a name="streamed-responses"></a>
-## 串流 Response
+## 串流 Response (Streamed Responses)
 
 透過在產生資料時將其串流到客戶端,你可以顯著減少記憶體使用並提高效能,尤其是對於非常大的 Response。串流 Response 允許客戶端在伺服器完成發送之前開始處理資料:
 
@@ -399,7 +399,7 @@ Route::post('/chat', function () {
 ```
 
 <a name="consuming-streamed-responses"></a>
-### 使用串流 Response
+### 使用串流 Response (Consuming Streamed Responses)
 
 串流 Response 可以使用 Laravel 的 `stream` npm 套件使用,它提供了一個方便的 API 來與 Laravel Response 和事件串流互動。要開始使用,請安裝 `@laravel/stream-react` 或 `@laravel/stream-vue` 套件:
 
@@ -642,7 +642,7 @@ const { isFetching, isStreaming } = useStream("chat", { id: props.id });
 ```
 
 <a name="streamed-json-responses"></a>
-### 串流 JSON Response
+### 串流 JSON Response (Streamed Json Responses)
 
 如果你需要逐步串流 JSON 資料,你可以使用 `streamJson` 方法。此方法對於需要逐步發送到瀏覽器的大型資料集特別有用,其格式可以由 JavaScript 輕鬆解析:
 
@@ -751,7 +751,7 @@ yield new StreamedEvent(
 ```
 
 <a name="consuming-event-streams"></a>
-#### 使用事件串流
+#### 使用事件串流 (Consuming Event Streams)
 
 事件串流可以使用 Laravel 的 `stream` npm 套件使用,它提供了一個方便的 API 來與 Laravel 事件串流互動。要開始使用,請安裝 `@laravel/stream-react` 或 `@laravel/stream-vue` 套件:
 
@@ -858,7 +858,7 @@ return response()->eventStream(function () {
 ```
 
 <a name="streamed-downloads"></a>
-### 串流下載
+### 串流下載 (Streamed Downloads)
 
 有時你可能希望將給定操作的字串 Response 轉換為可下載的 Response,而無需將操作的內容寫入磁碟。在這種情況下,你可以使用 `streamDownload` 方法。此方法接受回呼、檔案名稱和可選的標頭陣列作為其參數:
 
@@ -873,7 +873,7 @@ return response()->streamDownload(function () {
 ```
 
 <a name="response-macros"></a>
-## Response 巨集
+## Response 巨集 (Response Macros)
 
 如果你想定義可以在各種路由和 Controller 中重複使用的自訂 Response,你可以使用 `Response` Facade 上的 `macro` 方法。通常,你應該從應用程式的[Service Provider](/docs/providers) 之一的 `boot` 方法呼叫此方法,例如 `App\Providers\AppServiceProvider` Service Provider:
 

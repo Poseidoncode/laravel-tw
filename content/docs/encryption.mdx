@@ -11,11 +11,12 @@ description: Laravel 加密服務提供了使用 OpenSSL 進行 AES-256 和 AES-
 - [使用加密器](#using-the-encrypter)
 
 <a name="introduction"></a>
+<a name="introduction"></a>
 
 Laravel 的加密服務提供了一個簡單、方便的介面，用於透過 OpenSSL 使用 AES-256 和 AES-128 加密來加密和解密文字。所有 Laravel 加密的值都使用訊息驗證碼 (MAC) 進行簽署，因此一旦加密，其底層值就無法被修改或竄改。
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 ### 優雅地輪換加密金鑰
 
@@ -33,10 +34,10 @@ APP_PREVIOUS_KEYS="base64:2nLsGFGzyoae2ax3EF2Lyq/hH6QghBGLIq5uL+Gp8/w="
 這種優雅解密的方法允許使用者即使在加密金鑰輪換後也能不間斷地繼續使用您的應用程式。
 
 <a name="using-the-encrypter"></a>
-## 使用加密器
+## 使用加密器 (Using The Encrypter)
 
 <a name="encrypting-a-value"></a>
-#### 加密值
+#### 加密值 (Encrypting A Value)
 
 您可以使用 `Crypt` facade 提供的 `encryptString` 方法來加密值。所有加密的值都使用 OpenSSL 和 AES-256-CBC 密碼進行加密。此外，所有加密的值都使用訊息驗證碼 (MAC) 進行簽署。整合的訊息驗證碼將防止解密任何被惡意使用者竄改的值：
 
@@ -66,7 +67,7 @@ class DigitalOceanTokenController extends Controller
 ```
 
 <a name="decrypting-a-value"></a>
-#### 解密值
+#### 解密值 (Decrypting A Value)
 
 您可以使用 `Crypt` facade 提供的 `decryptString` 方法來解密值。如果值無法正確解密，例如當訊息驗證碼無效時，將拋出 `Illuminate\Contracts\Encryption\DecryptException`：
 

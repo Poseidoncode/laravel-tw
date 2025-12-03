@@ -19,12 +19,12 @@ description: 將 Laravel 應用程式部署到生產環境的指南
 - [使用 Laravel Cloud 或 Forge 部署](#deploying-with-cloud-or-forge)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 當你準備將 Laravel 應用程式部署到生產環境時，有一些重要事項可以確保你的應用程式盡可能高效地運行。在本文件中，我們將介紹一些確保 Laravel 應用程式正確部署的重要起點。
 
 <a name="server-requirements"></a>
-## 伺服器需求
+## 伺服器需求 (Server Requirements)
 
 Laravel 框架有一些系統需求。你應該確保你的 Web 伺服器符合以下最低 PHP 版本和擴充功能要求：
 
@@ -48,7 +48,7 @@ Laravel 框架有一些系統需求。你應該確保你的 Web 伺服器符合�
 </div>
 
 <a name="server-configuration"></a>
-## 伺服器設定
+## 伺服器設定 (Server Configuration)
 
 <a name="nginx"></a>
 ### Nginx
@@ -105,12 +105,12 @@ frankenphp php-server -r public/
 要利用 FrankenPHP 支援的更強大功能，例如其 [Laravel Octane](/docs/octane) 整合、HTTP/3、現代壓縮技術，或將 Laravel 應用程式打包為獨立二進位檔案的能力，請參閱 FrankenPHP 的 [Laravel 文件](https://frankenphp.dev/docs/laravel/)。
 
 <a name="directory-permissions"></a>
-### 目錄權限
+### 目錄權限 (Directory Permissions)
 
 Laravel 需要寫入 `bootstrap/cache` 和 `storage` 目錄，因此你應該確保 Web 伺服器處理程序擁有者具有寫入這些目錄的權限。
 
 <a name="optimization"></a>
-## 最佳化
+## 最佳化 (Optimization)
 
 將應用程式部署到生產環境時，有許多檔案應該被快取，包括你的設定、事件、路由和視圖。Laravel 提供了一個單一、方便的 `optimize` Artisan 指令，可以快取所有這些檔案。這個指令通常應該作為應用程式部署過程的一部分來呼叫：
 
@@ -127,7 +127,7 @@ php artisan optimize:clear
 在接下來的文件中，我們將討論由 `optimize` 指令執行的每個細粒度最佳化指令。
 
 <a name="optimizing-configuration-loading"></a>
-### 快取設定
+### 快取設定 (Optimizing Configuration Loading)
 
 將應用程式部署到生產環境時，你應該確保在部署過程中執行 `config:cache` Artisan 指令：
 
@@ -141,7 +141,7 @@ php artisan config:cache
 > 如果你在部署過程中執行 `config:cache` 指令，你應該確保只在設定檔中呼叫 `env` 函式。一旦設定被快取，`.env` 檔案將不會被載入，所有對 `.env` 變數的 `env` 函式呼叫都將回傳 `null`。
 
 <a name="caching-events"></a>
-### 快取事件
+### 快取事件 (Caching Events)
 
 你應該在部署過程中快取應用程式自動發現的事件與監聽器對應關係。這可以透過在部署期間呼叫 `event:cache` Artisan 指令來完成：
 
@@ -150,7 +150,7 @@ php artisan event:cache
 ```
 
 <a name="optimizing-route-loading"></a>
-### 快取路由
+### 快取路由 (Optimizing Route Loading)
 
 如果你正在建置一個擁有許多路由的大型應用程式，你應該確保在部署過程中執行 `route:cache` Artisan 指令：
 
@@ -161,7 +161,7 @@ php artisan route:cache
 此指令將所有路由註冊縮減為快取檔案中的單一方法呼叫，從而在註冊數百個路由時提高路由註冊的效能。
 
 <a name="optimizing-view-loading"></a>
-### 快取視圖
+### 快取視圖 (Optimizing View Loading)
 
 將應用程式部署到生產環境時，你應該確保在部署過程中執行 `view:cache` Artisan 指令：
 
@@ -172,14 +172,14 @@ php artisan view:cache
 此指令會預先編譯所有 Blade 視圖，因此它們不會在需要時才編譯，從而提高每個回傳視圖的請求的效能。
 
 <a name="debug-mode"></a>
-## 除錯模式
+## 除錯模式 (Debug Mode)
 
 `config/app.php` 設定檔中的 debug 選項決定了向使用者顯示多少錯誤資訊。預設情況下，此選項設定為遵循 `APP_DEBUG` 環境變數的值，該變數儲存在應用程式的 `.env` 檔案中。
 
 > [!WARNING] > **在生產環境中，此值應始終為 `false`。如果 `APP_DEBUG` 變數在生產環境中設定為 `true`，你將冒著向應用程式的終端使用者暴露敏感設定值的風險。**
 
 <a name="the-health-route"></a>
-## 健康檢查路由
+## 健康檢查路由 (The Health Route)
 
 Laravel 包含一個內建的健康檢查路由，可用於監控應用程式的狀態。在生產環境中，此路由可用於向正常執行時間監控器、負載平衡器或 Kubernetes 等編排系統報告應用程式的狀態。
 
@@ -197,7 +197,7 @@ Laravel 包含一個內建的健康檢查路由，可用於監控應用程式的
 當對此路由發出 HTTP 請求時，Laravel 還會分派一個 `Illuminate\Foundation\Events\DiagnosingHealth` 事件，允許你執行與應用程式相關的額外健康檢查。在此事件的[監聽器](/docs/events)中，你可以檢查應用程式的資料庫或快取狀態。如果你偵測到應用程式有問題，只需從監聽器拋出異常即可。
 
 <a name="deploying-with-cloud-or-forge"></a>
-## 使用 Laravel Cloud 或 Forge 部署
+## 使用 Laravel Cloud 或 Forge 部署 (Deploying With Cloud Or Forge)
 
 <a name="laravel-cloud"></a>
 #### Laravel Cloud

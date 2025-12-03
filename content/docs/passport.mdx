@@ -3,54 +3,53 @@ title: "Passport"
 description: Laravel Passport 為你的應用程式提供完整的 OAuth2 伺服器實作
 ---
 
-- [簡介 (Introduction)](#introduction)
-  - [Passport 還是 Sanctum？ (Passport or Sanctum?)](#passport-or-sanctum)
-- [安裝 (Installation)](#installation)
-  - [部署 Passport (Deploying Passport)](#deploying-passport)
-  - [升級 Passport (Upgrading Passport)](#upgrading-passport)
-- [設定 (Configuration)](#configuration)
-  - [Token 生命周期 (Token Lifetimes)](#token-lifetimes)
-  - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
-  - [覆寫路由 (Overriding Routes)](#overriding-routes)
-- [授權碼授權 (Authorization Code Grant)](#authorization-code-grant)
-  - [管理用戶端 (Managing Clients)](#managing-clients)
-  - [請求 Token (Requesting Tokens)](#requesting-tokens)
-  - [管理 Token (Managing Tokens)](#managing-tokens)
-  - [重新整理 Token (Refreshing Tokens)](#refreshing-tokens)
-  - [撤銷 Token (Revoking Tokens)](#revoking-tokens)
-  - [清除 Token (Purging Tokens)](#purging-tokens)
-- [帶有 PKCE 的授權碼授權 (Authorization Code Grant With PKCE)](#code-grant-pkce)
-  - [建立用戶端 (Creating the Client)](#creating-a-auth-pkce-grant-client)
-  - [請求 Token (Requesting Tokens)](#requesting-auth-pkce-grant-tokens)
-- [裝置授權 (Device Authorization Grant)](#device-authorization-grant)
-  - [建立裝置授權用戶端 (Creating a Device Code Grant Client)](#creating-a-device-authorization-grant-client)
-  - [請求 Token (Requesting Tokens)](#requesting-device-authorization-grant-tokens)
-- [密碼授權 (Password Grant)](#password-grant)
-  - [建立密碼授權用戶端 (Creating a Password Grant Client)](#creating-a-password-grant-client)
-  - [請求 Token (Requesting Tokens)](#requesting-password-grant-tokens)
-  - [請求所有 Scope (Requesting All Scopes)](#requesting-all-scopes)
-  - [自訂使用者提供者 (Customizing the User Provider)](#customizing-the-user-provider)
-  - [自訂使用者名稱欄位 (Customizing the Username Field)](#customizing-the-username-field)
-  - [自訂密碼驗證 (Customizing the Password Validation)](#customizing-the-password-validation)
-- [隱式授權 (Implicit Grant)](#implicit-grant)
-- [用戶端憑證授權 (Client Credentials Grant)](#client-credentials-grant)
-- [個人存取 Token (Personal Access Tokens)](#personal-access-tokens)
-  - [建立個人存取用戶端 (Creating a Personal Access Client)](#creating-a-personal-access-client)
-  - [自訂使用者提供者 (Customizing the User Provider)](#customizing-the-user-provider-for-pat)
-  - [管理個人存取 Token (Managing Personal Access Tokens)](#managing-personal-access-tokens)
-- [保護路由 (Protecting Routes)](#protecting-routes)
-  - [透過中介軟體 (Via Middleware)](#via-middleware)
-  - [傳遞存取 Token (Passing the Access Token)](#passing-the-access-token)
-- [Token Scope (Token Scopes)](#token-scopes)
-  - [定義 Scope (Defining Scopes)](#defining-scopes)
-  - [預設 Scope (Default Scope)](#default-scope)
-  - [將 Scope 指派給 Token (Assigning Scopes to Tokens)](#assigning-scopes-to-tokens)
-  - [檢查 Scope (Checking Scopes)](#checking-scopes)
-- [SPA 身份驗證 (SPA Authentication)](#spa-authentication)
-- [事件 (Events)](#events)
-- [測試 (Testing)](#testing)
+- [簡介](#introduction)
+  - [Passport 還是 Sanctum？](#passport-or-sanctum)
+- [安裝](#installation)
+  - [部署 Passport](#deploying-passport)
+  - [升級 Passport](#upgrading-passport)
+- [設定](#configuration)
+  - [Token 生命周期](#token-lifetimes)
+  - [覆寫預設模型](#overriding-default-models)
+  - [覆寫路由](#overriding-routes)
+- [授權碼授權](#authorization-code-grant)
+  - [管理用戶端](#managing-clients)
+  - [請求 Token](#requesting-tokens)
+  - [管理 Token](#managing-tokens)
+  - [重新整理 Token](#refreshing-tokens)
+  - [撤銷 Token](#revoking-tokens)
+  - [清除 Token](#purging-tokens)
+- [帶有 PKCE 的授權碼授權](#code-grant-pkce)
+  - [建立用戶端](#creating-a-auth-pkce-grant-client)
+  - [請求 Token](#requesting-auth-pkce-grant-tokens)
+- [裝置授權](#device-authorization-grant)
+  - [建立裝置授權用戶端](#creating-a-device-authorization-grant-client)
+  - [請求 Token](#requesting-device-authorization-grant-tokens)
+- [密碼授權](#password-grant)
+  - [建立密碼授權用戶端](#creating-a-password-grant-client)
+  - [請求 Token](#requesting-password-grant-tokens)
+  - [請求所有 Scope](#requesting-all-scopes)
+  - [自訂使用者提供者](#customizing-the-user-provider)
+  - [自訂使用者名稱欄位](#customizing-the-username-field)
+  - [自訂密碼驗證](#customizing-the-password-validation)
+- [隱式授權](#implicit-grant)
+- [用戶端憑證授權](#client-credentials-grant)
+- [個人存取 Token](#personal-access-tokens)
+  - [建立個人存取用戶端](#creating-a-personal-access-client)
+  - [自訂使用者提供者](#customizing-the-user-provider-for-pat)
+  - [管理個人存取 Token](#managing-personal-access-tokens)
+- [保護路由](#protecting-routes)
+  - [透過中介軟體](#via-middleware)
+  - [傳遞存取 Token](#passing-the-access-token)
+- [Token Scope](#token-scopes)
+  - [定義 Scope](#defining-scopes)
+  - [預設 Scope](#default-scope)
+  - [將 Scope 指派給 Token](#assigning-scopes-to-tokens)
+  - [檢查 Scope](#checking-scopes)
+- [SPA 身份驗證](#spa-authentication)
+- [事件](#events)
+- [測試](#testing)
 
-<a name="introduction"></a>
 <a name="introduction"></a>
 ## 簡介 (Introduction)
 
@@ -66,7 +65,6 @@ description: Laravel Passport 為你的應用程式提供完整的 OAuth2 伺服
 
 但是，如果你試圖驗證單頁應用程式、行動應用程式或發行 API Token，你應該使用 [Laravel Sanctum](/docs/sanctum)。Laravel Sanctum 不支援 OAuth2；但是，它提供了更簡單的 API 身份驗證開發體驗。
 
-<a name="installation"></a>
 <a name="installation"></a>
 ## 安裝 (Installation)
 
@@ -113,7 +111,6 @@ class User extends Authenticatable implements OAuthenticatable
 ],
 ```
 
-<a name="deploying-passport"></a>
 <a name="deploying-passport"></a>
 ### 部署 Passport (Deploying Passport)
 
@@ -684,7 +681,7 @@ Passport 將自動定義回傳這些視圖的路由。你的 `auth.oauth.device.
 你的 `auth.oauth.device.authorize` 樣板應包含一個向 `passport.device.authorizations.approve` 路由發出 POST 請求以批准授權的表單，以及一個向 `passport.device.authorizations.deny` 路由發出 DELETE 請求以拒絕授權的表單。`passport.device.authorizations.approve` 和 `passport.device.authorizations.deny` 路由需要 `state`、`client_id` 和 `auth_token` 欄位。
 
 <a name="creating-a-device-authorization-grant-client"></a>
-### 建立裝置授權用戶端 (Creating a Device Authorization Grant Client)
+### 建立裝置授權用戶端 (Creating a Device Authorization Grant Client) (Creating a Device Code Grant Client)
 
 在你的應用程式可以透過裝置授權發行 Token 之前，你需要建立一個啟用裝置流程的用戶端。你可以使用帶有 `--device` 選項的 `passport:client` Artisan 指令來執行此操作。此指令將建立一個第一方裝置流程啟用用戶端，並為你提供用戶端 ID 和 Secret：
 

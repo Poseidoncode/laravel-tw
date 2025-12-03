@@ -16,7 +16,7 @@ description: Laravel 的視圖（Views）負責應用程式的 HTML 呈現，將
 - [最佳化 Views](#optimizing-views)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 當然，直接從路由和 controller 回傳完整的 HTML 文件字串並不實用。值得慶幸的是，views 提供了一種便利的方式來將所有 HTML 放在獨立的檔案中。
 
@@ -44,14 +44,14 @@ Route::get('/', function () {
 > 尋找更多關於如何撰寫 Blade 樣板的資訊？查看完整的 [Blade 文件](/docs/blade) 開始使用。
 
 <a name="writing-views-in-react-or-vue"></a>
-### 使用 React / Vue 撰寫 Views
+### 使用 React / Vue 撰寫 Views (Writing Views In React Or Vue)
 
 許多開發者已經開始偏好使用 React 或 Vue 來撰寫他們的樣板，而不是透過 Blade 在 PHP 中撰寫前端樣板。Laravel 透過 [Inertia](https://inertiajs.com/) 讓這變得輕而易舉，這是一個函式庫，可以輕鬆地將你的 React / Vue 前端連接到你的 Laravel 後端，而不需要建構 SPA 的典型複雜性。
 
 我們的 [React 和 Vue 應用程式入門套件](/docs/starter-kits) 為你的下一個由 Inertia 驅動的 Laravel 應用程式提供了一個很好的起點。
 
 <a name="creating-and-rendering-views"></a>
-## 建立與渲染 Views
+## 建立與渲染 Views (Creating And Rendering Views)
 
 你可以透過在應用程式的 `resources/views` 目錄中放置一個副檔名為 `.blade.php` 的檔案來建立 view，或者使用 `make:view` Artisan 指令：
 
@@ -80,7 +80,7 @@ return View::make('greeting', ['name' => 'James']);
 如你所見，傳遞給 `view` 輔助函式的第一個參數對應於 `resources/views` 目錄中 view 檔案的名稱。第二個參數是一個應該提供給 view 的資料陣列。在這個例子中，我們傳遞了 `name` 變數，它在 view 中使用 [Blade 語法](/docs/blade) 顯示。
 
 <a name="nested-view-directories"></a>
-### 巢狀 View 目錄
+### 巢狀 View 目錄 (Nested View Directories)
 
 Views 也可以巢狀在 `resources/views` 目錄的子目錄中。「點」符號可以用來參照巢狀的 views。例如，如果你的 view 儲存在 `resources/views/admin/profile.blade.php`，你可以從應用程式的路由 / controller 中這樣回傳它：
 
@@ -92,7 +92,7 @@ return view('admin.profile', $data);
 > View 目錄名稱不應包含 `.` 字元。
 
 <a name="creating-the-first-available-view"></a>
-### 建立第一個可用的 View
+### 建立第一個可用的 View (Creating The First Available View)
 
 使用 `View` facade 的 `first` 方法，你可以建立在給定的 views 陣列中存在的第一個 view。如果你的應用程式或套件允許 views 被自訂或覆寫，這可能很有用：
 
@@ -103,7 +103,7 @@ return View::first(['custom.admin', 'admin'], $data);
 ```
 
 <a name="determining-if-a-view-exists"></a>
-### 判斷 View 是否存在
+### 判斷 View 是否存在 (Determining If A View Exists)
 
 如果你需要判斷 view 是否存在，你可以使用 `View` facade。`exists` 方法會在 view 存在時回傳 `true`：
 
@@ -116,7 +116,7 @@ if (View::exists('admin.profile')) {
 ```
 
 <a name="passing-data-to-views"></a>
-## 傳遞資料到 Views
+## 傳遞資料到 Views (Passing Data To Views)
 
 如你在先前的範例中所見，你可以傳遞一個資料陣列給 views 來讓 view 可以使用這些資料：
 
@@ -135,7 +135,7 @@ return view('greeting')
 ```
 
 <a name="sharing-data-with-all-views"></a>
-### 與所有 Views 共享資料
+### 與所有 Views 共享資料 (Sharing Data With All Views)
 
 有時候，你可能需要與應用程式渲染的所有 views 共享資料。你可以使用 `View` facade 的 `share` 方法來做到這一點。通常，你應該在 service provider 的 `boot` 方法中呼叫 `share` 方法。你可以將它們加入到 `App\Providers\AppServiceProvider` 類別中，或產生一個獨立的 service provider 來容納它們：
 
@@ -247,7 +247,7 @@ class ProfileComposer
 如你所見，所有 view composers 都透過 [service container](/docs/container) 解析，因此你可以在 composer 的建構式中型別提示任何你需要的依賴項。
 
 <a name="attaching-a-composer-to-multiple-views"></a>
-#### 將 Composer 附加到多個 Views
+#### 將 Composer 附加到多個 Views (Attaching A Composer To Multiple Views)
 
 你可以透過傳遞一個 views 陣列作為 `composer` 方法的第一個參數，一次將 view composer 附加到多個 views：
 
@@ -285,7 +285,7 @@ View::creator('profile', ProfileCreator::class);
 ```
 
 <a name="optimizing-views"></a>
-## 最佳化 Views
+## 最佳化 Views (Optimizing Views)
 
 預設情況下，Blade 樣板 views 會在需要時編譯。當執行渲染 view 的請求時，Laravel 會判斷 view 的已編譯版本是否存在。如果檔案存在，Laravel 會判斷未編譯的 view 是否比已編譯的 view 更近期被修改。如果已編譯的 view 不存在，或者未編譯的 view 已被修改，Laravel 會重新編譯該 view。
 

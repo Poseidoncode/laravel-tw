@@ -13,7 +13,7 @@ description: Laravel 提供使用 seed 類別來填充資料庫資料的功能
 - [執行 Seeders](#running-seeders)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 Laravel 提供了使用 seed 類別來填充資料庫資料的功能。所有的 seed 類別都儲存在 `database/seeders` 目錄中。預設情況下，會為您定義一個 `DatabaseSeeder` 類別。透過這個類別，您可以使用 `call` 方法來執行其他 seed 類別，讓您可以控制 seeding 的順序。
 
@@ -21,7 +21,7 @@ Laravel 提供了使用 seed 類別來填充資料庫資料的功能。所有的
 > 在資料庫 seeding 期間，[Mass assignment 保護](/docs/eloquent#mass-assignment) 會自動停用。
 
 <a name="writing-seeders"></a>
-## 撰寫 Seeders
+## 撰寫 Seeders (Writing Seeders)
 
 要產生一個 seeder，請執行 `make:seeder` [Artisan 命令](/docs/artisan)。框架產生的所有 seeders 都將放置在 `database/seeders` 目錄中：
 
@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
 > 您可以在 `run` 方法的簽章中型別提示任何您需要的依賴項。它們將透過 Laravel [service container](/docs/container) 自動解析。
 
 <a name="using-model-factories"></a>
-### 使用 Model Factories
+### 使用 Model Factories (Using Model Factories)
 
 當然，手動指定每個 model seed 的屬性是很麻煩的。相反，您可以使用 [model factories](/docs/eloquent-factories) 來方便地產生大量的資料庫記錄。首先，請查看 [model factory 文件](/docs/eloquent-factories) 來了解如何定義您的 factories。
 
@@ -85,7 +85,7 @@ public function run(): void
 ```
 
 <a name="calling-additional-seeders"></a>
-### 呼叫額外的 Seeders
+### 呼叫額外的 Seeders (Calling Additional Seeders)
 
 在 `DatabaseSeeder` 類別中，您可以使用 `call` 方法來執行額外的 seed 類別。使用 `call` 方法允許您將資料庫 seeding 拆分成多個檔案，這樣就不會讓單一個 seeder 類別變得太大。`call` 方法接受一個應該執行的 seeder 類別陣列：
 
@@ -104,7 +104,7 @@ public function run(): void
 ```
 
 <a name="muting-model-events"></a>
-### 靜音 Model Events
+### 靜音 Model Events (Muting Model Events)
 
 在執行 seeds 時，您可能想要防止 models 發送 events。您可以使用 `WithoutModelEvents` trait 來達成這一點。當使用時，`WithoutModelEvents` trait 確保不會發送任何 model events，即使透過 `call` 方法執行了額外的 seed 類別：
 
@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder
 ```
 
 <a name="running-seeders"></a>
-## 執行 Seeders
+## 執行 Seeders (Running Seeders)
 
 您可以執行 `db:seed` Artisan 命令來填充您的資料庫。預設情況下，`db:seed` 命令會執行 `Database\Seeders\DatabaseSeeder` 類別，該類別可能會依次呼叫其他 seed 類別。但是，您可以使用 `--class` 選項來指定一個特定的 seeder 類別單獨執行：
 
@@ -152,7 +152,7 @@ php artisan migrate:fresh --seed --seeder=UserSeeder
 ```
 
 <a name="forcing-seeding-production"></a>
-#### 強制在正式環境中執行 Seeders
+#### 強制在正式環境中執行 Seeders (Forcing Seeding Production)
 
 某些 seeding 操作可能會導致您更改或遺失資料。為了保護您不會對正式環境資料庫執行 seeding 命令，在 `production` 環境中執行 seeders 之前會提示您進行確認。要強制 seeders 在沒有提示的情況下執行，請使用 `--force` 標誌：
 

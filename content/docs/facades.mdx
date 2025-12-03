@@ -12,7 +12,7 @@ description: 是指為應用程式的服務容器（Service Container）中的�
 - [Facade 類別參考](#facade-class-reference)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 在整個 Laravel 文件中，您將看到透過「Facades」與 Laravel 功能互動的程式碼範例。Facades 為應用程式的 [Service Container](/docs/container) 中可用的類別提供「靜態」介面。Laravel 附帶了許多 Facades，可以存取幾乎所有的 Laravel 功能。
 
@@ -32,7 +32,7 @@ Route::get('/cache', function () {
 在整個 Laravel 文件中，許多範例將使用 Facades 來示範框架的各種功能。
 
 <a name="helper-functions"></a>
-#### Helper 函式
+#### Helper 函式 (Helper Functions)
 
 為了補充 Facades，Laravel 提供了各種全域「Helper 函式」，使與常見 Laravel 功能的互動變得更加容易。您可能互動的一些常見 Helper 函式包括 `view`、`response`、`url`、`config` 等等。Laravel 提供的每個 Helper 函式都有相應功能的說明文件；但是，完整的清單可在專用的 [Helper 文件](/docs/helpers) 中找到。
 
@@ -55,14 +55,14 @@ Route::get('/users', function () {
 ```
 
 <a name="when-to-use-facades"></a>
-## 何時使用 Facades
+## 何時使用 Facades (When To Use Facades)
 
 Facades 有很多好處。它們提供了簡潔、易記的語法，讓您可以使用 Laravel 的功能，而無需記住必須手動注入或設定的長類別名稱。此外，由於它們獨特地使用了 PHP 的動態方法，因此它們很容易測試。
 
 但是，使用 Facades 時必須小心。Facades 的主要危險是類別「範圍蔓延 (scope creep)」。由於 Facades 非常易於使用且不需要注入，因此很容易讓您的類別繼續增長並在單個類別中使用許多 Facades。使用 Dependency Injection 時，大型建構子給您的視覺回饋減輕了這種潛在問題，表明您的類別正在變得過大。因此，在使用 Facades 時，請特別注意類別的大小，以便其職責範圍保持狹窄。如果您的類別變得太大，請考慮將其拆分為多個較小的類別。
 
 <a name="facades-vs-dependency-injection"></a>
-### Facades 與 Dependency Injection
+### Facades 與 Dependency Injection (Facades Vs Dependency Injection)
 
 Dependency Injection 的主要好處之一是能夠交換注入類別的實作。這在測試期間很有用，因為您可以注入模擬 (mock) 或存根 (stub) 並斷言在存根上呼叫了各種方法。
 
@@ -111,7 +111,7 @@ public function test_basic_example(): void
 ```
 
 <a name="facades-vs-helper-functions"></a>
-### Facades 與 Helper 函式
+### Facades 與 Helper 函式 (Facades Vs Helper Functions)
 
 除了 Facades 之外，Laravel 還包含各種「Helper」函式，可以執行常見任務，如生成 Views、觸發 Events、調度 Jobs 或發送 HTTP 回應。許多這些 Helper 函式執行與相應 Facade 相同的功能。例如，此 Facade 呼叫和 Helper 呼叫是等效的：
 
@@ -150,7 +150,7 @@ public function test_basic_example(): void
 ```
 
 <a name="how-facades-work"></a>
-## Facades 如何運作
+## Facades 如何運作 (How Facades Work)
 
 在 Laravel 應用程式中，Facade 是一個提供從 Container 存取物件的類別。使這項工作得以進行的機制在 `Facade` 類別中。Laravel 的 Facades 以及您建立的任何自訂 Facades 都將繼承基礎 `Illuminate\Support\Facades\Facade` 類別。
 
@@ -198,7 +198,7 @@ class Cache extends Facade
 相反，`Cache` Facade 繼承了基礎 `Facade` 類別並定義了方法 `getFacadeAccessor()`。此方法的工作是返回 Service Container 綁定的名稱。當使用者參考 `Cache` Facade 上的任何靜態方法時，Laravel 會從 [Service Container](/docs/container) 解析 `cache` 綁定，並針對該物件執行請求的方法（在本例中為 `get`）。
 
 <a name="real-time-facades"></a>
-## 即時 Facades
+## 即時 Facades (Real Time Facades)
 
 使用即時 Facades，您可以將應用程式中的任何類別視為 Facade。為了說明如何使用它，讓我們先檢查一些不使用即時 Facades 的程式碼。例如，假設我們的 `Podcast` Model 有一個 `publish` 方法。但是，為了發布 Podcast，我們需要注入一個 `Publisher` 實例：
 
@@ -300,7 +300,7 @@ class PodcastTest extends TestCase
 ```
 
 <a name="facade-class-reference"></a>
-## Facade 類別參考
+## Facade 類別參考 (Facade Class Reference)
 
 在下面，您將找到每個 Facade 及其底層類別。這是一個用於快速深入了解給定 Facade root 的 API 文件的有用工具。[Service Container 綁定](/docs/container) 鍵也包含在適用的地方。
 

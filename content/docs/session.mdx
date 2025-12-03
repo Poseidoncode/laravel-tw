@@ -21,14 +21,14 @@ description: Laravel 透過統一的 API 支援多種 Session 後端
   - [註冊驅動程式](#registering-the-driver)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 由於 HTTP 驅動的應用程式是無狀態的，Session 提供了一種在多個請求之間儲存使用者資訊的方式。該使用者資訊通常會放置在可從後續請求存取的持久性儲存 / 後端中。
 
 Laravel 內建了多種 Session 後端，可透過富有表現力的統一 API 進行存取。支援流行的後端，如 [Memcached](https://memcached.org)、[Redis](https://redis.io) 和資料庫。
 
 <a name="configuration"></a>
-### 設定
+### 設定 (Configuration)
 
 您的應用程式的 Session 設定檔儲存在 `config/session.php`。請務必查看此檔案中可用的選項。預設情況下，Laravel 設定為使用 `database` Session 驅動程式。
 
@@ -49,10 +49,10 @@ Session `driver` 設定選項定義了每個請求的 Session 資料將儲存在
 > array 驅動程式主要在 [測試](/docs/testing) 期間使用，可防止儲存在 Session 中的資料被持久化。
 
 <a name="driver-prerequisites"></a>
-### 驅動程式先決條件
+### 驅動程式先決條件 (Driver Prerequisites)
 
 <a name="database"></a>
-#### 資料庫
+#### 資料庫 (Database)
 
 使用 `database` Session 驅動程式時，您需要確保有一個資料庫資料表來包含 Session 資料。通常，這包含在 Laravel 的預設 `0001_01_01_000000_create_users_table.php` [資料庫 Migration](/docs/migrations) 中；但是，如果您因為任何原因沒有 `sessions` 資料表，您可以使用 `make:session-table` Artisan 指令來產生此 Migration：
 
@@ -70,10 +70,10 @@ php artisan migrate
 > [!NOTE] > `SESSION_CONNECTION` 環境變數或 `session.php` 設定檔中的 `connection` 選項可用於指定哪個 Redis 連線用於 Session 儲存。
 
 <a name="interacting-with-the-session"></a>
-## 與 Session 互動
+## 與 Session 互動 (Interacting With The Session)
 
 <a name="retrieving-data"></a>
-### 取得資料
+### 取得資料 (Retrieving Data)
 
 在 Laravel 中有兩種主要的方式來處理 Session 資料：全域 `session` 輔助函式和透過 `Request` 實例。首先，讓我們看看透過 `Request` 實例存取 Session，它可以在路由 Closure 或 Controller 方法上進行型別提示。請記住，Controller 方法的依賴項會透過 Laravel [Service Container](/docs/container) 自動注入：
 
@@ -114,7 +114,7 @@ $value = $request->session()->get('key', function () {
 ```
 
 <a name="the-global-session-helper"></a>
-#### 全域 Session 輔助函式
+#### 全域 Session 輔助函式 (The Global Session Helper)
 
 您也可以使用全域 `session` PHP 函式來取得和儲存 Session 中的資料。當使用單一字串參數呼叫 `session` 輔助函式時，它將返回該 Session 鍵的值。當使用鍵 / 值對陣列呼叫輔助函式時，這些值將儲存在 Session 中：
 
@@ -135,7 +135,7 @@ Route::get('/home', function () {
 > 透過 HTTP 請求實例使用 Session 與使用全域 `session` 輔助函式之間幾乎沒有實際差異。這兩種方法都可以透過所有測試案例中都可用的 `assertSessionHas` 方法進行 [測試](/docs/testing)。
 
 <a name="retrieving-all-session-data"></a>
-#### 取得所有 Session 資料
+#### 取得所有 Session 資料 (Retrieving All Session Data)
 
 如果您想取得 Session 中的所有資料，您可以使用 `all` 方法：
 
@@ -144,7 +144,7 @@ $data = $request->session()->all();
 ```
 
 <a name="retrieving-a-portion-of-the-session-data"></a>
-#### 取得部分 Session 資料
+#### 取得部分 Session 資料 (Retrieving A Portion Of The Session Data)
 
 `only` 和 `except` 方法可用於取得 Session 資料的子集：
 
@@ -155,7 +155,7 @@ $data = $request->session()->except(['username', 'email']);
 ```
 
 <a name="determining-if-an-item-exists-in-the-session"></a>
-#### 判斷項目是否存在於 Session 中
+#### 判斷項目是否存在於 Session 中 (Determining If An Item Exists In The Session)
 
 要判斷項目是否存在於 Session 中，您可以使用 `has` 方法。如果項目存在且不為 `null`，`has` 方法返回 `true`：
 
@@ -182,7 +182,7 @@ if ($request->session()->missing('users')) {
 ```
 
 <a name="storing-data"></a>
-### 儲存資料
+### 儲存資料 (Storing Data)
 
 要在 Session 中儲存資料，您通常會使用請求實例的 `put` 方法或全域 `session` 輔助函式：
 
@@ -195,7 +195,7 @@ session(['key' => 'value']);
 ```
 
 <a name="pushing-to-array-session-values"></a>
-#### 推送到陣列 Session 值
+#### 推送到陣列 Session 值 (Pushing To Array Session Values)
 
 `push` 方法可用於將新值推送到作為陣列的 Session 值。例如，如果 `user.teams` 鍵包含團隊名稱的陣列，您可以像這樣將新值推送到陣列中：
 
@@ -204,7 +204,7 @@ $request->session()->push('user.teams', 'developers');
 ```
 
 <a name="retrieving-deleting-an-item"></a>
-#### 取得並刪除項目
+#### 取得並刪除項目 (Retrieving Deleting An Item)
 
 `pull` 方法將在單一語句中從 Session 取得並刪除項目：
 
@@ -213,7 +213,7 @@ $value = $request->session()->pull('key', 'default');
 ```
 
 <a name="incrementing-and-decrementing-session-values"></a>
-#### 遞增和遞減 Session 值
+#### 遞增和遞減 Session 值 (Incrementing And Decrementing Session Values)
 
 如果您的 Session 資料包含您希望遞增或遞減的整數，您可以使用 `increment` 和 `decrement` 方法：
 
@@ -228,7 +228,7 @@ $request->session()->decrement('count', $decrementBy = 2);
 ```
 
 <a name="flash-data"></a>
-### 快閃資料
+### 快閃資料 (Flash Data)
 
 有時您可能希望在 Session 中為下一個請求儲存項目。您可以使用 `flash` 方法來實現。使用此方法儲存在 Session 中的資料將立即可用，並在後續的 HTTP 請求期間可用。在後續的 HTTP 請求之後，快閃資料將被刪除。快閃資料主要用於短期的狀態訊息：
 
@@ -251,7 +251,7 @@ $request->session()->now('status', 'Task was successful!');
 ```
 
 <a name="deleting-data"></a>
-### 刪除資料
+### 刪除資料 (Deleting Data)
 
 `forget` 方法將從 Session 中移除一段資料。如果您想從 Session 中移除所有資料，您可以使用 `flush` 方法：
 
@@ -266,7 +266,7 @@ $request->session()->flush();
 ```
 
 <a name="regenerating-the-session-id"></a>
-### 重新產生 Session ID
+### 重新產生 Session ID (Regenerating The Session Id)
 
 重新產生 Session ID 通常是為了防止惡意使用者利用 [Session 固定](https://owasp.org/www-community/attacks/Session_fixation) 攻擊您的應用程式。
 
@@ -283,7 +283,7 @@ $request->session()->invalidate();
 ```
 
 <a name="session-cache"></a>
-## Session 快取
+## Session 快取 (Session Cache)
 
 Laravel 的 Session 快取提供了一種方便的方式來快取限定於個別使用者 Session 的資料。與全域應用程式快取不同，Session 快取資料會自動按 Session 隔離，並在 Session 過期或銷毀時清理。Session 快取支援所有熟悉的 [Laravel 快取方法](/docs/cache)，如 `get`、`put`、`remember`、`forget` 等，但範圍限定於當前 Session。
 
@@ -302,7 +302,7 @@ $request->session()->cache()->put(
 有關 Laravel 快取方法的更多資訊，請參閱 [快取文件](/docs/cache)。
 
 <a name="session-blocking"></a>
-## Session 阻塞
+## Session 阻塞 (Session Blocking)
 
 > [!WARNING]
 > 要使用 Session 阻塞，您的應用程式必須使用支援 [原子鎖](/docs/cache#atomic-locks) 的快取驅動程式。目前，這些快取驅動程式包括 `memcached`、`dynamodb`、`redis`、`mongodb`（包含在官方 `mongodb/laravel-mongodb` 套件中）、`database`、`file` 和 `array` 驅動程式。此外，您不能使用 `cookie` Session 驅動程式。
@@ -334,10 +334,10 @@ Route::post('/profile', function () {
 ```
 
 <a name="adding-custom-session-drivers"></a>
-## 新增自訂 Session 驅動程式
+## 新增自訂 Session 驅動程式 (Adding Custom Session Drivers)
 
 <a name="implementing-the-driver"></a>
-### 實作驅動程式
+### 實作驅動程式 (Implementing The Driver)
 
 如果現有的 Session 驅動程式都不符合您的應用程式需求，Laravel 使您可以編寫自己的 Session 處理程式。您的自訂 Session 驅動程式應實作 PHP 內建的 `SessionHandlerInterface`。此介面僅包含幾個簡單的方法。一個存根的 MongoDB 實作看起來像這樣：
 
@@ -373,7 +373,7 @@ class MongoSessionHandler implements \SessionHandlerInterface
 </div>
 
 <a name="registering-the-driver"></a>
-### 註冊驅動程式
+### 註冊驅動程式 (Registering The Driver)
 
 一旦您的驅動程式實作完成，您就可以將其註冊到 Laravel。要向 Laravel 的 Session 後端新增額外的驅動程式，您可以使用 `Session` [Facade](/docs/facades) 提供的 `extend` 方法。您應該從 [Service Provider](/docs/providers) 的 `boot` 方法呼叫 `extend` 方法。您可以從現有的 `App\Providers\AppServiceProvider` 執行此操作，或建立一個全新的 Provider：
 

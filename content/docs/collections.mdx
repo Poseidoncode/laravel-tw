@@ -15,7 +15,7 @@ description: Collection 類別提供流暢便利的方式來處理陣列資料
   - [惰性集合方法](#lazy-collection-methods)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 `Illuminate\Support\Collection` 類別提供了一個流暢、便利的封裝來處理陣列資料。例如，請看下面的程式碼。我們將使用 `collect` 輔助函式從陣列建立一個新的集合實例，對每個元素執行 `strtoupper` 函數，然後移除所有空元素：
 
@@ -30,7 +30,7 @@ $collection = collect(['Taylor', 'Abigail', null])->map(function (?string $name)
 如你所見，`Collection` 類別允許你鏈式呼叫其方法，以流暢地執行底層陣列的映射和歸約。一般來說，集合是不可變的，這意味著每個 `Collection` 方法都會返回一個全新的 `Collection` 實例。
 
 <a name="creating-collections"></a>
-### 建立集合
+### 建立集合 (Creating Collections)
 
 如上所述，`collect` 輔助函式會為給定的陣列返回一個新的 `Illuminate\Support\Collection` 實例。因此，建立一個集合非常簡單：
 
@@ -43,7 +43,7 @@ $collection = collect([1, 2, 3]);
 > [!NOTE] > [Eloquent](/docs/eloquent) 查詢的結果總是作為 `Collection` 實例返回。
 
 <a name="extending-collections"></a>
-### 擴充集合
+### 擴充集合 (Extending Collections)
 
 集合是「可巨集化 (macroable)」的，這允許你在執行時向 `Collection` 類別新增額外的方法。`Illuminate\Support\Collection` 類別的 `macro` 方法接受一個閉包，當你的巨集被呼叫時將執行該閉包。巨集閉包可以透過 `$this` 存取集合的其他方法，就像它是集合類別的真實方法一樣。例如，以下程式碼向 `Collection` 類別新增了一個 `toUpper` 方法：
 
@@ -67,7 +67,7 @@ $upper = $collection->toUpper();
 通常，你應該在 [服務提供者](/docs/providers) 的 `boot` 方法中宣告集合巨集。
 
 <a name="macro-arguments"></a>
-#### 巨集參數
+#### 巨集參數 (Macro Arguments)
 
 如果需要，你可以定義接受額外參數的巨集：
 
@@ -87,10 +87,10 @@ $translated = $collection->toLocale('es');
 ```
 
 <a name="available-methods"></a>
-## 可用方法
+## 可用方法 (Available Methods)
 
 <a name="available-methods"></a>
-## 可用方法
+## 可用方法 (Available Methods)
 
 對於剩餘的大部分集合文件，我們將討論 `Collection` 類別上可用的每個方法。請記住，所有這些方法都可以鏈式呼叫，以流暢地操作底層陣列。此外，幾乎每個方法都返回一個新的 `Collection` 實例，允許你在必要時保留集合的原始副本：
 
@@ -256,7 +256,7 @@ $translated = $collection->toLocale('es');
 </div>
 
 <a name="method-listing"></a>
-## 方法列表
+## 方法列表 (Method Listing)
 
 <a name="method-after"></a>
 #### `after()`
@@ -4054,7 +4054,7 @@ $zipped->all();
 ```
 
 <a name="higher-order-messages"></a>
-## 高階訊息
+## 高階訊息 (Higher Order Messages)
 
 集合也支援「高階訊息」，這是對集合執行常見操作的捷徑。提供高階訊息的集合方法有：[average](#method-average), [avg](#method-avg), [contains](#method-contains), [each](#method-each), [every](#method-every), [filter](#method-filter), [first](#method-first), [flatMap](#method-flatmap), [groupBy](#method-groupby), [keyBy](#method-keyby), [map](#method-map), [max](#method-max), [min](#method-min), [partition](#method-partition), [reject](#method-reject), [skipUntil](#method-skipuntil), [skipWhile](#method-skipwhile), [some](#method-some), [sortBy](#method-sortby), [sortByDesc](#method-sortbydesc), [sum](#method-sum), [takeUntil](#method-takeuntil), [takeWhile](#method-takewhile), 和 [unique](#method-unique)。
 
@@ -4080,7 +4080,7 @@ return $users->sum->votes;
 ## Lazy Collections
 
 <a name="lazy-collection-introduction"></a>
-### 簡介
+### 簡介 (Lazy Collection Introduction)
 
 > [!WARNING]
 > 在深入了解 Laravel 的 Lazy Collections 之前，請花點時間熟悉 [PHP 生成器](https://www.php.net/manual/en/language.generators.overview.php)。
@@ -4133,7 +4133,7 @@ foreach ($users as $user) {
 ```
 
 <a name="creating-lazy-collections"></a>
-### 建立 Lazy Collections
+### 建立 Lazy Collections (Creating Lazy Collections)
 
 要建立一個 Lazy Collection 實例，你應該將一個 PHP 生成器函數傳遞給集合的 `make` 方法：
 
@@ -4152,7 +4152,7 @@ LazyCollection::make(function () {
 ```
 
 <a name="the-enumerable-contract"></a>
-### Enumerable 契約
+### Enumerable 契約 (The Enumerable Contract)
 
 幾乎所有在 `Collection` 類別上可用的方法也都可以在 `LazyCollection` 類別上使用。這兩個類別都實現了 `Illuminate\Support\Enumerable` 契約，該契約定義了以下方法：
 
@@ -4278,7 +4278,7 @@ LazyCollection::make(function () {
 > 修改集合的方法（如 `shift`, `pop`, `prepend` 等）在 `LazyCollection` 類別上 **不可用**。
 
 <a name="lazy-collection-methods"></a>
-### Lazy Collection 方法
+### Lazy Collection 方法 (Lazy Collection Methods)
 
 除了 `Enumerable` 契約中定義的方法外，`LazyCollection` 類別還包含以下方法：
 

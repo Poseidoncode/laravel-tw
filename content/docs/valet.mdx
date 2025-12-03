@@ -5,27 +5,27 @@ description: Laravel Valet 是一個 macOS 極簡主義者的開發環境
 
 # Laravel Valet
 
-- [簡介 (Introduction)](#introduction)
-- [安裝 (Installation)](#installation)
-  - [升級 Valet (Upgrading Valet)](#upgrading-valet)
-- [提供網站服務 (Serving Sites)](#serving-sites)
-  - [「Park」指令 (The "Park" Command)](#the-park-command)
-  - [「Link」指令 (The "Link" Command)](#the-link-command)
-  - [使用 TLS 保護網站 (Securing Sites With TLS)](#securing-sites)
-  - [提供預設網站 (Serving a Default Site)](#serving-a-default-site)
-  - [各網站 PHP 版本 (Per-Site PHP Versions)](#per-site-php-versions)
-- [分享網站 (Sharing Sites)](#sharing-sites)
-  - [在區域網路分享網站 (Sharing Sites on Your Local Network)](#sharing-sites-on-your-local-network)
-- [網站專屬環境變數 (Site Specific Environment Variables)](#site-specific-environment-variables)
-- [代理服務 (Proxying Services)](#proxying-services)
-- [自訂 Valet 驅動 (Custom Valet Drivers)](#custom-valet-drivers)
-  - [本機驅動 (Local Drivers)](#local-drivers)
-- [其他 Valet 指令 (Other Valet Commands)](#other-valet-commands)
-- [Valet 目錄與檔案 (Valet Directories and Files)](#valet-directories-and-files)
-  - [磁碟存取 (Disk Access)](#disk-access)
+- [簡介](#introduction)
+- [安裝](#installation)
+  - [升級 Valet](#upgrading-valet)
+- [提供網站服務](#serving-sites)
+  - [「Park」指令](#the-park-command)
+  - [「Link」指令](#the-link-command)
+  - [使用 TLS 保護網站](#securing-sites)
+  - [提供預設網站](#serving-a-default-site)
+  - [各網站 PHP 版本](#per-site-php-versions)
+- [分享網站](#sharing-sites)
+  - [在區域網路分享網站](#sharing-sites-on-your-local-network)
+- [網站專屬環境變數](#site-specific-environment-variables)
+- [代理服務](#proxying-services)
+- [自訂 Valet 驅動](#custom-valet-drivers)
+  - [本機驅動](#local-drivers)
+- [其他 Valet 指令](#other-valet-commands)
+- [Valet 目錄與檔案](#valet-directories-and-files)
+  - [磁碟存取](#disk-access)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 > [!NOTE]
 > 想要在 macOS 或 Windows 上尋找更簡單的 Laravel 應用程式開發方式嗎？請查看 [Laravel Herd](https://herd.laravel.com)。Herd 包含了開始 Laravel 開發所需的一切，包括 Valet、PHP 和 Composer。
@@ -65,7 +65,7 @@ description: Laravel Valet 是一個 macOS 極簡主義者的開發環境
 然而，你可以使用自己的 [自訂驅動](#custom-valet-drivers) 來擴充 Valet。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 > [!WARNING]
 > Valet 需要 macOS 和 [Homebrew](https://brew.sh/)。在安裝之前，你應該確保沒有其他程式（如 Apache 或 Nginx）佔用你本機的 80 連接埠。
@@ -157,7 +157,7 @@ php=php@8.2
 安裝 Valet 後，你就可以開始提供 Laravel 應用程式服務了。Valet 提供了兩個指令來幫助你提供應用程式服務：`park` 和 `link`。
 
 <a name="the-park-command"></a>
-### 「Park」指令 (The `park` Command)
+### 「Park」指令 (The `park` Command) (The "Park" Command)
 
 `park` 指令會註冊一個包含你應用程式的目錄。一旦目錄被 Valet「停放 (parked)」，該目錄中的所有目錄都可以在你的網頁瀏覽器中以 `http://<directory-name>.test` 存取：
 
@@ -170,7 +170,7 @@ valet park
 就這樣。現在，你在「停放」目錄中建立的任何應用程式都將自動使用 `http://<directory-name>.test` 慣例提供服務。因此，如果你的停放目錄包含一個名為 "laravel" 的目錄，該應用程式將可以在 `http://laravel.test` 存取。此外，Valet 自動允許你使用萬用字元子網域 (`http://foo.laravel.test`) 存取網站。
 
 <a name="the-link-command"></a>
-### 「Link」指令 (The `link` Command)
+### 「Link」指令 (The `link` Command) (The "Link" Command)
 
 `link` 指令也可以用來提供 Laravel 應用程式服務。如果你想提供目錄中的單個網站而不是整個目錄，這個指令很有用：
 

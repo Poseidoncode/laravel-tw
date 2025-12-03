@@ -16,17 +16,17 @@ description: 使用 Laravel 進行前端開發的選項
 - [資產打包](#bundling-assets)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 是一個後端框架，提供了構建現代 Web 應用程式所需的所有功能，例如 [路由](/docs/routing)、[驗證](/docs/validation)、[快取](/docs/cache)、[佇列](/docs/queues)、[檔案儲存](/docs/filesystem) 等。然而，我們認為為開發人員提供美觀的全端體驗非常重要，包括用於構建應用程式前端的強大方法。
 
 在使用 Laravel 構建應用程式時，主要有兩種方法來處理前端開發，您選擇哪種方法取決於您是想利用 PHP 構建前端，還是使用 Vue 和 React 等 JavaScript 框架。我們將在下面討論這兩個選項，以便您能夠就應用程式的最佳前端開發方法做出明智的決定。
 
 <a name="using-php"></a>
-## 使用 PHP
+## 使用 PHP (Using Php)
 
 <a name="php-and-blade"></a>
-### PHP 與 Blade
+### PHP 與 Blade (Php And Blade)
 
 過去，大多數 PHP 應用程式使用簡單的 HTML 模板向瀏覽器渲染 HTML，其中穿插著 PHP `echo` 語句，用於渲染在請求期間從資料庫檢索的資料：
 
@@ -51,7 +51,7 @@ Laravel 是一個後端框架，提供了構建現代 Web 應用程式所需的�
 以這種方式構建應用程式時，表單提交和其他頁面互動通常會從伺服器接收一個全新的 HTML 文件，並且瀏覽器會重新渲染整個頁面。即使在今天，許多應用程式可能仍然非常適合使用簡單的 Blade 模板以這種方式構建前端。
 
 <a name="growing-expectations"></a>
-#### 日益增長的期望
+#### 日益增長的期望 (Growing Expectations)
 
 然而，隨著使用者對 Web 應用程式的期望日趨成熟，許多開發人員發現需要構建更動態的前端，並具有更精緻的互動。有鑑於此，一些開發人員選擇開始使用 JavaScript 框架（如 Vue 和 React）構建應用程式的前端。
 
@@ -105,12 +105,12 @@ class Counter extends Component
 如果您是 Laravel 的新手，我們建議您先熟悉 [視圖](/docs/views) 和 [Blade](/docs/blade) 的基本用法。然後，查閱官方 [Laravel Livewire 文件](https://livewire.laravel.com/docs)，學習如何使用互動式 Livewire 元件將您的應用程式提升到一個新的水平。
 
 <a name="php-starter-kits"></a>
-### 啟動套件
+### 啟動套件 (Php Starter Kits)
 
 如果您想使用 PHP 和 Livewire 構建前端，您可以利用我們的 [Livewire 啟動套件](/docs/starter-kits) 來快速開始您的應用程式開發。
 
 <a name="using-react-or-vue"></a>
-## 使用 React 或 Vue
+## 使用 React 或 Vue (Using React Or Vue)
 
 雖然可以使用 Laravel 和 Livewire 構建現代前端，但許多開發人員仍然更喜歡利用 React 或 Vue 等 JavaScript 框架的強大功能。這使開發人員能夠利用透過 NPM 提供的豐富 JavaScript 套件和工具生態系統。
 
@@ -172,12 +172,12 @@ export default function Show({ user }) {
 如果您因為應用程式需要伺服器端渲染而擔心是否要深入研究 Inertia，請不要擔心。Inertia 提供 [伺服器端渲染支援](https://inertiajs.com/server-side-rendering)。而且，當透過 [Laravel Cloud](https://cloud.laravel.com) 或 [Laravel Forge](https://forge.laravel.com) 部署應用程式時，確保 Inertia 的伺服器端渲染程序始終執行是輕而易舉的事。
 
 <a name="inertia-starter-kits"></a>
-### 啟動套件
+### 啟動套件 (Inertia Starter Kits)
 
 如果您想使用 Inertia 和 Vue / React 構建前端，您可以利用我們的 [React 或 Vue 應用程式啟動套件](/docs/starter-kits) 來快速開始您的應用程式開發。這兩個啟動套件都使用 Inertia、Vue / React、[Tailwind](https://tailwindcss.com) 和 [Vite](https://vitejs.dev) 為您的應用程式後端和前端驗證流程搭建鷹架，以便您可以開始構建您的下一個偉大創意。
 
 <a name="bundling-assets"></a>
-## 資產打包
+## 資產打包 (Bundling Assets)
 
 無論您選擇使用 Blade 和 Livewire 還是 Vue / React 和 Inertia 開發前端，您都可能需要將應用程式的 CSS 打包成生產就緒的資產。當然，如果您選擇使用 Vue 或 React 構建應用程式的前端，您還需要將元件打包成瀏覽器就緒的 JavaScript 資產。
 

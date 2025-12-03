@@ -16,12 +16,12 @@ description: Laravel Context 可讓您在整個應用程式中擷取、取回與
   - [Hydrated](#hydrated)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 Laravel 的「context」功能可讓您在應用程式中執行的 requests、jobs 和 commands 之間擷取、取回與共享資訊。這些擷取的資訊也會包含在應用程式寫入的 logs 中，讓您更深入了解在寫入 log 條目之前發生的周圍程式碼執行歷史，並允許您追蹤整個分散式系統的執行流程。
 
 <a name="how-it-works"></a>
-### 運作方式
+### 運作方式 (How It Works)
 
 了解 Laravel context 功能的最佳方式是使用內建的 logging 功能來實際操作。首先，您可以使用 `Context` facade 來[將資訊加入到 context](#capturing-context)。在此範例中，我們將使用 [middleware](/docs/middleware) 在每個傳入 request 上將 request URL 和唯一的 trace ID 加入到 context：
 
@@ -106,7 +106,7 @@ Processing podcast. {"podcast_id":95} {"url":"https://example.com/login","trace_
 雖然我們專注於 Laravel context 的內建 logging 相關功能，但以下文件將說明 context 如何讓您跨 HTTP request / queued job 邊界共享資訊，甚至如何加入不會與 log 條目一起寫入的[隱藏 context 資料](#hidden-context)。
 
 <a name="capturing-context"></a>
-## 擷取 Context
+## 擷取 Context (Capturing Context)
 
 您可以使用 `Context` facade 的 `add` 方法將資訊儲存在目前的 context 中：
 
@@ -150,7 +150,7 @@ Context::decrement('records_added', 5);
 ```
 
 <a name="conditional-context"></a>
-#### 條件式 Context
+#### 條件式 Context (Conditional Context)
 
 `when` 方法可用於根據給定條件將資料加入到 context。如果給定條件評估為 `true`，則會呼叫提供給 `when` 方法的第一個 closure，如果條件評估為 `false`，則會呼叫第二個 closure：
 
@@ -166,7 +166,7 @@ Context::when(
 ```
 
 <a name="scoped-context"></a>
-#### 作用域 Context
+#### 作用域 Context (Scoped Context)
 
 `scope` 方法提供了一種在給定 callback 執行期間暫時修改 context，並在 callback 完成執行時將 context 還原到原始狀態的方式。此外，您可以傳遞額外的資料（作為第二和第三個引數），這些資料應在 closure 執行時合併到 context 中。
 
@@ -260,7 +260,7 @@ return Context::stackContains('breadcrumbs', function ($value) {
 ```
 
 <a name="retrieving-context"></a>
-## 取回 Context
+## 取回 Context (Retrieving Context)
 
 您可以使用 `Context` facade 的 `get` 方法從 context 取回資訊：
 
@@ -312,7 +312,7 @@ $data = Context::all();
 ```
 
 <a name="determining-item-existence"></a>
-### 判斷項目是否存在
+### 判斷項目是否存在 (Determining Item Existence)
 
 您可以使用 `has` 和 `missing` 方法來判斷 context 是否為給定 key 儲存了任何值：
 
@@ -338,7 +338,7 @@ Context::has('key');
 ```
 
 <a name="removing-context"></a>
-## 移除 Context
+## 移除 Context (Removing Context)
 
 `forget` 方法可用於從目前的 context 中移除 key 及其值：
 
@@ -361,7 +361,7 @@ Context::forget(['first_key', 'second_key']);
 ```
 
 <a name="hidden-context"></a>
-## 隱藏的 Context
+## 隱藏的 Context (Hidden Context)
 
 Context 提供了儲存「隱藏」資料的功能。這些隱藏資訊不會附加到 logs，也無法透過上述記載的資料取回方法存取。Context 提供了一組不同的方法來與隱藏的 context 資訊互動：
 

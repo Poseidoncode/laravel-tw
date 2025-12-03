@@ -15,7 +15,7 @@ description: 如何為 Laravel 專案做出貢獻
 - [行為準則](#code-of-conduct)
 
 <a name="bug-reports"></a>
-## Bug 報告
+## Bug 報告 (Bug Reports)
 
 為了鼓勵積極的協作，Laravel 強烈建議提交 pull requests，而不僅僅是 bug 報告。只有當 pull requests 被標記為「ready for review」（不是「draft」狀態）且所有新功能的測試都通過時，才會被審查。停滯不活躍的 pull requests 如果留在「draft」狀態，將在幾天後被關閉。
 
@@ -59,7 +59,7 @@ Laravel 原始碼在 GitHub 上管理，每個 Laravel 專案都有儲存庫：
 </div>
 
 <a name="support-questions"></a>
-## 支援問題
+## 支援問題 (Support Questions)
 
 Laravel 的 GitHub issue 追蹤器並非用於提供 Laravel 的協助或支援。請改用以下管道之一：
 
@@ -76,14 +76,14 @@ Laravel 的 GitHub issue 追蹤器並非用於提供 Laravel 的協助或支援�
 </div>
 
 <a name="core-development-discussion"></a>
-## 核心開發討論
+## 核心開發討論 (Core Development Discussion)
 
 你可以在 Laravel framework 儲存庫的 [GitHub discussion 討論區](https://github.com/laravel/framework/discussions)中提議新功能或改進現有的 Laravel 行為。如果你提議新功能，請願意實作至少部分完成該功能所需的程式碼。
 
 關於 bugs、新功能和現有功能實作的非正式討論會在 [Laravel Discord 伺服器](https://discord.gg/laravel)的 `#internals` 頻道中進行。Laravel 的維護者 Taylor Otwell 通常在工作日的上午 8 點至下午 5 點（UTC-06:00 或 America/Chicago）在頻道中，其他時間則偶爾出現。
 
 <a name="which-branch"></a>
-## 要使用哪個分支？
+## 要使用哪個分支？ (Which Branch)
 
 **所有** bug 修復都應該發送到支援 bug 修復的最新版本（目前是 `12.x`）。Bug 修復**絕不**應該發送到 `master` 分支，除非它們修復的功能只存在於即將發布的版本中。
 
@@ -92,17 +92,17 @@ Laravel 的 GitHub issue 追蹤器並非用於提供 Laravel 的協助或支援�
 **主要**新功能或具有破壞性變更的功能應始終發送到 `master` 分支，該分支包含即將發布的版本。
 
 <a name="compiled-assets"></a>
-## 編譯的資源
+## 編譯的資源 (Compiled Assets)
 
 如果你提交的變更會影響編譯檔案，例如 `laravel/laravel` 儲存庫中 `resources/css` 或 `resources/js` 中的大部分檔案，請不要提交編譯檔案。由於它們的大小較大，維護者無法實際審查它們。這可能被利用來將惡意程式碼注入 Laravel。為了防禦性地防止這種情況，所有編譯檔案都將由 Laravel 維護者產生並提交。
 
 <a name="security-vulnerabilities"></a>
-## 安全性漏洞
+## 安全性漏洞 (Security Vulnerabilities)
 
 如果你發現 Laravel 中的安全性漏洞，請發送電子郵件給 Taylor Otwell：<a href="mailto:taylor@laravel.com">taylor@laravel.com</a>。所有安全性漏洞都會被迅速處理。
 
 <a name="coding-style"></a>
-## 程式碼風格
+## 程式碼風格 (Coding Style)
 
 Laravel 遵循 [PSR-2](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md) 程式碼標準和 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) 自動載入標準。
 
@@ -162,7 +162,7 @@ public function attachments(): array
 如果你的程式碼風格不夠完美，不用擔心！[StyleCI](https://styleci.io/) 會在 pull requests 合併後自動將任何風格修復合併到 Laravel 儲存庫中。這讓我們可以專注於貢獻的內容而不是程式碼風格。
 
 <a name="code-of-conduct"></a>
-## 行為準則
+## 行為準則 (Code Of Conduct)
 
 Laravel 的行為準則源自 Ruby 的行為準則。任何違反行為準則的行為都可以向 Taylor Otwell（taylor@laravel.com）報告：
 

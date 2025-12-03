@@ -5,55 +5,55 @@ description: Laravel Cashier Paddle 提供 Paddle 訂閱計費服務的整合
 
 # Laravel Cashier (Paddle)
 
-- [簡介 (Introduction)](#introduction)
-- [升級 Cashier (Upgrading Cashier)](#upgrading-cashier)
-- [安裝 (Installation)](#installation)
+- [簡介](#introduction)
+- [升級 Cashier](#upgrading-cashier)
+- [安裝](#installation)
   - [Paddle Sandbox](#paddle-sandbox)
-- [設定 (Configuration)](#configuration)
-  - [Billable 模型 (Billable Model)](#billable-model)
+- [設定](#configuration)
+  - [Billable 模型](#billable-model)
   - [API Keys](#api-keys)
   - [Paddle JS](#paddle-js)
-  - [貨幣設定 (Currency Configuration)](#currency-configuration)
-  - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
-- [快速開始 (Quickstart)](#quickstart)
-  - [銷售產品 (Selling Products)](#quickstart-selling-products)
-  - [銷售訂閱 (Selling Subscriptions)](#quickstart-selling-subscriptions)
-- [結帳 Session (Checkout Sessions)](#checkout-sessions)
-  - [Overlay 結帳 (Overlay Checkout)](#overlay-checkout)
-  - [Inline 結帳 (Inline Checkout)](#inline-checkout)
-  - [訪客結帳 (Guest Checkouts)](#guest-checkouts)
-- [價格預覽 (Price Previews)](#price-previews)
-  - [客戶價格預覽 (Customer Price Previews)](#customer-price-previews)
-  - [折扣 (Discounts)](#price-discounts)
-- [客戶 (Customers)](#customers)
-  - [客戶預設值 (Customer Defaults)](#customer-defaults)
-  - [取得客戶 (Retrieving Customers)](#retrieving-customers)
-  - [建立客戶 (Creating Customers)](#creating-customers)
-- [訂閱 (Subscriptions)](#subscriptions)
-  - [建立訂閱 (Creating Subscriptions)](#creating-subscriptions)
-  - [檢查訂閱狀態 (Checking Subscription Status)](#checking-subscription-status)
-  - [訂閱單次收費 (Subscription Single Charges)](#subscription-single-charges)
-  - [更新付款資訊 (Updating Payment Information)](#updating-payment-information)
-  - [變更方案 (Changing Plans)](#changing-plans)
-  - [訂閱數量 (Subscription Quantity)](#subscription-quantity)
-  - [多產品訂閱 (Subscriptions With Multiple Products)](#subscriptions-with-multiple-products)
-  - [多重訂閱 (Multiple Subscriptions)](#multiple-subscriptions)
-  - [暫停訂閱 (Pausing Subscriptions)](#pausing-subscriptions)
-  - [取消訂閱 (Canceling Subscriptions)](#canceling-subscriptions)
-- [訂閱試用 (Subscription Trials)](#subscription-trials)
-  - [預先提供付款方式 (With Payment Method Up Front)](#with-payment-method-up-front)
-  - [未預先提供付款方式 (Without Payment Method Up Front)](#without-payment-method-up-front)
-  - [延長或啟用試用 (Extend or Activate a Trial)](#extend-or-activate-a-trial)
-- [處理 Paddle Webhooks (Handling Paddle Webhooks)](#handling-paddle-webhooks)
-  - [定義 Webhook 事件處理器 (Defining Webhook Event Handlers)](#defining-webhook-event-handlers)
-  - [驗證 Webhook 簽章 (Verifying Webhook Signatures)](#verifying-webhook-signatures)
-- [單次收費 (Single Charges)](#single-charges)
-  - [產品收費 (Charging for Products)](#charging-for-products)
-  - [退款 (Refunding Transactions)](#refunding-transactions)
-  - [交易入帳 (Crediting Transactions)](#crediting-transactions)
-- [交易 (Transactions)](#transactions)
-  - [過去與即將到來的付款 (Past and Upcoming Payments)](#past-and-upcoming-payments)
-- [測試 (Testing)](#testing)
+  - [貨幣設定](#currency-configuration)
+  - [覆寫預設模型](#overriding-default-models)
+- [快速開始](#quickstart)
+  - [銷售產品](#quickstart-selling-products)
+  - [銷售訂閱](#quickstart-selling-subscriptions)
+- [結帳 Session](#checkout-sessions)
+  - [Overlay 結帳](#overlay-checkout)
+  - [Inline 結帳](#inline-checkout)
+  - [訪客結帳](#guest-checkouts)
+- [價格預覽](#price-previews)
+  - [客戶價格預覽](#customer-price-previews)
+  - [折扣](#price-discounts)
+- [客戶](#customers)
+  - [客戶預設值](#customer-defaults)
+  - [取得客戶](#retrieving-customers)
+  - [建立客戶](#creating-customers)
+- [訂閱](#subscriptions)
+  - [建立訂閱](#creating-subscriptions)
+  - [檢查訂閱狀態](#checking-subscription-status)
+  - [訂閱單次收費](#subscription-single-charges)
+  - [更新付款資訊](#updating-payment-information)
+  - [變更方案](#changing-plans)
+  - [訂閱數量](#subscription-quantity)
+  - [多產品訂閱](#subscriptions-with-multiple-products)
+  - [多重訂閱](#multiple-subscriptions)
+  - [暫停訂閱](#pausing-subscriptions)
+  - [取消訂閱](#canceling-subscriptions)
+- [訂閱試用](#subscription-trials)
+  - [預先提供付款方式](#with-payment-method-up-front)
+  - [未預先提供付款方式](#without-payment-method-up-front)
+  - [延長或啟用試用](#extend-or-activate-a-trial)
+- [處理 Paddle Webhooks](#handling-paddle-webhooks)
+  - [定義 Webhook 事件處理器](#defining-webhook-event-handlers)
+  - [驗證 Webhook 簽章](#verifying-webhook-signatures)
+- [單次收費](#single-charges)
+  - [產品收費](#charging-for-products)
+  - [退款](#refunding-transactions)
+  - [交易入帳](#crediting-transactions)
+- [交易](#transactions)
+  - [過去與即將到來的付款](#past-and-upcoming-payments)
+- [測試](#testing)
 
 <a name="introduction"></a>
 ## 簡介 (Introduction)
@@ -65,7 +65,6 @@ description: Laravel Cashier Paddle 提供 Paddle 訂閱計費服務的整合
 
 在深入研究 Cashier Paddle 之前，我們建議你也閱讀 Paddle 的 [概念指南](https://developer.paddle.com/concepts/overview) 和 [API 文件](https://developer.paddle.com/api-reference/overview)。
 
-<a name="upgrading-cashier"></a>
 <a name="upgrading-cashier"></a>
 ## 升級 Cashier (Upgrading Cashier)
 
@@ -108,7 +107,6 @@ PADDLE_SANDBOX=true
 
 完成應用程式開發後，你可以 [申請 Paddle 供應商帳號](https://paddle.com)。在你的應用程式投入生產環境之前，Paddle 需要核准你的應用程式網域。
 
-<a name="configuration"></a>
 <a name="configuration"></a>
 ## 設定 (Configuration)
 
@@ -247,7 +245,7 @@ Route::get('/buy', function (Request $request) {
 ```
 
 <a name="providing-meta-data-to-paddle-checkout"></a>
-#### 提供 Meta Data 給 Paddle Checkout
+#### 提供 Meta Data 給 Paddle Checkout (Providing Meta Data To Paddle Checkout)
 
 銷售產品時，通常會透過應用程式定義的 `Cart` 和 `Order` 模型來追蹤已完成的訂單和購買的產品。當將客戶重新導向到 Paddle 的 Checkout Overlay 以完成購買時，你可能需要提供現有的訂單識別碼，以便在客戶被重新導向回你的應用程式時，將已完成的購買與相應的訂單關聯起來。
 
@@ -373,7 +371,7 @@ Route::get('/subscribe', function (Request $request) {
 ```
 
 <a name="quickstart-building-a-subscribed-middleware"></a>
-#### 建立訂閱 Middleware
+#### 建立訂閱 Middleware (Quickstart Building A Subscribed Middleware)
 
 為了方便起見，你可能希望建立一個 [middleware](/docs/middleware) 來確定傳入的請求是否來自已訂閱的使用者。定義此 middleware 後，你可以輕鬆地將其指派給路由，以防止未訂閱的使用者存取該路由：
 
@@ -414,7 +412,7 @@ Route::get('/dashboard', function () {
 ```
 
 <a name="quickstart-allowing-customers-to-manage-their-billing-plan"></a>
-#### 允許客戶管理他們的計費方案
+#### 允許客戶管理他們的計費方案 (Quickstart Allowing Customers To Manage Their Billing Plan)
 
 當然，客戶可能希望將其訂閱方案變更為其他產品或「層級」。在上面的範例中，我們希望允許客戶將其方案從月繳訂閱變更為年繳訂閱。為此，你需要實作類似按鈕的東西，該按鈕導向以下路由：
 
@@ -490,7 +488,7 @@ Paddle 結帳小工具是非同步的。一旦使用者在小工具中建立訂�
 > 訂閱狀態變更後，接收相應 webhook 的延遲通常很短，但你應該在應用程式中考慮到這一點，即使用者的訂閱可能不會在完成結帳後立即生效。
 
 <a name="manually-rendering-an-overlay-checkout"></a>
-#### 手動渲染 Overlay Checkout
+#### 手動渲染 Overlay Checkout (Manually Rendering An Overlay Checkout)
 
 你也可以手動渲染 overlay checkout，而不使用 Laravel 內建的 Blade 元件。首先，[如前面的範例所示](#overlay-checkout) 產生結帳 session：
 
@@ -559,7 +557,7 @@ Route::get('/buy', function (Request $request) {
 有關 inline checkout 自訂選項的更多詳細資訊，請參閱 Paddle 的 [Inline Checkout 指南](https://developer.paddle.com/build/checkout/build-branded-inline-checkout) 和 [可用的結帳設定](https://developer.paddle.com/build/checkout/set-up-checkout-default-settings)。
 
 <a name="manually-rendering-an-inline-checkout"></a>
-#### 手動渲染 Inline Checkout
+#### 手動渲染 Inline Checkout (Manually Rendering An Inline Checkout)
 
 你也可以手動渲染 inline checkout，而不使用 Laravel 內建的 Blade 元件。首先，[如前面的範例所示](#inline-checkout) 產生結帳 session：
 
@@ -938,7 +936,7 @@ Subscription::query()->notOnGracePeriod();
 ```
 
 <a name="subscription-single-charges"></a>
-### Subscription Single Charges
+### Subscription Single Charges (Subscription Single Charges)
 
 Subscription single charges allow you to charge subscribers with a one-time charge on top of their subscriptions. You must provide one or multiple price ID's when invoking the `charge` method:
 
@@ -957,7 +955,7 @@ $response = $user->subscription()->chargeAndInvoice('pri_123');
 ```
 
 <a name="updating-payment-information"></a>
-### Updating Payment Information
+### Updating Payment Information (Updating Payment Information)
 
 Paddle always saves a payment method per subscription. If you want to update the default payment method for a subscription, you should redirect your customer to Paddle's hosted payment method update page using the `redirectToUpdatePaymentMethod` method on the subscription model:
 
@@ -974,7 +972,7 @@ Route::get('/update-payment-method', function (Request $request) {
 When a user has finished updating their information, a `subscription_updated` webhook will be dispatched by Paddle and the subscription details will be updated in your application's database.
 
 <a name="changing-plans"></a>
-### Changing Plans
+### Changing Plans (Changing Plans)
 
 After a user has subscribed to your application, they may occasionally want to change to a new subscription plan. To update the subscription plan for a user, you should pass the Paddle price's identifier to the subscription's `swap` method:
 
@@ -1018,7 +1016,7 @@ $user->subscription('default')->doNotBill()->swap($premium = 'pri_456');
 For more information on Paddle's proration policies, please consult Paddle's [proration documentation](https://developer.paddle.com/concepts/subscriptions/proration).
 
 <a name="subscription-quantity"></a>
-### Subscription Quantity
+### Subscription Quantity (Subscription Quantity)
 
 Sometimes subscriptions are affected by "quantity". For example, a project management application might charge $10 per month per project. To easily increment or decrement your subscription's quantity, use the `incrementQuantity` and `decrementQuantity` methods:
 
@@ -1058,7 +1056,7 @@ $user->subscription()->incrementQuantity(1, 'price_chat');
 ```
 
 <a name="subscriptions-with-multiple-products"></a>
-### Subscriptions With Multiple Products
+### Subscriptions With Multiple Products (Subscriptions With Multiple Products)
 
 [Subscription with multiple products](https://developer.paddle.com/build/subscriptions/add-remove-products-prices-addons) allow you to assign multiple billing products to a single subscription. For example, imagine you are building a customer service "helpdesk" application that has a base subscription price of $10 per month but offers a live chat add-on product for an additional $15 per month.
 
@@ -1109,7 +1107,7 @@ $user->subscription()->swap(['price_original' => 2]);
 > You may not remove the last price on a subscription. Instead, you should simply cancel the subscription.
 
 <a name="multiple-subscriptions"></a>
-### Multiple Subscriptions
+### Multiple Subscriptions (Multiple Subscriptions)
 
 Paddle allows your customers to have multiple subscriptions simultaneously. For example, you may run a gym that offers a swimming subscription and a weight-lifting subscription, and each subscription may have different pricing. Of course, customers should be able to subscribe to either or both plans.
 
@@ -1138,7 +1136,7 @@ $user->subscription('swimming')->cancel();
 ```
 
 <a name="pausing-subscriptions"></a>
-### Pausing Subscriptions
+### Pausing Subscriptions (Pausing Subscriptions)
 
 To pause a subscription, call the `pause` method on the user's subscription:
 
@@ -1184,7 +1182,7 @@ $user->subscription()->resume();
 > A subscription cannot be modified while it is paused. If you want to swap to a different plan or update quantities you must resume the subscription first.
 
 <a name="canceling-subscriptions"></a>
-### Canceling Subscriptions
+### Canceling Subscriptions (Canceling Subscriptions)
 
 To cancel a subscription, call the `cancel` method on the user's subscription:
 
@@ -1218,10 +1216,10 @@ $user->subscription()->stopCancelation();
 > Paddle's subscriptions cannot be resumed after cancelation. If your customer wishes to resume their subscription, they will have to create a new subscription.
 
 <a name="subscription-trials"></a>
-## Subscription Trials
+## Subscription Trials (Subscription Trials)
 
 <a name="with-payment-method-up-front"></a>
-### With Payment Method Up Front
+### With Payment Method Up Front (With Payment Method Up Front)
 
 If you would like to offer trial periods to your customers while still collecting payment method information up front, you should use set a trial time in the Paddle dashboard on the price your customer is subscribing to. Then, initiate the checkout session as normal:
 
@@ -1271,7 +1269,7 @@ if ($user->hasExpiredTrial('default')) {
 ```
 
 <a name="without-payment-method-up-front"></a>
-### Without Payment Method Up Front
+### Without Payment Method Up Front (Without Payment Method Up Front)
 
 If you would like to offer trial periods without collecting the user's payment method information up front, you may set the `trial_ends_at` column on the customer record attached to your user to your desired trial ending date. This is typically done during user registration:
 
@@ -1326,7 +1324,7 @@ if ($user->onGenericTrial()) {
 ```
 
 <a name="extend-or-activate-a-trial"></a>
-### Extend or Activate a Trial
+### Extend or Activate a Trial (Extend or Activate a Trial)
 
 You can extend an existing trial period on a subscription by invoking the `extendTrial` method and specifying the moment in time that the trial should end:
 
@@ -1341,7 +1339,7 @@ $user->subscription()->activate();
 ```
 
 <a name="handling-paddle-webhooks"></a>
-## Handling Paddle Webhooks
+## Handling Paddle Webhooks (Handling Paddle Webhooks)
 
 Paddle can notify your application of a variety of events via webhooks. By default, a route that points to Cashier's webhook controller is registered by the Cashier service provider. This controller will handle all incoming webhook requests.
 
@@ -1379,7 +1377,7 @@ Since Paddle webhooks need to bypass Laravel's [CSRF protection](/docs/csrf), yo
 For Paddle to be able to send your application webhooks during local development, you will need to expose your application via a site sharing service such as [Ngrok](https://ngrok.com/) or [Expose](https://expose.dev/docs/introduction). If you are developing your application locally using [Laravel Sail](/docs/sail), you may use Sail's [site sharing command](/docs/sail#sharing-your-site).
 
 <a name="defining-webhook-event-handlers"></a>
-### Defining Webhook Event Handlers
+### Defining Webhook Event Handlers (Defining Webhook Event Handlers)
 
 Cashier automatically handles subscription cancelation on failed charges and other common Paddle webhooks. However, if you have additional webhook events you would like to handle, you may do so by listening to the following events that are dispatched by Cashier:
 
@@ -1430,17 +1428,17 @@ CASHIER_WEBHOOK=https://example.com/my-paddle-webhook-url
 ```
 
 <a name="verifying-webhook-signatures"></a>
-### Verifying Webhook Signatures
+### Verifying Webhook Signatures (Verifying Webhook Signatures)
 
 To secure your webhooks, you may use [Paddle's webhook signatures](https://developer.paddle.com/webhooks/signature-verification). For convenience, Cashier automatically includes a middleware which validates that the incoming Paddle webhook request is valid.
 
 To enable webhook verification, ensure that the `PADDLE_WEBHOOK_SECRET` environment variable is defined in your application's `.env` file. The webhook secret may be retrieved from your Paddle account dashboard.
 
 <a name="single-charges"></a>
-## Single Charges
+## Single Charges (Single Charges)
 
 <a name="charging-for-products"></a>
-### Charging for Products
+### Charging for Products (Charging for Products)
 
 If you would like to initiate a product purchase for a customer, you may use the `checkout` method on a billable model instance to generate a checkout session for the purchase. The `checkout` method accepts one or multiple price ID's. If necessary, an associative array may be used to provide the quantity of the product that is being purchased:
 
@@ -1472,7 +1470,7 @@ $checkout = $user->checkout('pri_tshirt')
 ```
 
 <a name="refunding-transactions"></a>
-### Refunding Transactions
+### Refunding Transactions (Refunding Transactions)
 
 Refunding transactions will return the refunded amount to your customer's payment method that was used at the time of purchase. If you need to refund a Paddle purchase, you may use the `refund` method on a `Cashier\Paddle\Transaction` model. This method accepts a reason as the first argument, one or more price ID's to refund with optional amounts as an associative array. You may retrieve the transactions for a given billable model using the `transactions` method.
 
@@ -1503,7 +1501,7 @@ For more information on refunds, please consult [Paddle's refund documentation](
 > Refunds must always be approved by Paddle before fully processing.
 
 <a name="crediting-transactions"></a>
-### Crediting Transactions
+### Crediting Transactions (Crediting Transactions)
 
 Just like refunding, you can also credit transactions. Crediting transactions will add the funds to the customer's balance so it may be used for future purchases. Crediting transactions can only be done for manually-collected transactions and not for automatically-collected transactions (like subscriptions) since Paddle handles subscription credits automatically:
 
@@ -1520,7 +1518,7 @@ For more info, [see Paddle's documentation on crediting](https://developer.paddl
 > Credits can only be applied for manually-collected transactions. Automatically-collected transactions are credited by Paddle themselves.
 
 <a name="transactions"></a>
-## Transactions
+## Transactions (Transactions)
 
 You may easily retrieve an array of a billable model's transactions via the `transactions` property:
 
@@ -1567,7 +1565,7 @@ Route::get('/download-invoice/{transaction}', function (Request $request, Transa
 ```
 
 <a name="past-and-upcoming-payments"></a>
-### Past and Upcoming Payments
+### Past and Upcoming Payments (Past and Upcoming Payments)
 
 You may use the `lastPayment` and `nextPayment` methods to retrieve and display a customer's past or upcoming payments for recurring subscriptions:
 
@@ -1589,7 +1587,7 @@ Next payment: {{ $nextPayment->amount() }} due on {{ $nextPayment->date()->forma
 ```
 
 <a name="testing"></a>
-## Testing
+## Testing (Testing)
 
 While testing, you should manually test your billing flow to make sure your integration works as expected.
 

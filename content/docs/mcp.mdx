@@ -3,43 +3,43 @@ title: "MCP"
 description: Laravel MCP 提供 Model Context Protocol 整合
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [安裝 (Installation)](#installation)
-  - [發布路由 (Publishing Routes)](#publishing-routes)
-- [建立伺服器 (Creating Servers)](#creating-servers)
-  - [伺服器註冊 (Server Registration)](#server-registration)
-  - [Web 伺服器 (Web Servers)](#web-servers)
-  - [本地伺服器 (Local Servers)](#local-servers)
-- [工具 (Tools)](#tools)
-  - [建立工具 (Creating Tools)](#creating-tools)
-  - [工具輸入 Schemas (Tool Input Schemas)](#tool-input-schemas)
-  - [驗證工具參數 (Validating Tool Arguments)](#validating-tool-arguments)
-  - [工具依賴注入 (Tool Dependency Injection)](#tool-dependency-injection)
-  - [工具註解 (Tool Annotations)](#tool-annotations)
-  - [條件式工具註冊 (Conditional Tool Registration)](#conditional-tool-registration)
-  - [工具回應 (Tool Responses)](#tool-responses)
-- [提示 (Prompts)](#prompts)
-  - [建立提示 (Creating Prompts)](#creating-prompts)
-  - [提示參數 (Prompt Arguments)](#prompt-arguments)
-  - [驗證提示參數 (Validating Prompt Arguments)](#validating-prompt-arguments)
-  - [提示依賴注入 (Prompt Dependency Injection)](#prompt-dependency-injection)
-  - [條件式提示註冊 (Conditional Prompt Registration)](#conditional-prompt-registration)
-  - [提示回應 (Prompt Responses)](#prompt-responses)
-- [資源 (Resources)](#resources)
-  - [建立資源 (Creating Resources)](#creating-resources)
-  - [資源 URI 和 MIME 類型 (Resource URI and MIME Type)](#resource-uri-and-mime-type)
-  - [資源請求 (Resource Request)](#resource-request)
-  - [資源依賴注入 (Resource Dependency Injection)](#resource-dependency-injection)
-  - [條件式資源註冊 (Conditional Resource Registration)](#conditional-resource-registration)
-  - [資源回應 (Resource Responses)](#resource-responses)
+- [簡介](#introduction)
+- [安裝](#installation)
+  - [發布路由](#publishing-routes)
+- [建立伺服器](#creating-servers)
+  - [伺服器註冊](#server-registration)
+  - [Web 伺服器](#web-servers)
+  - [本地伺服器](#local-servers)
+- [工具](#tools)
+  - [建立工具](#creating-tools)
+  - [工具輸入 Schemas](#tool-input-schemas)
+  - [驗證工具參數](#validating-tool-arguments)
+  - [工具依賴注入](#tool-dependency-injection)
+  - [工具註解](#tool-annotations)
+  - [條件式工具註冊](#conditional-tool-registration)
+  - [工具回應](#tool-responses)
+- [提示](#prompts)
+  - [建立提示](#creating-prompts)
+  - [提示參數](#prompt-arguments)
+  - [驗證提示參數](#validating-prompt-arguments)
+  - [提示依賴注入](#prompt-dependency-injection)
+  - [條件式提示註冊](#conditional-prompt-registration)
+  - [提示回應](#prompt-responses)
+- [資源](#resources)
+  - [建立資源](#creating-resources)
+  - [資源 URI 和 MIME 類型](#resource-uri-and-mime-type)
+  - [資源請求](#resource-request)
+  - [資源依賴注入](#resource-dependency-injection)
+  - [條件式資源註冊](#conditional-resource-registration)
+  - [資源回應](#resource-responses)
 - [Metadata](#metadata)
-- [驗證 (Authentication)](#authentication)
+- [驗證](#authentication)
   - [OAuth 2.1](#oauth)
   - [Sanctum](#sanctum)
-- [授權 (Authorization)](#authorization)
-- [測試伺服器 (Testing Servers)](#testing-servers)
+- [授權](#authorization)
+- [測試伺服器](#testing-servers)
   - [MCP Inspector](#mcp-inspector)
-  - [單元測試 (Unit Tests)](#unit-tests)
+  - [單元測試](#unit-tests)
 
 <a name="introduction"></a>
 ## 簡介 (Introduction)
@@ -251,7 +251,7 @@ class WeatherServer extends Server
 ```
 
 <a name="tool-name-title-description"></a>
-#### 工具名稱、標題和描述
+#### 工具名稱、標題和描述 (Tool Name Title Description)
 
 預設情況下，工具的名稱和標題源自類別名稱。例如，`CurrentWeatherTool` 的名稱將為 `current-weather`，標題為 `Current Weather Tool`。你可以透過定義工具的 `$name` 和 `$title` 屬性來自訂這些值：
 
@@ -511,7 +511,7 @@ return Response::error('Unable to fetch weather data. Please try again.');
 ```
 
 <a name="multiple-content-responses"></a>
-#### 多重內容回應
+#### 多重內容回應 (Multiple Content Responses)
 
 工具可以透過回傳 `Response` 實例的陣列來回傳多個內容片段：
 
@@ -536,7 +536,7 @@ public function handle(Request $request): array
 ```
 
 <a name="streaming-responses"></a>
-#### 串流回應
+#### 串流回應 (Streaming Responses)
 
 對於長時間執行的操作或即時資料串流，工具可以從其 `handle` 方法回傳一個 [generator](https://www.php.net/manual/en/language.generators.overview.php)。這使得在最終回應之前可以發送中間更新給客戶端：
 
@@ -614,7 +614,7 @@ class WeatherServer extends Server
 ```
 
 <a name="prompt-name-title-and-description"></a>
-#### 提示名稱、標題和描述
+#### 提示名稱、標題和描述 (Prompt Name Title And Description)
 
 預設情況下，提示的名稱和標題源自類別名稱。例如，`DescribeWeatherPrompt` 的名稱將為 `describe-weather`，標題為 `Describe Weather Prompt`。你可以透過定義提示的 `$name` 和 `$title` 屬性來自訂這些值：
 
@@ -885,7 +885,7 @@ class WeatherServer extends Server
 ```
 
 <a name="resource-name-title-and-description"></a>
-#### 資源名稱、標題和描述
+#### 資源名稱、標題和描述 (Resource Name Title And Description)
 
 預設情況下，資源的名稱和標題源自類別名稱。例如，`WeatherGuidelinesResource` 的名稱將為 `weather-guidelines`，標題為 `Weather Guidelines Resource`。你可以透過定義資源的 `$name` 和 `$title` 屬性來自訂這些值：
 
@@ -1083,7 +1083,7 @@ public function handle(Request $request): Response
 ```
 
 <a name="resource-blob-responses"></a>
-#### Blob 回應
+#### Blob 回應 (Resource Blob Responses)
 
 要回傳 blob 內容，請使用 `blob` 方法，並提供 blob 內容：
 
@@ -1112,7 +1112,7 @@ class WeatherGuidelinesResource extends Resource
 ```
 
 <a name="resource-error-responses"></a>
-#### 錯誤回應
+#### 錯誤回應 (Resource Error Responses)
 
 要指示資源擷取期間發生錯誤，請使用 `error()` 方法：
 

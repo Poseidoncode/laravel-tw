@@ -36,14 +36,14 @@ description: Laravel Scout 為 Eloquent 模型提供了簡單的全文搜尋功�
 - [Custom Engines](#custom-engines)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Scout](https://github.com/laravel/scout) 提供一個簡單且以驅動程式為基礎的解決方案，用於為你的 [Eloquent 模型](/docs/eloquent) 新增全文搜尋功能。透過模型觀察者（model observers），Scout 能自動將搜尋索引與你的 Eloquent 資料列保持同步。
 
 目前 Scout 隨附的驅動包括 [Algolia](https://www.algolia.com/)、[Meilisearch](https://www.meilisearch.com)、[Typesense](https://typesense.org) 以及 MySQL / PostgreSQL（`database`）驅動。此外，Scout 還包含一個適用於本機開發的 "collection" 驅動，該驅動不需要外部相依或第三方服務。若內建驅動不符合需求，也可以自行撰寫並擴充自訂驅動。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 首先，使用 Composer 安裝 Scout 套件：
 
@@ -174,7 +174,7 @@ TYPESENSE_PROTOCOL=http
 有關 Typesense 集合（collections）的額外設定與 schema 定義，請在 `config/scout.php` 找到相關項目。更多資訊請參閱 [Typesense 文件](https://typesense.org/docs/guide/#quick-start)。
 
 <a name="preparing-data-for-storage-in-typesense"></a>
-#### 在 Typesense 中準備可儲存的資料
+#### 在 Typesense 中準備可儲存的資料 (Preparing Data For Storage In Typesense)
 
 使用 Typesense 時，模型的 `toSearchableArray` 方法需將模型主鍵轉為字串，並把建立時間轉為 UNIX 時間戳記，範例如下：
 
@@ -216,7 +216,7 @@ User::class => [
 
 <a name="typesense-dynamic-search-parameters"></a>
 
-#### 動態搜尋參數
+#### 動態搜尋參數 (Typesense Dynamic Search Parameters)
 
 Typesense 允許在透過 `options` 方法執行搜尋時動態修改 [搜尋參數](https://typesense.org/docs/latest/api/search.html#search-parameters)，範例：
 
@@ -229,11 +229,11 @@ Todo::search('Groceries')->options([
 ```
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 <a name="configuring-model-indexes"></a>
 
-### 設定模型索引
+### 設定模型索引 (Configuring Model Indexes)
 
 每個 Eloquent 模型會與一個搜尋「索引」（index）同步，該索引包含該模型所有可搜尋的記錄。換句話說，你可以把索引想像成類似於 MySQL 的資料表。預設情況下，每個模型會被儲存到對應模型典型「資料表」名稱的索引（通常為模型名稱的複數形式）。若需要，可以透過在模型中覆寫 `searchableAs` 方法自訂索引名稱：
 
@@ -261,7 +261,7 @@ class Post extends Model
 
 <a name="configuring-searchable-data"></a>
 
-### 設定可搜尋資料
+### 設定可搜尋資料 (Configuring Searchable Data)
 
 預設情況下，模型的整個 `toArray` 形式會被儲存到搜尋索引。若你想自訂同步到索引的資料，請在模型中覆寫 `toSearchableArray` 方法：
 
@@ -308,7 +308,7 @@ public function toSearchableArray()
 
 <a name="configuring-indexes-for-algolia"></a>
 
-#### 設定索引選項（Algolia）
+#### 設定索引選項（Algolia） (Configuring Indexes For Algolia)
 
 有時你會想在 Algolia 索引上設定額外的參數。雖然可以透過 Algolia 的 UI 管理這些設定，但直接在應用程式的 `config/scout.php` 中管理索引設定，會更方便且可加入部署流程，避免手動調整並確保在多環境間的一致性。你可以設定可過濾屬性（filterable attributes）、排序規則（ranking）、分面（faceting）等選項，或任何其他支援的設定（參見 Algolia 文件）。
 
@@ -350,7 +350,7 @@ php artisan scout:sync-index-settings
 
 <a name="configuring-filterable-data-for-meilisearch"></a>
 
-#### 為 Meilisearch 設定可過濾欄位與索引選項
+#### 為 Meilisearch 設定可過濾欄位與索引選項 (Configuring Filterable Data For Meilisearch)
 
 和其他 Scout 驅動不同，Meilisearch 需要你事先定義索引的搜尋設定，例如可過濾屬性（filterable attributes）、可排序屬性（sortable attributes）等。
 
@@ -393,7 +393,7 @@ php artisan scout:sync-index-settings
 
 <a name="configuring-the-model-id"></a>
 
-### 設定模型索引鍵（Model ID）
+### 設定模型索引鍵（Model ID） (Configuring The Model Id)
 
 預設情況下，Scout 會使用模型的主鍵作為儲存在索引中的唯一識別鍵。如果需要自訂此行為，可以在模型中覆寫 `getScoutKey` 與 `getScoutKeyName` 方法：
 
@@ -429,7 +429,7 @@ class User extends Model
 
 <a name="configuring-search-engines-per-model"></a>
 
-### 針對每個模型指定搜尋引擎
+### 針對每個模型指定搜尋引擎 (Configuring Search Engines Per Model)
 
 進行搜尋時，Scout 通常會使用 `config/scout.php` 中指定的預設搜尋引擎。若要為特定模型指定其他搜尋引擎，可以在模型中覆寫 `searchableUsing` 方法：
 
@@ -459,7 +459,7 @@ class User extends Model
 
 <a name="identifying-users"></a>
 
-### 使用者識別
+### 使用者識別 (Identifying Users)
 
 若使用 [Algolia](https://algolia.com)，Scout 也允許自動識別使用者。將已認證使用者與搜尋操作關聯，可幫助你在 Algolia 儀表板查看搜尋分析。可在 `.env` 檔中將 `SCOUT_IDENTIFY` 設為 `true` 以啟用此功能：
 
@@ -474,7 +474,7 @@ Enabling this feature will also pass the request's IP address and your authentic
 
 <a name="database-engine"></a>
 
-### Database（資料庫）引擎
+### Database（資料庫）引擎 (Database Engine)
 
 > [!WARNING]
 > 資料庫引擎目前僅支援 MySQL 與 PostgreSQL。
@@ -522,7 +522,7 @@ public function toSearchableArray(): array
 
 <a name="collection-engine"></a>
 
-### Collection（集合）引擎
+### Collection（集合）引擎 (Collection Engine)
 
 雖然在本機開發時，你可以使用 Algolia、Meilisearch 或 Typesense 等外部搜尋引擎，但若要快速上手，使用 `collection` 引擎會更方便。`collection` 引擎會從現有資料庫抓取結果並使用 `where` 條件與集合過濾來判斷符合查詢的記錄。使用此引擎時，不需要把模型「索引」到外部搜尋服務，因為資料會直接從本地資料庫取出。
 
@@ -541,11 +541,11 @@ On first glance, the "database" and "collections" engines are fairly similar. Th
 `collection` 引擎具有最高的移植性，支援 Laravel 支援的所有關聯式資料庫（包括 SQLite、SQL Server 等）；但其效能遠不及 Scout 的 `database` 引擎。
 
 <a name="indexing"></a>
-## 索引管理
+## 索引管理 (Indexing)
 
 <a name="batch-import"></a>
 
-### 批量匯入
+### 批量匯入 (Batch Import)
 
 若你在既有專案中安裝 Scout，可能已經有需要匯入索引的資料。Scout 提供 `scout:import` Artisan 指令，可用來把既有資料匯入搜尋索引：
 
@@ -567,7 +567,7 @@ php artisan scout:flush "App\Models\Post"
 
 <a name="modifying-the-import-query"></a>
 
-#### 調整匯入的查詢
+#### 調整匯入的查詢 (Modifying The Import Query)
 
 若要修改批量匯入時用來取得模型資料的查詢，可在模型上定義 `makeAllSearchableUsing` 方法。這裡適合加入必要的 eager load 關聯，以便在匯入前載入相關資料：
 
@@ -588,7 +588,7 @@ protected function makeAllSearchableUsing(Builder $query): Builder
 
 <a name="adding-records"></a>
 
-### 新增記錄
+### 新增記錄 (Adding Records)
 
 在模型加入 `Laravel\Scout\Searchable` trait 後，只要 `save` 或 `create` 該模型實例，該記錄就會自動新增到搜尋索引。若你已設定 Scout 使用 [佇列](#queueing)，此操作會由佇列工作程序在背景執行：
 
@@ -604,7 +604,7 @@ $order->save();
 
 <a name="adding-records-via-query"></a>
 
-#### 透過查詢新增記錄
+#### 透過查詢新增記錄 (Adding Records Via Query)
 
 如果想透過 Eloquent 查詢把一批模型新增到索引，可在查詢上連接 `searchable` 方法。`searchable` 會把查詢結果分塊（chunk）並將記錄加入索引。若 Scout 使用佇列，這些分塊將由佇列工作程序在背景匯入：
 
@@ -630,7 +630,7 @@ $orders->searchable();
 
 <a name="updating-records"></a>
 
-### 更新記錄
+### 更新記錄 (Updating Records)
 
 更新可搜尋模型時，只需修改模型實例的屬性並 `save` 至資料庫，Scout 會自動把變更同步到搜尋索引：
 
@@ -664,7 +664,7 @@ $orders->searchable();
 
 <a name="modifying-records-before-importing"></a>
 
-#### 在匯入前調整記錄
+#### 在匯入前調整記錄 (Modifying Records Before Importing)
 
 有時你可能需要在將模型加入索引前先準備該集合。例如，先 eager load 某個關聯，以便更有效率地把關聯資料加入索引。為此，可在對應模型上定義 `makeSearchableUsing` 方法：
 
@@ -682,7 +682,7 @@ public function makeSearchableUsing(Collection $models): Collection
 
 <a name="removing-records"></a>
 
-### 移除記錄
+### 移除記錄 (Removing Records)
 
 要將記錄從索引中移除，只要從資料庫 `delete` 該模型即可。即便模型支援 [軟刪除](/docs/eloquent#soft-deleting)，同樣適用：
 
@@ -720,7 +720,7 @@ Order::removeAllFromSearch();
 
 <a name="pausing-indexing"></a>
 
-### 暫停索引同步
+### 暫停索引同步 (Pausing Indexing)
 
 如果你需要對模型進行一系列批次操作，但不希望在此期間同步資料到搜尋索引，可使用 `withoutSyncingToSearch` 方法。此方法接受一個立即執行的 closure，在 closure 內發生的任何模型操作都不會同步到索引：
 
@@ -734,7 +734,7 @@ Order::withoutSyncingToSearch(function () {
 
 <a name="conditionally-searchable-model-instances"></a>
 
-### 條件式可搜尋模型實例
+### 條件式可搜尋模型實例 (Conditionally Searchable Model Instances)
 
 有時你可能只想在特定條件下讓模型可搜尋。例如，你的 `App\Models\Post` 可能處於「草稿（draft）」或「已發布（published）」兩種狀態，你可能希望只有「已發布」的文章能被搜尋到。可透過在模型中定義 `shouldBeSearchable` 方法來達成：
 
@@ -755,7 +755,7 @@ public function shouldBeSearchable(): bool
 
 <a name="searching"></a>
 
-## 搜尋
+## 搜尋 (Searching)
 
 你可以使用 `search` 方法開始對模型進行搜尋。`search` 接受一個查詢字串，接著可連鎖呼叫 `get` 方法來取得符合條件的 Eloquent 模型：
 
@@ -784,7 +784,7 @@ $orders = Order::search('Star Trek')->raw();
 
 <a name="custom-indexes"></a>
 
-#### 自訂索引
+#### 自訂索引 (Custom Indexes)
 
 搜尋查詢通常會在模型 `searchableAs` 指定的索引上執行。不過，你也可以使用 `within` 方法來指定要搜尋的自訂索引：
 
@@ -796,7 +796,7 @@ $orders = Order::search('Star Trek')
 
 <a name="where-clauses"></a>
 
-### Where 條件
+### Where 條件 (Where Clauses)
 
 Scout 允許在搜尋查詢上加入簡單的 `where` 條件。目前這些語法僅支援基本的數值相等檢查，主要用於依擁有者 ID 對搜尋結果進行範圍限制：
 
@@ -829,7 +829,7 @@ $orders = Order::search('Star Trek')->whereNotIn(
 
 <a name="pagination"></a>
 
-### 分頁
+### 分頁 (Pagination)
 
 除了取得模型集合外，你也可以使用 `paginate` 方法分頁搜尋結果。此方法會回傳 `Illuminate\Pagination\LengthAwarePaginator` 實例，就像你對傳統 Eloquent 查詢進行分頁一樣：
 
@@ -871,7 +871,7 @@ Route::get('/orders', function (Request $request) {
 
 <a name="soft-deleting"></a>
 
-### 軟刪除
+### 軟刪除 (Soft Deleting)
 
 若你的索引模型有使用 [軟刪除](/docs/eloquent#soft-deleting) 並且需要對軟刪除的模型進行搜尋，請在 `config/scout.php` 中將 `soft_delete` 選項設為 `true`：
 
@@ -896,7 +896,7 @@ $orders = Order::search('Star Trek')->onlyTrashed()->get();
 
 <a name="customizing-engine-searches"></a>
 
-### 自訂搜尋引擎查詢行為
+### 自訂搜尋引擎查詢行為 (Customizing Engine Searches)
 
 若需對搜尋引擎的查詢行為進行進階自訂，可把 closure 作為 `search` 方法的第二個參數傳入。例如，透過此回呼在傳給 Algolia 的搜尋選項中加入地理位置過濾：
 
@@ -919,7 +919,7 @@ Order::search(
 
 <a name="customizing-the-eloquent-results-query"></a>
 
-#### 自訂 Eloquent 結果查詢
+#### 自訂 Eloquent 結果查詢 (Customizing The Eloquent Results Query)
 
 當 Scout 從搜尋引擎取得符合條件的模型 ID 列表後，Eloquent 會根據主鍵取回所有對應的模型。你可以透過呼叫 `query` 方法來自訂此查詢。`query` 方法接受一個回呼，並會接收 Eloquent 查詢建構器（Builder）作為參數：
 
@@ -939,7 +939,7 @@ $orders = Order::search('Star Trek')
 
 <a name="writing-the-engine"></a>
 
-#### 實作自訂引擎
+#### 實作自訂引擎 (Writing The Engine)
 
 如果內建的 Scout 搜尋引擎無法滿足你的需求，你可以撰寫自訂引擎並註冊到 Scout 中。自訂引擎需繼承 `Laravel\Scout\Engines\Engine` 抽象類別，該類別定義了八個必須實作的方法：
 
@@ -960,7 +960,7 @@ abstract public function flush($model);
 
 <a name="registering-the-engine"></a>
 
-#### 註冊自訂引擎
+#### 註冊自訂引擎 (Registering The Engine)
 
 撰寫完自訂引擎後，可利用 Scout 引擎管理器的 `extend` 方法註冊引擎。引擎管理器可從 Laravel 的服務容器解析。建議在 `App\Providers\AppServiceProvider` 的 `boot` 方法或其他服務提供者中呼叫 `extend`：
 

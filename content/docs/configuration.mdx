@@ -15,14 +15,14 @@ title: 設定 (Configuration)
 - [維護模式](#maintenance-mode)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 框架的所有設定檔都儲存在 `config` 目錄中。每個選項都有文件說明，因此請隨意瀏覽這些檔案並熟悉可用的選項。
 
 這些設定檔允許您設定資料庫連線資訊、郵件伺服器資訊，以及各種其他核心設定值，例如您的應用程式 URL 和加密金鑰。
 
 <a name="the-about-command"></a>
-#### `about` 指令
+#### `about` 指令 (The About Command)
 
 Laravel 可以透過 `about` Artisan 指令顯示應用程式的設定、驅動程式和環境的概覽。
 
@@ -43,7 +43,7 @@ php artisan config:show database
 ```
 
 <a name="environment-configuration"></a>
-## 環境設定
+## 環境設定 (Environment Configuration)
 
 根據應用程式執行的環境擁有不同的設定值通常很有幫助。例如，您可能希望在本機使用與正式環境伺服器不同的快取驅動程式。
 
@@ -56,19 +56,19 @@ Laravel 的預設 `.env` 檔案包含一些常見的設定值，這些值可能�
 > [!NOTE] > `.env` 檔案中的任何變數都可以被外部環境變數（例如伺服器級或系統級環境變數）覆蓋。
 
 <a name="environment-file-security"></a>
-#### 環境檔案安全性
+#### 環境檔案安全性 (Environment File Security)
 
 您的 `.env` 檔案不應提交到應用程式的原始碼控制中，因為使用您的應用程式的每個開發者 / 伺服器可能需要不同的環境設定。此外，如果入侵者獲得了您的原始碼控制儲存庫的存取權限，這將是一個安全風險，因為任何敏感憑證都會被暴露。
 
 但是，可以使用 Laravel 內建的 [環境加密](#encrypting-environment-files) 來加密您的環境檔案。加密的環境檔案可以安全地放置在原始碼控制中。
 
 <a name="additional-environment-files"></a>
-#### 額外的環境檔案
+#### 額外的環境檔案 (Additional Environment Files)
 
 在載入應用程式的環境變數之前，Laravel 會判斷是否已從外部提供 `APP_ENV` 環境變數，或者是否已指定 `--env` CLI 參數。如果是，Laravel 將嘗試載入 `.env.[APP_ENV]` 檔案（如果存在）。如果不存在，則會載入預設的 `.env` 檔案。
 
 <a name="environment-variable-types"></a>
-### 環境變數類型
+### 環境變數類型 (Environment Variable Types)
 
 `.env` 檔案中的所有變數通常都被解析為字串，因此建立了一些保留值，以允許您從 `env()` 函式返回更廣泛的類型：
 
@@ -94,7 +94,7 @@ APP_NAME="My Application"
 ```
 
 <a name="retrieving-environment-configuration"></a>
-### 取得環境設定
+### 取得環境設定 (Retrieving Environment Configuration)
 
 當您的應用程式收到請求時，`.env` 檔案中列出的所有變數都將載入到 `$_ENV` PHP 超全域變數中。但是，您可以使用 `env` 函式從設定檔中檢索這些變數的值。事實上，如果您查看 Laravel 設定檔，您會注意到許多選項已經在使用此函式：
 
@@ -105,7 +105,7 @@ APP_NAME="My Application"
 傳遞給 `env` 函式的第二個值是「預設值」。如果給定的鍵不存在環境變數，則將返回此值。
 
 <a name="determining-the-current-environment"></a>
-### 判斷目前環境
+### 判斷目前環境 (Determining The Current Environment)
 
 目前的應用程式環境是透過 `.env` 檔案中的 `APP_ENV` 變數決定的。您可以透過 `App` [Facade](/docs/facades) 上的 `environment` 方法存取此值：
 
@@ -131,12 +131,12 @@ if (App::environment(['local', 'staging'])) {
 > 目前的應用程式環境偵測可以透過定義伺服器級 `APP_ENV` 環境變數來覆蓋。
 
 <a name="encrypting-environment-files"></a>
-### 加密環境檔案
+### 加密環境檔案 (Encrypting Environment Files)
 
 未加密的環境檔案永遠不應儲存在原始碼控制中。但是，Laravel 允許您加密環境檔案，以便可以將它們與應用程式的其餘部分一起安全地新增到原始碼控制中。
 
 <a name="encryption"></a>
-#### 加密
+#### 加密 (Encryption)
 
 要加密環境檔案，您可以使用 `env:encrypt` 指令：
 
@@ -160,7 +160,7 @@ php artisan env:encrypt --env=staging
 ```
 
 <a name="decryption"></a>
-#### 解密
+#### 解密 (Decryption)
 
 要解密環境檔案，您可以使用 `env:decrypt` 指令。此指令需要解密金鑰，Laravel 將從 `LARAVEL_ENV_ENCRYPTION_KEY` 環境變數中檢索該金鑰：
 
@@ -195,7 +195,7 @@ php artisan env:decrypt --force
 ```
 
 <a name="accessing-configuration-values"></a>
-## 存取設定值
+## 存取設定值 (Accessing Configuration Values)
 
 您可以從應用程式的任何位置使用 `Config` Facade 或全域 `config` 函式輕鬆存取您的設定值。可以使用「點」語法存取設定值，其中包括您希望存取的檔案名稱和選項。也可以指定預設值，如果設定選項不存在，則將返回該預設值：
 
@@ -230,7 +230,7 @@ Config::collection('config-key');
 ```
 
 <a name="configuration-caching"></a>
-## 設定快取
+## 設定快取 (Configuration Caching)
 
 為了提升應用程式的速度，您應該使用 `config:cache` Artisan 指令將所有設定檔快取到單一檔案中。這將把應用程式的所有設定選項合併到一個檔案中，框架可以快速載入該檔案。
 
@@ -250,7 +250,7 @@ php artisan config:clear
 > 如果您在部署過程中執行 `config:cache` 指令，您應該確保只在設定檔中呼叫 `env` 函式。一旦設定被快取，`.env` 檔案將不會被載入；因此，`env` 函式將只返回外部的、系統級的環境變數。
 
 <a name="configuration-publishing"></a>
-## 發布設定
+## 發布設定 (Configuration Publishing)
 
 大多數 Laravel 的設定檔已經發布在應用程式的 `config` 目錄中；但是，某些設定檔（如 `cors.php` 和 `view.php`）預設不會發布，因為大多數應用程式永遠不需要修改它們。
 
@@ -263,7 +263,7 @@ php artisan config:publish --all
 ```
 
 <a name="debug-mode"></a>
-## 除錯模式
+## 除錯模式 (Debug Mode)
 
 `config/app.php` 設定檔中的 `debug` 選項決定了向使用者顯示多少錯誤資訊。預設情況下，此選項設定為遵守儲存在 `.env` 檔案中的 `APP_DEBUG` 環境變數的值。
 
@@ -271,7 +271,7 @@ php artisan config:publish --all
 > 對於本機開發，您應該將 `APP_DEBUG` 環境變數設定為 `true`。**在您的正式環境中，此值應始終為 `false`。如果在正式環境中將該變數設定為 `true`，您將面臨向應用程式的終端使用者暴露敏感設定值的風險。**
 
 <a name="maintenance-mode"></a>
-## 維護模式
+## 維護模式 (Maintenance Mode)
 
 當您的應用程式處於維護模式時，將為進入應用程式的所有請求顯示一個自訂視圖。這使得在更新或執行維護時「停用」您的應用程式變得容易。維護模式檢查包含在應用程式的預設 Middleware 堆疊中。如果應用程式處於維護模式，將拋出一個狀態碼為 503 的 `Symfony\Component\HttpKernel\Exception\HttpException` 實例。
 
@@ -294,7 +294,7 @@ php artisan down --retry=60
 ```
 
 <a name="bypassing-maintenance-mode"></a>
-#### 繞過維護模式
+#### 繞過維護模式 (Bypassing Maintenance Mode)
 
 要允許使用秘密 Token 繞過維護模式，您可以使用 `secret` 選項指定維護模式繞過 Token：
 
@@ -320,7 +320,7 @@ php artisan down --with-secret
 > 您的維護模式秘密通常應由字母數字字元和（可選）破折號組成。您應該避免使用在 URL 中具有特殊意義的字元，例如 `?` 或 `&`。
 
 <a name="maintenance-mode-on-multiple-servers"></a>
-#### 多台伺服器上的維護模式
+#### 多台伺服器上的維護模式 (Maintenance Mode On Multiple Servers)
 
 預設情況下，Laravel 使用基於檔案的系統來判斷您的應用程式是否處於維護模式。這意味著要啟用維護模式，必須在託管應用程式的每台伺服器上執行 `php artisan down` 指令。
 
@@ -332,7 +332,7 @@ APP_MAINTENANCE_STORE=database
 ```
 
 <a name="pre-rendering-the-maintenance-mode-view"></a>
-#### 預先渲染維護模式視圖
+#### 預先渲染維護模式視圖 (Pre Rendering The Maintenance Mode View)
 
 如果您在部署期間使用 `php artisan down` 指令，如果您的使用者在 Composer 依賴項目或其他基礎設施組件更新時存取應用程式，他們有時仍可能會遇到錯誤。這是因為 Laravel 框架的很大一部分必須啟動才能判斷您的應用程式處於維護模式並使用樣板引擎渲染維護模式視圖。
 
@@ -343,7 +343,7 @@ php artisan down --render="errors::503"
 ```
 
 <a name="redirecting-maintenance-mode-requests"></a>
-#### 重新導向維護模式請求
+#### 重新導向維護模式請求 (Redirecting Maintenance Mode Requests)
 
 在維護模式下，Laravel 將為使用者嘗試存取的所有應用程式 URL 顯示維護模式視圖。如果您願意，您可以指示 Laravel 將所有請求重新導向到特定 URL。這可以使用 `redirect` 選項來完成。例如，您可能希望將所有請求重新導向到 `/` URI：
 
@@ -352,7 +352,7 @@ php artisan down --redirect=/
 ```
 
 <a name="disabling-maintenance-mode"></a>
-#### 停用維護模式
+#### 停用維護模式 (Disabling Maintenance Mode)
 
 要停用維護模式，請使用 `up` 指令：
 
@@ -364,11 +364,11 @@ php artisan up
 > 您可以透過在 `resources/views/errors/503.blade.php` 定義自己的樣板來客製化預設的維護模式樣板。
 
 <a name="maintenance-mode-queues"></a>
-#### 維護模式與 Queues
+#### 維護模式與 Queues (Maintenance Mode Queues)
 
 當您的應用程式處於維護模式時，將不會處理任何 [Queued jobs](/docs/queues)。一旦應用程式退出維護模式，Jobs 將繼續正常處理。
 
 <a name="alternatives-to-maintenance-mode"></a>
-#### 維護模式的替代方案
+#### 維護模式的替代方案 (Alternatives To Maintenance Mode)
 
 由於維護模式需要您的應用程式有幾秒鐘的停機時間，因此請考慮在像 [Laravel Cloud](https://cloud.laravel.com) 這樣的完全託管平台上執行您的應用程式，以實現 Laravel 的零停機部署。

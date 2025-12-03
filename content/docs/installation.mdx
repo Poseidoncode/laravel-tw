@@ -23,7 +23,7 @@ description: 安裝 (Installation)
   - [Laravel 作為 API 後端](#laravel-the-api-backend)
 
 <a name="meet-laravel"></a>
-## 遇見 Laravel
+## 遇見 Laravel (Meet Laravel)
 
 Laravel 是一個具有表達力、優雅語法的 Web 應用程式框架。Web 框架為建立應用程式提供了結構和起點，讓您可以專注於創造令人驚豔的事物，而我們則為您處理細節。
 
@@ -32,7 +32,7 @@ Laravel 致力於提供令人驚豔的開發者體驗，同時提供強大的功
 無論您是 PHP Web 框架的新手還是擁有多年經驗，Laravel 都是一個可以與您一起成長的框架。我們將幫助您邁出作為 Web 開發者的第一步，或者在您將專業知識提升到新水平時助您一臂之力。我們迫不及待地想看看您建立了什麼。
 
 <a name="why-laravel"></a>
-### 為什麼選擇 Laravel？
+### 為什麼選擇 Laravel？ (Why Laravel)
 
 在建立 Web 應用程式時，有各種工具和框架可供您使用。然而，我們相信 Laravel 是建立現代、全端 Web 應用程式的最佳選擇。
 
@@ -53,10 +53,10 @@ Laravel 具有令人難以置信的可擴展性。感謝 PHP 的擴展友善特�
 Laravel 結合了 PHP 生態系中最好的套件，提供最強大且對開發者友善的框架。此外，來自世界各地的數千名才華橫溢的開發者已經 [為框架做出了貢獻](https://github.com/laravel/framework)。誰知道呢，也許您甚至會成為 Laravel 的貢獻者。
 
 <a name="creating-a-laravel-project"></a>
-## 建立 Laravel 專案
+## 建立 Laravel 專案 (Creating A Laravel Project)
 
 <a name="installing-php"></a>
-### 安裝 PHP 與 Laravel Installer
+### 安裝 PHP 與 Laravel Installer (Installing Php)
 
 在建立您的第一個 Laravel 應用程式之前，請確保您的本機電腦已安裝 [PHP](https://php.net)、[Composer](https://getcomposer.org) 和 [Laravel installer](https://github.com/laravel/installer)。此外，您應該安裝 [Node 和 NPM](https://nodejs.org) 或 [Bun](https://bun.sh/)，以便您可以編譯應用程式的前端資源。
 
@@ -87,7 +87,7 @@ composer global require laravel/installer
 > 如需功能齊全的圖形化 PHP 安裝和管理體驗，請查看 [Laravel Herd](#installation-using-herd)。
 
 <a name="creating-an-application"></a>
-### 建立應用程式
+### 建立應用程式 (Creating An Application)
 
 安裝 PHP、Composer 和 Laravel installer 後，您就可以建立一個新的 Laravel 應用程式了。Laravel installer 會提示您選擇偏好的測試框架、資料庫和 Starter Kit：
 
@@ -109,14 +109,14 @@ composer run dev
 > 如果您想在開發 Laravel 應用程式時搶得先機，請考慮使用我們的 [Starter Kits](/docs/starter-kits) 之一。Laravel 的 Starter Kits 為您的新 Laravel 應用程式提供了後端和前端驗證的鷹架。
 
 <a name="initial-configuration"></a>
-## 初始設定
+## 初始設定 (Initial Configuration)
 
 Laravel 框架的所有設定檔都儲存在 `config` 目錄中。每個選項都有文件說明，因此請隨意瀏覽這些檔案並熟悉可用的選項。
 
 Laravel 開箱即用，幾乎不需要額外的設定。您可以自由地開始開發！但是，您可能希望查看 `config/app.php` 檔案及其文件。它包含幾個選項，例如 `url` 和 `locale`，您可能希望根據您的應用程式進行更改。
 
 <a name="environment-based-configuration"></a>
-### 基於環境的設定
+### 基於環境的設定 (Environment Based Configuration)
 
 由於 Laravel 的許多設定選項值可能會根據您的應用程式是在本機電腦上還是在正式環境 Web 伺服器上運行而有所不同，因此許多重要的設定值是使用應用程式根目錄下的 `.env` 檔案定義的。
 
@@ -126,7 +126,7 @@ Laravel 開箱即用，幾乎不需要額外的設定。您可以自由地開始
 > 有關 `.env` 檔案和基於環境的設定的更多資訊，請查看完整的 [設定文件](/docs/configuration#environment-configuration)。
 
 <a name="databases-and-migrations"></a>
-### 資料庫與 Migration
+### 資料庫與 Migration (Databases And Migrations)
 
 現在您已經建立了 Laravel 應用程式，您可能希望將一些資料儲存在資料庫中。預設情況下，應用程式的 `.env` 設定檔指定 Laravel 將與 SQLite 資料庫互動。
 
@@ -153,12 +153,12 @@ php artisan migrate
 > 如果您在 macOS 或 Windows 上開發，並且需要在本機安裝 MySQL、PostgreSQL 或 Redis，請考慮使用 [Herd Pro](https://herd.laravel.com/#plans) 或 [DBngin](https://dbngin.com/)。
 
 <a name="directory-configuration"></a>
-### 目錄設定
+### 目錄設定 (Directory Configuration)
 
 Laravel 應始終由為您的 Web 伺服器設定的「Web 目錄」的根目錄提供服務。您不應嘗試從「Web 目錄」的子目錄提供 Laravel 應用程式。嘗試這樣做可能會暴露應用程式中存在的敏感檔案。
 
 <a name="installation-using-herd"></a>
-## 使用 Herd 安裝
+## 使用 Herd 安裝 (Installation Using Herd)
 
 [Laravel Herd](https://herd.laravel.com) 是一個適用於 macOS 和 Windows 的極速、原生 Laravel 和 PHP 開發環境。Herd 包含了您開始 Laravel 開發所需的一切，包括 PHP 和 Nginx。
 
@@ -167,7 +167,7 @@ Laravel 應始終由為您的 Web 伺服器設定的「Web 目錄」的根目錄
 > [!NOTE] > [Herd Pro](https://herd.laravel.com/#plans) 透過額外的強大功能增強了 Herd，例如建立和管理本機 MySQL、Postgres 和 Redis 資料庫的能力，以及本機郵件檢視和日誌監控。
 
 <a name="herd-on-macos"></a>
-### macOS 上的 Herd
+### macOS 上的 Herd (Herd On Macos)
 
 如果您在 macOS 上開發，您可以從 [Herd 網站](https://herd.laravel.com) 下載 Herd 安裝程式。安裝程式會自動下載最新版本的 PHP 並設定您的 Mac 始終在背景執行 [Nginx](https://www.nginx.com/)。
 
@@ -187,7 +187,7 @@ herd open
 您可以透過查看 [Herd 文件](https://herd.laravel.com/docs) 了解更多關於 Herd 的資訊。
 
 <a name="herd-on-windows"></a>
-### Windows 上的 Herd
+### Windows 上的 Herd (Herd On Windows)
 
 您可以從 [Herd 網站](https://herd.laravel.com/windows) 下載 Herd 的 Windows 安裝程式。安裝完成後，您可以啟動 Herd 以完成入門流程並首次存取 Herd UI。
 
@@ -207,7 +207,7 @@ herd open
 您可以透過查看 [Windows 版 Herd 文件](https://herd.laravel.com/docs/windows) 了解更多關於 Herd 的資訊。
 
 <a name="ide-support"></a>
-## IDE 支援
+## IDE 支援 (Ide Support)
 
 您可以自由使用任何您希望的程式碼編輯器來開發 Laravel 應用程式。如果您正在尋找輕量且可擴充的編輯器，[VS Code](https://code.visualstudio.com) 或 [Cursor](https://cursor.com) 結合官方的 [Laravel VS Code Extension](https://marketplace.visualstudio.com/items?itemName=laravel.vscode-laravel) 提供了出色的 Laravel 支援，包括語法高亮、程式碼片段、Artisan 指令整合，以及對 Eloquent Model、Route、Middleware、Asset、Config 和 Inertia.js 的智慧自動完成。
 
@@ -216,7 +216,7 @@ herd open
 對於尋求雲端開發體驗的人來說，[Firebase Studio](https://firebase.studio/) 提供了直接在瀏覽器中建立 Laravel 的即時存取。無需任何設定，Firebase Studio 讓您可以輕鬆地從任何裝置開始建立 Laravel 應用程式。
 
 <a name="laravel-and-ai"></a>
-## Laravel 與 AI
+## Laravel 與 AI (Laravel And Ai)
 
 [Laravel Boost](https://github.com/laravel/boost) 是一個強大的工具，它橋接了 AI coding agents 和 Laravel 應用程式之間的鴻溝。Boost 為 AI agents 提供 Laravel 特定的上下文、工具和指南，以便它們可以生成更準確、特定於版本的程式碼，並遵循 Laravel 慣例。
 
@@ -227,7 +227,7 @@ herd open
 Boost 還包括 Laravel 維護的 AI 指南，幫助 agents 遵循框架慣例、編寫適當的測試，並避免在生成 Laravel 程式碼時出現常見的陷阱。
 
 <a name="installing-laravel-boost"></a>
-### 安裝 Laravel Boost
+### 安裝 Laravel Boost (Installing Laravel Boost)
 
 Boost 可以安裝在執行 PHP 8.1 或更高版本的 Laravel 10、11 和 12 應用程式中。要開始使用，請將 Boost 安裝為開發依賴項目：
 
@@ -247,7 +247,7 @@ php artisan boost:install
 > 要了解有關 Boost 的更多資訊，請查看 [GitHub 上的 Laravel Boost repository](https://github.com/laravel/boost)。
 
 <a name="next-steps"></a>
-## 下一步
+## 下一步 (Next Steps)
 
 現在您已經建立了 Laravel 應用程式，您可能想知道接下來要學什麼。首先，我們強烈建議透過閱讀以下文件來熟悉 Laravel 的運作方式：
 
@@ -265,7 +265,7 @@ php artisan boost:install
 您想要如何使用 Laravel 也將決定您旅程的下一步。使用 Laravel 的方式有很多種，我們將在下面探討框架的兩個主要使用案例。
 
 <a name="laravel-the-fullstack-framework"></a>
-### Laravel 作為全端框架
+### Laravel 作為全端框架 (Laravel The Fullstack Framework)
 
 Laravel 可以作為全端框架。所謂「全端」框架，是指您將使用 Laravel 來將請求路由到您的應用程式，並透過 [Blade 樣板](/docs/blade) 或像 [Inertia](https://inertiajs.com) 這樣的單頁應用程式混合技術來渲染您的前端。這是使用 Laravel 框架最常見的方式，在我們看來，也是使用 Laravel 最具生產力的方式。
 
@@ -277,7 +277,7 @@ Laravel 可以作為全端框架。所謂「全端」框架，是指您將使用
 > 如果您想在建立應用程式時搶得先機，請查看我們官方的 [應用程式 Starter Kits](/docs/starter-kits) 之一。
 
 <a name="laravel-the-api-backend"></a>
-### Laravel 作為 API 後端
+### Laravel 作為 API 後端 (Laravel The Api Backend)
 
 Laravel 也可以作為 JavaScript 單頁應用程式或行動應用程式的 API 後端。例如，您可以使用 Laravel 作為 [Next.js](https://nextjs.org) 應用程式的 API 後端。在這種情況下，您可以使用 Laravel 為您的應用程式提供 [驗證](/docs/sanctum) 和資料儲存 / 檢索，同時利用 Laravel 的強大服務，如 Queues、電子郵件、通知等等。
 

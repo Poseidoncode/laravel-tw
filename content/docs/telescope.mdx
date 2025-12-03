@@ -38,14 +38,14 @@ description: Laravel Telescope 是一個優雅的 Laravel 應用程式除錯助�
 - [顯示使用者頭像](#displaying-user-avatars)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Telescope](https://github.com/laravel/telescope) 是 Laravel 本地開發環境的絕佳伴侶。Telescope 提供了對進入應用程式的請求、例外、日誌條目、資料庫查詢、排隊的 Job、郵件、通知、快取操作、排程任務、變數 Dump 等的深入洞察。
 
 <img src="https://laravel.com/img/docs/telescope-example.png" />
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 你可以使用 Composer 套件管理器將 Telescope 安裝到你的 Laravel 專案中：
 
@@ -104,7 +104,7 @@ public function register(): void
 ```
 
 <a name="configuration"></a>
-### 設定
+### 設定 (Configuration)
 
 發布 Telescope 的資源後，其主要設定檔將位於 `config/telescope.php`。此設定檔允許你設定 [監聽器選項](#available-watchers)。每個設定選項都包含其用途的說明，因此請務必仔細瀏覽此檔案。
 
@@ -160,7 +160,7 @@ protected function gate(): void
 > 你應該確保在生產環境中將 `APP_ENV` 環境變數更改為 `production`。否則，你的 Telescope 安裝將公開可用。
 
 <a name="upgrading-telescope"></a>
-## 升級 Telescope
+## 升級 Telescope (Upgrading Telescope)
 
 升級到 Telescope 的新主要版本時，請務必仔細閱讀 [升級指南](https://github.com/laravel/telescope/blob/master/UPGRADE.md)。
 
@@ -183,7 +183,7 @@ php artisan telescope:publish
 ```
 
 <a name="filtering"></a>
-## 過濾
+## 過濾 (Filtering)
 
 <a name="filtering-entries"></a>
 ### 條目 (Entries)
@@ -249,7 +249,7 @@ public function register(): void
 ```
 
 <a name="tagging"></a>
-## 標記
+## 標記 (Tagging)
 
 Telescope 允許你透過「標籤」搜尋條目。通常，標籤是 Eloquent 模型類別名稱或經過驗證的使用者 ID，Telescope 會自動將其新增到條目中。有時，你可能希望將自己的自訂標籤附加到條目。為此，你可以使用 `Telescope::tag` 方法。`tag` 方法接受一個閉包，該閉包應回傳一個標籤陣列。閉包回傳的標籤將與 Telescope 自動附加到條目的任何標籤合併。通常，你應該在 `App\Providers\TelescopeServiceProvider` 類別的 `register` 方法中呼叫 `tag` 方法：
 

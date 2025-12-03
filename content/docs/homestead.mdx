@@ -5,41 +5,41 @@ description: Laravel Homestead 是一個官方預封裝的 Vagrant box
 
 # Laravel Homestead
 
-- [簡介 (Introduction)](#introduction)
-- [安裝與設定 (Installation and Setup)](#installation-and-setup)
-  - [第一步 (First Steps)](#first-steps)
-  - [設定 Homestead (Configuring Homestead)](#configuring-homestead)
-  - [設定 Nginx 網站 (Configuring Nginx Sites)](#configuring-nginx-sites)
-  - [設定服務 (Configuring Services)](#configuring-services)
-  - [啟動 Vagrant Box (Launching the Vagrant Box)](#launching-the-vagrant-box)
-  - [各專案獨立安裝 (Per Project Installation)](#per-project-installation)
-  - [安裝可選功能 (Installing Optional Features)](#installing-optional-features)
+- [簡介](#introduction)
+- [安裝與設定](#installation-and-setup)
+  - [第一步](#first-steps)
+  - [設定 Homestead](#configuring-homestead)
+  - [設定 Nginx 網站](#configuring-nginx-sites)
+  - [設定服務](#configuring-services)
+  - [啟動 Vagrant Box](#launching-the-vagrant-box)
+  - [各專案獨立安裝](#per-project-installation)
+  - [安裝可選功能](#installing-optional-features)
   - [Aliases](#aliases)
-- [更新 Homestead (Updating Homestead)](#updating-homestead)
-- [日常使用 (Daily Usage)](#daily-usage)
-  - [透過 SSH 連線 (Connecting via SSH)](#connecting-via-ssh)
-  - [新增額外網站 (Adding Additional Sites)](#adding-additional-sites)
-  - [環境變數 (Environment Variables)](#environment-variables)
-  - [連接埠 (Ports)](#ports)
-  - [PHP 版本 (PHP Versions)](#php-versions)
-  - [連線至資料庫 (Connecting to Databases)](#connecting-to-databases)
-  - [資料庫備份 (Database Backups)](#database-backups)
-  - [設定 Cron 排程 (Configuring Cron Schedules)](#configuring-cron-schedules)
-  - [設定 Mailpit (Configuring Mailpit)](#configuring-mailpit)
-  - [設定 Minio (Configuring Minio)](#configuring-minio)
+- [更新 Homestead](#updating-homestead)
+- [日常使用](#daily-usage)
+  - [透過 SSH 連線](#connecting-via-ssh)
+  - [新增額外網站](#adding-additional-sites)
+  - [環境變數](#environment-variables)
+  - [連接埠](#ports)
+  - [PHP 版本](#php-versions)
+  - [連線至資料庫](#connecting-to-databases)
+  - [資料庫備份](#database-backups)
+  - [設定 Cron 排程](#configuring-cron-schedules)
+  - [設定 Mailpit](#configuring-mailpit)
+  - [設定 Minio](#configuring-minio)
   - [Laravel Dusk](#laravel-dusk)
-  - [分享你的環境 (Sharing Your Environment)](#sharing-your-environment)
-- [除錯與分析 (Debugging and Profiling)](#debugging-and-profiling)
-  - [使用 Xdebug 對 Web 請求進行除錯 (Debugging Web Requests With Xdebug)](#debugging-web-requests)
-  - [除錯 CLI 應用程式 (Debugging CLI Applications)](#debugging-cli-applications)
-  - [使用 Blackfire 分析應用程式 (Profiling Applications With Blackfire)](#profiling-applications-with-blackfire)
-- [網路介面 (Network Interfaces)](#network-interfaces)
-- [擴充 Homestead (Extending Homestead)](#extending-homestead)
-- [供應商特定設定 (Provider Specific Settings)](#provider-specific-settings)
+  - [分享你的環境](#sharing-your-environment)
+- [除錯與分析](#debugging-and-profiling)
+  - [使用 Xdebug 對 Web 請求進行除錯](#debugging-web-requests)
+  - [除錯 CLI 應用程式](#debugging-cli-applications)
+  - [使用 Blackfire 分析應用程式](#profiling-applications-with-blackfire)
+- [網路介面](#network-interfaces)
+- [擴充 Homestead](#extending-homestead)
+- [供應商特定設定](#provider-specific-settings)
   - [VirtualBox](#provider-specific-virtualbox)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 > [!WARNING]
 > Laravel Homestead 是一個不再積極維護的舊版套件。[Laravel Sail](/docs/sail) 可作為現代化的替代方案。
@@ -54,7 +54,7 @@ Homestead 可以在任何 Windows、macOS 或 Linux 系統上運行，並包含 
 > 如果你使用的是 Windows，你可能需要啟用硬體虛擬化 (VT-x)。通常可以透過 BIOS 啟用。如果你在 UEFI 系統上使用 Hyper-V，你可能還需要停用 Hyper-V 才能存取 VT-x。
 
 <a name="included-software"></a>
-### 包含的軟體
+### 包含的軟體 (Included Software)
 
 <div id="software-list" markdown="1">
 
@@ -91,7 +91,7 @@ Homestead 可以在任何 Windows、macOS 或 Linux 系統上運行，並包含 
 </div>
 
 <a name="optional-software"></a>
-### 可選軟體
+### 可選軟體 (Optional Software)
 
 <div id="optional-software-list" markdown="1">
 
@@ -130,10 +130,10 @@ Homestead 可以在任何 Windows、macOS 或 Linux 系統上運行，並包含 
 </div>
 
 <a name="installation-and-setup"></a>
-## 安裝與設定
+## 安裝與設定 (Installation and Setup)
 
 <a name="first-steps"></a>
-### 第一步
+### 第一步 (First Steps)
 
 在啟動 Homestead 環境之前，你必須安裝 [Vagrant](https://developer.hashicorp.com/vagrant/downloads) 以及下列其中一個支援的供應商：
 
@@ -145,7 +145,7 @@ Homestead 可以在任何 Windows、macOS 或 Linux 系統上運行，並包含 
 要使用 Parallels 供應商，你需要安裝 [Parallels Vagrant plug-in](https://github.com/Parallels/vagrant-parallels)。它是免費的。
 
 <a name="installing-homestead"></a>
-#### 安裝 Homestead
+#### 安裝 Homestead (Installing Homestead)
 
 你可以透過將 Homestead 儲存庫複製到你的主機機器上來安裝 Homestead。建議將儲存庫複製到你的「home」目錄下的 `Homestead` 資料夾中，因為 Homestead 虛擬機器將作為你所有 Laravel 應用程式的主機。在整份文件中，我們將稱此目錄為你的「Homestead 目錄」：
 
@@ -172,10 +172,10 @@ init.bat
 ```
 
 <a name="configuring-homestead"></a>
-### 設定 Homestead
+### 設定 Homestead (Configuring Homestead)
 
 <a name="setting-your-provider"></a>
-#### 設定你的供應商
+#### 設定你的供應商 (Setting Your Provider)
 
 你的 `Homestead.yaml` 檔案中的 `provider` 鍵表示應該使用哪個 Vagrant 供應商：`virtualbox` 或 `parallels`：
 
@@ -185,7 +185,7 @@ init.bat
 > 如果你使用的是 Apple Silicon，則必須使用 Parallels 供應商。
 
 <a name="configuring-shared-folders"></a>
-#### 設定共享資料夾
+#### 設定共享資料夾 (Configuring Shared Folders)
 
 `Homestead.yaml` 檔案的 `folders` 屬性列出了你希望與 Homestead 環境共享的所有資料夾。當這些資料夾中的檔案發生變更時，它們將在你的本地機器和 Homestead 虛擬環境之間保持同步。你可以根據需要設定任意數量的共享資料夾：
 
@@ -236,7 +236,7 @@ folders:
 ```
 
 <a name="configuring-nginx-sites"></a>
-### 設定 Nginx 網站
+### 設定 Nginx 網站 (Configuring Nginx Sites)
 
 不熟悉 Nginx？沒問題。你的 `Homestead.yaml` 檔案的 `sites` 屬性允許你輕鬆地將「網域」映射到 Homestead 環境上的資料夾。`Homestead.yaml` 檔案中包含一個範例網站設定。同樣地，你可以根據需要將任意數量的網站新增至你的 Homestead 環境。Homestead 可以作為你正在開發的每個 Laravel 應用程式的便利虛擬化環境：
 
@@ -252,7 +252,7 @@ sites:
 > Homestead 指令碼旨在盡可能具有等冪性。但是，如果你在配置時遇到問題，你應該透過執行 `vagrant destroy && vagrant up` 指令來銷毀並重建機器。
 
 <a name="hostname-resolution"></a>
-#### 主機名稱解析
+#### 主機名稱解析 (Hostname Resolution)
 
 Homestead 使用 `mDNS` 發佈主機名稱以進行自動主機解析。如果你在 `Homestead.yaml` 檔案中設定 `hostname: homestead`，則主機將可透過 `homestead.local` 存取。macOS、iOS 和 Linux 桌面發行版預設包含 `mDNS` 支援。如果你使用的是 Windows，則必須安裝 [Bonjour Print Services for Windows](https://support.apple.com/kb/DL999?viewlocale=en_US&locale=en_US)。
 
@@ -269,7 +269,7 @@ http://homestead.test
 ```
 
 <a name="configuring-services"></a>
-### 設定服務
+### 設定服務 (Configuring Services)
 
 Homestead 預設會啟動數個服務；但是，你可以在配置期間自訂啟用或停用哪些服務。例如，你可以透過修改 `Homestead.yaml` 檔案中的 `services` 選項來啟用 PostgreSQL 並停用 MySQL：
 
@@ -284,14 +284,14 @@ services:
 指定的服務將根據它們在 `enabled` 和 `disabled` 指令中的順序啟動或停止。
 
 <a name="launching-the-vagrant-box"></a>
-### 啟動 Vagrant Box
+### 啟動 Vagrant Box (Launching the Vagrant Box)
 
 一旦你根據自己的喜好編輯了 `Homestead.yaml`，請從你的 Homestead 目錄執行 `vagrant up` 指令。Vagrant 將啟動虛擬機器並自動設定你的共享資料夾和 Nginx 網站。
 
 要銷毀機器，你可以使用 `vagrant destroy` 指令。
 
 <a name="per-project-installation"></a>
-### 各專案獨立安裝
+### 各專案獨立安裝 (Per Project Installation)
 
 你可以為你管理的每個專案設定一個 Homestead 實例，而不是全域安裝 Homestead 並在所有專案之間共享同一個 Homestead 虛擬機器。如果你希望隨專案附帶 `Vagrantfile`，以便其他參與專案的人員在複製專案儲存庫後立即 `vagrant up`，則各專案獨立安裝 Homestead 可能會有所幫助。
 
@@ -314,7 +314,7 @@ vendor\\bin\\homestead make
 接下來，在終端機中執行 `vagrant up` 指令，並在瀏覽器中透過 `http://homestead.test` 存取你的專案。請記住，如果你不使用自動 [主機名稱解析](#hostname-resolution)，你仍然需要為 `homestead.test` 或你選擇的網域新增 `/etc/hosts` 檔案項目。
 
 <a name="installing-optional-features"></a>
-### 安裝可選功能
+### 安裝可選功能 (Installing Optional Features)
 
 可選軟體是使用 `Homestead.yaml` 檔案中的 `features` 選項安裝的。大多數功能可以使用布林值啟用或停用，而某些功能允許多個設定選項：
 
@@ -395,7 +395,7 @@ alias ..='cd ..'
 更新 `aliases` 檔案後，你應該使用 `vagrant reload --provision` 指令重新配置 Homestead 虛擬機器。這將確保你的新 aliases 在機器上可用。
 
 <a name="updating-homestead"></a>
-## 更新 Homestead
+## 更新 Homestead (Updating Homestead)
 
 在開始更新 Homestead 之前，你應該確保已透過在 Homestead 目錄中執行以下指令來移除目前的虛擬機器：
 
@@ -442,15 +442,15 @@ vagrant up
 ```
 
 <a name="daily-usage"></a>
-## 日常使用
+## 日常使用 (Daily Usage)
 
 <a name="connecting-via-ssh"></a>
-### 透過 SSH 連線
+### 透過 SSH 連線 (Connecting via SSH)
 
 你可以透過從你的 Homestead 目錄執行 `vagrant ssh` 終端機指令來 SSH 進入你的虛擬機器。
 
 <a name="adding-additional-sites"></a>
-### 新增額外網站
+### 新增額外網站 (Adding Additional Sites)
 
 一旦你的 Homestead 環境配置完成並運行，你可能希望為你的其他 Laravel 專案新增額外的 Nginx 網站。你可以在單一 Homestead 環境上運行任意數量的 Laravel 專案。要新增額外網站，請將該網站新增至你的 `Homestead.yaml` 檔案。
 
@@ -475,7 +475,7 @@ sites:
 新增網站後，從你的 Homestead 目錄執行 `vagrant reload --provision` 終端機指令。
 
 <a name="site-types"></a>
-#### 網站類型
+#### 網站類型 (Site Types)
 
 Homestead 支援數種「類型」的網站，允許你輕鬆運行非基於 Laravel 的專案。例如，我們可以使用 `statamic` 網站類型輕鬆地將 Statamic 應用程式新增至 Homestead：
 
@@ -489,7 +489,7 @@ sites:
 可用的網站類型有：`apache`、`apache-proxy`、`apigility`、`expressive`、`laravel`（預設）、`proxy`（用於 nginx）、`silverstripe`、`statamic`、`symfony2`、`symfony4` 和 `zf`。
 
 <a name="site-parameters"></a>
-#### 網站參數
+#### 網站參數 (Site Parameters)
 
 你可以透過 `params` 網站指令將額外的 Nginx `fastcgi_param` 值新增至你的網站：
 
@@ -503,7 +503,7 @@ sites:
 ```
 
 <a name="environment-variables"></a>
-### 環境變數
+### 環境變數 (Environment Variables)
 
 你可以透過將全域環境變數新增至你的 `Homestead.yaml` 檔案來定義它們：
 
@@ -518,7 +518,7 @@ variables:
 更新 `Homestead.yaml` 檔案後，請務必執行 `vagrant reload --provision` 指令重新配置機器。這將更新所有已安裝 PHP 版本的 PHP-FPM 設定，並更新 `vagrant` 使用者的環境。
 
 <a name="ports"></a>
-### 連接埠
+### 連接埠 (Ports)
 
 預設情況下，以下連接埠會轉發到你的 Homestead 環境：
 
@@ -530,7 +530,7 @@ variables:
 </div>
 
 <a name="forwarding-additional-ports"></a>
-#### 轉發額外連接埠
+#### 轉發額外連接埠 (Forwarding Additional Ports)
 
 如果願意，你可以透過在 `Homestead.yaml` 檔案中定義 `ports` 設定項目來將額外連接埠轉發到 Vagrant box。更新 `Homestead.yaml` 檔案後，請務必執行 `vagrant reload --provision` 指令重新配置機器：
 
@@ -558,7 +558,7 @@ ports:
 </div>
 
 <a name="php-versions"></a>
-### PHP 版本
+### PHP 版本 (PHP Versions)
 
 Homestead 支援在同一虛擬機器上運行多個版本的 PHP。你可以在 `Homestead.yaml` 檔案中指定特定網站使用的 PHP 版本。可用的 PHP 版本為："5.6"、"7.0"、"7.1"、"7.2"、"7.3"、"7.4"、"8.0"、"8.1"、"8.2" 和 "8.3"（預設）：
 
@@ -600,7 +600,7 @@ php83
 ```
 
 <a name="connecting-to-databases"></a>
-### 連線至資料庫
+### 連線至資料庫 (Connecting to Databases)
 
 `homestead` 資料庫已針對 MySQL 和 PostgreSQL 進行了開箱即用的設定。要從主機機器的資料庫客戶端連線到你的 MySQL 或 PostgreSQL 資料庫，你應該連線到 `127.0.0.1` 的連接埠 `33060` (MySQL) 或 `54320` (PostgreSQL)。這兩個資料庫的使用者名稱和密碼皆為 `homestead` / `secret`。
 
@@ -608,7 +608,7 @@ php83
 > 當從你的主機機器連線到資料庫時，你應該只使用這些非標準連接埠。由於 Laravel 是在虛擬機器*內部*運行，因此你將在 Laravel 應用程式的 `database` 設定檔中使用預設的 3306 和 5432 連接埠。
 
 <a name="database-backups"></a>
-### 資料庫備份
+### 資料庫備份 (Database Backups)
 
 當你的 Homestead 虛擬機器被銷毀時，Homestead 可以自動備份你的資料庫。要利用此功能，你必須使用 Vagrant 2.1.0 或更高版本。或者，如果你使用的是舊版 Vagrant，則必須安裝 `vagrant-triggers` 外掛程式。要啟用自動資料庫備份，請將以下行新增至你的 `Homestead.yaml` 檔案：
 
@@ -619,7 +619,7 @@ backup: true
 設定完成後，當執行 `vagrant destroy` 指令時，Homestead 會將你的資料庫匯出到 `.backup/mysql_backup` 和 `.backup/postgres_backup` 目錄。這些目錄可以在你安裝 Homestead 的資料夾中找到，或者如果你使用 [各專案獨立安裝](#per-project-installation) 方法，則可以在專案的根目錄中找到。
 
 <a name="configuring-cron-schedules"></a>
-### 設定 Cron 排程
+### 設定 Cron 排程 (Configuring Cron Schedules)
 
 Laravel 透過排程一個每分鐘執行一次的 `schedule:run` Artisan 指令，提供了一種方便的方式來 [排程 cron jobs](/docs/scheduling)。`schedule:run` 指令將檢查你的 `routes/console.php` 檔案中定義的作業排程，以決定要執行哪些排程任務。
 
@@ -635,7 +635,7 @@ sites:
 該網站的 cron job 將定義在 Homestead 虛擬機器的 `/etc/cron.d` 目錄中。
 
 <a name="configuring-mailpit"></a>
-### 設定 Mailpit
+### 設定 Mailpit (Configuring Mailpit)
 
 [Mailpit](https://github.com/axllent/mailpit) 允許你攔截外發電子郵件並進行檢查，而無需實際將郵件發送給收件人。要開始使用，請更新你的應用程式的 `.env` 檔案以使用以下郵件設定：
 
@@ -651,7 +651,7 @@ MAIL_ENCRYPTION=null
 配置 Mailpit 後，你可以透過 `http://localhost:8025` 存取 Mailpit 儀表板。
 
 <a name="configuring-minio"></a>
-### 設定 Minio
+### 設定 Minio (Configuring Minio)
 
 [Minio](https://github.com/minio/minio) 是一個具有 Amazon S3 相容 API 的開源物件儲存伺服器。要安裝 Minio，請在 [features](#installing-optional-features) 區段中使用以下設定選項更新你的 `Homestead.yaml` 檔案：
 
@@ -694,7 +694,7 @@ features:
 啟用 `webdriver` 功能後，你應該在終端機中執行 `vagrant reload --provision` 指令。
 
 <a name="sharing-your-environment"></a>
-### 分享你的環境
+### 分享你的環境 (Sharing Your Environment)
 
 有時你可能希望與同事或客戶分享你目前正在進行的工作。Vagrant 透過 `vagrant share` 指令內建支援此功能；但是，如果你在 `Homestead.yaml` 檔案中設定了多個網站，這將無法運作。
 
@@ -716,10 +716,10 @@ share homestead.test -region=eu -subdomain=laravel
 > 請記住，Vagrant 本質上是不安全的，當執行 `share` 指令時，你將你的虛擬機器暴露在網際網路上。
 
 <a name="debugging-and-profiling"></a>
-## 除錯與分析
+## 除錯與分析 (Debugging and Profiling)
 
 <a name="debugging-web-requests"></a>
-### 使用 Xdebug 對 Web 請求進行除錯
+### 使用 Xdebug 對 Web 請求進行除錯 (Debugging Web Requests With Xdebug)
 
 Homestead 包含使用 [Xdebug](https://xdebug.org) 進行逐步除錯的支援。例如，你可以在瀏覽器中存取頁面，PHP 將連線到你的 IDE 以允許檢查和修改正在運行的程式碼。
 
@@ -729,7 +729,7 @@ Homestead 包含使用 [Xdebug](https://xdebug.org) 進行逐步除錯的支援�
 > Xdebug 會導致 PHP 運行速度顯著變慢。要停用 Xdebug，請在你的 Homestead 虛擬機器內執行 `sudo phpdismod xdebug` 並重新啟動 FPM 服務。
 
 <a name="autostarting-xdebug"></a>
-#### 自動啟動 Xdebug
+#### 自動啟動 Xdebug (Autostarting Xdebug)
 
 在對向 Web 伺服器發出請求的功能測試進行除錯時，自動啟動除錯比修改測試以傳遞自訂標頭或 cookie 來觸發除錯更容易。要強制 Xdebug 自動啟動，請修改你的 Homestead 虛擬機器內的 `/etc/php/7.x/fpm/conf.d/20-xdebug.ini` 檔案並新增以下設定：
 
@@ -741,7 +741,7 @@ xdebug.start_with_request = yes
 ```
 
 <a name="debugging-cli-applications"></a>
-### 除錯 CLI 應用程式
+### 除錯 CLI 應用程式 (Debugging CLI Applications)
 
 要除錯 PHP CLI 應用程式，請在你的 Homestead 虛擬機器內使用 `xphp` shell alias：
 
@@ -750,7 +750,7 @@ xphp /path/to/script
 ```
 
 <a name="profiling-applications-with-blackfire"></a>
-### 使用 Blackfire 分析應用程式
+### 使用 Blackfire 分析應用程式 (Profiling Applications With Blackfire)
 
 [Blackfire](https://blackfire.io/docs/introduction) 是一個用於分析 Web 請求和 CLI 應用程式的服務。它提供了一個互動式使用者介面，可在呼叫圖和時間軸中顯示分析資料。它是為開發、預備和生產環境而建構的，對終端使用者沒有開銷。此外，Blackfire 還提供程式碼和 `php.ini` 設定的效能、品質和安全性檢查。
 
@@ -770,7 +770,7 @@ features:
 Blackfire 伺服器憑證和客戶端憑證 [需要 Blackfire 帳戶](https://blackfire.io/signup)。Blackfire 提供各種選項來分析應用程式，包括 CLI 工具和瀏覽器擴充功能。請 [查看 Blackfire 文件以獲取更多詳細資訊](https://blackfire.io/docs/php/integrations/laravel/index)。
 
 <a name="network-interfaces"></a>
-## 網路介面
+## 網路介面 (Network Interfaces)
 
 `Homestead.yaml` 檔案的 `networks` 屬性配置你的 Homestead 虛擬機器的網路介面。你可以根據需要配置任意數量的介面：
 
@@ -808,7 +808,7 @@ networks:
 ```
 
 <a name="extending-homestead"></a>
-## 擴充 Homestead
+## 擴充 Homestead (Extending Homestead)
 
 你可以使用 Homestead 目錄根目錄中的 `after.sh` 指令碼來擴充 Homestead。在此檔案中，你可以新增任何正確配置和自訂虛擬機器所需的 shell 指令。
 
@@ -822,12 +822,12 @@ sudo apt-get -y \
 ```
 
 <a name="user-customizations"></a>
-### 使用者自訂
+### 使用者自訂 (User Customizations)
 
 當與團隊一起使用 Homestead 時，你可能希望調整 Homestead 以更符合你的個人開發風格。為此，你可以在 Homestead 目錄（包含 `Homestead.yaml` 檔案的同一目錄）的根目錄中建立一個 `user-customizations.sh` 檔案。在此檔案中，你可以進行任何你想要的自訂；但是，`user-customizations.sh` 不應受到版本控制。
 
 <a name="provider-specific-settings"></a>
-## 供應商特定設定
+## 供應商特定設定 (Provider Specific Settings)
 
 <a name="provider-specific-virtualbox"></a>
 ### VirtualBox

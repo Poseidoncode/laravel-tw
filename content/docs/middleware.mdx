@@ -15,14 +15,14 @@ description: 中介軟體 (Middleware)
 - [可終止的 Middleware](#terminable-middleware)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Middleware 提供了一個方便的機制來檢查和過濾進入應用程式的 HTTP 請求。例如，Laravel 包含一個 Middleware，用於驗證應用程式的使用者是否已驗證。如果使用者未驗證，Middleware 將把使用者重新導向到應用程式的登入畫面。但是，如果使用者已驗證，Middleware 將允許請求進一步進入應用程式。
 
 除了驗證之外，還可以編寫其他 Middleware 來執行各種任務。例如，日誌記錄 Middleware 可能會記錄所有傳入應用程式的請求。Laravel 包含多種 Middleware，包括用於驗證和 CSRF 保護的 Middleware；但是，所有使用者定義的 Middleware 通常位於應用程式的 `app/Http/Middleware` 目錄中。
 
 <a name="defining-middleware"></a>
-## 定義 Middleware
+## 定義 Middleware (Defining Middleware)
 
 要建立新的 Middleware，請使用 `make:middleware` Artisan 指令：
 
@@ -67,7 +67,7 @@ class EnsureTokenIsValid
 > 所有 Middleware 都透過 [Service Container](/docs/container) 解析，因此您可以在 Middleware 的建構子中對所需的任何依賴項進行型別提示。
 
 <a name="middleware-and-responses"></a>
-#### Middleware 與回應
+#### Middleware 與回應 (Middleware And Responses)
 
 當然，Middleware 可以在將請求更深入地傳遞到應用程式之前或之後執行任務。例如，以下 Middleware 將在應用程式處理請求**之前**執行某些任務：
 
@@ -116,10 +116,10 @@ class AfterMiddleware
 ```
 
 <a name="registering-middleware"></a>
-## 註冊 Middleware
+## 註冊 Middleware (Registering Middleware)
 
 <a name="global-middleware"></a>
-### 全域 Middleware
+### 全域 Middleware (Global Middleware)
 
 如果您希望 Middleware 在應用程式的每個 HTTP 請求期間執行，您可以在應用程式的 `bootstrap/app.php` 檔案中將其附加到全域 Middleware 堆疊：
 
@@ -134,7 +134,7 @@ use App\Http\Middleware\EnsureTokenIsValid;
 提供給 `withMiddleware` Closure 的 `$middleware` 物件是 `Illuminate\Foundation\Configuration\Middleware` 的實例，負責管理分配給應用程式路由的 Middleware。`append` 方法將 Middleware 新增到全域 Middleware 清單的末尾。如果您想將 Middleware 新增到清單的開頭，應使用 `prepend` 方法。
 
 <a name="manually-managing-laravels-default-global-middleware"></a>
-#### 手動管理 Laravel 的預設全域 Middleware
+#### 手動管理 Laravel 的預設全域 Middleware (Manually Managing Laravels Default Global Middleware)
 
 如果您想手動管理 Laravel 的全域 Middleware 堆疊，您可以將 Laravel 的預設全域 Middleware 堆疊提供給 `use` 方法。然後，您可以根據需要調整預設的 Middleware 堆疊：
 
@@ -154,7 +154,7 @@ use App\Http\Middleware\EnsureTokenIsValid;
 ```
 
 <a name="assigning-middleware-to-routes"></a>
-### 將 Middleware 分配給路由
+### 將 Middleware 分配給路由 (Assigning Middleware To Routes)
 
 如果您想將 Middleware 分配給特定路由，您可以在定義路由時呼叫 `middleware` 方法：
 
@@ -175,7 +175,7 @@ Route::get('/', function () {
 ```
 
 <a name="excluding-middleware"></a>
-#### 排除 Middleware
+#### 排除 Middleware (Excluding Middleware)
 
 將 Middleware 分配給一組路由時，您可能偶爾需要防止 Middleware 應用於群組內的單個路由。您可以使用 `withoutMiddleware` 方法來實現：
 
@@ -208,7 +208,7 @@ Route::withoutMiddleware([EnsureTokenIsValid::class])->group(function () {
 `withoutMiddleware` 方法只能移除路由 Middleware，不適用於 [全域 Middleware](#global-middleware)。
 
 <a name="middleware-groups"></a>
-### Middleware 群組
+### Middleware 群組 (Middleware Groups)
 
 有時您可能希望將多個 Middleware 分組在單個鍵下，以便更容易將它們分配給路由。您可以在應用程式的 `bootstrap/app.php` 檔案中使用 `appendToGroup` 方法來實現：
 
@@ -242,7 +242,7 @@ Route::middleware(['group-name'])->group(function () {
 ```
 
 <a name="laravels-default-middleware-groups"></a>
-#### Laravel 的預設 Middleware 群組
+#### Laravel 的預設 Middleware 群組 (Laravels Default Middleware Groups)
 
 Laravel 包含預定義的 `web` 和 `api` Middleware 群組，其中包含您可能想要應用於 Web 和 API 路由的常見 Middleware。請記住，Laravel 會自動將這些 Middleware 群組應用於相應的 `routes/web.php` 和 `routes/api.php` 檔案：
 
@@ -332,7 +332,7 @@ $middleware->web(remove: [
 ```
 
 <a name="manually-managing-laravels-default-middleware-groups"></a>
-#### 手動管理 Laravel 的預設 Middleware 群組
+#### 手動管理 Laravel 的預設 Middleware 群組 (Manually Managing Laravels Default Middleware Groups)
 
 如果您想手動管理 Laravel 預設 `web` 和 `api` Middleware 群組中的所有 Middleware，您可以完全重新定義這些群組。以下範例將使用其預設 Middleware 定義 `web` 和 `api` Middleware 群組，允許您根據需要自訂它們：
 
@@ -360,7 +360,7 @@ $middleware->web(remove: [
 > 預設情況下，`web` 和 `api` Middleware 群組會由 `bootstrap/app.php` 檔案自動應用於應用程式對應的 `routes/web.php` 和 `routes/api.php` 檔案。
 
 <a name="middleware-aliases"></a>
-### Middleware 別名
+### Middleware 別名 (Middleware Aliases)
 
 您可以在應用程式的 `bootstrap/app.php` 檔案中為 Middleware 分配別名。Middleware 別名允許您為給定的 Middleware 類別定義簡短的別名，這對於具有長類別名稱的 Middleware 特別有用：
 
@@ -453,7 +453,7 @@ Route::get('/profile', function () {
 </div>
 
 <a name="sorting-middleware"></a>
-### 排序 Middleware
+### 排序 Middleware (Sorting Middleware)
 
 在極少數情況下，您可能需要 Middleware 以特定順序執行，但在將它們分配給路由時無法控制它們的順序。在這些情況下，您可以在應用程式的 `bootstrap/app.php` 檔案中使用 `priority` 方法指定 Middleware 優先順序：
 
@@ -477,7 +477,7 @@ Route::get('/profile', function () {
 ```
 
 <a name="middleware-parameters"></a>
-## Middleware 參數
+## Middleware 參數 (Middleware Parameters)
 
 Middleware 也可以接收額外的參數。例如，如果您的應用程式需要在執行給定動作之前驗證經過驗證的使用者是否具有給定的「角色」，您可以建立一個 `EnsureUserHasRole` Middleware，該 Middleware 接收角色名稱作為額外參數。
 
@@ -529,7 +529,7 @@ Route::put('/post/{'{id}'}', function (string $id) {
 ```
 
 <a name="terminable-middleware"></a>
-## 可終止的 Middleware
+## 可終止的 Middleware (Terminable Middleware)
 
 有時 Middleware 可能需要在 HTTP 回應已發送到瀏覽器之後執行某些工作。如果您在 Middleware 上定義了 `terminate` 方法，並且您的 Web 伺服器正在使用 [FastCGI](https://www.php.net/manual/en/install.fpm.php)，則在回應發送到瀏覽器後，`terminate` 方法將自動被呼叫：
 

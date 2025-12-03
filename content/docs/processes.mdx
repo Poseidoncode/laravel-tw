@@ -3,28 +3,28 @@ title: "程序 (Processes)"
 description: Laravel 提供了流暢的 API 來執行外部程序
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [呼叫程序 (Invoking Processes)](#invoking-processes)
-  - [程序選項 (Process Options)](#process-options)
-  - [程序輸出 (Process Output)](#process-output)
-  - [管道 (Pipelines)](#process-pipelines)
-- [非同步程序 (Asynchronous Processes)](#asynchronous-processes)
-  - [程序 ID 和訊號 (Process IDs and Signals)](#process-ids-and-signals)
-  - [非同步程序輸出 (Asynchronous Process Output)](#asynchronous-process-output)
-  - [非同步程序逾時 (Asynchronous Process Timeouts)](#asynchronous-process-timeouts)
-- [並行程序 (Concurrent Processes)](#concurrent-processes)
-  - [命名池程序 (Naming Pool Processes)](#naming-pool-processes)
-  - [池程序 ID 和訊號 (Pool Process IDs and Signals)](#pool-process-ids-and-signals)
-- [測試 (Testing)](#testing)
-  - [偽造程序 (Faking Processes)](#faking-processes)
-  - [偽造特定程序 (Faking Specific Processes)](#faking-specific-processes)
-  - [偽造程序序列 (Faking Process Sequences)](#faking-process-sequences)
-  - [偽造非同步程序生命週期 (Faking Asynchronous Process Lifecycles)](#faking-asynchronous-process-lifecycles)
-  - [可用的斷言 (Available Assertions)](#available-assertions)
-  - [防止雜散程序 (Preventing Stray Processes)](#preventing-stray-processes)
+- [簡介](#introduction)
+- [呼叫程序](#invoking-processes)
+  - [程序選項](#process-options)
+  - [程序輸出](#process-output)
+  - [管道](#process-pipelines)
+- [非同步程序](#asynchronous-processes)
+  - [程序 ID 和訊號](#process-ids-and-signals)
+  - [非同步程序輸出](#asynchronous-process-output)
+  - [非同步程序逾時](#asynchronous-process-timeouts)
+- [並行程序](#concurrent-processes)
+  - [命名池程序](#naming-pool-processes)
+  - [池程序 ID 和訊號](#pool-process-ids-and-signals)
+- [測試](#testing)
+  - [偽造程序](#faking-processes)
+  - [偽造特定程序](#faking-specific-processes)
+  - [偽造程序序列](#faking-process-sequences)
+  - [偽造非同步程序生命週期](#faking-asynchronous-process-lifecycles)
+  - [可用的斷言](#available-assertions)
+  - [防止雜散程序](#preventing-stray-processes)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 圍繞 [Symfony Process 元件](https://symfony.com/doc/current/components/process.html) 提供了富有表現力且精簡的 API，讓你可以方便地從 Laravel 應用程式呼叫外部程序。Laravel 的程序功能專注於最常見的使用案例和出色的開發人員體驗。
 

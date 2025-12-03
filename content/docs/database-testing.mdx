@@ -9,12 +9,12 @@ title: 資料庫測試 (database-testing)
 - [可用的斷言](#available-assertions)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 Laravel 提供了各種有用的工具和斷言，讓測試資料庫驅動的應用程式變得更加容易。此外，Laravel 的 model factories 和 seeders 可以輕鬆地使用你應用程式的 Eloquent models 和關聯來建立測試資料庫記錄。我們會在以下文件中討論所有這些強大的功能。
 
 <a name="resetting-the-database-after-each-test"></a>
-### 每次測試後重置資料庫
+### 每次測試後重置資料庫 (Resetting The Database After Each Test)
 
 在繼續之前，讓我們討論如何在每次測試後重置你的資料庫，以便前一次測試的資料不會干擾後續的測試。Laravel 內建的 `Illuminate\Foundation\Testing\RefreshDatabase` trait 會為你處理這件事。只需在你的測試類別中使用這個 trait：
 
@@ -89,7 +89,7 @@ public function test_models_can_be_instantiated(): void
 ```
 
 <a name="running-seeders"></a>
-## 執行 Seeders
+## 執行 Seeders (Running Seeders)
 
 如果你想在功能測試期間使用[資料庫 seeders](/docs/{{version}}/seeding) 來填充你的資料庫，你可以調用 `seed` 方法。預設情況下，`seed` 方法會執行 `DatabaseSeeder`，它應該會執行你所有其他的 seeders。或者，你可以將特定的 seeder 類別名稱傳遞給 `seed` 方法：
 
@@ -191,7 +191,7 @@ protected $seeder = OrderStatusSeeder::class;
 ```
 
 <a name="available-assertions"></a>
-## 可用的斷言
+## 可用的斷言 (Available Assertions)
 
 Laravel 為你的 [Pest](https://pestphp.com) 或 [PHPUnit](https://phpunit.de) 功能測試提供了多種資料庫斷言。我們將在下面討論每一個斷言。
 

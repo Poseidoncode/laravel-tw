@@ -3,25 +3,25 @@ title: "輔助函式 (Helpers)"
 description: Laravel 包含多種全域 PHP 輔助函式
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [可用方法 (Available Methods)](#available-methods)
-- [其他工具 (Other Utilities)](#other-utilities)
-  - [基準測試 (Benchmarking)](#benchmarking)
-  - [日期 (Dates)](#dates)
-  - [延遲函式 (Deferred Functions)](#deferred-functions)
-  - [抽獎 (Lottery)](#lottery)
-  - [管道 (Pipeline)](#pipeline)
-  - [睡眠 (Sleep)](#sleep)
-  - [時間框 (Timebox)](#timebox)
+- [簡介](#introduction)
+- [可用方法](#available-methods)
+- [其他工具](#other-utilities)
+  - [基準測試](#benchmarking)
+  - [日期](#dates)
+  - [延遲函式](#deferred-functions)
+  - [抽獎](#lottery)
+  - [管道](#pipeline)
+  - [睡眠](#sleep)
+  - [時間框](#timebox)
   - [URI](#uri)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架本身使用;但是,如果你發現它們很方便,你可以在自己的應用程式中自由使用它們。
 
 <a name="available-methods"></a>
-## 可用方法
+## 可用方法 (Available Methods)
 
 <a name="arrays-and-objects-method-list"></a>
 ### 陣列和物件 (Arrays & Objects)
@@ -3159,10 +3159,10 @@ $value = when(true, fn () => 'Hello World');
 ```
 
 <a name="other-utilities"></a>
-## 其他工具
+## 其他工具 (Other Utilities)
 
 <a name="benchmarking"></a>
-### Benchmarking
+### Benchmarking (Benchmarking)
 
 有時你可能希望快速測試應用程式某些部分的效能。在這種情況下,你可以使用 `Benchmark` 支援類別來測量給定回呼完成所需的毫秒數:
 
@@ -3195,7 +3195,7 @@ Benchmark::dd(fn () => User::count(), iterations: 10); // 0.5 ms
 ```
 
 <a name="dates"></a>
-### Dates
+### Dates (Dates)
 
 Laravel 包含 [Carbon](https://carbon.nesbot.com/docs/),這是一個強大的日期和時間操作函式庫。要建立一個新的 `Carbon` 實例,你可以呼叫 `now` 函式。此函式在你的 Laravel 應用程式中全域可用:
 
@@ -3214,7 +3214,7 @@ $now = Carbon::now();
 有關 Carbon 及其功能的詳細討論,請參閱 [Carbon 官方文件](https://carbon.nesbot.com/docs/)。
 
 <a name="deferred-functions"></a>
-### 延遲函式
+### 延遲函式 (Deferred Functions)
 
 雖然 Laravel 的 [queued jobs](/docs/queues) 允許你將任務排隊以進行背景處理,但有時你可能有一些簡單的任務希望延遲執行,而無需設定或維護長時間執行的佇列工作執行緒。
 
@@ -3245,7 +3245,7 @@ defer(fn () => Metrics::reportOrder($order))->always();
 > 如果你安裝了 [Swoole PHP extension](https://www.php.net/manual/en/book.swoole.php),Laravel 的 `defer` 函式可能會與 Swoole 自己的全域 `defer` 函式衝突,導致 Web 伺服器錯誤。請確保透過顯式命名空間呼叫 Laravel 的 `defer` 輔助函式: `use function Illuminate\Support\defer;`
 
 <a name="cancelling-deferred-functions"></a>
-#### 取消延遲函式
+#### 取消延遲函式 (Cancelling Deferred Functions)
 
 如果你需要在執行之前取消延遲函式,可以使用 `forget` 方法按名稱取消該函式。要命名延遲函式,請將第二個參數提供給 `Illuminate\Support\defer` 函式:
 
@@ -3256,7 +3256,7 @@ defer()->forget('reportMetrics');
 ```
 
 <a name="disabling-deferred-functions-in-tests"></a>
-#### 在測試中停用延遲函式
+#### 在測試中停用延遲函式 (Disabling Deferred Functions In Tests)
 
 在編寫測試時,停用延遲函式可能很有用。你可以在測試中呼叫 `withoutDefer` 來指示 Laravel 立即呼叫所有延遲函式:
 
@@ -3303,7 +3303,7 @@ abstract class TestCase extends BaseTestCase
 ```
 
 <a name="lottery"></a>
-### Lottery
+### Lottery (Lottery)
 
 Laravel 的 lottery 類別可用於根據給定的機率執行回呼。當你只想為傳入請求的一定百分比執行程式碼時,這特別有用:
 
@@ -3330,7 +3330,7 @@ DB::whenQueryingForLongerThan(
 ```
 
 <a name="testing-lotteries"></a>
-#### 測試 Lotteries
+#### 測試 Lotteries (Testing Lotteries)
 
 Laravel 提供了一些簡單的方法,讓你輕鬆測試應用程式的 lottery 呼叫:
 
@@ -3349,7 +3349,7 @@ Lottery::determineResultsNormally();
 ```
 
 <a name="pipeline"></a>
-### Pipeline
+### Pipeline (Pipeline)
 
 Laravel 的 `Pipeline` facade 提供了一種方便的方法,可以將給定的輸入「傳送」到一系列可呼叫的類別、閉包或可呼叫物件中,讓每個類別都有機會檢查或修改輸入,並呼叫管道中的下一個可呼叫物件:
 
@@ -3404,7 +3404,7 @@ $user = Pipeline::send($user)
 ```
 
 <a name="sleep"></a>
-### Sleep
+### Sleep (Sleep)
 
 Laravel 的 `Sleep` 類別是 PHP 原生 `sleep` 和 `usleep` 函式的輕量級包裝器,提供了更好的可測試性,同時也公開了一個對開發人員友好的 API 來處理時間:
 
@@ -3458,7 +3458,7 @@ Sleep::for(1)->second()->and(10)->milliseconds();
 ```
 
 <a name="testing-sleep"></a>
-#### 測試 Sleep
+#### 測試 Sleep (Testing Sleep)
 
 在測試使用 `Sleep` 類別或 PHP 原生 sleep 函式的程式碼時,你的測試將暫停執行。正如你所預料的那樣,這會使你的測試套件明顯變慢。例如,想像你正在測試以下程式碼:
 
@@ -3577,7 +3577,7 @@ $start->diffForHumans(); // 1 second ago
 Laravel 在暫停執行時內部使用 `Sleep` 類別。例如,[retry](#method-retry) 輔助函式在睡眠時使用 `Sleep` 類別,從而允許在使用該輔助函式時提高可測試性。
 
 <a name="timebox"></a>
-### Timebox
+### Timebox (Timebox)
 
 Laravel 的 `Timebox` 類別確保給定的回呼始終花費固定的時間來執行,即使其實際執行完成得更快。這對於加密操作和使用者認證檢查特別有用,因為攻擊者可能會利用執行時間的變化來推斷敏感資訊。
 
@@ -3635,7 +3635,7 @@ $uri = Uri::of('https://example.com')
 ```
 
 <a name="inspecting-uris"></a>
-#### 檢查 URIs
+#### 檢查 URIs (Inspecting Uris)
 
 `Uri` 類別還允許你輕鬆檢查底層 URI 的各個元件:
 
@@ -3650,7 +3650,7 @@ $fragment = $uri->fragment();
 ```
 
 <a name="manipulating-query-strings"></a>
-#### 操作查詢字串
+#### 操作查詢字串 (Manipulating Query Strings)
 
 `Uri` 類別提供了幾種可用於操作 URI 查詢字串的方法。`withQuery` 方法可用於將其他查詢字串參數合併到現有查詢字串中:
 
@@ -3683,7 +3683,7 @@ $uri = $uri->withoutQuery(['page']);
 ```
 
 <a name="generating-responses-from-uris"></a>
-#### 從 URIs 產生回應
+#### 從 URIs 產生回應 (Generating Responses From Uris)
 
 `redirect` 方法可用於產生給定 URI 的 `RedirectResponse` 實例:
 

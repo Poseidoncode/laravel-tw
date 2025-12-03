@@ -22,14 +22,14 @@ description: Laravel 入門套件提供了應用程式開發的起點
 - [常見問題](#faqs)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 為了讓您在建立新的 Laravel 應用程式時能有個領先的起跑點，我們很高興能提供 [應用程式啟動套件 (application starter kits)](https://laravel.com/starter-kits)。這些啟動套件能讓您在建立下一個 Laravel 應用程式時快速上手，並包含了註冊和驗證應用程式使用者所需的路由、控制器和視圖。這些啟動套件使用 [Laravel Fortify](/docs/fortify) 來提供驗證功能。
 
 雖然我們歡迎您使用這些啟動套件，但它們並非強制性的。您完全可以透過安裝一份全新的 Laravel，從頭開始建立您自己的應用程式。無論哪種方式，我們都知道您將會打造出色的作品！
 
 <a name="creating-an-application"></a>
-## 使用啟動套件建立應用程式
+## 使用啟動套件建立應用程式 (Creating An Application)
 
 要使用我們的啟動套件之一來建立新的 Laravel 應用程式，您首先應該 [安裝 PHP 和 Laravel CLI 工具](/docs/installation#installing-php)。如果您已經安裝了 PHP 和 Composer，您可以透過 Composer 安裝 Laravel 安裝程式 CLI 工具：
 
@@ -54,7 +54,7 @@ composer run dev
 一旦您啟動了 Laravel 開發伺服器，您的應用程式就可以在網頁瀏覽器中透過 [http://localhost:8000](http://localhost:8000) 存取。
 
 <a name="available-starter-kits"></a>
-## 可用的啟動套件
+## 可用的啟動套件 (Available Starter Kits)
 
 <a name="react"></a>
 ### React
@@ -84,7 +84,7 @@ Livewire 是一種僅使用 PHP 即可建立動態、反應式前端 UI 的強�
 Livewire 啟動套件使用了 Livewire、Tailwind 和 [Flux UI](https://fluxui.dev) 元件庫。
 
 <a name="starter-kit-customization"></a>
-## 啟動套件自訂
+## 啟動套件自訂 (Starter Kit Customization)
 
 <a name="react-customization"></a>
 ### React
@@ -276,7 +276,7 @@ Livewire 啟動套件中包含的驗證頁面（例如登入頁面和註冊頁�
 ```
 
 <a name="two-factor-authentication"></a>
-## 兩因素驗證
+## 兩因素驗證 (Two Factor Authentication)
 
 所有啟動套件都包含由 [Laravel Fortify](/docs/fortify#two-factor-authentication) 驅動的內建兩因素驗證 (2FA)，為使用者帳戶增加了一層額外的安全性。使用者可以使用任何支援基於時間的一次性密碼 (TOTP) 的驗證器應用程式來保護他們的帳戶。
 
@@ -320,12 +320,12 @@ WORKOS_REDIRECT_URL="${APP_URL}/authenticate"
 此外，您應該在 WorkOS 儀表板中設定應用程式首頁 URL。此 URL 是使用者登出您的應用程式後將被重新導向的地方。
 
 <a name="configuring-authkit-authentication-methods"></a>
-#### 設定 AuthKit 驗證方法
+#### 設定 AuthKit 驗證方法 (Configuring Authkit Authentication Methods)
 
 使用 WorkOS 驅動的啟動套件時，我們建議您在應用程式的 WorkOS AuthKit 設定中停用「電子郵件 + 密碼」驗證，僅允許使用者透過社群驗證提供者、Passkeys、「Magic Auth」和 SSO 進行驗證。這讓您的應用程式可以完全避免處理使用者密碼。
 
 <a name="configuring-authkit-session-timeouts"></a>
-#### 設定 AuthKit 工作階段逾時
+#### 設定 AuthKit 工作階段逾時 (Configuring Authkit Session Timeouts)
 
 此外，我們建議您設定 WorkOS AuthKit 工作階段閒置逾時，以符合您 Laravel 應用程式設定的工作階段逾時閾值，通常為兩小時。
 
@@ -345,7 +345,7 @@ composer dev:ssr
 ```
 
 <a name="community-maintained-starter-kits"></a>
-### 社群維護的啟動套件
+### 社群維護的啟動套件 (Community Maintained Starter Kits)
 
 使用 Laravel 安裝程式建立新的 Laravel 應用程式時，您可以將 Packagist 上任何可用的社群維護啟動套件提供給 `--using` 旗標：
 
@@ -354,20 +354,20 @@ laravel new my-app --using=example/starter-kit
 ```
 
 <a name="creating-starter-kits"></a>
-#### 建立啟動套件
+#### 建立啟動套件 (Creating Starter Kits)
 
 為了確保其他人可以使用您的啟動套件，您需要將其發佈到 [Packagist](https://packagist.org)。您的啟動套件應該在其 `.env.example` 檔案中定義其所需的環境變數，任何必要的安裝後指令都應該列在啟動套件 `composer.json` 檔案的 `post-create-project-cmd` 陣列中。
 
 <a name="faqs"></a>
-### 常見問題
+### 常見問題 (Faqs)
 
 <a name="faq-upgrade"></a>
-#### 如何升級？
+#### 如何升級？ (Faq Upgrade)
 
 每個啟動套件都為您的下一個應用程式提供了一個堅實的起點。擁有程式碼的完全所有權，您可以完全按照您的構想進行調整、自訂和建構應用程式。但是，不需要更新啟動套件本身。
 
 <a name="faq-enable-email-verification"></a>
-#### 如何啟用電子郵件驗證？
+#### 如何啟用電子郵件驗證？ (Faq Enable Email Verification)
 
 可以透過取消註解 `App/Models/User.php` 模型中的 `MustVerifyEmail` 匯入，並確保模型實作 `MustVerifyEmail` 介面來新增電子郵件驗證：
 
@@ -399,7 +399,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 > 使用 [WorkOS](#workos) 變體的啟動套件時，不需要電子郵件驗證。
 
 <a name="faq-modify-email-template"></a>
-#### 如何修改預設的電子郵件樣板？
+#### 如何修改預設的電子郵件樣板？ (Faq Modify Email Template)
 
 您可能想要自訂預設的電子郵件樣板，以更符合您應用程式的品牌形象。要修改此樣板，您應該使用以下指令將電子郵件視圖發佈到您的應用程式：
 

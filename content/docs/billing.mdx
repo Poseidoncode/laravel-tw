@@ -5,84 +5,84 @@ description: Laravel Cashier Stripe 提供了訂閱計費服務的流暢介面
 
 # Laravel Cashier (Stripe)
 
-- [簡介 (Introduction)](#introduction)
-- [升級 Cashier (Upgrading Cashier)](#upgrading-cashier)
-- [安裝 (Installation)](#installation)
-- [設定 (Configuration)](#configuration)
-  - [可計費模型 (Billable Model)](#billable-model)
-  - [API 金鑰 (API Keys)](#api-keys)
-  - [貨幣設定 (Currency Configuration)](#currency-configuration)
-  - [稅務設定 (Tax Configuration)](#tax-configuration)
-  - [日誌 (Logging)](#logging)
-  - [使用自訂模型 (Using Custom Models)](#using-custom-models)
-- [快速入門 (Quickstart)](#quickstart)
-  - [銷售產品 (Selling Products)](#quickstart-selling-products)
-  - [銷售訂閱 (Selling Subscriptions)](#quickstart-selling-subscriptions)
-- [客戶 (Customers)](#customers)
-  - [檢索客戶 (Retrieving Customers)](#retrieving-customers)
-  - [建立客戶 (Creating Customers)](#creating-customers)
-  - [更新客戶 (Updating Customers)](#updating-customers)
-  - [餘額 (Balances)](#balances)
-  - [稅務 ID (Tax IDs)](#tax-ids)
-  - [與 Stripe 同步客戶資料 (Syncing Customer Data With Stripe)](#syncing-customer-data-with-stripe)
-  - [計費入口網站 (Billing Portal)](#billing-portal)
-- [付款方式 (Payment Methods)](#payment-methods)
-  - [儲存付款方式 (Storing Payment Methods)](#storing-payment-methods)
-  - [檢索付款方式 (Retrieving Payment Methods)](#retrieving-payment-methods)
-  - [付款方式存在性 (Payment Method Presence)](#payment-method-presence)
-  - [更新預設付款方式 (Updating the Default Payment Method)](#updating-the-default-payment-method)
-  - [新增付款方式 (Adding Payment Methods)](#adding-payment-methods)
-  - [刪除付款方式 (Deleting Payment Methods)](#deleting-payment-methods)
-- [訂閱 (Subscriptions)](#subscriptions)
-  - [建立訂閱 (Creating Subscriptions)](#creating-subscriptions)
-  - [檢查訂閱狀態 (Checking Subscription Status)](#checking-subscription-status)
-  - [更改價格 (Changing Prices)](#changing-prices)
-  - [訂閱數量 (Subscription Quantity)](#subscription-quantity)
-  - [具有多個產品的訂閱 (Subscriptions With Multiple Products)](#subscriptions-with-multiple-products)
-  - [多個訂閱 (Multiple Subscriptions)](#multiple-subscriptions)
-  - [基於使用量的計費 (Usage Based Billing)](#usage-based-billing)
-  - [訂閱稅務 (Subscription Taxes)](#subscription-taxes)
-  - [訂閱錨定日期 (Subscription Anchor Date)](#subscription-anchor-date)
-  - [取消訂閱 (Canceling Subscriptions)](#cancelling-subscriptions)
-  - [恢復訂閱 (Resuming Subscriptions)](#resuming-subscriptions)
-- [訂閱試用 (Subscription Trials)](#subscription-trials)
-  - [預先提供付款方式 (With Payment Method Up Front)](#with-payment-method-up-front)
-  - [無需預先提供付款方式 (Without Payment Method Up Front)](#without-payment-method-up-front)
-  - [延長試用 (Extending Trials)](#extending-trials)
-- [處理 Stripe Webhook (Handling Stripe Webhooks)](#handling-stripe-webhooks)
-  - [定義 Webhook 事件處理器 (Defining Webhook Event Handlers)](#defining-webhook-event-handlers)
-  - [驗證 Webhook 簽章 (Verifying Webhook Signatures)](#verifying-webhook-signatures)
-- [單次收費 (Single Charges)](#single-charges)
-  - [簡單收費 (Simple Charge)](#simple-charge)
-  - [發票收費 (Charge With Invoice)](#charge-with-invoice)
-  - [建立 Payment Intent (Creating Payment Intents)](#creating-payment-intents)
-  - [退款 (Refunding Charges)](#refunding-charges)
-- [發票 (Invoices)](#invoices)
-  - [檢索發票 (Retrieving Invoices)](#retrieving-invoices)
-  - [即將到來的發票 (Upcoming Invoices)](#upcoming-invoices)
-  - [預覽訂閱發票 (Previewing Subscription Invoices)](#previewing-subscription-invoices)
-  - [產生發票 PDF (Generating Invoice PDFs)](#generating-invoice-pdfs)
+- [簡介](#introduction)
+- [升級 Cashier](#upgrading-cashier)
+- [安裝](#installation)
+- [設定](#configuration)
+  - [可計費模型](#billable-model)
+  - [API 金鑰](#api-keys)
+  - [貨幣設定](#currency-configuration)
+  - [稅務設定](#tax-configuration)
+  - [日誌](#logging)
+  - [使用自訂模型](#using-custom-models)
+- [快速入門](#quickstart)
+  - [銷售產品](#quickstart-selling-products)
+  - [銷售訂閱](#quickstart-selling-subscriptions)
+- [客戶](#customers)
+  - [檢索客戶](#retrieving-customers)
+  - [建立客戶](#creating-customers)
+  - [更新客戶](#updating-customers)
+  - [餘額](#balances)
+  - [稅務 ID](#tax-ids)
+  - [與 Stripe 同步客戶資料](#syncing-customer-data-with-stripe)
+  - [計費入口網站](#billing-portal)
+- [付款方式](#payment-methods)
+  - [儲存付款方式](#storing-payment-methods)
+  - [檢索付款方式](#retrieving-payment-methods)
+  - [付款方式存在性](#payment-method-presence)
+  - [更新預設付款方式](#updating-the-default-payment-method)
+  - [新增付款方式](#adding-payment-methods)
+  - [刪除付款方式](#deleting-payment-methods)
+- [訂閱](#subscriptions)
+  - [建立訂閱](#creating-subscriptions)
+  - [檢查訂閱狀態](#checking-subscription-status)
+  - [更改價格](#changing-prices)
+  - [訂閱數量](#subscription-quantity)
+  - [具有多個產品的訂閱](#subscriptions-with-multiple-products)
+  - [多個訂閱](#multiple-subscriptions)
+  - [基於使用量的計費](#usage-based-billing)
+  - [訂閱稅務](#subscription-taxes)
+  - [訂閱錨定日期](#subscription-anchor-date)
+  - [取消訂閱](#cancelling-subscriptions)
+  - [恢復訂閱](#resuming-subscriptions)
+- [訂閱試用](#subscription-trials)
+  - [預先提供付款方式](#with-payment-method-up-front)
+  - [無需預先提供付款方式](#without-payment-method-up-front)
+  - [延長試用](#extending-trials)
+- [處理 Stripe Webhook](#handling-stripe-webhooks)
+  - [定義 Webhook 事件處理器](#defining-webhook-event-handlers)
+  - [驗證 Webhook 簽章](#verifying-webhook-signatures)
+- [單次收費](#single-charges)
+  - [簡單收費](#simple-charge)
+  - [發票收費](#charge-with-invoice)
+  - [建立 Payment Intent](#creating-payment-intents)
+  - [退款](#refunding-charges)
+- [發票](#invoices)
+  - [檢索發票](#retrieving-invoices)
+  - [即將到來的發票](#upcoming-invoices)
+  - [預覽訂閱發票](#previewing-subscription-invoices)
+  - [產生發票 PDF](#generating-invoice-pdfs)
 - [Checkout](#checkout)
-  - [產品 Checkout (Product Checkouts)](#product-checkouts)
-  - [單次收費 Checkout (Single Charge Checkouts)](#single-charge-checkouts)
-  - [訂閱 Checkout (Subscription Checkouts)](#subscription-checkouts)
-  - [收集稅務 ID (Collecting Tax IDs)](#collecting-tax-ids)
-  - [訪客 Checkout (Guest Checkouts)](#guest-checkouts)
-- [處理失敗的付款 (Handling Failed Payments)](#handling-failed-payments)
-  - [確認付款 (Confirming Payments)](#confirming-payments)
-- [強大客戶驗證 (Strong Customer Authentication)](#strong-customer-authentication)
-  - [需要額外確認的付款 (Payments Requiring Additional Confirmation)](#payments-requiring-additional-confirmation)
-  - [非會話付款通知 (Off-Session Payment Notifications)](#off-session-payment-notifications)
+  - [產品 Checkout](#product-checkouts)
+  - [單次收費 Checkout](#single-charge-checkouts)
+  - [訂閱 Checkout](#subscription-checkouts)
+  - [收集稅務 ID](#collecting-tax-ids)
+  - [訪客 Checkout](#guest-checkouts)
+- [處理失敗的付款](#handling-failed-payments)
+  - [確認付款](#confirming-payments)
+- [強大客戶驗證](#strong-customer-authentication)
+  - [需要額外確認的付款](#payments-requiring-additional-confirmation)
+  - [非會話付款通知](#off-session-payment-notifications)
 - [Stripe SDK](#stripe-sdk)
-- [測試 (Testing)](#testing)
+- [測試](#testing)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Laravel Cashier Stripe](https://github.com/laravel/cashier-stripe) 為 [Stripe](https://stripe.com) 的訂閱計費服務提供了一個語意化且流暢的介面。它幾乎處理了所有你害怕編寫的訂閱計費樣板程式碼。除了基本的訂閱管理之外，Cashier 還可以處理折價券、交換訂閱、訂閱「數量」、取消寬限期，甚至產生發票 PDF。
 
 <a name="upgrading-cashier"></a>
-## 升級 Cashier
+## 升級 Cashier (Upgrading Cashier)
 
 當升級到新版本的 Cashier 時，仔細閱讀 [升級指南](https://github.com/laravel/cashier-stripe/blob/master/UPGRADE.md) 非常重要。
 
@@ -90,7 +90,7 @@ description: Laravel Cashier Stripe 提供了訂閱計費服務的流暢介面
 > 為了防止破壞性變更，Cashier 使用固定的 Stripe API 版本。Cashier 16 使用 Stripe API 版本 `2025-06-30.basil`。Stripe API 版本將在次要版本發布時更新，以利用新的 Stripe 功能和改進。
 
 <a name="installation"></a>
-## 安裝
+## 安裝 (Installation)
 
 首先，使用 Composer 套件管理器安裝 Stripe 的 Cashier 套件：
 
@@ -124,7 +124,7 @@ php artisan vendor:publish --tag="cashier-config"
 > Stripe 建議任何用於儲存 Stripe 識別碼的欄位都應區分大小寫。因此，當使用 MySQL 時，你應該確保 `stripe_id` 欄位的校對設定 (Collation) 為 `utf8_bin`。有關此內容的更多資訊，請參閱 [Stripe 文件](https://stripe.com/docs/upgrades#what-changes-does-stripe-consider-to-be-backwards-compatible)。
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 <a name="billable-model"></a>
 ### 可計費模型 (Billable Model)
@@ -288,7 +288,7 @@ As you can see in the example above, we will utilize Cashier's provided `checkou
 If necessary, the `checkout` method will automatically create a customer in Stripe and connect that Stripe customer record to the corresponding user in your application's database. After completing the checkout session, the customer will be redirected to a dedicated success or cancellation page where you can display an informational message to the customer.
 
 <a name="providing-meta-data-to-stripe-checkout"></a>
-#### 提供中繼資料給 Stripe Checkout
+#### 提供中繼資料給 Stripe Checkout (Providing Meta Data To Stripe Checkout)
 
 銷售產品時，通常會透過應用程式定義的 `Cart` 和 `Order` 模型來追蹤已完成的訂單和購買的產品。當將客戶重新導向到 Stripe Checkout 以完成購買時，你可能需要提供現有的訂單識別碼，以便在客戶被重新導向回你的應用程式時，將已完成的購買與相應的訂單關聯起來。
 
@@ -398,7 +398,7 @@ We can even easily determine if a user is subscribed to specific product or pric
 ```
 
 <a name="quickstart-building-a-subscribed-middleware"></a>
-#### 建立已訂閱 Middleware
+#### 建立已訂閱 Middleware (Quickstart Building A Subscribed Middleware)
 
 為了方便起見，你可能希望建立一個 [Middleware](/docs/middleware) 來確定傳入的請求是否來自已訂閱的使用者。定義此 Middleware 後，你可以輕鬆地將其分配給路由，以防止未訂閱的使用者存取該路由：
 
@@ -439,7 +439,7 @@ Route::get('/dashboard', function () {
 ```
 
 <a name="quickstart-allowing-customers-to-manage-their-billing-plan"></a>
-#### 允許客戶管理他們的計費方案
+#### 允許客戶管理他們的計費方案 (Quickstart Allowing Customers To Manage Their Billing Plan)
 
 當然，客戶可能希望將其訂閱方案更改為其他產品或「層級」。允許這樣做的最簡單方法是將客戶引導至 Stripe 的 [客戶計費入口網站](https://stripe.com/docs/no-code/customer-portal)，該入口網站提供了一個託管的使用者介面，允許客戶下載發票、更新付款方式和更改訂閱方案。
 

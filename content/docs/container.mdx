@@ -6,25 +6,25 @@ description: Service Container
 - [簡介](#introduction)
   - [零設定解析](#zero-configuration-resolution)
   - [何時使用 Container](#when-to-use-the-container)
-- [綁定 (Binding)](#binding)
+- [綁定](#binding)
   - [綁定基礎](#binding-basics)
   - [綁定介面至實作](#binding-interfaces-to-implementations)
-  - [上下文綁定 (Contextual Binding)](#contextual-binding)
-  - [上下文屬性 (Contextual Attributes)](#contextual-attributes)
+  - [上下文綁定](#contextual-binding)
+  - [上下文屬性](#contextual-attributes)
   - [綁定基本型別](#binding-primitives)
   - [綁定型別化可變參數](#binding-typed-variadics)
-  - [標記 (Tagging)](#tagging)
+  - [標記](#tagging)
   - [擴充綁定](#extending-bindings)
-- [解析 (Resolving)](#resolving)
+- [解析](#resolving)
   - [Make 方法](#the-make-method)
   - [自動注入](#automatic-injection)
 - [方法呼叫與注入](#method-invocation-and-injection)
 - [Container Events](#container-events)
-  - [重新綁定 (Rebinding)](#rebinding)
+  - [重新綁定](#rebinding)
 - [PSR-11](#psr-11)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel Service Container 是一個用於管理類別依賴和執行 Dependency Injection (依賴注入) 的強大工具。Dependency Injection 是一個花俏的詞彙，基本上意味著：類別依賴透過建構子或在某些情況下透過「setter」方法「注入」到類別中。
 
@@ -64,7 +64,7 @@ class PodcastController extends Controller
 深入了解 Laravel Service Container 對於建立強大的大型應用程式以及為 Laravel 核心本身做出貢獻至關重要。
 
 <a name="zero-configuration-resolution"></a>
-### 零設定解析
+### 零設定解析 (Zero Configuration Resolution)
 
 如果一個類別沒有依賴，或者只依賴於其他具體類別（不是介面），則不需要指示 Container 如何解析該類別。例如，您可以在 `routes/web.php` 檔案中放置以下程式碼：
 
@@ -86,7 +86,7 @@ Route::get('/', function (Service $service) {
 值得慶幸的是，在建立 Laravel 應用程式時，您將編寫的許多類別都會自動透過 Container 接收其依賴，包括 [Controllers](/docs/controllers)、[Event Listeners](/docs/events)、[Middleware](/docs/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/queues) 的 `handle` 方法中對依賴進行型別提示。一旦您體驗了自動和零設定 Dependency Injection 的強大功能，就會覺得沒有它就無法開發。
 
 <a name="when-to-use-the-container"></a>
-### 何時使用 Container
+### 何時使用 Container (When To Use The Container)
 
 由於零設定解析，您經常會在路由、Controllers、Event Listeners 和其他地方對依賴進行型別提示，而無需手動與 Container 互動。例如，您可以在路由定義中對 `Illuminate\Http\Request` 物件進行型別提示，以便您可以輕鬆存取目前的請求。即使我們從不需要與 Container 互動來編寫此程式碼，它也在幕後管理這些依賴的注入：
 
@@ -106,10 +106,10 @@ Route::get('/', function (Request $request) {
 ## 綁定 (Binding)
 
 <a name="binding-basics"></a>
-### 綁定基礎
+### 綁定基礎 (Binding Basics)
 
 <a name="simple-bindings"></a>
-#### 簡單綁定
+#### 簡單綁定 (Simple Bindings)
 
 幾乎所有的 Service Container 綁定都將在 [Service Providers](/docs/providers) 中註冊，因此這些範例中的大多數將示範在該上下文中使用 Container。
 
@@ -159,7 +159,7 @@ App::bind(function (Application $app): Transistor {
 > 如果類別不依賴於任何介面，則無需將其綁定到 Container 中。Container 不需要被指示如何建立這些物件，因為它可以使用反射自動解析這些物件。
 
 <a name="binding-a-singleton"></a>
-#### 綁定 Singleton
+#### 綁定 Singleton (Binding A Singleton)
 
 `singleton` 方法將一個類別或介面綁定到 Container 中，該類別或介面只應解析一次。一旦解析了 Singleton 綁定，隨後的 Container 呼叫將返回相同的物件實例：
 
@@ -182,7 +182,7 @@ $this->app->singletonIf(Transistor::class, function (Application $app) {
 ```
 
 <a name="singleton-attribute"></a>
-#### Singleton 屬性
+#### Singleton 屬性 (Singleton Attribute)
 
 或者，您可以使用 `#[Singleton]` 屬性標記介面或類別，以指示 Container 應將其解析一次：
 
@@ -201,7 +201,7 @@ class Transistor
 ```
 
 <a name="binding-scoped"></a>
-#### 綁定 Scoped Singletons
+#### 綁定 Scoped Singletons (Binding Scoped)
 
 `scoped` 方法將一個類別或介面綁定到 Container 中，該類別或介面在給定的 Laravel 請求 / Job 生命週期內只應解析一次。雖然此方法與 `singleton` 方法類似，但使用 `scoped` 方法註冊的實例將在 Laravel 應用程式開始新的「生命週期」時被清除，例如當 [Laravel Octane](/docs/octane) worker 處理新請求或 Laravel [Queue worker](/docs/queues) 處理新 Job 時：
 
@@ -224,7 +224,7 @@ $this->app->scopedIf(Transistor::class, function (Application $app) {
 ```
 
 <a name="scoped-attribute"></a>
-#### Scoped 屬性
+#### Scoped 屬性 (Scoped Attribute)
 
 或者，您可以使用 `#[Scoped]` 屬性標記介面或類別，以指示 Container 應在給定的 Laravel 請求 / Job 生命週期內將其解析一次：
 
@@ -243,7 +243,7 @@ class Transistor
 ```
 
 <a name="binding-instances"></a>
-#### 綁定實例
+#### 綁定實例 (Binding Instances)
 
 您也可以使用 `instance` 方法將現有的物件實例綁定到 Container 中。隨後的 Container 呼叫將始終返回給定的實例：
 
@@ -257,7 +257,7 @@ $this->app->instance(Transistor::class, $service);
 ```
 
 <a name="binding-interfaces-to-implementations"></a>
-### 綁定介面至實作
+### 綁定介面至實作 (Binding Interfaces To Implementations)
 
 Service Container 的一個非常強大的功能是能夠將介面綁定到給定的實作。例如，假設我們有一個 `EventPusher` 介面和一個 `RedisEventPusher` 實作。一旦我們編寫了這個介面的 `RedisEventPusher` 實作，我們就可以像這樣向 Service Container 註冊它：
 
@@ -282,7 +282,7 @@ public function __construct(
 ```
 
 <a name="bind-attribute"></a>
-#### Bind 屬性
+#### Bind 屬性 (Bind Attribute)
 
 Laravel 還提供了一個 `Bind` 屬性以增加便利性。您可以將此屬性應用於任何介面，以告訴 Laravel 每當請求該介面時應自動注入哪個實作。使用 `Bind` 屬性時，無需在應用程式的 Service Providers 中執行任何額外的服務註冊。
 
@@ -425,7 +425,7 @@ Route::get('/user', function (#[CurrentUser] User $user) {
 ```
 
 <a name="defining-custom-attributes"></a>
-#### 定義自訂屬性
+#### 定義自訂屬性 (Defining Custom Attributes)
 
 您可以透過實作 `Illuminate\Contracts\Container\ContextualAttribute` Contract 來建立自己的上下文屬性。Container 將呼叫您的屬性的 `resolve` 方法，該方法應解析應注入到使用該屬性的類別中的值。在下面的範例中，我們將重新實作 Laravel 內建的 `Config` 屬性：
 
@@ -463,7 +463,7 @@ class Config implements ContextualAttribute
 ```
 
 <a name="binding-primitives"></a>
-### 綁定基本型別
+### 綁定基本型別 (Binding Primitives)
 
 有時您可能有一個類別接收一些注入的類別，但也需要一個注入的基本值，例如整數。您可以輕鬆地使用上下文綁定來注入您的類別可能需要的任何值：
 
@@ -492,7 +492,7 @@ $this->app->when(ReportAggregator::class)
 ```
 
 <a name="binding-typed-variadics"></a>
-### 綁定型別化可變參數
+### 綁定型別化可變參數 (Binding Typed Variadics)
 
 偶爾，您可能有一個類別使用可變參數建構子參數接收一個型別化物件的陣列：
 
@@ -550,7 +550,7 @@ $this->app->when(Firewall::class)
 ```
 
 <a name="variadic-tag-dependencies"></a>
-#### 可變參數標記依賴
+#### 可變參數標記依賴 (Variadic Tag Dependencies)
 
 有時一個類別可能有一個型別提示為給定類別的可變參數依賴 (`Report ...$reports`)。使用 `needs` 和 `giveTagged` 方法，您可以輕鬆地為給定依賴注入帶有該 [標記](#tagging) 的所有 Container 綁定：
 
@@ -586,7 +586,7 @@ $this->app->bind(ReportAnalyzer::class, function (Application $app) {
 ```
 
 <a name="extending-bindings"></a>
-### 擴充綁定
+### 擴充綁定 (Extending Bindings)
 
 `extend` 方法允許修改已解析的服務。例如，當一個服務被解析時，您可以執行額外的程式碼來裝飾或設定該服務。`extend` 方法接受兩個參數，您要擴充的服務類別和一個應返回修改後服務的 Closure。Closure 接收正在解析的服務和 Container 實例：
 
@@ -600,7 +600,7 @@ $this->app->extend(Service::class, function (Service $service, Application $app)
 ## 解析 (Resolving)
 
 <a name="the-make-method"></a>
-### `make` 方法
+### `make` 方法 (The Make Method)
 
 您可以使用 `make` 方法從 Container 中解析類別實例。`make` 方法接受您希望解析的類別或介面的名稱：
 
@@ -651,7 +651,7 @@ public function __construct(
 ```
 
 <a name="automatic-injection"></a>
-### 自動注入
+### 自動注入 (Automatic Injection)
 
 或者，重要的是，您可以在由 Container 解析的類別的建構子中對依賴進行型別提示，包括 [Controllers](/docs/controllers)、[Event Listeners](/docs/events)、[Middleware](/docs/middleware) 等等。此外，您可以在 [Queued Jobs](/docs/queues) 的 `handle` 方法中對依賴進行型別提示。實際上，這是您的大多數物件應該由 Container 解析的方式。
 
@@ -684,7 +684,7 @@ class PodcastController extends Controller
 ```
 
 <a name="method-invocation-and-injection"></a>
-## 方法呼叫與注入
+## 方法呼叫與注入 (Method Invocation And Injection)
 
 有時您可能希望在物件實例上呼叫方法，同時允許 Container 自動注入該方法的依賴。例如，給定以下類別：
 

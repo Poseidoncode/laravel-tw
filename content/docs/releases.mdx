@@ -8,19 +8,19 @@ description: Laravel 12.x 發行說明
 - [Laravel 12](#laravel-12)
 
 <a name="versioning-scheme"></a>
-## 版本命名規則
+## 版本命名規則 (Versioning Scheme)
 
 Laravel 及其他官方套件遵循 [語意化版本控制](https://semver.org)。主要框架版本每年發布一次（約在第一季），而次要版本和修補版本可能每週發布。次要版本和修補版本**絕不應該**包含破壞性變更。
 
 當從您的應用程式或套件引用 Laravel 框架或其組件時，您應該始終使用版本約束，例如 `^12.0`，因為 Laravel 的主要版本確實包含破壞性變更。但是，我們會努力確保您可以在一天或更短的時間內更新到新的主要版本。
 
 <a name="named-arguments"></a>
-#### 命名引數
+#### 命名引數 (Named Arguments)
 
 [命名引數](https://www.php.net/manual/en/functions.arguments.php#functions.named-arguments) 不在 Laravel 的向後相容性準則的涵蓋範圍內。為了改進 Laravel 程式碼庫，我們可能會在必要時選擇重新命名函式引數。因此，使用命名引數呼叫 Laravel 方法時應該謹慎行事，並理解參數名稱將來可能會更改。
 
 <a name="support-policy"></a>
-## 支援政策
+## 支援政策 (Support Policy)
 
 對於所有 Laravel 版本，錯誤修復提供 18 個月，安全修復提供 2 年。對於所有額外的函式庫，只有最新的主要版本會收到錯誤修復。此外，請查看 [Laravel 支援的資料庫版本](/docs/database#introduction)。
 
@@ -88,14 +88,14 @@ Laravel 及其他官方套件遵循 [語意化版本控制](https://semver.org)�
 Laravel 12 延續了 Laravel 11.x 的改進，更新了上游依賴項目，並為 React、Vue 和 Livewire 推出了新的 Starter Kits，包括使用 [WorkOS AuthKit](https://authkit.com) 進行使用者驗證的選項。我們 Starter Kits 的 WorkOS 變體提供了社群驗證、Passkeys 和 SSO 支援。
 
 <a name="minimal-breaking-changes"></a>
-### 最小化破壞性變更
+### 最小化破壞性變更 (Minimal Breaking Changes)
 
 在這個發布週期中，我們的大部分重點都放在最小化破壞性變更上。相反，我們致力於全年發布不會破壞現有應用程式的持續性改進。
 
 因此，Laravel 12 版本是相對較小的「維護版本」，目的是升級現有的依賴項目。鑑於此，大多數 Laravel 應用程式可以在不更改任何應用程式程式碼的情況下升級到 Laravel 12。
 
 <a name="new-application-starter-kits"></a>
-### 新的應用程式 Starter Kits
+### 新的應用程式 Starter Kits (New Application Starter Kits)
 
 Laravel 12 為 React、Vue 和 Livewire 推出了新的[應用程式 Starter Kits](/docs/starter-kits)。React 和 Vue Starter Kits 使用 Inertia 2、TypeScript、[shadcn/ui](https://ui.shadcn.com) 和 Tailwind，而 Livewire Starter Kits 則使用基於 Tailwind 的 [Flux UI](https://fluxui.dev) 組件庫和 Laravel Volt。
 

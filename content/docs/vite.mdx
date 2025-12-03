@@ -25,24 +25,24 @@ description: Laravel 與 Vite 的整合指南
 - [自訂基礎 URL](#custom-base-urls)
 - [環境變數](#environment-variables)
 - [在測試中停用 Vite](#disabling-vite-in-tests)
-- [伺服器端渲染 (SSR)](#ssr)
+- [伺服器端渲染](#ssr)
 - [腳本與樣式標籤屬性](#script-and-style-attributes)
   - [內容安全策略 (CSP) Nonce](#content-security-policy-csp-nonce)
-  - [子資源完整性 (SRI)](#subresource-integrity-sri)
+  - [子資源完整性](#subresource-integrity-sri)
   - [任意屬性](#arbitrary-attributes)
 - [進階自訂](#advanced-customization)
-  - [開發伺服器跨來源資源共享 (CORS)](#cors)
+  - [開發伺服器跨來源資源共享](#cors)
   - [修正開發伺服器 URL](#correcting-dev-server-urls)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 [Vite](https://vitejs.dev) 是一個現代化的前端建置工具，提供極快的開發環境並將你的程式碼打包用於生產環境。在使用 Laravel 建置應用程式時，你通常會使用 Vite 將應用程式的 CSS 和 JavaScript 檔案打包成生產環境可用的資源。
 
 Laravel 透過提供官方外掛和 Blade 指令來載入你的開發和生產資源，與 Vite 無縫整合。
 
 <a name="installation"></a>
-## 安裝 & Setup
+## 安裝 & Setup (Installation)
 
 > [!NOTE]
 > 以下文件討論如何手動安裝和設定 Laravel Vite 外掛。但是，Laravel 的 [啟動套件](/docs/starter-kits) 已經包含了所有這些鷹架，是開始使用 Laravel 和 Vite 的最快方式。

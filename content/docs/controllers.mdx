@@ -21,15 +21,15 @@ description: 學習如何使用 Laravel Controllers 組織請求處理邏輯
 - [依賴注入與 Controllers](#dependency-injection-and-controllers)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 除了在路由檔案中將所有請求處理邏輯定義為閉包之外，你可能會希望使用「controller」類別來組織這些行為。Controllers 可以將相關的請求處理邏輯組合到一個類別中。例如，一個 `UserController` 類別可能處理所有與使用者相關的傳入請求，包括顯示、建立、更新和刪除使用者。預設情況下，controllers 會儲存在 `app/Http/Controllers` 目錄中。
 
 <a name="writing-controllers"></a>
-## 撰寫 Controllers
+## 撰寫 Controllers (Writing Controllers)
 
 <a name="basic-controllers"></a>
-### 基本 Controllers
+### 基本 Controllers (Basic Controllers)
 
 要快速產生一個新的 controller，你可以執行 `make:controller` Artisan 指令。預設情況下，應用程式的所有 controllers 都儲存在 `app/Http/Controllers` 目錄中：
 
@@ -75,7 +75,7 @@ Route::get('/user/{'{id}'}', [UserController::class, 'show']);
 > Controllers **並非必須**繼承基底類別。但是，有時候繼承一個包含應該在所有 controllers 之間共享的方法的基底 controller 類別會很方便。
 
 <a name="single-action-controllers"></a>
-### 單一動作 Controllers
+### 單一動作 Controllers (Single Action Controllers)
 
 如果一個 controller 動作特別複雜，你可能會發現將整個 controller 類別專門用於該單一動作很方便。為了實現這一點，你可以在 controller 內定義一個單一的 `__invoke` 方法：
 
@@ -209,7 +209,7 @@ Route::softDeletableResources([
 ```
 
 <a name="actions-handled-by-resource-controllers"></a>
-#### Resource Controllers 處理的動作
+#### Resource Controllers 處理的動作 (Actions Handled By Resource Controllers)
 
 <div className="overflow-auto">
 
@@ -271,7 +271,7 @@ Route::softDeletableResources([
 </div>
 
 <a name="customizing-missing-model-behavior"></a>
-#### 自訂找不到 Model 的行為
+#### 自訂找不到 Model 的行為 (Customizing Missing Model Behavior)
 
 通常，如果找不到隱式繫結的 resource model，將會產生 404 HTTP 回應。但是，你可以在定義 resource 路由時呼叫 `missing` 方法來自訂此行為。`missing` 方法接受一個閉包，如果對於任何 resource 的路由都找不到隱式繫結的 model，該閉包將會被呼叫：
 
@@ -287,7 +287,7 @@ Route::resource('photos', PhotoController::class)
 ```
 
 <a name="soft-deleted-models"></a>
-#### 軟刪除 Models
+#### 軟刪除 Models (Soft Deleted Models)
 
 通常，隱式 model 繫結不會擷取已經[軟刪除](/docs/eloquent#soft-deleting)的 models，而是會回傳 404 HTTP 回應。但是，你可以在定義 resource 路由時呼叫 `withTrashed` 方法來指示框架允許軟刪除的 models：
 
@@ -304,7 +304,7 @@ Route::resource('photos', PhotoController::class)->withTrashed(['show']);
 ```
 
 <a name="specifying-the-resource-model"></a>
-#### 指定 Resource Model
+#### 指定 Resource Model (Specifying The Resource Model)
 
 如果你正在使用[路由 model 繫結](/docs/routing#route-model-binding)並且希望 resource controller 的方法對 model 實例進行型別提示，你可以在產生 controller 時使用 `--model` 選項：
 
@@ -313,7 +313,7 @@ php artisan make:controller PhotoController --model=Photo --resource
 ```
 
 <a name="generating-form-requests"></a>
-#### 產生表單請求
+#### 產生表單請求 (Generating Form Requests)
 
 你可以在產生 resource controller 時提供 `--requests` 選項，以指示 Artisan 為 controller 的儲存和更新方法產生 [form request 類別](/docs/validation#form-request-validation)：
 
@@ -322,7 +322,7 @@ php artisan make:controller PhotoController --model=Photo --resource --requests
 ```
 
 <a name="restful-partial-resource-routes"></a>
-### 部分 Resource 路由
+### 部分 Resource 路由 (Restful Partial Resource Routes)
 
 在宣告 resource 路由時，你可以指定 controller 應該處理的動作子集，而不是完整的預設動作集：
 
@@ -339,7 +339,7 @@ Route::resource('photos', PhotoController::class)->except([
 ```
 
 <a name="api-resource-routes"></a>
-#### API Resource 路由
+#### API Resource 路由 (Api Resource Routes)
 
 當宣告將被 APIs 使用的 resource 路由時,你通常會希望排除呈現 HTML 樣板的路由，例如 `create` 和 `edit`。為了方便起見，你可以使用 `apiResource` 方法自動排除這兩個路由：
 
@@ -368,7 +368,7 @@ php artisan make:controller PhotoController --api
 ```
 
 <a name="restful-nested-resources"></a>
-### 巢狀 Resources
+### 巢狀 Resources (Restful Nested Resources)
 
 有時候你可能需要定義到巢狀 resource 的路由。例如，一個照片 resource 可能有多個附加到照片的評論。要巢狀 resource controllers，你可以在路由宣告中使用「點」符號：
 
@@ -385,12 +385,12 @@ Route::resource('photos.comments', PhotoCommentController::class);
 ```
 
 <a name="scoping-nested-resources"></a>
-#### 限定巢狀 Resources 的範圍
+#### 限定巢狀 Resources 的範圍 (Scoping Nested Resources)
 
 Laravel 的[隱式 model 繫結](/docs/routing#implicit-model-binding-scoping)功能可以自動限定巢狀繫結的範圍，使得已解析的子 model 被確認屬於父 model。透過在定義巢狀 resource 時使用 `scoped` 方法，你可以啟用自動範圍限定，並指示 Laravel 應該透過哪個欄位擷取子 resource。有關如何完成此操作的更多資訊，請參閱有關[限定 resource 路由範圍](#restful-scoping-resource-routes)的文件。
 
 <a name="shallow-nesting"></a>
-#### 淺層巢狀
+#### 淺層巢狀 (Shallow Nesting)
 
 通常，在 URI 中同時擁有父 ID 和子 ID 並不是完全必要的，因為子 ID 已經是唯一識別碼。當使用諸如自動遞增主鍵之類的唯一識別碼來識別 URI 區段中的 models 時，你可以選擇使用「淺層巢狀」：
 
@@ -462,7 +462,7 @@ Route::resource('photos.comments', CommentController::class)->shallow();
 </div>
 
 <a name="restful-naming-resource-routes"></a>
-### 命名 Resource 路由
+### 命名 Resource 路由 (Restful Naming Resource Routes)
 
 預設情況下，所有 resource controller 動作都有一個路由名稱；但是，你可以透過傳遞一個 `names` 陣列來覆蓋這些名稱，其中包含你想要的路由名稱：
 
@@ -475,7 +475,7 @@ Route::resource('photos', PhotoController::class)->names([
 ```
 
 <a name="restful-naming-resource-route-parameters"></a>
-### 命名 Resource 路由參數
+### 命名 Resource 路由參數 (Restful Naming Resource Route Parameters)
 
 預設情況下，`Route::resource` 將根據 resource 名稱的「單數化」版本為你的 resource 路由建立路由參數。你可以使用 `parameters` 方法輕鬆地在每個 resource 基礎上覆蓋此設定。傳遞給 `parameters` 方法的陣列應該是 resource 名稱和參數名稱的關聯陣列：
 
@@ -494,7 +494,7 @@ Route::resource('users', AdminUserController::class)->parameters([
 ```
 
 <a name="restful-scoping-resource-routes"></a>
-### 限定 Resource 路由範圍
+### 限定 Resource 路由範圍 (Restful Scoping Resource Routes)
 
 Laravel 的[限定範圍的隱式 model 繫結](/docs/routing#implicit-model-binding-scoping)功能可以自動限定巢狀繫結的範圍，使得已解析的子 model 被確認屬於父 model。透過在定義巢狀 resource 時使用 `scoped` 方法，你可以啟用自動範圍限定，並指示 Laravel 應該透過哪個欄位擷取子 resource：
 
@@ -515,7 +515,7 @@ Route::resource('photos.comments', PhotoCommentController::class)->scoped([
 當使用自訂鍵隱式繫結作為巢狀路由參數時，Laravel 將自動限定查詢範圍，以透過其父項擷取巢狀 model，使用慣例來猜測父項上的關聯名稱。在這種情況下，將假定 `Photo` model 具有一個名為 `comments`（路由參數名稱的複數形式）的關聯，可用於擷取 `Comment` model。
 
 <a name="restful-localizing-resource-uris"></a>
-### 在地化 Resource URIs
+### 在地化 Resource URIs (Restful Localizing Resource Uris)
 
 預設情況下，`Route::resource` 將使用英文動詞和複數規則建立 resource URIs。如果你需要在地化 `create` 和 `edit` 動作動詞，你可以使用 `Route::resourceVerbs` 方法。這可以在應用程式的 `App\Providers\AppServiceProvider` 中的 `boot` 方法開始時完成：
 
@@ -541,7 +541,7 @@ Laravel 的複數化器支援[數種不同的語言，你可以根據需要進�
 ```
 
 <a name="restful-supplementing-resource-controllers"></a>
-### 補充 Resource Controllers
+### 補充 Resource Controllers (Restful Supplementing Resource Controllers)
 
 如果你需要在 resource controller 中新增超出預設 resource 路由集的額外路由，你應該在呼叫 `Route::resource` 方法之前定義這些路由；否則，由 `resource` 方法定義的路由可能會無意中優先於你的補充路由：
 
@@ -648,7 +648,7 @@ Route::singleton('photos.thumbnail', ThumbnailController::class);
 </div>
 
 <a name="creatable-singleton-resources"></a>
-#### 可建立的 Singleton Resources
+#### 可建立的 Singleton Resources (Creatable Singleton Resources)
 
 有時候，你可能想要為 singleton resource 定義建立和儲存路由。要完成此操作，你可以在註冊 singleton resource 路由時呼叫 `creatable` 方法：
 
@@ -733,7 +733,7 @@ Route::apiSingleton('photos.thumbnail', ProfileController::class)->creatable();
 ```
 
 <a name="middleware-and-resource-controllers"></a>
-### Middleware 與 Resource Controllers
+### Middleware 與 Resource Controllers (Middleware And Resource Controllers)
 
 Laravel 允許你使用 `middleware`、`middlewareFor` 和 `withoutMiddlewareFor` 方法將 middleware 指派給 resource 路由的所有或僅特定方法。這些方法提供對每個 resource 動作套用哪些 middleware 的細緻控制。
 
@@ -792,10 +792,10 @@ Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
 ```
 
 <a name="dependency-injection-and-controllers"></a>
-## 依賴注入與 Controllers
+## 依賴注入與 Controllers (Dependency Injection And Controllers)
 
 <a name="constructor-injection"></a>
-#### 建構子注入
+#### 建構子注入 (Constructor Injection)
 
 Laravel [service container](/docs/container) 用於解析所有 Laravel controllers。因此，你可以在 controller 的建構子中對其可能需要的任何依賴進行型別提示。宣告的依賴將自動被解析並注入到 controller 實例中：
 
@@ -818,7 +818,7 @@ class UserController extends Controller
 ```
 
 <a name="method-injection"></a>
-#### 方法注入
+#### 方法注入 (Method Injection)
 
 除了建構子注入之外，你還可以在 controller 的方法上對依賴進行型別提示。方法注入的一個常見用例是將 `Illuminate\Http\Request` 實例注入到 controller 方法中：
 

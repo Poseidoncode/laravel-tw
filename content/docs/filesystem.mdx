@@ -3,38 +3,38 @@ title: "檔案儲存 (File Storage)"
 description: Laravel 提供強大的檔案系統抽象
 ---
 
-- [簡介 (Introduction)](#introduction)
-- [設定 (Configuration)](#configuration)
-  - [Local 驅動程式 (The Local Driver)](#the-local-driver)
-  - [Public 磁碟 (The Public Disk)](#the-public-disk)
-  - [驅動程式先決條件 (Driver Prerequisites)](#driver-prerequisites)
-  - [作用域和唯讀檔案系統 (Scoped and Read-Only Filesystems)](#scoped-and-read-only-filesystems)
-  - [Amazon S3 相容檔案系統 (Amazon S3 Compatible Filesystems)](#amazon-s3-compatible-filesystems)
-- [取得磁碟實例 (Obtaining Disk Instances)](#obtaining-disk-instances)
-  - [隨選磁碟 (On-Demand Disks)](#on-demand-disks)
-- [檢索檔案 (Retrieving Files)](#retrieving-files)
-  - [下載檔案 (Downloading Files)](#downloading-files)
-  - [檔案 URL (File URLs)](#file-urls)
-  - [臨時 URL (Temporary URLs)](#temporary-urls)
-  - [檔案元資料 (File Metadata)](#file-metadata)
-- [儲存檔案 (Storing Files)](#storing-files)
-  - [在檔案前面和後面新增內容 (Prepending and Appending To Files)](#prepending-appending-to-files)
-  - [複製和移動檔案 (Copying and Moving Files)](#copying-moving-files)
-  - [自動串流 (Automatic Streaming)](#automatic-streaming)
-  - [檔案上傳 (File Uploads)](#file-uploads)
-  - [檔案可見性 (File Visibility)](#file-visibility)
-- [刪除檔案 (Deleting Files)](#deleting-files)
-- [目錄 (Directories)](#directories)
-- [測試 (Testing)](#testing)
-- [自訂檔案系統 (Custom Filesystems)](#custom-filesystems)
+- [簡介](#introduction)
+- [設定](#configuration)
+  - [Local 驅動程式](#the-local-driver)
+  - [Public 磁碟](#the-public-disk)
+  - [驅動程式先決條件](#driver-prerequisites)
+  - [作用域和唯讀檔案系統](#scoped-and-read-only-filesystems)
+  - [Amazon S3 相容檔案系統](#amazon-s3-compatible-filesystems)
+- [取得磁碟實例](#obtaining-disk-instances)
+  - [隨選磁碟](#on-demand-disks)
+- [檢索檔案](#retrieving-files)
+  - [下載檔案](#downloading-files)
+  - [檔案 URL](#file-urls)
+  - [臨時 URL](#temporary-urls)
+  - [檔案元資料](#file-metadata)
+- [儲存檔案](#storing-files)
+  - [在檔案前面和後面新增內容](#prepending-appending-to-files)
+  - [複製和移動檔案](#copying-moving-files)
+  - [自動串流](#automatic-streaming)
+  - [檔案上傳](#file-uploads)
+  - [檔案可見性](#file-visibility)
+- [刪除檔案](#deleting-files)
+- [目錄](#directories)
+- [測試](#testing)
+- [自訂檔案系統](#custom-filesystems)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 Laravel 提供了強大的檔案系統抽象,感謝 Frank de Jonge 的出色 [Flysystem](https://github.com/thephpleague/flysystem) PHP 套件。Laravel Flysystem 整合提供了簡單的驅動程式來處理本地檔案系統、SFTP 和 Amazon S3。更好的是,在本地開發機器和生產伺服器之間切換這些儲存選項非常簡單,因為每個系統的 API 保持一致。
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 Laravel 的檔案系統設定檔位於 `config/filesystems.php`。在此檔案中,你可以設定所有檔案系統「磁碟」。每個磁碟代表一個特定的儲存驅動程式和儲存位置。設定檔中包含了每個支援的驅動程式的範例設定,因此你可以修改設定以反映你的儲存喜好和憑證。
 
@@ -44,7 +44,7 @@ Laravel 的檔案系統設定檔位於 `config/filesystems.php`。在此檔案�
 > 你可以設定任意數量的磁碟,甚至可以有多個使用相同驅動程式的磁碟。
 
 <a name="the-local-driver"></a>
-### Local 驅動程式
+### Local 驅動程式 (The Local Driver)
 
 當使用 `local` 驅動程式時,所有檔案操作都是相對於你的 `filesystems` 設定檔中定義的 `root` 目錄。預設情況下,此值設定為 `storage/app/private` 目錄。因此,以下方法將寫入 `storage/app/private/example.txt`:
 
@@ -55,7 +55,7 @@ Storage::disk('local')->put('example.txt', 'Contents');
 ```
 
 <a name="the-public-disk"></a>
-### Public 磁碟
+### Public 磁碟 (The Public Disk)
 
 應用程式的 `filesystems` 設定檔中包含的 `public` 磁碟用於將公開可存取的檔案。預設情況下,`public` 磁碟使用 `local` 驅動程式並將其檔案儲存在 `storage/app/public` 中。
 
@@ -89,10 +89,10 @@ php artisan storage:unlink
 ```
 
 <a name="driver-prerequisites"></a>
-### 驅動程式先決條件
+### 驅動程式先決條件 (Driver Prerequisites)
 
 <a name="s3-driver-configuration"></a>
-#### S3 驅動程式設定
+#### S3 驅動程式設定 (S3 Driver Configuration)
 
 在使用 S3 驅動程式之前,你需要透過 Composer 套件管理器安裝 Flysystem S3 套件:
 
@@ -113,7 +113,7 @@ AWS_USE_PATH_STYLE_ENDPOINT=false
 為了方便起見,這些環境變數與 AWS CLI 使用的命名慣例相匹配。
 
 <a name="ftp-driver-configuration"></a>
-#### FTP 驅動程式設定
+#### FTP 驅動程式設定 (Ftp Driver Configuration)
 
 在使用 FTP 驅動程式之前,你需要透過 Composer 套件管理器安裝 Flysystem FTP 套件:
 
@@ -140,7 +140,7 @@ Laravel 的 Flysystem 整合與 FTP 配合得很好;但是,框架的預設 `conf
 ```
 
 <a name="sftp-driver-configuration"></a>
-#### SFTP 驅動程式設定
+#### SFTP 驅動程式設定 (Sftp Driver Configuration)
 
 在使用 SFTP 驅動程式之前,你需要透過 Composer 套件管理器安裝 Flysystem SFTP 套件:
 
@@ -179,7 +179,7 @@ Laravel 的 Flysystem 整合與 SFTP 配合得很好;但是,框架的預設 `con
 ```
 
 <a name="scoped-and-read-only-filesystems"></a>
-### 作用域和唯讀檔案系統
+### 作用域和唯讀檔案系統 (Scoped and Read-Only Filesystems)
 
 作用域磁碟允許你定義一個檔案系統,其中所有路徑都會自動以給定的路徑前綴為前綴。在建立作用域檔案系統磁碟之前,你需要透過 Composer 套件管理器安裝額外的 Flysystem 套件:
 
@@ -214,7 +214,7 @@ composer require league/flysystem-read-only "^3.0"
 ```
 
 <a name="amazon-s3-compatible-filesystems"></a>
-### Amazon S3 相容檔案系統
+### Amazon S3 相容檔案系統 (Amazon S3 Compatible Filesystems)
 
 預設情況下,你的應用程式的 `filesystems` 設定檔包含 `s3` 磁碟的磁碟設定。除了使用此磁碟與 [Amazon S3](https://aws.amazon.com/s3/) 互動外,你還可以使用它與任何 S3 相容檔案儲存服務互動,例如 [MinIO](https://github.com/minio/minio)、[DigitalOcean Spaces](https://www.digitalocean.com/products/spaces/)、[Vultr Object Storage](https://www.vultr.com/products/object-storage/)、[Cloudflare R2](https://www.cloudflare.com/developer-platform/products/r2/) 或 [Hetzner Cloud Storage](https://www.hetzner.com/storage/object-storage/)。
 
@@ -237,7 +237,7 @@ AWS_URL=http://localhost:9000/local
 > 當使用 MinIO 時,如果 `endpoint` 無法被客戶端存取,透過 `temporaryUrl` 方法產生臨時儲存 URL 可能無法工作。
 
 <a name="obtaining-disk-instances"></a>
-## 取得磁碟實例
+## 取得磁碟實例 (Obtaining Disk Instances)
 
 `Storage` facade 可用於與你的任何設定磁碟互動。例如,你可以在 facade 上使用 `put` 方法將頭像儲存到預設磁碟。如果你在 `Storage` facade 上呼叫方法而不先呼叫 `disk` 方法,該方法將自動傳遞給預設磁碟:
 
@@ -254,7 +254,7 @@ Storage::disk('s3')->put('avatars/1', $content);
 ```
 
 <a name="on-demand-disks"></a>
-### 隨選磁碟
+### 隨選磁碟 (On-Demand Disks)
 
 有時你可能希望在執行時期使用給定的設定建立磁碟,而不需要該設定實際存在於你的應用程式的 `filesystems` 設定檔中。要完成此操作,你可以將設定陣列傳遞給 `Storage` facade 的 `build` 方法:
 
@@ -270,7 +270,7 @@ $disk->put('image.jpg', $content);
 ```
 
 <a name="retrieving-files"></a>
-## 檢索檔案
+## 檢索檔案 (Retrieving Files)
 
 `get` 方法可用於檢索檔案的內容。該方法將返回檔案的原始字串內容。請記住,所有檔案路徑都應相對於磁碟的「根」位置指定:
 
@@ -301,7 +301,7 @@ if (Storage::disk('s3')->missing('file.jpg')) {
 ```
 
 <a name="downloading-files"></a>
-### 下載檔案
+### 下載檔案 (Downloading Files)
 
 `download` 方法可用於產生強制使用者瀏覽器下載給定路徑檔案的回應。`download` 方法接受檔案名稱作為方法的第二個參數,這將決定下載檔案的使用者看到的檔案名稱。最後,你可以將 HTTP 標頭陣列作為方法的第三個參數傳遞:
 
@@ -312,7 +312,7 @@ return Storage::download('file.jpg', $name, $headers);
 ```
 
 <a name="file-urls"></a>
-### 檔案 URL
+### 檔案 URL (File URLs)
 
 你可以使用 `url` 方法來取得給定檔案的 URL。如果你使用 `local` 驅動程式,這通常只會在給定路徑前面加上 `/storage` 並返回檔案的相對 URL。如果你使用 `s3` 驅動程式,將返回完全限定的遠端 URL:
 
@@ -328,7 +328,7 @@ $url = Storage::url('file.jpg');
 > 使用 `local` 驅動程式時,`url` 的返回值不是 URL 編碼的。因此,我們建議始終使用會建立有效 URL 的名稱來儲存檔案。
 
 <a name="url-host-customization"></a>
-#### URL 主機自訂
+#### URL 主機自訂 (Url Host Customization)
 
 如果你想修改使用 `Storage` facade 產生的 URL 的主機,你可以在磁碟的設定陣列中新增或更改 `url` 選項:
 
@@ -343,7 +343,7 @@ $url = Storage::url('file.jpg');
 ```
 
 <a name="temporary-urls"></a>
-### 臨時 URL
+### 臨時 URL (Temporary URLs)
 
 使用 `temporaryUrl` 方法,你可以為使用 `local` 和 `s3` 驅動程式儲存的檔案建立臨時 URL。此方法接受路徑和 `DateTime` 實例,指定 URL 應該何時過期:
 
@@ -356,7 +356,7 @@ $url = Storage::temporaryUrl(
 ```
 
 <a name="enabling-local-temporary-urls"></a>
-#### 啟用本地臨時 URL
+#### 啟用本地臨時 URL (Enabling Local Temporary Urls)
 
 如果你在 `local` 驅動程式引入臨時 URL 支援之前就開始開發應用程式,你可能需要啟用本地臨時 URL。要這樣做,請在 `config/filesystems.php` 設定檔中將 `serve` 選項新增到你的 `local` 磁碟的設定陣列:
 
@@ -370,7 +370,7 @@ $url = Storage::temporaryUrl(
 ```
 
 <a name="s3-request-parameters"></a>
-#### S3 請求參數
+#### S3 請求參數 (S3 Request Parameters)
 
 如果你需要指定額外的 [S3 請求參數](https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectGET.html#RESTObjectGET-requests),你可以將請求參數陣列作為第三個參數傳遞給 `temporaryUrl` 方法:
 
@@ -386,7 +386,7 @@ $url = Storage::temporaryUrl(
 ```
 
 <a name="customizing-temporary-urls"></a>
-#### 自訂臨時 URL
+#### 自訂臨時 URL (Customizing Temporary Urls)
 
 如果你需要自訂特定儲存磁碟的臨時 URL 的建立方式,你可以使用 `buildTemporaryUrlsUsing` 方法。例如,如果你有一個控制器允許你下載透過通常不支援臨時 URL 的磁碟儲存的檔案,這可能很有用。通常,此方法應該從服務提供者的 `boot` 方法中呼叫:
 
@@ -421,7 +421,7 @@ class AppServiceProvider extends ServiceProvider
 ```
 
 <a name="temporary-upload-urls"></a>
-#### 臨時上傳 URL
+#### 臨時上傳 URL (Temporary Upload Urls)
 
 > [!WARNING]
 > 產生臨時上傳 URL 的能力僅由 `s3` 驅動程式支援。
@@ -439,7 +439,7 @@ use Illuminate\Support\Facades\Storage;
 此方法主要用於無伺服器環境,需要客戶端應用程式直接上傳檔案到雲端儲存系統(如 Amazon S3)。
 
 <a name="file-metadata"></a>
-### 檔案元資料
+### 檔案元資料 (File Metadata)
 
 除了讀取和寫入檔案外,Laravel 還可以提供有關檔案本身的資訊。例如,`size` 方法可用於取得檔案的大小(以位元組為單位):
 
@@ -462,7 +462,7 @@ $mime = Storage::mimeType('file.jpg');
 ```
 
 <a name="file-paths"></a>
-#### 檔案路徑
+#### 檔案路徑 (File Paths)
 
 你可以使用 `path` 方法來取得給定檔案的路徑。如果你使用 `local` 驅動程式,這將返回檔案的絕對路徑。如果你使用 `s3` 驅動程式,此方法將返回 S3 儲存桶中檔案的相對路徑:
 
@@ -473,7 +473,7 @@ $path = Storage::path('file.jpg');
 ```
 
 <a name="storing-files"></a>
-## 儲存檔案
+## 儲存檔案 (Storing Files)
 
 `put` 方法可用於將檔案內容儲存到磁碟。你也可以將 PHP `resource` 傳遞給 `put` 方法,它將使用 Flysystem 的底層串流支援。請記住,所有檔案路徑都應相對於為磁碟設定的「根」位置指定:
 
@@ -486,7 +486,7 @@ Storage::put('file.jpg', $resource);
 ```
 
 <a name="failed-writes"></a>
-#### 寫入失敗
+#### 寫入失敗 (Failed Writes)
 
 如果 `put` 方法(或其他「寫入」操作)無法將檔案寫入磁碟,將返回 `false`:
 
@@ -507,7 +507,7 @@ if (! Storage::put('file.jpg', $contents)) {
 ```
 
 <a name="prepending-appending-to-files"></a>
-### 在檔案前面和後面新增內容
+### 在檔案前面和後面新增內容 (Prepending and Appending To Files)
 
 `prepend` 和 `append` 方法允許你寫入檔案的開頭或結尾:
 
@@ -518,7 +518,7 @@ Storage::append('file.log', 'Appended Text');
 ```
 
 <a name="copying-moving-files"></a>
-### 複製和移動檔案
+### 複製和移動檔案 (Copying and Moving Files)
 
 `copy` 方法可用於將現有檔案複製到磁碟上的新位置,而 `move` 方法可用於重新命名或將現有檔案移動到新位置:
 
@@ -529,7 +529,7 @@ Storage::move('old/file.jpg', 'new/file.jpg');
 ```
 
 <a name="automatic-streaming"></a>
-### 自動串流
+### 自動串流 (Automatic Streaming)
 
 將檔案串流到儲存可顯著減少記憶體使用。如果你希望 Laravel 自動管理將給定檔案串流到你的儲存位置,你可以使用 `putFile` 或 `putFileAs` 方法。此方法接受 `Illuminate\Http\File` 或 `Illuminate\Http\UploadedFile` 實例,並將自動將檔案串流到你所需的位置:
 
@@ -553,7 +553,7 @@ Storage::putFile('photos', new File('/path/to/photo'), 'public');
 ```
 
 <a name="file-uploads"></a>
-### File Uploads
+### File Uploads (File Uploads)
 
 In web applications, one of the most common use-cases for storing files is storing user uploaded files such as photos and documents. Laravel makes it very easy to store uploaded files using the `store` method on an uploaded file instance. Call the `store` method with the path at which you wish to store the uploaded file:
 
@@ -651,7 +651,7 @@ $extension = $file->extension(); // Determine the file's extension based on the 
 ```
 
 <a name="file-visibility"></a>
-### 檔案可見性
+### 檔案可見性 (File Visibility)
 
 在 Laravel 的 Flysystem 整合中,「可見性」是跨多個平台的檔案權限的抽象。檔案可以被宣告為 `public` 或 `private`。當檔案被宣告為 `public` 時,你表示該檔案通常應該對其他人可存取。例如,當使用 S3 驅動程式時,你可以檢索 `public` 檔案的 URL。
 
@@ -684,7 +684,7 @@ $path = $request->file('avatar')->storePubliclyAs(
 ```
 
 <a name="local-files-and-visibility"></a>
-#### 本地檔案和可見性
+#### 本地檔案和可見性 (Local Files And Visibility)
 
 當使用 `local` 驅動程式時,`public` [可見性](#file-visibility)轉換為目錄的 `0755` 權限和檔案的 `0644` 權限。你可以在應用程式的 `filesystems` 設定檔中修改權限映射:
 
@@ -707,7 +707,7 @@ $path = $request->file('avatar')->storePubliclyAs(
 ```
 
 <a name="deleting-files"></a>
-## 刪除檔案
+## 刪除檔案 (Deleting Files)
 
 `delete` 方法接受單個檔案名稱或要刪除的檔案陣列:
 
@@ -728,10 +728,10 @@ Storage::disk('s3')->delete('path/file.jpg');
 ```
 
 <a name="directories"></a>
-## 目錄
+## 目錄 (Directories)
 
 <a name="get-all-files-within-a-directory"></a>
-#### 取得目錄中的所有檔案
+#### 取得目錄中的所有檔案 (Get All Files Within A Directory)
 
 `files` 方法返回給定目錄中所有檔案的陣列。如果你想檢索給定目錄中的所有檔案(包括子目錄),你可以使用 `allFiles` 方法:
 
@@ -744,7 +744,7 @@ $files = Storage::allFiles($directory);
 ```
 
 <a name="get-all-directories-within-a-directory"></a>
-#### 取得目錄中的所有子目錄
+#### 取得目錄中的所有子目錄 (Get All Directories Within A Directory)
 
 `directories` 方法返回給定目錄中所有目錄的陣列。如果你想檢索給定目錄中的所有目錄(包括子目錄),你可以使用 `allDirectories` 方法:
 
@@ -755,7 +755,7 @@ $directories = Storage::allDirectories($directory);
 ```
 
 <a name="create-a-directory"></a>
-#### 建立目錄
+#### 建立目錄 (Create A Directory)
 
 `makeDirectory` 方法將建立給定的目錄,包括任何需要的子目錄:
 
@@ -764,7 +764,7 @@ Storage::makeDirectory($directory);
 ```
 
 <a name="delete-a-directory"></a>
-#### 刪除目錄
+#### 刪除目錄 (Delete A Directory)
 
 最後,`deleteDirectory` 方法可用於刪除目錄及其所有檔案:
 
@@ -773,7 +773,7 @@ Storage::deleteDirectory($directory);
 ```
 
 <a name="testing"></a>
-## 測試
+## 測試 (Testing)
 
 `Storage` facade 的 `fake` 方法允許你輕鬆產生一個僽磁碟,結合 `Illuminate\Http\UploadedFile` 類別的檔案產生工具,大大簡化了檔案上傳的測試。例如:
 
@@ -849,7 +849,7 @@ class ExampleTest extends TestCase
 > [!WARNING] > `image` 方法需要 [GD 擴展](https://www.php.net/manual/en/book.image.php)。
 
 <a name="custom-filesystems"></a>
-## 自訂檔案系統
+## 自訂檔案系統 (Custom Filesystems)
 
 Laravel 的 Flysystem 整合提供了幾個開箱即用的「驅動程式」支援;但是,Flysystem 不僅限於這些,它還有許多其他儲存系統的適配器。如果你想在 Laravel 應用程式中使用這些額外的適配器之一,你可以建立自訂驅動程式。
 

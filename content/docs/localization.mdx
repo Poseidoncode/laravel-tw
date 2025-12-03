@@ -13,7 +13,7 @@ title: "本地化 (Localization)"
 - [覆寫套件語言檔案](#overriding-package-language-files)
 
 <a name="introduction"></a>
-## 介紹
+## 介紹 (Introduction)
 
 > [!NOTE]
 > 預設情況下，Laravel 應用程式骨架不包含 `lang` 目錄。如果你想自訂 Laravel 的語言檔案，你可以透過 `lang:publish` Artisan 命令發布它們。
@@ -41,7 +41,7 @@ Laravel 提供兩種方式來管理翻譯字串。首先，語言字串可以儲
 我們將在這份文件中討論每種管理翻譯字串的方法。
 
 <a name="publishing-the-language-files"></a>
-### 發布語言檔案
+### 發布語言檔案 (Publishing The Language Files)
 
 預設情況下，Laravel 應用程式骨架不包含 `lang` 目錄。如果你想自訂 Laravel 的語言檔案或建立你自己的語言檔案，你應該透過 `lang:publish` Artisan 命令建立 `lang` 目錄骨架。`lang:publish` 命令會在你的應用程式中建立 `lang` 目錄並發布 Laravel 使用的預設語言檔案集：
 
@@ -50,7 +50,7 @@ php artisan lang:publish
 ```
 
 <a name="configuring-the-locale"></a>
-### 設定地區
+### 設定地區 (Configuring The Locale)
 
 應用程式的預設語言儲存在 `config/app.php` 設定檔的 `locale` 設定選項中，通常使用 `APP_LOCALE` 環境變數設定。你可以自由修改這個值以適合你的應用程式需求。
 
@@ -73,7 +73,7 @@ Route::get('/greeting/{locale}', function (string $locale) {
 ```
 
 <a name="determining-the-current-locale"></a>
-#### 判斷當前地區
+#### 判斷當前地區 (Determining The Current Locale)
 
 你可以使用 `App` facade 上的 `currentLocale` 和 `isLocale` 方法來判斷當前地區或檢查地區是否為指定值：
 
@@ -88,7 +88,7 @@ if (App::isLocale('en')) {
 ```
 
 <a name="pluralization-language"></a>
-### 複數化語言
+### 複數化語言 (Pluralization Language)
 
 <div className="code-list-no-flex-break">
 你可以指示 Laravel 的「複數化器」使用英語以外的語言，Eloquent 和框架的其他部分會使用它將單數字串轉換為複數字串。這可以透過在應用程式的某個 service provider 的 `boot` 方法中調用 `useLanguage` 方法來完成。複數化器目前支援的語言有：`french`、`norwegian-bokmal`、`portuguese`、`spanish` 和 `turkish`：
@@ -113,10 +113,10 @@ public function boot(): void
 > 如果你自訂了複數化器的語言，你應該明確定義你的 Eloquent model 的[資料表名稱](/docs/{{version}}/eloquent#table-names)。
 
 <a name="defining-translation-strings"></a>
-## 定義翻譯字串
+## 定義翻譯字串 (Defining Translation Strings)
 
 <a name="using-short-keys"></a>
-### 使用短鍵
+### 使用短鍵 (Using Short Keys)
 
 通常，翻譯字串儲存在 `lang` 目錄中的檔案裡。在這個目錄中，應該有應用程式支援的每種語言的子目錄。這是 Laravel 用於管理內建 Laravel 功能（如驗證錯誤訊息）的翻譯字串的方法：
 
@@ -144,7 +144,7 @@ return [
 > 對於因地區而異的語言，你應該根據 ISO 15897 命名語言目錄。例如，英式英語應使用 "en_GB" 而非 "en-gb"。
 
 <a name="using-translation-strings-as-keys"></a>
-### 使用翻譯字串作為鍵
+### 使用翻譯字串作為鍵 (Using Translation Strings As Keys)
 
 對於有大量可翻譯字串的應用程式，使用「短鍵」定義每個字串在視圖中參考鍵時會變得混亂，而且為應用程式支援的每個翻譯字串不斷發明鍵也很繁瑣。
 
@@ -161,7 +161,7 @@ return [
 你不應該定義與其他翻譯檔名衝突的翻譯字串鍵。例如，當 `nl/action.php` 檔案存在但 `nl.json` 檔案不存在時，為 "NL" 地區翻譯 `__('Action')` 會導致翻譯器回傳 `nl/action.php` 的全部內容。
 
 <a name="retrieving-translation-strings"></a>
-## 擷取翻譯字串
+## 擷取翻譯字串 (Retrieving Translation Strings)
 
 你可以使用 `__` 輔助函式從語言檔案中擷取翻譯字串。如果你使用「短鍵」來定義翻譯字串，你應該使用「點」語法將包含鍵的檔案和鍵本身傳遞給 `__` 函式。例如，讓我們從 `lang/en/messages.php` 語言檔案中擷取 `welcome` 翻譯字串：
 
@@ -186,7 +186,7 @@ echo __('I love programming.');
 ```
 
 <a name="replacing-parameters-in-translation-strings"></a>
-### 替換翻譯字串中的參數
+### 替換翻譯字串中的參數 (Replacing Parameters In Translation Strings)
 
 如果你願意，你可以在翻譯字串中定義佔位符。所有佔位符都以 `:` 為前綴。例如，你可以定義一個帶有佔位符名稱的歡迎訊息：
 
@@ -208,7 +208,7 @@ echo __('messages.welcome', ['name' => 'dayle']);
 ```
 
 <a name="object-replacement-formatting"></a>
-#### 物件替換格式化
+#### 物件替換格式化 (Object Replacement Formatting)
 
 如果你嘗試提供物件作為翻譯佔位符，物件的 `__toString` 方法會被調用。[\_\_toString](https://www.php.net/manual/en/language.oop5.magic.php#object.tostring) 方法是 PHP 內建的「魔術方法」之一。然而，有時你可能無法控制給定類別的 `__toString` 方法，例如當你互動的類別屬於第三方函式庫時。
 
@@ -230,7 +230,7 @@ public function boot(): void
 ```
 
 <a name="pluralization"></a>
-### 複數化
+### 複數化 (Pluralization)
 
 複數化是一個複雜的問題，因為不同的語言有各種複雜的複數化規則；然而，Laravel 可以根據你定義的複數化規則以不同方式翻譯字串。使用 `|` 字元，你可以區分字串的單數和複數形式：
 
@@ -273,7 +273,7 @@ echo trans_choice('time.minutes_ago', 5, ['value' => 5]);
 ```
 
 <a name="overriding-package-language-files"></a>
-## 覆寫套件語言檔案
+## 覆寫套件語言檔案 (Overriding Package Language Files)
 
 有些套件可能會隨附自己的語言檔案。與其更改套件的核心檔案來調整這些行，你可以透過在 `lang/vendor/{package}/{locale}` 目錄中放置檔案來覆寫它們。
 
