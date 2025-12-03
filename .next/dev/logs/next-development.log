@@ -114,3 +114,79 @@ title: 資料庫：入門(Database: Getting Started)
 [00:35:41.572] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:35:56.150] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:36:11.421] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:41:39.790] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:41:45.706] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:41:48.060] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:43:13.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:47:16.853] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:48:06.695] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:58.834] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:53:40.080] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:54:55.226] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Seeding (Database: Seeding)
+       ^
+
+[00:54:55.359] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Seeding (Database: Seeding)
+       ^
+
+[00:55:27.044] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:46.234] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:52.849] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：入門 (Eloquent: Getting Started)
+       ^
+
+[00:55:52.969] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：入門 (Eloquent: Getting Started)
+       ^
+
+[00:56:33.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:56:57.393] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：工廠 (Eloquent: Factories)
+       ^
+
+[00:56:57.513] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：工廠 (Eloquent: Factories)
+       ^
+
+[00:57:18.232] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:57:22.591] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：變異器和類型轉換 (Eloquent: Mutators and Casting)
+       ^
+
+[00:57:22.712] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：變異器和類型轉換 (Eloquent: Mutators and Casting)
+       ^
+
+[00:57:39.975] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:57:56.936] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：序列化 (Eloquent: Serialization)
+       ^
+
+[00:57:57.055] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: Eloquent：序列化 (Eloquent: Serialization)
+       ^
+
+[00:59:34.476] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:01:03.739] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:01:21.170] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 測試：入門 (Testing: Getting Started)
+       ^
+
+[01:01:21.296] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 測試：入門 (Testing: Getting Started)
+       ^
+
+[01:01:43.114] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
