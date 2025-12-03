@@ -58,13 +58,14 @@ export function TableOfContents({ items }: TocProps) {
                 <h4 className="text-sm font-semibold mb-4 text-foreground">On this page</h4>
                 <ScrollArea className="h-[calc(100vh-120px)]">
                     <nav className="space-y-1">
-                        {items.map((item) => {
+                        {items.map((item, index) => {
                             const isActive = activeId === item.id
                             const paddingLeft = (item.level - 2) * 12 // h2 = 0, h3 = 12px, h4 = 24px
+                            const uniqueKey = `${item.id}-${index}`
 
                             return (
                                 <a
-                                    key={item.id}
+                                    key={uniqueKey}
                                     href={`#${item.id}`}
                                     className={`
                     block text-sm py-1 transition-colors

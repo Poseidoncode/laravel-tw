@@ -3,8 +3,6 @@ title: "Session"
 description: Laravel 透過統一的 API 支援多種 Session 後端
 ---
 
-# HTTP Session
-
 - [簡介](#introduction)
   - [設定](#configuration)
   - [驅動程式先決條件](#driver-prerequisites)
@@ -155,7 +153,8 @@ $data = $request->session()->except(['username', 'email']);
 ```
 
 <a name="determining-if-an-item-exists-in-the-session"></a>
-#### 判斷項目是否存在於 Session 中 (Determining If An Item Exists In The Session)
+#### 判斷項目是否存在於 Session 中 (Determining If An Item Exists In The
+Session)
 
 要判斷項目是否存在於 Session 中，您可以使用 `has` 方法。如果項目存在且不為 `null`，`has` 方法返回 `true`：
 
