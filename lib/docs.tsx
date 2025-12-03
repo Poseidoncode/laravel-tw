@@ -5,6 +5,7 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeShiki from '@shikijs/rehype'
 import { CodeBlock } from '@/components/ui/code-block'
+import type { TocItem } from '@/components/docs/toc'
 
 const contentDir = path.join(process.cwd(), 'content/docs')
 
@@ -15,6 +16,7 @@ export type Doc = {
     title: string
     description?: string
   }
+  toc: TocItem[]
 }
 
 export async function getDocBySlug(slug: string): Promise<Doc | null> {
@@ -26,6 +28,37 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
   }
 
   const source = fs.readFileSync(filePath, 'utf8')
+
+  // Extract TOC from source
+  const toc: TocItem[] = []
+  const lines = source.split('\n')
+  let inFrontmatter = false
+  let frontmatterCount = 0
+
+  for (const line of lines) {
+    // Skip frontmatter
+    if (line.trim() === '---') {
+      frontmatterCount++
+      inFrontmatter = frontmatterCount === 1
+      continue
+    }
+    if (inFrontmatter || frontmatterCount < 2) continue
+
+    // Match markdown headings (## or ### or ####)
+    const headingMatch = line.match(/^(#{2,4})\s+(.+)/)
+    if (headingMatch) {
+      const level = headingMatch[1].length
+      const text = headingMatch[2].trim()
+
+      // Generate ID from text (similar to rehype-slug)
+      const id = text
+        .toLowerCase()
+        .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')
+        .replace(/^-|-$/g, '')
+
+      toc.push({ id, text, level })
+    }
+  }
 
   const { content, frontmatter } = await compileMDX<{ title: string; description?: string }>({
     source,
@@ -66,6 +99,7 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
     slug,
     content,
     frontmatter,
+    toc,
   }
 }
 
