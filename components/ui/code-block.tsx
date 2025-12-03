@@ -27,7 +27,7 @@ export function CodeBlock({ children, className, raw }: CodeBlockProps) {
 
     return (
         <div className="relative group">
-            <pre className={className}>
+            <pre className={`${className} overflow-x-auto max-w-full`}>
                 {children}
             </pre>
             <button

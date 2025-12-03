@@ -1193,6 +1193,10 @@
     max-width: 600px;
   }
 
+  .max-w-full {
+    max-width: 100%;
+  }
+
   .max-w-none {
     max-width: none;
   }
