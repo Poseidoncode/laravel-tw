@@ -1,215 +1,74 @@
-[00:00:00.784] Server  LOG      ✓ Ready in 550ms
-[00:00:03.729] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+[00:00:01.026] Server  LOG      ✓ Ready in 753ms
+[00:00:09.406] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:43.742] Server  LOG      ✓ Compiled in 85ms
+[00:09:56.094] Browser ERROR   ./lib/docs.ts:41:22
+Parsing ecmascript source code failed
+  39 |
+  40 |         return (
+> 41 |           <CodeBlock className= { className } raw = { typeof code === 'string' ? code : undefined } >
+     |                      ^^^^^^^^^
+  42 |             { children }
+  43 |             </CodeBlock>
+  44 |         )
+
+Expected '>', got 'className'
+
+Import trace:
+  Server Component:
+    ./lib/docs.ts
+    ./app/docs/[slug]/page.tsx
+[00:09:56.094] Browser ERROR   ./lib/docs.ts
+Code generation for chunk item errored
+An error occurred while generating the chunk item [project]/lib/docs.ts [app-rsc] (ecmascript)
+
+Caused by:
+- CJS module can't be async.
+
+Debug info:
+- An error occurred while generating the chunk item [project]/lib/docs.ts [app-rsc] (ecmascript)
+- Execution of <ModuleChunkItem as EcmascriptChunkItem>::content_with_async_module_info failed
+- Execution of EcmascriptChunkItemContent::new failed
+- CJS module can't be async.
+
+Import trace:
+  Server Component:
+    ./lib/docs.ts
+    ./app/docs/[slug]/page.tsx
+[00:11:06.253] Server  LOG      ✓ Compiled in 132ms
+[00:11:07.101] Server  LOG      ✓ Compiled in 1ms
+[00:12:32.566] Server  LOG      ✓ Compiled in 65ms
+[00:13:38.210] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:13:39.171] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/docs/coll..." notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <RootLayout>
+                        <html
+                          lang="en"
+-                         data-jetski-tab-id="1634156166"
+                        >
+                  ...
 
-title: 資料庫：Migration (Database: Migrations)
-       ^
-
-[00:00:04.134] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:04.302] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：Migration (Database: Migrations)
-       ^
-
-[00:00:21.267] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：Migration (Database: Migrations)
-       ^
-
-[00:00:21.413] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:21.519] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：Migration (Database: Migrations)
-       ^
-
-[00:05:48.891] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:10:34.837] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:10:35.719] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫遷移 (Database: Migrations)
-       ^
-
-[00:10:35.847] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫遷移 (Database: Migrations)
-       ^
-
-[00:10:37.426] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫遷移 (Database: Migrations)
-       ^
-
-[00:10:37.569] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:10:37.679] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫遷移 (Database: Migrations)
-       ^
-
-[00:10:49.257] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:12:54.436] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：分頁 (Database: Pagination)
-       ^
-
-[00:12:54.559] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：分頁 (Database: Pagination)
-       ^
-
-[00:12:57.742] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：分頁 (Database: Pagination)
-       ^
-
-[00:12:57.996] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:12:58.114] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：分頁 (Database: Pagination)
-       ^
-
-[00:13:16.983] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:32:05.047] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：查詢建構器 (Database: Query Builder)
-       ^
-
-[00:32:05.175] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：查詢建構器 (Database: Query Builder)
-       ^
-
-[00:32:13.013] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：查詢建構器 (Database: Query Builder)
-       ^
-
-[00:32:13.341] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:32:13.440] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：查詢建構器 (Database: Query Builder)
-       ^
-
-[00:32:49.722] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:34:27.635] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：入門(Database: Getting Started)
-       ^
-
-[00:34:27.759] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：入門(Database: Getting Started)
-       ^
-
-[00:34:31.378] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：入門(Database: Getting Started)
-       ^
-
-[00:34:31.642] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:34:31.757] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：入門(Database: Getting Started)
-       ^
-
-[00:34:58.566] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:35:41.572] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:35:56.150] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:36:11.421] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:41:39.790] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:41:45.706] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:41:48.060] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:43:13.882] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:47:16.853] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:48:06.695] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:49:58.834] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:53:40.080] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:54:55.226] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：Seeding (Database: Seeding)
-       ^
-
-[00:54:55.359] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 資料庫：Seeding (Database: Seeding)
-       ^
-
-[00:55:27.044] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:55:46.234] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:55:52.849] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：入門 (Eloquent: Getting Started)
-       ^
-
-[00:55:52.969] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：入門 (Eloquent: Getting Started)
-       ^
-
-[00:56:33.848] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:56:57.393] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：工廠 (Eloquent: Factories)
-       ^
-
-[00:56:57.513] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：工廠 (Eloquent: Factories)
-       ^
-
-[00:57:18.232] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:57:22.591] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：變異器和類型轉換 (Eloquent: Mutators and Casting)
-       ^
-
-[00:57:22.712] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：變異器和類型轉換 (Eloquent: Mutators and Casting)
-       ^
-
-[00:57:39.975] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:57:56.936] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：序列化 (Eloquent: Serialization)
-       ^
-
-[00:57:57.055] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: Eloquent：序列化 (Eloquent: Serialization)
-       ^
-
-[00:59:34.476] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:01:03.739] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:01:21.170] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 測試：入門 (Testing: Getting Started)
-       ^
-
-[01:01:21.296] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
-
-title: 測試：入門 (Testing: Getting Started)
-       ^
-
-[01:01:43.114] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:06:28.814] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:07:12.923] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:08:53.513] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:10:45.336] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:12:35.512] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:18:31.187] Server  LOG      ✓ Compiled in 59ms
-[01:22:10.618] Server  LOG      ✓ Compiled in 58ms
-[01:23:09.350] Server  LOG      ✓ Compiled in 54ms
-[01:23:29.788] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:24:19.787] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:24:28.468] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:26:45.305] Server  LOG      ✓ Compiled in 35ms
-[01:28:05.963] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:28:46.141] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:29:10.375] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:30:29.923] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:37:39.767] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:43:33.427] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:49:46.866] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[01:50:02.440] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:18:55.904] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:22:26.964] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[02:25:10.322] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
