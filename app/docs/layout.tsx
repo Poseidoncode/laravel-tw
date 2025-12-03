@@ -13,7 +13,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                 <ModeToggle />
             </div>
             <DocsSidebar />
-            <main className="flex-1 relative overflow-hidden">
+            <main className="flex-1 relative">
                 {children}
             </main>
         </div>
