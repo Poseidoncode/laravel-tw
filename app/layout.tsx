@@ -28,6 +28,33 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(${function setInitialTheme() {
+              try {
+                const persisted = window.localStorage.getItem('theme')
+                if (typeof persisted === 'string') {
+                  if (persisted === 'dark') {
+                    document.documentElement.classList.add('dark')
+                    document.documentElement.style.colorScheme = 'dark'
+                  } else {
+                    document.documentElement.classList.remove('dark')
+                    document.documentElement.style.colorScheme = 'light'
+                  }
+                  return
+                }
+                const mql = window.matchMedia('(prefers-color-scheme: dark)')
+                if (mql.matches) {
+                  document.documentElement.classList.add('dark')
+                  document.documentElement.style.colorScheme = 'dark'
+                } else {
+                  document.documentElement.classList.remove('dark')
+                  document.documentElement.style.colorScheme = 'light'
+                }
+              } catch (e) {}
+            }.toString()})();`,
+          }}
+        />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
