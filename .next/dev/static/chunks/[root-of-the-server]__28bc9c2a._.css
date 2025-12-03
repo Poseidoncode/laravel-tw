@@ -1293,6 +1293,10 @@
     max-width: none;
   }
 
+  .min-w-0 {
+    min-width: calc(var(--spacing) * 0);
+  }
+
   .min-w-full {
     min-width: 100%;
   }
@@ -1381,6 +1385,10 @@
 
   .overflow-auto {
     overflow: auto;
+  }
+
+  .overflow-hidden {
+    overflow: hidden;
   }
 
   .overflow-x-auto {
@@ -2156,6 +2164,12 @@
     }
   }
 
+  @media (min-width: 48rem) {
+    .md\:px-6 {
+      padding-inline: calc(var(--spacing) * 6);
+    }
+  }
+
   @media (min-width: 64rem) {
     .lg\:text-5xl {
       font-size: var(--text-5xl);
@@ -2512,6 +2526,35 @@
     --sidebar-border: lab(100% 0 0 / .1);
     --sidebar-ring: lab(48.496% 0 0);
   }
+}
+
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+code {
+  word-wrap: break-word;
+}
+
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose code {
+  word-break: break-word;
+}
+
+.prose table {
+  max-width: 100%;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .collection-method-list ul {

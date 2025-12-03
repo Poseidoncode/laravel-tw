@@ -123,6 +123,39 @@
   }
 }
 
+/* RWD fix for code blocks and pre elements */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+code {
+  word-wrap: break-word;
+}
+
+/* Ensure prose content doesn't overflow on mobile */
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.prose code {
+  word-break: break-word;
+}
+
+/* Fix table overflow on mobile */
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Prevent long URLs and words from causing overflow */
+.prose {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 .collection-method-list ul {
   column-count: 3;
   column-gap: 2rem;

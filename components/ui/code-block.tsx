@@ -26,7 +26,7 @@ export function CodeBlock({ children, className, raw }: CodeBlockProps) {
     }
 
     return (
-        <div className="relative group">
+        <div className="relative group max-w-full overflow-hidden">
             <pre className={`${className} overflow-x-auto max-w-full`}>
                 {children}
             </pre>

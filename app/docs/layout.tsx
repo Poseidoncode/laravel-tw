@@ -9,7 +9,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                 <span className="ml-2 font-bold text-lg"><span className="text-red-600">Laravel</span> Docs</span>
             </div>
             <DocsSidebar />
-            <main className="flex-1 relative">
+            <main className="flex-1 relative overflow-hidden">
                 {children}
             </main>
         </div>
