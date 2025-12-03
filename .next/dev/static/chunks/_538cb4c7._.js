@@ -311,23 +311,23 @@ const sidebarItems = [
         title: '深入探討',
         items: [
             {
-                title: 'Artisan Console',
+                title: 'Artisan 命令列 (Artisan Console)',
                 href: '/docs/artisan'
             },
             {
-                title: 'Broadcasting',
+                title: '廣播 (Broadcasting)',
                 href: '/docs/broadcasting'
             },
             {
-                title: 'Cache',
+                title: '快取 (Cache)',
                 href: '/docs/cache'
             },
             {
-                title: 'Collections',
+                title: '集合 (Collections)',
                 href: '/docs/collections'
             },
             {
-                title: 'Concurrency',
+                title: '並行 (Concurrency)',
                 href: '/docs/concurrency'
             },
             {
@@ -335,59 +335,59 @@ const sidebarItems = [
                 href: '/docs/context'
             },
             {
-                title: 'Contracts',
+                title: '契約 (Contracts)',
                 href: '/docs/contracts'
             },
             {
-                title: 'Events',
+                title: '事件 (Events)',
                 href: '/docs/events'
             },
             {
-                title: 'File Storage',
+                title: '檔案儲存 (File Storage)',
                 href: '/docs/filesystem'
             },
             {
-                title: 'Helpers',
+                title: '輔助函式 (Helpers)',
                 href: '/docs/helpers'
             },
             {
-                title: 'HTTP Client',
+                title: 'HTTP 客戶端 (HTTP Client)',
                 href: '/docs/http-client'
             },
             {
-                title: 'Localization',
+                title: '本地化(Localization)',
                 href: '/docs/localization'
             },
             {
-                title: 'Mail',
+                title: '郵件 (Mail)',
                 href: '/docs/mail'
             },
             {
-                title: 'Notifications',
+                title: '通知 (Notifications)',
                 href: '/docs/notifications'
             },
             {
-                title: 'Package Development',
+                title: '套件 (Packages)',
                 href: '/docs/packages'
             },
             {
-                title: 'Processes',
+                title: '程序 (Processes)',
                 href: '/docs/processes'
             },
             {
-                title: 'Queues',
+                title: '佇列 (Queues)',
                 href: '/docs/queues'
             },
             {
-                title: 'Rate Limiting',
+                title: '速率限制 (Rate Limiting)',
                 href: '/docs/rate-limiting'
             },
             {
-                title: 'Strings',
+                title: '字串 (Strings)',
                 href: '/docs/strings'
             },
             {
-                title: 'Task Scheduling',
+                title: '任務排程 (Scheduling)',
                 href: '/docs/scheduling'
             }
         ]
