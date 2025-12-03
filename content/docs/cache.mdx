@@ -3,7 +3,7 @@ title: "快取 (Cache)"
 description: Laravel 為各種快取後端提供統一的 API
 ---
 
-- [簡介 (Introduction)](#introduction)
+- [簡介](#introduction)
 - [設定 (Configuration)](#configuration)
   - [驅動程式先決條件 (Driver Prerequisites)](#driver-prerequisites)
 - [快取使用 (Cache Usage)](#cache-usage)
@@ -24,7 +24,7 @@ description: Laravel 為各種快取後端提供統一的 API
 - [事件 (Events)](#events)
 
 <a name="introduction"></a>
-## 簡介
+## 簡介 (Introduction)
 
 你的應用程式執行的某些資料檢索或處理任務可能會耗費大量 CPU 資源或需要數秒才能完成。在這種情況下,通常會將檢索到的資料快取一段時間,以便在後續對相同資料的請求中快速檢索。快取的資料通常儲存在非常快速的資料儲存中,例如 [Memcached](https://memcached.org) 或 [Redis](https://redis.io)。
 
