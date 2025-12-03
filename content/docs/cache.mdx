@@ -4,24 +4,24 @@ description: Laravel 為各種快取後端提供統一的 API
 ---
 
 - [簡介](#introduction)
-- [設定 (Configuration)](#configuration)
-  - [驅動程式先決條件 (Driver Prerequisites)](#driver-prerequisites)
-- [快取使用 (Cache Usage)](#cache-usage)
-  - [取得快取實例 (Obtaining a Cache Instance)](#obtaining-a-cache-instance)
-  - [從快取中檢索項目 (Retrieving Items From the Cache)](#retrieving-items-from-the-cache)
-  - [在快取中儲存項目 (Storing Items in the Cache)](#storing-items-in-the-cache)
-  - [從快取中刪除項目 (Removing Items From the Cache)](#removing-items-from-the-cache)
-  - [快取記憶化 (Cache Memoization)](#cache-memoization)
-  - [快取輔助函式 (The Cache Helper)](#the-cache-helper)
-- [快取標籤 (Cache Tags)](#cache-tags)
-- [原子鎖定 (Atomic Locks)](#atomic-locks)
-  - [管理鎖定 (Managing Locks)](#managing-locks)
-  - [跨程序管理鎖定 (Managing Locks Across Processes)](#managing-locks-across-processes)
-- [快取故障轉移 (Cache Failover)](#cache-failover)
-- [新增自訂快取驅動程式 (Adding Custom Cache Drivers)](#adding-custom-cache-drivers)
-  - [編寫驅動程式 (Writing the Driver)](#writing-the-driver)
-  - [註冊驅動程式 (Registering the Driver)](#registering-the-driver)
-- [事件 (Events)](#events)
+- [設定](#configuration)
+  - [驅動程式先決條件](#driver-prerequisites)
+- [快取使用](#cache-usage)
+  - [取得快取實例](#obtaining-a-cache-instance)
+  - [從快取中檢索項目](#retrieving-items-from-the-cache)
+  - [在快取中儲存項目](#storing-items-in-the-cache)
+  - [從快取中刪除項目](#removing-items-from-the-cache)
+  - [快取記憶化](#cache-memoization)
+  - [快取輔助函式](#the-cache-helper)
+- [快取標籤](#cache-tags)
+- [原子鎖定](#atomic-locks)
+  - [管理鎖定](#managing-locks)
+  - [跨程序管理鎖定](#managing-locks-across-processes)
+- [快取故障轉移](#cache-failover)
+- [新增自訂快取驅動程式](#adding-custom-cache-drivers)
+  - [編寫驅動程式](#writing-the-driver)
+  - [註冊驅動程式](#registering-the-driver)
+- [事件](#events)
 
 <a name="introduction"></a>
 ## 簡介 (Introduction)
@@ -31,14 +31,14 @@ description: Laravel 為各種快取後端提供統一的 API
 幸運的是,Laravel 為各種快取後端提供了富有表現力的統一 API,讓你可以利用它們極快的資料檢索速度來加速你的 Web 應用程式。
 
 <a name="configuration"></a>
-## 設定
+## 設定 (Configuration)
 
 你的應用程式的快取設定檔位於 `config/cache.php`。在此檔案中,你可以指定預設要在整個應用程式中使用的快取儲存。Laravel 開箱即支援流行的快取後端,如 [Memcached](https://memcached.org)、[Redis](https://redis.io)、[DynamoDB](https://aws.amazon.com/dynamodb) 和關聯式資料庫。此外,還提供基於檔案的快取驅動程式,而 `array` 和 `null` 快取驅動程式則為你的自動化測試提供方便的快取後端。
 
 快取設定檔還包含你可以查看的各種其他選項。預設情況下,Laravel 設定為使用 `database` 快取驅動程式,它將序列化的快取物件儲存在應用程式的資料庫中。
 
 <a name="driver-prerequisites"></a>
-### 驅動程式先決條件
+### 驅動程式先決條件 (Driver Prerequisites)
 
 <a name="prerequisites-database"></a>
 #### Database
@@ -129,10 +129,10 @@ composer require aws/aws-sdk-php
 有關設定 MongoDB 的更多資訊,請參閱 MongoDB [快取和鎖定文件](https://www.mongodb.com/docs/drivers/php/laravel-mongodb/current/cache/)。
 
 <a name="cache-usage"></a>
-## 快取使用
+## 快取使用 (Cache Usage)
 
 <a name="obtaining-a-cache-instance"></a>
-### 取得快取實例
+### 取得快取實例 (Obtaining a Cache Instance)
 
 要取得快取儲存實例,你可以使用 `Cache` facade,這是我們在整個文件中將使用的。`Cache` facade 提供了方便、簡潔的方式來存取 Laravel 快取契約的底層實現:
 
@@ -160,7 +160,7 @@ class UserController extends Controller
 ```
 
 <a name="accessing-multiple-cache-stores"></a>
-#### 存取多個快取儲存
+#### 存取多個快取儲存 (Accessing Multiple Cache Stores)
 
 使用 `Cache` facade,你可以透過 `store` 方法存取各種快取儲存。傳遞給 `store` 方法的鍵應該對應於 `cache` 設定檔中 `stores` 設定陣列中列出的其中一個儲存:
 
@@ -171,7 +171,7 @@ Cache::store('redis')->put('bar', 'baz', 600); // 10 Minutes
 ```
 
 <a name="retrieving-items-from-the-cache"></a>
-### 從快取中檢索項目
+### 從快取中檢索項目 (Retrieving Items From the Cache)
 
 `Cache` facade 的 `get` 方法用於從快取中檢索項目。如果項目不存在於快取中,將返回 `null`。如果你願意,可以將第二個參數傳遞給 `get` 方法,指定如果項目不存在時你希望返回的預設值:
 
@@ -190,7 +190,7 @@ $value = Cache::get('key', function () {
 ```
 
 <a name="determining-item-existence"></a>
-#### 確定項目是否存在
+#### 確定項目是否存在 (Determining Item Existence)
 
 `has` 方法可用於確定項目是否存在於快取中。如果項目存在但其值為 `null`,此方法也將返回 `false`:
 
@@ -201,7 +201,7 @@ if (Cache::has('key')) {
 ```
 
 <a name="incrementing-decrementing-values"></a>
-#### 遞增 / 遞減值
+#### 遞增 / 遞減值 (Incrementing / Decrementing Values)
 
 `increment` 和 `decrement` 方法可用於調整快取中整數項目的值。這兩個方法都接受一個可選的第二個參數,指示遞增或遞減項目值的量:
 
@@ -217,7 +217,7 @@ Cache::decrement('key', $amount);
 ```
 
 <a name="retrieve-store"></a>
-#### 檢索和儲存
+#### 檢索和儲存 (Retrieve & Store)
 
 有時你可能希望從快取中檢索一個項目,但如果請求的項目不存在,也要儲存一個預設值。例如,你可能希望從快取中檢索所有使用者,或者如果他們不存在,從資料庫中檢索他們並將他們新增到快取中。你可以使用 `Cache::remember` 方法來完成此操作:
 
@@ -238,7 +238,7 @@ $value = Cache::rememberForever('users', function () {
 ```
 
 <a name="swr"></a>
-#### 在重新驗證時使用過期資料
+#### 在重新驗證時使用過期資料 (Stale While Revalidate)
 
 使用 `Cache::remember` 方法時,如果快取值已過期,某些使用者可能會遇到緩慢的回應時間。對於某些類型的資料,允許在背景中重新計算快取值的同時提供部分過期的資料可能是有用的,這可以防止某些使用者在計算快取值時遇到緩慢的回應時間。這通常稱為「在重新驗證時使用過期資料」模式,`Cache::flexible` 方法提供了此模式的實現。
 
@@ -253,7 +253,7 @@ $value = Cache::flexible('users', [5, 10], function () {
 ```
 
 <a name="retrieve-delete"></a>
-#### 檢索和刪除
+#### 檢索和刪除 (Retrieve & Delete)
 
 如果你需要從快取中檢索一個項目然後刪除該項目,你可以使用 `pull` 方法。與 `get` 方法一樣,如果項目不存在於快取中,將返回 `null`:
 
@@ -264,7 +264,7 @@ $value = Cache::pull('key', 'default');
 ```
 
 <a name="storing-items-in-the-cache"></a>
-### 在快取中儲存項目
+### 在快取中儲存項目 (Storing Items in the Cache)
 
 你可以使用 `Cache` facade 上的 `put` 方法將項目儲存在快取中:
 
@@ -285,7 +285,7 @@ Cache::put('key', 'value', now()->addMinutes(10));
 ```
 
 <a name="store-if-not-present"></a>
-#### 如果不存在則儲存
+#### 如果不存在則儲存 (Store If Not Present)
 
 `add` 方法只會在項目不存在於快取儲存中時將其新增到快取中。如果項目實際上被新增到快取中,該方法將返回 `true`。否則,該方法將返回 `false`。`add` 方法是一個原子操作:
 
@@ -294,7 +294,7 @@ Cache::add('key', 'value', $seconds);
 ```
 
 <a name="storing-items-forever"></a>
-#### 永久儲存項目
+#### 永久儲存項目 (Storing Items Forever)
 
 `forever` 方法可用於將項目永久儲存在快取中。由於這些項目不會過期,必須使用 `forget` 方法手動從快取中刪除它們:
 
@@ -306,7 +306,7 @@ Cache::forever('key', 'value');
 > 如果你使用 Memcached 驅動程式,當快取達到其大小限制時,「永久」儲存的項目可能會被刪除。
 
 <a name="removing-items-from-the-cache"></a>
-### 從快取中刪除項目
+### 從快取中刪除項目 (Removing Items From the Cache)
 
 你可以使用 `forget` 方法從快取中刪除項目:
 
@@ -332,7 +332,7 @@ Cache::flush();
 > 清除快取不會尊重你設定的快取「前綴」,並且將從快取中刪除所有項目。當清除由其他應用程式共享的快取時,請仔細考慮這一點。
 
 <a name="cache-memoization"></a>
-### 快取記憶化
+### 快取記憶化 (Cache Memoization)
 
 Laravel 的 `memo` 快取驅動程式允許你在單個請求或任務執行期間將解析的快取值暫時儲存在記憶體中。這可以防止在同一執行中重複快取命中,顯著提高效能。
 
@@ -376,7 +376,7 @@ Cache::memo()->get('name');           // Hits underlying cache again...
 ```
 
 <a name="the-cache-helper"></a>
-### 快取輔助函式
+### 快取輔助函式 (The Cache Helper)
 
 除了使用 `Cache` facade 之外,你還可以使用全域 `cache` 函式透過快取檢索和儲存資料。當使用單個字串參數呼叫 `cache` 函式時,它將返回給定鍵的值:
 
@@ -404,13 +404,13 @@ cache()->remember('users', $seconds, function () {
 > 當測試對全域 `cache` 函式的呼叫時,你可以使用 `Cache::shouldReceive` 方法,就像你在[測試 facade](/docs/mocking#mocking-facades) 一樣。
 
 <a name="cache-tags"></a>
-## 快取標籤
+## 快取標籤 (Cache Tags)
 
 > [!WARNING]
 > 使用 `file`、`dynamodb` 或 `database` 快取驅動程式時不支援快取標籤。
 
 <a name="storing-tagged-cache-items"></a>
-### 儲存帶標籤的快取項目
+### 儲存帶標籤的快取項目 (Storing Tagged Cache Items)
 
 快取標籤允許你在快取中標記相關項目,然後清除所有已分配給定標籤的快取值。你可以透過傳遞有序的標籤名稱陣列來存取帶標籤的快取。例如,讓我們存取一個帶標籤的快取並將一個值 `put` 到快取中:
 
@@ -422,7 +422,7 @@ Cache::tags(['people', 'authors'])->put('Anne', $anne, $seconds);
 ```
 
 <a name="accessing-tagged-cache-items"></a>
-### 存取帶標籤的快取項目
+### 存取帶標籤的快取項目 (Accessing Tagged Cache Items)
 
 透過標籤儲存的項目只有在也提供用於儲存值的標籤時才能存取。要檢索帶標籤的快取項目,請將相同的有序標籤列表傳遞給 `tags` 方法,然後使用你希望檢索的鍵呼叫 `get` 方法:
 
@@ -433,7 +433,7 @@ $anne = Cache::tags(['people', 'authors'])->get('Anne');
 ```
 
 <a name="removing-tagged-cache-items"></a>
-### 刪除帶標籤的快取項目
+### 刪除帶標籤的快取項目 (Removing Tagged Cache Items)
 
 你可以清除分配給一個標籤或標籤列表的所有項目。例如,以下程式碼將刪除所有帶有 `people`、`authors` 或兩者標籤的快取。因此,`Anne` 和 `John` 都將從快取中刪除:
 
@@ -448,13 +448,13 @@ Cache::tags('authors')->flush();
 ```
 
 <a name="atomic-locks"></a>
-## 原子鎖定
+## 原子鎖定 (Atomic Locks)
 
 > [!WARNING]
 > 要使用此功能,你的應用程式必須使用 `memcached`、`redis`、`dynamodb`、`database`、`file` 或 `array` 快取驅動程式作為應用程式的預設快取驅動程式。此外,所有伺服器必須與同一個中央快取伺服器通訊。
 
 <a name="managing-locks"></a>
-### 管理鎖定
+### 管理鎖定 (Managing Locks)
 
 原子鎖定允許操作分散鎖定而無需擔心競爭條件。例如,[Laravel Cloud](https://cloud.laravel.com) 使用原子鎖定來確保一次只有一個遠端任務在伺服器上執行。你可以使用 `Cache::lock` 方法建立和管理鎖定:
 
@@ -505,7 +505,7 @@ Cache::lock('foo', 10)->block(5, function () {
 ```
 
 <a name="managing-locks-across-processes"></a>
-### 跨程序管理鎖定
+### 跨程序管理鎖定 (Managing Locks Across Processes)
 
 有時,你可能希望在一個程序中獲取鎖定並在另一個程序中釋放它。例如,你可能在 Web 請求期間獲取鎖定,並希望在由該請求觸發的佇列任務結束時釋放鎖定。在這種情況下,你應該將鎖定的作用域「擁有者標記」傳遞給佇列任務,以便任務可以使用給定的標記重新實例化鎖定。
 
@@ -534,7 +534,7 @@ Cache::lock('processing')->forceRelease();
 ```
 
 <a name="cache-failover"></a>
-## 快取故障轉移
+## 快取故障轉移 (Cache Failover)
 
 `failover` 快取驅動程式在與快取互動時提供自動故障轉移功能。如果主要快取儲存因任何原因失敗,Laravel 將自動嘗試使用列表中下一個設定的儲存。這對於確保生產環境中的高可用性特別有用,其中快取可靠性至關重要。
 
@@ -559,10 +559,10 @@ CACHE_STORE=failover
 當快取儲存操作失敗並啟動故障轉移時,Laravel 將分派 `Illuminate\Cache\Events\CacheFailedOver` 事件,允許你報告或記錄快取儲存已失敗。
 
 <a name="adding-custom-cache-drivers"></a>
-## 新增自訂快取驅動程式
+## 新增自訂快取驅動程式 (Adding Custom Cache Drivers)
 
 <a name="writing-the-driver"></a>
-### 編寫驅動程式
+### 編寫驅動程式 (Writing the Driver)
 
 要建立我們的自訂快取驅動程式,我們首先需要實現 `Illuminate\Contracts\Cache\Store` [契約](/docs/contracts)。因此,MongoDB 快取實現可能看起來像這樣:
 
@@ -600,7 +600,7 @@ Cache::extend('mongo', function (Application $app) {
 > 如果你想知道在哪裡放置你的自訂快取驅動程式程式碼,你可以在 `app` 目錄中建立一個 `Extensions` 命名空間。但是,請記住,Laravel 沒有固定的應用程式結構,你可以根據你的喜好自由組織你的應用程式。
 
 <a name="registering-the-driver"></a>
-### 註冊驅動程式
+### 註冊驅動程式 (Registering the Driver)
 
 要向 Laravel 註冊自訂快取驅動程式,我們將在 `Cache` facade 上使用 `extend` 方法。由於其他服務提供者可能會嘗試在其 `boot` 方法中讀取快取值,我們將在 `booting` 回呼中註冊我們的自訂驅動程式。透過使用 `booting` 回呼,我們可以確保在應用程式的服務提供者上呼叫 `boot` 方法之前,但在所有服務提供者上呼叫 `register` 方法之後,註冊自訂驅動程式。我們將在應用程式的 `App\Providers\AppServiceProvider` 類別的 `register` 方法中註冊我們的 `booting` 回呼:
 
@@ -643,7 +643,7 @@ class AppServiceProvider extends ServiceProvider
 一旦你的擴充註冊完成,請將應用程式的 `config/cache.php` 設定檔中的 `CACHE_STORE` 環境變數或 `default` 選項更新為你的擴充名稱。
 
 <a name="events"></a>
-## 事件
+## 事件 (Events)
 
 要在每個快取操作上執行程式碼,你可以監聽快取分派的各種[事件](/docs/events):
 
