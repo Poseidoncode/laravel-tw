@@ -2516,6 +2516,20 @@ code {
   word-wrap: break-word;
 }
 
+article.prose code:not(pre code):before, article.prose code:not(pre code):after {
+  content: none !important;
+  display: none !important;
+}
+
+article.prose code:not(pre code) {
+  background-color: var(--muted) !important;
+  color: var(--primary) !important;
+  border-radius: .25rem !important;
+  padding: .2em .4em !important;
+  font-size: .875em !important;
+  font-weight: 500 !important;
+}
+
 .prose pre {
   max-width: 100%;
   overflow-x: auto;

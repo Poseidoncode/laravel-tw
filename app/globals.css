@@ -135,6 +135,22 @@ code {
   word-wrap: break-word;
 }
 
+/* Fix Tailwind Typography inline code styling - remove backticks and add background */
+article.prose code:not(pre code)::before,
+article.prose code:not(pre code)::after {
+  content: none !important;
+  display: none !important;
+}
+
+article.prose code:not(pre code) {
+  background-color: var(--muted) !important;
+  color: var(--primary) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875em !important;
+  font-weight: 500 !important;
+}
+
 /* Ensure prose content doesn't overflow on mobile */
 .prose pre {
   max-width: 100%;
