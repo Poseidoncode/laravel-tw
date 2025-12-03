@@ -1,36 +1,36 @@
 ---
-title: Directory Structure
-description: Directory Structure
+title: 目錄結構 (Directory Structure)
+description: 目錄結構 (Directory Structure)
 ---
 
 # 目錄結構 (Directory Structure)
 
 - [簡介](#introduction)
 - [根目錄](#the-root-directory)
-    - [`app` 目錄](#the-root-app-directory)
-    - [`bootstrap` 目錄](#the-bootstrap-directory)
-    - [`config` 目錄](#the-config-directory)
-    - [`database` 目錄](#the-database-directory)
-    - [`public` 目錄](#the-public-directory)
-    - [`resources` 目錄](#the-resources-directory)
-    - [`routes` 目錄](#the-routes-directory)
-    - [`storage` 目錄](#the-storage-directory)
-    - [`tests` 目錄](#the-tests-directory)
-    - [`vendor` 目錄](#the-vendor-directory)
+  - [`app` 目錄](#the-root-app-directory)
+  - [`bootstrap` 目錄](#the-bootstrap-directory)
+  - [`config` 目錄](#the-config-directory)
+  - [`database` 目錄](#the-database-directory)
+  - [`public` 目錄](#the-public-directory)
+  - [`resources` 目錄](#the-resources-directory)
+  - [`routes` 目錄](#the-routes-directory)
+  - [`storage` 目錄](#the-storage-directory)
+  - [`tests` 目錄](#the-tests-directory)
+  - [`vendor` 目錄](#the-vendor-directory)
 - [App 目錄](#the-app-directory)
-    - [`Broadcasting` 目錄](#the-broadcasting-directory)
-    - [`Console` 目錄](#the-console-directory)
-    - [`Events` 目錄](#the-events-directory)
-    - [`Exceptions` 目錄](#the-exceptions-directory)
-    - [`Http` 目錄](#the-http-directory)
-    - [`Jobs` 目錄](#the-jobs-directory)
-    - [`Listeners` 目錄](#the-listeners-directory)
-    - [`Mail` 目錄](#the-mail-directory)
-    - [`Models` 目錄](#the-models-directory)
-    - [`Notifications` 目錄](#the-notifications-directory)
-    - [`Policies` 目錄](#the-policies-directory)
-    - [`Providers` 目錄](#the-providers-directory)
-    - [`Rules` 目錄](#the-rules-directory)
+  - [`Broadcasting` 目錄](#the-broadcasting-directory)
+  - [`Console` 目錄](#the-console-directory)
+  - [`Events` 目錄](#the-events-directory)
+  - [`Exceptions` 目錄](#the-exceptions-directory)
+  - [`Http` 目錄](#the-http-directory)
+  - [`Jobs` 目錄](#the-jobs-directory)
+  - [`Listeners` 目錄](#the-listeners-directory)
+  - [`Mail` 目錄](#the-mail-directory)
+  - [`Models` 目錄](#the-models-directory)
+  - [`Notifications` 目錄](#the-notifications-directory)
+  - [`Policies` 目錄](#the-policies-directory)
+  - [`Providers` 目錄](#the-providers-directory)
+  - [`Rules` 目錄](#the-rules-directory)
 
 <a name="introduction"></a>
 ## 簡介
@@ -111,8 +111,7 @@ description: Directory Structure
 
 `Console` 和 `Http` 目錄將在下面各自的部分中進一步解釋，但可以將 `Console` 和 `Http` 目錄視為提供進入應用程式核心的 API。HTTP 協定和 CLI 都是與應用程式互動的機制，但實際上並不包含應用程式邏輯。換句話說，它們是向應用程式發出指令的兩種方式。`Console` 目錄包含所有的 Artisan 指令，而 `Http` 目錄包含您的 Controllers、Middleware 和 Requests。
 
-> [!NOTE]
-> `app` 目錄中的許多類別都可以透過 Artisan 指令生成。要查看可用的指令，請在終端機中執行 `php artisan list make` 指令。
+> [!NOTE] > `app` 目錄中的許多類別都可以透過 Artisan 指令生成。要查看可用的指令，請在終端機中執行 `php artisan list make` 指令。
 
 <a name="the-broadcasting-directory"></a>
 ### Broadcasting 目錄

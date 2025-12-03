@@ -1,5 +1,5 @@
 ---
-title: Vite
+title: 資源打包 (Vite)
 description: Laravel 與 Vite 的整合指南
 ---
 
@@ -83,40 +83,35 @@ Vite 透過專案根目錄中的 `vite.config.js` 檔案進行設定。你可以
 Laravel Vite 外掛要求你指定應用程式的進入點。這些可能是 JavaScript 或 CSS 檔案，並包括預處理語言，如 TypeScript、JSX、TSX 和 Sass。
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel([
-            'resources/css/app.css',
-            'resources/js/app.js',
-        ]),
-    ],
+  plugins: [laravel(["resources/css/app.css", "resources/js/app.js"])],
 });
 ```
 
 如果你正在建置 SPA，包括使用 Inertia 建置的應用程式，Vite 在沒有 CSS 進入點的情況下效果最好：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel([
-            'resources/css/app.css', // [tl! remove]
-            'resources/js/app.js',
-        ]),
-    ],
+  plugins: [
+    laravel([
+      "resources/css/app.css", // [tl! remove]
+      "resources/js/app.js",
+    ]),
+  ],
 });
 ```
 
 相反，你應該透過 JavaScript 匯入你的 CSS。通常，這會在應用程式的 `resources/js/app.js` 檔案中完成：
 
 ```js
-import './bootstrap';
-import '../css/app.css'; // [tl! add]
+import "./bootstrap";
+import "../css/app.css"; // [tl! add]
 ```
 
 Laravel 外掛還支援多個進入點和進階設定選項，例如 [SSR 進入點](#ssr)。
@@ -131,16 +126,16 @@ Laravel 外掛還支援多個進入點和進階設定選項，例如 [SSR 進入
 如果你使用與應用程式目錄名稱不符的主機保護網站，你可以在應用程式的 `vite.config.js` 檔案中手動指定主機：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            // ...
-            detectTls: 'my-app.test', // [tl! add]
-        }),
-    ],
+  plugins: [
+    laravel({
+      // ...
+      detectTls: "my-app.test", // [tl! add]
+    }),
+  ],
 });
 ```
 
@@ -148,20 +143,22 @@ export default defineConfig({
 
 ```js
 // ...
-import fs from 'fs'; // [tl! add]
+import fs from "fs"; // [tl! add]
 
-const host = 'my-app.test'; // [tl! add]
+const host = "my-app.test"; // [tl! add]
 
 export default defineConfig({
-    // ...
-    server: { // [tl! add]
-        host, // [tl! add]
-        hmr: { host }, // [tl! add]
-        https: { // [tl! add]
-            key: fs.readFileSync(`/path/to/${host}.key`), // [tl! add]
-            cert: fs.readFileSync(`/path/to/${host}.crt`), // [tl! add]
-        }, // [tl! add]
+  // ...
+  server: {
+    // [tl! add]
+    host, // [tl! add]
+    hmr: { host }, // [tl! add]
+    https: {
+      // [tl! add]
+      key: fs.readFileSync(`/path/to/${host}.key`), // [tl! add]
+      cert: fs.readFileSync(`/path/to/${host}.crt`), // [tl! add]
     }, // [tl! add]
+  }, // [tl! add]
 });
 ```
 
@@ -176,12 +173,13 @@ export default defineConfig({
 // ...
 
 export default defineConfig({
-    // ...
-    server: { // [tl! add:start]
-        hmr: {
-            host: 'localhost',
-        },
-    }, // [tl! add:end]
+  // ...
+  server: {
+    // [tl! add:start]
+    hmr: {
+      host: "localhost",
+    },
+  }, // [tl! add:end]
 });
 ```
 
@@ -237,7 +235,7 @@ export default defineConfig({
 <head>
     {{-- ... --}}
 
-    
+
     <script>
         {!! Vite::content('resources/js/app.js') !!}
     </script>
@@ -278,18 +276,16 @@ npm run build
 你可以透過將自己的別名新增到 `vite.config.js` 設定檔來覆寫 `'@'` 別名：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel(['resources/ts/app.tsx']),
-    ],
-    resolve: {
-        alias: {
-            '@': '/resources/ts',
-        },
+  plugins: [laravel(["resources/ts/app.tsx"])],
+  resolve: {
+    alias: {
+      "@": "/resources/ts",
     },
+  },
 });
 ```
 
@@ -305,32 +301,32 @@ npm install --save-dev @vitejs/plugin-vue
 然後你可以在 `vite.config.js` 設定檔中包含該外掛。當在 Laravel 中使用 Vue 外掛時，你需要一些額外的選項：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import vue from '@vitejs/plugin-vue';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import vue from "@vitejs/plugin-vue";
 
 export default defineConfig({
-    plugins: [
-        laravel(['resources/js/app.js']),
-        vue({
-            template: {
-                transformAssetUrls: {
-                    // The Vue plugin will re-write asset URLs, when referenced
-                    // in Single File Components, to point to the Laravel web
-                    // server. Setting this to `null` allows the Laravel plugin
-                    // to instead re-write asset URLs to point to the Vite
-                    // server instead.
-                    base: null,
+  plugins: [
+    laravel(["resources/js/app.js"]),
+    vue({
+      template: {
+        transformAssetUrls: {
+          // The Vue plugin will re-write asset URLs, when referenced
+          // in Single File Components, to point to the Laravel web
+          // server. Setting this to `null` allows the Laravel plugin
+          // to instead re-write asset URLs to point to the Vite
+          // server instead.
+          base: null,
 
-                    // The Vue plugin will parse absolute URLs and treat them
-                    // as absolute paths to files on disk. Setting this to
-                    // `false` will leave absolute URLs un-touched so they can
-                    // reference assets in the public directory as expected.
-                    includeAbsolute: false,
-                },
-            },
-        }),
-    ],
+          // The Vue plugin will parse absolute URLs and treat them
+          // as absolute paths to files on disk. Setting this to
+          // `false` will leave absolute URLs un-touched so they can
+          // reference assets in the public directory as expected.
+          includeAbsolute: false,
+        },
+      },
+    }),
+  ],
 });
 ```
 
@@ -349,15 +345,12 @@ npm install --save-dev @vitejs/plugin-react
 然後你可以在 `vite.config.js` 設定檔中包含該外掛：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-    plugins: [
-        laravel(['resources/js/app.jsx']),
-        react(),
-    ],
+  plugins: [laravel(["resources/js/app.jsx"]), react()],
 });
 ```
 
@@ -381,16 +374,20 @@ export default defineConfig({
 Laravel Vite 外掛提供了一個方便的 `resolvePageComponent` 函式來幫助你解析 Inertia 頁面組件。以下是該輔助函式與 Vue 3 一起使用的範例；但是，你也可以在其他框架（如 React）中使用該函式：
 
 ```js
-import { createApp, h } from 'vue';
-import { createInertiaApp } from '@inertiajs/vue3';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createApp, h } from "vue";
+import { createInertiaApp } from "@inertiajs/vue3";
+import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 
 createInertiaApp({
-  resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
+  resolve: (name) =>
+    resolvePageComponent(
+      `./Pages/${name}.vue`,
+      import.meta.glob("./Pages/**/*.vue")
+    ),
   setup({ el, App, props, plugin }) {
     createApp({ render: () => h(App, props) })
       .use(plugin)
-      .mount(el)
+      .mount(el);
   },
 });
 ```
@@ -455,10 +452,7 @@ composer run dev
 但是，為了實現這一點，你需要透過將靜態資源匯入到應用程式的進入點來讓 Vite 知道你的資源。例如，如果你想處理並版本化儲存在 `resources/images` 中的所有圖片和儲存在 `resources/fonts` 中的所有字型，你應該在應用程式的 `resources/js/app.js` 進入點中新增以下內容：
 
 ```js
-import.meta.glob([
-  '../images/**',
-  '../fonts/**',
-]);
+import.meta.glob(["../images/**", "../fonts/**"]);
 ```
 
 這些資源現在將在執行 `npm run build` 時由 Vite 處理。然後你可以使用 `Vite::asset` 方法在 Blade 樣板中參考這些資源，該方法將回傳給定資源的版本化 URL：
@@ -473,16 +467,16 @@ import.meta.glob([
 當你的應用程式使用 Blade 進行傳統的伺服器端渲染時，Vite 可以透過在你變更應用程式中的視圖檔案時自動重新整理瀏覽器來改善你的開發工作流程。要開始使用，你可以簡單地將 `refresh` 選項指定為 `true`。
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            // ...
-            refresh: true,
-        }),
-    ],
+  plugins: [
+    laravel({
+      // ...
+      refresh: true,
+    }),
+  ],
 });
 ```
 
@@ -500,35 +494,37 @@ export default defineConfig({
 如果這些預設路徑不符合你的需求，你可以指定自己的監聽路徑列表：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            // ...
-            refresh: ['resources/views/**'],
-        }),
-    ],
+  plugins: [
+    laravel({
+      // ...
+      refresh: ["resources/views/**"],
+    }),
+  ],
 });
 ```
 
 在底層，Laravel Vite 外掛使用 [vite-plugin-full-reload](https://github.com/ElMassimo/vite-plugin-full-reload) 套件，該套件提供了一些進階設定選項來微調此功能的行為。如果你需要這種級別的自訂，你可以提供一個 `config` 定義：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            // ...
-            refresh: [{
-                paths: ['path/to/watch/**'],
-                config: { delay: 300 }
-            }],
-        }),
-    ],
+  plugins: [
+    laravel({
+      // ...
+      refresh: [
+        {
+          paths: ["path/to/watch/**"],
+          config: { delay: 300 },
+        },
+      ],
+    }),
+  ],
 });
 ```
 
@@ -616,9 +612,11 @@ public function boot(): void
 
 ```html
 <script>
-    addEventListener('load', () => setTimeout(() => {
-        dispatchEvent(new Event('vite:prefetch'))
-    }, 3000))
+  addEventListener("load", () =>
+    setTimeout(() => {
+      dispatchEvent(new Event("vite:prefetch"));
+    }, 3000)
+  );
 </script>
 ```
 
@@ -651,7 +649,7 @@ VITE_SENTRY_DSN_PUBLIC=http://example.com
 你可以透過 `import.meta.env` 物件存取注入的環境變數：
 
 ```js
-import.meta.env.VITE_SENTRY_DSN_PUBLIC
+import.meta.env.VITE_SENTRY_DSN_PUBLIC;
 ```
 
 <a name="disabling-vite-in-tests"></a>
@@ -709,16 +707,16 @@ abstract class TestCase extends BaseTestCase
 Laravel Vite 外掛讓使用 Vite 設定伺服器端渲染變得非常簡單。要開始使用，請在 `resources/js/ssr.js` 建立一個 SSR 進入點，並透過將設定選項傳遞給 Laravel 外掛來指定進入點：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: 'resources/js/app.js',
-            ssr: 'resources/js/ssr.js',
-        }),
-    ],
+  plugins: [
+    laravel({
+      input: "resources/js/app.js",
+      ssr: "resources/js/ssr.js",
+    }),
+  ],
 });
 ```
 
@@ -810,17 +808,17 @@ npm install --save-dev vite-plugin-manifest-sri
 然後你可以在 `vite.config.js` 檔案中啟用此外掛：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import manifestSRI from 'vite-plugin-manifest-sri';// [tl! add]
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import manifestSRI from "vite-plugin-manifest-sri"; // [tl! add]
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            // ...
-        }),
-        manifestSRI(),// [tl! add]
-    ],
+  plugins: [
+    laravel({
+      // ...
+    }),
+    manifestSRI(), // [tl! add]
+  ],
 });
 ```
 
@@ -899,20 +897,20 @@ Vite::useStyleTagAttributes(fn (string $src, string $url, array|null $chunk, arr
 在 `vite.config.js` 檔案中，你應該指定相同的設定：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            hotFile: 'storage/vite.hot', // Customize the "hot" file...
-            buildDirectory: 'bundle', // Customize the build directory...
-            input: ['resources/js/app.js'], // Specify the entry points...
-        }),
-    ],
-    build: {
-      manifest: 'assets.json', // Customize the manifest filename...
-    },
+  plugins: [
+    laravel({
+      hotFile: "storage/vite.hot", // Customize the "hot" file...
+      buildDirectory: "bundle", // Customize the build directory...
+      input: ["resources/js/app.js"], // Specify the entry points...
+    }),
+  ],
+  build: {
+    manifest: "assets.json", // Customize the manifest filename...
+  },
 });
 ```
 
@@ -937,48 +935,54 @@ APP_URL=https://my-app.laravel
 如果你需要對來源進行更精細的控制，例如支援多個來源，你應該利用 [Vite 全面且靈活的內建 CORS 伺服器設定](https://vite.dev/config/server-options.html#server-cors)。例如，你可以在專案的 `vite.config.js` 檔案中的 `server.cors.origin` 設定選項中指定多個來源：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: 'resources/js/app.js',
-            refresh: true,
-        }),
-    ],
-    server: {  // [tl! add]
-        cors: {  // [tl! add]
-            origin: [  // [tl! add]
-                'https://backend.laravel',  // [tl! add]
-                'http://admin.laravel:8566',  // [tl! add]
-            ],  // [tl! add]
-        },  // [tl! add]
-    },  // [tl! add]
+  plugins: [
+    laravel({
+      input: "resources/js/app.js",
+      refresh: true,
+    }),
+  ],
+  server: {
+    // [tl! add]
+    cors: {
+      // [tl! add]
+      origin: [
+        // [tl! add]
+        "https://backend.laravel", // [tl! add]
+        "http://admin.laravel:8566", // [tl! add]
+      ], // [tl! add]
+    }, // [tl! add]
+  }, // [tl! add]
 });
 ```
 
 你也可以包含正規表達式模式，如果你想允許給定頂級網域的所有來源（例如 `*.laravel`），這會很有幫助：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: 'resources/js/app.js',
-            refresh: true,
-        }),
-    ],
-    server: {  // [tl! add]
-        cors: {  // [tl! add]
-            origin: [ // [tl! add]
-                // Supports: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
-                /^https?:\/\/.*\.laravel(:\d+)?$/, //[tl! add]
-            ], // [tl! add]
-        }, // [tl! add]
+  plugins: [
+    laravel({
+      input: "resources/js/app.js",
+      refresh: true,
+    }),
+  ],
+  server: {
+    // [tl! add]
+    cors: {
+      // [tl! add]
+      origin: [
+        // [tl! add]
+        // Supports: SCHEME://DOMAIN.laravel[:PORT] [tl! add]
+        /^https?:\/\/.*\.laravel(:\d+)?$/, //[tl! add]
+      ], // [tl! add]
     }, // [tl! add]
+  }, // [tl! add]
 });
 ```
 
@@ -998,24 +1002,31 @@ Vite 生態系統中的某些外掛假設以正斜線開頭的 URL 將始終指�
 在這個特定範例中，我們將在產生的程式碼中所有出現 `/@imagetools` 的地方前面加上開發伺服器 URL：
 
 ```js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import { imagetools } from 'vite-imagetools';
+import { defineConfig } from "vite";
+import laravel from "laravel-vite-plugin";
+import { imagetools } from "vite-imagetools";
 
 export default defineConfig({
-    plugins: [
-        laravel({
-            // ...
-            transformOnServe: (code, devServerUrl) => code.replaceAll('/@imagetools', devServerUrl+'/@imagetools'),
-        }),
-        imagetools(),
-    ],
+  plugins: [
+    laravel({
+      // ...
+      transformOnServe: (code, devServerUrl) =>
+        code.replaceAll("/@imagetools", devServerUrl + "/@imagetools"),
+    }),
+    imagetools(),
+  ],
 });
 ```
 
 現在，當 Vite 提供資源服務時，它將輸出指向 Vite 開發伺服器的 URL：
 
 ```html
-- <img src="/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520" /><!-- [tl! remove] -->
-+ <img src="http://[::1]:5173/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520" /><!-- [tl! add] -->
+-
+<img
+  src="/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"
+/><!-- [tl! remove] -->
++
+<img
+  src="http://[::1]:5173/@imagetools/f0b2f404b13f052c604e632f2fb60381bf61a520"
+/><!-- [tl! add] -->
 ```

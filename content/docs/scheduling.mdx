@@ -1,5 +1,6 @@
 ---
-title: 任務排程
+title: 任務排程 (任務排程)
+description: 任務排程
 ---
 
 # 任務排程
@@ -118,170 +119,170 @@ Schedule::exec('node /home/forge/script.js')->daily();
 <div className="overflow-auto">
 
 <table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`->cron('* * * * *');`</td>
-<td>使用自訂 cron 排程執行任務。</td>
-</tr>
-<tr>
-<td>`->everySecond();`</td>
-<td>每秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyTwoSeconds();`</td>
-<td>每兩秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyFiveSeconds();`</td>
-<td>每五秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyTenSeconds();`</td>
-<td>每十秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyFifteenSeconds();`</td>
-<td>每十五秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyTwentySeconds();`</td>
-<td>每二十秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyThirtySeconds();`</td>
-<td>每三十秒執行任務。</td>
-</tr>
-<tr>
-<td>`->everyMinute();`</td>
-<td>每分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyTwoMinutes();`</td>
-<td>每兩分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyThreeMinutes();`</td>
-<td>每三分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyFourMinutes();`</td>
-<td>每四分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyFiveMinutes();`</td>
-<td>每五分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyTenMinutes();`</td>
-<td>每十分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyFifteenMinutes();`</td>
-<td>每十五分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyThirtyMinutes();`</td>
-<td>每三十分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->hourly();`</td>
-<td>每小時執行任務。</td>
-</tr>
-<tr>
-<td>`->hourlyAt(17);`</td>
-<td>每小時的第 17 分鐘執行任務。</td>
-</tr>
-<tr>
-<td>`->everyOddHour($minutes = 0);`</td>
-<td>每奇數小時執行任務。</td>
-</tr>
-<tr>
-<td>`->everyTwoHours($minutes = 0);`</td>
-<td>每兩小時執行任務。</td>
-</tr>
-<tr>
-<td>`->everyThreeHours($minutes = 0);`</td>
-<td>每三小時執行任務。</td>
-</tr>
-<tr>
-<td>`->everyFourHours($minutes = 0);`</td>
-<td>每四小時執行任務。</td>
-</tr>
-<tr>
-<td>`->everySixHours($minutes = 0);`</td>
-<td>每六小時執行任務。</td>
-</tr>
-<tr>
-<td>`->daily();`</td>
-<td>每天午夜執行任務。</td>
-</tr>
-<tr>
-<td>`->dailyAt('13:00');`</td>
-<td>每天 13:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->twiceDaily(1, 13);`</td>
-<td>每天 1:00 和 13:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->twiceDailyAt(1, 13, 15);`</td>
-<td>每天 1:15 和 13:15 執行任務。</td>
-</tr>
-<tr>
-<td>`->daysOfMonth([1, 10, 20]);`</td>
-<td>在每月的特定日期執行任務。</td>
-</tr>
-<tr>
-<td>`->weekly();`</td>
-<td>每週日 00:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->weeklyOn(1, '8:00');`</td>
-<td>每週一 8:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->monthly();`</td>
-<td>每月第一天 00:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->monthlyOn(4, '15:00');`</td>
-<td>每月 4 日 15:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->twiceMonthly(1, 16, '13:00');`</td>
-<td>每月 1 日和 16 日 13:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->lastDayOfMonth('15:00');`</td>
-<td>每月最後一天 15:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->quarterly();`</td>
-<td>每季第一天 00:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->quarterlyOn(4, '14:00');`</td>
-<td>每季 4 日 14:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->yearly();`</td>
-<td>每年第一天 00:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->yearlyOn(6, 1, '17:00');`</td>
-<td>每年 6 月 1 日 17:00 執行任務。</td>
-</tr>
-<tr>
-<td>`->timezone('America/New_York');`</td>
-<td>為任務設定時區。</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`->cron('* * * * *');`</td>
+      <td>使用自訂 cron 排程執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everySecond();`</td>
+      <td>每秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyTwoSeconds();`</td>
+      <td>每兩秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyFiveSeconds();`</td>
+      <td>每五秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyTenSeconds();`</td>
+      <td>每十秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyFifteenSeconds();`</td>
+      <td>每十五秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyTwentySeconds();`</td>
+      <td>每二十秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyThirtySeconds();`</td>
+      <td>每三十秒執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyMinute();`</td>
+      <td>每分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyTwoMinutes();`</td>
+      <td>每兩分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyThreeMinutes();`</td>
+      <td>每三分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyFourMinutes();`</td>
+      <td>每四分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyFiveMinutes();`</td>
+      <td>每五分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyTenMinutes();`</td>
+      <td>每十分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyFifteenMinutes();`</td>
+      <td>每十五分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyThirtyMinutes();`</td>
+      <td>每三十分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->hourly();`</td>
+      <td>每小時執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->hourlyAt(17);`</td>
+      <td>每小時的第 17 分鐘執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyOddHour($minutes = 0);`</td>
+      <td>每奇數小時執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyTwoHours($minutes = 0);`</td>
+      <td>每兩小時執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyThreeHours($minutes = 0);`</td>
+      <td>每三小時執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everyFourHours($minutes = 0);`</td>
+      <td>每四小時執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->everySixHours($minutes = 0);`</td>
+      <td>每六小時執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->daily();`</td>
+      <td>每天午夜執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->dailyAt('13:00');`</td>
+      <td>每天 13:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->twiceDaily(1, 13);`</td>
+      <td>每天 1:00 和 13:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->twiceDailyAt(1, 13, 15);`</td>
+      <td>每天 1:15 和 13:15 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->daysOfMonth([1, 10, 20]);`</td>
+      <td>在每月的特定日期執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->weekly();`</td>
+      <td>每週日 00:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->weeklyOn(1, '8:00');`</td>
+      <td>每週一 8:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->monthly();`</td>
+      <td>每月第一天 00:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->monthlyOn(4, '15:00');`</td>
+      <td>每月 4 日 15:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->twiceMonthly(1, 16, '13:00');`</td>
+      <td>每月 1 日和 16 日 13:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->lastDayOfMonth('15:00');`</td>
+      <td>每月最後一天 15:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->quarterly();`</td>
+      <td>每季第一天 00:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->quarterlyOn(4, '14:00');`</td>
+      <td>每季 4 日 14:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->yearly();`</td>
+      <td>每年第一天 00:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->yearlyOn(6, 1, '17:00');`</td>
+      <td>每年 6 月 1 日 17:00 執行任務。</td>
+    </tr>
+    <tr>
+      <td>`->timezone('America/New_York');`</td>
+      <td>為任務設定時區。</td>
+    </tr>
+  </tbody>
 </table>
 
 </div>
@@ -309,70 +310,70 @@ Schedule::command('foo')
 <div className="overflow-auto">
 
 <table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`->weekdays();`</td>
-<td>將任務限制在平日。</td>
-</tr>
-<tr>
-<td>`->weekends();`</td>
-<td>將任務限制在週末。</td>
-</tr>
-<tr>
-<td>`->sundays();`</td>
-<td>將任務限制在週日。</td>
-</tr>
-<tr>
-<td>`->mondays();`</td>
-<td>將任務限制在週一。</td>
-</tr>
-<tr>
-<td>`->tuesdays();`</td>
-<td>將任務限制在週二。</td>
-</tr>
-<tr>
-<td>`->wednesdays();`</td>
-<td>將任務限制在週三。</td>
-</tr>
-<tr>
-<td>`->thursdays();`</td>
-<td>將任務限制在週四。</td>
-</tr>
-<tr>
-<td>`->fridays();`</td>
-<td>將任務限制在週五。</td>
-</tr>
-<tr>
-<td>`->saturdays();`</td>
-<td>將任務限制在週六。</td>
-</tr>
-<tr>
-<td>`->days(array\|mixed);`</td>
-<td>將任務限制在特定的日子。</td>
-</tr>
-<tr>
-<td>`->between($startTime, $endTime);`</td>
-<td>將任務限制在開始和結束時間之間執行。</td>
-</tr>
-<tr>
-<td>`->unlessBetween($startTime, $endTime);`</td>
-<td>將任務限制在開始和結束時間之間不執行。</td>
-</tr>
-<tr>
-<td>`->when(Closure);`</td>
-<td>根據真假測試限制任務。</td>
-</tr>
-<tr>
-<td>`->environments($env);`</td>
-<td>將任務限制在特定環境。</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`->weekdays();`</td>
+      <td>將任務限制在平日。</td>
+    </tr>
+    <tr>
+      <td>`->weekends();`</td>
+      <td>將任務限制在週末。</td>
+    </tr>
+    <tr>
+      <td>`->sundays();`</td>
+      <td>將任務限制在週日。</td>
+    </tr>
+    <tr>
+      <td>`->mondays();`</td>
+      <td>將任務限制在週一。</td>
+    </tr>
+    <tr>
+      <td>`->tuesdays();`</td>
+      <td>將任務限制在週二。</td>
+    </tr>
+    <tr>
+      <td>`->wednesdays();`</td>
+      <td>將任務限制在週三。</td>
+    </tr>
+    <tr>
+      <td>`->thursdays();`</td>
+      <td>將任務限制在週四。</td>
+    </tr>
+    <tr>
+      <td>`->fridays();`</td>
+      <td>將任務限制在週五。</td>
+    </tr>
+    <tr>
+      <td>`->saturdays();`</td>
+      <td>將任務限制在週六。</td>
+    </tr>
+    <tr>
+      <td>`->days(array\|mixed);`</td>
+      <td>將任務限制在特定的日子。</td>
+    </tr>
+    <tr>
+      <td>`->between($startTime, $endTime);`</td>
+      <td>將任務限制在開始和結束時間之間執行。</td>
+    </tr>
+    <tr>
+      <td>`->unlessBetween($startTime, $endTime);`</td>
+      <td>將任務限制在開始和結束時間之間不執行。</td>
+    </tr>
+    <tr>
+      <td>`->when(Closure);`</td>
+      <td>根據真假測試限制任務。</td>
+    </tr>
+    <tr>
+      <td>`->environments($env);`</td>
+      <td>將任務限制在特定環境。</td>
+    </tr>
+  </tbody>
 </table>
 
 </div>
@@ -552,8 +553,7 @@ Schedule::command('analytics:report')
     ->runInBackground();
 ```
 
-> [!WARNING]
-> `runInBackground` 方法只能在使用 `command` 和 `exec` 方法排程任務時使用。
+> [!WARNING] > `runInBackground` 方法只能在使用 `command` 和 `exec` 方法排程任務時使用。
 
 ### 維護模式
 
@@ -670,8 +670,7 @@ Schedule::command('report:generate')
     ->emailOutputOnFailure('taylor@example.com');
 ```
 
-> [!WARNING]
-> `emailOutputTo`、`emailOutputOnFailure`、`sendOutputTo` 和 `appendOutputTo` 方法僅限於 `command` 和 `exec` 方法。
+> [!WARNING] > `emailOutputTo`、`emailOutputOnFailure`、`sendOutputTo` 和 `appendOutputTo` 方法僅限於 `command` 和 `exec` 方法。
 
 ## 任務鉤子
 
@@ -759,28 +758,28 @@ Laravel 在排程過程中會調度各種[事件](/docs/{{version}}/events)。�
 <div className="overflow-auto">
 
 <table>
-<thead>
-<tr>
-<th>事件名稱</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`Illuminate\Console\Events\ScheduledTaskStarting`</td>
-</tr>
-<tr>
-<td>`Illuminate\Console\Events\ScheduledTaskFinished`</td>
-</tr>
-<tr>
-<td>`Illuminate\Console\Events\ScheduledBackgroundTaskFinished`</td>
-</tr>
-<tr>
-<td>`Illuminate\Console\Events\ScheduledTaskSkipped`</td>
-</tr>
-<tr>
-<td>`Illuminate\Console\Events\ScheduledTaskFailed`</td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>事件名稱</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>`Illuminate\Console\Events\ScheduledTaskStarting`</td>
+    </tr>
+    <tr>
+      <td>`Illuminate\Console\Events\ScheduledTaskFinished`</td>
+    </tr>
+    <tr>
+      <td>`Illuminate\Console\Events\ScheduledBackgroundTaskFinished`</td>
+    </tr>
+    <tr>
+      <td>`Illuminate\Console\Events\ScheduledTaskSkipped`</td>
+    </tr>
+    <tr>
+      <td>`Illuminate\Console\Events\ScheduledTaskFailed`</td>
+    </tr>
+  </tbody>
 </table>
 
 </div>

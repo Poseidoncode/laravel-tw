@@ -1,5 +1,5 @@
 ---
-title: 加密
+title: 加密 (加密)
 description: Laravel 加密服務提供了使用 OpenSSL 進行 AES-256 和 AES-128 加密的簡單介面
 ---
 
@@ -7,24 +7,22 @@ description: Laravel 加密服務提供了使用 OpenSSL 進行 AES-256 和 AES-
 
 - [介紹](#introduction)
 - [設定](#configuration)
-    - [優雅地輪換加密金鑰](#gracefully-rotating-encryption-keys)
+  - [優雅地輪換加密金鑰](#gracefully-rotating-encryption-keys)
 - [使用加密器](#using-the-encrypter)
 
 <a name="introduction"></a>
-## 介紹
 
 Laravel 的加密服務提供了一個簡單、方便的介面，用於透過 OpenSSL 使用 AES-256 和 AES-128 加密來加密和解密文字。所有 Laravel 加密的值都使用訊息驗證碼 (MAC) 進行簽署，因此一旦加密，其底層值就無法被修改或竄改。
 
 <a name="configuration"></a>
 ## 設定
 
-在使用 Laravel 的加密器之前，您必須在 `config/app.php` 設定檔中設定 `key` 設定選項。此設定值由 `APP_KEY` 環境變數驅動。您應該使用 `php artisan key:generate` 命令來產生此變數的值，因為 `key:generate` 命令將使用 PHP 的安全隨機位元組產生器來為您的應用程式建立一個加密安全的金鑰。通常，在 [Laravel 安裝](/docs/installation) 期間會為您產生 `APP_KEY` 環境變數的值。
-
-<a name="gracefully-rotating-encryption-keys"></a>
 ### 優雅地輪換加密金鑰
 
 如果您變更應用程式的加密金鑰，所有已驗證的使用者 sessions 都將被登出您的應用程式。這是因為每個 cookie，包括 session cookies，都由 Laravel 加密。此外，將不再可能解密使用您先前加密金鑰加密的任何資料。
 
+title: 加密 (加密)
+description: Laravel 加密服務提供了使用 OpenSSL 進行 AES-256 和 AES-128 加密的簡單介面
 為了緩解此問題，Laravel 允許您在應用程式的 `APP_PREVIOUS_KEYS` 環境變數中列出您先前的加密金鑰。此變數可以包含以逗號分隔的所有先前加密金鑰的列表：
 
 ```ini
