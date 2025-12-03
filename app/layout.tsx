@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -51,7 +51,7 @@ export default function RootLayout({
                   document.documentElement.classList.remove('dark')
                   document.documentElement.style.colorScheme = 'light'
                 }
-              } catch (e) {}
+              } catch (e) { }
             }.toString()})();`,
           }}
         />

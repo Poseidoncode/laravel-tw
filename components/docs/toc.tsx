@@ -73,10 +73,10 @@ export function TableOfContents({ items }: TocProps) {
     }
 
     return (
-        <div className="hidden xl:block w-64 sticky top-0 h-screen">
+        <div className="hidden xl:block w-64 sticky top-4 h-[calc(100vh-2rem)] self-start overflow-y-auto">
             <div className="p-6">
                 <h4 className="text-sm font-semibold mb-4 text-foreground">On this page</h4>
-                <ScrollArea className="h-[calc(100vh-120px)]">
+                <ScrollArea className="h-[calc(100vh-8rem)]">
                     <nav className="space-y-1">
                         {items.map((item, index) => {
                             const isActive = activeId === item.id
