@@ -22,7 +22,7 @@ Laravel 的加密服務提供了一個簡單、方便的介面，用於透過 Op
 
 如果您變更應用程式的加密金鑰，所有已驗證的使用者 sessions 都將被登出您的應用程式。這是因為每個 cookie，包括 session cookies，都由 Laravel 加密。此外，將不再可能解密使用您先前加密金鑰加密的任何資料。
 
-為了緩解此問題，Laravel 允許您在應用程式的 `APP_PREVIOUS_KEYS` 環境變數中列出您先前的加密金鑰。此變數可以包含以逗號分隔的所有先前加密金鑰的列表：
+為了緩解此問題，Laravel 允許您在應用程式的 `APP_PREVIOUS_KEYS`環境變數中列出您先前的加密金鑰。此變數可以包含以逗號分隔的所有先前加密金鑰的列表：
 
 ```ini
 APP_KEY="base64:J63qRTDLub5NuZvP+kb8YIorGS6qFYHKVo6u7179stY="
@@ -39,7 +39,7 @@ APP_PREVIOUS_KEYS="base64:2nLsGFGzyoae2ax3EF2Lyq/hH6QghBGLIq5uL+Gp8/w="
 <a name="encrypting-a-value"></a>
 #### 加密值 (Encrypting A Value)
 
-您可以使用 `Crypt` facade 提供的 `encryptString` 方法來加密值。所有加密的值都使用 OpenSSL 和 AES-256-CBC 密碼進行加密。此外，所有加密的值都使用訊息驗證碼 (MAC) 進行簽署。整合的訊息驗證碼將防止解密任何被惡意使用者竄改的值：
+您可以使用 `Crypt` facade 提供的 `encryptString`方法來加密值。所有加密的值都使用 OpenSSL 和 AES-256-CBC 密碼進行加密。此外，所有加密的值都使用訊息驗證碼 (MAC) 進行簽署。整合的訊息驗證碼將防止解密任何被惡意使用者竄改的值：
 
 ```php
 <?php
@@ -69,7 +69,7 @@ class DigitalOceanTokenController extends Controller
 <a name="decrypting-a-value"></a>
 #### 解密值 (Decrypting A Value)
 
-您可以使用 `Crypt` facade 提供的 `decryptString` 方法來解密值。如果值無法正確解密，例如當訊息驗證碼無效時，將拋出 `Illuminate\Contracts\Encryption\DecryptException`：
+您可以使用 `Crypt` facade 提供的 `decryptString`方法來解密值。如果值無法正確解密，例如當訊息驗證碼無效時，將拋出 `Illuminate\Contracts\Encryption\DecryptException`：
 
 ```php
 use Illuminate\Contracts\Encryption\DecryptException;

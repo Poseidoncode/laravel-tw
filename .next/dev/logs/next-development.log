@@ -1,52 +1,12 @@
-[00:00:00.771] Server  LOG      ✓ Ready in 556ms
-[00:00:06.558] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:58.941] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:02:06.708] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:09.156] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:09.410] Browser ERROR   A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
-
-- A server/client branch `if (typeof window !== 'undefined')`.
-- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
-- Date formatting in a user's locale which doesn't match the server.
-- External changing data without sending a snapshot of it along with the HTML.
-- Invalid HTML tag nesting.
-
-It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
-
-%s%s https://react.dev/link/hydration-mismatch 
-
-  ...
-    <script>
-    <script>
-    <script>
-    <DocsLayout>
-      <div className="flex min-h...">
-        <div className="md:hidden ...">
-          <div className="flex items...">
-            <MobileNav>
-              <Sheet open={false} onOpenChange={function bound dispatchSetState}>
-                <Dialog data-slot="sheet" open={false} onOpenChange={function bound dispatchSetState}>
-                  <DialogProvider scope={undefined} triggerRef={{current:null}} contentRef={{current:null}} ...>
-                    <SheetTrigger asChild={true}>
-                      <DialogTrigger data-slot="sheet-trigger" asChild={true}>
-                        <Primitive.button type="button" aria-haspopup="dialog" aria-expanded={false} ...>
-                          <Primitive.button.Slot type="button" aria-haspopup="dialog" aria-expanded={false} ...>
-                            <Primitive.button.SlotClone type="button" aria-haspopup="dialog" aria-expanded={false} ...>
-                              <Button variant="ghost" size="icon" className="md:hidden" type="button" ...>
-                                <button
-                                  data-slot="sheet-trigger"
-                                  className={"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded..."}
-                                  type="button"
-                                  aria-haspopup="dialog"
-                                  aria-expanded={false}
-+                                 aria-controls="radix-_R_mitqlb_"
--                                 aria-controls="radix-_R_2mitqlb_"
-                                  data-state="closed"
-                                  onClick={function handleEvent}
-                                  ref={function}
-                                >
-                    ...
-            ...
-          ...
-        ...
-
+[00:00:01.079] Server  LOG      ✓ Ready in 863ms
+[00:00:05.645] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:08.224] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:10.301] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:11.127] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:11.832] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:41.401] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:04:09.506] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:05.853] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:00.292] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:46.984] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:09:51.055] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription } from '@/components/ui/sheet'
@@ -11,6 +11,11 @@ import { sidebarItems } from '@/lib/docs-config'
 export function MobileNav() {
     const [open, setOpen] = useState(false)
     const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['前言', '入門']))
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     const toggleSection = (sectionTitle: string) => {
         const newExpanded = new Set(expandedSections)
@@ -21,6 +26,15 @@ export function MobileNav() {
             newExpanded.add(sectionTitle)
         }
         setExpandedSections(newExpanded)
+    }
+
+    if (!mounted) {
+        return (
+            <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle menu</span>
+            </Button>
+        )
     }
 
     return (
