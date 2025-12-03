@@ -13,6 +13,26 @@ type TocProps = {
     items: TocItem[]
 }
 
+const containsCJK = /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff]/
+const containsLatin = /[A-Za-z]/
+
+function stripEnglishParenthetical(text: string) {
+    const match = text.match(/^(.*?)(\s*\(([^)]*)\))$/)
+
+    if (!match) {
+        return text
+    }
+
+    const [, before, , inside] = match
+
+    if (containsLatin.test(inside) && !containsCJK.test(inside)) {
+        const trimmed = before.trim()
+        return trimmed.length > 0 ? trimmed : text
+    }
+
+    return text
+}
+
 export function TableOfContents({ items }: TocProps) {
     const [activeId, setActiveId] = useState<string>('')
 
@@ -62,6 +82,7 @@ export function TableOfContents({ items }: TocProps) {
                             const isActive = activeId === item.id
                             const paddingLeft = (item.level - 2) * 12 // h2 = 0, h3 = 12px, h4 = 24px
                             const uniqueKey = `${item.id}-${index}`
+                            const displayText = stripEnglishParenthetical(item.text)
 
                             return (
                                 <a
@@ -84,7 +105,7 @@ export function TableOfContents({ items }: TocProps) {
                                         }
                                     }}
                                 >
-                                    {item.text}
+                                    {displayText}
                                 </a>
                             )
                         })}
