@@ -1,5 +1,5 @@
 ---
-title: Mail
+title: "郵件 (Mail)"
 description: Laravel 提供簡潔的 API 來透過各種郵件服務傳送電子郵件
 ---
 
@@ -266,7 +266,7 @@ public function headers(): Headers
 'default' => env('MAIL_MAILER', 'roundrobin'),
 ```
 
-輪詢傳輸會從已設定的郵件程式列表中隨機選擇一個郵件程式，然後為每封後續電子郵件切換到下一個可用的郵件程式。與有助於實現 _[高可用性](https://en.wikipedia.org/wiki/High_availability)_ 的 `failover` 傳輸相反，`roundrobin` 傳輸提供 _[負載平衡](<https://en.wikipedia.org/wiki/Load_balancing_(computing)>)_。
+輪詢傳輸會從已設定的郵件程式列表中隨機選擇一個郵件程式，然後為每封後續電子郵件切換到下一個可用的郵件程式。與有助於實現 _[高可用性](https://en.wikipedia.org/wiki/High_availability)_ 的 `failover` 傳輸相反，`roundrobin` 傳輸提供 _[負載平衡](<https://en.wikipedia.org/wiki/Load_balancing_(computing)>)\_。
 
 <a name="generating-mailables"></a>
 ## 產生 Mailable (Generating Mailables)

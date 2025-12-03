@@ -1,5 +1,5 @@
 ---
-title: Telescope
+title: "Telescope"
 description: Laravel Telescope 是一個優雅的 Laravel 應用程式除錯助手
 ---
 
@@ -7,34 +7,34 @@ description: Laravel Telescope 是一個優雅的 Laravel 應用程式除錯助�
 
 - [簡介](#introduction)
 - [安裝](#installation)
-    - [僅本地安裝](#local-only-installation)
-    - [設定](#configuration)
-    - [資料修剪](#data-pruning)
-    - [儀表板授權](#dashboard-authorization)
+  - [僅本地安裝](#local-only-installation)
+  - [設定](#configuration)
+  - [資料修剪](#data-pruning)
+  - [儀表板授權](#dashboard-authorization)
 - [升級 Telescope](#upgrading-telescope)
 - [過濾](#filtering)
-    - [條目](#filtering-entries)
-    - [批次](#filtering-batches)
+  - [條目](#filtering-entries)
+  - [批次](#filtering-batches)
 - [標記](#tagging)
 - [可用的監聽器](#available-watchers)
-    - [批次監聽器](#batch-watcher)
-    - [快取監聽器](#cache-watcher)
-    - [指令監聽器](#command-watcher)
-    - [Dump 監聽器](#dump-watcher)
-    - [事件監聽器](#event-watcher)
-    - [例外監聽器](#exception-watcher)
-    - [Gate 監聽器](#gate-watcher)
-    - [HTTP 用戶端監聽器](#http-client-watcher)
-    - [Job 監聽器](#job-watcher)
-    - [日誌監聽器](#log-watcher)
-    - [郵件監聽器](#mail-watcher)
-    - [模型監聽器](#model-watcher)
-    - [通知監聽器](#notification-watcher)
-    - [查詢監聽器](#query-watcher)
-    - [Redis 監聽器](#redis-watcher)
-    - [請求監聽器](#request-watcher)
-    - [排程監聽器](#schedule-watcher)
-    - [視圖監聽器](#view-watcher)
+  - [批次監聽器](#batch-watcher)
+  - [快取監聽器](#cache-watcher)
+  - [指令監聽器](#command-watcher)
+  - [Dump 監聽器](#dump-watcher)
+  - [事件監聽器](#event-watcher)
+  - [例外監聽器](#exception-watcher)
+  - [Gate 監聽器](#gate-watcher)
+  - [HTTP 用戶端監聽器](#http-client-watcher)
+  - [Job 監聽器](#job-watcher)
+  - [日誌監聽器](#log-watcher)
+  - [郵件監聽器](#mail-watcher)
+  - [模型監聽器](#model-watcher)
+  - [通知監聽器](#notification-watcher)
+  - [查詢監聽器](#query-watcher)
+  - [Redis 監聽器](#redis-watcher)
+  - [請求監聽器](#request-watcher)
+  - [排程監聽器](#schedule-watcher)
+  - [視圖監聽器](#view-watcher)
 - [顯示使用者頭像](#displaying-user-avatars)
 
 <a name="introduction"></a>
@@ -174,11 +174,11 @@ php artisan telescope:publish
 
 ```json
 {
-    "scripts": {
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
-        ]
-    }
+  "scripts": {
+    "post-update-cmd": [
+      "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+    ]
+  }
 }
 ```
 

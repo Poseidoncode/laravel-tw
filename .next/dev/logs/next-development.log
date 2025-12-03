@@ -67,3 +67,50 @@ title: 資料庫：分頁 (Database: Pagination)
        ^
 
 [00:13:16.983] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:32:05.047] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：查詢建構器 (Database: Query Builder)
+       ^
+
+[00:32:05.175] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：查詢建構器 (Database: Query Builder)
+       ^
+
+[00:32:13.013] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：查詢建構器 (Database: Query Builder)
+       ^
+
+[00:32:13.341] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:32:13.440] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：查詢建構器 (Database: Query Builder)
+       ^
+
+[00:32:49.722] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:27.635] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：入門(Database: Getting Started)
+       ^
+
+[00:34:27.759] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：入門(Database: Getting Started)
+       ^
+
+[00:34:31.378] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：入門(Database: Getting Started)
+       ^
+
+[00:34:31.642] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:31.757] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：入門(Database: Getting Started)
+       ^
+
+[00:34:58.566] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:41.572] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:56.150] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:11.421] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

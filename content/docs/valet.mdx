@@ -1,5 +1,5 @@
 ---
-title: Valet
+title: "Valet"
 description: Laravel Valet 是一個 macOS 極簡主義者的開發環境
 ---
 
@@ -7,22 +7,22 @@ description: Laravel Valet 是一個 macOS 極簡主義者的開發環境
 
 - [簡介 (Introduction)](#introduction)
 - [安裝 (Installation)](#installation)
-    - [升級 Valet (Upgrading Valet)](#upgrading-valet)
+  - [升級 Valet (Upgrading Valet)](#upgrading-valet)
 - [提供網站服務 (Serving Sites)](#serving-sites)
-    - [「Park」指令 (The "Park" Command)](#the-park-command)
-    - [「Link」指令 (The "Link" Command)](#the-link-command)
-    - [使用 TLS 保護網站 (Securing Sites With TLS)](#securing-sites)
-    - [提供預設網站 (Serving a Default Site)](#serving-a-default-site)
-    - [各網站 PHP 版本 (Per-Site PHP Versions)](#per-site-php-versions)
+  - [「Park」指令 (The "Park" Command)](#the-park-command)
+  - [「Link」指令 (The "Link" Command)](#the-link-command)
+  - [使用 TLS 保護網站 (Securing Sites With TLS)](#securing-sites)
+  - [提供預設網站 (Serving a Default Site)](#serving-a-default-site)
+  - [各網站 PHP 版本 (Per-Site PHP Versions)](#per-site-php-versions)
 - [分享網站 (Sharing Sites)](#sharing-sites)
-    - [在區域網路分享網站 (Sharing Sites on Your Local Network)](#sharing-sites-on-your-local-network)
+  - [在區域網路分享網站 (Sharing Sites on Your Local Network)](#sharing-sites-on-your-local-network)
 - [網站專屬環境變數 (Site Specific Environment Variables)](#site-specific-environment-variables)
 - [代理服務 (Proxying Services)](#proxying-services)
 - [自訂 Valet 驅動 (Custom Valet Drivers)](#custom-valet-drivers)
-    - [本機驅動 (Local Drivers)](#local-drivers)
+  - [本機驅動 (Local Drivers)](#local-drivers)
 - [其他 Valet 指令 (Other Valet Commands)](#other-valet-commands)
 - [Valet 目錄與檔案 (Valet Directories and Files)](#valet-directories-and-files)
-    - [磁碟存取 (Disk Access)](#disk-access)
+  - [磁碟存取 (Disk Access)](#disk-access)
 
 <a name="introduction"></a>
 ## 簡介
@@ -35,8 +35,6 @@ description: Laravel Valet 是一個 macOS 極簡主義者的開發環境
 換句話說，Valet 是一個極快的 Laravel 開發環境，僅使用約 7 MB 的 RAM。Valet 並不是 [Sail](/docs/sail) 或 [Homestead](/docs/homestead) 的完全替代品，但如果你想要靈活的基礎、偏好極致的速度，或者在 RAM 有限的機器上工作，它提供了一個很好的選擇。
 
 預設情況下，Valet 支援包括但不限於：
-
-
 
 <div id="valet-support" markdown="1">
 
@@ -99,6 +97,7 @@ valet install
 安裝 Valet 後，嘗試在終端機使用 `ping foobar.test` 等指令 ping 任何 `*.test` 網域。如果 Valet 安裝正確，你應該會看到此網域在 `127.0.0.1` 上回應。
 
 Valet 會在每次機器開機時自動啟動其所需的服務。
+
 <a name="php-versions"></a>
 #### PHP 版本 (PHP Versions)
 
@@ -423,8 +422,7 @@ public function isStaticFile(string $sitePath, string $siteName, string $uri)
 }
 ```
 
-> [!WARNING]
-> `isStaticFile` 方法只有在 `serves` 方法對傳入的請求回傳 `true` 且請求 URI 不是 `/` 時才會被呼叫。
+> [!WARNING] > `isStaticFile` 方法只有在 `serves` 方法對傳入的請求回傳 `true` 且請求 URI 不是 `/` 時才會被呼叫。
 
 <a name="the-frontcontrollerpath-method"></a>
 #### `frontControllerPath` 方法 (The `frontControllerPath` Method)
@@ -474,19 +472,19 @@ class LocalValetDriver extends LaravelValetDriver
 
 <div className="overflow-auto">
 
-| Command | Description |
-| --- | --- |
-| `valet list` | 顯示所有 Valet 指令的列表。 |
-| `valet diagnose` | 輸出診斷資訊以協助除錯 Valet。 |
-| `valet directory-listing` | 確定目錄列表行為。預設為 "off"，這會為目錄呈現 404 頁面。 |
-| `valet forget` | 從「停放」目錄執行此指令以將其從停放目錄列表中移除。 |
-| `valet log` | 查看 Valet 服務寫入的日誌列表。 |
-| `valet paths` | 查看所有「停放」的路徑。 |
-| `valet restart` | 重新啟動 Valet 守護行程。 |
-| `valet start` | 啟動 Valet 守護行程。 |
-| `valet stop` | 停止 Valet 守護行程。 |
-| `valet trust` | 為 Brew 和 Valet 新增 sudoers 檔案，以允許在不提示輸入密碼的情況下執行 Valet 指令。 |
-| `valet uninstall` | 解除安裝 Valet：顯示手動解除安裝的說明。傳遞 `--force` 選項以積極刪除所有 Valet 資源。 |
+| Command                   | Description                                                                            |
+| ------------------------- | -------------------------------------------------------------------------------------- |
+| `valet list`              | 顯示所有 Valet 指令的列表。                                                            |
+| `valet diagnose`          | 輸出診斷資訊以協助除錯 Valet。                                                         |
+| `valet directory-listing` | 確定目錄列表行為。預設為 "off"，這會為目錄呈現 404 頁面。                              |
+| `valet forget`            | 從「停放」目錄執行此指令以將其從停放目錄列表中移除。                                   |
+| `valet log`               | 查看 Valet 服務寫入的日誌列表。                                                        |
+| `valet paths`             | 查看所有「停放」的路徑。                                                               |
+| `valet restart`           | 重新啟動 Valet 守護行程。                                                              |
+| `valet start`             | 啟動 Valet 守護行程。                                                                  |
+| `valet stop`              | 停止 Valet 守護行程。                                                                  |
+| `valet trust`             | 為 Brew 和 Valet 新增 sudoers 檔案，以允許在不提示輸入密碼的情況下執行 Valet 指令。    |
+| `valet uninstall`         | 解除安裝 Valet：顯示手動解除安裝的說明。傳遞 `--force` 選項以積極刪除所有 Valet 資源。 |
 
 </div>
 

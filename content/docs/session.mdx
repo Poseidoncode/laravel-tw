@@ -1,24 +1,24 @@
 ---
-title: Session
+title: "Session"
 description: Laravel 透過統一的 API 支援多種 Session 後端
 ---
 
 # HTTP Session
 
 - [簡介](#introduction)
-    - [設定](#configuration)
-    - [驅動程式先決條件](#driver-prerequisites)
+  - [設定](#configuration)
+  - [驅動程式先決條件](#driver-prerequisites)
 - [與 Session 互動](#interacting-with-the-session)
-    - [取得資料](#retrieving-data)
-    - [儲存資料](#storing-data)
-    - [快閃資料](#flash-data)
-    - [刪除資料](#deleting-data)
-    - [重新產生 Session ID](#regenerating-the-session-id)
+  - [取得資料](#retrieving-data)
+  - [儲存資料](#storing-data)
+  - [快閃資料](#flash-data)
+  - [刪除資料](#deleting-data)
+  - [重新產生 Session ID](#regenerating-the-session-id)
 - [Session 快取](#session-cache)
 - [Session 阻塞](#session-blocking)
 - [新增自訂 Session 驅動程式](#adding-custom-session-drivers)
-    - [實作驅動程式](#implementing-the-driver)
-    - [註冊驅動程式](#registering-the-driver)
+  - [實作驅動程式](#implementing-the-driver)
+  - [註冊驅動程式](#registering-the-driver)
 
 <a name="introduction"></a>
 ## 簡介
@@ -67,8 +67,7 @@ php artisan migrate
 
 在 Laravel 中使用 Redis Session 之前，您需要透過 PECL 安裝 PhpRedis PHP 擴充功能，或透過 Composer 安裝 `predis/predis` 套件 (~1.0)。有關設定 Redis 的更多資訊，請參閱 Laravel 的 [Redis 文件](/docs/redis#configuration)。
 
-> [!NOTE]
-> `SESSION_CONNECTION` 環境變數或 `session.php` 設定檔中的 `connection` 選項可用於指定哪個 Redis 連線用於 Session 儲存。
+> [!NOTE] > `SESSION_CONNECTION` 環境變數或 `session.php` 設定檔中的 `connection` 選項可用於指定哪個 Redis 連線用於 Session 儲存。
 
 <a name="interacting-with-the-session"></a>
 ## 與 Session 互動

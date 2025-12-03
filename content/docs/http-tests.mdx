@@ -1,5 +1,5 @@
 ---
-title: Http Tests
+title: "HTTP 測試 (Http Tests)"
 description: 使用 Laravel 測試 HTTP 請求和回應
 ---
 
@@ -509,8 +509,7 @@ expect($response['created'])->toBeTrue();
 $this->assertTrue($response['created']);
 ```
 
-> [!NOTE]
-> `assertJson` 方法將回應轉換為陣列，以驗證給定陣列是否存在於應用程式回傳的 JSON 回應中。因此，如果 JSON 回應中有其他屬性，只要給定片段存在，此測試仍將通過。
+> [!NOTE] > `assertJson` 方法將回應轉換為陣列，以驗證給定陣列是否存在於應用程式回傳的 JSON 回應中。因此，如果 JSON 回應中有其他屬性，只要給定片段存在，此測試仍將通過。
 
 <a name="verifying-exact-match"></a>
 <a name="verifying-exact-match"></a>

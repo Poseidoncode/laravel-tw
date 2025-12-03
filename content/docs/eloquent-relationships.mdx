@@ -1,5 +1,5 @@
 ---
-title: Eloquent Relationships
+title: "Eloquent 關聯 (Eloquent Relationships)"
 description: Eloquent 關聯讓你輕鬆定義 model 之間的關聯
 ---
 
@@ -452,7 +452,8 @@ public function largestOrder(): HasOne
 > 由於 PostgreSQL 不支援對 UUID 欄位執行 `MAX` 函數，目前無法將一對多之其一關聯與 PostgreSQL UUID 欄位結合使用。
 
 <a name="converting-many-relationships-to-has-one-relationships"></a>
-#### 將「多」關聯轉換為「一」關聯 (Converting "Many" Relationships to Has One Relationships)
+#### 將「多」關聯轉換為「一」關聯 (Converting "Many" Relationships to Has One
+Relationships)
 
 通常，當使用 `latestOfMany`、`oldestOfMany` 或 `ofMany` 方法檢索單個模型時，你已經為同一模型定義了「一對多」關聯。為了方便起見，Laravel 允許你通過在關聯上呼叫 `one` 方法輕鬆地將此關聯轉換為「一對一」關聯：
 
@@ -508,9 +509,9 @@ public function currentPricing(): HasOne
 <a name="has-one-through"></a>
 ### 遠層一對一 (Has One Through)
 
-「遠層一對一」關聯定義了與另一個模型的一對一關聯。但是，這種關聯表示宣告模型可以通過_第三個_模型與另一個模型的一個實例相匹配。
+「遠層一對一」關聯定義了與另一個模型的一對一關聯。但是，這種關聯表示宣告模型可以通過*第三個*模型與另一個模型的一個實例相匹配。
 
-例如，在汽車維修店應用程式中，每個 `Mechanic` 模型可能與一個 `Car` 模型相關聯，而每個 `Car` 模型可能與一個 `Owner` 模型相關聯。雖然技師和車主在資料庫中沒有直接關係，但技師可以_通過_ `Car` 模型存取車主。讓我們看看定義此關聯所需的資料表：
+例如，在汽車維修店應用程式中，每個 `Mechanic` 模型可能與一個 `Car` 模型相關聯，而每個 `Car` 模型可能與一個 `Owner` 模型相關聯。雖然技師和車主在資料庫中沒有直接關係，但技師可以*通過* `Car` 模型存取車主。讓我們看看定義此關聯所需的資料表：
 
 ```text
 mechanics
@@ -913,7 +914,8 @@ foreach ($users->flatMap->podcasts as $podcast) {
 
 <a name="filtering-queries-via-intermediate-table-columns"></a>
 <a name="filtering-queries-via-intermediate-table-columns"></a>
-### 透過中間資料表欄位過濾查詢 (Filtering Queries via Intermediate Table Columns)
+### 透過中間資料表欄位過濾查詢 (Filtering Queries via Intermediate Table
+Columns)
 
 你還可以在定義關聯時使用 `wherePivot`、`wherePivotIn`、`wherePivotNotIn`、`wherePivotBetween`、`wherePivotNotBetween`、`wherePivotNull` 和 `wherePivotNotNull` 方法來過濾 `belongsToMany` 關聯查詢回傳的結果：
 
@@ -1555,7 +1557,8 @@ $user->posts()->where('active', 1)->get();
 
 <a name="chaining-orwhere-clauses-after-relationships"></a>
 <a name="chaining-orwhere-clauses-after-relationships"></a>
-#### 在關聯後串接 `orWhere` 子句 (Chaining `orWhere` Clauses After Relationships)
+#### 在關聯後串接 `orWhere` 子句 (Chaining `orWhere` Clauses After
+Relationships)
 
 如上例所示，你可以在查詢關聯時自由地向關聯新增額外的約束。但是，將 `orWhere` 子句串接到關聯時要小心，因為 `orWhere` 子句將在邏輯上與關聯約束分組在同一級別：
 
@@ -1566,7 +1569,7 @@ $user->posts()
     ->get();
 ```
 
-上面的範例將生成以下 SQL。如你所見，`or` 子句指示查詢回傳_任何_票數大於 100 的文章。查詢不再受限於特定使用者：
+上面的範例將生成以下 SQL。如你所見，`or` 子句指示查詢回傳*任何*票數大於 100 的文章。查詢不再受限於特定使用者：
 
 ```sql
 select *
@@ -1865,7 +1868,8 @@ $book->loadCount(['reviews' => function (Builder $query) {
 ```
 
 <a name="relationship-counting-and-custom-select-statements"></a>
-#### 關聯計數與自訂 Select 語句 (Relationship Counting and Custom Select Statements)
+#### 關聯計數與自訂 Select 語句 (Relationship Counting and Custom Select
+Statements)
 
 如果你將 `withCount` 與 `select` 語句結合使用，請確保在 `select` 方法之後呼叫 `withCount`：
 
@@ -1917,7 +1921,8 @@ $posts = Post::select(['title', 'body'])
 ```
 
 <a name="counting-related-models-on-morph-to-relationships"></a>
-### 計算 Morph To 關聯的相關模型數量 (Counting Related Models on Morph To Relationships)
+### 計算 Morph To 關聯的相關模型數量 (Counting Related Models on Morph To
+Relationships)
 
 如果你想要預先載入「morph to」關聯，以及該關聯可能回傳的各種實體的相關模型計數，你可以結合使用 `with` 方法和 `morphTo` 關聯的 `morphWithCount` 方法。
 
@@ -2171,7 +2176,8 @@ $users = User::with(['posts' => function ($query) {
 
 <a name="constraining-eager-loading-of-morph-to-relationships"></a>
 <a name="constraining-eager-loading-of-morph-to-relationships"></a>
-#### 限制 `morphTo` 關聯的預先載入 (Constraining Eager Loading of `morphTo` Relationships)
+#### 限制 `morphTo` 關聯的預先載入 (Constraining Eager Loading of `morphTo`
+Relationships)
 
 如果你正在預先載入 `morphTo` 關聯，Eloquent 將執行多個查詢以獲取每種類型的相關模型。你可以使用 `MorphTo` 關聯的 `constrain` 方法向這些查詢中的每一個新增額外的約束：
 
@@ -2194,7 +2200,8 @@ $comments = Comment::with(['commentable' => function (MorphTo $morphTo) {
 
 <a name="constraining-eager-loads-with-relationship-existence"></a>
 <a name="constraining-eager-loads-with-relationship-existence"></a>
-#### 使用關聯存在性限制預先載入 (Constraining Eager Loads With Relationship Existence)
+#### 使用關聯存在性限制預先載入 (Constraining Eager Loads With Relationship
+Existence)
 
 你有時可能會發現自己需要檢查關聯的存在性，同時根據相同的條件載入關聯。例如，你可能希望僅檢索具有符合給定查詢條件的子 `Post` 模型的 `User` 模型，同時也預先載入符合條件的文章。你可以使用 `withWhereHas` 方法來實現此目的：
 

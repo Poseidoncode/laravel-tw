@@ -1,5 +1,5 @@
 ---
-title: Cashier Paddle
+title: "Cashier Paddle"
 description: Laravel Cashier Paddle 提供 Paddle 訂閱計費服務的整合
 ---
 
@@ -8,51 +8,51 @@ description: Laravel Cashier Paddle 提供 Paddle 訂閱計費服務的整合
 - [簡介 (Introduction)](#introduction)
 - [升級 Cashier (Upgrading Cashier)](#upgrading-cashier)
 - [安裝 (Installation)](#installation)
-    - [Paddle Sandbox](#paddle-sandbox)
+  - [Paddle Sandbox](#paddle-sandbox)
 - [設定 (Configuration)](#configuration)
-    - [Billable 模型 (Billable Model)](#billable-model)
-    - [API Keys](#api-keys)
-    - [Paddle JS](#paddle-js)
-    - [貨幣設定 (Currency Configuration)](#currency-configuration)
-    - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
+  - [Billable 模型 (Billable Model)](#billable-model)
+  - [API Keys](#api-keys)
+  - [Paddle JS](#paddle-js)
+  - [貨幣設定 (Currency Configuration)](#currency-configuration)
+  - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
 - [快速開始 (Quickstart)](#quickstart)
-    - [銷售產品 (Selling Products)](#quickstart-selling-products)
-    - [銷售訂閱 (Selling Subscriptions)](#quickstart-selling-subscriptions)
+  - [銷售產品 (Selling Products)](#quickstart-selling-products)
+  - [銷售訂閱 (Selling Subscriptions)](#quickstart-selling-subscriptions)
 - [結帳 Session (Checkout Sessions)](#checkout-sessions)
-    - [Overlay 結帳 (Overlay Checkout)](#overlay-checkout)
-    - [Inline 結帳 (Inline Checkout)](#inline-checkout)
-    - [訪客結帳 (Guest Checkouts)](#guest-checkouts)
+  - [Overlay 結帳 (Overlay Checkout)](#overlay-checkout)
+  - [Inline 結帳 (Inline Checkout)](#inline-checkout)
+  - [訪客結帳 (Guest Checkouts)](#guest-checkouts)
 - [價格預覽 (Price Previews)](#price-previews)
-    - [客戶價格預覽 (Customer Price Previews)](#customer-price-previews)
-    - [折扣 (Discounts)](#price-discounts)
+  - [客戶價格預覽 (Customer Price Previews)](#customer-price-previews)
+  - [折扣 (Discounts)](#price-discounts)
 - [客戶 (Customers)](#customers)
-    - [客戶預設值 (Customer Defaults)](#customer-defaults)
-    - [取得客戶 (Retrieving Customers)](#retrieving-customers)
-    - [建立客戶 (Creating Customers)](#creating-customers)
+  - [客戶預設值 (Customer Defaults)](#customer-defaults)
+  - [取得客戶 (Retrieving Customers)](#retrieving-customers)
+  - [建立客戶 (Creating Customers)](#creating-customers)
 - [訂閱 (Subscriptions)](#subscriptions)
-    - [建立訂閱 (Creating Subscriptions)](#creating-subscriptions)
-    - [檢查訂閱狀態 (Checking Subscription Status)](#checking-subscription-status)
-    - [訂閱單次收費 (Subscription Single Charges)](#subscription-single-charges)
-    - [更新付款資訊 (Updating Payment Information)](#updating-payment-information)
-    - [變更方案 (Changing Plans)](#changing-plans)
-    - [訂閱數量 (Subscription Quantity)](#subscription-quantity)
-    - [多產品訂閱 (Subscriptions With Multiple Products)](#subscriptions-with-multiple-products)
-    - [多重訂閱 (Multiple Subscriptions)](#multiple-subscriptions)
-    - [暫停訂閱 (Pausing Subscriptions)](#pausing-subscriptions)
-    - [取消訂閱 (Canceling Subscriptions)](#canceling-subscriptions)
+  - [建立訂閱 (Creating Subscriptions)](#creating-subscriptions)
+  - [檢查訂閱狀態 (Checking Subscription Status)](#checking-subscription-status)
+  - [訂閱單次收費 (Subscription Single Charges)](#subscription-single-charges)
+  - [更新付款資訊 (Updating Payment Information)](#updating-payment-information)
+  - [變更方案 (Changing Plans)](#changing-plans)
+  - [訂閱數量 (Subscription Quantity)](#subscription-quantity)
+  - [多產品訂閱 (Subscriptions With Multiple Products)](#subscriptions-with-multiple-products)
+  - [多重訂閱 (Multiple Subscriptions)](#multiple-subscriptions)
+  - [暫停訂閱 (Pausing Subscriptions)](#pausing-subscriptions)
+  - [取消訂閱 (Canceling Subscriptions)](#canceling-subscriptions)
 - [訂閱試用 (Subscription Trials)](#subscription-trials)
-    - [預先提供付款方式 (With Payment Method Up Front)](#with-payment-method-up-front)
-    - [未預先提供付款方式 (Without Payment Method Up Front)](#without-payment-method-up-front)
-    - [延長或啟用試用 (Extend or Activate a Trial)](#extend-or-activate-a-trial)
+  - [預先提供付款方式 (With Payment Method Up Front)](#with-payment-method-up-front)
+  - [未預先提供付款方式 (Without Payment Method Up Front)](#without-payment-method-up-front)
+  - [延長或啟用試用 (Extend or Activate a Trial)](#extend-or-activate-a-trial)
 - [處理 Paddle Webhooks (Handling Paddle Webhooks)](#handling-paddle-webhooks)
-    - [定義 Webhook 事件處理器 (Defining Webhook Event Handlers)](#defining-webhook-event-handlers)
-    - [驗證 Webhook 簽章 (Verifying Webhook Signatures)](#verifying-webhook-signatures)
+  - [定義 Webhook 事件處理器 (Defining Webhook Event Handlers)](#defining-webhook-event-handlers)
+  - [驗證 Webhook 簽章 (Verifying Webhook Signatures)](#verifying-webhook-signatures)
 - [單次收費 (Single Charges)](#single-charges)
-    - [產品收費 (Charging for Products)](#charging-for-products)
-    - [退款 (Refunding Transactions)](#refunding-transactions)
-    - [交易入帳 (Crediting Transactions)](#crediting-transactions)
+  - [產品收費 (Charging for Products)](#charging-for-products)
+  - [退款 (Refunding Transactions)](#refunding-transactions)
+  - [交易入帳 (Crediting Transactions)](#crediting-transactions)
 - [交易 (Transactions)](#transactions)
-    - [過去與即將到來的付款 (Past and Upcoming Payments)](#past-and-upcoming-payments)
+  - [過去與即將到來的付款 (Past and Upcoming Payments)](#past-and-upcoming-payments)
 - [測試 (Testing)](#testing)
 
 <a name="introduction"></a>
@@ -242,7 +242,7 @@ Route::get('/buy', function (Request $request) {
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
-    Buy Product
+  Buy Product
 </x-paddle-button>
 ```
 
@@ -346,7 +346,7 @@ Route::get('/subscribe', function (Request $request) {
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
-    Subscribe
+  Subscribe
 </x-paddle-button>
 ```
 
@@ -472,7 +472,7 @@ Cashier 包含一個 `paddle-button` [Blade 元件](/docs/blade#components)。�
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4">
-    Subscribe
+  Subscribe
 </x-paddle-button>
 ```
 
@@ -480,7 +480,7 @@ Cashier 包含一個 `paddle-button` [Blade 元件](/docs/blade#components)。�
 
 ```html
 <x-paddle-button :checkout="$checkout" className="px-8 py-4" data-theme="light">
-    Subscribe
+  Subscribe
 </x-paddle-button>
 ```
 
@@ -1538,14 +1538,20 @@ When listing the transactions for a customer, you may use the transaction instan
 
 ```html
 <table>
-    @foreach ($transactions as $transaction)
-        <tr>
-            <td>{{ $transaction->billed_at->toFormattedDateString() }}</td>
-            <td>{{ $transaction->total() }}</td>
-            <td>{{ $transaction->tax() }}</td>
-            <td><a href="{{ route('download-invoice', $transaction->id) }}" target="_blank">Download</a></td>
-        </tr>
-    @endforeach
+  @foreach ($transactions as $transaction)
+  <tr>
+    <td>{{ $transaction->billed_at->toFormattedDateString() }}</td>
+    <td>{{ $transaction->total() }}</td>
+    <td>{{ $transaction->tax() }}</td>
+    <td>
+      <a
+        href="{{ route('download-invoice', $transaction->id) }}"
+        target="_blank"
+        >Download</a
+      >
+    </td>
+  </tr>
+  @endforeach
 </table>
 ```
 
