@@ -1,65 +1,63 @@
 ---
-title: Queues
+title: 佇列 (Queues)
 description: Laravel 佇列為各種佇列後端提供統一的 API
 ---
 
-# 佇列 (Queues)
-
 - [簡介 (Introduction)](#introduction)
-    - [連線 vs. 佇列 (Connections vs. Queues)](#connections-vs-queues)
-    - [驅動程式說明與先決條件 (Driver Notes and Prerequisites)](#driver-prerequisites)
+  - [連線 vs. 佇列 (Connections vs. Queues)](#connections-vs-queues)
+  - [驅動程式說明與先決條件 (Driver Notes and Prerequisites)](#driver-prerequisites)
 - [建立 Job (Creating Jobs)](#creating-jobs)
-    - [產生 Job 類別 (Generating Job Classes)](#generating-job-classes)
-    - [類別結構 (Class Structure)](#class-structure)
-    - [唯一 Job (Unique Jobs)](#unique-jobs)
-    - [加密 Job (Encrypted Jobs)](#encrypted-jobs)
+  - [產生 Job 類別 (Generating Job Classes)](#generating-job-classes)
+  - [類別結構 (Class Structure)](#class-structure)
+  - [唯一 Job (Unique Jobs)](#unique-jobs)
+  - [加密 Job (Encrypted Jobs)](#encrypted-jobs)
 - [Job Middleware (Job Middleware)](#job-middleware)
-    - [速率限制 (Rate Limiting)](#rate-limiting)
-    - [防止 Job 重疊 (Preventing Job Overlaps)](#preventing-job-overlaps)
-    - [限制例外 (Throttling Exceptions)](#throttling-exceptions)
-    - [跳過 Job (Skipping Jobs)](#skipping-jobs)
+  - [速率限制 (Rate Limiting)](#rate-limiting)
+  - [防止 Job 重疊 (Preventing Job Overlaps)](#preventing-job-overlaps)
+  - [限制例外 (Throttling Exceptions)](#throttling-exceptions)
+  - [跳過 Job (Skipping Jobs)](#skipping-jobs)
 - [分派 Job (Dispatching Jobs)](#dispatching-jobs)
-    - [延遲分派 (Delayed Dispatching)](#delayed-dispatching)
-    - [同步分派 (Synchronous Dispatching)](#synchronous-dispatching)
-    - [Job 與資料庫交易 (Jobs & Database Transactions)](#jobs-and-database-transactions)
-    - [Job 鏈接 (Job Chaining)](#job-chaining)
-    - [自訂佇列與連線 (Customizing The Queue and Connection)](#customizing-the-queue-and-connection)
-    - [指定最大 Job 嘗試次數 / 逾時值 (Specifying Max Job Attempts / Timeout Values)](#max-job-attempts-and-timeout)
-    - [SQS FIFO 與公平佇列 (SQS FIFO and Fair Queues)](#sqs-fifo-and-fair-queues)
-    - [佇列容錯移轉 (Queue Failover)](#queue-failover)
-    - [錯誤處理 (Error Handling)](#error-handling)
+  - [延遲分派 (Delayed Dispatching)](#delayed-dispatching)
+  - [同步分派 (Synchronous Dispatching)](#synchronous-dispatching)
+  - [Job 與資料庫交易 (Jobs & Database Transactions)](#jobs-and-database-transactions)
+  - [Job 鏈接 (Job Chaining)](#job-chaining)
+  - [自訂佇列與連線 (Customizing The Queue and Connection)](#customizing-the-queue-and-connection)
+  - [指定最大 Job 嘗試次數 / 逾時值 (Specifying Max Job Attempts / Timeout Values)](#max-job-attempts-and-timeout)
+  - [SQS FIFO 與公平佇列 (SQS FIFO and Fair Queues)](#sqs-fifo-and-fair-queues)
+  - [佇列容錯移轉 (Queue Failover)](#queue-failover)
+  - [錯誤處理 (Error Handling)](#error-handling)
 - [Job 批次處理 (Job Batching)](#job-batching)
-    - [定義可批次處理的 Job (Defining Batchable Jobs)](#defining-batchable-jobs)
-    - [分派批次 (Dispatching Batches)](#dispatching-batches)
-    - [鏈接與批次 (Chains and Batches)](#chains-and-batches)
-    - [新增 Job 到批次 (Adding Jobs to Batches)](#adding-jobs-to-batches)
-    - [檢查批次 (Inspecting Batches)](#inspecting-batches)
-    - [取消批次 (Cancelling Batches)](#cancelling-batches)
-    - [批次失敗 (Batch Failures)](#batch-failures)
-    - [清除批次 (Pruning Batches)](#pruning-batches)
-    - [將批次儲存於 DynamoDB (Storing Batches in DynamoDB)](#storing-batches-in-dynamodb)
+  - [定義可批次處理的 Job (Defining Batchable Jobs)](#defining-batchable-jobs)
+  - [分派批次 (Dispatching Batches)](#dispatching-batches)
+  - [鏈接與批次 (Chains and Batches)](#chains-and-batches)
+  - [新增 Job 到批次 (Adding Jobs to Batches)](#adding-jobs-to-batches)
+  - [檢查批次 (Inspecting Batches)](#inspecting-batches)
+  - [取消批次 (Cancelling Batches)](#cancelling-batches)
+  - [批次失敗 (Batch Failures)](#batch-failures)
+  - [清除批次 (Pruning Batches)](#pruning-batches)
+  - [將批次儲存於 DynamoDB (Storing Batches in DynamoDB)](#storing-batches-in-dynamodb)
 - [佇列閉包 (Queueing Closures)](#queueing-closures)
 - [執行佇列 Worker (Running the Queue Worker)](#running-the-queue-worker)
-    - [`queue:work` 指令 (The `queue:work` Command)](#the-queue-work-command)
-    - [佇列優先順序 (Queue Priorities)](#queue-priorities)
-    - [佇列 Worker 與部署 (Queue Workers and Deployment)](#queue-workers-and-deployment)
-    - [Job 過期與逾時 (Job Expirations and Timeouts)](#job-expirations-and-timeouts)
+  - [`queue:work` 指令 (The `queue:work` Command)](#the-queue-work-command)
+  - [佇列優先順序 (Queue Priorities)](#queue-priorities)
+  - [佇列 Worker 與部署 (Queue Workers and Deployment)](#queue-workers-and-deployment)
+  - [Job 過期與逾時 (Job Expirations and Timeouts)](#job-expirations-and-timeouts)
 - [Supervisor 設定 (Supervisor Configuration)](#supervisor-configuration)
 - [處理失敗的 Job (Dealing With Failed Jobs)](#dealing-with-failed-jobs)
-    - [清除失敗的 Job (Cleaning Up After Failed Jobs)](#cleaning-up-after-failed-jobs)
-    - [重試失敗的 Job (Retrying Failed Jobs)](#retrying-failed-jobs)
-    - [忽略遺失的模型 (Ignoring Missing Models)](#ignoring-missing-models)
-    - [清除失敗的 Job (Pruning Failed Jobs)](#pruning-failed-jobs)
-    - [將失敗的 Job 儲存於 DynamoDB (Storing Failed Jobs in DynamoDB)](#storing-failed-jobs-in-dynamodb)
-    - [停用失敗 Job 儲存 (Disabling Failed Job Storage)](#disabling-failed-job-storage)
-    - [失敗 Job 事件 (Failed Job Events)](#failed-job-events)
+  - [清除失敗的 Job (Cleaning Up After Failed Jobs)](#cleaning-up-after-failed-jobs)
+  - [重試失敗的 Job (Retrying Failed Jobs)](#retrying-failed-jobs)
+  - [忽略遺失的模型 (Ignoring Missing Models)](#ignoring-missing-models)
+  - [清除失敗的 Job (Pruning Failed Jobs)](#pruning-failed-jobs)
+  - [將失敗的 Job 儲存於 DynamoDB (Storing Failed Jobs in DynamoDB)](#storing-failed-jobs-in-dynamodb)
+  - [停用失敗 Job 儲存 (Disabling Failed Job Storage)](#disabling-failed-job-storage)
+  - [失敗 Job 事件 (Failed Job Events)](#failed-job-events)
 - [清除佇列中的 Job (Clearing Jobs From Queues)](#clearing-jobs-from-queues)
 - [監控佇列 (Monitoring Your Queues)](#monitoring-your-queues)
 - [測試 (Testing)](#testing)
-    - [偽造部分 Job (Faking a Subset of Jobs)](#faking-a-subset-of-jobs)
-    - [測試 Job 鏈接 (Testing Job Chains)](#testing-job-chains)
-    - [測試 Job 批次 (Testing Job Batches)](#testing-job-batches)
-    - [測試 Job / 佇列互動 (Testing Job / Queue Interactions)](#testing-job-queue-interactions)
+  - [偽造部分 Job (Faking a Subset of Jobs)](#faking-a-subset-of-jobs)
+  - [測試 Job 鏈接 (Testing Job Chains)](#testing-job-chains)
+  - [測試 Job 批次 (Testing Job Batches)](#testing-job-batches)
+  - [測試 Job / 佇列互動 (Testing Job / Queue Interactions)](#testing-job-queue-interactions)
 - [Job 事件 (Job Events)](#job-events)
 
 <a name="introduction"></a>
@@ -116,8 +114,7 @@ php artisan migrate
 
 為了使用 `redis` 佇列驅動程式，您應該在 `config/database.php` 設定檔中設定 Redis 資料庫連線。
 
-> [!WARNING]
-> `redis` 佇列驅動程式不支援 `serializer` 和 `compression` Redis 選項。
+> [!WARNING] > `redis` 佇列驅動程式不支援 `serializer` 和 `compression` Redis 選項。
 
 <a name="redis-cluster"></a>
 ##### Redis Cluster
@@ -659,8 +656,7 @@ public function middleware(): array
 }
 ```
 
-> [!WARNING]
-> `WithoutOverlapping` Middleware 需要支援[鎖定](/docs/cache#atomic-locks)的快取驅動程式。目前，`memcached`、`redis`、`dynamodb`、`database`、`file` 和 `array` 快取驅動程式支援原子鎖定。
+> [!WARNING] > `WithoutOverlapping` Middleware 需要支援[鎖定](/docs/cache#atomic-locks)的快取驅動程式。目前，`memcached`、`redis`、`dynamodb`、`database`、`file` 和 `array` 快取驅動程式支援原子鎖定。
 
 <a name="sharing-lock-keys"></a>
 #### 在 Job 類別之間共用鎖定鍵 (Sharing Lock Keys Across Job Classes)
@@ -1243,7 +1239,8 @@ class ProcessPodcast implements ShouldQueue
 ```
 
 <a name="max-job-attempts-and-timeout"></a>
-### 指定最大 Job 嘗試次數 / 逾時值 (Specifying Max Job Attempts / Timeout Values)
+### 指定最大 Job 嘗試次數 / 逾時值 (Specifying Max Job Attempts / Timeout
+Values)
 
 <a name="max-attempts"></a>
 #### 最大嘗試次數 (Max Attempts)
@@ -1698,6 +1695,7 @@ php artisan migrate
 ### 定義可批次處理的 Job (Defining Batchable Jobs)
 
 要定義可批次處理的 Job，您應該像往常一樣[建立一個可佇列 Job](#creating-jobs)；但是，您應該將 `Illuminate\Bus\Batchable` trait 新增至 Job 類別。此 trait 提供對 `batch` 方法的存取，該方法可用於檢索 Job 正在其中執行的目前批次：
+
 ```php
 <?php
 
@@ -2292,8 +2290,7 @@ php artisan queue:work --timeout=60
 
 `retry_after` 設定選項和 `--timeout` CLI 選項不同，但它們共同作用以確保 Job 不會遺失，並且 Job 僅成功處理一次。
 
-> [!WARNING]
-> `--timeout` 值應始終比 `retry_after` 設定值短至少幾秒鐘。這將確保處理凍結 Job 的 Worker 在重試 Job 之前始終被終止。如果您的 `--timeout` 選項比 `retry_after` 設定值長，您的 Job 可能會被處理兩次。
+> [!WARNING] > `--timeout` 值應始終比 `retry_after` 設定值短至少幾秒鐘。這將確保處理凍結 Job 的 Worker 在重試 Job 之前始終被終止。如果您的 `--timeout` 選項比 `retry_after` 設定值長，您的 Job 可能會被處理兩次。
 
 <a name="supervisor-configuration"></a>
 ## Supervisor 設定 (Supervisor Configuration)
