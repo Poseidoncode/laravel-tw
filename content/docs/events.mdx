@@ -3,31 +3,29 @@ title: Events
 description: Laravel events 提供簡單的觀察者模式實作
 ---
 
-# Events
-
 - [簡介 (Introduction)](#introduction)
 - [產生事件和監聽器 (Generating Events and Listeners)](#generating-events-and-listeners)
 - [註冊事件和監聽器 (Registering Events and Listeners)](#registering-events-and-listeners)
-    - [事件發現 (Event Discovery)](#event-discovery)
-    - [手動註冊事件 (Manually Registering Events)](#manually-registering-events)
-    - [閉包監聽器 (Closure Listeners)](#closure-listeners)
+  - [事件發現 (Event Discovery)](#event-discovery)
+  - [手動註冊事件 (Manually Registering Events)](#manually-registering-events)
+  - [閉包監聽器 (Closure Listeners)](#closure-listeners)
 - [定義事件 (Defining Events)](#defining-events)
 - [定義監聽器 (Defining Listeners)](#defining-listeners)
 - [佇列事件監聽器 (Queued Event Listeners)](#queued-event-listeners)
-    - [手動與佇列互動 (Manually Interacting With the Queue)](#manually-interacting-with-the-queue)
-    - [佇列事件監聽器和資料庫交易 (Queued Event Listeners and Database Transactions)](#queued-event-listeners-and-database-transactions)
-    - [佇列監聽器中介軟體 (Queued Listener Middleware)](#queued-listener-middleware)
-    - [加密的佇列監聽器 (Encrypted Queued Listeners)](#encrypted-queued-listeners)
-    - [處理失敗的任務 (Handling Failed Jobs)](#handling-failed-jobs)
+  - [手動與佇列互動 (Manually Interacting With the Queue)](#manually-interacting-with-the-queue)
+  - [佇列事件監聽器和資料庫交易 (Queued Event Listeners and Database Transactions)](#queued-event-listeners-and-database-transactions)
+  - [佇列監聽器中介軟體 (Queued Listener Middleware)](#queued-listener-middleware)
+  - [加密的佇列監聽器 (Encrypted Queued Listeners)](#encrypted-queued-listeners)
+  - [處理失敗的任務 (Handling Failed Jobs)](#handling-failed-jobs)
 - [分派事件 (Dispatching Events)](#dispatching-events)
-    - [在資料庫交易後分派事件 (Dispatching Events After Database Transactions)](#dispatching-events-after-database-transactions)
-    - [延遲事件 (Deferring Events)](#deferring-events)
+  - [在資料庫交易後分派事件 (Dispatching Events After Database Transactions)](#dispatching-events-after-database-transactions)
+  - [延遲事件 (Deferring Events)](#deferring-events)
 - [事件訂閱者 (Event Subscribers)](#event-subscribers)
-    - [編寫事件訂閱者 (Writing Event Subscribers)](#writing-event-subscribers)
-    - [註冊事件訂閱者 (Registering Event Subscribers)](#registering-event-subscribers)
+  - [編寫事件訂閱者 (Writing Event Subscribers)](#writing-event-subscribers)
+  - [註冊事件訂閱者 (Registering Event Subscribers)](#registering-event-subscribers)
 - [測試 (Testing)](#testing)
-    - [偽造部分事件 (Faking a Subset of Events)](#faking-a-subset-of-events)
-    - [範圍事件偽造 (Scoped Events Fakes)](#scoped-event-fakes)
+  - [偽造部分事件 (Faking a Subset of Events)](#faking-a-subset-of-events)
+  - [範圍事件偽造 (Scoped Events Fakes)](#scoped-event-fakes)
 
 <a name="introduction"></a>
 ## 簡介

@@ -3,18 +3,16 @@ title: Folio
 description: Laravel Folio 是一個強大的基於頁面的路由器
 ---
 
-# Laravel Folio
-
 - [簡介](#introduction)
 - [安裝](#installation)
-    - [頁面路徑 / URI](#page-paths-uris)
-    - [子網域路由](#subdomain-routing)
+  - [頁面路徑 / URI](#page-paths-uris)
+  - [子網域路由](#subdomain-routing)
 - [建立路由](#creating-routes)
-    - [巢狀路由](#nested-routes)
-    - [索引路由](#index-routes)
+  - [巢狀路由](#nested-routes)
+  - [索引路由](#index-routes)
 - [路由參數](#route-parameters)
 - [路由模型綁定](#route-model-binding)
-    - [軟刪除模型](#soft-deleted-models)
+  - [軟刪除模型](#soft-deleted-models)
 - [渲染 Hook](#render-hooks)
 - [命名路由](#named-routes)
 - [中介軟體](#middleware)
@@ -86,7 +84,7 @@ Folio::domain('admin.example.com')
     ->path(resource_path('views/pages/admin'));
 ```
 
-```
+````
 
 `domain` 方法也允許你擷取網域或子網域的部分內容作為參數。這些參數將被注入到你的頁面樣板中：
 
@@ -95,7 +93,7 @@ use Laravel\Folio\Folio;
 
 Folio::domain('{account}.example.com')
     ->path(resource_path('views/pages/admin'));
-```
+````
 
 <a name="creating-routes"></a>
 ## 建立路由 (Creating Routes)
@@ -145,7 +143,7 @@ php artisan folio:page "users/[id]"
 # pages/users/[id].blade.php → /users/1
 ```
 
-```
+````
 
 擷取的片段可以作為變數在你的 Blade 樣板中存取：
 
@@ -153,9 +151,9 @@ php artisan folio:page "users/[id]"
 <div>
     User {{ $id }}
 </div>
-```
+````
 
-```
+````
 
 要擷取多個片段，你可以在封裝的片段前加上三個點 `...`：
 
@@ -163,9 +161,9 @@ php artisan folio:page "users/[id]"
 php artisan folio:page "users/[...ids]"
 
 # pages/users/[...ids].blade.php → /users/1/2/3
-```
+````
 
-```
+````
 
 當擷取多個片段時，擷取的片段將以陣列形式注入到頁面中：
 
@@ -175,7 +173,7 @@ php artisan folio:page "users/[...ids]"
         <li>User {{ $id }}</li>
     @endforeach
 </ul>
-```
+````
 
 <a name="route-model-binding"></a>
 ## 路由模型綁定 (Route Model Binding)
@@ -191,9 +189,7 @@ php artisan folio:page "users/[User]"
 擷取的模型可以作為變數在你的 Blade 樣板中存取。模型的變數名稱將轉換為「駝峰式大小寫」：
 
 ```html
-<div>
-    User {{ $user->id }}
-</div>
+<div>User {{ $user->id }}</div>
 ```
 
 #### 自訂鍵 (Customizing the Key)

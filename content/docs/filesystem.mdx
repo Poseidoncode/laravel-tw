@@ -3,28 +3,26 @@ title: File Storage
 description: Laravel 提供強大的檔案系統抽象
 ---
 
-# File Storage
-
 - [簡介 (Introduction)](#introduction)
 - [設定 (Configuration)](#configuration)
-    - [Local 驅動程式 (The Local Driver)](#the-local-driver)
-    - [Public 磁碟 (The Public Disk)](#the-public-disk)
-    - [驅動程式先決條件 (Driver Prerequisites)](#driver-prerequisites)
-    - [作用域和唯讀檔案系統 (Scoped and Read-Only Filesystems)](#scoped-and-read-only-filesystems)
-    - [Amazon S3 相容檔案系統 (Amazon S3 Compatible Filesystems)](#amazon-s3-compatible-filesystems)
+  - [Local 驅動程式 (The Local Driver)](#the-local-driver)
+  - [Public 磁碟 (The Public Disk)](#the-public-disk)
+  - [驅動程式先決條件 (Driver Prerequisites)](#driver-prerequisites)
+  - [作用域和唯讀檔案系統 (Scoped and Read-Only Filesystems)](#scoped-and-read-only-filesystems)
+  - [Amazon S3 相容檔案系統 (Amazon S3 Compatible Filesystems)](#amazon-s3-compatible-filesystems)
 - [取得磁碟實例 (Obtaining Disk Instances)](#obtaining-disk-instances)
-    - [隨選磁碟 (On-Demand Disks)](#on-demand-disks)
+  - [隨選磁碟 (On-Demand Disks)](#on-demand-disks)
 - [檢索檔案 (Retrieving Files)](#retrieving-files)
-    - [下載檔案 (Downloading Files)](#downloading-files)
-    - [檔案 URL (File URLs)](#file-urls)
-    - [臨時 URL (Temporary URLs)](#temporary-urls)
-    - [檔案元資料 (File Metadata)](#file-metadata)
+  - [下載檔案 (Downloading Files)](#downloading-files)
+  - [檔案 URL (File URLs)](#file-urls)
+  - [臨時 URL (Temporary URLs)](#temporary-urls)
+  - [檔案元資料 (File Metadata)](#file-metadata)
 - [儲存檔案 (Storing Files)](#storing-files)
-    - [在檔案前面和後面新增內容 (Prepending and Appending To Files)](#prepending-appending-to-files)
-    - [複製和移動檔案 (Copying and Moving Files)](#copying-moving-files)
-    - [自動串流 (Automatic Streaming)](#automatic-streaming)
-    - [檔案上傳 (File Uploads)](#file-uploads)
-    - [檔案可見性 (File Visibility)](#file-visibility)
+  - [在檔案前面和後面新增內容 (Prepending and Appending To Files)](#prepending-appending-to-files)
+  - [複製和移動檔案 (Copying and Moving Files)](#copying-moving-files)
+  - [自動串流 (Automatic Streaming)](#automatic-streaming)
+  - [檔案上傳 (File Uploads)](#file-uploads)
+  - [檔案可見性 (File Visibility)](#file-visibility)
 - [刪除檔案 (Deleting Files)](#deleting-files)
 - [目錄 (Directories)](#directories)
 - [測試 (Testing)](#testing)
@@ -848,8 +846,7 @@ class ExampleTest extends TestCase
 
 預設情況下,`fake` 方法將刪除其臨時目錄中的所有檔案。如果你想保留這些檔案,你可以使用「persistentFake」方法。有關測試檔案上傳的更多資訊,你可以查閱 [HTTP 測試文件中有關檔案上傳的資訊](/docs/http-tests#testing-file-uploads)。
 
-> [!WARNING]
-> `image` 方法需要 [GD 擴展](https://www.php.net/manual/en/book.image.php)。
+> [!WARNING] > `image` 方法需要 [GD 擴展](https://www.php.net/manual/en/book.image.php)。
 
 <a name="custom-filesystems"></a>
 ## 自訂檔案系統

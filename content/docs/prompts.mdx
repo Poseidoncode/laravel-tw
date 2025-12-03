@@ -3,11 +3,6 @@ title: Prompts
 description: Laravel Prompts 是一個用於向 CLI 應用程式添加美觀介面的套件
 ---
 
-# Prompts
-
-- [簡介](#introduction)
-- [安裝](#installation)
-- [可用的提示框](#available-prompts)
     - [文字輸入 (Text)](#text)
     - [多行文字輸入 (Textarea)](#textarea)
     - [密碼輸入 (Password)](#password)
@@ -18,16 +13,6 @@ description: Laravel Prompts 是一個用於向 CLI 應用程式添加美觀介�
     - [搜尋 (Search)](#search)
     - [多重搜尋 (Multi-search)](#multisearch)
     - [暫停 (Pause)](#pause)
-- [驗證前轉換輸入](#transforming-input-before-validation)
-- [表單](#forms)
-- [訊息提示](#informational-messages)
-- [表格](#tables)
-- [旋轉指示器](#spin)
-- [進度條](#progress)
-- [清除終端機](#clear)
-- [終端機注意事項](#terminal-considerations)
-- [不支援的環境與備案](#fallbacks)
-- [測試](#testing)
 
 <a name="introduction"></a>
 ## 簡介
@@ -869,8 +854,7 @@ $response = spin(
 );
 ```
 
-> [!WARNING]
-> `spin` 函式需要 [PCNTL](https://www.php.net/manual/en/book.pcntl.php) PHP 擴充功能才能為旋轉指示器設定動畫。當此擴充功能不可用時，將顯示靜態版本的旋轉指示器。
+> [!WARNING] > `spin` 函式需要 [PCNTL](https://www.php.net/manual/en/book.pcntl.php) PHP 擴充功能才能為旋轉指示器設定動畫。當此擴充功能不可用時，將顯示靜態版本的旋轉指示器。
 
 <a name="progress"></a>
 ## 進度條 (Progress Bars)

@@ -3,37 +3,35 @@ title: Pennant
 description: Laravel Pennant 是一個輕量級的功能旗標套件
 ---
 
-# Laravel Pennant
-
 - [簡介 (Introduction)](#introduction)
 - [安裝 (Installation)](#installation)
 - [設定 (Configuration)](#configuration)
 - [定義功能 (Defining Features)](#defining-features)
-    - [基於類別的功能 (Class Based Features)](#class-based-features)
+  - [基於類別的功能 (Class Based Features)](#class-based-features)
 - [檢查功能 (Checking Features)](#checking-features)
-    - [條件執行 (Conditional Execution)](#conditional-execution)
-    - [`HasFeatures` Trait](#the-has-features-trait)
-    - [Blade 指令 (Blade Directive)](#blade-directive)
-    - [Middleware](#middleware)
-    - [攔截功能檢查 (Intercepting Feature Checks)](#intercepting-feature-checks)
-    - [記憶體快取 (In-Memory Cache)](#in-memory-cache)
+  - [條件執行 (Conditional Execution)](#conditional-execution)
+  - [`HasFeatures` Trait](#the-has-features-trait)
+  - [Blade 指令 (Blade Directive)](#blade-directive)
+  - [Middleware](#middleware)
+  - [攔截功能檢查 (Intercepting Feature Checks)](#intercepting-feature-checks)
+  - [記憶體快取 (In-Memory Cache)](#in-memory-cache)
 - [範圍 (Scope)](#scope)
-    - [指定範圍 (Specifying the Scope)](#specifying-the-scope)
-    - [預設範圍 (Default Scope)](#default-scope)
-    - [可為空的範圍 (Nullable Scope)](#nullable-scope)
-    - [識別範圍 (Identifying Scope)](#identifying-scope)
-    - [序列化範圍 (Serializing Scope)](#serializing-scope)
+  - [指定範圍 (Specifying the Scope)](#specifying-the-scope)
+  - [預設範圍 (Default Scope)](#default-scope)
+  - [可為空的範圍 (Nullable Scope)](#nullable-scope)
+  - [識別範圍 (Identifying Scope)](#identifying-scope)
+  - [序列化範圍 (Serializing Scope)](#serializing-scope)
 - [豐富的功能值 (Rich Feature Values)](#rich-feature-values)
 - [檢索多個功能 (Retrieving Multiple Features)](#retrieving-multiple-features)
 - [預先載入 (Eager Loading)](#eager-loading)
 - [更新值 (Updating Values)](#updating-values)
-    - [批次更新 (Bulk Updates)](#bulk-updates)
-    - [清除功能 (Purging Features)](#purging-features)
+  - [批次更新 (Bulk Updates)](#bulk-updates)
+  - [清除功能 (Purging Features)](#purging-features)
 - [測試 (Testing)](#testing)
 - [加入自訂 Pennant 驅動 (Adding Custom Pennant Drivers)](#adding-custom-pennant-drivers)
-    - [實作驅動 (Implementing the Driver)](#implementing-the-driver)
-    - [註冊驅動 (Registering the Driver)](#registering-the-driver)
-    - [外部定義功能 (Defining Features Externally)](#defining-features-externally)
+  - [實作驅動 (Implementing the Driver)](#implementing-the-driver)
+  - [註冊驅動 (Registering the Driver)](#registering-the-driver)
+  - [外部定義功能 (Defining Features Externally)](#defining-features-externally)
 - [事件 (Events)](#events)
 
 <a name="introduction"></a>
@@ -903,7 +901,7 @@ Feature::purge('new-api');
 Feature::purge(['new-api', 'purchase-button']);
 ```
 
-如果你想從儲存中清除_所有_功能，可以在不帶任何參數的情況下呼叫 `purge` 方法：
+如果你想從儲存中清除*所有*功能，可以在不帶任何參數的情況下呼叫 `purge` 方法：
 
 ```php
 Feature::purge();
@@ -917,7 +915,7 @@ php artisan pennant:purge new-api
 php artisan pennant:purge new-api purchase-button
 ```
 
-也可以清除_除了_給定功能列表之外的所有功能。例如，想像一下你想清除所有功能，但在儲存中保留 "new-api" 和 "purchase-button" 功能的值。為此，你可以將這些功能名稱傳遞給 `--except` 選項：
+也可以清除*除了*給定功能列表之外的所有功能。例如，想像一下你想清除所有功能，但在儲存中保留 "new-api" 和 "purchase-button" 功能的值。為此，你可以將這些功能名稱傳遞給 `--except` 選項：
 
 ```shell
 php artisan pennant:purge --except=new-api --except=purchase-button

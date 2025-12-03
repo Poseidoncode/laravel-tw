@@ -3,26 +3,24 @@ title: HTTP Client
 description: Laravel 提供表達性且最小化的 API 來發送 HTTP 請求
 ---
 
-# HTTP Client
-
 - [簡介](#introduction)
 - [發送請求](#making-requests)
-    - [請求資料](#request-data)
-    - [標頭](#headers)
-    - [認證](#authentication)
-    - [逾時](#timeout)
-    - [重試](#retries)
-    - [錯誤處理](#error-handling)
-    - [Guzzle Middleware](#guzzle-middleware)
-    - [Guzzle 選項](#guzzle-options)
+  - [請求資料](#request-data)
+  - [標頭](#headers)
+  - [認證](#authentication)
+  - [逾時](#timeout)
+  - [重試](#retries)
+  - [錯誤處理](#error-handling)
+  - [Guzzle Middleware](#guzzle-middleware)
+  - [Guzzle 選項](#guzzle-options)
 - [並發請求](#concurrent-requests)
-    - [請求池](#request-pooling)
-    - [請求批次處理](#request-batching)
+  - [請求池](#request-pooling)
+  - [請求批次處理](#request-batching)
 - [巨集](#macros)
 - [測試](#testing)
-    - [偽造回應](#faking-responses)
-    - [檢查請求](#inspecting-requests)
-    - [防止意外請求](#preventing-stray-requests)
+  - [偽造回應](#faking-responses)
+  - [檢查請求](#inspecting-requests)
+  - [防止意外請求](#preventing-stray-requests)
 - [事件](#events)
 
 <a name="introduction"></a>
@@ -627,10 +625,10 @@ $responses = Http::batch(fn (Batch $batch) => [
 ```php
 // The number of requests assigned to the batch...
 $batch->totalRequests;
- 
+
 // The number of requests that have not been processed yet...
 $batch->pendingRequests;
- 
+
 // The number of requests that have failed...
 $batch->failedRequests;
 
@@ -643,6 +641,7 @@ $batch->finished();
 // Indicates if the batch has request failures...
 $batch->hasFailures();
 ```
+
 <a name="deferring-batches"></a>
 #### 延遲批次處理
 

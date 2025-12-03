@@ -3,28 +3,26 @@ title: Artisan Console
 description: Artisan 是 Laravel 內建的命令列介面
 ---
 
-# Artisan Console
-
 - [簡介](#introduction)
-    - [Tinker (REPL)](#tinker)
+  - [Tinker (REPL)](#tinker)
 - [撰寫指令](#writing-commands)
-    - [生成指令](#generating-commands)
-    - [指令結構](#command-structure)
-    - [Closure 指令](#closure-commands)
-    - [可隔離指令](#isolatable-commands)
+  - [生成指令](#generating-commands)
+  - [指令結構](#command-structure)
+  - [Closure 指令](#closure-commands)
+  - [可隔離指令](#isolatable-commands)
 - [定義輸入期望](#defining-input-expectations)
-    - [參數](#arguments)
-    - [選項](#options)
-    - [輸入陣列](#input-arrays)
-    - [輸入描述](#input-descriptions)
-    - [提示缺少輸入](#prompting-for-missing-input)
+  - [參數](#arguments)
+  - [選項](#options)
+  - [輸入陣列](#input-arrays)
+  - [輸入描述](#input-descriptions)
+  - [提示缺少輸入](#prompting-for-missing-input)
 - [指令 I/O](#command-io)
-    - [檢索輸入](#retrieving-input)
-    - [提示輸入](#prompting-for-input)
-    - [寫入輸出](#writing-output)
+  - [檢索輸入](#retrieving-input)
+  - [提示輸入](#prompting-for-input)
+  - [寫入輸出](#writing-output)
 - [註冊指令](#registering-commands)
 - [程式化執行指令](#programmatically-executing-commands)
-    - [從其他指令呼叫指令](#calling-commands-from-other-commands)
+  - [從其他指令呼叫指令](#calling-commands-from-other-commands)
 - [訊號處理](#signal-handling)
 - [Stub 自訂](#stub-customization)
 - [事件](#events)
@@ -85,8 +83,7 @@ php artisan tinker
 php artisan vendor:publish --provider="Laravel\Tinker\TinkerServiceProvider"
 ```
 
-> [!WARNING]
-> `dispatch` 輔助函式和 `Dispatchable` 類別上的 `dispatch` 方法依賴垃圾回收將 Job 放入 Queue 中。因此，使用 tinker 時，你應該使用 `Bus::dispatch` 或 `Queue::push` 來調度 Job。
+> [!WARNING] > `dispatch` 輔助函式和 `Dispatchable` 類別上的 `dispatch` 方法依賴垃圾回收將 Job 放入 Queue 中。因此，使用 tinker 時，你應該使用 `Bus::dispatch` 或 `Queue::push` 來調度 Job。
 
 <a name="command-allow-list"></a>
 #### 指令允許列表
@@ -267,7 +264,7 @@ php artisan mail:send 1 --isolated=12
 預設情況下，Laravel 將使用指令名稱生成用於在應用程式快取中獲取原子鎖的字串鍵。但是，你可以透過在 Artisan 指令類別上定義 `isolatableId` 方法來自訂此鍵，允許你將指令的參數或選項整合到鍵中：
 
 ```php
-/**
+#
  * Get the isolatable ID for the command.
  */
 public function isolatableId(): string
@@ -566,8 +563,7 @@ $options = $this->options();
 <a name="prompting-for-input"></a>
 ### 提示輸入
 
-> [!NOTE]
-> [Laravel Prompts](/docs/prompts) 是一個 PHP 套件，用於為你的命令列應用程式新增美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
+> [!NOTE] > [Laravel Prompts](/docs/prompts) 是一個 PHP 套件，用於為你的命令列應用程式新增美觀且使用者友善的表單，具有類似瀏覽器的功能，包括預留位置文字和驗證。
 
 除了顯示輸出外，你還可以在指令執行期間要求使用者提供輸入。`ask` 方法將提示使用者給定的問題，接受他們的輸入，然後將使用者的輸入回傳給你的指令：
 

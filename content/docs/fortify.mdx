@@ -3,30 +3,28 @@ title: Laravel Fortify
 description: Fortify 是 Laravel 的前端無關驗證後端實作
 ---
 
-# Laravel Fortify
-
 - [簡介 (Introduction)](#introduction)
-    - [什麼是 Fortify？ (What is Fortify?)](#what-is-fortify)
-    - [何時該使用 Fortify？ (When Should I Use Fortify?)](#when-should-i-use-fortify)
+  - [什麼是 Fortify？ (What is Fortify?)](#what-is-fortify)
+  - [何時該使用 Fortify？ (When Should I Use Fortify?)](#when-should-i-use-fortify)
 - [安裝 (Installation)](#installation)
-    - [Fortify 功能 (Fortify Features)](#fortify-features)
-    - [停用視圖 (Disabling Views)](#disabling-views)
+  - [Fortify 功能 (Fortify Features)](#fortify-features)
+  - [停用視圖 (Disabling Views)](#disabling-views)
 - [認證 (Authentication)](#authentication)
-    - [自訂使用者認證 (Customizing User Authentication)](#customizing-user-authentication)
-    - [自訂認證 Pipeline (Customizing the Authentication Pipeline)](#customizing-the-authentication-pipeline)
-    - [自訂重新導向 (Customizing Redirects)](#customizing-authentication-redirects)
+  - [自訂使用者認證 (Customizing User Authentication)](#customizing-user-authentication)
+  - [自訂認證 Pipeline (Customizing the Authentication Pipeline)](#customizing-the-authentication-pipeline)
+  - [自訂重新導向 (Customizing Redirects)](#customizing-authentication-redirects)
 - [雙重認證 (Two-Factor Authentication)](#two-factor-authentication)
-    - [啟用雙重認證 (Enabling Two-Factor Authentication)](#enabling-two-factor-authentication)
-    - [使用雙重認證進行認證 (Authenticating With Two-Factor Authentication)](#authenticating-with-two-factor-authentication)
-    - [停用雙重認證 (Disabling Two-Factor Authentication)](#disabling-two-factor-authentication)
+  - [啟用雙重認證 (Enabling Two-Factor Authentication)](#enabling-two-factor-authentication)
+  - [使用雙重認證進行認證 (Authenticating With Two-Factor Authentication)](#authenticating-with-two-factor-authentication)
+  - [停用雙重認證 (Disabling Two-Factor Authentication)](#disabling-two-factor-authentication)
 - [註冊 (Registration)](#registration)
-    - [自訂註冊 (Customizing Registration)](#customizing-registration)
+  - [自訂註冊 (Customizing Registration)](#customizing-registration)
 - [重設密碼 (Password Reset)](#password-reset)
-    - [請求重設密碼連結 (Requesting a Password Reset Link)](#requesting-a-password-reset-link)
-    - [重設密碼 (Resetting the Password)](#resetting-the-password)
-    - [自訂重設密碼 (Customizing Password Resets)](#customizing-password-resets)
+  - [請求重設密碼連結 (Requesting a Password Reset Link)](#requesting-a-password-reset-link)
+  - [重設密碼 (Resetting the Password)](#resetting-the-password)
+  - [自訂重設密碼 (Customizing Password Resets)](#customizing-password-resets)
 - [電子郵件驗證 (Email Verification)](#email-verification)
-    - [保護路由 (Protecting Routes)](#protecting-routes)
+  - [保護路由 (Protecting Routes)](#protecting-routes)
 - [密碼確認 (Password Confirmation)](#password-confirmation)
 
 <a name="introduction"></a>
@@ -283,9 +281,7 @@ class User extends Authenticatable
 
 ```html
 @if (session('status') == 'two-factor-authentication-enabled')
-    <div className="mb-4 font-medium text-sm">
-        請在下方完成雙重認證設定。
-    </div>
+<div className="mb-4 font-medium text-sm">請在下方完成雙重認證設定。</div>
 @endif
 ```
 
@@ -306,9 +302,7 @@ $request->user()->twoFactorQrCodeSvg();
 
 ```html
 @if (session('status') == 'two-factor-authentication-confirmed')
-    <div className="mb-4 font-medium text-sm">
-        雙重認證已成功確認並啟用。
-    </div>
+<div className="mb-4 font-medium text-sm">雙重認證已成功確認並啟用。</div>
 @endif
 ```
 
@@ -438,9 +432,9 @@ Fortify 將負責定義回傳此視圖的 `/forgot-password` 端點。你的 `fo
 
 ```html
 @if (session('status'))
-    <div className="mb-4 font-medium text-sm text-green-600">
-        {{ session('status') }}
-    </div>
+<div className="mb-4 font-medium text-sm text-green-600">
+  {{ session('status') }}
+</div>
 @endif
 ```
 

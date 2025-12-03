@@ -3,51 +3,49 @@ title: Passport
 description: Laravel Passport 為你的應用程式提供完整的 OAuth2 伺服器實作
 ---
 
-# Laravel Passport
-
 - [簡介 (Introduction)](#introduction)
-    - [Passport 還是 Sanctum？ (Passport or Sanctum?)](#passport-or-sanctum)
+  - [Passport 還是 Sanctum？ (Passport or Sanctum?)](#passport-or-sanctum)
 - [安裝 (Installation)](#installation)
-    - [部署 Passport (Deploying Passport)](#deploying-passport)
-    - [升級 Passport (Upgrading Passport)](#upgrading-passport)
+  - [部署 Passport (Deploying Passport)](#deploying-passport)
+  - [升級 Passport (Upgrading Passport)](#upgrading-passport)
 - [設定 (Configuration)](#configuration)
-    - [Token 生命周期 (Token Lifetimes)](#token-lifetimes)
-    - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
-    - [覆寫路由 (Overriding Routes)](#overriding-routes)
+  - [Token 生命周期 (Token Lifetimes)](#token-lifetimes)
+  - [覆寫預設模型 (Overriding Default Models)](#overriding-default-models)
+  - [覆寫路由 (Overriding Routes)](#overriding-routes)
 - [授權碼授權 (Authorization Code Grant)](#authorization-code-grant)
-    - [管理用戶端 (Managing Clients)](#managing-clients)
-    - [請求 Token (Requesting Tokens)](#requesting-tokens)
-    - [管理 Token (Managing Tokens)](#managing-tokens)
-    - [重新整理 Token (Refreshing Tokens)](#refreshing-tokens)
-    - [撤銷 Token (Revoking Tokens)](#revoking-tokens)
-    - [清除 Token (Purging Tokens)](#purging-tokens)
+  - [管理用戶端 (Managing Clients)](#managing-clients)
+  - [請求 Token (Requesting Tokens)](#requesting-tokens)
+  - [管理 Token (Managing Tokens)](#managing-tokens)
+  - [重新整理 Token (Refreshing Tokens)](#refreshing-tokens)
+  - [撤銷 Token (Revoking Tokens)](#revoking-tokens)
+  - [清除 Token (Purging Tokens)](#purging-tokens)
 - [帶有 PKCE 的授權碼授權 (Authorization Code Grant With PKCE)](#code-grant-pkce)
-    - [建立用戶端 (Creating the Client)](#creating-a-auth-pkce-grant-client)
-    - [請求 Token (Requesting Tokens)](#requesting-auth-pkce-grant-tokens)
+  - [建立用戶端 (Creating the Client)](#creating-a-auth-pkce-grant-client)
+  - [請求 Token (Requesting Tokens)](#requesting-auth-pkce-grant-tokens)
 - [裝置授權 (Device Authorization Grant)](#device-authorization-grant)
-    - [建立裝置授權用戶端 (Creating a Device Code Grant Client)](#creating-a-device-authorization-grant-client)
-    - [請求 Token (Requesting Tokens)](#requesting-device-authorization-grant-tokens)
+  - [建立裝置授權用戶端 (Creating a Device Code Grant Client)](#creating-a-device-authorization-grant-client)
+  - [請求 Token (Requesting Tokens)](#requesting-device-authorization-grant-tokens)
 - [密碼授權 (Password Grant)](#password-grant)
-    - [建立密碼授權用戶端 (Creating a Password Grant Client)](#creating-a-password-grant-client)
-    - [請求 Token (Requesting Tokens)](#requesting-password-grant-tokens)
-    - [請求所有 Scope (Requesting All Scopes)](#requesting-all-scopes)
-    - [自訂使用者提供者 (Customizing the User Provider)](#customizing-the-user-provider)
-    - [自訂使用者名稱欄位 (Customizing the Username Field)](#customizing-the-username-field)
-    - [自訂密碼驗證 (Customizing the Password Validation)](#customizing-the-password-validation)
+  - [建立密碼授權用戶端 (Creating a Password Grant Client)](#creating-a-password-grant-client)
+  - [請求 Token (Requesting Tokens)](#requesting-password-grant-tokens)
+  - [請求所有 Scope (Requesting All Scopes)](#requesting-all-scopes)
+  - [自訂使用者提供者 (Customizing the User Provider)](#customizing-the-user-provider)
+  - [自訂使用者名稱欄位 (Customizing the Username Field)](#customizing-the-username-field)
+  - [自訂密碼驗證 (Customizing the Password Validation)](#customizing-the-password-validation)
 - [隱式授權 (Implicit Grant)](#implicit-grant)
 - [用戶端憑證授權 (Client Credentials Grant)](#client-credentials-grant)
 - [個人存取 Token (Personal Access Tokens)](#personal-access-tokens)
-    - [建立個人存取用戶端 (Creating a Personal Access Client)](#creating-a-personal-access-client)
-    - [自訂使用者提供者 (Customizing the User Provider)](#customizing-the-user-provider-for-pat)
-    - [管理個人存取 Token (Managing Personal Access Tokens)](#managing-personal-access-tokens)
+  - [建立個人存取用戶端 (Creating a Personal Access Client)](#creating-a-personal-access-client)
+  - [自訂使用者提供者 (Customizing the User Provider)](#customizing-the-user-provider-for-pat)
+  - [管理個人存取 Token (Managing Personal Access Tokens)](#managing-personal-access-tokens)
 - [保護路由 (Protecting Routes)](#protecting-routes)
-    - [透過中介軟體 (Via Middleware)](#via-middleware)
-    - [傳遞存取 Token (Passing the Access Token)](#passing-the-access-token)
+  - [透過中介軟體 (Via Middleware)](#via-middleware)
+  - [傳遞存取 Token (Passing the Access Token)](#passing-the-access-token)
 - [Token Scope (Token Scopes)](#token-scopes)
-    - [定義 Scope (Defining Scopes)](#defining-scopes)
-    - [預設 Scope (Default Scope)](#default-scope)
-    - [將 Scope 指派給 Token (Assigning Scopes to Tokens)](#assigning-scopes-to-tokens)
-    - [檢查 Scope (Checking Scopes)](#checking-scopes)
+  - [定義 Scope (Defining Scopes)](#defining-scopes)
+  - [預設 Scope (Default Scope)](#default-scope)
+  - [將 Scope 指派給 Token (Assigning Scopes to Tokens)](#assigning-scopes-to-tokens)
+  - [檢查 Scope (Checking Scopes)](#checking-scopes)
 - [SPA 身份驗證 (SPA Authentication)](#spa-authentication)
 - [事件 (Events)](#events)
 - [測試 (Testing)](#testing)
@@ -1210,7 +1208,7 @@ Route::get('/orders', function () {
 <a name="check-for-any-scopes"></a>
 #### 檢查任何 Scope (Check for Any Scopes)
 
-可以將 `Laravel\Passport\Http\Middleware\CheckTokenForAnyScope` 中介軟體指派給路由，以驗證傳入請求的存取 Token 是否具有列出的 *至少一個* Scope：
+可以將 `Laravel\Passport\Http\Middleware\CheckTokenForAnyScope` 中介軟體指派給路由，以驗證傳入請求的存取 Token 是否具有列出的 _至少一個_ Scope：
 
 ```php
 use Laravel\Passport\Http\Middleware\CheckTokenForAnyScope;
@@ -1287,10 +1285,9 @@ use Laravel\Passport\Http\Middleware\CreateFreshApiToken;
 此中介軟體將附加一個 `laravel_token` cookie 到你的傳出回應。此 cookie 包含一個加密的 JWT，Passport 將使用它來驗證來自你的 JavaScript 應用程式的 API 請求。JWT 的生命週期等於你的 `session.lifetime` 設定值。現在，由於瀏覽器將自動隨所有後續請求發送 cookie，你可以向你的應用程式的 API 發出請求，而無需明確傳遞存取 Token：
 
 ```js
-axios.get('/api/user')
-    .then(response => {
-        console.log(response.data);
-    });
+axios.get("/api/user").then((response) => {
+  console.log(response.data);
+});
 ```
 
 <a name="customizing-the-cookie-name"></a>

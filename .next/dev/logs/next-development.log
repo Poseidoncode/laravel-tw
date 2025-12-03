@@ -6,3 +6,39 @@
 [00:10:52.083] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:11:25.021] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:33:32.946] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:24.820] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:29.826] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:30.854] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:01.319] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:32.525] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Migration (Database: Migrations)
+       ^
+
+[00:55:32.654] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Migration (Database: Migrations)
+       ^
+
+[00:55:38.717] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Migration (Database: Migrations)
+       ^
+
+[00:55:38.913] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:39.020] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Migration (Database: Migrations)
+       ^
+
+[01:02:52.160] Server  ERROR    ⨯ YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Migration (Database: Migrations)
+       ^
+
+[01:02:52.423] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:02:52.548] Browser ERROR   uncaughtError: YAMLParseError: Nested mappings are not allowed in compact mappings at line 1, column 8:
+
+title: 資料庫：Migration (Database: Migrations)
+       ^
+

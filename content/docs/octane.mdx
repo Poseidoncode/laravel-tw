@@ -3,27 +3,25 @@ title: Octane
 description: Laravel Octane 使用高效能的應用程式伺服器來增強應用程式效能
 ---
 
-# Laravel Octane
-
 - [簡介 (Introduction)](#introduction)
 - [安裝 (Installation)](#installation)
 - [伺服器先決條件 (Server Prerequisites)](#server-prerequisites)
-    - [FrankenPHP](#frankenphp)
-    - [RoadRunner](#roadrunner)
-    - [Swoole](#swoole)
+  - [FrankenPHP](#frankenphp)
+  - [RoadRunner](#roadrunner)
+  - [Swoole](#swoole)
 - [提供應用程式服務 (Serving Your Application)](#serving-your-application)
-    - [透過 HTTPS 提供應用程式服務 (Serving Your Application via HTTPS)](#serving-your-application-via-https)
-    - [透過 Nginx 提供應用程式服務 (Serving Your Application via Nginx)](#serving-your-application-via-nginx)
-    - [監視檔案變更 (Watching for File Changes)](#watching-for-file-changes)
-    - [指定 Worker 數量 (Specifying the Worker Count)](#specifying-the-worker-count)
-    - [指定最大請求數 (Specifying the Max Request Count)](#specifying-the-max-request-count)
-    - [指定最大執行時間 (Specifying the Max Execution Time)](#specifying-the-max-execution-time)
-    - [重新載入 Workers (Reloading the Workers)](#reloading-the-workers)
-    - [停止伺服器 (Stopping the Server)](#stopping-the-server)
+  - [透過 HTTPS 提供應用程式服務 (Serving Your Application via HTTPS)](#serving-your-application-via-https)
+  - [透過 Nginx 提供應用程式服務 (Serving Your Application via Nginx)](#serving-your-application-via-nginx)
+  - [監視檔案變更 (Watching for File Changes)](#watching-for-file-changes)
+  - [指定 Worker 數量 (Specifying the Worker Count)](#specifying-the-worker-count)
+  - [指定最大請求數 (Specifying the Max Request Count)](#specifying-the-max-request-count)
+  - [指定最大執行時間 (Specifying the Max Execution Time)](#specifying-the-max-execution-time)
+  - [重新載入 Workers (Reloading the Workers)](#reloading-the-workers)
+  - [停止伺服器 (Stopping the Server)](#stopping-the-server)
 - [依賴注入與 Octane (Dependency Injection and Octane)](#dependency-injection-and-octane)
-    - [容器注入 (Container Injection)](#container-injection)
-    - [請求注入 (Request Injection)](#request-injection)
-    - [設定 Repository 注入 (Configuration Repository Injection)](#configuration-repository-injection)
+  - [容器注入 (Container Injection)](#container-injection)
+  - [請求注入 (Request Injection)](#request-injection)
+  - [設定 Repository 注入 (Configuration Repository Injection)](#configuration-repository-injection)
 - [管理記憶體洩漏 (Managing Memory Leaks)](#managing-memory-leaks)
 - [並行任務 (Concurrent Tasks)](#concurrent-tasks)
 - [Ticks 與 Intervals](#ticks-and-intervals)
@@ -82,8 +80,8 @@ services:
   laravel.test:
     environment:
       SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=frankenphp --host=0.0.0.0 --admin-port=2019 --port='${APP_PORT:-80}'" # [tl! add]
-      XDG_CONFIG_HOME:  /var/www/html/config # [tl! add]
-      XDG_DATA_HOME:  /var/www/html/data # [tl! add]
+      XDG_CONFIG_HOME: /var/www/html/config # [tl! add]
+      XDG_DATA_HOME: /var/www/html/data # [tl! add]
 ```
 
 要啟用 HTTPS、HTTP/2 和 HTTP/3,請改用以下修改:
@@ -92,14 +90,14 @@ services:
 services:
   laravel.test:
     ports:
-        - '${APP_PORT:-80}:80'
-        - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
-        - '443:443' # [tl! add]
-        - '443:443/udp' # [tl! add]
+      - "${APP_PORT:-80}:80"
+      - "${VITE_PORT:-5173}:${VITE_PORT:-5173}"
+      - "443:443" # [tl! add]
+      - "443:443/udp" # [tl! add]
     environment:
       SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --host=localhost --port=443 --admin-port=2019 --https" # [tl! add]
-      XDG_CONFIG_HOME:  /var/www/html/config # [tl! add]
-      XDG_DATA_HOME:  /var/www/html/data # [tl! add]
+      XDG_CONFIG_HOME: /var/www/html/config # [tl! add]
+      XDG_DATA_HOME: /var/www/html/data # [tl! add]
 ```
 
 通常,您應該透過 `https://localhost` 存取您的 FrankenPHP Sail 應用程式,因為使用 `https://127.0.0.1` 需要額外的設定,並且[不建議使用](https://frankenphp.dev/docs/known-issues/#using-https127001-with-docker)。

@@ -3,17 +3,15 @@ title: Pint
 description: Laravel Pint 是一個專為 Laravel 設計的 PHP 程式碼風格修復工具
 ---
 
-# Laravel Pint
-
 - [簡介](#introduction)
 - [安裝](#installation)
 - [執行 Pint](#running-pint)
 - [設定 Pint](#configuring-pint)
-    - [預設配置 (Presets)](#presets)
-    - [規則 (Rules)](#rules)
-    - [排除檔案 / 資料夾](#excluding-files-or-folders)
+  - [預設配置 (Presets)](#presets)
+  - [規則 (Rules)](#rules)
+  - [排除檔案 / 資料夾](#excluding-files-or-folders)
 - [持續整合 (Continuous Integration)](#continuous-integration)
-    - [GitHub Actions](#running-tests-on-github-actions)
+  - [GitHub Actions](#running-tests-on-github-actions)
 
 <a name="introduction"></a>
 
@@ -100,7 +98,7 @@ Pint 會顯示所有已更新檔案的詳細清單。您可以在呼叫 Pint 時
 
 ```json
 {
-    "preset": "laravel"
+  "preset": "laravel"
 }
 ```
 
@@ -123,7 +121,7 @@ Pint 會顯示所有已更新檔案的詳細清單。您可以在呼叫 Pint 時
 
 ```json
 {
-    "preset": "psr12"
+  "preset": "psr12"
 }
 ```
 
@@ -138,15 +136,15 @@ Pint 目前支援的預設配置有：`laravel`、`per`、`psr12`、`symfony` �
 
 ```json
 {
-    "preset": "laravel",
-    "rules": {
-        "simplified_null_return": true,
-        "array_indentation": false,
-        "new_with_parentheses": {
-            "anonymous_class": true,
-            "named_class": true
-        }
+  "preset": "laravel",
+  "rules": {
+    "simplified_null_return": true,
+    "array_indentation": false,
+    "new_with_parentheses": {
+      "anonymous_class": true,
+      "named_class": true
     }
+  }
 }
 ```
 
@@ -159,9 +157,7 @@ Pint 建立在 [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) 之�
 
 ```json
 {
-    "exclude": [
-        "my-specific/folder"
-    ]
+  "exclude": ["my-specific/folder"]
 }
 ```
 
@@ -169,9 +165,7 @@ Pint 建立在 [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) 之�
 
 ```json
 {
-    "notName": [
-        "*-my-file.php"
-    ]
+  "notName": ["*-my-file.php"]
 }
 ```
 
@@ -179,9 +173,7 @@ Pint 建立在 [PHP CS Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer) 之�
 
 ```json
 {
-    "notPath": [
-        "path/to/excluded-file.php"
-    ]
+  "notPath": ["path/to/excluded-file.php"]
 }
 ```
 

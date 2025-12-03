@@ -3,8 +3,6 @@ title: HTTP Response
 description: Laravel 提供多種方式回傳 Response,包括字串、陣列、JSON、檔案下載、串流回應等。
 ---
 
-# HTTP Response
-
 - [建立 Response](#creating-responses)
   - [將標頭附加到 Response](#attaching-headers-to-responses)
   - [將 Cookie 附加到 Response](#attaching-cookies-to-responses)
@@ -429,7 +427,7 @@ function App() {
 
   return (
     <div>
-      <div>{'{data}'}</div>
+      <div>{"{data}"}</div>
       {isFetching && <div>Connecting...</div>}
       {isStreaming && <div>Generating...</div>}
       <button onClick={sendMessage}>Send Message</button>
@@ -524,7 +522,7 @@ function App() {
     },
   });
 
-  return <div>{'{data}'}</div>;
+  return <div>{"{data}"}</div>;
 }
 ```
 
@@ -554,8 +552,8 @@ function App() {
 
   return (
     <div>
-      <div>{'{data}'}</div>
-      <button onClick={'{cancel}'}>Cancel</button>
+      <div>{"{data}"}</div>
+      <button onClick={"{cancel}"}>Cancel</button>
     </div>
   );
 }
@@ -587,8 +585,8 @@ function App() {
 
   return (
     <div>
-      <div>{'{data}'}</div>
-      <StreamStatus id={'{id}'} />
+      <div>{"{data}"}</div>
+      <StreamStatus id={"{id}"} />
     </div>
   );
 }
@@ -773,7 +771,7 @@ import { useEventStream } from "@laravel/stream-react";
 function App() {
   const { message } = useEventStream("/chat");
 
-  return <div>{'{message}'}</div>;
+  return <div>{"{message}"}</div>;
 }
 ```
 
@@ -810,7 +808,7 @@ function App() {
     glue: " ",
   });
 
-  return <div>{'{message}'}</div>;
+  return <div>{"{message}"}</div>;
 }
 ```
 

@@ -3,53 +3,51 @@ title: Notifications
 description: Laravel 提供支援透過多種管道傳送通知
 ---
 
-# Notifications
-
 - [簡介 (Introduction)](#introduction)
 - [產生通知 (Generating Notifications)](#generating-notifications)
 - [發送通知 (Sending Notifications)](#sending-notifications)
-    - [使用 Notifiable Trait (Using the Notifiable Trait)](#using-the-notifiable-trait)
-    - [使用 Notification Facade (Using the Notification Facade)](#using-the-notification-facade)
-    - [指定傳送頻道 (Specifying Delivery Channels)](#specifying-delivery-channels)
-    - [佇列通知 (Queueing Notifications)](#queueing-notifications)
-    - [隨需通知 (On-Demand Notifications)](#on-demand-notifications)
+  - [使用 Notifiable Trait (Using the Notifiable Trait)](#using-the-notifiable-trait)
+  - [使用 Notification Facade (Using the Notification Facade)](#using-the-notification-facade)
+  - [指定傳送頻道 (Specifying Delivery Channels)](#specifying-delivery-channels)
+  - [佇列通知 (Queueing Notifications)](#queueing-notifications)
+  - [隨需通知 (On-Demand Notifications)](#on-demand-notifications)
 - [郵件通知 (Mail Notifications)](#mail-notifications)
-    - [格式化郵件訊息 (Formatting Mail Messages)](#formatting-mail-messages)
-    - [自訂寄件者 (Customizing the Sender)](#customizing-the-sender)
-    - [自訂收件者 (Customizing the Recipient)](#customizing-the-recipient)
-    - [自訂主旨 (Customizing the Subject)](#customizing-the-subject)
-    - [自訂 Mailer (Customizing the Mailer)](#customizing-the-mailer)
-    - [自訂樣板 (Customizing the Templates)](#customizing-the-templates)
-    - [附件 (Attachments)](#mail-attachments)
-    - [新增標籤與 Metadata (Adding Tags and Metadata)](#adding-tags-metadata)
-    - [自訂 Symfony 訊息 (Customizing the Symfony Message)](#customizing-the-symfony-message)
-    - [使用 Mailables (Using Mailables)](#using-mailables)
-    - [預覽郵件通知 (Previewing Mail Notifications)](#previewing-mail-notifications)
+  - [格式化郵件訊息 (Formatting Mail Messages)](#formatting-mail-messages)
+  - [自訂寄件者 (Customizing the Sender)](#customizing-the-sender)
+  - [自訂收件者 (Customizing the Recipient)](#customizing-the-recipient)
+  - [自訂主旨 (Customizing the Subject)](#customizing-the-subject)
+  - [自訂 Mailer (Customizing the Mailer)](#customizing-the-mailer)
+  - [自訂樣板 (Customizing the Templates)](#customizing-the-templates)
+  - [附件 (Attachments)](#mail-attachments)
+  - [新增標籤與 Metadata (Adding Tags and Metadata)](#adding-tags-metadata)
+  - [自訂 Symfony 訊息 (Customizing the Symfony Message)](#customizing-the-symfony-message)
+  - [使用 Mailables (Using Mailables)](#using-mailables)
+  - [預覽郵件通知 (Previewing Mail Notifications)](#previewing-mail-notifications)
 - [Markdown 郵件通知 (Markdown Mail Notifications)](#markdown-mail-notifications)
-    - [產生訊息 (Generating the Message)](#generating-the-message)
-    - [撰寫訊息 (Writing the Message)](#writing-the-message)
-    - [自訂元件 (Customizing the Components)](#customizing-the-components)
+  - [產生訊息 (Generating the Message)](#generating-the-message)
+  - [撰寫訊息 (Writing the Message)](#writing-the-message)
+  - [自訂元件 (Customizing the Components)](#customizing-the-components)
 - [資料庫通知 (Database Notifications)](#database-notifications)
-    - [先決條件 (Prerequisites)](#database-prerequisites)
-    - [格式化資料庫通知 (Formatting Database Notifications)](#formatting-database-notifications)
-    - [存取通知 (Accessing the Notifications)](#accessing-the-notifications)
-    - [將通知標記為已讀 (Marking Notifications as Read)](#marking-notifications-as-read)
+  - [先決條件 (Prerequisites)](#database-prerequisites)
+  - [格式化資料庫通知 (Formatting Database Notifications)](#formatting-database-notifications)
+  - [存取通知 (Accessing the Notifications)](#accessing-the-notifications)
+  - [將通知標記為已讀 (Marking Notifications as Read)](#marking-notifications-as-read)
 - [廣播通知 (Broadcast Notifications)](#broadcast-notifications)
-    - [先決條件 (Prerequisites)](#broadcast-prerequisites)
-    - [格式化廣播通知 (Formatting Broadcast Notifications)](#formatting-broadcast-notifications)
-    - [監聽通知 (Listening for Notifications)](#listening-for-notifications)
+  - [先決條件 (Prerequisites)](#broadcast-prerequisites)
+  - [格式化廣播通知 (Formatting Broadcast Notifications)](#formatting-broadcast-notifications)
+  - [監聽通知 (Listening for Notifications)](#listening-for-notifications)
 - [SMS 通知 (SMS Notifications)](#sms-notifications)
-    - [先決條件 (Prerequisites)](#sms-prerequisites)
-    - [格式化 SMS 通知 (Formatting SMS Notifications)](#formatting-sms-notifications)
-    - [自訂 "From" 號碼 (Customizing the "From" Number)](#customizing-the-from-number)
-    - [新增客戶參考 (Adding a Client Reference)](#adding-a-client-reference)
-    - [路由 SMS 通知 (Routing SMS Notifications)](#routing-sms-notifications)
+  - [先決條件 (Prerequisites)](#sms-prerequisites)
+  - [格式化 SMS 通知 (Formatting SMS Notifications)](#formatting-sms-notifications)
+  - [自訂 "From" 號碼 (Customizing the "From" Number)](#customizing-the-from-number)
+  - [新增客戶參考 (Adding a Client Reference)](#adding-a-client-reference)
+  - [路由 SMS 通知 (Routing SMS Notifications)](#routing-sms-notifications)
 - [Slack 通知 (Slack Notifications)](#slack-notifications)
-    - [先決條件 (Prerequisites)](#slack-prerequisites)
-    - [格式化 Slack 通知 (Formatting Slack Notifications)](#formatting-slack-notifications)
-    - [Slack 互動 (Slack Interactivity)](#slack-interactivity)
-    - [路由 Slack 通知 (Routing Slack Notifications)](#routing-slack-notifications)
-    - [通知外部 Slack 工作區 (Notifying External Slack Workspaces)](#notifying-external-slack-workspaces)
+  - [先決條件 (Prerequisites)](#slack-prerequisites)
+  - [格式化 Slack 通知 (Formatting Slack Notifications)](#formatting-slack-notifications)
+  - [Slack 互動 (Slack Interactivity)](#slack-interactivity)
+  - [路由 Slack 通知 (Routing Slack Notifications)](#routing-slack-notifications)
+  - [通知外部 Slack 工作區 (Notifying External Slack Workspaces)](#notifying-external-slack-workspaces)
 - [在地化通知 (Localizing Notifications)](#localizing-notifications)
 - [測試 (Testing)](#testing)
 - [通知事件 (Notification Events)](#notification-events)
@@ -433,7 +431,8 @@ class InvoicePaid extends Notification implements ShouldQueue
 > 要了解有關解決這些問題的更多資訊，請查看關於 [佇列任務和資料庫交易](/docs/queues#jobs-and-database-transactions) 的文件。
 
 <a name="determining-if-the-queued-notification-should-be-sent"></a>
-#### 決定是否應發送佇列通知 (Determining if a Queued Notification Should Be Sent)
+#### 決定是否應發送佇列通知 (Determining if a Queued Notification Should Be
+Sent)
 
 在佇列通知被分派到佇列進行背景處理後，它通常會被佇列 worker 接受並發送給預期的收件者。
 
@@ -1190,10 +1189,9 @@ public function broadcastType(): string
 通知將在格式為 `{notifiable}.{id}` 的私有頻道上廣播。因此，如果你向 ID 為 `1` 的 `App\Models\User` 實例發送通知，通知將在 `App.Models.User.1` 私有頻道上廣播。當使用 [Laravel Echo](/docs/broadcasting#client-side-installation) 時，你可以使用 `notification` 方法輕鬆監聽頻道上的通知：
 
 ```js
-Echo.private('App.Models.User.' + userId)
-    .notification((notification) => {
-        console.log(notification.type);
-    });
+Echo.private("App.Models.User." + userId).notification((notification) => {
+  console.log(notification.type);
+});
 ```
 
 <a name="using-react-or-vue"></a>
@@ -1204,24 +1202,18 @@ Laravel Echo 包含 React 和 Vue hooks，讓監聽通知變得輕鬆。要開�
 ```js tab=React
 import { useEchoNotification } from "@laravel/echo-react";
 
-useEchoNotification(
-    `App.Models.User.${userId}`,
-    (notification) => {
-        console.log(notification.type);
-    },
-);
+useEchoNotification(`App.Models.User.${userId}`, (notification) => {
+  console.log(notification.type);
+});
 ```
 
 ```vue tab=Vue
 <script setup lang="ts">
 import { useEchoNotification } from "@laravel/echo-vue";
 
-useEchoNotification(
-    `App.Models.User.${userId}`,
-    (notification) => {
-        console.log(notification.type);
-    },
-);
+useEchoNotification(`App.Models.User.${userId}`, (notification) => {
+  console.log(notification.type);
+});
 </script>
 ```
 
@@ -1231,11 +1223,11 @@ useEchoNotification(
 import { useEchoNotification } from "@laravel/echo-react";
 
 useEchoNotification(
-    `App.Models.User.${userId}`,
-    (notification) => {
-        console.log(notification.type);
-    },
-    'App.Notifications.InvoicePaid',
+  `App.Models.User.${userId}`,
+  (notification) => {
+    console.log(notification.type);
+  },
+  "App.Notifications.InvoicePaid"
 );
 ```
 
@@ -1244,11 +1236,11 @@ useEchoNotification(
 import { useEchoNotification } from "@laravel/echo-vue";
 
 useEchoNotification(
-    `App.Models.User.${userId}`,
-    (notification) => {
-        console.log(notification.type);
-    },
-    'App.Notifications.InvoicePaid',
+  `App.Models.User.${userId}`,
+  (notification) => {
+    console.log(notification.type);
+  },
+  "App.Notifications.InvoicePaid"
 );
 </script>
 ```
@@ -1257,18 +1249,18 @@ useEchoNotification(
 
 ```ts
 type InvoicePaidNotification = {
-    invoice_id: number;
-    created_at: string;
+  invoice_id: number;
+  created_at: string;
 };
 
 useEchoNotification<InvoicePaidNotification>(
-    `App.Models.User.${userId}`,
-    (notification) => {
-        console.log(notification.invoice_id);
-        console.log(notification.created_at);
-        console.log(notification.type);
-    },
-    'App.Notifications.InvoicePaid',
+  `App.Models.User.${userId}`,
+  (notification) => {
+    console.log(notification.invoice_id);
+    console.log(notification.created_at);
+    console.log(notification.type);
+  },
+  "App.Notifications.InvoicePaid"
 );
 ```
 
@@ -1489,7 +1481,8 @@ public function toSlack(object $notifiable): SlackMessage
 ```
 
 <a name="using-slacks-block-kit-builder-template"></a>
-#### 使用 Slack 的 Block Kit Builder 樣板 (Using Slack's Block Kit Builder Template)
+#### 使用 Slack 的 Block Kit Builder 樣板 (Using Slack's Block Kit Builder
+Template)
 
 除了使用流暢的訊息建構器方法來建構你的 Block Kit 訊息之外，你還可以將 Slack 的 Block Kit Builder 產生的原始 JSON payload 提供給 `usingBlockKitTemplate` 方法：
 

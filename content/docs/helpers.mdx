@@ -3,8 +3,6 @@ title: Helpers
 description: Laravel 包含多種全域 PHP 輔助函式
 ---
 
-# Helpers
-
 - [簡介 (Introduction)](#introduction)
 - [可用方法 (Available Methods)](#available-methods)
 - [其他工具 (Other Utilities)](#other-utilities)
@@ -31,67 +29,67 @@ Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架�
 <div className="collection-method-list">
 
 <ul>
-<li>[Arr::accessible](#method-array-accessible)</li>
-<li>[Arr::add](#method-array-add)</li>
-<li>[Arr::array](#method-array-array)</li>
-<li>[Arr::boolean](#method-array-boolean)</li>
-<li>[Arr::collapse](#method-array-collapse)</li>
-<li>[Arr::crossJoin](#method-array-crossjoin)</li>
-<li>[Arr::divide](#method-array-divide)</li>
-<li>[Arr::dot](#method-array-dot)</li>
-<li>[Arr::every](#method-array-every)</li>
-<li>[Arr::except](#method-array-except)</li>
-<li>[Arr::exists](#method-array-exists)</li>
-<li>[Arr::first](#method-array-first)</li>
-<li>[Arr::flatten](#method-array-flatten)</li>
-<li>[Arr::float](#method-array-float)</li>
-<li>[Arr::forget](#method-array-forget)</li>
-<li>[Arr::from](#method-array-from)</li>
-<li>[Arr::get](#method-array-get)</li>
-<li>[Arr::has](#method-array-has)</li>
-<li>[Arr::hasAll](#method-array-hasall)</li>
-<li>[Arr::hasAny](#method-array-hasany)</li>
-<li>[Arr::integer](#method-array-integer)</li>
-<li>[Arr::isAssoc](#method-array-isassoc)</li>
-<li>[Arr::isList](#method-array-islist)</li>
-<li>[Arr::join](#method-array-join)</li>
-<li>[Arr::keyBy](#method-array-keyby)</li>
-<li>[Arr::last](#method-array-last)</li>
-<li>[Arr::map](#method-array-map)</li>
-<li>[Arr::mapSpread](#method-array-map-spread)</li>
-<li>[Arr::mapWithKeys](#method-array-map-with-keys)</li>
-<li>[Arr::only](#method-array-only)</li>
-<li>[Arr::partition](#method-array-partition)</li>
-<li>[Arr::pluck](#method-array-pluck)</li>
-<li>[Arr::prepend](#method-array-prepend)</li>
-<li>[Arr::prependKeysWith](#method-array-prependkeyswith)</li>
-<li>[Arr::pull](#method-array-pull)</li>
-<li>[Arr::push](#method-array-push)</li>
-<li>[Arr::query](#method-array-query)</li>
-<li>[Arr::random](#method-array-random)</li>
-<li>[Arr::reject](#method-array-reject)</li>
-<li>[Arr::select](#method-array-select)</li>
-<li>[Arr::set](#method-array-set)</li>
-<li>[Arr::shuffle](#method-array-shuffle)</li>
-<li>[Arr::sole](#method-array-sole)</li>
-<li>[Arr::some](#method-array-some)</li>
-<li>[Arr::sort](#method-array-sort)</li>
-<li>[Arr::sortDesc](#method-array-sort-desc)</li>
-<li>[Arr::sortRecursive](#method-array-sort-recursive)</li>
-<li>[Arr::string](#method-array-string)</li>
-<li>[Arr::take](#method-array-take)</li>
-<li>[Arr::toCssClasses](#method-array-to-css-classes)</li>
-<li>[Arr::toCssStyles](#method-array-to-css-styles)</li>
-<li>[Arr::undot](#method-array-undot)</li>
-<li>[Arr::where](#method-array-where)</li>
-<li>[Arr::whereNotNull](#method-array-where-not-null)</li>
-<li>[Arr::wrap](#method-array-wrap)</li>
-<li>[data_fill](#method-data-fill)</li>
-<li>[data_get](#method-data-get)</li>
-<li>[data_set](#method-data-set)</li>
-<li>[data_forget](#method-data-forget)</li>
-<li>[head](#method-head)</li>
-<li>[last](#method-last)</li>
+  <li>[Arr::accessible](#method-array-accessible)</li>
+  <li>[Arr::add](#method-array-add)</li>
+  <li>[Arr::array](#method-array-array)</li>
+  <li>[Arr::boolean](#method-array-boolean)</li>
+  <li>[Arr::collapse](#method-array-collapse)</li>
+  <li>[Arr::crossJoin](#method-array-crossjoin)</li>
+  <li>[Arr::divide](#method-array-divide)</li>
+  <li>[Arr::dot](#method-array-dot)</li>
+  <li>[Arr::every](#method-array-every)</li>
+  <li>[Arr::except](#method-array-except)</li>
+  <li>[Arr::exists](#method-array-exists)</li>
+  <li>[Arr::first](#method-array-first)</li>
+  <li>[Arr::flatten](#method-array-flatten)</li>
+  <li>[Arr::float](#method-array-float)</li>
+  <li>[Arr::forget](#method-array-forget)</li>
+  <li>[Arr::from](#method-array-from)</li>
+  <li>[Arr::get](#method-array-get)</li>
+  <li>[Arr::has](#method-array-has)</li>
+  <li>[Arr::hasAll](#method-array-hasall)</li>
+  <li>[Arr::hasAny](#method-array-hasany)</li>
+  <li>[Arr::integer](#method-array-integer)</li>
+  <li>[Arr::isAssoc](#method-array-isassoc)</li>
+  <li>[Arr::isList](#method-array-islist)</li>
+  <li>[Arr::join](#method-array-join)</li>
+  <li>[Arr::keyBy](#method-array-keyby)</li>
+  <li>[Arr::last](#method-array-last)</li>
+  <li>[Arr::map](#method-array-map)</li>
+  <li>[Arr::mapSpread](#method-array-map-spread)</li>
+  <li>[Arr::mapWithKeys](#method-array-map-with-keys)</li>
+  <li>[Arr::only](#method-array-only)</li>
+  <li>[Arr::partition](#method-array-partition)</li>
+  <li>[Arr::pluck](#method-array-pluck)</li>
+  <li>[Arr::prepend](#method-array-prepend)</li>
+  <li>[Arr::prependKeysWith](#method-array-prependkeyswith)</li>
+  <li>[Arr::pull](#method-array-pull)</li>
+  <li>[Arr::push](#method-array-push)</li>
+  <li>[Arr::query](#method-array-query)</li>
+  <li>[Arr::random](#method-array-random)</li>
+  <li>[Arr::reject](#method-array-reject)</li>
+  <li>[Arr::select](#method-array-select)</li>
+  <li>[Arr::set](#method-array-set)</li>
+  <li>[Arr::shuffle](#method-array-shuffle)</li>
+  <li>[Arr::sole](#method-array-sole)</li>
+  <li>[Arr::some](#method-array-some)</li>
+  <li>[Arr::sort](#method-array-sort)</li>
+  <li>[Arr::sortDesc](#method-array-sort-desc)</li>
+  <li>[Arr::sortRecursive](#method-array-sort-recursive)</li>
+  <li>[Arr::string](#method-array-string)</li>
+  <li>[Arr::take](#method-array-take)</li>
+  <li>[Arr::toCssClasses](#method-array-to-css-classes)</li>
+  <li>[Arr::toCssStyles](#method-array-to-css-styles)</li>
+  <li>[Arr::undot](#method-array-undot)</li>
+  <li>[Arr::where](#method-array-where)</li>
+  <li>[Arr::whereNotNull](#method-array-where-not-null)</li>
+  <li>[Arr::wrap](#method-array-wrap)</li>
+  <li>[data_fill](#method-data-fill)</li>
+  <li>[data_get](#method-data-get)</li>
+  <li>[data_set](#method-data-set)</li>
+  <li>[data_forget](#method-data-forget)</li>
+  <li>[head](#method-head)</li>
+  <li>[last](#method-last)</li>
 </ul>
 
 </div>
@@ -102,26 +100,26 @@ Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架�
 <div className="collection-method-list">
 
 <ul>
-<li>[Number::abbreviate](#method-number-abbreviate)</li>
-<li>[Number::clamp](#method-number-clamp)</li>
-<li>[Number::currency](#method-number-currency)</li>
-<li>[Number::defaultCurrency](#method-default-currency)</li>
-<li>[Number::defaultLocale](#method-default-locale)</li>
-<li>[Number::fileSize](#method-number-file-size)</li>
-<li>[Number::forHumans](#method-number-for-humans)</li>
-<li>[Number::format](#method-number-format)</li>
-<li>[Number::ordinal](#method-number-ordinal)</li>
-<li>[Number::pairs](#method-number-pairs)</li>
-<li>[Number::parseInt](#method-number-parse-int)</li>
-<li>[Number::parseFloat](#method-number-parse-float)</li>
-<li>[Number::percentage](#method-number-percentage)</li>
-<li>[Number::spell](#method-number-spell)</li>
-<li>[Number::spellOrdinal](#method-number-spell-ordinal)</li>
-<li>[Number::trim](#method-number-trim)</li>
-<li>[Number::useLocale](#method-number-use-locale)</li>
-<li>[Number::withLocale](#method-number-with-locale)</li>
-<li>[Number::useCurrency](#method-number-use-currency)</li>
-<li>[Number::withCurrency](#method-number-with-currency)</li>
+  <li>[Number::abbreviate](#method-number-abbreviate)</li>
+  <li>[Number::clamp](#method-number-clamp)</li>
+  <li>[Number::currency](#method-number-currency)</li>
+  <li>[Number::defaultCurrency](#method-default-currency)</li>
+  <li>[Number::defaultLocale](#method-default-locale)</li>
+  <li>[Number::fileSize](#method-number-file-size)</li>
+  <li>[Number::forHumans](#method-number-for-humans)</li>
+  <li>[Number::format](#method-number-format)</li>
+  <li>[Number::ordinal](#method-number-ordinal)</li>
+  <li>[Number::pairs](#method-number-pairs)</li>
+  <li>[Number::parseInt](#method-number-parse-int)</li>
+  <li>[Number::parseFloat](#method-number-parse-float)</li>
+  <li>[Number::percentage](#method-number-percentage)</li>
+  <li>[Number::spell](#method-number-spell)</li>
+  <li>[Number::spellOrdinal](#method-number-spell-ordinal)</li>
+  <li>[Number::trim](#method-number-trim)</li>
+  <li>[Number::useLocale](#method-number-use-locale)</li>
+  <li>[Number::withLocale](#method-number-with-locale)</li>
+  <li>[Number::useCurrency](#method-number-use-currency)</li>
+  <li>[Number::withCurrency](#method-number-with-currency)</li>
 </ul>
 
 </div>
@@ -132,14 +130,14 @@ Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架�
 <div className="collection-method-list">
 
 <ul>
-<li>[app_path](#method-app-path)</li>
-<li>[base_path](#method-base-path)</li>
-<li>[config_path](#method-config-path)</li>
-<li>[database_path](#method-database-path)</li>
-<li>[lang_path](#method-lang-path)</li>
-<li>[public_path](#method-public-path)</li>
-<li>[resource_path](#method-resource-path)</li>
-<li>[storage_path](#method-storage-path)</li>
+  <li>[app_path](#method-app-path)</li>
+  <li>[base_path](#method-base-path)</li>
+  <li>[config_path](#method-config-path)</li>
+  <li>[database_path](#method-database-path)</li>
+  <li>[lang_path](#method-lang-path)</li>
+  <li>[public_path](#method-public-path)</li>
+  <li>[resource_path](#method-resource-path)</li>
+  <li>[storage_path](#method-storage-path)</li>
 </ul>
 
 </div>
@@ -150,15 +148,15 @@ Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架�
 <div className="collection-method-list">
 
 <ul>
-<li>[action](#method-action)</li>
-<li>[asset](#method-asset)</li>
-<li>[route](#method-route)</li>
-<li>[secure_asset](#method-secure-asset)</li>
-<li>[secure_url](#method-secure-url)</li>
-<li>[to_action](#method-to-action)</li>
-<li>[to_route](#method-to-route)</li>
-<li>[uri](#method-uri)</li>
-<li>[url](#method-url)</li>
+  <li>[action](#method-action)</li>
+  <li>[asset](#method-asset)</li>
+  <li>[route](#method-route)</li>
+  <li>[secure_asset](#method-secure-asset)</li>
+  <li>[secure_url](#method-secure-url)</li>
+  <li>[to_action](#method-to-action)</li>
+  <li>[to_route](#method-to-route)</li>
+  <li>[uri](#method-uri)</li>
+  <li>[url](#method-url)</li>
 </ul>
 
 </div>
@@ -169,65 +167,65 @@ Laravel 包含多種全域「輔助」PHP 函式。許多這些函式由框架�
 <div className="collection-method-list">
 
 <ul>
-<li>[abort](#method-abort)</li>
-<li>[abort_if](#method-abort-if)</li>
-<li>[abort_unless](#method-abort-unless)</li>
-<li>[app](#method-app)</li>
-<li>[auth](#method-auth)</li>
-<li>[back](#method-back)</li>
-<li>[bcrypt](#method-bcrypt)</li>
-<li>[blank](#method-blank)</li>
-<li>[broadcast](#method-broadcast)</li>
-<li>[broadcast_if](#method-broadcast-if)</li>
-<li>[broadcast_unless](#method-broadcast-unless)</li>
-<li>[cache](#method-cache)</li>
-<li>[class_uses_recursive](#method-class-uses-recursive)</li>
-<li>[collect](#method-collect)</li>
-<li>[config](#method-config)</li>
-<li>[context](#method-context)</li>
-<li>[cookie](#method-cookie)</li>
-<li>[csrf_field](#method-csrf-field)</li>
-<li>[csrf_token](#method-csrf-token)</li>
-<li>[decrypt](#method-decrypt)</li>
-<li>[dd](#method-dd)</li>
-<li>[dispatch](#method-dispatch)</li>
-<li>[dispatch_sync](#method-dispatch-sync)</li>
-<li>[dump](#method-dump)</li>
-<li>[encrypt](#method-encrypt)</li>
-<li>[env](#method-env)</li>
-<li>[event](#method-event)</li>
-<li>[fake](#method-fake)</li>
-<li>[filled](#method-filled)</li>
-<li>[info](#method-info)</li>
-<li>[literal](#method-literal)</li>
-<li>[logger](#method-logger)</li>
-<li>[method_field](#method-method-field)</li>
-<li>[now](#method-now)</li>
-<li>[old](#method-old)</li>
-<li>[once](#method-once)</li>
-<li>[optional](#method-optional)</li>
-<li>[policy](#method-policy)</li>
-<li>[redirect](#method-redirect)</li>
-<li>[report](#method-report)</li>
-<li>[report_if](#method-report-if)</li>
-<li>[report_unless](#method-report-unless)</li>
-<li>[request](#method-request)</li>
-<li>[rescue](#method-rescue)</li>
-<li>[resolve](#method-resolve)</li>
-<li>[response](#method-response)</li>
-<li>[retry](#method-retry)</li>
-<li>[session](#method-session)</li>
-<li>[tap](#method-tap)</li>
-<li>[throw_if](#method-throw-if)</li>
-<li>[throw_unless](#method-throw-unless)</li>
-<li>[today](#method-today)</li>
-<li>[trait_uses_recursive](#method-trait-uses-recursive)</li>
-<li>[transform](#method-transform)</li>
-<li>[validator](#method-validator)</li>
-<li>[value](#method-value)</li>
-<li>[view](#method-view)</li>
-<li>[with](#method-with)</li>
-<li>[when](#method-when)</li>
+  <li>[abort](#method-abort)</li>
+  <li>[abort_if](#method-abort-if)</li>
+  <li>[abort_unless](#method-abort-unless)</li>
+  <li>[app](#method-app)</li>
+  <li>[auth](#method-auth)</li>
+  <li>[back](#method-back)</li>
+  <li>[bcrypt](#method-bcrypt)</li>
+  <li>[blank](#method-blank)</li>
+  <li>[broadcast](#method-broadcast)</li>
+  <li>[broadcast_if](#method-broadcast-if)</li>
+  <li>[broadcast_unless](#method-broadcast-unless)</li>
+  <li>[cache](#method-cache)</li>
+  <li>[class_uses_recursive](#method-class-uses-recursive)</li>
+  <li>[collect](#method-collect)</li>
+  <li>[config](#method-config)</li>
+  <li>[context](#method-context)</li>
+  <li>[cookie](#method-cookie)</li>
+  <li>[csrf_field](#method-csrf-field)</li>
+  <li>[csrf_token](#method-csrf-token)</li>
+  <li>[decrypt](#method-decrypt)</li>
+  <li>[dd](#method-dd)</li>
+  <li>[dispatch](#method-dispatch)</li>
+  <li>[dispatch_sync](#method-dispatch-sync)</li>
+  <li>[dump](#method-dump)</li>
+  <li>[encrypt](#method-encrypt)</li>
+  <li>[env](#method-env)</li>
+  <li>[event](#method-event)</li>
+  <li>[fake](#method-fake)</li>
+  <li>[filled](#method-filled)</li>
+  <li>[info](#method-info)</li>
+  <li>[literal](#method-literal)</li>
+  <li>[logger](#method-logger)</li>
+  <li>[method_field](#method-method-field)</li>
+  <li>[now](#method-now)</li>
+  <li>[old](#method-old)</li>
+  <li>[once](#method-once)</li>
+  <li>[optional](#method-optional)</li>
+  <li>[policy](#method-policy)</li>
+  <li>[redirect](#method-redirect)</li>
+  <li>[report](#method-report)</li>
+  <li>[report_if](#method-report-if)</li>
+  <li>[report_unless](#method-report-unless)</li>
+  <li>[request](#method-request)</li>
+  <li>[rescue](#method-rescue)</li>
+  <li>[resolve](#method-resolve)</li>
+  <li>[response](#method-response)</li>
+  <li>[retry](#method-retry)</li>
+  <li>[session](#method-session)</li>
+  <li>[tap](#method-tap)</li>
+  <li>[throw_if](#method-throw-if)</li>
+  <li>[throw_unless](#method-throw-unless)</li>
+  <li>[today](#method-today)</li>
+  <li>[trait_uses_recursive](#method-trait-uses-recursive)</li>
+  <li>[transform](#method-transform)</li>
+  <li>[validator](#method-validator)</li>
+  <li>[value](#method-value)</li>
+  <li>[view](#method-view)</li>
+  <li>[with](#method-with)</li>
+  <li>[when](#method-when)</li>
 </ul>
 
 </div>
@@ -3476,7 +3474,7 @@ while ($waiting) {
 }
 ```
 
-通常,測試此程式碼將花費_至少_一秒鐘。幸運的是,`Sleep` 類別允許我們「偽造」睡眠,以便我們的測試套件保持快速:
+通常,測試此程式碼將花費*至少*一秒鐘。幸運的是,`Sleep` 類別允許我們「偽造」睡眠,以便我們的測試套件保持快速:
 
 ```php tab=Pest
 it('waits until ready', function () {

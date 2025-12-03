@@ -3,28 +3,26 @@ title: Laravel Sanctum
 description: Sanctum 為 SPAs 和行動應用程式提供簡單的驗證系統
 ---
 
-# Laravel Sanctum
-
 - [簡介 (Introduction)](#introduction)
-    - [運作原理 (How it Works)](#how-it-works)
+  - [運作原理 (How it Works)](#how-it-works)
 - [安裝 (Installation)](#installation)
 - [設定 (Configuration)](#configuration)
-    - [覆寫預設 Model (Overriding Default Models)](#overriding-default-models)
+  - [覆寫預設 Model (Overriding Default Models)](#overriding-default-models)
 - [API Token 驗證 (API Token Authentication)](#api-token-authentication)
-    - [發行 API Token (Issuing API Tokens)](#issuing-api-tokens)
-    - [Token 能力 (Token Abilities)](#token-abilities)
-    - [保護路由 (Protecting Routes)](#protecting-routes)
-    - [撤銷 Token (Revoking Tokens)](#revoking-tokens)
-    - [Token 過期 (Token Expiration)](#token-expiration)
+  - [發行 API Token (Issuing API Tokens)](#issuing-api-tokens)
+  - [Token 能力 (Token Abilities)](#token-abilities)
+  - [保護路由 (Protecting Routes)](#protecting-routes)
+  - [撤銷 Token (Revoking Tokens)](#revoking-tokens)
+  - [Token 過期 (Token Expiration)](#token-expiration)
 - [SPA 驗證 (SPA Authentication)](#spa-authentication)
-    - [設定 (Configuration)](#spa-configuration)
-    - [驗證 (Authenticating)](#spa-authenticating)
-    - [保護路由 (Protecting Routes)](#protecting-spa-routes)
-    - [授權私有廣播頻道 (Authorizing Private Broadcast Channels)](#authorizing-private-broadcast-channels)
+  - [設定 (Configuration)](#spa-configuration)
+  - [驗證 (Authenticating)](#spa-authenticating)
+  - [保護路由 (Protecting Routes)](#protecting-spa-routes)
+  - [授權私有廣播頻道 (Authorizing Private Broadcast Channels)](#authorizing-private-broadcast-channels)
 - [行動應用程式驗證 (Mobile Application Authentication)](#mobile-application-authentication)
-    - [發行 API Token (Issuing API Tokens)](#issuing-mobile-api-tokens)
-    - [保護路由 (Protecting Routes)](#protecting-mobile-api-routes)
-    - [撤銷 Token (Revoking Tokens)](#revoking-mobile-api-tokens)
+  - [發行 API Token (Issuing API Tokens)](#issuing-mobile-api-tokens)
+  - [保護路由 (Protecting Routes)](#protecting-mobile-api-routes)
+  - [撤銷 Token (Revoking Tokens)](#revoking-mobile-api-tokens)
 - [測試 (Testing)](#testing)
 
 <a name="introduction"></a>
@@ -187,7 +185,7 @@ Route::get('/orders', function () {
 })->middleware(['auth:sanctum', 'abilities:check-status,place-orders']);
 ```
 
-`ability` Middleware 可以指派給路由，以驗證傳入請求的 Token 是否具有列出的能力中的 *至少一個*：
+`ability` Middleware 可以指派給路由，以驗證傳入請求的 Token 是否具有列出的能力中的 _至少一個_：
 
 ```php
 Route::get('/orders', function () {
@@ -336,8 +334,8 @@ axios.defaults.withXSRFToken = true;
 要驗證你的 SPA，你的 SPA 的「登入」頁面應首先向 `/sanctum/csrf-cookie` 端點發出請求，以初始化應用程式的 CSRF 保護：
 
 ```js
-axios.get('/sanctum/csrf-cookie').then(response => {
-    // Login...
+axios.get("/sanctum/csrf-cookie").then((response) => {
+  // Login...
 });
 ```
 
@@ -389,27 +387,28 @@ return Application::configure(basePath: dirname(__DIR__))
 
 ```js
 window.Echo = new Echo({
-    broadcaster: "pusher",
-    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-    encrypted: true,
-    key: import.meta.env.VITE_PUSHER_APP_KEY,
-    authorizer: (channel, options) => {
-        return {
-            authorize: (socketId, callback) => {
-                axios.post('/api/broadcasting/auth', {
-                    socket_id: socketId,
-                    channel_name: channel.name
-                })
-                .then(response => {
-                    callback(false, response.data);
-                })
-                .catch(error => {
-                    callback(true, error);
-                });
-            }
-        };
-    },
-})
+  broadcaster: "pusher",
+  cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+  encrypted: true,
+  key: import.meta.env.VITE_PUSHER_APP_KEY,
+  authorizer: (channel, options) => {
+    return {
+      authorize: (socketId, callback) => {
+        axios
+          .post("/api/broadcasting/auth", {
+            socket_id: socketId,
+            channel_name: channel.name,
+          })
+          .then((response) => {
+            callback(false, response.data);
+          })
+          .catch((error) => {
+            callback(true, error);
+          });
+      },
+    };
+  },
+});
 ```
 
 <a name="mobile-application-authentication"></a>

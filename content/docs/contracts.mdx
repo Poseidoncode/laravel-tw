@@ -3,10 +3,8 @@ title: Contracts
 description: Laravel Contracts 是一組定義核心服務的介面
 ---
 
-# Contracts
-
 - [介紹](#introduction)
-    - [Contracts vs. Facades](#contracts-vs-facades)
+  - [Contracts vs. Facades](#contracts-vs-facades)
 - [何時使用 Contracts](#when-to-use-contracts)
 - [如何使用 Contracts](#how-to-use-contracts)
 - [Contract 參考](#contract-reference)
@@ -79,326 +77,722 @@ class CacheOrderInformation
 此表格提供了所有 Laravel contracts 及其等效 facades 的快速參考：
 
 <div className="overflow-auto">
-<table className="min-w-full text-left border-collapse">
+  <table className="min-w-full text-left border-collapse">
     <thead>
-        <tr>
-            <th className="px-3 py-2">Contract</th>
-            <th className="px-3 py-2">參考的 Facade</th>
-        </tr>
+      <tr>
+        <th className="px-3 py-2">Contract</th>
+        <th className="px-3 py-2">參考的 Facade</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/Access/Authorizable.php">Illuminate\Contracts\Auth\Access\Authorizable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/Access/Gate.php">Illuminate\Contracts\Auth\Access\Gate</a></td>
-            <td className="px-3 py-2"><code>Gate</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/Authenticatable.php">Illuminate\Contracts\Auth\Authenticatable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/CanResetPassword.php">Illuminate\Contracts\Auth\CanResetPassword</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/Factory.php">Illuminate\Contracts\Auth\Factory</a></td>
-            <td className="px-3 py-2"><code>Auth</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/Guard.php">Illuminate\Contracts\Auth\Guard</a></td>
-            <td className="px-3 py-2"><code>Auth::guard()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/PasswordBroker.php">Illuminate\Contracts\Auth\PasswordBroker</a></td>
-            <td className="px-3 py-2"><code>Password::broker()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/PasswordBrokerFactory.php">Illuminate\Contracts\Auth\PasswordBrokerFactory</a></td>
-            <td className="px-3 py-2"><code>Password</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/StatefulGuard.php">Illuminate\Contracts\Auth\StatefulGuard</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/SupportsBasicAuth.php">Illuminate\Contracts\Auth\SupportsBasicAuth</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Auth/UserProvider.php">Illuminate\Contracts\Auth\UserProvider</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Broadcasting/Broadcaster.php">Illuminate\Contracts\Broadcasting\Broadcaster</a></td>
-            <td className="px-3 py-2"><code>Broadcast::connection()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Broadcasting/Factory.php">Illuminate\Contracts\Broadcasting\Factory</a></td>
-            <td className="px-3 py-2"><code>Broadcast</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Broadcasting/ShouldBroadcast.php">Illuminate\Contracts\Broadcasting\ShouldBroadcast</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Broadcasting/ShouldBroadcastNow.php">Illuminate\Contracts\Broadcasting\ShouldBroadcastNow</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Bus/Dispatcher.php">Illuminate\Contracts\Bus\Dispatcher</a></td>
-            <td className="px-3 py-2"><code>Bus</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Bus/QueueingDispatcher.php">Illuminate\Contracts\Bus\QueueingDispatcher</a></td>
-            <td className="px-3 py-2"><code>Bus::dispatchToQueue()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cache/Factory.php">Illuminate\Contracts\Cache\Factory</a></td>
-            <td className="px-3 py-2"><code>Cache</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cache/Lock.php">Illuminate\Contracts\Cache\Lock</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cache/LockProvider.php">Illuminate\Contracts\Cache\LockProvider</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cache/Repository.php">Illuminate\Contracts\Cache\Repository</a></td>
-            <td className="px-3 py-2"><code>Cache::driver()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cache/Store.php">Illuminate\Contracts\Cache\Store</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Config/Repository.php">Illuminate\Contracts\Config\Repository</a></td>
-            <td className="px-3 py-2"><code>Config</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Console/Application.php">Illuminate\Contracts\Console\Application</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Console/Kernel.php">Illuminate\Contracts\Console\Kernel</a></td>
-            <td className="px-3 py-2"><code>Artisan</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Container/Container.php">Illuminate\Contracts\Container\Container</a></td>
-            <td className="px-3 py-2"><code>App</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cookie/Factory.php">Illuminate\Contracts\Cookie\Factory</a></td>
-            <td className="px-3 py-2"><code>Cookie</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Cookie/QueueingFactory.php">Illuminate\Contracts\Cookie\QueueingFactory</a></td>
-            <td className="px-3 py-2"><code>Cookie::queue()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Database/ModelIdentifier.php">Illuminate\Contracts\Database\ModelIdentifier</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Debug/ExceptionHandler.php">Illuminate\Contracts\Debug\ExceptionHandler</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Encryption/Encrypter.php">Illuminate\Contracts\Encryption\Encrypter</a></td>
-            <td className="px-3 py-2"><code>Crypt</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Events/Dispatcher.php">Illuminate\Contracts\Events\Dispatcher</a></td>
-            <td className="px-3 py-2"><code>Event</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Filesystem/Cloud.php">Illuminate\Contracts\Filesystem\Cloud</a></td>
-            <td className="px-3 py-2"><code>Storage::cloud()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Filesystem/Factory.php">Illuminate\Contracts\Filesystem\Factory</a></td>
-            <td className="px-3 py-2"><code>Storage</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Filesystem/Filesystem.php">Illuminate\Contracts\Filesystem\Filesystem</a></td>
-            <td className="px-3 py-2"><code>Storage::disk()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Foundation/Application.php">Illuminate\Contracts\Foundation\Application</a></td>
-            <td className="px-3 py-2"><code>App</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Hashing/Hasher.php">Illuminate\Contracts\Hashing\Hasher</a></td>
-            <td className="px-3 py-2"><code>Hash</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Http/Kernel.php">Illuminate\Contracts\Http\Kernel</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Mail/Mailable.php">Illuminate\Contracts\Mail\Mailable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Mail/Mailer.php">Illuminate\Contracts\Mail\Mailer</a></td>
-            <td className="px-3 py-2"><code>Mail</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Mail/MailQueue.php">Illuminate\Contracts\Mail\MailQueue</a></td>
-            <td className="px-3 py-2"><code>Mail::queue()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Notifications/Dispatcher.php">Illuminate\Contracts\Notifications\Dispatcher</a></td>
-            <td className="px-3 py-2"><code>Notification</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Notifications/Factory.php">Illuminate\Contracts\Notifications\Factory</a></td>
-            <td className="px-3 py-2"><code>Notification</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Pagination/LengthAwarePaginator.php">Illuminate\Contracts\Pagination\LengthAwarePaginator</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Pagination/Paginator.php">Illuminate\Contracts\Pagination\Paginator</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Pipeline/Hub.php">Illuminate\Contracts\Pipeline\Hub</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Pipeline/Pipeline.php">Illuminate\Contracts\Pipeline\Pipeline</a></td>
-            <td className="px-3 py-2"><code>Pipeline</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/EntityResolver.php">Illuminate\Contracts\Queue\EntityResolver</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/Factory.php">Illuminate\Contracts\Queue\Factory</a></td>
-            <td className="px-3 py-2"><code>Queue</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/Job.php">Illuminate\Contracts\Queue\Job</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/Monitor.php">Illuminate\Contracts\Queue\Monitor</a></td>
-            <td className="px-3 py-2"><code>Queue</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/Queue.php">Illuminate\Contracts\Queue\Queue</a></td>
-            <td className="px-3 py-2"><code>Queue::connection()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/QueueableCollection.php">Illuminate\Contracts\Queue\QueueableCollection</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/QueueableEntity.php">Illuminate\Contracts\Queue\QueueableEntity</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Queue/ShouldQueue.php">Illuminate\Contracts\Queue\ShouldQueue</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Redis/Factory.php">Illuminate\Contracts\Redis\Factory</a></td>
-            <td className="px-3 py-2"><code>Redis</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Routing/BindingRegistrar.php">Illuminate\Contracts\Routing\BindingRegistrar</a></td>
-            <td className="px-3 py-2"><code>Route</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Routing/Registrar.php">Illuminate\Contracts\Routing\Registrar</a></td>
-            <td className="px-3 py-2"><code>Route</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Routing/ResponseFactory.php">Illuminate\Contracts\Routing\ResponseFactory</a></td>
-            <td className="px-3 py-2"><code>Response</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Routing/UrlGenerator.php">Illuminate\Contracts\Routing\UrlGenerator</a></td>
-            <td className="px-3 py-2"><code>URL</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Routing/UrlRoutable.php">Illuminate\Contracts\Routing\UrlRoutable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Session/Session.php">Illuminate\Contracts\Session\Session</a></td>
-            <td className="px-3 py-2"><code>Session::driver()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/Arrayable.php">Illuminate\Contracts\Support\Arrayable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/Htmlable.php">Illuminate\Contracts\Support\Htmlable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/Jsonable.php">Illuminate\Contracts\Support\Jsonable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/MessageBag.php">Illuminate\Contracts\Support\MessageBag</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/MessageProvider.php">Illuminate\Contracts\Support\MessageProvider</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/Renderable.php">Illuminate\Contracts\Support\Renderable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Support/Responsable.php">Illuminate\Contracts\Support\Responsable</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Translation/Loader.php">Illuminate\Contracts\Translation\Loader</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Translation/Translator.php">Illuminate\Contracts\Translation\Translator</a></td>
-            <td className="px-3 py-2"><code>Lang</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Validation/Factory.php">Illuminate\Contracts\Validation\Factory</a></td>
-            <td className="px-3 py-2"><code>Validator</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Validation/ValidatesWhenResolved.php">Illuminate\Contracts\Validation\ValidatesWhenResolved</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Validation/ValidationRule.php">Illuminate\Contracts\Validation\ValidationRule</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/Validation/Validator.php">Illuminate\Contracts\Validation\Validator</a></td>
-            <td className="px-3 py-2"><code>Validator::make()</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/View/Engine.php">Illuminate\Contracts\View\Engine</a></td>
-            <td className="px-3 py-2">&nbsp;</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/View/Factory.php">Illuminate\Contracts\View\Factory</a></td>
-            <td className="px-3 py-2"><code>View</code></td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2"><a href="https://github.com/illuminate/contracts/blob/View/View.php">Illuminate\Contracts\View\View</a></td>
-            <td className="px-3 py-2"><code>View::make()</code></td>
-        </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/Access/Authorizable.php">
+            Illuminate\Contracts\Auth\Access\Authorizable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/Access/Gate.php">
+            Illuminate\Contracts\Auth\Access\Gate
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Gate</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/Authenticatable.php">
+            Illuminate\Contracts\Auth\Authenticatable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/CanResetPassword.php">
+            Illuminate\Contracts\Auth\CanResetPassword
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/Factory.php">
+            Illuminate\Contracts\Auth\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Auth</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/Guard.php">
+            Illuminate\Contracts\Auth\Guard
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Auth::guard()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/PasswordBroker.php">
+            Illuminate\Contracts\Auth\PasswordBroker
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Password::broker()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/PasswordBrokerFactory.php">
+            Illuminate\Contracts\Auth\PasswordBrokerFactory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Password</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/StatefulGuard.php">
+            Illuminate\Contracts\Auth\StatefulGuard
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/SupportsBasicAuth.php">
+            Illuminate\Contracts\Auth\SupportsBasicAuth
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Auth/UserProvider.php">
+            Illuminate\Contracts\Auth\UserProvider
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Broadcasting/Broadcaster.php">
+            Illuminate\Contracts\Broadcasting\Broadcaster
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Broadcast::connection()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Broadcasting/Factory.php">
+            Illuminate\Contracts\Broadcasting\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Broadcast</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Broadcasting/ShouldBroadcast.php">
+            Illuminate\Contracts\Broadcasting\ShouldBroadcast
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Broadcasting/ShouldBroadcastNow.php">
+            Illuminate\Contracts\Broadcasting\ShouldBroadcastNow
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Bus/Dispatcher.php">
+            Illuminate\Contracts\Bus\Dispatcher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Bus</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Bus/QueueingDispatcher.php">
+            Illuminate\Contracts\Bus\QueueingDispatcher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Bus::dispatchToQueue()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cache/Factory.php">
+            Illuminate\Contracts\Cache\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Cache</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cache/Lock.php">
+            Illuminate\Contracts\Cache\Lock
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cache/LockProvider.php">
+            Illuminate\Contracts\Cache\LockProvider
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cache/Repository.php">
+            Illuminate\Contracts\Cache\Repository
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Cache::driver()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cache/Store.php">
+            Illuminate\Contracts\Cache\Store
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Config/Repository.php">
+            Illuminate\Contracts\Config\Repository
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Config</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Console/Application.php">
+            Illuminate\Contracts\Console\Application
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Console/Kernel.php">
+            Illuminate\Contracts\Console\Kernel
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Artisan</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Container/Container.php">
+            Illuminate\Contracts\Container\Container
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>App</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cookie/Factory.php">
+            Illuminate\Contracts\Cookie\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Cookie</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Cookie/QueueingFactory.php">
+            Illuminate\Contracts\Cookie\QueueingFactory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Cookie::queue()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Database/ModelIdentifier.php">
+            Illuminate\Contracts\Database\ModelIdentifier
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Debug/ExceptionHandler.php">
+            Illuminate\Contracts\Debug\ExceptionHandler
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Encryption/Encrypter.php">
+            Illuminate\Contracts\Encryption\Encrypter
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Crypt</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Events/Dispatcher.php">
+            Illuminate\Contracts\Events\Dispatcher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Event</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Filesystem/Cloud.php">
+            Illuminate\Contracts\Filesystem\Cloud
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Storage::cloud()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Filesystem/Factory.php">
+            Illuminate\Contracts\Filesystem\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Storage</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Filesystem/Filesystem.php">
+            Illuminate\Contracts\Filesystem\Filesystem
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Storage::disk()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Foundation/Application.php">
+            Illuminate\Contracts\Foundation\Application
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>App</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Hashing/Hasher.php">
+            Illuminate\Contracts\Hashing\Hasher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Hash</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Http/Kernel.php">
+            Illuminate\Contracts\Http\Kernel
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Mail/Mailable.php">
+            Illuminate\Contracts\Mail\Mailable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Mail/Mailer.php">
+            Illuminate\Contracts\Mail\Mailer
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Mail</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Mail/MailQueue.php">
+            Illuminate\Contracts\Mail\MailQueue
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Mail::queue()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Notifications/Dispatcher.php">
+            Illuminate\Contracts\Notifications\Dispatcher
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Notification</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Notifications/Factory.php">
+            Illuminate\Contracts\Notifications\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Notification</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Pagination/LengthAwarePaginator.php">
+            Illuminate\Contracts\Pagination\LengthAwarePaginator
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Pagination/Paginator.php">
+            Illuminate\Contracts\Pagination\Paginator
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Pipeline/Hub.php">
+            Illuminate\Contracts\Pipeline\Hub
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Pipeline/Pipeline.php">
+            Illuminate\Contracts\Pipeline\Pipeline
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Pipeline</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/EntityResolver.php">
+            Illuminate\Contracts\Queue\EntityResolver
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/Factory.php">
+            Illuminate\Contracts\Queue\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Queue</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/Job.php">
+            Illuminate\Contracts\Queue\Job
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/Monitor.php">
+            Illuminate\Contracts\Queue\Monitor
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Queue</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/Queue.php">
+            Illuminate\Contracts\Queue\Queue
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Queue::connection()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/QueueableCollection.php">
+            Illuminate\Contracts\Queue\QueueableCollection
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/QueueableEntity.php">
+            Illuminate\Contracts\Queue\QueueableEntity
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Queue/ShouldQueue.php">
+            Illuminate\Contracts\Queue\ShouldQueue
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Redis/Factory.php">
+            Illuminate\Contracts\Redis\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Redis</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Routing/BindingRegistrar.php">
+            Illuminate\Contracts\Routing\BindingRegistrar
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Route</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Routing/Registrar.php">
+            Illuminate\Contracts\Routing\Registrar
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Route</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Routing/ResponseFactory.php">
+            Illuminate\Contracts\Routing\ResponseFactory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Response</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Routing/UrlGenerator.php">
+            Illuminate\Contracts\Routing\UrlGenerator
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>URL</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Routing/UrlRoutable.php">
+            Illuminate\Contracts\Routing\UrlRoutable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Session/Session.php">
+            Illuminate\Contracts\Session\Session
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Session::driver()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/Arrayable.php">
+            Illuminate\Contracts\Support\Arrayable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/Htmlable.php">
+            Illuminate\Contracts\Support\Htmlable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/Jsonable.php">
+            Illuminate\Contracts\Support\Jsonable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/MessageBag.php">
+            Illuminate\Contracts\Support\MessageBag
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/MessageProvider.php">
+            Illuminate\Contracts\Support\MessageProvider
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/Renderable.php">
+            Illuminate\Contracts\Support\Renderable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Support/Responsable.php">
+            Illuminate\Contracts\Support\Responsable
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Translation/Loader.php">
+            Illuminate\Contracts\Translation\Loader
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Translation/Translator.php">
+            Illuminate\Contracts\Translation\Translator
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Lang</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Validation/Factory.php">
+            Illuminate\Contracts\Validation\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Validator</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Validation/ValidatesWhenResolved.php">
+            Illuminate\Contracts\Validation\ValidatesWhenResolved
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Validation/ValidationRule.php">
+            Illuminate\Contracts\Validation\ValidationRule
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/Validation/Validator.php">
+            Illuminate\Contracts\Validation\Validator
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>Validator::make()</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/View/Engine.php">
+            Illuminate\Contracts\View\Engine
+          </a>
+        </td>
+        <td className="px-3 py-2">&nbsp;</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/View/Factory.php">
+            Illuminate\Contracts\View\Factory
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>View</code>
+        </td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">
+          <a href="https://github.com/illuminate/contracts/blob/View/View.php">
+            Illuminate\Contracts\View\View
+          </a>
+        </td>
+        <td className="px-3 py-2">
+          <code>View::make()</code>
+        </td>
+      </tr>
     </tbody>
-</table>
+  </table>
 </div>

@@ -3,16 +3,14 @@ title: Precognition
 description: Laravel Precognition 允許你在使用者完成表單之前預先驗證
 ---
 
-# Precognition
-
 - [簡介 (Introduction)](#introduction)
 - [即時驗證 (Live Validation)](#live-validation)
-    - [使用 Vue (Using Vue)](#using-vue)
-    - [使用 Vue 和 Inertia (Using Vue and Inertia)](#using-vue-and-inertia)
-    - [使用 React (Using React)](#using-react)
-    - [使用 React 和 Inertia (Using React and Inertia)](#using-react-and-inertia)
-    - [使用 Alpine 和 Blade (Using Alpine and Blade)](#using-alpine)
-    - [設定 Axios (Configuring Axios)](#configuring-axios)
+  - [使用 Vue (Using Vue)](#using-vue)
+  - [使用 Vue 和 Inertia (Using Vue and Inertia)](#using-vue-and-inertia)
+  - [使用 React (Using React)](#using-react)
+  - [使用 React 和 Inertia (Using React and Inertia)](#using-react-and-inertia)
+  - [使用 Alpine 和 Blade (Using Alpine and Blade)](#using-alpine)
+  - [設定 Axios (Configuring Axios)](#configuring-axios)
 - [自訂驗證規則 (Customizing Validation Rules)](#customizing-validation-rules)
 - [處理檔案上傳 (Handling File Uploads)](#handling-file-uploads)
 - [管理副作用 (Managing Side-Effects)](#managing-side-effects)
@@ -56,43 +54,37 @@ npm install laravel-precognition-vue
 
 ```vue
 <script setup>
-import { useForm } from 'laravel-precognition-vue';
+import { useForm } from "laravel-precognition-vue";
 
-const form = useForm('post', '/users', {
-    name: '',
-    email: '',
+const form = useForm("post", "/users", {
+  name: "",
+  email: "",
 });
 
 const submit = () => form.submit();
 </script>
 
 <template>
-    <form @submit.prevent="submit">
-        <label for="name">Name</label>
-        <input
-            id="name"
-            v-model="form.name"
-            @change="form.validate('name')"
-        />
-        <div v-if="form.invalid('name')">
-            {{ form.errors.name }}
-        </div>
+  <form @submit.prevent="submit">
+    <label for="name">Name</label>
+    <input id="name" v-model="form.name" @change="form.validate('name')" />
+    <div v-if="form.invalid('name')">
+      {{ form.errors.name }}
+    </div>
 
-        <label for="email">Email</label>
-        <input
-            id="email"
-            type="email"
-            v-model="form.email"
-            @change="form.validate('email')"
-        />
-        <div v-if="form.invalid('email')">
-            {{ form.errors.email }}
-        </div>
+    <label for="email">Email</label>
+    <input
+      id="email"
+      type="email"
+      v-model="form.email"
+      @change="form.validate('email')"
+    />
+    <div v-if="form.invalid('email')">
+      {{ form.errors.email }}
+    </div>
 
-        <button :disabled="form.processing">
-            Create User
-        </button>
-    </form>
+    <button :disabled="form.processing">Create User</button>
+  </form>
 </template>
 ```
 
@@ -105,37 +97,29 @@ form.setValidationTimeout(3000);
 當驗證請求正在進行時,表單的 `validating` 屬性將為 `true`:
 
 ```html
-<div v-if="form.validating">
-    Validating...
-</div>
+<div v-if="form.validating">Validating...</div>
 ```
 
 在驗證請求或表單提交期間返回的任何驗證錯誤都會自動填入表單的 `errors` 物件:
 
 ```html
-<div v-if="form.invalid('email')">
-    {{ form.errors.email }}
-</div>
+<div v-if="form.invalid('email')">{{ form.errors.email }}</div>
 ```
 
 你可以使用表單的 `hasErrors` 屬性來判斷表單是否有任何錯誤:
 
 ```html
 <div v-if="form.hasErrors">
-    <!-- ... -->
+  <!-- ... -->
 </div>
 ```
 
 你也可以透過將輸入的名稱傳遞給表單的 `valid` 和 `invalid` 函式,來判斷輸入是否通過或未通過驗證:
 
 ```html
-<span v-if="form.valid('email')">
-    ✅
-</span>
+<span v-if="form.valid('email')"> ✅ </span>
 
-<span v-else-if="form.invalid('email')">
-    ❌
-</span>
+<span v-else-if="form.invalid('email')"> ❌ </span>
 ```
 
 > [!WARNING]
@@ -145,14 +129,14 @@ form.setValidationTimeout(3000);
 
 ```html
 <input
-    id="avatar"
-    type="file"
-    @change="(e) => {
+  id="avatar"
+  type="file"
+  @change="(e) => {
         form.avatar = e.target.files[0]
 
         form.forgetError('avatar')
     }"
->
+/>
 ```
 
 如我們所見,你可以掛鉤到輸入的 `change` 事件,並在使用者與它們互動時驗證個別輸入;然而,你可能需要驗證使用者尚未互動的輸入。這在建立「精靈」時很常見,你希望在移至下一步之前驗證所有可見的輸入,無論使用者是否與它們互動。
@@ -161,35 +145,37 @@ form.setValidationTimeout(3000);
 
 ```html
 <button
-    type="button"
-    @click="form.validate({
+  type="button"
+  @click="form.validate({
         only: ['name', 'email', 'phone'],
         onSuccess: (response) => nextStep(),
         onValidationError: (response) => /* ... */,
     })"
->Next Step</button>
+>
+  Next Step
+</button>
 ```
 
 當然,你也可以執行程式碼來回應表單提交的回應。表單的 `submit` 函式會返回一個 Axios 請求 promise。這提供了一種方便的方式來存取回應負載、在成功提交時重設表單輸入,或處理失敗的請求:
 
 ```js
-const submit = () => form.submit()
-    .then(response => {
-        form.reset();
+const submit = () =>
+  form
+    .submit()
+    .then((response) => {
+      form.reset();
 
-        alert('User created.');
+      alert("User created.");
     })
-    .catch(error => {
-        alert('An error occurred.');
+    .catch((error) => {
+      alert("An error occurred.");
     });
 ```
 
 你可以透過檢查表單的 `processing` 屬性來判斷表單提交請求是否正在進行:
 
 ```html
-<button :disabled="form.processing">
-    Submit
-</button>
+<button :disabled="form.processing">Submit</button>
 ```
 
 <a name="using-vue-and-inertia"></a>
@@ -210,17 +196,18 @@ npm install laravel-precognition-vue-inertia
 
 ```vue
 <script setup>
-import { useForm } from 'laravel-precognition-vue-inertia';
+import { useForm } from "laravel-precognition-vue-inertia";
 
-const form = useForm('post', '/users', {
-    name: '',
-    email: '',
+const form = useForm("post", "/users", {
+  name: "",
+  email: "",
 });
 
-const submit = () => form.submit({
+const submit = () =>
+  form.submit({
     preserveScroll: true,
     onSuccess: () => form.reset(),
-});
+  });
 </script>
 ```
 
@@ -251,46 +238,44 @@ npm install laravel-precognition-react
 要啟用即時驗證,你應該監聽每個輸入的 `change` 和 `blur` 事件。在 `change` 事件處理程式中,你應該使用 `setData` 函式設定表單的資料,傳遞輸入的名稱和新值。然後,在 `blur` 事件處理程式中呼叫表單的 `validate` 方法,並提供輸入的名稱:
 
 ```jsx
-import { useForm } from 'laravel-precognition-react';
+import { useForm } from "laravel-precognition-react";
 
 export default function Form() {
-    const form = useForm('post', '/users', {
-        name: '',
-        email: '',
-    });
+  const form = useForm("post", "/users", {
+    name: "",
+    email: "",
+  });
 
-    const submit = (e) => {
-        e.preventDefault();
+  const submit = (e) => {
+    e.preventDefault();
 
-        form.submit();
-    };
+    form.submit();
+  };
 
-    return (
-        <form onSubmit={submit}>
-            <label htmlFor="name">Name</label>
-            <input
-                id="name"
-                value={form.data.name}
-                onChange={(e) => form.setData('name', e.target.value)}
-                onBlur={() => form.validate('name')}
-            />
-            {form.invalid('name') && <div>{form.errors.name}</div>}
+  return (
+    <form onSubmit={submit}>
+      <label htmlFor="name">Name</label>
+      <input
+        id="name"
+        value={form.data.name}
+        onChange={(e) => form.setData("name", e.target.value)}
+        onBlur={() => form.validate("name")}
+      />
+      {form.invalid("name") && <div>{form.errors.name}</div>}
 
-            <label htmlFor="email">Email</label>
-            <input
-                id="email"
-                value={form.data.email}
-                onChange={(e) => form.setData('email', e.target.value)}
-                onBlur={() => form.validate('email')}
-            />
-            {form.invalid('email') && <div>{form.errors.email}</div>}
+      <label htmlFor="email">Email</label>
+      <input
+        id="email"
+        value={form.data.email}
+        onChange={(e) => form.setData("email", e.target.value)}
+        onBlur={() => form.validate("email")}
+      />
+      {form.invalid("email") && <div>{form.errors.email}</div>}
 
-            <button disabled={form.processing}>
-                Create User
-            </button>
-        </form>
-    );
-};
+      <button disabled={form.processing}>Create User</button>
+    </form>
+  );
+}
 ```
 
 現在,當使用者填寫表單時,Precognition 將提供由路由表單請求中的驗證規則驅動的即時驗證輸出。當表單的輸入改變時,將向你的 Laravel 應用程式發送一個防抖的「預知」驗證請求。你可以透過呼叫表單的 `setValidationTimeout` 函式來設定防抖逾時:
@@ -302,13 +287,17 @@ form.setValidationTimeout(3000);
 當驗證請求正在進行時,表單的 `validating` 屬性將為 `true`:
 
 ```jsx
-{form.validating && <div>Validating...</div>}
+{
+  form.validating && <div>Validating...</div>;
+}
 ```
 
 在驗證請求或表單提交期間返回的任何驗證錯誤都會自動填入表單的 `errors` 物件:
 
 ```jsx
-{form.invalid('email') && <div>{form.errors.email}</div>}
+{
+  form.invalid("email") && <div>{form.errors.email}</div>;
+}
 ```
 
 你可以使用表單的 `hasErrors` 屬性來判斷表單是否有任何錯誤:
@@ -320,9 +309,13 @@ form.setValidationTimeout(3000);
 你也可以透過將輸入的名稱傳遞給表單的 `valid` 和 `invalid` 函式,來判斷輸入是否通過或未通過驗證:
 
 ```jsx
-{form.valid('email') && <span>✅</span>}
+{
+  form.valid("email") && <span>✅</span>;
+}
 
-{form.invalid('email') && <span>❌</span>}
+{
+  form.invalid("email") && <span>❌</span>;
+}
 ```
 
 > [!WARNING]
@@ -361,26 +354,25 @@ form.setValidationTimeout(3000);
 
 ```js
 const submit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    form.submit()
-        .then(response => {
-            form.reset();
+  form
+    .submit()
+    .then((response) => {
+      form.reset();
 
-            alert('User created.');
-        })
-        .catch(error => {
-            alert('An error occurred.');
-        });
+      alert("User created.");
+    })
+    .catch((error) => {
+      alert("An error occurred.");
+    });
 };
 ```
 
 你可以透過檢查表單的 `processing` 屬性來判斷表單提交請求是否正在進行:
 
 ```html
-<button disabled={form.processing}>
-    Submit
-</button>
+<button disabled="{form.processing}">Submit</button>
 ```
 
 <a name="using-react-and-inertia"></a>
@@ -400,20 +392,20 @@ npm install laravel-precognition-react-inertia
 表單輔助工具的 `submit` 方法已經簡化,無需指定 HTTP 方法或 URL。相反,你可以將 Inertia 的[訪問選項](https://inertiajs.com/manual-visits)作為第一個也是唯一的參數傳遞。此外,`submit` 方法不會像上面 React 範例中那樣返回 Promise。相反,你可以在給定給 `submit` 方法的訪問選項中提供 Inertia 支援的任何[事件回呼](https://inertiajs.com/manual-visits#event-callbacks):
 
 ```js
-import { useForm } from 'laravel-precognition-react-inertia';
+import { useForm } from "laravel-precognition-react-inertia";
 
-const form = useForm('post', '/users', {
-    name: '',
-    email: '',
+const form = useForm("post", "/users", {
+  name: "",
+  email: "",
 });
 
 const submit = (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    form.submit({
-        preserveScroll: true,
-        onSuccess: () => form.reset(),
-    });
+  form.submit({
+    preserveScroll: true,
+    onSuccess: () => form.reset(),
+  });
 };
 ```
 
@@ -442,8 +434,8 @@ npm install laravel-precognition-alpine
 然後,在你的 `resources/js/app.js` 檔案中向 Alpine 註冊 Precognition 外掛:
 
 ```js
-import Alpine from 'alpinejs';
-import Precognition from 'laravel-precognition-alpine';
+import Alpine from "alpinejs";
+import Precognition from "laravel-precognition-alpine";
 
 window.Alpine = Alpine;
 
@@ -456,38 +448,38 @@ Alpine.start();
 要啟用即時驗證,你應該將表單的資料繫定到其相關輸入,然後監聽每個輸入的 `change` 事件。在 `change` 事件處理程式中,你應該呼叫表單的 `validate` 方法,並提供輸入的名稱:
 
 ```html
-<form x-data="{
+<form
+  x-data="{
     form: $form('post', '/register', {
         name: '',
         email: '',
     }),
-}">
-    @csrf
-    <label for="name">Name</label>
-    <input
-        id="name"
-        name="name"
-        x-model="form.name"
-        @change="form.validate('name')"
-    />
-    <template x-if="form.invalid('name')">
-        <div x-text="form.errors.name"></div>
-    </template>
+}"
+>
+  @csrf
+  <label for="name">Name</label>
+  <input
+    id="name"
+    name="name"
+    x-model="form.name"
+    @change="form.validate('name')"
+  />
+  <template x-if="form.invalid('name')">
+    <div x-text="form.errors.name"></div>
+  </template>
 
-    <label for="email">Email</label>
-    <input
-        id="email"
-        name="email"
-        x-model="form.email"
-        @change="form.validate('email')"
-    />
-    <template x-if="form.invalid('email')">
-        <div x-text="form.errors.email"></div>
-    </template>
+  <label for="email">Email</label>
+  <input
+    id="email"
+    name="email"
+    x-model="form.email"
+    @change="form.validate('email')"
+  />
+  <template x-if="form.invalid('email')">
+    <div x-text="form.errors.email"></div>
+  </template>
 
-    <button :disabled="form.processing">
-        Create User
-    </button>
+  <button :disabled="form.processing">Create User</button>
 </form>
 ```
 
@@ -501,7 +493,7 @@ When a validation request is in-flight, the form's `validating` property will be
 
 ```html
 <template x-if="form.validating">
-    <div>Validating...</div>
+  <div>Validating...</div>
 </template>
 ```
 
@@ -509,7 +501,7 @@ Any validation errors returned during a validation request or a form submission 
 
 ```html
 <template x-if="form.invalid('email')">
-    <div x-text="form.errors.email"></div>
+  <div x-text="form.errors.email"></div>
 </template>
 ```
 
@@ -517,7 +509,7 @@ You can determine if the form has any errors using the form's `hasErrors` proper
 
 ```html
 <template x-if="form.hasErrors">
-    <div><!-- ... --></div>
+  <div><!-- ... --></div>
 </template>
 ```
 
@@ -525,11 +517,11 @@ You may also determine if an input has passed or failed validation by passing th
 
 ```html
 <template x-if="form.valid('email')">
-    <span>✅</span>
+  <span>✅</span>
 </template>
 
 <template x-if="form.invalid('email')">
-    <span>❌</span>
+  <span>❌</span>
 </template>
 ```
 
@@ -542,21 +534,21 @@ To do this with Precognition, you should call the `validate` method passing the 
 
 ```html
 <button
-    type="button"
-    @click="form.validate({
+  type="button"
+  @click="form.validate({
         only: ['name', 'email', 'phone'],
         onSuccess: (response) => nextStep(),
         onValidationError: (response) => /* ... */,
     })"
->Next Step</button>
+>
+  Next Step
+</button>
 ```
 
 You may determine if a form submission request is in-flight by inspecting the form's `processing` property:
 
 ```html
-<button :disabled="form.processing">
-    Submit
-</button>
+<button :disabled="form.processing">Submit</button>
 ```
 
 <a name="repopulating-old-form-data"></a>
@@ -565,19 +557,21 @@ You may determine if a form submission request is in-flight by inspecting the fo
 In the user creation example discussed above, we are using Precognition to perform live validation; however, we are performing a traditional server-side form submission to submit the form. So, the form should be populated with any "old" input and validation errors returned from the server-side form submission:
 
 ```html
-<form x-data="{
+<form
+  x-data="{
     form: $form('post', '/register', {
         name: '{{ old('name') }}',
         email: '{{ old('email') }}',
     }).setErrors({{ Js::from($errors->messages()) }}),
-}">
+}"
+></form>
 ```
 
 Alternatively, if you would like to submit the form via XHR you may use the form's `submit` function, which returns an Axios request promise:
 
 ```html
 <form
-    x-data="{
+  x-data="{
         form: $form('post', '/register', {
             name: '',
             email: '',
@@ -594,8 +588,8 @@ Alternatively, if you would like to submit the form via XHR you may use the form
                 });
         },
     }"
-    @submit.prevent="submit"
->
+  @submit.prevent="submit"
+></form>
 ```
 
 <a name="configuring-axios"></a>
@@ -604,21 +598,21 @@ Alternatively, if you would like to submit the form via XHR you may use the form
 The Precognition validation libraries use the [Axios](https://github.com/axios/axios) HTTP client to send requests to your application's backend. For convenience, the Axios instance may be customized if required by your application. For example, when using the `laravel-precognition-vue` library, you may add additional request headers to each outgoing request in your application's `resources/js/app.js` file:
 
 ```js
-import { client } from 'laravel-precognition-vue';
+import { client } from "laravel-precognition-vue";
 
-client.axios().defaults.headers.common['Authorization'] = authToken;
+client.axios().defaults.headers.common["Authorization"] = authToken;
 ```
 
 Or, if you already have a configured Axios instance for your application, you may tell Precognition to use that instance instead:
 
 ```js
-import Axios from 'axios';
-import { client } from 'laravel-precognition-vue';
+import Axios from "axios";
+import { client } from "laravel-precognition-vue";
 
-window.axios = Axios.create()
-window.axios.defaults.headers.common['Authorization'] = authToken;
+window.axios = Axios.create();
+window.axios.defaults.headers.common["Authorization"] = authToken;
 
-client.use(window.axios)
+client.use(window.axios);
 ```
 
 > [!WARNING]

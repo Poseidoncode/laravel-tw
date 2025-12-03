@@ -3,45 +3,43 @@ title: Mcp
 description: Laravel MCP 提供 Model Context Protocol 整合
 ---
 
-# Laravel MCP
-
 - [簡介 (Introduction)](#introduction)
 - [安裝 (Installation)](#installation)
-    - [發布路由 (Publishing Routes)](#publishing-routes)
+  - [發布路由 (Publishing Routes)](#publishing-routes)
 - [建立伺服器 (Creating Servers)](#creating-servers)
-    - [伺服器註冊 (Server Registration)](#server-registration)
-    - [Web 伺服器 (Web Servers)](#web-servers)
-    - [本地伺服器 (Local Servers)](#local-servers)
+  - [伺服器註冊 (Server Registration)](#server-registration)
+  - [Web 伺服器 (Web Servers)](#web-servers)
+  - [本地伺服器 (Local Servers)](#local-servers)
 - [工具 (Tools)](#tools)
-    - [建立工具 (Creating Tools)](#creating-tools)
-    - [工具輸入 Schemas (Tool Input Schemas)](#tool-input-schemas)
-    - [驗證工具參數 (Validating Tool Arguments)](#validating-tool-arguments)
-    - [工具依賴注入 (Tool Dependency Injection)](#tool-dependency-injection)
-    - [工具註解 (Tool Annotations)](#tool-annotations)
-    - [條件式工具註冊 (Conditional Tool Registration)](#conditional-tool-registration)
-    - [工具回應 (Tool Responses)](#tool-responses)
+  - [建立工具 (Creating Tools)](#creating-tools)
+  - [工具輸入 Schemas (Tool Input Schemas)](#tool-input-schemas)
+  - [驗證工具參數 (Validating Tool Arguments)](#validating-tool-arguments)
+  - [工具依賴注入 (Tool Dependency Injection)](#tool-dependency-injection)
+  - [工具註解 (Tool Annotations)](#tool-annotations)
+  - [條件式工具註冊 (Conditional Tool Registration)](#conditional-tool-registration)
+  - [工具回應 (Tool Responses)](#tool-responses)
 - [提示 (Prompts)](#prompts)
-    - [建立提示 (Creating Prompts)](#creating-prompts)
-    - [提示參數 (Prompt Arguments)](#prompt-arguments)
-    - [驗證提示參數 (Validating Prompt Arguments)](#validating-prompt-arguments)
-    - [提示依賴注入 (Prompt Dependency Injection)](#prompt-dependency-injection)
-    - [條件式提示註冊 (Conditional Prompt Registration)](#conditional-prompt-registration)
-    - [提示回應 (Prompt Responses)](#prompt-responses)
+  - [建立提示 (Creating Prompts)](#creating-prompts)
+  - [提示參數 (Prompt Arguments)](#prompt-arguments)
+  - [驗證提示參數 (Validating Prompt Arguments)](#validating-prompt-arguments)
+  - [提示依賴注入 (Prompt Dependency Injection)](#prompt-dependency-injection)
+  - [條件式提示註冊 (Conditional Prompt Registration)](#conditional-prompt-registration)
+  - [提示回應 (Prompt Responses)](#prompt-responses)
 - [資源 (Resources)](#resources)
-    - [建立資源 (Creating Resources)](#creating-resources)
-    - [資源 URI 和 MIME 類型 (Resource URI and MIME Type)](#resource-uri-and-mime-type)
-    - [資源請求 (Resource Request)](#resource-request)
-    - [資源依賴注入 (Resource Dependency Injection)](#resource-dependency-injection)
-    - [條件式資源註冊 (Conditional Resource Registration)](#conditional-resource-registration)
-    - [資源回應 (Resource Responses)](#resource-responses)
+  - [建立資源 (Creating Resources)](#creating-resources)
+  - [資源 URI 和 MIME 類型 (Resource URI and MIME Type)](#resource-uri-and-mime-type)
+  - [資源請求 (Resource Request)](#resource-request)
+  - [資源依賴注入 (Resource Dependency Injection)](#resource-dependency-injection)
+  - [條件式資源註冊 (Conditional Resource Registration)](#conditional-resource-registration)
+  - [資源回應 (Resource Responses)](#resource-responses)
 - [Metadata](#metadata)
 - [驗證 (Authentication)](#authentication)
-    - [OAuth 2.1](#oauth)
-    - [Sanctum](#sanctum)
+  - [OAuth 2.1](#oauth)
+  - [Sanctum](#sanctum)
 - [授權 (Authorization)](#authorization)
 - [測試伺服器 (Testing Servers)](#testing-servers)
-    - [MCP Inspector](#mcp-inspector)
-    - [單元測試 (Unit Tests)](#unit-tests)
+  - [MCP Inspector](#mcp-inspector)
+  - [單元測試 (Unit Tests)](#unit-tests)
 
 <a name="introduction"></a>
 ## 簡介 (Introduction)
@@ -450,12 +448,12 @@ class CurrentWeatherTool extends Tool
 
 可用的註解包括：
 
-| 註解 | 類型 | 描述 |
-| ------------------ | ------- | ----------------------------------------------------------------------------------------------- |
-| `#[IsReadOnly]`    | boolean | 指示該工具不會修改其環境。                                            |
-| `#[IsDestructive]` | boolean | 指示該工具可能會執行破壞性更新（僅在非唯讀時有意義）。       |
+| 註解               | 類型    | 描述                                                   |
+| ------------------ | ------- | ------------------------------------------------------ |
+| `#[IsReadOnly]`    | boolean | 指示該工具不會修改其環境。                             |
+| `#[IsDestructive]` | boolean | 指示該工具可能會執行破壞性更新（僅在非唯讀時有意義）。 |
 | `#[IsIdempotent]`  | boolean | 指示使用相同參數重複呼叫沒有額外效果（當非唯讀時）。   |
-| `#[IsOpenWorld]`   | boolean | 指示該工具可能會與外部實體互動。                                        |
+| `#[IsOpenWorld]`   | boolean | 指示該工具可能會與外部實體互動。                       |
 
 <a name="conditional-tool-registration"></a>
 ### 條件式工具註冊 (Conditional Tool Registration)
@@ -1205,7 +1203,7 @@ Mcp::web('/mcp/weather', WeatherExample::class)
 
 #### 新的 Passport 安裝 (New Passport Installation)
 
-如果你的應用程式尚未使​​用 Laravel Passport，請按照 Passport 的[安裝和部署指南](/docs/passport#installation)將 Passport 新增到你的應用程式中。在繼續之前，你應該擁有一個 `OAuthenticatable` 模型、新的驗證 guard 和 passport keys。
+如果你的應用程式尚未使 ​​ 用 Laravel Passport，請按照 Passport 的[安裝和部署指南](/docs/passport#installation)將 Passport 新增到你的應用程式中。在繼續之前，你應該擁有一個 `OAuthenticatable` 模型、新的驗證 guard 和 passport keys。
 
 接下來，你應該發布 Laravel MCP 提供的 Passport 授權視圖：
 
