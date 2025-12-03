@@ -557,7 +557,7 @@ const sidebarItems = [
                 href: '/docs/billing'
             },
             {
-                title: 'Cashier (Paddle)',
+                title: 'Cashier Paddle',
                 href: '/docs/cashier-paddle'
             },
             {
@@ -565,7 +565,7 @@ const sidebarItems = [
                 href: '/docs/envoy'
             },
             {
-                title: 'Errors',
+                title: '錯誤處理',
                 href: '/docs/errors'
             },
             {
@@ -585,19 +585,19 @@ const sidebarItems = [
                 href: '/docs/horizon'
             },
             {
-                title: 'HTTP Client',
+                title: 'HTTP 客戶端',
                 href: '/docs/http-client'
             },
             {
-                title: 'License',
+                title: '授權條款',
                 href: '/docs/license'
             },
             {
-                title: 'Localization',
+                title: '本地化',
                 href: '/docs/localization'
             },
             {
-                title: 'Logging',
+                title: '日誌',
                 href: '/docs/logging'
             },
             {
@@ -621,7 +621,7 @@ const sidebarItems = [
                 href: '/docs/octane'
             },
             {
-                title: 'Packages',
+                title: '套件',
                 href: '/docs/packages'
             },
             {
@@ -629,7 +629,7 @@ const sidebarItems = [
                 href: '/docs/passport'
             },
             {
-                title: 'Passwords',
+                title: '重設密碼',
                 href: '/docs/passwords'
             },
             {
@@ -645,11 +645,11 @@ const sidebarItems = [
                 href: '/docs/precognition'
             },
             {
-                title: 'Processes',
+                title: '程序',
                 href: '/docs/processes'
             },
             {
-                title: 'Prompts',
+                title: '提示',
                 href: '/docs/prompts'
             },
             {
@@ -657,15 +657,15 @@ const sidebarItems = [
                 href: '/docs/pulse'
             },
             {
-                title: 'Rate Limiting',
+                title: '速率限制',
                 href: '/docs/rate-limiting'
             },
             {
-                title: 'Readme',
+                title: '說明文件',
                 href: '/docs/readme'
             },
             {
-                title: 'Redirects',
+                title: 'HTTP 重新導向',
                 href: '/docs/redirects'
             },
             {
@@ -689,7 +689,7 @@ const sidebarItems = [
                 href: '/docs/socialite'
             },
             {
-                title: 'Strings',
+                title: '字串',
                 href: '/docs/strings'
             },
             {
@@ -697,11 +697,11 @@ const sidebarItems = [
                 href: '/docs/telescope'
             },
             {
-                title: 'Upgrade',
+                title: '升級指南',
                 href: '/docs/upgrade'
             },
             {
-                title: 'URLs',
+                title: 'URL 產生',
                 href: '/docs/urls'
             },
             {
@@ -709,15 +709,15 @@ const sidebarItems = [
                 href: '/docs/valet'
             },
             {
-                title: 'Validation',
+                title: '驗證',
                 href: '/docs/validation'
             },
             {
-                title: 'Verification',
+                title: '電子郵件驗證',
                 href: '/docs/verification'
             },
             {
-                title: 'Vite',
+                title: '資源打包',
                 href: '/docs/vite'
             },
             {
@@ -725,19 +725,19 @@ const sidebarItems = [
                 href: '/docs/context'
             },
             {
-                title: 'Contracts',
+                title: '契約',
                 href: '/docs/contracts'
             },
             {
-                title: 'Contributions',
+                title: '貢獻指南',
                 href: '/docs/contributions'
             },
             {
-                title: 'Documentation',
+                title: '文件',
                 href: '/docs/documentation'
             },
             {
-                title: 'Concurrency',
+                title: '並行',
                 href: '/docs/concurrency'
             }
         ]
