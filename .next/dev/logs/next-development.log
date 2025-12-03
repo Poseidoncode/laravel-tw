@@ -196,3 +196,8 @@ title: 測試：入門 (Testing: Getting Started)
 [01:10:45.336] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:12:35.512] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [01:18:31.187] Server  LOG      ✓ Compiled in 59ms
+[01:22:10.618] Server  LOG      ✓ Compiled in 58ms
+[01:23:09.350] Server  LOG      ✓ Compiled in 54ms
+[01:23:29.788] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:24:19.787] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[01:24:28.468] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
