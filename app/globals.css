@@ -50,7 +50,7 @@
   --background: oklch(0.98 0.01 85); /* Warm Paper */
   --foreground: oklch(0.25 0 0);     /* Soft Black */
   --card: oklch(0.96 0.01 85);
-  --pre-bg: lab(13 -2.95 -10.28);
+  --pre-bg: rgb(16, 24, 40);
   --card-foreground: oklch(0.25 0 0);
   --popover: oklch(0.98 0.01 85);
   --popover-foreground: oklch(0.25 0 0);

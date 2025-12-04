@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { usePathname } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { ChevronDown, ChevronRight } from 'lucide-react'
@@ -10,6 +11,7 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { sidebarItems } from '@/lib/docs-config'
 
 export function DocsSidebar() {
+    const pathname = usePathname()
     const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set(['前言', '入門']))
 
     const toggleSection = (sectionTitle: string) => {
@@ -51,28 +53,51 @@ export function DocsSidebar() {
                             </button>
                             {expandedSections.has(section.title) && (
                                 <div className="ml-4 mt-1 space-y-1">
-                                    {section.items.map((item) => (
-                                        <Link key={item.href} href={item.href} className="block">
-                                            <Button variant="ghost" size="sm" className="w-full justify-start font-normal text-sm">
-                                                {item.title}
-                                            </Button>
-                                        </Link>
-                                    ))}
+                                    {section.items.map((item) => {
+                                        const href = item.href
+                                        const normalizedPath = pathname?.replace(/\/$/, '') ?? ''
+                                        const normalizedHref = href.replace(/\/$/, '')
+                                        const isActive = normalizedPath === normalizedHref || normalizedPath.startsWith(`${normalizedHref}/`)
+
+                                        return (
+                                            <Link key={item.href} href={item.href} className="block" aria-current={isActive ? 'page' : undefined}>
+                                                <Button
+                                                    variant="ghost"
+                                                    size="sm"
+                                                    className={isActive ? 'w-full justify-start font-semibold text-foreground' : 'w-full justify-start font-normal text-sm'}
+                                                >
+                                                    {item.title}
+                                                </Button>
+                                            </Link>
+                                        )
+                                    })}
                                 </div>
                             )}
                         </div>
                     ))}
                     <div className="border-t pt-4 space-y-2">
-                        <Link href="/docs/api" className="block">
-                            <Button variant="ghost" size="sm" className="w-full justify-start font-normal text-sm">
-                                API 文件
-                            </Button>
-                        </Link>
-                        <Link href="/docs/releases" className="block">
-                            <Button variant="ghost" size="sm" className="w-full justify-start font-normal text-sm">
-                                更新日誌
-                            </Button>
-                        </Link>
+                        {(() => {
+                            const normalizedPath = pathname?.replace(/\/$/, '') ?? ''
+                            const apiHref = '/docs/api'
+                            const releasesHref = '/docs/releases'
+                            const isApiActive = normalizedPath === apiHref || normalizedPath.startsWith(`${apiHref}/`)
+                            const isReleasesActive = normalizedPath === releasesHref || normalizedPath.startsWith(`${releasesHref}/`)
+
+                            return (
+                                <>
+                                    <Link href="/docs/api" className="block" aria-current={isApiActive ? 'page' : undefined}>
+                                        <Button variant="ghost" size="sm" className={isApiActive ? 'w-full justify-start font-semibold text-foreground' : 'w-full justify-start font-normal text-sm'}>
+                                            API 文件
+                                        </Button>
+                                    </Link>
+                                    <Link href="/docs/releases" className="block" aria-current={isReleasesActive ? 'page' : undefined}>
+                                        <Button variant="ghost" size="sm" className={isReleasesActive ? 'w-full justify-start font-semibold text-foreground' : 'w-full justify-start font-normal text-sm'}>
+                                            更新日誌
+                                        </Button>
+                                    </Link>
+                                </>
+                            )
+                        })()}
                     </div>
                 </div>
             </ScrollArea>
