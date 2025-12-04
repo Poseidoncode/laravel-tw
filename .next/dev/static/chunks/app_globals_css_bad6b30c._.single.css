@@ -2482,11 +2482,13 @@
 }
 
 pre {
-  background-color: var(--card);
-  max-width: 100%;
-  color: var(--card-foreground);
+  color: #eee;
+  color: lab(94.2% 0 0);
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  background-color: #11161f;
+  background-color: lab(7.13753% -.43682 -7.17928);
+  max-width: 100%;
   padding: .75rem 1rem;
   overflow-x: auto;
 }
@@ -2512,6 +2514,10 @@ article.prose code:not(pre code) {
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
+  color: #eee !important;
+  color: lab(94.2% 0 0) !important;
+  background-color: #11161f !important;
+  background-color: lab(7.13753% -.43682 -7.17928) !important;
 }
 
 .prose code {

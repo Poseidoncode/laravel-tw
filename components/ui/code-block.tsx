@@ -10,7 +10,7 @@ interface CodeBlockProps {
 
 const CopyIcon = () => (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6.2474 6.25033V2.91699H17.0807V13.7503H13.7474M13.7474 6.25033V17.0837H2.91406V6.25033H13.7474Z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"></path>
+        <path d="M6.2474 6.25033V2.91699H17.0807V13.7503H13.7474M13.7474 6.25033V17.0837H2.91406V6.25033H13.7474Z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"></path>
     </svg>
 )
 
@@ -43,7 +43,7 @@ export function CodeBlock({ children, className, raw }: CodeBlockProps) {
             </pre>
             <button
                 onClick={handleCopy}
-                className="absolute top-6 right-3 p-2 text-primary transition-colors"
+                className="absolute top-6 right-3 p-2 text-white transition-colors"
                 aria-label="Copy code to clipboard"
             >
                 {copied ? (

@@ -130,8 +130,8 @@
 pre {
   max-width: 100%;
   overflow-x: auto;
-  background-color: var(--card);
-  color: var(--card-foreground);
+  background-color: oklch(0.20 0.02 260); /* Dark background */
+  color: oklch(0.95 0 0); /* Light text */
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -161,6 +161,8 @@ article.prose code:not(pre code) {
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
+  background-color: oklch(0.20 0.02 260) !important; /* Dark background */
+  color: oklch(0.95 0 0) !important; /* Light text */
 }
 
 .prose code {
