@@ -1593,6 +1593,16 @@
     color: var(--foreground);
   }
 
+  .text-foreground\/70 {
+    color: var(--foreground);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-foreground\/70 {
+      color: color-mix(in oklab, var(--foreground) 70%, transparent);
+    }
+  }
+
   .text-gray-500 {
     color: var(--color-gray-500);
   }

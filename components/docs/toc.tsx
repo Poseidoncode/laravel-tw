@@ -92,7 +92,7 @@ export function TableOfContents({ items }: TocProps) {
                     block text-sm py-1 transition-colors
                     ${isActive
                                             ? 'text-foreground font-medium border-l-2 border-foreground -ml-px'
-                                            : 'text-muted-foreground hover:text-foreground border-l-2 border-transparent -ml-px'
+                                            : 'text-foreground/70 hover:text-foreground border-l-2 border-transparent -ml-px'
                                         }
                   `}
                                     style={{ paddingLeft: `${paddingLeft + 12}px` }}
