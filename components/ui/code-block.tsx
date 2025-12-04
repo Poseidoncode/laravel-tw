@@ -1,6 +1,5 @@
 'use client'
 
-import { Check, Copy } from 'lucide-react'
 import { useState } from 'react'
 
 interface CodeBlockProps {
@@ -8,6 +7,18 @@ interface CodeBlockProps {
     className?: string
     raw?: string
 }
+
+const CopyIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M6.2474 6.25033V2.91699H17.0807V13.7503H13.7474M13.7474 6.25033V17.0837H2.91406V6.25033H13.7474Z" stroke="currentColor" strokeOpacity="0.45" strokeLinecap="round"></path>
+    </svg>
+)
+
+const CheckIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.5 5L7.5 15L2.5 10" stroke="currentColor" strokeOpacity="0.45" strokeLinecap="round" strokeLinejoin="round"></path>
+    </svg>
+)
 
 export function CodeBlock({ children, className, raw }: CodeBlockProps) {
     const [copied, setCopied] = useState(false)
@@ -32,13 +43,13 @@ export function CodeBlock({ children, className, raw }: CodeBlockProps) {
             </pre>
             <button
                 onClick={handleCopy}
-                className="absolute top-8 right-3 p-2 rounded-md bg-zinc-700 hover:bg-zinc-600 text-zinc-100 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                className="absolute top-6 right-3 p-2 text-foreground hover:text-primary transition-colors"
                 aria-label="Copy code to clipboard"
             >
                 {copied ? (
-                    <Check className="h-4 w-4" />
+                    <CheckIcon />
                 ) : (
-                    <Copy className="h-4 w-4" />
+                    <CopyIcon />
                 )}
             </button>
         </div>
