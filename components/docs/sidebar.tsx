@@ -27,9 +27,10 @@ export function DocsSidebar() {
 
     return (
         <div className="w-64 border-r bg-background h-screen sticky top-0 hidden md:block">
-            <div className="p-6 font-bold text-xl border-b flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                    <span className="text-red-600">Laravel</span> Docs（中文）
+            <div className="p-6 font-bold text-lg border-b flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 whitespace-nowrap">
+                    <span className="text-red-600 mr-0.5">Laravel</span>
+                    <span>Docs（中文）</span>
                 </div>
                 <ModeToggle />
             </div>

@@ -29,9 +29,43 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
 
   const source = fs.readFileSync(filePath, 'utf8')
 
+  // Remove manual top-of-page TOC lists placed directly after frontmatter.
+  // Many MDX files include a hand-authored list-of-links at the top of the file.
+  // The site already renders a right-hand page TOC, so strip these blocks here
+  // so we don't need to modify dozens of content files.
+  let lines = source.split('\n')
+  const fmIndexes: number[] = []
+  for (let i = 0; i < Math.min(lines.length, 40); i++) {
+    if (lines[i].trim() === '---') fmIndexes.push(i)
+    if (fmIndexes.length === 2) break
+  }
+
+  if (fmIndexes.length === 2) {
+    // index after the closing frontmatter delimiter
+    let i = fmIndexes[1] + 1
+    // skip initial blank lines
+    while (i < lines.length && lines[i].trim() === '') i++
+
+    // If the first non-blank block is a bullet/numbered list containing
+    // link entries (e.g. "- [Section](#id)"), strip the entire contiguous
+    // list (including nested indented items).
+    const listStart = i
+    const listLineRE = /^\s*([-*]|\d+\.)\s+/
+    let foundList = false
+    let j = i
+    while (j < lines.length && (lines[j].trim() === '' || listLineRE.test(lines[j]))) {
+      if (listLineRE.test(lines[j])) foundList = true
+      j++
+    }
+
+    if (foundList) {
+      // Remove the lines from listStart..j-1
+      lines = [...lines.slice(0, listStart), ...lines.slice(j)]
+    }
+  }
+
   // Extract TOC from source
   const toc: TocItem[] = []
-  const lines = source.split('\n')
   let inFrontmatter = false
   let frontmatterCount = 0
 
@@ -60,8 +94,10 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
     }
   }
 
+  const cleanedSource = lines.join('\n')
+
   const { content, frontmatter } = await compileMDX<{ title: string; description?: string }>({
-    source,
+    source: cleanedSource,
     components: {
       pre: ({ children, ...props }: any) => {
         // Extract code content and language from children

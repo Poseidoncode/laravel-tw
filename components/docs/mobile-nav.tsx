@@ -50,8 +50,9 @@ export function MobileNav() {
                 <SheetDescription className="sr-only">
                     Browse the documentation sections and pages.
                 </SheetDescription>
-                <div className="p-6 font-bold text-xl border-b flex items-center gap-2">
-                    <span className="text-red-600">Laravel</span> Docs（中文）
+                <div className="p-6 font-bold text-lg border-b flex items-center gap-2">
+                    <span className="text-red-600 mr-0.5">Laravel</span>
+                    <span className="whitespace-nowrap">Docs（中文）</span>
                 </div>
                 <ScrollArea className="h-[calc(100vh-65px)]">
                     <div className="p-4 space-y-2">

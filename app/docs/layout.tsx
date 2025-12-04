@@ -8,7 +8,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
             <div className="md:hidden p-4 border-b flex items-center justify-between sticky top-0 bg-background z-10">
                 <div className="flex items-center">
                     <MobileNav />
-                    <span className="ml-2 font-bold text-lg"><span className="text-red-600">Laravel</span> Docs</span>
+                    <span className="ml-2 font-bold text-base whitespace-nowrap"><span className="text-red-600 mr-0.5">Laravel</span>Docs（中文）</span>
                 </div>
                 <ModeToggle />
             </div>

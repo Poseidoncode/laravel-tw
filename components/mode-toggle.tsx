@@ -12,6 +12,7 @@ export function ModeToggle() {
     return (
         <Button
             variant="ghost"
+            className="-ml-3 md:-ml-4 cursor-pointer"
             size="icon"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             title="切換主題"
