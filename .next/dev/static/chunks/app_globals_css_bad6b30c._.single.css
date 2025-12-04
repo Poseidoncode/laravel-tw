@@ -2346,6 +2346,7 @@
   --background: #fbf8f1;
   --foreground: #222;
   --card: #f5f1ea;
+  --pre-bg: #152330;
   --card-foreground: #222;
   --popover: #fbf8f1;
   --popover-foreground: #222;
@@ -2381,6 +2382,7 @@
     --background: lab(97.7201% .286549 3.81312);
     --foreground: lab(13% 0 0);
     --card: lab(95.4001% .287116 3.81355);
+    --pre-bg: lab(13% -2.95 -10.28);
     --card-foreground: lab(13% 0 0);
     --popover: lab(97.7201% .286549 3.81312);
     --popover-foreground: lab(13% 0 0);
@@ -2416,6 +2418,7 @@
   --background: #070b14;
   --foreground: #eee;
   --card: #11161f;
+  --pre-bg: #11161f;
   --card-foreground: #eee;
   --popover: #11161f;
   --popover-foreground: #eee;
@@ -2451,6 +2454,7 @@
     --background: lab(2.99229% -.130028 -4.69358);
     --foreground: lab(94.2% 0 0);
     --card: lab(7.13753% -.43682 -7.17928);
+    --pre-bg: lab(7.13753% -.43682 -7.17928);
     --card-foreground: lab(94.2% 0 0);
     --popover: lab(7.13753% -.43682 -7.17928);
     --popover-foreground: lab(94.2% 0 0);
@@ -2482,13 +2486,11 @@
 }
 
 pre {
-  color: #eee;
-  color: lab(94.2% 0 0);
+  background-color: var(--pre-bg);
+  max-width: 100%;
+  color: var(--card-foreground);
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  background-color: #11161f;
-  background-color: lab(7.13753% -.43682 -7.17928);
-  max-width: 100%;
   padding: .75rem 1rem;
   overflow-x: auto;
 }
@@ -2514,10 +2516,8 @@ article.prose code:not(pre code) {
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
-  color: #eee !important;
-  color: lab(94.2% 0 0) !important;
-  background-color: #11161f !important;
-  background-color: lab(7.13753% -.43682 -7.17928) !important;
+  background-color: var(--pre-bg) !important;
+  color: var(--card-foreground) !important;
 }
 
 .prose code {

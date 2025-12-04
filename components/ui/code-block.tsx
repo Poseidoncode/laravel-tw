@@ -43,7 +43,7 @@ export function CodeBlock({ children, className, raw }: CodeBlockProps) {
             </pre>
             <button
                 onClick={handleCopy}
-                className="absolute top-6 right-3 p-2 text-white transition-colors"
+                className="absolute top-6 right-3 p-2 text-foreground transition-colors"
                 aria-label="Copy code to clipboard"
             >
                 {copied ? (

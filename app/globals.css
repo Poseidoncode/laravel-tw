@@ -50,6 +50,7 @@
   --background: oklch(0.98 0.01 85); /* Warm Paper */
   --foreground: oklch(0.25 0 0);     /* Soft Black */
   --card: oklch(0.96 0.01 85);
+  --pre-bg: lab(13 -2.95 -10.28);
   --card-foreground: oklch(0.25 0 0);
   --popover: oklch(0.98 0.01 85);
   --popover-foreground: oklch(0.25 0 0);
@@ -85,6 +86,7 @@
   --background: oklch(0.15 0.02 260); /* Deep Blue/Slate */
   --foreground: oklch(0.95 0 0);
   --card: oklch(0.20 0.02 260);
+  --pre-bg: oklch(0.20 0.02 260);
   --card-foreground: oklch(0.95 0 0);
   --popover: oklch(0.20 0.02 260);
   --popover-foreground: oklch(0.95 0 0);
@@ -130,8 +132,8 @@
 pre {
   max-width: 100%;
   overflow-x: auto;
-  background-color: oklch(0.20 0.02 260); /* Dark background */
-  color: oklch(0.95 0 0); /* Light text */
+  background-color: var(--pre-bg);
+  color: var(--card-foreground);
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -161,8 +163,8 @@ article.prose code:not(pre code) {
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
-  background-color: oklch(0.20 0.02 260) !important; /* Dark background */
-  color: oklch(0.95 0 0) !important; /* Light text */
+  background-color: var(--pre-bg) !important;
+  color: var(--card-foreground) !important;
 }
 
 .prose code {
