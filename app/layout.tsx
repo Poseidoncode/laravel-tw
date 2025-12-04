@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const genryuSans = localFont({
+  variable: "--font-genryu",
+  display: "swap",
+  src: [
+    { path: "../public/genryu/GenRyuMinTW-EL-01.woff2", weight: "200", style: "normal" },
+    { path: "../public/genryu/GenRyuMinTW-L-01.woff2", weight: "300", style: "normal" },
+    { path: "../public/genryu/GenRyuMinTW-R-01.woff2", weight: "400", style: "normal" },
+    { path: "../public/genryu/GenRyuMinTW-M-01.woff2", weight: "500", style: "normal" },
+    { path: "../public/genryu/GenRyuMinTW-SB-01.woff2", weight: "600", style: "normal" },
+    { path: "../public/genryu/GenRyuMinTW-B-01.woff2", weight: "700", style: "normal" },
+    { path: "../public/genryu/GenRyuMinTW-H-01.woff2", weight: "800", style: "normal" },
+  ],
 });
 
 const geistMono = Geist_Mono({
@@ -26,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${genryuSans.variable} ${geistMono.variable} antialiased`}
       >
         <script
           dangerouslySetInnerHTML={{

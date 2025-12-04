@@ -107,7 +107,7 @@
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
     --default-transition-duration: .15s;
     --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-    --default-font-family: var(--font-geist-sans);
+    --default-font-family: var(--font-genryu);
     --default-mono-font-family: var(--font-geist-mono);
   }
 
@@ -2458,7 +2458,7 @@
   --primary-foreground: #eee;
   --secondary: #1c222b;
   --secondary-foreground: #eee;
-  --muted: #1c222b;
+  --muted: transparent;
   --muted-foreground: #9e9e9e;
   --accent: #1c222b;
   --accent-foreground: #eee;
@@ -2493,7 +2493,6 @@
     --primary-foreground: lab(94.2% 0 0);
     --secondary: lab(12.9118% -.603847 -7.27841);
     --secondary-foreground: lab(94.2% 0 0);
-    --muted: lab(12.9118% -.603847 -7.27841);
     --muted-foreground: lab(65.2% 0 0);
     --accent: lab(12.9118% -.603847 -7.27841);
     --accent-foreground: lab(94.2% 0 0);

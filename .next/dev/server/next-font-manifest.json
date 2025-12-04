@@ -1,11 +1,23 @@
 {
   "app": {
     "[project]/app/docs/[slug]/page": [
-      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/GenRyuMinTW_EL_01-s.p.eabd5646.woff2",
+      "static/media/GenRyuMinTW_L_01-s.p.478afe90.woff2",
+      "static/media/GenRyuMinTW_R_01-s.p.ddd1fe03.woff2",
+      "static/media/GenRyuMinTW_M_01-s.p.7798298c.woff2",
+      "static/media/GenRyuMinTW_SB_01-s.p.912326da.woff2",
+      "static/media/GenRyuMinTW_B_01-s.p.678fd6b1.woff2",
+      "static/media/GenRyuMinTW_H_01-s.p.eb77dc7e.woff2",
       "static/media/797e433ab948586e-s.p.dbea232f.woff2"
     ],
     "[project]/app/page": [
-      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/GenRyuMinTW_EL_01-s.p.eabd5646.woff2",
+      "static/media/GenRyuMinTW_L_01-s.p.478afe90.woff2",
+      "static/media/GenRyuMinTW_R_01-s.p.ddd1fe03.woff2",
+      "static/media/GenRyuMinTW_M_01-s.p.7798298c.woff2",
+      "static/media/GenRyuMinTW_SB_01-s.p.912326da.woff2",
+      "static/media/GenRyuMinTW_B_01-s.p.678fd6b1.woff2",
+      "static/media/GenRyuMinTW_H_01-s.p.eb77dc7e.woff2",
       "static/media/797e433ab948586e-s.p.dbea232f.woff2"
     ]
   },
