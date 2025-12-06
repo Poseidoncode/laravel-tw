@@ -1,6 +1,6 @@
 ---
 title: Starter Kits
-description: Laravel Starter Kits provide a robust starting point for building applications with React, Vue, or Livewire frontends.
+description: Laravel Starter Kits 為使用 React、Vue 或 Livewire 前端建置應用程式提供了一個強大的起點。
 ---
 
 # Starter Kits
@@ -247,24 +247,99 @@ Livewire 起始套件中包含的認證頁面,如登入頁面和註冊頁面,也
 
 Fortify 會根據你應用程式的 `config/fortify.php` 配置檔案中啟用的功能自動註冊以下認證路由:
 
-| Method | URI | 用途 |
-|--------|-----|------|
-| GET | `/login` | 顯示登入表單 |
-| POST | `/login` | 處理登入請求 |
-| POST | `/logout` | 登出使用者 |
-| GET | `/register` | 顯示註冊表單 |
-| POST | `/register` | 處理註冊請求 |
-| GET | `/forgot-password` | 顯示忘記密碼表單 |
-| POST | `/forgot-password` | 發送密碼重設連結 |
-| GET | `/reset-password/{token}` | 顯示密碼重設表單 |
-| POST | `/reset-password` | 處理密碼重設 |
-| GET | `/email/verify` | 顯示電子郵件驗證通知 |
-| GET | `/email/verify/{id}/{hash}` | 驗證電子郵件地址 |
-| POST | `/email/verification-notification` | 重新發送驗證郵件 |
-| GET | `/user/confirm-password` | 顯示密碼確認表單 |
-| POST | `/user/confirm-password` | 處理密碼確認 |
-| GET | `/two-factor-challenge` | 顯示雙因素認證挑戰 |
-| POST | `/two-factor-challenge` | 處理雙因素認證挑戰 |
+<div className="overflow-auto">
+<table className="min-w-full text-left border-collapse">
+    <thead>
+        <tr>
+            <th className="px-3 py-2">Method</th>
+            <th className="px-3 py-2">URI</th>
+            <th className="px-3 py-2">用途</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/login`</td>
+            <td className="px-3 py-2">顯示登入表單</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/login`</td>
+            <td className="px-3 py-2">處理登入請求</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/logout`</td>
+            <td className="px-3 py-2">登出使用者</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/register`</td>
+            <td className="px-3 py-2">顯示註冊表單</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/register`</td>
+            <td className="px-3 py-2">處理註冊請求</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/forgot-password`</td>
+            <td className="px-3 py-2">顯示忘記密碼表單</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/forgot-password`</td>
+            <td className="px-3 py-2">發送密碼重設連結</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/reset-password/{token}`</td>
+            <td className="px-3 py-2">顯示密碼重設表單</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/reset-password`</td>
+            <td className="px-3 py-2">處理密碼重設</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/email/verify`</td>
+            <td className="px-3 py-2">顯示電子郵件驗證通知</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/email/verify/{id}/{hash}`</td>
+            <td className="px-3 py-2">驗證電子郵件地址</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/email/verification-notification`</td>
+            <td className="px-3 py-2">重新發送驗證郵件</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/user/confirm-password`</td>
+            <td className="px-3 py-2">顯示密碼確認表單</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/user/confirm-password`</td>
+            <td className="px-3 py-2">處理密碼確認</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">GET</td>
+            <td className="px-3 py-2">`/two-factor-challenge`</td>
+            <td className="px-3 py-2">顯示雙因素認證挑戰</td>
+        </tr>
+        <tr>
+            <td className="px-3 py-2">POST</td>
+            <td className="px-3 py-2">`/two-factor-challenge`</td>
+            <td className="px-3 py-2">處理雙因素認證挑戰</td>
+        </tr>
+    </tbody>
+</table>
+</div>
 
 可以使用 `php artisan route:list` Artisan 命令來顯示應用程式中的所有路由。
 
