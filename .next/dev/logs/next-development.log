@@ -74,3 +74,377 @@ Import trace:
 [00:20:59.147] Server  LOG      ✓ Compiled in 112ms
 [00:21:15.163] Server  LOG      ✓ Compiled in 106ms
 [00:21:30.141] Server  LOG      ✓ Compiled in 111ms
+[00:23:59.186] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:47.380] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:28:47.583] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:33:58.389] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:33:59.571] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:33:59.777] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:34:15.989] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:34:16.878] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:17.413] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:34:36.554] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:34:37.504] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:37.697] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:34:54.379] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:34:55.321] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:55.546] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:35:30.361] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:35:33.152] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:33.568] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:35:59.487] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:36:01.213] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:01.584] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:00.372] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:02.227] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:02.518] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:30.753] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:33.374] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:33.602] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:42:06.533] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:44:02.117] Server  ERROR    ⨯ ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:44:02.124] Server  ERROR    ⨯ ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:44:02.127] Server  ERROR    ⨯ ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:44:02.129] Server  ERROR    ⨯ ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:44:02.133] Server  ERROR    ⨯ ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:44:02.136] Server  ERROR    ⨯ ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:44:02.499] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:02.501] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:07.012] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:07.013] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:08.060] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:08.060] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:08.065] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:08.065] Browser ERROR   ./lib/docs.tsx:7:1
+Module not found: Can't resolve 'remark-heading-id'
+   5 | import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+   6 | import rehypeShiki from '@shikijs/rehype'
+>  7 | import remarkHeadingId from 'remark-heading-id'
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import type { TocItem } from '@/components/docs/toc'
+   9 |
+  10 | const contentDir = path.join(process.cwd(), 'content/docs')
+
+Import trace:
+  Server Component:
+    ./lib/docs.tsx
+    ./app/docs/[slug]/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+[00:44:21.768] Server  LOG      ✓ Compiled in 66ms
+[00:44:28.493] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:28.700] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:29.847] Browser ERROR   uncaughtError: Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndFocusHandler segmentPath={[...]}>
+        <InnerScrollAndFocusHandler segmentPath={[...]} focusAndScrollRef={{apply:false, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="strings/" loading={null}>
+              <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+                <RedirectBoundary>
+                  <RedirectErrorBoundary router={{...}}>
+                    <InnerLayoutRouter url="/docs/strings" tree={[...]} params={{slug:"strings"}} ...>
+                      <SegmentViewNode type="page" pagePath="docs/[slug...">
+                        <SegmentTrieNode>
+                        <DocPage>
+                          <div className="container ...">
+                            <CodeCopyButtons>
+                            <div className="flex gap-8...">
+                              <div className="flex-1 max...">
+                                <div>
++                               <article className="prose prose-slate dark:prose-invert max-w-none overflow-x-auto">
+-                               <h2 id="introduction">
+                              ...
+                      ...
+                    ...
+          ...
+
+[00:44:49.831] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

@@ -4,6 +4,7 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeShiki from '@shikijs/rehype'
+import remarkHeadingId from 'remark-custom-heading-id'
 import type { TocItem } from '@/components/docs/toc'
 
 const contentDir = path.join(process.cwd(), 'content/docs')
@@ -81,13 +82,23 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
     const headingMatch = line.match(/^(#{2,4})\s+(.+)/)
     if (headingMatch) {
       const level = headingMatch[1].length
-      const text = headingMatch[2].trim()
+      let text = headingMatch[2].trim()
 
-      // Generate ID from text (similar to rehype-slug)
-      const id = text
-        .toLowerCase()
-        .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')
-        .replace(/^-|-$/g, '')
+      // Check for custom ID in {#custom-id} format
+      const customIdMatch = text.match(/\s*\{#([^}]+)\}\s*$/)
+      let id: string
+
+      if (customIdMatch) {
+        // Use custom ID and remove it from display text
+        id = customIdMatch[1]
+        text = text.replace(/\s*\{#[^}]+\}\s*$/, '').trim()
+      } else {
+        // Generate ID from text (similar to rehype-slug)
+        id = text
+          .toLowerCase()
+          .replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-')
+          .replace(/^-|-$/g, '')
+      }
 
       toc.push({ id, text, level })
     }
@@ -101,6 +112,9 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
     options: {
       parseFrontmatter: true,
       mdxOptions: {
+        remarkPlugins: [
+          remarkHeadingId,
+        ],
         rehypePlugins: [
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: 'wrap' }],
