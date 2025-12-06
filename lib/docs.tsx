@@ -15,6 +15,7 @@ export type Doc = {
   frontmatter: {
     title: string
     description?: string
+    keywords?: string
   }
   toc: TocItem[]
 }
@@ -106,7 +107,7 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
 
   const cleanedSource = lines.join('\n')
 
-  const { content, frontmatter } = await compileMDX<{ title: string; description?: string }>({
+  const { content, frontmatter } = await compileMDX<{ title: string; description?: string; keywords?: string }>({
     source: cleanedSource,
     components: {},
     options: {

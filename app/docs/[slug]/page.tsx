@@ -10,6 +10,37 @@ export async function generateStaticParams() {
     }))
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params
+    const doc = await getDocBySlug(slug)
+
+    if (!doc) {
+        return {}
+    }
+
+    const title = doc.frontmatter.title
+    const description = doc.frontmatter.description || ''
+
+    return {
+        title,
+        description,
+        keywords: doc.frontmatter.keywords ? doc.frontmatter.keywords.split(',').map(k => k.trim()) : [],
+        openGraph: {
+            title,
+            description,
+            type: 'article',
+            url: `/docs/${slug}`,
+            siteName: 'Laravel12 繁體中文文檔',
+            locale: 'zh_TW',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title,
+            description,
+        },
+    }
+}
+
 export default async function DocPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
     const doc = await getDocBySlug(slug)
