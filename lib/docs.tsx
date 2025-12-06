@@ -4,7 +4,6 @@ import { compileMDX } from 'next-mdx-remote/rsc'
 import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeShiki from '@shikijs/rehype'
-import { CodeBlock } from '@/components/ui/code-block'
 import type { TocItem } from '@/components/docs/toc'
 
 const contentDir = path.join(process.cwd(), 'content/docs')
@@ -98,20 +97,7 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
 
   const { content, frontmatter } = await compileMDX<{ title: string; description?: string }>({
     source: cleanedSource,
-    components: {
-      pre: ({ children, ...props }: any) => {
-        // Extract code content and language from children
-        const codeElement = children?.props
-        const code = codeElement?.children || ''
-        const className = codeElement?.className || ''
-
-        return (
-          <CodeBlock className={className} raw={typeof code === 'string' ? code : undefined}>
-            {children}
-          </CodeBlock>
-        )
-      }
-    },
+    components: {},
     options: {
       parseFrontmatter: true,
       mdxOptions: {
@@ -119,12 +105,8 @@ export async function getDocBySlug(slug: string): Promise<Doc | null> {
           rehypeSlug,
           [rehypeAutolinkHeadings, { behavior: 'wrap' }],
           [rehypeShiki, {
-            themes: {
-              light: 'github-light',
-              dark: 'github-dark',
-            },
-            defaultColor: 'dark',
-            langs: ['php', 'javascript', 'typescript', 'bash', 'blade', 'json', 'html', 'css', 'sql', 'diff']
+            theme: 'github-dark',
+            langs: ['php', 'javascript', 'typescript', 'bash', 'blade', 'json', 'html', 'css', 'sql', 'diff', 'tsx', 'jsx', 'vue']
           }]
         ]
       }

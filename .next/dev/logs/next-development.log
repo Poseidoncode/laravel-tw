@@ -30,3 +30,15 @@ Could not parse expression with acorn
 
 More information: https://mdxjs.com/docs/troubleshooting-mdx
 [00:40:59.591] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:20.380] Server  LOG      ✓ Compiled in 107ms
+[00:44:49.201] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:47:42.586] Server  LOG      ✓ Compiled in 153ms
+[00:50:12.493] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:51:50.511] Server  LOG      ✓ Compiled in 51ms
+[00:52:12.554] Server  LOG      ✓ Compiled in 126ms
+[00:53:04.257] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:53:34.887] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:53:37.120] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:56:08.598] Server  LOG      ✓ Compiled in 147ms
+[00:58:14.636] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:53.575] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold

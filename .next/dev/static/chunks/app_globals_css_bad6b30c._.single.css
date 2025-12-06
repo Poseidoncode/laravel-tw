@@ -2509,14 +2509,17 @@
   }
 }
 
+html:not(.dark) pre[data-theme="dark"], html:not(.dark) pre[data-theme="dark"] code, .dark pre[data-theme="light"], .dark pre[data-theme="light"] code {
+  display: none;
+}
+
 pre {
-  background-color: var(--pre-bg);
-  max-width: 100%;
-  color: var(--card-foreground);
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  max-width: 100%;
   padding: .75rem 1rem;
   overflow-x: auto;
+  background: #0d1117 !important;
 }
 
 code {
@@ -2540,8 +2543,6 @@ article.prose code:not(pre code) {
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
-  background-color: var(--pre-bg) !important;
-  color: var(--card-foreground) !important;
 }
 
 .prose code {

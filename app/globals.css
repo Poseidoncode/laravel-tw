@@ -47,14 +47,17 @@
 :root {
   --radius: 0.625rem;
   /* Electronic Paper Theme (Light Mode) */
-  --background: oklch(0.98 0.01 85); /* Warm Paper */
-  --foreground: oklch(0.25 0 0);     /* Soft Black */
+  --background: oklch(0.98 0.01 85);
+  /* Warm Paper */
+  --foreground: oklch(0.25 0 0);
+  /* Soft Black */
   --card: oklch(0.96 0.01 85);
   --pre-bg: rgb(16, 24, 40);
   --card-foreground: oklch(0.25 0 0);
   --popover: oklch(0.98 0.01 85);
   --popover-foreground: oklch(0.25 0 0);
-  --primary: oklch(0.45 0.15 30);    /* Laravel Red-ish but warmer/softer */
+  --primary: oklch(0.45 0.15 30);
+  /* Laravel Red-ish but warmer/softer */
   --primary-foreground: oklch(0.98 0.01 85);
   --secondary: oklch(0.94 0.02 85);
   --secondary-foreground: oklch(0.35 0 0);
@@ -83,14 +86,16 @@
 
 .dark {
   /* Laravel Dark Theme */
-  --background: oklch(0.15 0.02 260); /* Deep Blue/Slate */
+  --background: oklch(0.15 0.02 260);
+  /* Deep Blue/Slate */
   --foreground: oklch(0.95 0 0);
   --card: oklch(0.20 0.02 260);
   --pre-bg: oklch(0.20 0.02 260);
   --card-foreground: oklch(0.95 0 0);
   --popover: oklch(0.20 0.02 260);
   --popover-foreground: oklch(0.95 0 0);
-  --primary: oklch(0.55 0.2 30);      /* Laravel Red */
+  --primary: oklch(0.55 0.2 30);
+  /* Laravel Red */
   --primary-foreground: oklch(0.95 0 0);
   --secondary: oklch(0.25 0.02 260);
   --secondary-foreground: oklch(0.95 0 0);
@@ -108,7 +113,8 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.13 0.02 260);    /* Slightly darker than bg */
+  --sidebar: oklch(0.13 0.02 260);
+  /* Slightly darker than bg */
   --sidebar-foreground: oklch(0.95 0 0);
   --sidebar-primary: oklch(0.55 0.2 30);
   --sidebar-primary-foreground: oklch(0.95 0 0);
@@ -128,15 +134,14 @@
   }
 }
 
-/* RWD fix for code blocks and pre elements */
+/* Code blocks with dark background */
 pre {
   max-width: 100%;
   overflow-x: auto;
-  background-color: var(--pre-bg);
-  color: var(--card-foreground);
   padding: 0.75rem 1rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
+  background: #0d1117 !important;
 }
 
 code {
@@ -163,8 +168,6 @@ article.prose code:not(pre code) {
 .prose pre {
   max-width: 100%;
   overflow-x: auto;
-  background-color: var(--pre-bg) !important;
-  color: var(--card-foreground) !important;
 }
 
 .prose code {
@@ -274,6 +277,7 @@ article.prose code:not(pre code) {
 }
 
 @media (max-width: 768px) {
+
   #software-list ul,
   #optional-software-list ul {
     column-count: 1;
