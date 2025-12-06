@@ -35,7 +35,7 @@ export function CodeCopyButtons() {
 
                 // Create copy button
                 const button = document.createElement('button')
-                button.className = 'code-copy-button absolute top-3 right-3 p-2 text-gray-400 hover:text-white transition-colors opacity-0 group-hover:opacity-100'
+                button.className = 'code-copy-button absolute top-1 right-3 p-2 text-gray-400 hover:text-white transition-colors'
                 button.setAttribute('aria-label', 'Copy code to clipboard')
                 button.innerHTML = `
           <svg class="copy-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -444,8 +444,8 @@
     top: calc(var(--spacing) * 0);
   }
 
-  .top-3 {
-    top: calc(var(--spacing) * 3);
+  .top-1 {
+    top: calc(var(--spacing) * 1);
   }
 
   .top-4 {
@@ -1675,10 +1675,6 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  .opacity-0 {
-    opacity: 0;
-  }
-
   .opacity-70 {
     opacity: .7;
   }
@@ -1852,12 +1848,6 @@
 
   .running {
     animation-play-state: running;
-  }
-
-  @media (hover: hover) {
-    .group-hover\:opacity-100:is(:where(.group):hover *) {
-      opacity: 1;
-    }
   }
 
   @media (hover: hover) {
@@ -2545,7 +2535,7 @@ html:not(.dark) body {
 html:not(.dark) body:before {
   content: "";
   pointer-events: none;
-  opacity: .07;
+  opacity: .025;
   z-index: 9999;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   width: 100%;
