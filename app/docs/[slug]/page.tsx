@@ -1,6 +1,7 @@
 import { getDocBySlug, getAllDocs } from '@/lib/docs'
 import { notFound } from 'next/navigation'
 import { TableOfContents } from '@/components/docs/toc'
+import { CodeCopyButtons } from '@/components/docs/code-copy-button'
 
 export async function generateStaticParams() {
     const docs = await getAllDocs()
@@ -19,6 +20,7 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
 
     return (
         <div className="container mx-auto py-10 px-4 md:px-6">
+            <CodeCopyButtons />
             <div className="flex gap-8 justify-center items-start">
                 <div className="flex-1 max-w-3xl min-w-0">
                     <div className="mb-0">

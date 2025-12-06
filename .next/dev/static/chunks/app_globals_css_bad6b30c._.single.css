@@ -70,6 +70,7 @@
     --color-red-600: #e40014;
     --color-green-100: #dcfce7;
     --color-green-600: #00a544;
+    --color-gray-400: #99a1af;
     --color-gray-500: #6a7282;
     --color-gray-700: #364153;
     --color-black: #000;
@@ -115,6 +116,7 @@
       --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-green-100: lab(96.1861% -13.8464 6.52365);
       --color-green-600: lab(59.0978% -58.6621 41.2579);
+      --color-gray-400: lab(65.9269% -.832707 -8.17473);
       --color-gray-500: lab(47.7841% -.393182 -10.0268);
       --color-gray-700: lab(27.1134% -.956401 -12.3224);
     }
@@ -440,6 +442,10 @@
 
   .top-0 {
     top: calc(var(--spacing) * 0);
+  }
+
+  .top-3 {
+    top: calc(var(--spacing) * 3);
   }
 
   .top-4 {
@@ -1612,6 +1618,10 @@
     }
   }
 
+  .text-gray-400 {
+    color: var(--color-gray-400);
+  }
+
   .text-gray-500 {
     color: var(--color-gray-500);
   }
@@ -1663,6 +1673,10 @@
   .antialiased {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  .opacity-0 {
+    opacity: 0;
   }
 
   .opacity-70 {
@@ -1841,6 +1855,12 @@
   }
 
   @media (hover: hover) {
+    .group-hover\:opacity-100:is(:where(.group):hover *) {
+      opacity: 1;
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:bg-accent:hover {
       background-color: var(--accent);
     }
@@ -1891,6 +1911,12 @@
   @media (hover: hover) {
     .hover\:text-foreground:hover {
       color: var(--foreground);
+    }
+  }
+
+  @media (hover: hover) {
+    .hover\:text-white:hover {
+      color: var(--color-white);
     }
   }
 
@@ -2509,10 +2535,6 @@
   }
 }
 
-html:not(.dark) pre[data-theme="dark"], html:not(.dark) pre[data-theme="dark"] code, .dark pre[data-theme="light"], .dark pre[data-theme="light"] code {
-  display: none;
-}
-
 pre {
   border-radius: var(--radius);
   border: 1px solid var(--border);
@@ -2520,6 +2542,33 @@ pre {
   padding: .75rem 1rem;
   overflow-x: auto;
   background: #0d1117 !important;
+}
+
+.code-block-wrapper {
+  margin: 1rem 0;
+  position: relative;
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+}
+
+.code-copy-button {
+  background: #0d1117cc;
+  border-radius: .375rem;
+  transition: opacity .2s;
+}
+
+.code-copy-button:hover {
+  background: #0d1117f2;
+}
+
+.code-copy-button svg {
+  display: block;
+}
+
+.code-copy-button .hidden {
+  display: none;
 }
 
 code {
