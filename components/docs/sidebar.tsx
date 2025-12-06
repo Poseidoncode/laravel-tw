@@ -64,7 +64,7 @@ export function DocsSidebar() {
                                                 <Button
                                                     variant="ghost"
                                                     size="sm"
-                                                    className={isActive ? 'w-full justify-start font-semibold text-foreground' : 'w-full justify-start font-normal text-sm'}
+                                                    className={isActive ? 'w-full justify-start font-semibold text-primary' : 'w-full justify-start font-normal text-sm'}
                                                 >
                                                     {item.title}
                                                 </Button>
@@ -86,12 +86,12 @@ export function DocsSidebar() {
                             return (
                                 <>
                                     <Link href="/docs/api" className="block" aria-current={isApiActive ? 'page' : undefined}>
-                                        <Button variant="ghost" size="sm" className={isApiActive ? 'w-full justify-start font-semibold text-foreground' : 'w-full justify-start font-normal text-sm'}>
+                                        <Button variant="ghost" size="sm" className={isApiActive ? 'w-full justify-start font-semibold text-primary' : 'w-full justify-start font-normal text-sm'}>
                                             API 文件
                                         </Button>
                                     </Link>
                                     <Link href="/docs/releases" className="block" aria-current={isReleasesActive ? 'page' : undefined}>
-                                        <Button variant="ghost" size="sm" className={isReleasesActive ? 'w-full justify-start font-semibold text-foreground' : 'w-full justify-start font-normal text-sm'}>
+                                        <Button variant="ghost" size="sm" className={isReleasesActive ? 'w-full justify-start font-semibold text-primary' : 'w-full justify-start font-normal text-sm'}>
                                             更新日誌
                                         </Button>
                                     </Link>
