@@ -1,3 +1,32 @@
 [00:00:00.938] Server  LOG      ✓ Ready in 696ms
 [00:00:06.253] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
 [00:05:51.618] Server  LOG      ✓ Compiled in 89ms
+[00:10:27.207] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:00.831] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:12:02.898] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:25.524] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:16:28.308] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:22:56.851] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:24:09.477] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:09.055] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:28:12.233] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:34:05.570] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:38.451] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:39.108] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:39.418] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:42.395] Server  ERROR    ⨯ Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:37:43.120] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:37:43.340] Browser ERROR   uncaughtError: Error: [next-mdx-remote] error compiling MDX:
+Could not parse expression with acorn
+
+More information: https://mdxjs.com/docs/troubleshooting-mdx
+[00:40:59.591] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
