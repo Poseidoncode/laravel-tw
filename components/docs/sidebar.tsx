@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import { ModeToggle } from '@/components/mode-toggle'
+import { SearchButton } from '@/components/docs/search'
 
 import { sidebarItems } from '@/lib/docs-config'
 
@@ -36,7 +37,10 @@ export function DocsSidebar() {
                 </div>
                 <ModeToggle />
             </div>
-            <ScrollArea className="h-[calc(100vh-65px)]">
+            <div className="p-4 border-b">
+                <SearchButton />
+            </div>
+            <ScrollArea className="h-[calc(100vh-130px)]">
                 <div className="p-4 space-y-2">
                     {sidebarItems.map((section) => (
                         <div key={section.title}>

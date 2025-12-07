@@ -1,6 +1,7 @@
 import { DocsSidebar } from '@/components/docs/sidebar'
 import { MobileNav } from '@/components/docs/mobile-nav'
 import { ModeToggle } from '@/components/mode-toggle'
+import { SearchButton } from '@/components/docs/search'
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -10,7 +11,10 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                     <MobileNav />
                     <span className="ml-2 font-bold text-base whitespace-nowrap"><span className="text-red-600 mr-0.5">Laravel</span>Docs（中文）</span>
                 </div>
-                <ModeToggle />
+                <div className="flex items-center gap-2">
+                    <SearchButton variant="icon" />
+                    <ModeToggle />
+                </div>
             </div>
             <DocsSidebar />
             <main className="flex-1 relative">
