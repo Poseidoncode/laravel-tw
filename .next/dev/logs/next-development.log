@@ -1,6 +1,0 @@
-[00:00:00.989] Server  LOG      ✓ Ready in 730ms
-[00:00:22.064] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:39.037] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:48.297] Server  ERROR    ⨯ Failed to generate static paths for /docs/[slug]:
-[00:01:48.315] Server  ERROR   Error: Page "/docs/[slug]/page" is missing param "/docs/[slug]" in "generateStaticParams()", which is required with "output: export" config.
-[00:02:35.096] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
