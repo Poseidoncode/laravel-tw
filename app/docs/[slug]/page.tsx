@@ -3,12 +3,7 @@ import { notFound } from 'next/navigation'
 import { TableOfContents } from '@/components/docs/toc'
 import { CodeCopyButtons } from '@/components/docs/code-copy-button'
 
-export async function generateStaticParams() {
-    const docs = await getAllDocs()
-    return docs.map((slug) => ({
-        slug,
-    }))
-}
+// generateStaticParams moved to this segment's layout.tsx to satisfy static export
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
