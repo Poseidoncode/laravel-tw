@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { Search, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -204,8 +205,8 @@ export function SearchButton({ variant = 'default' }: SearchButtonProps) {
             )}
 
             {/* Search Dialog */}
-            {open && (
-                <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
+            {open && typeof document !== 'undefined' && createPortal(
+                <div className="fixed inset-0 z-50 flex items-start justify-center pt-[20vh] md:left-64 md:pr-4">
                     {/* Backdrop */}
                     <div
                         className="fixed inset-0 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
@@ -221,7 +222,7 @@ export function SearchButton({ variant = 'default' }: SearchButtonProps) {
                                 ref={inputRef}
                                 type="text"
                                 placeholder="搜尋文件..."
-                                className="flex h-12 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-gray-500 dark:text-white disabled:cursor-not-allowed disabled:opacity-50"
+                                className="flex h-12 w-full rounded-md bg-white/90 dark:bg-[#0b1220]/80 py-3 px-2 text-sm outline-none placeholder:text-gray-500 dark:placeholder:text-gray-400 text-gray-900 dark:text-white disabled:cursor-not-allowed disabled:opacity-50"
                                 value={query}
                                 onChange={(e) => setQuery(e.target.value)}
                                 onKeyDown={handleKeyDown}
@@ -290,8 +291,7 @@ export function SearchButton({ variant = 'default' }: SearchButtonProps) {
                             </span>
                         </div>
                     </div>
-                </div>
-            )}
+                </div>, document.body)}
         </>
     )
 }
