@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -16,6 +16,12 @@ const genryuSans = localFont({
     { path: "../public/genryu/GenRyuMinTW-B-01.woff2", weight: "700", style: "normal" },
     { path: "../public/genryu/GenRyuMinTW-H-01.woff2", weight: "800", style: "normal" },
   ],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -63,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="zh-TW" suppressHydrationWarning>
       <body
-        className={`${genryuSans.variable} ${geistMono.variable} antialiased`}
+        className={`${genryuSans.variable} ${inter.variable} ${geistMono.variable} antialiased`}
       >
         <script
           dangerouslySetInnerHTML={{
