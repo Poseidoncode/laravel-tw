@@ -1,10 +1,11 @@
-import Link from "next/link"
-import type { Metadata } from "next"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import type { Metadata } from "next";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Laravel 12 中文文檔 - PHP Web 框架",
-  description: "Laravel 12 官方文檔的正體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
+  description:
+    "Laravel 12 官方文檔的正體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
   openGraph: {
     title: "Laravel 12 中文文檔",
     description: "Laravel 12 官方文檔的正體中文翻譯",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     url: "https://laravel12-zh-tw.hulstem.com",
   },
-}
+};
 
 export default function Home() {
   return (
@@ -23,17 +24,30 @@ export default function Home() {
           Laravel <span className="text-red-600">12</span>
         </h1>
         <p className="text-2xl text-muted-foreground max-w-[600px] mx-auto">
-          為 Web 工匠打造的 PHP 框架<br />中文翻譯文檔
+          為 Web 工匠打造的 PHP 框架
+          <br />
+          中文翻譯文檔
         </p>
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:justify-center sm:gap-4">
           <Link href="/docs/releases">
-            <Button size="lg" className="text-lg px-8">
+            <Button className="text-base px-4 cursor-pointer sm:text-lg sm:px-8">
               開始閱讀
             </Button>
           </Link>
           <Link href="https://laravel.com" target="_blank">
-            <Button variant="outline" size="lg" className="text-lg px-8">
+            <Button
+              variant="secondary"
+              className="text-base px-4 cursor-pointer sm:text-lg sm:px-8"
+            >
               官方網站
+            </Button>
+          </Link>
+          <Link href="https://deepwiki.com/laravel/laravel" target="_blank">
+            <Button
+              variant="outline"
+              className="text-base px-6 cursor-pointer sm:text-lg sm:px-8"
+            >
+              AI輔助
             </Button>
           </Link>
         </div>
@@ -41,10 +55,15 @@ export default function Home() {
 
       <footer className="w-full border-t border-muted-foreground/10 bg-background/50 py-6">
         <div className="max-w-3xl mx-auto text-center space-y-1 px-4 text-sm text-muted-foreground">
-          <p className="italic">“Come to me, all you who are weary and burdened, and I will give you rest.” (Matthew 11:28)</p>
-          <p>凡勞苦擔重擔的人，可以到我這裡來，我就使你們得安息。 （太 11:28）</p>
+          <p className="italic">
+            “Come to me, all you who are weary and burdened, and I will give you
+            rest.” (Matthew 11:28)
+          </p>
+          <p>
+            凡勞苦擔重擔的人，可以到我這裡來，我就使你們得安息。 （太 11:28）
+          </p>
         </div>
       </footer>
     </div>
-  )
+  );
 }
