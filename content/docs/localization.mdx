@@ -1,16 +1,7 @@
 ---
 title: "本地化 (Localization)"
+description: Laravel 的本地化功能提供了一個管理和檢索各種語言字串的系統，從而能夠開發多語言應用程式。
 ---
-
-- [介紹](#introduction)
-  你可以指示 Laravel 的「複數化器」使用英語以外的語言，Eloquent 和框架的其他部分會使用它將單數字串轉換為複數字串。這可以透過在應用程式的某個 service provider 的 `boot` 方法中調用 `useLanguage` 方法來完成。複數化器目前支援的語言有：`french`、`norwegian-bokmal`、`portuguese`、`spanish` 和 `turkish`： - [設定地區](#configuring-the-locale) - [複數化語言](#pluralization-language)
-- [定義翻譯字串](#defining-translation-strings)
-  - [使用短鍵](#using-short-keys)
-  - [使用翻譯字串作為鍵](#using-translation-strings-as-keys)
-- [擷取翻譯字串](#retrieving-translation-strings)
-  - [替換翻譯字串中的參數](#replacing-parameters-in-translation-strings)
-  - [複數化](#pluralization)
-- [覆寫套件語言檔案](#overriding-package-language-files)
 
 <a name="introduction"></a>
 ## 介紹 (Introduction)

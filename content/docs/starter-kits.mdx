@@ -3,7 +3,7 @@ title: Starter Kits
 description: Laravel Starter Kits 為使用 React、Vue 或 Livewire 前端建置應用程式提供了一個強大的起點。
 ---
 
-# Starter Kits
+-
 
 ## 簡介 (Introduction)
 
@@ -88,7 +88,7 @@ npx shadcn@latest add switch
 在這個例子中,該命令將 Switch 元件發布到 `resources/js/components/ui/switch.tsx`。一旦元件被發布,你可以在任何頁面中使用它:
 
 ```tsx
-import { Switch } from "@/components/ui/switch"
+import { Switch } from "@/components/ui/switch";
 
 const MyPage = () => {
   return (
@@ -106,8 +106,8 @@ export default MyPage;
 React 起始套件包含兩種不同的主要佈局供你選擇:「側邊欄 (sidebar)」佈局和「標題 (header)」佈局。側邊欄佈局是預設的,但你可以透過修改應用程式的 `resources/js/layouts/app-layout.tsx` 檔案頂部匯入的佈局來切換到標題佈局:
 
 ```tsx
-import AppLayoutTemplate from '@/layouts/app/app-sidebar-layout';
-import AppLayoutTemplate from '@/layouts/app/app-header-layout';
+import AppLayoutTemplate from "@/layouts/app/app-sidebar-layout";
+import AppLayoutTemplate from "@/layouts/app/app-header-layout";
 ```
 
 #### React 側邊欄變體 (React Sidebar Variants)
@@ -126,8 +126,8 @@ React 起始套件中包含的認證頁面,如登入頁面和註冊頁面,也提
 要更改你的認證佈局,請修改應用程式的 `resources/js/layouts/auth-layout.tsx` 檔案頂部匯入的佈局:
 
 ```tsx
-import AuthLayoutTemplate from '@/layouts/auth/auth-simple-layout';
-import AuthLayoutTemplate from '@/layouts/auth/auth-split-layout';
+import AuthLayoutTemplate from "@/layouts/auth/auth-simple-layout";
+import AuthLayoutTemplate from "@/layouts/auth/auth-split-layout";
 ```
 
 ### Vue 自訂 (Vue)
@@ -156,7 +156,7 @@ npx shadcn-vue@latest add switch
 
 ```vue
 <script setup lang="ts">
-import { Switch } from '@/Components/ui/switch'
+import { Switch } from "@/Components/ui/switch";
 </script>
 
 <template>
@@ -171,8 +171,8 @@ import { Switch } from '@/Components/ui/switch'
 Vue 起始套件包含兩種不同的主要佈局供你選擇:「側邊欄 (sidebar)」佈局和「標題 (header)」佈局。側邊欄佈局是預設的,但你可以透過修改應用程式的 `resources/js/layouts/AppLayout.vue` 檔案頂部匯入的佈局來切換到標題佈局:
 
 ```typescript
-import AppLayout from '@/layouts/app/AppSidebarLayout.vue';
-import AppLayout from '@/layouts/app/AppHeaderLayout.vue';
+import AppLayout from "@/layouts/app/AppSidebarLayout.vue";
+import AppLayout from "@/layouts/app/AppHeaderLayout.vue";
 ```
 
 #### Vue 側邊欄變體 (Vue Sidebar Variants)
@@ -191,8 +191,8 @@ Vue 起始套件中包含的認證頁面,如登入頁面和註冊頁面,也提�
 要更改你的認證佈局,請修改應用程式的 `resources/js/layouts/AuthLayout.vue` 檔案頂部匯入的佈局:
 
 ```typescript
-import AuthLayout from '@/layouts/auth/AuthSimpleLayout.vue';
-import AuthLayout from '@/layouts/auth/AuthSplitLayout.vue';
+import AuthLayout from "@/layouts/auth/AuthSimpleLayout.vue";
+import AuthLayout from "@/layouts/auth/AuthSplitLayout.vue";
 ```
 
 ### Livewire 自訂 (Livewire)
@@ -248,97 +248,99 @@ Livewire 起始套件中包含的認證頁面,如登入頁面和註冊頁面,也
 Fortify 會根據你應用程式的 `config/fortify.php` 配置檔案中啟用的功能自動註冊以下認證路由:
 
 <div className="overflow-auto">
-<table className="min-w-full text-left border-collapse">
+  <table className="min-w-full text-left border-collapse">
     <thead>
-        <tr>
-            <th className="px-3 py-2">Method</th>
-            <th className="px-3 py-2">URI</th>
-            <th className="px-3 py-2">用途</th>
-        </tr>
+      <tr>
+        <th className="px-3 py-2">Method</th>
+        <th className="px-3 py-2">URI</th>
+        <th className="px-3 py-2">用途</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/login`</td>
-            <td className="px-3 py-2">顯示登入表單</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/login`</td>
-            <td className="px-3 py-2">處理登入請求</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/logout`</td>
-            <td className="px-3 py-2">登出使用者</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/register`</td>
-            <td className="px-3 py-2">顯示註冊表單</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/register`</td>
-            <td className="px-3 py-2">處理註冊請求</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/forgot-password`</td>
-            <td className="px-3 py-2">顯示忘記密碼表單</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/forgot-password`</td>
-            <td className="px-3 py-2">發送密碼重設連結</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/reset-password/{token}`</td>
-            <td className="px-3 py-2">顯示密碼重設表單</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/reset-password`</td>
-            <td className="px-3 py-2">處理密碼重設</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/email/verify`</td>
-            <td className="px-3 py-2">顯示電子郵件驗證通知</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/email/verify/{id}/{hash}`</td>
-            <td className="px-3 py-2">驗證電子郵件地址</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/email/verification-notification`</td>
-            <td className="px-3 py-2">重新發送驗證郵件</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/user/confirm-password`</td>
-            <td className="px-3 py-2">顯示密碼確認表單</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/user/confirm-password`</td>
-            <td className="px-3 py-2">處理密碼確認</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">GET</td>
-            <td className="px-3 py-2">`/two-factor-challenge`</td>
-            <td className="px-3 py-2">顯示雙因素認證挑戰</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">POST</td>
-            <td className="px-3 py-2">`/two-factor-challenge`</td>
-            <td className="px-3 py-2">處理雙因素認證挑戰</td>
-        </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/login`</td>
+        <td className="px-3 py-2">顯示登入表單</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/login`</td>
+        <td className="px-3 py-2">處理登入請求</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/logout`</td>
+        <td className="px-3 py-2">登出使用者</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/register`</td>
+        <td className="px-3 py-2">顯示註冊表單</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/register`</td>
+        <td className="px-3 py-2">處理註冊請求</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/forgot-password`</td>
+        <td className="px-3 py-2">顯示忘記密碼表單</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/forgot-password`</td>
+        <td className="px-3 py-2">發送密碼重設連結</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/reset-password/{token}`</td>
+        <td className="px-3 py-2">顯示密碼重設表單</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/reset-password`</td>
+        <td className="px-3 py-2">處理密碼重設</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/email/verify`</td>
+        <td className="px-3 py-2">顯示電子郵件驗證通知</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">
+          `/email/verify/{id}/{hash}`
+        </td>
+        <td className="px-3 py-2">驗證電子郵件地址</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/email/verification-notification`</td>
+        <td className="px-3 py-2">重新發送驗證郵件</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/user/confirm-password`</td>
+        <td className="px-3 py-2">顯示密碼確認表單</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/user/confirm-password`</td>
+        <td className="px-3 py-2">處理密碼確認</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">GET</td>
+        <td className="px-3 py-2">`/two-factor-challenge`</td>
+        <td className="px-3 py-2">顯示雙因素認證挑戰</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">POST</td>
+        <td className="px-3 py-2">`/two-factor-challenge`</td>
+        <td className="px-3 py-2">處理雙因素認證挑戰</td>
+      </tr>
     </tbody>
-</table>
+  </table>
 </div>
 
 可以使用 `php artisan route:list` Artisan 命令來顯示應用程式中的所有路由。

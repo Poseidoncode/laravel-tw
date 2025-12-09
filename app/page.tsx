@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-background text-foreground">
+    <div className="flex flex-col items-center justify-between min-h-screen py-2 bg-background text-foreground">
+      <div></div>
       <div className="text-center space-y-6">
         <h1 className="text-6xl font-bold tracking-tighter sm:text-7xl">
           Laravel <span className="text-red-600">12</span>
@@ -37,6 +38,13 @@ export default function Home() {
           </Link>
         </div>
       </div>
+
+      <footer className="w-full border-t border-muted-foreground/10 bg-background/50 py-6">
+        <div className="max-w-3xl mx-auto text-center space-y-1 px-4 text-sm text-muted-foreground">
+          <p className="italic">“Come to me, all you who are weary and burdened, and I will give you rest.” (Matthew 11:28)</p>
+          <p>凡勞苦擔重擔的人，可以到我這裡來，我就使你們得安息。 （太 11:28）</p>
+        </div>
+      </footer>
     </div>
   )
 }

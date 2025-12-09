@@ -11,7 +11,6 @@ export const sidebarItems = [
             { title: '安裝', href: '/docs/installation' },
             { title: '配置', href: '/docs/configuration' },
             { title: '目錄結構', href: '/docs/structure' },
-            { title: '生命週期', href: '/docs/lifecycle' },
             { title: '前端', href: '/docs/frontend' },
             { title: '啟動套件', href: '/docs/starter-kits' },
             { title: '部署', href: '/docs/deployment' },

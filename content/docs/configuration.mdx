@@ -1,5 +1,6 @@
 ---
 title: 設定 (Configuration)
+description: Laravel 的設定主要目的在提供一個強大、集中的地方來管理應用程式的設定、環境和服務。
 ---
 
 - [簡介](#introduction)
@@ -73,48 +74,48 @@ Laravel 的預設 `.env` 檔案包含一些常見的設定值，這些值可能�
 `.env` 檔案中的所有變數通常都被解析為字串，因此建立了一些保留值，以允許您從 `env()` 函式返回更廣泛的類型：
 
 <div className="overflow-auto">
-<table className="min-w-full text-left border-collapse">
+  <table className="min-w-full text-left border-collapse">
     <thead>
-        <tr>
-            <th className="px-3 py-2">`.env` 值</th>
-            <th className="px-3 py-2">`env()` 值</th>
-        </tr>
+      <tr>
+        <th className="px-3 py-2">`.env` 值</th>
+        <th className="px-3 py-2">`env()` 值</th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td className="px-3 py-2">`true`</td>
-            <td className="px-3 py-2">`(bool) true`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`(true)`</td>
-            <td className="px-3 py-2">`(bool) true`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`false`</td>
-            <td className="px-3 py-2">`(bool) false`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`(false)`</td>
-            <td className="px-3 py-2">`(bool) false`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`empty`</td>
-            <td className="px-3 py-2">`(string) ''`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`(empty)`</td>
-            <td className="px-3 py-2">`(string) ''`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`null`</td>
-            <td className="px-3 py-2">`(null) null`</td>
-        </tr>
-        <tr>
-            <td className="px-3 py-2">`(null)`</td>
-            <td className="px-3 py-2">`(null) null`</td>
-        </tr>
+      <tr>
+        <td className="px-3 py-2">`true`</td>
+        <td className="px-3 py-2">`(bool) true`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`(true)`</td>
+        <td className="px-3 py-2">`(bool) true`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`false`</td>
+        <td className="px-3 py-2">`(bool) false`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`(false)`</td>
+        <td className="px-3 py-2">`(bool) false`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`empty`</td>
+        <td className="px-3 py-2">`(string) ''`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`(empty)`</td>
+        <td className="px-3 py-2">`(string) ''`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`null`</td>
+        <td className="px-3 py-2">`(null) null`</td>
+      </tr>
+      <tr>
+        <td className="px-3 py-2">`(null)`</td>
+        <td className="px-3 py-2">`(null) null`</td>
+      </tr>
     </tbody>
-</table>
+  </table>
 </div>
 
 如果您需要定義一個包含空格的值的環境變數，可以透過將值括在雙引號中來實現：

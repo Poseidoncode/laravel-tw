@@ -1,6 +1,6 @@
 ---
 title: 中介軟體 (Middleware)
-description: 中介軟體 (Middleware)
+description: Laravel 中介軟體提供了一種機制，用於過濾和檢查進入應用程式的 HTTP 請求。它們充當一系列層，請求在到達目標路由處理程序之前會依次經過這些層，並且還可以在回應發送後執行操作。
 ---
 
 - [簡介](#introduction)
@@ -134,7 +134,8 @@ use App\Http\Middleware\EnsureTokenIsValid;
 提供給 `withMiddleware` Closure 的 `$middleware` 物件是 `Illuminate\Foundation\Configuration\Middleware` 的實例，負責管理分配給應用程式路由的 Middleware。`append` 方法將 Middleware 新增到全域 Middleware 清單的末尾。如果您想將 Middleware 新增到清單的開頭，應使用 `prepend` 方法。
 
 <a name="manually-managing-laravels-default-global-middleware"></a>
-#### 手動管理 Laravel 的預設全域 Middleware (Manually Managing Laravels Default Global Middleware)
+#### 手動管理 Laravel 的預設全域 Middleware (Manually Managing Laravels Default
+Global Middleware)
 
 如果您想手動管理 Laravel 的全域 Middleware 堆疊，您可以將 Laravel 的預設全域 Middleware 堆疊提供給 `use` 方法。然後，您可以根據需要調整預設的 Middleware 堆疊：
 
@@ -332,7 +333,8 @@ $middleware->web(remove: [
 ```
 
 <a name="manually-managing-laravels-default-middleware-groups"></a>
-#### 手動管理 Laravel 的預設 Middleware 群組 (Manually Managing Laravels Default Middleware Groups)
+#### 手動管理 Laravel 的預設 Middleware 群組 (Manually Managing Laravels Default
+Middleware Groups)
 
 如果您想手動管理 Laravel 預設 `web` 和 `api` Middleware 群組中的所有 Middleware，您可以完全重新定義這些群組。以下範例將使用其預設 Middleware 定義 `web` 和 `api` Middleware 群組，允許您根據需要自訂它們：
 
