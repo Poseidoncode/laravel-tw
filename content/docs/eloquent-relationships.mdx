@@ -3,50 +3,6 @@ title: "Eloquent：關聯 (Relationships)"
 description: Eloquent 關聯讓你輕鬆定義 model 之間的關聯
 ---
 
-# Eloquent: Relationships
-
-- [簡介](#introduction)
-- [定義關聯](#defining-relationships)
-  - [一對一 / 擁有一個](#one-to-one)
-  - [一對多 / 擁有多個](#one-to-many)
-  - [一對多（反向）/ 屬於 (One to Many](#one-to-many-inverse)
-  - [一對多之其一](#has-one-of-many)
-  - [遠層一對一](#has-one-through)
-  - [遠層一對多](#has-many-through)
-- [範圍關聯](#scoped-relationships)
-- [多對多關聯](#many-to-many)
-  - [檢索中間資料表欄位](#retrieving-intermediate-table-columns)
-  - [透過中間資料表欄位過濾查詢](#filtering-queries-via-intermediate-table-columns)
-  - [透過中間資料表欄位排序查詢](#ordering-queries-via-intermediate-table-columns)
-  - [定義自訂中間資料表模型](#defining-custom-intermediate-table-models)
-- [多型關聯](#polymorphic-relationships)
-  - [一對一](#one-to-one-polymorphic-relations)
-  - [一對多](#one-to-many-polymorphic-relations)
-  - [一對多之其一](#one-of-many-polymorphic-relations)
-  - [多對多](#many-to-many-polymorphic-relations)
-  - [自訂多型類型](#custom-polymorphic-types)
-- [動態關聯](#dynamic-relationships)
-- [查詢關聯](#querying-relations)
-  - [關聯方法與動態屬性](#relationship-methods-vs-dynamic-properties)
-  - [查詢關聯存在性](#querying-relationship-existence)
-  - [查詢關聯不存在性](#querying-relationship-absence)
-  - [查詢 Morph To 關聯](#querying-morph-to-relationships)
-- [聚合相關模型](#aggregating-related-models)
-  - [計算相關模型數量](#counting-related-models)
-  - [其他聚合函數](#other-aggregate-functions)
-  - [計算 Morph To 關聯的相關模型數量](#counting-related-models-on-morph-to-relationships)
-- [預先載入](#eager-loading)
-  - [限制預先載入](#constraining-eager-loads)
-  - [延遲預先載入](#lazy-eager-loading)
-  - [自動預先載入](#automatic-eager-loading)
-  - [防止延遲載入](#preventing-lazy-loading)
-- [插入和更新相關模型](#inserting-and-updating-related-models)
-  - [`save` 方法](#the-save-method)
-  - [`create` 方法](#the-create-method)
-  - [屬於關聯](#updating-belongs-to-relationships)
-  - [多對多關聯](#updating-many-to-many-relationships)
-- [觸碰父級時間戳記](#touching-parent-timestamps)
-
 <a name="introduction"></a>
 ## 簡介 (Introduction)
 
@@ -452,8 +408,8 @@ public function largestOrder(): HasOne
 > 由於 PostgreSQL 不支援對 UUID 欄位執行 `MAX` 函數，目前無法將一對多之其一關聯與 PostgreSQL UUID 欄位結合使用。
 
 <a name="converting-many-relationships-to-has-one-relationships"></a>
-#### 將「多」關聯轉換為「一」關聯 (Converting "Many" Relationships to Has One (Converting Many Relationships To Has One Relationships)
-Relationships)
+#### 將「多」關聯轉換為「一」關聯 (Converting "Many" Relationships to Has One
+(Converting Many Relationships To Has One Relationships) Relationships)
 
 通常，當使用 `latestOfMany`、`oldestOfMany` 或 `ofMany` 方法檢索單個模型時，你已經為同一模型定義了「一對多」關聯。為了方便起見，Laravel 允許你通過在關聯上呼叫 `one` 方法輕鬆地將此關聯轉換為「一對一」關聯：
 
@@ -910,8 +866,8 @@ foreach ($users->flatMap->podcasts as $podcast) {
 ```
 
 <a name="filtering-queries-via-intermediate-table-columns"></a>
-### 透過中間資料表欄位過濾查詢 (Filtering Queries via Intermediate Table (Filtering Queries via Intermediate Table Columns)
-Columns)
+### 透過中間資料表欄位過濾查詢 (Filtering Queries via Intermediate Table
+(Filtering Queries via Intermediate Table Columns) Columns)
 
 你還可以在定義關聯時使用 `wherePivot`、`wherePivotIn`、`wherePivotNotIn`、`wherePivotBetween`、`wherePivotNotBetween`、`wherePivotNull` 和 `wherePivotNotNull` 方法來過濾 `belongsToMany` 關聯查詢回傳的結果：
 
@@ -1548,8 +1504,8 @@ $user->posts()->where('active', 1)->get();
 你可以在關聯上使用任何 Laravel [查詢建構器](/docs/queries) 的方法，因此請務必探索查詢建構器文件以了解所有可用的方法。
 
 <a name="chaining-orwhere-clauses-after-relationships"></a>
-#### 在關聯後串接 `orWhere` 子句 (Chaining `orWhere` Clauses After (Chaining Orwhere Clauses After Relationships)
-Relationships)
+#### 在關聯後串接 `orWhere` 子句 (Chaining `orWhere` Clauses After (Chaining
+Orwhere Clauses After Relationships) Relationships)
 
 如上例所示，你可以在查詢關聯時自由地向關聯新增額外的約束。但是，將 `orWhere` 子句串接到關聯時要小心，因為 `orWhere` 子句將在邏輯上與關聯約束分組在同一級別：
 
@@ -1852,8 +1808,8 @@ $book->loadCount(['reviews' => function (Builder $query) {
 ```
 
 <a name="relationship-counting-and-custom-select-statements"></a>
-#### 關聯計數與自訂 Select 語句 (Relationship Counting and Custom Select (Relationship Counting And Custom Select Statements)
-Statements)
+#### 關聯計數與自訂 Select 語句 (Relationship Counting and Custom Select
+(Relationship Counting And Custom Select Statements) Statements)
 
 如果你將 `withCount` 與 `select` 語句結合使用，請確保在 `select` 方法之後呼叫 `withCount`：
 
@@ -1905,8 +1861,8 @@ $posts = Post::select(['title', 'body'])
 ```
 
 <a name="counting-related-models-on-morph-to-relationships"></a>
-### 計算 Morph To 關聯的相關模型數量 (Counting Related Models on Morph To (Counting Related Models on Morph To Relationships)
-Relationships)
+### 計算 Morph To 關聯的相關模型數量 (Counting Related Models on Morph To
+(Counting Related Models on Morph To Relationships) Relationships)
 
 如果你想要預先載入「morph to」關聯，以及該關聯可能回傳的各種實體的相關模型計數，你可以結合使用 `with` 方法和 `morphTo` 關聯的 `morphWithCount` 方法。
 
@@ -2152,8 +2108,8 @@ $users = User::with(['posts' => function ($query) {
 ```
 
 <a name="constraining-eager-loading-of-morph-to-relationships"></a>
-#### 限制 `morphTo` 關聯的預先載入 (Constraining Eager Loading of `morphTo` (Constraining Eager Loading Of Morph To Relationships)
-Relationships)
+#### 限制 `morphTo` 關聯的預先載入 (Constraining Eager Loading of `morphTo`
+(Constraining Eager Loading Of Morph To Relationships) Relationships)
 
 如果你正在預先載入 `morphTo` 關聯，Eloquent 將執行多個查詢以獲取每種類型的相關模型。你可以使用 `MorphTo` 關聯的 `constrain` 方法向這些查詢中的每一個新增額外的約束：
 
@@ -2175,8 +2131,8 @@ $comments = Comment::with(['commentable' => function (MorphTo $morphTo) {
 在這個範例中，Eloquent 將僅預先載入尚未隱藏的文章和 `type` 值為「educational」的影片。
 
 <a name="constraining-eager-loads-with-relationship-existence"></a>
-#### 使用關聯存在性限制預先載入 (Constraining Eager Loads With Relationship (Constraining Eager Loads With Relationship Existence)
-Existence)
+#### 使用關聯存在性限制預先載入 (Constraining Eager Loads With Relationship
+(Constraining Eager Loads With Relationship Existence) Existence)
 
 你有時可能會發現自己需要檢查關聯的存在性，同時根據相同的條件載入關聯。例如，你可能希望僅檢索具有符合給定查詢條件的子 `Post` 模型的 `User` 模型，同時也預先載入符合條件的文章。你可以使用 `withWhereHas` 方法來實現此目的：
 

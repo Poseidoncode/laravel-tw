@@ -87,6 +87,7 @@ export const sidebarItems = [
             { title: '遷移', href: '/docs/migrations' },
             { title: 'Seeding', href: '/docs/seeding' },
             { title: 'Redis', href: '/docs/redis' },
+            { title: 'MongoDB', href: '/docs/mongodb' },
         ]
     },
     {
@@ -107,8 +108,9 @@ export const sidebarItems = [
             { title: '測試概論', href: '/docs/testing' },
             { title: 'HTTP 測試', href: '/docs/http-tests' },
             { title: 'Console 測試', href: '/docs/console-tests' },
+            { title: '瀏覽器測試', href: '/docs/dusk' },
             { title: '資料庫測試', href: '/docs/database-testing' },
-            { title: 'Dusk', href: '/docs/dusk' },
+            { title: 'Mocking', href: '/docs/mocking' },
         ]
     },
     {
