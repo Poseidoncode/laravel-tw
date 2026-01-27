@@ -68,31 +68,36 @@ export default function RootLayout({
         className={`${genryuSans.variable} ${inter.variable} antialiased`}
       >
         <script
-          dangerouslySetInnerHTML={{
-            __html: `(${function setInitialTheme() {
-              try {
-                const persisted = window.localStorage.getItem('theme')
-                if (typeof persisted === 'string') {
-                  if (persisted === 'dark') {
-                    document.documentElement.classList.add('dark')
-                    document.documentElement.style.colorScheme = 'dark'
-                  } else {
-                    document.documentElement.classList.remove('dark')
-                    document.documentElement.style.colorScheme = 'light'
+            dangerouslySetInnerHTML={{
+                __html: `(${function setInitialTheme() {
+                  try {
+                    // 檢查本地儲存中是否已設定主題偏好
+                    const persisted = window.localStorage.getItem('theme')
+                    if (typeof persisted === 'string') {
+                      // 根據儲存的主題設定應用對應的 CSS 類別
+                      if (persisted === 'dark') {
+                        document.documentElement.classList.add('dark')
+                        document.documentElement.style.colorScheme = 'dark'
+                      } else {
+                        document.documentElement.classList.remove('dark')
+                        document.documentElement.style.colorScheme = 'light'
+                      }
+                      return
+                    }
+                    // 如果沒有儲存的偏好，檢查系統主題設定
+                    const mql = window.matchMedia('(prefers-color-scheme: dark)')
+                    if (mql.matches) {
+                      document.documentElement.classList.add('dark')
+                      document.documentElement.style.colorScheme = 'dark'
+                    } else {
+                      document.documentElement.classList.remove('dark')
+                      document.documentElement.style.colorScheme = 'light'
+                    }
+                  } catch (e) {
+                    // 靜默處理錯誤，避免阻塞頁面載入
                   }
-                  return
-                }
-                const mql = window.matchMedia('(prefers-color-scheme: dark)')
-                if (mql.matches) {
-                  document.documentElement.classList.add('dark')
-                  document.documentElement.style.colorScheme = 'dark'
-                } else {
-                  document.documentElement.classList.remove('dark')
-                  document.documentElement.style.colorScheme = 'light'
-                }
-              } catch (e) { }
-            }.toString()})();`,
-          }}
+                }.toString()})();`,
+            }}
         />
         <ThemeProvider
           attribute="class"

@@ -1,3 +1,22 @@
+/**
+ * 側邊欄導航項目配置
+ *
+ * 定義文檔網站的側邊欄導航結構，按照 Laravel 文檔的章節組織。
+ * 每個項目包含顯示標題和對應的路由 href。
+ *
+ * @example
+ * ```typescript
+ * import { sidebarItems } from '@/lib/docs-config'
+ *
+ * // 使用配置渲染導航
+ * sidebarItems.forEach(section => {
+ *   console.log(section.title) // "前言", "入門", etc.
+ *   section.items.forEach(item => {
+ *     console.log(item.title, item.href)
+ *   })
+ * })
+ * ```
+ */
 export const sidebarItems = [
     {
         title: '前言',

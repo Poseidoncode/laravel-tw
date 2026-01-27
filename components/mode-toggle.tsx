@@ -6,6 +6,26 @@ import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 
+/**
+ * 主題切換元件
+ *
+ * 提供明亮模式和深色模式之間的切換功能。
+ * 自動適應系統主題偏好設定，並提供平滑的過渡動畫。
+ *
+ * @component
+ * @example
+ * ```tsx
+ * import { ModeToggle } from "@/components/mode-toggle"
+ *
+ * export function Header() {
+ *   return (
+ *     <header>
+ *       <ModeToggle />
+ *     </header>
+ *   )
+ * }
+ * ```
+ */
 export function ModeToggle() {
     const { setTheme, theme } = useTheme()
 
