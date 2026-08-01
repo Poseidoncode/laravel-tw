@@ -2,5 +2,9 @@
 User-agent: *
 Allow: /
 
+# Prevent indexing of generated search index and not-found page
+Disallow: /pagefind/
+Disallow: /_not-found
+
 # Sitemap
 Sitemap: https://laravel12-zh-tw.hulstem.com/sitemap.xml
