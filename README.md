@@ -243,7 +243,7 @@ npm run postbuild
 
 ## 📄 授權條款
 
-本專案採用 MIT 授權條款。詳見 [LICENSE](LICENSE) 檔案。
+本專案的網站原始碼與繁體中文翻譯均採用 MIT 授權條款。原始 Laravel 文件著作權屬 Taylor Otwell，繁體中文翻譯著作權屬 Poseidoncode。詳見 [LICENSE](LICENSE) 與 [content/docs/license.mdx](content/docs/license.mdx)。
 
 ## 🙏 致謝
 
