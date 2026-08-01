@@ -21,9 +21,12 @@ const inter = Inter({
   display: "swap",
 });
 
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://laravel12-zh-tw.hulstem.com";
+const baseUrl = rawSiteUrl.replace(/\/+$/, "");
+const siteUrlWithSlash = `${baseUrl}/`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://laravel12-zh-tw.hulstem.com"),
+  metadataBase: new URL(baseUrl),
   title: "Laravel 12 中文文檔 - PHP Web 框架",
   description: "Laravel 12 官方文檔的繁體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
   keywords: ["Laravel", "Laravel 12", "PHP", "Web 框架", "中文文檔"],
@@ -31,10 +34,9 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "zh_TW",
-    url: "https://laravel12-zh-tw.hulstem.com",
     title: "Laravel 12 中文文檔",
     description: "Laravel 12 官方文檔的繁體中文翻譯",
-    siteName: "Laravel 12 中文",
+    siteName: "Laravel 12 繁體中文文檔",
     images: [
       {
         url: "/og-image.png",
@@ -51,7 +53,7 @@ export const metadata: Metadata = {
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://laravel12-zh-tw.hulstem.com",
+    canonical: "/",
   },
 };
 
@@ -69,10 +71,8 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{
                 __html: `(${function setInitialTheme() {
                   try {
-                    // 檢查本地儲存中是否已設定主題偏好
                     const persisted = window.localStorage.getItem('theme')
                     if (typeof persisted === 'string') {
-                      // 根據儲存的主題設定應用對應的 CSS 類別
                       if (persisted === 'dark') {
                         document.documentElement.classList.add('dark')
                         document.documentElement.style.colorScheme = 'dark'
@@ -82,7 +82,6 @@ export default function RootLayout({
                       }
                       return
                     }
-                    // 如果沒有儲存的偏好，檢查系統主題設定
                     const mql = window.matchMedia('(prefers-color-scheme: dark)')
                     if (mql.matches) {
                       document.documentElement.classList.add('dark')
@@ -95,6 +94,18 @@ export default function RootLayout({
                     // 靜默處理錯誤，避免阻塞頁面載入
                   }
                 }.toString()})();`,
+            }}
+        />
+        <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+                __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "WebSite",
+                    "name": "Laravel 12 繁體中文文檔",
+                    "url": siteUrlWithSlash,
+                    "inLanguage": "zh-TW"
+                }).replace(/</g, '\\u003c'),
             }}
         />
         <ThemeProvider

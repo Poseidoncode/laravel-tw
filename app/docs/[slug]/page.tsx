@@ -1,9 +1,9 @@
-import { getDocBySlug, getAllDocs } from '@/lib/docs'
+import { getDocBySlug } from '@/lib/docs'
 import { notFound } from 'next/navigation'
 import { TableOfContents } from '@/components/docs/toc'
 import { CodeCopyButtons } from '@/components/docs/code-copy-button'
 
-// generateStaticParams moved to this segment's layout.tsx to satisfy static export
+const baseUrl = (process.env.NEXT_PUBLIC_SITE_URL || 'https://laravel12-zh-tw.hulstem.com').replace(/\/+$/, '')
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
@@ -17,22 +17,33 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const description = doc.frontmatter.description || ''
 
     return {
-        metadataBase: new URL("https://laravel12-zh-tw.hulstem.com"),
         title,
-        description,
-        keywords: doc.frontmatter.keywords ? doc.frontmatter.keywords.split(',').map(k => k.trim()) : [],
+        description: description || title,
+        keywords: doc.frontmatter.keywords?.split(',').map(k => k.trim()) ?? [],
+        alternates: {
+            canonical: `/docs/${slug}`,
+        },
         openGraph: {
             title,
-            description,
+            description: description || title,
             type: 'article',
             url: `/docs/${slug}`,
-            siteName: 'Laravel12 繁體中文文檔',
+            siteName: 'Laravel 12 繁體中文文檔',
             locale: 'zh_TW',
+            images: [
+                {
+                    url: '/og-image.png',
+                    width: 1200,
+                    height: 630,
+                    alt: title,
+                },
+            ],
         },
         twitter: {
             card: 'summary_large_image',
             title,
-            description,
+            description: description || title,
+            images: ['/og-image.png'],
         },
     }
 }
@@ -43,6 +54,38 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
 
     if (!doc) {
         notFound()
+    }
+
+    const title = doc.frontmatter.title
+    const description = doc.frontmatter.description || ''
+    const fullUrl = `${baseUrl}/docs/${slug}`
+
+    const articleLd = {
+        '@context': 'https://schema.org',
+        '@type': 'TechArticle',
+        headline: title,
+        description,
+        url: fullUrl,
+        inLanguage: 'zh-TW',
+    }
+
+    const breadcrumbLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+            {
+                '@type': 'ListItem',
+                position: 1,
+                name: '首頁',
+                item: `${baseUrl}/`,
+            },
+            {
+                '@type': 'ListItem',
+                position: 2,
+                name: title,
+                item: fullUrl,
+            },
+        ],
     }
 
     return (
@@ -63,6 +106,12 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                     <article className="prose prose-slate dark:prose-invert max-w-none overflow-x-auto">
                         {doc.content}
                     </article>
+                    <script
+                        type="application/ld+json"
+                        dangerouslySetInnerHTML={{
+                            __html: JSON.stringify([articleLd, breadcrumbLd]).replace(/</g, '\\u003c'),
+                        }}
+                    />
                 </div>
                 <TableOfContents items={doc.toc} />
             </div>

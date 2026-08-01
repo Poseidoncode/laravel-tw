@@ -1,4 +1,4 @@
-# Laravel 12 中文文檔網站
+# Laravel 12.x 繁體中文文檔
 
 [![Next.js](https://img.shields.io/badge/Next.js-14+-000000?style=flat&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5+-3178C6?style=flat&logo=typescript)](https://www.typescriptlang.org/)
