@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     const description = doc.frontmatter.description || ''
 
     return {
+        metadataBase: new URL("https://laravel12-zh-tw.hulstem.com"),
         title,
         description,
         keywords: doc.frontmatter.keywords ? doc.frontmatter.keywords.split(',').map(k => k.trim()) : [],

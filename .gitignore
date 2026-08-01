@@ -32,4 +32,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
+# generated pagefind search index
+/public/pagefind
+
 /docs/

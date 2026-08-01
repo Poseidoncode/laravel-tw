@@ -23,8 +23,9 @@ const inter = Inter({
 
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://laravel12-zh-tw.hulstem.com"),
   title: "Laravel 12 中文文檔 - PHP Web 框架",
-  description: "Laravel 12 官方文檔的正體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
+  description: "Laravel 12 官方文檔的繁體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
   keywords: ["Laravel", "Laravel 12", "PHP", "Web 框架", "中文文檔"],
   authors: [{ name: "Laravel Taiwan Community" }],
   openGraph: {
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     locale: "zh_TW",
     url: "https://laravel12-zh-tw.hulstem.com",
     title: "Laravel 12 中文文檔",
-    description: "Laravel 12 官方文檔的正體中文翻譯",
+    description: "Laravel 12 官方文檔的繁體中文翻譯",
     siteName: "Laravel 12 中文",
     images: [
       {
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Laravel 12 中文文檔",
-    description: "Laravel 12 官方文檔的正體中文翻譯",
+    description: "Laravel 12 官方文檔的繁體中文翻譯",
     images: ["/og-image.png"],
   },
   alternates: {

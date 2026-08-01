@@ -5,7 +5,7 @@
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3+-06B6D4?style=flat&logo=tailwind-css)](https://tailwindcss.com/)
 [![Laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat&logo=laravel)](https://laravel.com/)
 
-Laravel 12 官方文檔的正體中文翻譯版本，提供完整的 Laravel 框架文檔翻譯和互動式文檔網站。
+Laravel 12 官方文檔的繁體中文翻譯版本，提供完整的 Laravel 框架文檔翻譯和互動式文檔網站。
 
 ## 📋 項目概要
 
@@ -13,7 +13,7 @@ Laravel 12 官方文檔的正體中文翻譯版本，提供完整的 Laravel 框
 
 ### 🎯 主要特色
 
-- **完整的繁體中文翻譯**: Laravel 12 官方文檔的完整正體中文版本
+- **完整的繁體中文翻譯**: Laravel 12 官方文檔的完整繁體中文版本
 - **現代化閱讀體驗**: 採用 Next.js 和 MDX 技術，提供流暢的文檔閱讀體驗
 - **即時搜尋功能**: 整合 Pagefind 搜尋引擎，支援全文檢索
 - **響應式設計**: 完美適配桌面、平板和手機等各種裝置

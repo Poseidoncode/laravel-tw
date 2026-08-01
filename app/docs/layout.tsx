@@ -17,7 +17,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
                 </div>
             </div>
             <DocsSidebar />
-            <main className="flex-1 relative">
+            <main className="flex-1 relative" data-pagefind-body>
                 {children}
             </main>
         </div>

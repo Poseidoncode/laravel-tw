@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://laravel12-zh-tw.hulstem.com"),
   title: "Laravel 12 中文文檔 - PHP Web 框架",
   description:
-    "Laravel 12 官方文檔的正體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
+    "Laravel 12 官方文檔的繁體中文翻譯。Laravel 是為 Web 工匠打造的 PHP 框架，提供優雅的語法和強大的功能。",
   openGraph: {
     title: "Laravel 12 中文文檔",
-    description: "Laravel 12 官方文檔的正體中文翻譯",
+    description: "Laravel 12 官方文檔的繁體中文翻譯",
     type: "website",
     locale: "zh_TW",
     url: "https://laravel12-zh-tw.hulstem.com",
@@ -19,7 +20,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-between min-h-screen py-2 bg-background text-foreground">
       <div></div>
-      <div className="text-center space-y-6">
+      <main className="text-center space-y-6" data-pagefind-body>
         <h1 className="text-6xl font-bold tracking-tighter sm:text-7xl">
           Laravel <span className="text-red-600">12</span>
         </h1>
@@ -51,7 +52,7 @@ export default function Home() {
             </Button>
           </Link>
         </div>
-      </div>
+      </main>
 
       <footer className="w-full border-t border-muted-foreground/10 bg-background/50 py-6">
         <div className="max-w-3xl mx-auto text-center space-y-1 px-4 text-sm text-muted-foreground">
