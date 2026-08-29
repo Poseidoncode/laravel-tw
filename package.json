@@ -31,9 +31,10 @@
     "tailwind-merge": "^3.4.0"
   },
   "overrides": {
-    "js-yaml": "^4.2.0",
+    "js-yaml": "^4.3.2",
     "@babel/core": "^7.29.6",
-    "postcss": "^8.5.10",
+    "nanoid": "^3.3.18",
+    "postcss": "^8.5.26",
     "sharp": "^0.35.3"
   },
   "devDependencies": {
